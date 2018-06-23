@@ -1,0 +1,113 @@
+include "TriggerLibs/NativeLib"
+include "TriggerLibs/HeroesLib_h"
+include "TriggerLibs/GameLib_h"
+include "TriggerLibs/MapMechanicsLib_h"
+include "TriggerLibs/AILib_h"
+include "TriggerLibs/UILib_h"
+include "TriggerLibs/StartingExperienceLib_h"
+include "TriggerLibs/SoundLib_h"
+include "TriggerLibs/SupportLib_h"
+
+include "libDEBUG_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Game Data Helper
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libDEBUG_InitLibraries () {
+    libNtve_InitVariables();
+    libCore_InitVariables();
+    libGame_InitVariables();
+    libMapM_InitVariables();
+    libAIAI_InitVariables();
+    libUIUI_InitVariables();
+    libStEx_InitVariables();
+    libSond_InitVariables();
+    libSprt_InitVariables();
+}
+
+// Variable Initialization
+bool libDEBUG_InitVariables_completed = false;
+
+void libDEBUG_InitVariables () {
+
+}
+
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HeroAI - Medivh Has Landed
+//--------------------------------------------------------------------------------------------------
+bool libDEBUG_gt_greetingCommand_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Hi! Welcome to Try Mode 2.0!"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_greetingCommand_Init () {
+    libDEBUG_gt_greetingCommand = TriggerCreate("libDEBUG_gt_greetingCommand_Func");
+    TriggerEnable(libDEBUG_gt_greetingCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "-hello", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "-hi", true);
+}
+// --------------------
+
+bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+
+    string lv_inputparam = StringWord(EventChatMessage(false), 2);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam ));
+
+    // UnitCreate(1, lv_inputparam, 0, lv_raynorPlayer, PointWithOffsetPolar(UnitGetPosition(lv_raynor), 1.5, 240.0), 240.0);
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_SpawnUnitCommand_Init () {
+    libDEBUG_gt_SpawnUnitCommand = TriggerCreate("libDEBUG_gt_SpawnUnitCommand_Func");
+    TriggerEnable(libDEBUG_gt_SpawnUnitCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "-spawn", false);
+}
+
+// -------------------
+
+bool libDEBUG_gt_RestartGameCommand_Func (bool testConds, bool runActions) {
+    RestartGame(PlayerGroupAll());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_RestartGameCommand_Init () {
+    libDEBUG_gt_RestartGameCommand = TriggerCreate("libDEBUG_gt_RestartGameCommand_Func");
+    TriggerEnable(libDEBUG_gt_RestartGameCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "-restart", true);
+}
+
+// Init triggers
+
+void libDEBUG_InitTriggers () {
+    libDEBUG_gt_greetingCommand_Init();
+    libDEBUG_gt_SpawnUnitCommand_Init();
+    libDEBUG_gt_RestartGameCommand_Init();
+
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libDEBUG_InitLib_completed = false;
+
+void libDEBUG_InitLib () {
+    if (libDEBUG_InitLib_completed) {
+        return;
+    }
+
+    libDEBUG_InitLib_completed = true;
+
+    libDEBUG_InitLibraries();
+    libDEBUG_InitVariables();
+    libDEBUG_InitTriggers();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Lib Initialized"));
+}

@@ -1,0 +1,17 @@
+include "TriggerLibs/HeroesLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Raynor
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+
+// Function Declarations
+
+
+// Trigger Declarations
+trigger libDEBUG_gt_greetingCommand;
+trigger libDEBUG_gt_SpawnUnitCommand;
+trigger libDEBUG_gt_RestartGameCommand;
+// Library Initialization
+void libDEBUG_InitVariables ();
+
