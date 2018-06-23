@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+  <CGame id="Dflt">
+    <AIDifficultySettings index="5">
+      <AbilityRecentlyUsedAdditionalThrottleSeconds value="4" />
+      <AbilityMinThrottleSeconds value="7" />
+      <AbilityMaxThrottleSeconds value="9" />
+      <AbilityMinDelaySeconds value="0.5" />
+      <AbilityMaxDelaySeconds value="0.625" />
+      <AbilityMinTargetOffset value="1" />
+      <AbilityMaxTargetOffset value="5" />
+      <TeamAbilityMinThrottleSeconds value="1" />
+      <TeamAbilityMaxThrottleSeconds value="3" />
+      <TeamGoalDelaySeconds value="0" />
+      <AllyThreatFactor value="2" />
+      <CloakedUnitAwarenessTimer value="10" />
+    </AIDifficultySettings>
+  </CGame>
+</Catalog>

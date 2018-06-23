@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<BankList>
+    <Bank Name="PlayerSettings" Player="1"/>
+    <Bank Name="PlayerSettings" Player="3"/>
+</BankList>

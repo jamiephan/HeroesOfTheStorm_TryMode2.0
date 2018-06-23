@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CTerrainTex id="StormCastleWorld1">
+        <Normalmap value="Assets\Textures\storm_castleworld_3normal.dds"/>
+    </CTerrainTex>
+    <CTerrainTex id="StormCastleWorld5">
+        <Normalmap value="Assets\Textures\storm_castleworld_4normal.dds"/>
+    </CTerrainTex>
+    <CTerrainTex id="StormCastleWorld8">
+        <Normalmap value="Assets\Textures\storm_castleworld_7normal.dds"/>
+    </CTerrainTex>
+</Catalog>

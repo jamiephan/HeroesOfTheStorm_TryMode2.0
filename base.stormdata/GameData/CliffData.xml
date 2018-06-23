@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CCliff id="StormNoShowCliff">
+        <CliffMesh value="Storm_Cliff_Natural0"/>
+        <EditorIcon value="Assets\Textures\storm_cliff_small_green_noise_diff_00.dds"/>
+        <CliffMaterial value="Assets\Cliffs\Storm_Cliff_DummyNoShow_Material0\Storm_Cliff_DummyNoShow_Material0.m3"/>
+    </CCliff>
+</Catalog>

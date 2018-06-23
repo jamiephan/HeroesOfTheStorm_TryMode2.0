@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CUnit id="KingsCore">
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <WeaponArray index="0" removed="1"/>
+        <Radius value="0"/>
+        <Footprint value=""/>
+        <PlacementFootprint value=""/>
+    </CUnit>
+    <CUnit id="TargetHeroDummy">
+        <FogVisibility value="Dimmed"/>
+        <MinimapRadius value="0.3"/>
+        <CardLayouts>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="2" Column="1"/>
+        </CardLayouts>
+        <LifeRegenDelay value="0"/>
+        <LifeRegenRate value="0"/>
+    </CUnit>
+    <CUnit id="TownGateL315BLURGarden">
+        <Facing value="83.9904"/>
+    </CUnit>
+    <CUnit id="TownGateL315BRULGarden">
+        <Facing value="277.998"/>
+    </CUnit>
+</Catalog>

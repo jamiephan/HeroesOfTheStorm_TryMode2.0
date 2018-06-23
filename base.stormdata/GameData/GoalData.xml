@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CGoalDefeatWave id="DefeatWave">
+        <EnemyThreatFactor value="0.3"/>
+    </CGoalDefeatWave>
+    <CGoalGank id="Gank">
+        <FlagArray index="Enabled" value="0"/>
+    </CGoalGank>
+    <CGoalMercenaryCamp id="MercenaryCamp">
+        <FlagArray index="Enabled" value="0"/>
+    </CGoalMercenaryCamp>
+    <CGoalHealingAltar id="HealingAltar">
+        <FlagArray index="Enabled" value="0"/>
+    </CGoalHealingAltar>
+    <CGoalHealingWell id="HealingWell">
+        <FlagArray index="Enabled" value="0"/>
+    </CGoalHealingWell>
+    <CGoalPushTowers id="PushTowers">
+        <EnemyThreatFactor value="0.3"/>
+    </CGoalPushTowers>
+    <CGoalBeacon id="VisionBeacon">
+        <FlagArray index="Enabled" value="0"/>
+    </CGoalBeacon>
+    <CGoalWaveStaging id="WaveStaging">
+        <EnemyThreatFactor value="0.3"/>
+    </CGoalWaveStaging>
+    <CGoalBeacon id="MidLaneBeacon">
+        <BaseBenefitScore value="9001"/>
+    </CGoalBeacon>
+</Catalog>

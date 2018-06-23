@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CTerrain id="StormKingsCrestGardens">
+        <FOWColor value="255,12,7,24"/>
+        <CliffSets index="0" value="StormNoShowCliff"/>
+        <CliffSets index="1" removed="1"/>
+    </CTerrain>
+</Catalog>

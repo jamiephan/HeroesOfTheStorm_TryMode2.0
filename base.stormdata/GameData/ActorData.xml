@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+  <CActorUnit id="JungleCampIconUnit">
+    <MinimapIconIsTeamColored value="1" />
+  </CActorUnit>
+  <CActorUnit id="JungleGraveGolemDefender">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_CursedHollow_Boss_GraveGolem.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="JungleGraveGolemLaner">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_CursedHollow_Boss_GraveGolem.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TargetHeroDummy">
+    <MinimapIcon value="Assets\Textures\ui_heroselect_minimapicon_minos.dds" />
+    <MinimapUnitStatusFrame value="" />
+    <MinimapIconBackground value="" />
+  </CActorUnit>
+  <CActorUnit id="TownGateL215BRUL">
+    <On Terms="ActorCreation" Send="ModelSwap TownGateL2" />
+    <On Terms="ActorCreation" Send="Create TownGateStandingSoundLoop" />
+    <On Terms="Behavior.BuildingMediumDamage.On; ModelName TownGateL2" Send="ModelSwap TownGateDamaged 0" />
+    <On Terms="Behavior.BuildingMediumDamage.Off; ModelName TownGateDamaged; ModelVariation 0" Send="ModelSwap TownGateL2 0" />
+    <On Terms="UnitDeathCustomize" Send="DeathCustomize Variation0" />
+    <Remove Terms="Signal.*.PlayBuild" Send="AnimPlay Build Stand,Morph,Start" />
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Gate.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownGateL215BLUR">
+    <On Terms="ActorCreation" Send="ModelSwap TownGateL2" />
+    <On Terms="ActorCreation" Send="Create TownGateStandingSoundLoop" />
+    <On Terms="Behavior.BuildingMediumDamage.On; ModelName TownGateL2" Send="ModelSwap TownGateDamaged 0" />
+    <On Terms="Behavior.BuildingMediumDamage.Off; ModelName TownGateDamaged; ModelVariation 0" Send="ModelSwap TownGateL2 0" />
+    <On Terms="UnitDeathCustomize" Send="DeathCustomize Variation0" />
+    <Remove Terms="Signal.*.PlayBuild" Send="AnimPlay Build Stand,Morph,Start" />
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Gate.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownMoonwellL2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_BB_Building_Moonwell.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownTownHallL2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Fort.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownTownHallL3">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Keep.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownCannonTowerL2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_BB_Building_Tower_0.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownWallRadial4L2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Wall.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownWallRadial5L2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Wall.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownWallRadial18L2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Wall.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="TownWallRadial19L2">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Wall.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="FootmanMinion">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_BB_Minion_Melee.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="RangedMinion">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_BB_Minion_Ranged.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="WizardMinion">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_BB_Minion_Wizard.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="CatapultMinion">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Minion_Catapult.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="MercDefenderMeleeKnight">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Bruiser_Knight.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="MercLanerMeleeKnight">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Bruiser_Knight.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="MercDefenderRangedMage">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Bruiser_Wizard.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="MercLanerRangedKnight">
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Bruiser_Wizard.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorDoodad id="FortDoodad">
+    <Model value="TownTownHallL2" />
+    <Scale value="0.500000" />
+  </CActorDoodad>
+  <CActorDoodad id="HeroDoodad">
+    <Model value="HeroRaynor" />
+  </CActorDoodad>
+  <CActorDoodad id="MinionDoodad">
+    <Model value="MinionFootmanKingsCrest" />
+  </CActorDoodad>
+  <CActorDoodad id="SwitchBeacon">
+    <On Terms="Signal.*.Used" Send="$Spell" />
+    <Model value="TownMercCampCaptureBeacon" />
+    <Scale value="0.500000" />
+  </CActorDoodad>
+  <CActorUnit id="MercLanerSiegeGiant">
+    <On Terms="UnitDeathCustomize; ModelVariation 1" Send="DeathCustomize Variation1" />
+    <On Terms="UnitDeathCustomize; ModelVariation 2" Send="DeathCustomize Variation2" />
+    <On Terms="Signal.*.VariationSet0" Send="ModelSwap MercSiegeGiantGardens 0" />
+    <On Terms="Signal.*.VariationSet1" Send="ModelSwap MercSiegeGiantGardens 1" />
+    <On Terms="Signal.*.VariationSet2" Send="ModelSwap MercSiegeGiantGardens 2" />
+    <On Terms="Signal.*.VariationSet3" Send="ModelSwap MercSiegeGiantGardens 3" />
+    <Model value="MercSiegeGiantGardens" />
+    <BuildModel value="MercSiegeGiantGardens" />
+    <DeathArray index="Normal" ModelLink="MercSiegeGiantGardensDeath00" />
+    <PlacementModel value="MercSiegeGiantGardens" />
+    <DeathCustoms ModelLink="MercSiegeGiantGardensDeath01" Name="Variation1" />
+    <DeathCustoms ModelLink="MercSiegeGiantGardensDeath02" Name="Variation2" />
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Siege.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="MercDefenderSiegeGiant">
+    <Model value="MercSiegeGiantGardens" />
+    <On Terms="UnitDeathCustomize; ModelVariation 1" Send="DeathCustomize Variation1" />
+    <DeathArray index="Normal" ModelLink="MercSiegeGiantDefenderKnightNonDeath01" />
+    <DeathCustoms ModelLink="MercSiegeGiantDefenderKnightNonDeath01" Name="Variation1" />
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Merc_Siege.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorMissile id="MercDefenderSiegeGiantAttackMissile">
+    <Model value="MercLanerSiegeGiantAttackMissileGardens" />
+    <DeathArray index="Normal" ModelLink="MercLanerSiegeGiantAttackMissileGardens" />
+  </CActorMissile>
+  <CActorMissile id="MercLanerSiegeGiantAttackMissile">
+    <Model value="MercLanerSiegeGiantAttackMissileGardens" />
+    <DeathArray index="Normal" ModelLink="MercLanerSiegeGiantAttackMissileGardens" />
+  </CActorMissile>
+  <CActorModel id="SiegeGiantRangedAttackImpactModel" />
+  <CActorUnit id="KingsCore">
+    <Model value="Invisible" />
+    <Remove Terms="ActorCreation" Send="Create CorePermanentInvulnerabilityOrbitingModel" />
+    <GroupIcon>
+      <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Core.dds" />
+    </GroupIcon>
+  </CActorUnit>
+  <CActorUnit id="Storm_Doodad_HealingPad">
+    <Model value="HealingPadKingsCrest" />
+    <BuildModel value="HealingPadKingsCrest" />
+    <PlacementModel value="HealingPadKingsCrest" />
+  </CActorUnit>
+</Catalog>

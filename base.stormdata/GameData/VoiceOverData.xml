@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CVoiceOver id="LadyofThorns">
+        <Lines index="139" Group="SpreeStart" SoundIndex="0"/>
+        <Lines index="140" Group="SpreeFirstUpgrade"/>
+        <Lines index="141" Group="SpreeSecondUpgrade"/>
+        <Lines index="142" Group="SpreeThirdUpgrade"/>
+        <Lines index="143" Group="SpreeMax"/>
+        <Lines index="144" Group="SpreeStart_Ally"/>
+        <Lines index="145" Group="SpreeStart_Enemy"/>
+        <Lines index="146" Group="SpreeStart_Red"/>
+        <Lines index="147" Group="SpreeStart_Blue"/>
+        <Lines index="148" Group="SpreeEnd"/>
+        <Lines index="149" Group="SpreeEnd_Ally"/>
+        <Lines index="150" Group="SpreeEnd_Enemy"/>
+        <Lines index="151" Group="SpreeEnd_Red"/>
+        <Lines index="152" Group="SpreeEnd_Blue"/>
+        <Lines index="153" Group="Gravestomp"/>
+        <Lines index="154" Group="Gravestomp_Observer"/>
+        <Lines index="155" Group="Revive"/>
+        <Lines index="156" Group="Revive_Observer"/>
+        <Lines index="157" removed="1"/>
+    </CVoiceOver>
+</Catalog>

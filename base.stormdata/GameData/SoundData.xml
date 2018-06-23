@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CSound id="LadyofThorns_HeroSlain">
+        <AssetArray index="2" TemplateParam="LadyofThorns_HeroSlain03"/>
+        <AssetArray index="3" removed="1"/>
+    </CSound>
+</Catalog>
