@@ -1,0 +1,22 @@
+{
+  "name": "heroesofthestorm_trymode2.0",
+  "version": "1.0.0",
+  "description": "Enhanced Try mode",
+  "main": "index.js",
+  "scripts": {
+    "buildxml": "node ./tools/buildxml.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/issues"
+  },
+  "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0#readme",
+  "dependencies": {
+    "xml2js": "^0.4.19"
+  }
+}
