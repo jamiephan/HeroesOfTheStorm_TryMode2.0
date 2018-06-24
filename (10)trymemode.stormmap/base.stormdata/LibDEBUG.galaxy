@@ -6,12 +6,13 @@ include "TriggerLibs/AILib_h"
 include "TriggerLibs/UILib_h"
 include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
+include "TriggerLibs/GameDataHelperLib_h"
 include "TriggerLibs/SupportLib_h"
 
 include "libDEBUG_h"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Game Data Helper
+// Library: DEBUG
 //--------------------------------------------------------------------------------------------------
 // External Library Initialization
 void libDEBUG_InitLibraries () {
@@ -23,14 +24,15 @@ void libDEBUG_InitLibraries () {
     libUIUI_InitVariables();
     libStEx_InitVariables();
     libSond_InitVariables();
-    libSprt_InitVariables();
+    libGDHL_InitVariables();
 }
 
 // Variable Initialization
 bool libDEBUG_InitVariables_completed = false;
 
 void libDEBUG_InitVariables () {
-
+    libCore_gv_dEBUGDebuggingEnabled = true;
+    
 }
 
 
@@ -38,9 +40,7 @@ void libDEBUG_InitVariables () {
 // Trigger: HeroAI - Medivh Has Landed
 //--------------------------------------------------------------------------------------------------
 bool libDEBUG_gt_greetingCommand_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Hi! Welcome to Try Mode 2.0!"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Greetings, ") + PlayerName(EventPlayer()) + StringToText(". Welcome to Try Mode 2.0!")));
     return true;
 }
 
@@ -48,19 +48,41 @@ bool libDEBUG_gt_greetingCommand_Func (bool testConds, bool runActions) {
 void libDEBUG_gt_greetingCommand_Init () {
     libDEBUG_gt_greetingCommand = TriggerCreate("libDEBUG_gt_greetingCommand_Func");
     TriggerEnable(libDEBUG_gt_greetingCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "-hello", true);
-    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "-hi", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hello", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hi", true);
 }
 // --------------------
 
 bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
+
 
     string lv_inputparam = StringWord(EventChatMessage(false), 2);
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam ));
+    string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
+    int lv_triggeringPlayer;
+    lv_triggeringPlayer = EventPlayer();
 
-    // UnitCreate(1, lv_inputparam, 0, lv_raynorPlayer, PointWithOffsetPolar(UnitGetPosition(lv_raynor), 1.5, 240.0), 240.0);
+    if(lv_inputparam == null) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of summoning: summon | sum UnitName [Player]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon TownTownHallL2"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: sum HeroRaynor"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon JungleGraveGolemDefender 6"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
+    }
 
+    if(!(lv_inputparam2 == null)){
+        lv_triggeringPlayer = StringToInt(lv_inputparam2);
+    }
+
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam + ", for Player " + IntToString(lv_triggeringPlayer)));
+    // libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, c_unitCreateIgnorePlacement, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
+    libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, 0, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
+    
+
+    // Enable group selection, like vikings and samuro with illusion master
+    UISetDragSelectEnabled(PlayerGroupAll(), true);
+    UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
     return true;
 }
 
@@ -68,12 +90,14 @@ bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
 void libDEBUG_gt_SpawnUnitCommand_Init () {
     libDEBUG_gt_SpawnUnitCommand = TriggerCreate("libDEBUG_gt_SpawnUnitCommand_Func");
     TriggerEnable(libDEBUG_gt_SpawnUnitCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "-spawn", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "summon", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "sum", false);
 }
 
 // -------------------
 
 bool libDEBUG_gt_RestartGameCommand_Func (bool testConds, bool runActions) {
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Attempting to restart......."));
     RestartGame(PlayerGroupAll());
     return true;
 }
@@ -82,7 +106,40 @@ bool libDEBUG_gt_RestartGameCommand_Func (bool testConds, bool runActions) {
 void libDEBUG_gt_RestartGameCommand_Init () {
     libDEBUG_gt_RestartGameCommand = TriggerCreate("libDEBUG_gt_RestartGameCommand_Func");
     TriggerEnable(libDEBUG_gt_RestartGameCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "-restart", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "restart", true);
+}
+
+
+// -------------------
+
+bool libDEBUG_gt_RespawnTimeCommand_Func (bool testConds, bool runActions) {
+    string lv_inputparam;
+    lv_inputparam = StringWord(EventChatMessage(false), 2);
+
+    if(lv_inputparam == null){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for respawn time: respawntime | rst Time"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: respawntime 0"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: rst 10"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
+    }
+
+    if(StringToInt(lv_inputparam) == 0) {
+        // libCore_gv_bALDeathTimeOverride cannot set to 0
+        libCore_gv_bALDeathTimeOverride = 0.1;
+    } else {
+        libCore_gv_bALDeathTimeOverride = StringToInt(lv_inputparam);
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + IntToString(StringToInt(lv_inputparam)))); //LOL
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_RespawnTimeCommand_Init () {
+    libDEBUG_gt_RespawnTimeCommand = TriggerCreate("libDEBUG_gt_RespawnTimeCommand_Func");
+    TriggerEnable(libDEBUG_gt_RespawnTimeCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "respawntime", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "rst", false);
 }
 
 // Init triggers
@@ -91,6 +148,7 @@ void libDEBUG_InitTriggers () {
     libDEBUG_gt_greetingCommand_Init();
     libDEBUG_gt_SpawnUnitCommand_Init();
     libDEBUG_gt_RestartGameCommand_Init();
+    libDEBUG_gt_RespawnTimeCommand_Init();
 
 }
 
@@ -110,4 +168,5 @@ void libDEBUG_InitLib () {
     libDEBUG_InitVariables();
     libDEBUG_InitTriggers();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Lib Initialized"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Lets start by saying 'hi', shall we?"));
 }

@@ -4,16 +4,47 @@ A modified Try Mode to create a better experience on Heroes of the Storm - Try m
 
 # In game chat commands
 
+
+## Custom Commands:
+
 The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.galaxy` and `base.stormdata/LibDEBUG.galaxy`. Note that all commands must be done in game chat (either `allies` or `all` chat. Public chat channels and private messages does not work.)
 
-## Current commands:
+### `restart`
 
-- `-restart`: Restarting the game, without exit and re-enter.
+    Restarting the game, without exit and re-enter.
 
-- `-hi` or `-hello`: Output a greeting message,
+### `hi` | `hello`
 
-- `-spawn [unitname]`: Spawn a unit at your location. (Functionality currently not functioning and only outputs a debug message.)
+    Output a greeting message, with your username.
 
+### `summon UNITNAME [PlayerGroup]`
+
+    Spawn a unit (as long as it loaded by lib) at the centre of the your selected unit group. If you only selected 1 unit, it will spawn next to you.
+    Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master.
+
+    Parameters:
+        UNITNAME: String, Required, defines the unit name to spawn.
+        [PlayerGroup]: Integer, Optional, defines the owner of the unit. Default: EventPlayer(), 1
+
+        Note for PlayerGroup: 2-5 means ally players, 6-10 means enemy players. If you set 6-10, the unit will attack you (if it capable of). You cannot control them if you set anything other than you.
+
+    Examples:
+        summon TownTownHallL2
+        summon HeroRaynor
+        smoon JungleGraveGolemDefender 6
+
+### `respawntime` | `rst` RESPAWNTIME
+
+    Override the current respawn timer. (Due to the game design, if you set to 0, it will change it to 0.1 automatically.)
+
+    Parameters:
+        RESPAWNTIME: Integer, Required, defines the respawn time
+
+## System Commands
+
+These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well, here are a list of commands from `TriggerLibs/SupportLib`.
+
+    ---PENDING FOR UPDATE---
 
 
 # Tools
@@ -28,6 +59,13 @@ To use the tool after created XML files under `Mods` folder, simply use terminal
 
 
 # Notes:
+
+### Dealing with chat commands
+
+The trigger event is `TriggerAddEventChatMessage(TRIGGER, c_playerAny, "-hi", false);`. The forth boolean parameter determines whether the input must exact match or not. So commands like `-restart` is recommanded set to true and `-spawn XXX` is set to false.
+
+To get the param from `false`, inside the function, get it by `StringWord(EventChatMessage(false), 2)` where the `2` is the position of the param split by space. For example, a command like `-spawn HeroChen 100`, `1` will be `-spawn`, `2` will be `HeroChen` and `3` will be `100`.
+
 
 ### When Editing Asset Files (.dds)
 Recommended using Photoshop plugin [NVIDIA Texture Tools for Adobe Photoshop](https://developer.nvidia.com/nvidia-texture-tools-adobe-photoshop) to do so. 

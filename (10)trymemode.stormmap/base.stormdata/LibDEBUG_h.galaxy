@@ -12,6 +12,8 @@ include "TriggerLibs/HeroesLib"
 trigger libDEBUG_gt_greetingCommand;
 trigger libDEBUG_gt_SpawnUnitCommand;
 trigger libDEBUG_gt_RestartGameCommand;
+trigger libDEBUG_gt_SwapHeroCommand;
+trigger libDEBUG_gt_RespawnTimeCommand;
 // Library Initialization
 void libDEBUG_InitVariables ();
 
