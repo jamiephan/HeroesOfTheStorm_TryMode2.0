@@ -2,6 +2,14 @@
 # HeroesOfTheStorm_TryMode2.0
 A modified Try Mode to create a better experience on Heroes of the Storm - Try mode.
 
+
+# Internal Debug Menu
+
+Internally, there is a hidden debug menu, by forcing enable debug mode, you can now summon it as well, by clicking the hotkey `\` which have various functionalities such as switch heroes, level, etc. Here is a quick look:
+
+![debug menu](https://i.imgur.com/gPI9we8.png)
+
+
 # In game chat commands
 
 
@@ -51,6 +59,17 @@ These commands are used by Blizzard internaly, after force to turn in the debug 
 
     Format: TRIGGERLIB_gt_TRIGGERFUNCTION   "Command"
 
+# Modifications
+
+A list of modifications to heroes, system or terrain, some of them are not documented, maybe because of laziness, but still.
+
+Modifications are under `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). If Galaxy modification needed, it will be in (`./(10)trymemode.stormmap/base.stormdata`), same as where the debug lib went.
+
+## Hero Modifications
+
+### [Placeholder] Raynor
+
+- [Placeholder]
 
 # Tools
 
