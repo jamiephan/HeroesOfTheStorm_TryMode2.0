@@ -2,6 +2,8 @@
 # HeroesOfTheStorm_TryMode2.0
 A modified Try Mode to create a better experience on Heroes of the Storm - Try mode.
 
+![wheeeeeeeeeeeeeeeeeee](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
+
 
 # Internal Debug Menu
 
@@ -61,13 +63,31 @@ These commands are used by Blizzard internaly, after force to turn in the debug 
 
 # Modifications
 
-A list of modifications to heroes, system or terrain, some of them are not documented, maybe because of laziness, but still.
+A list of modifications to heroes, system, terrain, object....., some of them are not documented, maybe because of laziness, but still.
 
-Modifications are under `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). If Galaxy modification needed, it will be in (`./(10)trymemode.stormmap/base.stormdata`), same as where the debug lib went.
+Modifications of XML files are under `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). If Galaxy modification needed, it will be in (`./(10)trymemode.stormmap/base.stormdata`), same as where the debug lib went.
 
 ## Hero Modifications
 
 ### [Placeholder] Raynor
+
+- [Placeholder]
+
+## System Modifications
+
+### [Placeholder] Camera
+
+- [Placeholder]
+
+## Terrain Modifications
+
+### [Placeholder] New objective area
+
+- [Placeholder] 
+
+## Object Modifications
+
+### [Placeholder] Added new boss
 
 - [Placeholder]
 
