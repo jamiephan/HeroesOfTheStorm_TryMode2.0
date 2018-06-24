@@ -42,9 +42,14 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
 ## System Commands
 
-These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well, here are a list of commands from `TriggerLibs/SupportLib`.
+These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well.
 
     ---PENDING FOR UPDATE---
+    The command list are just a quick "grep" generated from all galaxy files. Some of them works in Try mode but some of them don't. Some of them require parameters, some of them just log out to TriggerDebugOutput(). Documentation are not there yet, but might add later.
+
+    For now to see command list, please refer to `InternalCommands.txt`
+
+    Format: TRIGGERLIB_gt_TRIGGERFUNCTION   "Command"
 
 
 # Tools
