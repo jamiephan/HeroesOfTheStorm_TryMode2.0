@@ -32,6 +32,7 @@ bool libDEBUG_InitVariables_completed = false;
 
 void libDEBUG_InitVariables () {
     libCore_gv_dEBUGDebuggingEnabled = true;
+    libDEBUG_gt_SpawnUnitScale = 1.0;
     
 }
 
@@ -78,8 +79,7 @@ bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam + ", for Player " + IntToString(lv_triggeringPlayer)));
     // libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, c_unitCreateIgnorePlacement, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
     libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, 0, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
-    
-
+    UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gt_SpawnUnitScale, 100.0 * libDEBUG_gt_SpawnUnitScale, 100.0 * libDEBUG_gt_SpawnUnitScale);
     // Enable group selection, like vikings and samuro with illusion master
     UISetDragSelectEnabled(PlayerGroupAll(), true);
     UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
@@ -92,6 +92,42 @@ void libDEBUG_gt_SpawnUnitCommand_Init () {
     TriggerEnable(libDEBUG_gt_SpawnUnitCommand, true);
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "summon", false);
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "sum", false);
+}
+
+// --------------------
+
+bool libDEBUG_gt_SpawnSetScaleCommand_Func (bool testConds, bool runActions) {
+
+
+    string lv_inputparam = StringWord(EventChatMessage(false), 2);
+    fixed lv_scale;
+
+    if(lv_inputparam == null) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of setting summons scale: setscale | ss SCALE"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: setscale 1"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: ss 3"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
+    }
+
+    lv_scale = StringToFixed(lv_inputparam);
+
+    if(lv_scale == 0){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid scale number or scale is 0."));
+        return true;
+    }
+
+    libDEBUG_gt_SpawnUnitScale = lv_scale;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Changed summon unit with scale " + FixedToString(libDEBUG_gt_SpawnUnitScale, 2)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_SpawnSetScaleCommand_Init () {
+    libDEBUG_gt_SpawnSetScaleCommand = TriggerCreate("libDEBUG_gt_SpawnSetScaleCommand_Func");
+    TriggerEnable(libDEBUG_gt_SpawnSetScaleCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnSetScaleCommand, c_playerAny, "setscale", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnSetScaleCommand, c_playerAny, "ss", false);
 }
 
 // -------------------
@@ -149,6 +185,7 @@ void libDEBUG_InitTriggers () {
     libDEBUG_gt_SpawnUnitCommand_Init();
     libDEBUG_gt_RestartGameCommand_Init();
     libDEBUG_gt_RespawnTimeCommand_Init();
+    libDEBUG_gt_SpawnSetScaleCommand_Init();
 
 }
 

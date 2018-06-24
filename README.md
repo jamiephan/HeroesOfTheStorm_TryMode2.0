@@ -27,7 +27,7 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
     Output a greeting message, with your username.
 
-### `summon UNITNAME [PlayerGroup]`
+### `summon | sum UNITNAME [PlayerGroup]`
 
     Spawn a unit (as long as it loaded by lib) at the centre of the your selected unit group. If you only selected 1 unit, it will spawn next to you.
     Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master.
@@ -41,7 +41,18 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
     Examples:
         summon TownTownHallL2
         summon HeroRaynor
-        smoon JungleGraveGolemDefender 6
+        sum JungleGraveGolemDefender 6
+
+### `setscale | ss SCALE`
+
+    Set the scale of the summon units from "summon". 1.0 is default size
+
+    Parameters:
+        SCALE: Fixed, Requires, define the summon scale
+    
+    Examples:
+        setscale 0.1
+        ss 1.5
 
 ### `respawntime` | `rst` RESPAWNTIME
 
