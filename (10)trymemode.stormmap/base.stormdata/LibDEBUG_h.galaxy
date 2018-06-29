@@ -1,7 +1,7 @@
 include "TriggerLibs/HeroesLib"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Raynor
+// Library: DEBUG
 //--------------------------------------------------------------------------------------------------
 // Variable Declarations
 fixed libDEBUG_gt_SpawnUnitScale;
@@ -15,6 +15,7 @@ trigger libDEBUG_gt_SpawnSetScaleCommand;
 trigger libDEBUG_gt_RestartGameCommand;
 trigger libDEBUG_gt_SwapHeroCommand;
 trigger libDEBUG_gt_RespawnTimeCommand;
+trigger libDEBUG_gt_SpawnItemToUnitCommand;
 // Library Initialization
 void libDEBUG_InitVariables ();
 

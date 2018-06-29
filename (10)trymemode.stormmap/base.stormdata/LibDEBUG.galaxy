@@ -38,7 +38,7 @@ void libDEBUG_InitVariables () {
 
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: HeroAI - Medivh Has Landed
+// Trigger: DEBUG - Greeting Command
 //--------------------------------------------------------------------------------------------------
 bool libDEBUG_gt_greetingCommand_Func (bool testConds, bool runActions) {
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Greetings, ") + PlayerName(EventPlayer()) + StringToText(". Welcome to Try Mode 2.0!")));
@@ -52,10 +52,12 @@ void libDEBUG_gt_greetingCommand_Init () {
     TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hello", true);
     TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hi", true);
 }
-// --------------------
 
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Spawn unit command
+//--------------------------------------------------------------------------------------------------
 bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
-
 
     string lv_inputparam = StringWord(EventChatMessage(false), 2);
     string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
@@ -86,7 +88,6 @@ bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
     return true;
 }
 
-//--------------------------------------------------------------------------------------------------
 void libDEBUG_gt_SpawnUnitCommand_Init () {
     libDEBUG_gt_SpawnUnitCommand = TriggerCreate("libDEBUG_gt_SpawnUnitCommand_Func");
     TriggerEnable(libDEBUG_gt_SpawnUnitCommand, true);
@@ -94,10 +95,11 @@ void libDEBUG_gt_SpawnUnitCommand_Init () {
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnUnitCommand, c_playerAny, "sum", false);
 }
 
-// --------------------
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Spawn Unit with scale command
+//--------------------------------------------------------------------------------------------------
 
 bool libDEBUG_gt_SpawnSetScaleCommand_Func (bool testConds, bool runActions) {
-
 
     string lv_inputparam = StringWord(EventChatMessage(false), 2);
     fixed lv_scale;
@@ -122,7 +124,6 @@ bool libDEBUG_gt_SpawnSetScaleCommand_Func (bool testConds, bool runActions) {
     return true;
 }
 
-//--------------------------------------------------------------------------------------------------
 void libDEBUG_gt_SpawnSetScaleCommand_Init () {
     libDEBUG_gt_SpawnSetScaleCommand = TriggerCreate("libDEBUG_gt_SpawnSetScaleCommand_Func");
     TriggerEnable(libDEBUG_gt_SpawnSetScaleCommand, true);
@@ -130,7 +131,9 @@ void libDEBUG_gt_SpawnSetScaleCommand_Init () {
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnSetScaleCommand, c_playerAny, "ss", false);
 }
 
-// -------------------
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Restart game command
+//--------------------------------------------------------------------------------------------------
 
 bool libDEBUG_gt_RestartGameCommand_Func (bool testConds, bool runActions) {
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Attempting to restart......."));
@@ -138,7 +141,6 @@ bool libDEBUG_gt_RestartGameCommand_Func (bool testConds, bool runActions) {
     return true;
 }
 
-//--------------------------------------------------------------------------------------------------
 void libDEBUG_gt_RestartGameCommand_Init () {
     libDEBUG_gt_RestartGameCommand = TriggerCreate("libDEBUG_gt_RestartGameCommand_Func");
     TriggerEnable(libDEBUG_gt_RestartGameCommand, true);
@@ -146,7 +148,9 @@ void libDEBUG_gt_RestartGameCommand_Init () {
 }
 
 
-// -------------------
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Respawn time override command
+//--------------------------------------------------------------------------------------------------
 
 bool libDEBUG_gt_RespawnTimeCommand_Func (bool testConds, bool runActions) {
     string lv_inputparam;
@@ -169,13 +173,47 @@ bool libDEBUG_gt_RespawnTimeCommand_Func (bool testConds, bool runActions) {
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + IntToString(StringToInt(lv_inputparam)))); //LOL
     return true;
 }
-
-//--------------------------------------------------------------------------------------------------
 void libDEBUG_gt_RespawnTimeCommand_Init () {
     libDEBUG_gt_RespawnTimeCommand = TriggerCreate("libDEBUG_gt_RespawnTimeCommand_Func");
     TriggerEnable(libDEBUG_gt_RespawnTimeCommand, true);
     TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "respawntime", false);
     TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "rst", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Respawn Item to unit
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUG_gt_SpawnItemToUnitCommand_Func (bool testConds, bool runActions) {
+    string lv_inputparam;
+    unit lv_itUnit;
+    unitgroup lv_unitgroup;
+    int lv_unitcount;
+    lv_inputparam = StringWord(EventChatMessage(false), 2);
+
+    if(lv_inputparam == null){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for spawn items: additem | adi ITEM"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: additem ArthasAntiMagicShell"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: adi TalentRewind"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
+    }
+
+
+    lv_unitgroup = UnitGroupSelected(EventPlayer());
+    lv_unitcount = UnitGroupCount(lv_unitgroup, c_unitCountAll);
+    for (;; lv_unitcount -= 1) {
+        lv_itUnit = UnitGroupUnitFromEnd(lv_unitgroup, lv_unitcount);
+        if (lv_itUnit == null) { break; }
+        UnitInventoryCreate(lv_itUnit, lv_inputparam);
+    }
+    return true;
+}
+void libDEBUG_gt_SpawnItemToUnitCommand_Init () {
+    libDEBUG_gt_SpawnItemToUnitCommand = TriggerCreate("libDEBUG_gt_SpawnItemToUnitCommand_Func");
+    TriggerEnable(libDEBUG_gt_SpawnItemToUnitCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnItemToUnitCommand, c_playerAny, "additem", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_SpawnItemToUnitCommand, c_playerAny, "adi", false);
 }
 
 // Init triggers
@@ -186,7 +224,7 @@ void libDEBUG_InitTriggers () {
     libDEBUG_gt_RestartGameCommand_Init();
     libDEBUG_gt_RespawnTimeCommand_Init();
     libDEBUG_gt_SpawnSetScaleCommand_Init();
-
+    libDEBUG_gt_SpawnItemToUnitCommand_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -61,6 +61,26 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
     Parameters:
         RESPAWNTIME: Integer, Required, defines the respawn time
 
+    Examples:
+        respawntime 99
+        rst 0
+
+### `additem` | `adi` ITEM
+
+    Spawn an item that is added to your unit inventory. If you selected multiple units, it will add to each of them.
+    Due to some validation might occur, some items such as "NecromancerBoneSpear" (Xul lv16 Bone Spear) will not have any functionality (but can be still spawned) because it validates that whether you have the talent. Modify it though the Mod XML files.
+
+    You can aquire the ITEMs from "<CUnit id="XXXX" parent="ITEM" />"
+
+    Still figuring out out to despawn, for now, just change your respawn your hero with the debug menu or internal command "spawnhero Raynor 1"
+
+    Parameters:
+        ITEM: String, Required, defines ITEM
+
+    Example:
+        additem ArthasAntiMagicShell
+        adi TalentRewind
+
 ## System Commands
 
 These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well.
