@@ -2,7 +2,7 @@
 # HeroesOfTheStorm_TryMode2.0
 A modified Try Mode to create a better experience on Heroes of the Storm - Try mode.
 
-![wheeeeeeeeeeeeeeeeeee](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
+![I believe, I can fly. I believe, I can touch the sky.](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
 
 # Internal Debug Menus
@@ -18,7 +18,7 @@ Internally, there is a hidden debug menu, by forcing enable debug mode, you can 
 Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only). Here is a quick look:
 
 
-
+![debug menu](https://i.imgur.com/lrg8G3M.png)
 
 
 
@@ -138,11 +138,15 @@ All tools require `nodejs` to do so. After installed `nodejs` and cloned the rep
 
 ### Automatically generate `GameData.XML`
 
+**Command**: `npm run buildxml`
+
 This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata/GameData.xml`. Note that it was preset that all XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories are not limited and will automatically include when generating `GameData.XML`.
 
-To use the tool after created XML files under `Mods` folder, simply use terminal (or CMD) with the command `npm run buildxml`. Also note that it **will ignore** any files that does not end with `.xml` (case insensitive) and will **not** validate whether the XML file is valid (syntax error, etc).
+Note that it **will ignore** any files that does not end with `.xml` (case insensitive) and will **not** validate whether the XML file is valid (syntax error, etc).
 
 ### Trigger code generator
+
+**Command**: `npm run triggergenerator`
 
 This tool will help you to generate the code to make a simple trigger. Just follow the instructions and you can build a basic trigger code.
 
