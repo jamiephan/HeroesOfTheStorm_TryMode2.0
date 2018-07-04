@@ -4,7 +4,8 @@
   "description": "Enhanced Try mode",
   "main": "index.js",
   "scripts": {
-    "buildxml": "node ./tools/buildxml.js"
+    "buildxml": "node ./tools/buildxml.js",
+    "triggergenerator": "node ./tools/triggerGenerator.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0#readme",
   "dependencies": {
+    "prompt": "^1.0.0",
     "xml2js": "^0.4.19"
   }
 }

@@ -132,6 +132,12 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 To use the tool after created XML files under `Mods` folder, simply use terminal (or CMD) with the command `npm run buildxml`. Also note that it **will ignore** any files that does not end with `.xml` (case insensitive) and will **not** validate whether the XML file is valid (syntax error, etc).
 
+### Trigger code generator
+
+This tool will help you to generate the code to make a simple trigger. Just follow the instructions and you can build a basic trigger code.
+
+The `TriggerAddEventChatMessage()` is a trigger function that will read the input from user and execute the trigger when it matches/contains (depends on the variable forth parameter `true`/`false`). You can get trigger functions from either SC2 editor (Modules->Triggers->[Add some Events with the UI]->Data->View Script.)
+
 
 # Notes:
 
