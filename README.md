@@ -5,11 +5,21 @@ A modified Try Mode to create a better experience on Heroes of the Storm - Try m
 ![wheeeeeeeeeeeeeeeeeee](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
 
-# Internal Debug Menu
+# Internal Debug Menus
+
+## Debug Menu
 
 Internally, there is a hidden debug menu, by forcing enable debug mode, you can now summon it as well, by clicking the hotkey `\` which have various functionalities such as switch heroes, level, etc. Here is a quick look:
 
 ![debug menu](https://i.imgur.com/gPI9we8.png)
+
+## QA Cheat Menu
+
+Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only). Here is a quick look:
+
+
+
+
 
 
 # In game chat commands
