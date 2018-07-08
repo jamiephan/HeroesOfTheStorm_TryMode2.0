@@ -4,18 +4,30 @@ include "TriggerLibs/HeroesLib"
 // Library: DEBUG
 //--------------------------------------------------------------------------------------------------
 // Variable Declarations
-fixed libDEBUG_gt_SpawnUnitScale;
+fixed libDEBUG_gv_SpawnUnitScale;
+revealer libDEBUG_gv_FogOfWarRevealer;
+bool libDEBUG_gv_FogOfWarIsEnabled;
+bool libDEBUG_gv_BuilderModeIsEnabled;
 // Function Declarations
 
 
 // Trigger Declarations
 trigger libDEBUG_gt_greetingCommand;
 trigger libDEBUG_gt_SpawnUnitCommand;
+trigger libDEBUG_gt_KillUnitCommand;
 trigger libDEBUG_gt_SpawnSetScaleCommand;
 trigger libDEBUG_gt_RestartGameCommand;
 trigger libDEBUG_gt_SwapHeroCommand;
 trigger libDEBUG_gt_RespawnTimeCommand;
 trigger libDEBUG_gt_SpawnItemToUnitCommand;
+trigger libDEBUG_gt_ToggleFullMapVisionCommand;
+trigger libDEBUG_gt_ForceBackSpaceOpenQACheatCommand;
+trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
+
+// builder mode
+trigger libDEBUG_gt_ToggleBuilderModeCommand;
+trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;
+trigger libDEBUG_gt_BuilderModeConfirmTeleportToMouse;
 // Library Initialization
 void libDEBUG_InitVariables ();
 

@@ -32,7 +32,9 @@ bool libDEBUG_InitVariables_completed = false;
 
 void libDEBUG_InitVariables () {
     libCore_gv_dEBUGDebuggingEnabled = true;
-    libDEBUG_gt_SpawnUnitScale = 1.0;
+    libDEBUG_gv_SpawnUnitScale = 1.0;
+    libDEBUG_gv_FogOfWarIsEnabled = true;
+    libDEBUG_gv_BuilderModeIsEnabled = false;
     
 }
 
@@ -79,9 +81,12 @@ bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
 
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam + ", for Player " + IntToString(lv_triggeringPlayer)));
-    // libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, c_unitCreateIgnorePlacement, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
+
+    // Self note: As of 04/07/2018, the PTR spwn command changed to:
+    // libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam , 0, EventPlayer(), UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), null);
+    
     libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, 0, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
-    UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gt_SpawnUnitScale, 100.0 * libDEBUG_gt_SpawnUnitScale, 100.0 * libDEBUG_gt_SpawnUnitScale);
+    UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale);
     // Enable group selection, like vikings and samuro with illusion master
     UISetDragSelectEnabled(PlayerGroupAll(), true);
     UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
@@ -119,8 +124,8 @@ bool libDEBUG_gt_SpawnSetScaleCommand_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    libDEBUG_gt_SpawnUnitScale = lv_scale;
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Changed summon unit with scale " + FixedToString(libDEBUG_gt_SpawnUnitScale, 2)));
+    libDEBUG_gv_SpawnUnitScale = lv_scale;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Changed summon unit with scale " + FixedToString(libDEBUG_gv_SpawnUnitScale, 2)));
     return true;
 }
 
@@ -130,6 +135,42 @@ void libDEBUG_gt_SpawnSetScaleCommand_Init () {
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnSetScaleCommand, c_playerAny, "setscale", false);
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnSetScaleCommand, c_playerAny, "ss", false);
 }
+
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Kill each units in a selected group
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_KillUnitCommand_Func(bool testConds, bool runActions) {
+        // Variable Declarations
+        int lv_units;
+
+        // Automatic Variable Declarations
+        int autoC410B7EE_ae;
+        const int autoC410B7EE_ai = 1;
+
+        // Variable Initialization
+
+        // Actions
+        if (!runActions) {
+            return true;
+        }
+
+        autoC410B7EE_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+        lv_units = 0;
+        for ( ; ( (autoC410B7EE_ai >= 0 && lv_units <= autoC410B7EE_ae) || (autoC410B7EE_ai < 0 && lv_units >= autoC410B7EE_ae) ) ; lv_units += autoC410B7EE_ai ) {
+            UnitKill(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_units));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Killed all selected unit(s) "));
+
+        }
+        return true;
+    }
+
+    void libDEBUG_gt_KillUnitCommand_Init() {
+        libDEBUG_gt_KillUnitCommand = TriggerCreate("libDEBUG_gt_KillUnitCommand_Func");
+        TriggerEnable(libDEBUG_gt_KillUnitCommand, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_KillUnitCommand, c_playerAny, "killunits", true);
+        TriggerAddEventChatMessage(libDEBUG_gt_KillUnitCommand, c_playerAny, "ku", true);
+    }
 
 //--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Restart game command
@@ -216,15 +257,138 @@ void libDEBUG_gt_SpawnItemToUnitCommand_Init () {
     TriggerAddEventChatMessage(libDEBUG_gt_SpawnItemToUnitCommand, c_playerAny, "adi", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Toggle Full Map vision
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions) {
+    if (!runActions) {
+        return true;
+    }
+    if(libDEBUG_gv_FogOfWarIsEnabled == true){
+        VisRevealerCreate(EventPlayer(), RegionEntireMap());
+        libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
+        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
+    } else {
+        VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
+        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
+    }
+    return true;
+}
+void libDEBUG_gt_ToggleFullMapVisionCommand_Init() {
+    libDEBUG_gt_ToggleFullMapVisionCommand = TriggerCreate("libDEBUG_gt_ToggleFullMapVisionCommand_Func");
+    TriggerEnable(libDEBUG_gt_ToggleFullMapVisionCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_ToggleFullMapVisionCommand, c_playerAny, "tfow", true);
+}
+    
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force using backslash key (same with debug key) to force open the QA cheat menu without using chat command -devcheats
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Func(bool testConds, bool runActions) {
+    if (!runActions) {
+        return true;
+    }
+
+    if ((DialogControlIsVisible(libUIUI_gv_uIDebugPanel.lv_mainDialog, EventPlayer()) == true)) {
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), true);
+    }
+    else {
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), false);
+    }
+
+    return true;
+}
+void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
+    libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand = TriggerCreate("libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Func");
+    TriggerEnable(libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand, true);
+    TriggerAddEventKeyPressed(libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand, c_playerAny, c_keyBackSlash, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+  //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Toggle builder mode
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_ToggleBuilderModeCommand_Func(bool testConds, bool runActions) {
+        if (!runActions) {
+            return true;
+        }
+        if (libDEBUG_gv_BuilderModeIsEnabled) {
+            // Already enabled, disable all triggers
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Builder Mode"));
+            libDEBUG_gv_BuilderModeIsEnabled = false;
+            TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
+
+        } else {
+            // Already disbled, enable asll triggers
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Builder Mode"));
+            libDEBUG_gv_BuilderModeIsEnabled = true;
+            TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, true);
+
+        }
+        return true;
+    }
+
+    void libDEBUG_gt_ToggleBuilderModeCommand_Init() {
+        libDEBUG_gt_ToggleBuilderModeCommand = TriggerCreate("libDEBUG_gt_ToggleBuilderModeCommand_Func");
+        TriggerEnable(libDEBUG_gt_ToggleBuilderModeCommand, true);
+        TriggerAddEventKeyPressed(libDEBUG_gt_ToggleBuilderModeCommand, c_playerAny, c_keyBackSpace, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    }
+
+
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Constantly teleport all selected units to the mouse location
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Func(bool testConds, bool runActions) {
+        // Variable Declarations
+        int lv_unit_i;
+        point lv_mouse;
+
+        // Automatic Variable Declarations
+        int autoB2EDC8BC_ae;
+        const int autoB2EDC8BC_ai = 1;
+
+        // Variable Initialization
+        lv_mouse = Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld());
+
+        // Actions
+        if (!runActions) {
+            return true;
+        }
+
+        autoB2EDC8BC_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+        lv_unit_i = 1;
+        for ( ; ( (autoB2EDC8BC_ai >= 0 && lv_unit_i <= autoB2EDC8BC_ae) || (autoB2EDC8BC_ai < 0 && lv_unit_i >= autoB2EDC8BC_ae) ) ; lv_unit_i += autoB2EDC8BC_ai ) {
+            UnitSetPosition(UnitGroupUnit(UnitGroupSelected(1), lv_unit_i), lv_mouse, true);
+        }
+        return true;
+    }
+
+    void libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Init() {
+        libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand = TriggerCreate("libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Func");
+        TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
+        TriggerAddEventMouseMoved(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, c_playerAny);
+    }
+
+
+
 // Init triggers
 
 void libDEBUG_InitTriggers () {
     libDEBUG_gt_greetingCommand_Init();
     libDEBUG_gt_SpawnUnitCommand_Init();
+    libDEBUG_gt_KillUnitCommand_Init();
     libDEBUG_gt_RestartGameCommand_Init();
     libDEBUG_gt_RespawnTimeCommand_Init();
     libDEBUG_gt_SpawnSetScaleCommand_Init();
     libDEBUG_gt_SpawnItemToUnitCommand_Init();
+    libDEBUG_gt_ToggleFullMapVisionCommand_Init();
+    libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init();
+    libDEBUG_gt_ToggleBuilderModeCommand_Init();
+    libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

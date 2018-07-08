@@ -15,7 +15,9 @@ Internally, there is a hidden debug menu, by forcing enable debug mode, you can 
 
 ## QA Cheat Menu
 
-Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only). Here is a quick look:
+Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only). In a recent commit, I have sync the `/` key with QA Cheat meni and Debug menu, for better experience.
+
+Here is a quick look:
 
 
 ![debug menu](https://i.imgur.com/lrg8G3M.png)
@@ -64,7 +66,7 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         setscale 0.1
         ss 1.5
 
-### `respawntime` | `rst` RESPAWNTIME
+### `respawntime | rst RESPAWNTIME`
 
     Override the current respawn timer. (Due to the game design, if you set to 0, it will change it to 0.1 automatically.)
 
@@ -75,7 +77,7 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         respawntime 99
         rst 0
 
-### `additem` | `adi` ITEM
+### `additem | adi ITEM`
 
     Spawn an item that is added to your unit inventory. If you selected multiple units, it will add to each of them.
     Due to some validation might occur, some items such as "NecromancerBoneSpear" (Xul lv16 Bone Spear) will not have any functionality (but can be still spawned) because it validates that whether you have the talent. Modify it though the Mod XML files.
@@ -91,6 +93,28 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         additem ArthasAntiMagicShell
         adi TalentRewind
 
+### `killunits` | `ku`
+
+    Instant Kill all units within the select group.
+
+    Parameters: 
+        none
+
+    Example:
+        killunits
+        ku
+
+### `tfow`
+
+    Toggle Fow of war (Enable or disable full map vision)
+
+    Parameters: 
+        none
+
+    Example:
+        tfow
+
+
 ## System Commands
 
 These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well.
@@ -101,6 +125,17 @@ These commands are used by Blizzard internaly, after force to turn in the debug 
     For now to see command list, please refer to `InternalCommands.txt`
 
     Format: TRIGGERLIB_gt_TRIGGERFUNCTION   "Command"
+
+## Builder Mode
+
+**This system is still in a early development.**
+
+Builder mode allows you to place objects to anywhere in the map. The units will constantly teleport to your cursor (follow your cursor). To active it, remember to select `/ac` and `ts` in QA menu (this will added automatically in future development).
+
+To use builder mode, select a unit, or units and press `backspace`. Then builder mode will be activated and you can place the units where you like.
+
+To place the units down, press `backspace` again to deactivate builder mode.
+
 
 # Modifications
 
