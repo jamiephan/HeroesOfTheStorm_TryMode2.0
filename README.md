@@ -31,7 +31,7 @@ Here is a quick look:
 
 The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.galaxy` and `base.stormdata/LibDEBUG.galaxy`. Note that all commands must be done in game chat (either `allies` or `all` chat. Public chat channels and private messages does not work.)
 
-### `restart`
+### `re` | `restart`
 
     Restarting the game, without exit and re-enter.
 

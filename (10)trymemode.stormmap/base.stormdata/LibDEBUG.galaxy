@@ -186,6 +186,7 @@ void libDEBUG_gt_RestartGameCommand_Init () {
     libDEBUG_gt_RestartGameCommand = TriggerCreate("libDEBUG_gt_RestartGameCommand_Func");
     TriggerEnable(libDEBUG_gt_RestartGameCommand, true);
     TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "restart", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "re", true);
 }
 
 
