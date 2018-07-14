@@ -41,7 +41,8 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
 ### `summon | sum UNITNAME [PlayerGroup]`
 
-    Spawn a unit (as long as it loaded by lib) at the centre of the your selected unit group. If you only selected 1 unit, it will spawn next to you.
+    Spawn a unit (as long as it loaded by lib) at the centre of your camera location.
+    
     Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master.
 
     Parameters:
