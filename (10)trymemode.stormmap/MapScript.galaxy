@@ -672,11 +672,11 @@ void gf_SetHeroLevel (int lp_level) {
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_currentLevel = UnitXPGetCurrentLevel(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, null);
+    lv_realLevel = MaxI(1, MinI(30, lp_level));
     lv_defaultIndex = 1;
 
     // Implementation
-    lv_currentLevel = UnitXPGetCurrentLevel(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, null);
-    lv_realLevel = MaxI(1, MinI(30, lp_level));
     if ((lv_realLevel == lv_currentLevel)) {
         return ;
     }
@@ -693,7 +693,10 @@ void gf_SetHeroLevel (int lp_level) {
         libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_defaultIndex, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_xP, gv_pLAYER_AI_Ally_C, gv_pLAYER_AI_Ally_C);
     }
 
-    libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Enemy_C)), 0, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Enemy_C)), lv_xP, gv_pLAYER_AI_Enemy_C, gv_pLAYER_TryMe_C);
+    if ((gv_pLAYER_AI_EnemyHero != null)) {
+        libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Enemy_C)), 0, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Enemy_C)), lv_xP, gv_pLAYER_AI_Enemy_C, gv_pLAYER_TryMe_C);
+    }
+
     ShowTalentPanel(libCore_gv_playerGroupFromPlayer[gv_pLAYER_TryMe_C], true, 1);
     Wait(0.0625, c_timeGame);
     UnitIssueOrder(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
@@ -1008,7 +1011,7 @@ void gf_Createalltownstructures () {
         gv_keepInitialized = true;
     }
     else {
-        libNtve_gf_CreateUnitsAtPoint2(1, "TownTownHallL3", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(1798196082));
+        libNtve_gf_CreateUnitsAtPoint2(1, "TownTownHallL3", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(1798196082), null);
         libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
         UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
         gv_alliedFort = UnitLastCreated();
@@ -1016,7 +1019,7 @@ void gf_Createalltownstructures () {
         libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), "AnimClear Build 0.000000");
         libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
     }
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownMoonwellL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(37));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownMoonwellL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(37), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
@@ -1041,38 +1044,38 @@ void gf_Createalltownstructures () {
 
     }
     UIFlyerHelperClearOverride(PlayerGroupAll());
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(31));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(31), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
     UnitSetPropertyFixed(UnitLastCreated(), c_unitPropEnergyRegen, 10.0);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(25));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(25), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
     UnitSetPropertyFixed(UnitLastCreated(), c_unitPropEnergyRegen, 10.0);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownGateL215BRUL", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(29));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownGateL215BRUL", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(29), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), "Signal PlayBuild");
     libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), "AnimClear Build 0.000000");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
     UnitSetPropertyFixed(UnitLastCreated(), c_unitPropEnergyRegen, 10.0);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial4L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(27));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial4L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(27), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     libNtve_gf_UnitSetVariation(UnitLastCreated(), "WallRadial4", 9, "");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial5L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(34));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial5L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, PointFromId(34), null);
     libGame_gf_TownAddStructureToTownArray(1, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libCore_gv_cOMPUTER_TeamChaos);
     libNtve_gf_UnitSetVariation(UnitLastCreated(), "WallRadial5", 7, "");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownTownHallL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(40));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownTownHallL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(40), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     gv_enemyFort = UnitLastCreated();
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownMoonwellL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(38));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownMoonwellL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(38), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
     lv_itPlayer = 1;
@@ -1094,22 +1097,22 @@ void gf_Createalltownstructures () {
 
     }
     libGame_gf_TownAddMoonwellMinimapIconstoTown(2);
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(33));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(33), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(26));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownCannonTowerL2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(26), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownGateL215BLUR", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(30));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownGateL215BLUR", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(30), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), "Signal PlayBuild");
     libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), "AnimClear Build 0.000000");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial19L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(28));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial19L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(28), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     libNtve_gf_UnitSetVariation(UnitLastCreated(), "WallRadial1", 7, "");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
-    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial18L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(36));
+    libNtve_gf_CreateUnitsAtPoint2(1, "TownWallRadial18L2", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamChaos, PointFromId(36), null);
     libGame_gf_TownAddStructureToTownArray(2, UnitLastCreated(), libGame_gf_TownGetTownStructurePresetFromUnit(UnitLastCreated()), libGame_gv_teamOrderIndex_C);
     libNtve_gf_UnitSetVariation(UnitLastCreated(), "WallRadial0", 10, "");
     UnitGroupAdd(gv_allTownStructures, UnitLastCreated());
@@ -1257,7 +1260,7 @@ bool auto_gf_TargetDummyRespawn_TriggerFunc (bool testConds, bool runActions) {
     ActorSend(lv_eggactor, "AnimBracketStart Spell IGNORE Spell,A Spell,A,End 0 -1.000000 AsDuration");
     ActorSend(lv_eggactor, "Create Murky_EggRespawn_Start");
     Wait(4.8125, c_timeGame);
-    libNtve_gf_CreateUnitsWithDefaultFacing(1, "TargetHeroDummy", 0, libGame_gf_ComputerPlayerInTeam(libGame_gv_teamChaosIndex_C), gv_targetDummyLocation[lp_targetDummyIndex]);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "TargetHeroDummy", 0, libGame_gf_ComputerPlayerInTeam(libGame_gv_teamChaosIndex_C), gv_targetDummyLocation[lp_targetDummyIndex], null);
     gv_targetDummyUnit[lp_targetDummyIndex] = UnitLastCreated();
     TriggerAddEventUnitDamaged(gt_TargetDummyTakesDamage, UnitRefFromUnit(UnitLastCreated()), c_unitDamageTypeAny, c_unitDamageEither, null);
     ActorSend(libNtve_gf_MainActorofUnit(gv_targetDummyUnit[lp_targetDummyIndex]), "SetScale 0.300000");

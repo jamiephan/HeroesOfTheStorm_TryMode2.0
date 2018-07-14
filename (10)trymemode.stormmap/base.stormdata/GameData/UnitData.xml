@@ -15,7 +15,7 @@
         <FogVisibility value="Dimmed"/>
         <MinimapRadius value="0.3"/>
         <CardLayouts>
-            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="2" Column="1"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Slot="Stop"/>
         </CardLayouts>
         <LifeRegenDelay value="0"/>
         <LifeRegenRate value="0"/>

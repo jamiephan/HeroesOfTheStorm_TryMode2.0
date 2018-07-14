@@ -82,10 +82,8 @@ bool libDEBUG_gt_SpawnUnitCommand_Func (bool testConds, bool runActions) {
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam + ", for Player " + IntToString(lv_triggeringPlayer)));
 
-    // Self note: As of 04/07/2018, the PTR spwn command changed to:
-    // libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam , 0, EventPlayer(), UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), null);
-    
-    libNtve_gf_UnitCreateFacingPoint(1, lv_inputparam, 0, lv_triggeringPlayer, UnitGroupCenterOfGroup(UnitGroupSelected(EventPlayer())), UnitGetPosition(EventUnit()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam , 0, lv_triggeringPlayer, CameraGetTarget(EventPlayer()), null);
+    // libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam, c_unitCreateIgnorePlacement, lv_triggeringPlayer, CameraGetTarget(EventPlayer()));
     UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale);
     // Enable group selection, like vikings and samuro with illusion master
     UISetDragSelectEnabled(PlayerGroupAll(), true);
