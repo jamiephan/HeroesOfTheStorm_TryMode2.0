@@ -90,15 +90,26 @@ You can aquire the ITEM ID from `<CUnit id="XXXX" parent="ITEM" />`
 
 >Notice: Due to some validation might occur, some items such as "NecromancerBoneSpear" (Xul lv16 Bone Spear) will not have any functionality (but can be still spawned) because it validates that whether you have the talent. Modify it manually though the Mod XML files.
 
-
-Still figuring out out to remove the items, for now, just change your respawn your hero with the debug menu or internal command `spawnhero HERONAME 1`.
-
     Parameters:
         ITEM: String, Required, defines ITEM
 
     Example:
         additem ArthasAntiMagicShell
         adi TalentRewind
+
+### `removeitems` | `rmi`
+
+Remove all items from selected units.
+
+*Still figuring out out to remove items by name instead all of them.*
+
+    Parameters:
+        none
+
+    Example:
+        removeitems
+        rmi
+
 
 ### `setscore` | `score` `FIELD` `VALUE`
 

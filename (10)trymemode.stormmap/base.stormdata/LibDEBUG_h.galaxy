@@ -21,6 +21,7 @@ trigger libDEBUG_gt_RestartGameCommand;
 trigger libDEBUG_gt_SwapHeroCommand;
 trigger libDEBUG_gt_RespawnTimeCommand;
 trigger libDEBUG_gt_SpawnItemToUnitCommand;
+trigger libDEBUG_gt_RemoveItemsFromUnit;
 trigger libDEBUG_gt_ToggleFullMapVisionCommand;
 trigger libDEBUG_gt_ForceBackSpaceOpenQACheatCommand;
 trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
