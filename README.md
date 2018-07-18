@@ -105,16 +105,33 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         killunits
         ku
 
-### `tfow`
+### `togglefogofwar` | `tfow`
 
-    Toggle Fow of war (Enable or disable full map vision)
+    Toggle Fow of war
+    
+    This can enable or disable full map vision
 
     Parameters: 
         none
 
     Example:
         tfow
+        togglefogofwar
 
+### `toggleoutputid` | `toi`
+
+    Toggle Display Unit ID Mode
+
+    This can output all the selected Units ID to the screen with a right click.
+
+    Notice: The system is not perfect yet and its kinda buggy. But the main functionality kinda works. Requires `ts` and `/ac` in the QA Cheat menu for now.
+
+    Parameters: 
+        none
+
+    Example:
+        tfow
+        toggleoutputid
 
 ## System Commands
 

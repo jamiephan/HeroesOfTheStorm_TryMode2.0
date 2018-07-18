@@ -35,6 +35,7 @@ void libDEBUG_InitVariables () {
     libDEBUG_gv_SpawnUnitScale = 1.0;
     libDEBUG_gv_FogOfWarIsEnabled = true;
     libDEBUG_gv_BuilderModeIsEnabled = false;
+    libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
     
 }
 
@@ -279,6 +280,7 @@ bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions
 void libDEBUG_gt_ToggleFullMapVisionCommand_Init() {
     libDEBUG_gt_ToggleFullMapVisionCommand = TriggerCreate("libDEBUG_gt_ToggleFullMapVisionCommand_Func");
     TriggerEnable(libDEBUG_gt_ToggleFullMapVisionCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_ToggleFullMapVisionCommand, c_playerAny, "togglefogofwar", true);
     TriggerAddEventChatMessage(libDEBUG_gt_ToggleFullMapVisionCommand, c_playerAny, "tfow", true);
 }
     
@@ -361,7 +363,7 @@ void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
         autoB2EDC8BC_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
         lv_unit_i = 1;
         for ( ; ( (autoB2EDC8BC_ai >= 0 && lv_unit_i <= autoB2EDC8BC_ae) || (autoB2EDC8BC_ai < 0 && lv_unit_i >= autoB2EDC8BC_ae) ) ; lv_unit_i += autoB2EDC8BC_ai ) {
-            UnitSetPosition(UnitGroupUnit(UnitGroupSelected(1), lv_unit_i), lv_mouse, true);
+            UnitSetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_unit_i), lv_mouse, true);
         }
         return true;
     }
@@ -373,6 +375,102 @@ void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
     }
 
 
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: Output the unit ID by right clicking the unit
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_OutputUnitIDCommand_Func(bool testConds, bool runActions) {
+        // Variable Declarations
+        string lv_unittype;
+        unit lv_unit;
+
+        // Automatic Variable Declarations
+        unitgroup auto905AD777_g;
+        int auto905AD777_u;
+
+        // Actions
+        if (!runActions) {
+            return true;
+        }
+
+        auto905AD777_g = UnitGroupSelected(EventPlayer());
+        auto905AD777_u = 1;
+        for ( ; auto905AD777_u <= UnitGroupCount(auto905AD777_g, c_unitCountAll) ; auto905AD777_u += BoolToInt(lv_unit == UnitGroupUnit(auto905AD777_g, auto905AD777_u)) ) {
+            lv_unit = UnitGroupUnit(auto905AD777_g, auto905AD777_u);
+            lv_unittype = UnitGetType(lv_unit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_unittype));
+        }
+
+        return true;
+
+    }
+
+    void libDEBUG_gt_OutputUnitIDCommand_Init() {
+        libDEBUG_gt_OutputUnitIDCommand = TriggerCreate("libDEBUG_gt_OutputUnitIDCommand_Func");
+        TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, false);
+        TriggerAddEventMouseClicked(libDEBUG_gt_OutputUnitIDCommand, c_playerAny, c_mouseButtonLeft, true);
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: Toggle output unit's ID mode with right click
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_ToggleOutputUnitIDMode_Func(bool testConds, bool runActions) {
+        if (!runActions) {
+            return true;
+        }
+        if(libDEBUG_gv_OutputUnitIDModeIsEnabled){
+            TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, false);
+            libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Output Unit ID Mode"));
+        } else {
+            TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, true);
+            libDEBUG_gv_OutputUnitIDModeIsEnabled = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Output Unit ID Mode"));
+        }
+
+        return true;
+    }
+
+    void libDEBUG_gt_ToggleOutputUnitIDMode_Init() {
+        libDEBUG_gt_ToggleOutputUnitIDMode = TriggerCreate("libDEBUG_gt_ToggleOutputUnitIDMode_Func");
+        TriggerEnable(libDEBUG_gt_ToggleOutputUnitIDMode, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_ToggleOutputUnitIDMode, c_playerAny, "toi", true);
+        TriggerAddEventChatMessage(libDEBUG_gt_ToggleOutputUnitIDMode, c_playerAny, "toggleoutputid", true);
+    }
+  //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Modify Score board (Tab Screen)
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_ScoreModifier_Func(bool testConds, bool runActions) {
+
+        string lv_field = StringWord(EventChatMessage(false), 2);
+        string lv_value = StringWord(EventChatMessage(false), 3);
+        int lv_valueParsed = StringToInt(lv_value);
+
+
+        if (!runActions) {
+            return true;
+        }
+
+        if(lv_field == null || lv_value == null){
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | adi FIELD SCORE"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: setscore HeroDamage 0"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score SoloKill 524287"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
+    }
+        PlayerScoreValueSetFromInt(EventPlayer(), lv_field, lv_valueParsed);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Modified Player " + IntToString(EventPlayer()) + "'s " + lv_field + " to " + IntToString(lv_valueParsed)));
+        return true;
+    }
+
+    void libDEBUG_gt_ScoreModifier_Init() {
+        libDEBUG_gt_ScoreModifier = TriggerCreate("libDEBUG_gt_ScoreModifier_Func");
+        TriggerEnable(libDEBUG_gt_ScoreModifier, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_ScoreModifier, c_playerAny, "setscore", false);
+        TriggerAddEventChatMessage(libDEBUG_gt_ScoreModifier, c_playerAny, "score", false);
+    }
 
 // Init triggers
 
@@ -388,6 +486,9 @@ void libDEBUG_InitTriggers () {
     libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init();
     libDEBUG_gt_ToggleBuilderModeCommand_Init();
     libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Init();
+    libDEBUG_gt_OutputUnitIDCommand_Init();
+    libDEBUG_gt_ToggleOutputUnitIDMode_Init();
+    libDEBUG_gt_ScoreModifier_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

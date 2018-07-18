@@ -8,6 +8,7 @@ fixed libDEBUG_gv_SpawnUnitScale;
 revealer libDEBUG_gv_FogOfWarRevealer;
 bool libDEBUG_gv_FogOfWarIsEnabled;
 bool libDEBUG_gv_BuilderModeIsEnabled;
+bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
 // Function Declarations
 
 
@@ -23,6 +24,9 @@ trigger libDEBUG_gt_SpawnItemToUnitCommand;
 trigger libDEBUG_gt_ToggleFullMapVisionCommand;
 trigger libDEBUG_gt_ForceBackSpaceOpenQACheatCommand;
 trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
+trigger libDEBUG_gt_OutputUnitIDCommand;
+trigger libDEBUG_gt_ToggleOutputUnitIDMode;
+trigger libDEBUG_gt_ScoreModifier;
 
 // builder mode
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
