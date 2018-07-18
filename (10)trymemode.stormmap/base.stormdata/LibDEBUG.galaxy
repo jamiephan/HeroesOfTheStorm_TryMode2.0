@@ -454,7 +454,7 @@ void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
         }
 
         if(lv_field == null || lv_value == null){
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | adi FIELD SCORE"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | score FIELD SCORE"));
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: setscore HeroDamage 0"));
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score SoloKill 524287"));
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));

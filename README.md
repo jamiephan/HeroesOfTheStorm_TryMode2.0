@@ -113,8 +113,8 @@ You can obtain these from `ScoreValueData.xml` in `heroesdata.stormmod`
         VALUE: Integer, Required, defined Value
 
     Example:
-        setscore SoloKill 100
-        score HeroDamage 2147483647
+        setscore HeroDamage 0
+        score SoloKill 524287
 
     
 
