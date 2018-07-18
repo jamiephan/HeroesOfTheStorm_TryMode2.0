@@ -33,32 +33,34 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
 ### `re` | `restart`
 
-    Restarting the game, without exit and re-enter.
+ Restarting the game, without exit and re-enter.
 
 ### `hi` | `hello`
 
-    Output a greeting message, with your username.
+Output a greeting message, with your username.
 
-### `summon | sum UNITNAME [PlayerGroup]`
+### `summon` | `sum` `UNITNAME` `[Player]`
 
-    Spawn a unit (as long as it loaded by lib) at the centre of your camera location.
+Spawn a unit at the centre of your camera location.
     
-    Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master.
+>Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master.
 
     Parameters:
         UNITNAME: String, Required, defines the unit name to spawn.
-        [PlayerGroup]: Integer, Optional, defines the owner of the unit. Default: EventPlayer(), 1
+        [Player]: Integer, Optional, defines the Player ID. 
+                  Default: EventPlayer(), 1
 
-        Note for PlayerGroup: 2-5 means ally players, 6-10 means enemy players. If you set 6-10, the unit will attack you (if it capable of). You cannot control them if you set anything other than you.
 
     Examples:
         summon TownTownHallL2
         summon HeroRaynor
         sum JungleGraveGolemDefender 6
 
-### `setscale | ss SCALE`
+### `setscale` | `ss` `SCALE`
 
-    Set the scale of the summon units from "summon". 1.0 is default size
+Set the scale of the summon units from "summon".
+
+`1.0` is default size for most of the models.
 
     Parameters:
         SCALE: Fixed, Requires, define the summon scale
@@ -67,9 +69,11 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         setscale 0.1
         ss 1.5
 
-### `respawntime | rst RESPAWNTIME`
+### `respawntime` | `rst` `RESPAWNTIME`
 
-    Override the current respawn timer. (Due to the game design, if you set to 0, it will change it to 0.1 automatically.)
+Override the current respawn timer. 
+
+>Notice: Due to the system limitation, if you set to 0, it will change it to 0.1 automatically.
 
     Parameters:
         RESPAWNTIME: Integer, Required, defines the respawn time
@@ -78,14 +82,16 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         respawntime 99
         rst 0
 
-### `additem | adi ITEM`
+### `additem` | `adi` `ITEM`
 
-    Spawn an item that is added to your unit inventory. If you selected multiple units, it will add to each of them.
-    Due to some validation might occur, some items such as "NecromancerBoneSpear" (Xul lv16 Bone Spear) will not have any functionality (but can be still spawned) because it validates that whether you have the talent. Modify it though the Mod XML files.
+Spawn an item that is added to your unit inventory. If you selected multiple units, it will add to each of them.
 
-    You can aquire the ITEMs from "<CUnit id="XXXX" parent="ITEM" />"
+You can aquire the ITEM ID from `<CUnit id="XXXX" parent="ITEM" />`
 
-    Still figuring out out to despawn, for now, just change your respawn your hero with the debug menu or internal command "spawnhero Raynor 1"
+>Notice: Due to some validation might occur, some items such as "NecromancerBoneSpear" (Xul lv16 Bone Spear) will not have any functionality (but can be still spawned) because it validates that whether you have the talent. Modify it manually though the Mod XML files.
+
+
+Still figuring out out to remove the items, for now, just change your respawn your hero with the debug menu or internal command `spawnhero HERONAME 1`.
 
     Parameters:
         ITEM: String, Required, defines ITEM
@@ -94,9 +100,27 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
         additem ArthasAntiMagicShell
         adi TalentRewind
 
+### `setscore` | `score` `FIELD` `VALUE`
+
+Set the score for the scoreboard (some of them shows in tab screen).
+
+You can obtain these from `ScoreValueData.xml` in `heroesdata.stormmod`
+
+>Notice: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for Fixed is `524287` and `2147483647` for Integer. 
+
+    Parameters:
+        FIELD: String, Required, defines Field
+        VALUE: Integer, Required, defined Value
+
+    Example:
+        setscore SoloKill 100
+        score HeroDamage 2147483647
+
+    
+
 ### `killunits` | `ku`
 
-    Instant Kill all units within the select group.
+Instant Kill all units within the select group.
 
     Parameters: 
         none
@@ -107,9 +131,7 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
 ### `togglefogofwar` | `tfow`
 
-    Toggle Fow of war
-    
-    This can enable or disable full map vision
+Toggle Fow of war. This can enable or disable full map vision
 
     Parameters: 
         none
@@ -120,11 +142,11 @@ The Lib handles chat commands scripts are located in `base.stormdata/LibDEBUG_h.
 
 ### `toggleoutputid` | `toi`
 
-    Toggle Display Unit ID Mode
+Toggle Display Unit ID Mode
 
-    This can output all the selected Units ID to the screen with a right click.
+This can output all the selected Units ID to the screen with a right click.
 
-    Notice: The system is not perfect yet and its kinda buggy. But the main functionality kinda works. Requires `ts` and `/ac` in the QA Cheat menu for now.
+>Notice: The system is not perfect yet and its kinda buggy. But the main functionality kinda works. Requires `ts` and `/ac` in the QA Cheat menu for now.
 
     Parameters: 
         none
