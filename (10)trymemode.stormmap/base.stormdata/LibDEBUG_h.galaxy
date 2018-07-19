@@ -9,8 +9,9 @@ revealer libDEBUG_gv_FogOfWarRevealer;
 bool libDEBUG_gv_FogOfWarIsEnabled;
 bool libDEBUG_gv_BuilderModeIsEnabled;
 bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
+bool libDEBUG_gv_ToggleFreeCameraIsEnabled;
 // Function Declarations
-
+void libDEBUG_gf_ToggleFreeCamera(bool lp_enable, int lp_player);
 
 // Trigger Declarations
 trigger libDEBUG_gt_greetingCommand;
@@ -28,11 +29,13 @@ trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
 trigger libDEBUG_gt_OutputUnitIDCommand;
 trigger libDEBUG_gt_ToggleOutputUnitIDMode;
 trigger libDEBUG_gt_ScoreModifier;
-
+trigger libDEBUG_gt_ToggleFreeCamera;
 // builder mode
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
 trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;
 trigger libDEBUG_gt_BuilderModeConfirmTeleportToMouse;
+// Hmm
+trigger libDEBUG_gt_EasterEggDoABarrelRoll;
 // Library Initialization
 void libDEBUG_InitVariables ();
 

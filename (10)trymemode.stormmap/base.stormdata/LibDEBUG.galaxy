@@ -36,7 +36,20 @@ void libDEBUG_InitVariables() {
     libDEBUG_gv_FogOfWarIsEnabled = true;
     libDEBUG_gv_BuilderModeIsEnabled = false;
     libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
+    libDEBUG_gv_ToggleFreeCameraIsEnabled = false;
 
+}
+
+// Functions
+void libDEBUG_gf_ToggleFreeCamera(bool lp_enable, int lp_player){
+    if(lp_enable){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera On")));
+        CameraSetMouseRotates(lp_player, true);
+    }else{
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera Off")));
+        CameraApplyInfo(lp_player, CameraInfoDefault(), 0.0, -1, 10.0, false);
+        CameraSetMouseRotates(lp_player, false);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -53,6 +66,7 @@ void libDEBUG_gt_greetingCommand_Init() {
     TriggerEnable(libDEBUG_gt_greetingCommand, true);
     TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hello", true);
     TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hi", true);
+
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -302,12 +316,13 @@ bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions
     if (libDEBUG_gv_FogOfWarIsEnabled == true) {
         VisRevealerCreate(EventPlayer(), RegionEntireMap());
         libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
         libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
     } else {
         VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
         libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
+        
     }
     return true;
 }
@@ -505,6 +520,77 @@ void libDEBUG_gt_ScoreModifier_Init() {
     TriggerAddEventChatMessage(libDEBUG_gt_ScoreModifier, c_playerAny, "score", false);
 }
 
+   //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Toggle Free Camera
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_ToggleFreeCamera_Func(bool testConds, bool runActions) {
+
+        if(libDEBUG_gv_ToggleFreeCameraIsEnabled){
+            // Enabled, going to disble
+            libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
+            libDEBUG_gf_ToggleFreeCamera(false, EventPlayer());
+
+
+        } else {
+            // Disabled, going to enable
+            libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
+            libDEBUG_gf_ToggleFreeCamera(true, EventPlayer());
+
+
+        }
+        return true;
+    }
+
+    void libDEBUG_gt_ToggleFreeCamera_Init() {
+        libDEBUG_gt_ToggleFreeCamera = TriggerCreate("libDEBUG_gt_ToggleFreeCamera_Func");
+        TriggerEnable(libDEBUG_gt_ToggleFreeCamera, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_ToggleFreeCamera, c_playerAny, "tfc", true);
+        TriggerAddEventChatMessage(libDEBUG_gt_ToggleFreeCamera, c_playerAny, "togglefreecamera", true);
+    }
+
+       //--------------------------------------------------------------------------------------------------
+    // Trigger: Easter Egg - Do A Barrel Roll!
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_EasterEggDoABarrelRoll_Func(bool testConds, bool runActions) {
+        // Variable Declarations
+        int lv_i;
+
+        // Automatic Variable Declarations
+        const int auto2CAE9C9B_ae = 90;
+        const int auto2CAE9C9B_ai = 1;
+
+        // Variable Initialization
+
+        // Actions
+        if (!runActions) {
+            return true;
+        }
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Barrel Roll, Barrel Roll ~~"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Roll ~~"));
+
+
+        lv_i = 1;
+        for ( ; ( (auto2CAE9C9B_ai >= 0 && lv_i <= auto2CAE9C9B_ae) || (auto2CAE9C9B_ai < 0 && lv_i >= auto2CAE9C9B_ae) ) ; lv_i += auto2CAE9C9B_ai ) {
+            CameraSetValue(1, c_cameraValueRoll, (lv_i * 4), 0.0625, -1, 100.0);
+            Wait(0.000001, c_timeReal);
+        }
+        return true;
+    }
+
+    void libDEBUG_gt_EasterEggDoABarrelRoll_Init() {
+        libDEBUG_gt_EasterEggDoABarrelRoll = TriggerCreate("libDEBUG_gt_EasterEggDoABarrelRoll_Func");
+        TriggerEnable(libDEBUG_gt_EasterEggDoABarrelRoll, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_EasterEggDoABarrelRoll, c_playerAny, "do a barrel roll", true);
+    }
+
+
+
+
 // Init triggers
 
 void libDEBUG_InitTriggers() {
@@ -523,6 +609,8 @@ void libDEBUG_InitTriggers() {
     libDEBUG_gt_OutputUnitIDCommand_Init();
     libDEBUG_gt_ToggleOutputUnitIDMode_Init();
     libDEBUG_gt_ScoreModifier_Init();
+    libDEBUG_gt_ToggleFreeCamera_Init();
+    libDEBUG_gt_EasterEggDoABarrelRoll_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
