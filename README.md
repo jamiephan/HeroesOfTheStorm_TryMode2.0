@@ -166,6 +166,40 @@ This can output all the selected Units ID to the screen with a right click.
         tfow
         toggleoutputid
 
+### `togglefreecamera` | `tfc`
+
+Toggle Free Camera Mode
+
+This can allows you to freely move your camera's around. Free zoom are coming soon.
+
+>Notice: The camera pan will be disabled while free camera mode is activated (you can no longer move your camera by pushing your cursor to the side.)
+
+    Parameters: 
+        none
+
+    Example:
+        tfc
+        togglefreecamera
+
+### `do a barrel roll`
+
+DO A BARREL ROLL
+
+    ~~ Barrel Roll, Barrel Roll ~~
+    ~~ Do The Barrel Barrel Roll ~~
+    ~~ Do The Barrel Barrel Roll ~~
+    ~~ Do The Barrel Roll ~~
+
+>Notice: IT WILL SWOOOOOOOOOOP.
+
+
+    Parameters: 
+        none
+
+    Example:
+        do a barrel roll
+        dO a BaRrEl rOlL
+
 ## System Commands
 
 These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well.
