@@ -245,6 +245,7 @@ bool libDEBUG_gt_SpawnItemToUnitCommand_Func(bool testConds, bool runActions) {
             break;
         }
         UnitInventoryCreate(lv_itUnit, lv_inputparam);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Tried to add " + lv_inputparam + " to " + UnitGetType(lv_itUnit)));
     }
     return true;
 }
@@ -272,9 +273,14 @@ bool libDEBUG_gt_RemoveItemsFromUnit_Func(bool testConds, bool runActions) {
         if (lv_itUnit == null) {
             break;
         }
-        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, EventPlayer()));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 1));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 2));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 3));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 4));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 5));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 6));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Removed all items from " + UnitGetType(lv_itUnit)));
     }
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Removed all items from selected units"));
     return true;
 }
 
@@ -442,7 +448,7 @@ void libDEBUG_gt_OutputUnitIDCommand_Init() {
 //--------------------------------------------------------------------------------------------------
 
 bool libDEBUG_gt_ToggleOutputUnitIDMode_Func(bool testConds, bool runActions) {
-  
+
     if (!runActions) {
         return true;
     }
