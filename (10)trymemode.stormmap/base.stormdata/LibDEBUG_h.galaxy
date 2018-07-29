@@ -30,6 +30,7 @@ trigger libDEBUG_gt_OutputUnitIDCommand;
 trigger libDEBUG_gt_ToggleOutputUnitIDMode;
 trigger libDEBUG_gt_ScoreModifier;
 trigger libDEBUG_gt_ToggleFreeCamera;
+trigger libDEBUG_gt_OverrideRespawnPointCommand;
 // builder mode
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
 trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;

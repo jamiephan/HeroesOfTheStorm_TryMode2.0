@@ -57,6 +57,7 @@ void libDEBUG_gf_ToggleFreeCamera(bool lp_enable, int lp_player){
 //--------------------------------------------------------------------------------------------------
 bool libDEBUG_gt_greetingCommand_Func(bool testConds, bool runActions) {
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Greetings, ") + PlayerName(EventPlayer()) + StringToText(". Welcome to Try Mode 2.0!")));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Your Player ID is " + IntToString(EventPlayer())));
     return true;
 }
 
@@ -153,6 +154,7 @@ void libDEBUG_gt_SpawnSetScaleCommand_Init() {
 bool libDEBUG_gt_KillUnitCommand_Func(bool testConds, bool runActions) {
     // Variable Declarations
     int lv_units;
+    unit lv_unit;
 
     // Automatic Variable Declarations
     int autoC410B7EE_ae;
@@ -166,12 +168,12 @@ bool libDEBUG_gt_KillUnitCommand_Func(bool testConds, bool runActions) {
     }
 
     autoC410B7EE_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-    lv_units = 0;
+    lv_units = 1;
     for (;
         ((autoC410B7EE_ai >= 0 && lv_units <= autoC410B7EE_ae) || (autoC410B7EE_ai < 0 && lv_units >= autoC410B7EE_ae)); lv_units += autoC410B7EE_ai) {
-        UnitKill(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_units));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Killed all selected unit(s) "));
-
+        lv_unit = UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_units);
+        UnitKill(lv_unit);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Killed Player " + IntToString(UnitGetOwner(lv_unit)) + "'s " + UnitGetType(lv_unit)));
     }
     return true;
 }
@@ -217,8 +219,8 @@ bool libDEBUG_gt_RespawnTimeCommand_Func(bool testConds, bool runActions) {
     }
 
     if (StringToInt(lv_inputparam) == 0) {
-        // libCore_gv_bALDeathTimeOverride cannot set to 0
-        libCore_gv_bALDeathTimeOverride = 0.1;
+        // libCore_gv_bALDeathTimeOverride cannot set to 0, so set it to 1 game tick (0.0625s)
+        libCore_gv_bALDeathTimeOverride = 0.0625;
     } else {
         libCore_gv_bALDeathTimeOverride = StringToInt(lv_inputparam);
     }
@@ -261,6 +263,11 @@ bool libDEBUG_gt_SpawnItemToUnitCommand_Func(bool testConds, bool runActions) {
         UnitInventoryCreate(lv_itUnit, lv_inputparam);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Tried to add " + lv_inputparam + " to " + UnitGetType(lv_itUnit)));
     }
+        EngineReset();
+    TriggerDebugSetTypeFile(1, "TriggerDebug.txt");
+           TriggerDebugOutputEnable(true);
+            TriggerDebugEnableType(1, true);
+        TriggerDebugOutput(1, StringToText("Param/Value/C6C750AD"), true);
     return true;
 }
 void libDEBUG_gt_SpawnItemToUnitCommand_Init() {
@@ -588,6 +595,101 @@ void libDEBUG_gt_ScoreModifier_Init() {
         TriggerAddEventChatMessage(libDEBUG_gt_EasterEggDoABarrelRoll, c_playerAny, "do a barrel roll", true);
     }
 
+   //--------------------------------------------------------------------------------------------------
+    // Trigger: Overrides the respawn point for player's unit
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_OverrideRespawnPointCommand_Func(bool testConds, bool runActions) {
+
+        int lv_i = 1;
+        string lv_inputparam = StringWord(EventChatMessage(false), 2);
+        string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
+        int lv_player = EventPlayer();
+        point lv_cameraLocation = CameraGetTarget(EventPlayer());
+        string lv_cameraLocationString = libNtve_gf_ConvertPointToString(lv_cameraLocation);
+
+        if (!runActions) {
+            return true;
+        }
+
+        if (lv_inputparam == null) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+            return true;
+        }
+
+        if (lv_inputparam2 == null) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+            return true;
+        }
+
+        if(lv_inputparam == "set"){
+            if(lv_inputparam2 == "all") {
+
+                lv_i = 1;
+                for ( ; ( (1 >= 0 && lv_i <= 10) || (1 <= 0 && lv_i >= 10) ) ; lv_i += 1 ) {
+                    libGame_gv_players[lv_i].lv_spawnPoint = lv_cameraLocation;
+                }    
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set All Players Respawn point to current camera point (" + lv_cameraLocationString + ")."));
+
+
+            }else {
+                if(StringToInt(lv_inputparam2) > 0) {
+                    lv_player = StringToInt(lv_inputparam2);
+                    libGame_gv_players[lv_player].lv_spawnPoint = lv_cameraLocation;
+                    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set Player " + IntToString(lv_player) + "'s Respawn point to current camera point (" + lv_cameraLocationString + ")."));
+                }
+            }
+
+        } else {
+
+            if(lv_inputparam == "reset") {
+                if(lv_inputparam2 == "all") {
+
+                    lv_i = 1;
+                    for ( ; ( (1 >= 0 && lv_i <= 10) || (1 <= 0 && lv_i >= 10) ) ; lv_i += 1 ) {
+                        libGame_gv_players[lv_i].lv_spawnPoint = PlayerStartLocation(lv_i);
+                    } 
+                    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn point to their default spawn point."));
+                }else {
+                    if(StringToInt(lv_inputparam2) > 0) {
+                        lv_player = StringToInt(lv_inputparam2);
+                        libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset Player " + IntToString(lv_player) + "'s Respawn point to default spawn point (" + libNtve_gf_ConvertPointToString(PlayerStartLocation(lv_player)) + ")"));
+
+                    }
+                }
+
+            } else {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+            }
+        }
+        
+        
+
+
+
+        return true;
+    }
+
+    void libDEBUG_gt_OverrideRespawnPointCommand_Init() {
+        libDEBUG_gt_OverrideRespawnPointCommand = TriggerCreate("libDEBUG_gt_OverrideRespawnPointCommand_Func");
+        TriggerEnable(libDEBUG_gt_OverrideRespawnPointCommand, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_OverrideRespawnPointCommand, c_playerAny, "rsp", false);
+        TriggerAddEventChatMessage(libDEBUG_gt_OverrideRespawnPointCommand, c_playerAny, "respawnpoint", false);
+    }
+
 
 
 
@@ -611,6 +713,7 @@ void libDEBUG_InitTriggers() {
     libDEBUG_gt_ScoreModifier_Init();
     libDEBUG_gt_ToggleFreeCamera_Init();
     libDEBUG_gt_EasterEggDoABarrelRoll_Init();
+    libDEBUG_gt_OverrideRespawnPointCommand_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

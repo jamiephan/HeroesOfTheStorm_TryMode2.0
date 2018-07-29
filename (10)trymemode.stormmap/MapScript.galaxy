@@ -14,7 +14,6 @@ include "TriggerLibs/UILib"
 include "TriggerLibs/SoundLib"
 include "TriggerLibs/GameDataHelperLib"
 include "TriggerLibs/SupportLib"
-
 include "LibDEBUG"
 
 //--------------------------------------------------------------------------------------------------

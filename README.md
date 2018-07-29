@@ -127,6 +127,24 @@ You can obtain these from `ScoreValueData.xml` in `heroesdata.stormmod`
         setscore HeroDamage 0
         score SoloKill 524287
 
+
+### `respawnpoint` | `rsp` `ACTION` `PLAYER`
+
+Set the action for the respawn point for the player.
+
+    Accept values:
+        ACTION:
+            set: Set the spawn location for the player(s) at the current camera location.
+            reset: Reset the spawn location for the player(s) to its/their default spawn location.
+        PLAYER:
+            [1-10]: Set the target player for the action above.
+            all: Apply the action above to all players (1-10)
+
+    Example:
+        respawnpoint set all
+        rsp set 1
+        rsp reset all
+
     
 
 ### `killunits` | `ku`
