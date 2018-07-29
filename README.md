@@ -132,7 +132,7 @@ You can obtain these from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 Set the action for the respawn point for the player.
 
-    Accept values:
+    Parameters:
         ACTION:
             set: Set the spawn location for the player(s) at the current camera location.
             reset: Reset the spawn location for the player(s) to its/their default spawn location.
@@ -223,11 +223,14 @@ DO A BARREL ROLL
 These commands are used by Blizzard internaly, after force to turn in the debug mode, we can use it as well.
 
     ---PENDING FOR UPDATE---
-    The command list are just a quick "grep" generated from all galaxy files. Some of them works in Try mode but some of them don't. Some of them require parameters, some of them just log out to TriggerDebugOutput(). Documentation are not there yet, but might add later.
+    The command list are just a quick "grep" generated from all galaxy files. Documentation are not there yet, but might add later.
+
 
     For now to see command list, please refer to `InternalCommands.txt`
 
-    Format: TRIGGERLIB_gt_TRIGGERFUNCTION   "Command"
+    Format: TriggerLibPath:lineNumber: TriggerAddEventChatMessage(TRIGGERFUNCTION, c_playerAny, CHATCOMMAND, OPTION);
+
+    if OPTION is true, means the chat command does not have parameter, and if it is false, meaning you have to refer to the code to see the parameter.
 
 ## Builder Mode
 
