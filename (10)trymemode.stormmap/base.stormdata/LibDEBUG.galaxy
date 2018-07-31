@@ -40,18 +40,6 @@ void libDEBUG_InitVariables() {
 
 }
 
-// Functions
-void libDEBUG_gf_ToggleFreeCamera(bool lp_enable, int lp_player) {
-    if (lp_enable) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera On")));
-      CameraSetMouseRotates(lp_player, true);
-    } else {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera Off")));
-      CameraApplyInfo(lp_player, CameraInfoDefault(), 0.0, -1, 10.0, false);
-      CameraSetMouseRotates(lp_player, false);
-    }
-}
-
 //--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Greeting Command
 //--------------------------------------------------------------------------------------------------
@@ -82,20 +70,20 @@ bool libDEBUG_gt_SpawnUnitCommand_Func(bool testConds, bool runActions) {
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "sum") || (StringWord(EventChatMessage(false), 1) == "summon")))) {
-      return false;
+        return false;
     }
 
     if (lv_inputparam == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of summoning: summon | sum UnitName [Player]"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon TownTownHallL2"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: sum HeroRaynor"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon JungleGraveGolemDefender 6"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of summoning: summon | sum UnitName [Player]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon TownTownHallL2"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: sum HeroRaynor"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: summon JungleGraveGolemDefender 6"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     if (!(lv_inputparam2 == null)) {
-      lv_triggeringPlayer = StringToInt(lv_inputparam2);
+        lv_triggeringPlayer = StringToInt(lv_inputparam2);
     }
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Trying to spawn: " + lv_inputparam + ", for Player " + IntToString(lv_triggeringPlayer)));
@@ -126,22 +114,22 @@ bool libDEBUG_gt_SpawnSetScaleCommand_Func(bool testConds, bool runActions) {
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "ss") || (StringWord(EventChatMessage(false), 1) == "setscale")))) {
-      return false;
+        return false;
     }
 
     if (lv_inputparam == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of setting summons scale: setscale | ss SCALE"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: setscale 1"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: ss 3"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of setting summons scale: setscale | ss SCALE"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: setscale 1"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: ss 3"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     lv_scale = StringToFixed(lv_inputparam);
 
     if (lv_scale == 0) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid scale number or scale is 0."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid scale number or scale is 0."));
+        return true;
     }
 
     libDEBUG_gv_SpawnUnitScale = lv_scale;
@@ -173,16 +161,16 @@ bool libDEBUG_gt_KillUnitCommand_Func(bool testConds, bool runActions) {
 
     // Actions
     if (!runActions) {
-      return true;
+        return true;
     }
 
     autoC410B7EE_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
     lv_units = 1;
     for (;
-      ((autoC410B7EE_ai >= 0 && lv_units <= autoC410B7EE_ae) || (autoC410B7EE_ai < 0 && lv_units >= autoC410B7EE_ae)); lv_units += autoC410B7EE_ai) {
-      lv_unit = UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_units);
-      UnitKill(lv_unit);
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Killed Player " + IntToString(UnitGetOwner(lv_unit)) + "'s " + UnitGetType(lv_unit)));
+        ((autoC410B7EE_ai >= 0 && lv_units <= autoC410B7EE_ae) || (autoC410B7EE_ai < 0 && lv_units >= autoC410B7EE_ae)); lv_units += autoC410B7EE_ai) {
+        lv_unit = UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_units);
+        UnitKill(lv_unit);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Killed Player " + IntToString(UnitGetOwner(lv_unit)) + "'s " + UnitGetType(lv_unit)));
     }
     return true;
 }
@@ -221,22 +209,22 @@ bool libDEBUG_gt_RespawnTimeCommand_Func(bool testConds, bool runActions) {
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "rst") || (StringWord(EventChatMessage(false), 1) == "respawntime")))) {
-      return false;
+        return false;
     }
 
     if (lv_inputparam == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for respawn time: respawntime | rst Time"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: respawntime 0"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: rst 10"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for respawn time: respawntime | rst Time"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: respawntime 0"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: rst 10"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     if (StringToInt(lv_inputparam) == 0) {
-      // libCore_gv_bALDeathTimeOverride cannot set to 0, so set it to 1 game tick (0.0625s)
-      libCore_gv_bALDeathTimeOverride = 0.0625;
+        // libCore_gv_bALDeathTimeOverride cannot set to 0, so set it to 1 game tick (0.0625s)
+        libCore_gv_bALDeathTimeOverride = 0.0625;
     } else {
-      libCore_gv_bALDeathTimeOverride = StringToInt(lv_inputparam);
+        libCore_gv_bALDeathTimeOverride = StringToInt(lv_inputparam);
     }
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + IntToString(StringToInt(lv_inputparam)))); //LOL
     return true;
@@ -261,26 +249,26 @@ bool libDEBUG_gt_SpawnItemToUnitCommand_Func(bool testConds, bool runActions) {
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "adi") || (StringWord(EventChatMessage(false), 1) == "additem")))) {
-      return false;
+        return false;
     }
 
     if (lv_inputparam == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for spawn items: additem | adi ITEM"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: additem ArthasAntiMagicShell"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: adi TalentRewind"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for spawn items: additem | adi ITEM"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: additem ArthasAntiMagicShell"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: adi TalentRewind"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     lv_unitgroup = UnitGroupSelected(EventPlayer());
     lv_unitcount = UnitGroupCount(lv_unitgroup, c_unitCountAll);
     for (;; lv_unitcount -= 1) {
-      lv_itUnit = UnitGroupUnitFromEnd(lv_unitgroup, lv_unitcount);
-      if (lv_itUnit == null) {
-          break;
-      }
-      UnitInventoryCreate(lv_itUnit, lv_inputparam);
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Tried to add " + lv_inputparam + " to " + UnitGetType(lv_itUnit)));
+        lv_itUnit = UnitGroupUnitFromEnd(lv_unitgroup, lv_unitcount);
+        if (lv_itUnit == null) {
+            break;
+        }
+        UnitInventoryCreate(lv_itUnit, lv_inputparam);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Tried to add " + lv_inputparam + " to " + UnitGetType(lv_itUnit)));
     }
     EngineReset();
     TriggerDebugSetTypeFile(1, "TriggerDebug.txt");
@@ -309,17 +297,17 @@ bool libDEBUG_gt_RemoveItemsFromUnit_Func(bool testConds, bool runActions) {
     lv_unitgroup = UnitGroupSelected(EventPlayer());
     lv_unitcount = UnitGroupCount(lv_unitgroup, c_unitCountAll);
     for (;; lv_unitcount -= 1) {
-      lv_itUnit = UnitGroupUnitFromEnd(lv_unitgroup, lv_unitcount);
-      if (lv_itUnit == null) {
-          break;
-      }
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 1));
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 2));
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 3));
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 4));
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 5));
-      UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 6));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Removed all items from " + UnitGetType(lv_itUnit)));
+        lv_itUnit = UnitGroupUnitFromEnd(lv_unitgroup, lv_unitcount);
+        if (lv_itUnit == null) {
+            break;
+        }
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 1));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 2));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 3));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 4));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 5));
+        UnitInventoryRemove(UnitInventoryItem(lv_itUnit, 6));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Removed all items from " + UnitGetType(lv_itUnit)));
     }
     return true;
 }
@@ -337,17 +325,17 @@ void libDEBUG_gt_RemoveItemsFromUnit_Init() {
 
 bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions) {
     if (!runActions) {
-      return true;
+        return true;
     }
     if (libDEBUG_gv_FogOfWarIsEnabled == true) {
-      VisRevealerCreate(EventPlayer(), RegionEntireMap());
-      libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
-      libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
+        VisRevealerCreate(EventPlayer(), RegionEntireMap());
+        libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
+        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
     } else {
-      VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
-      libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
+        VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
+        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
 
     }
     return true;
@@ -365,13 +353,13 @@ void libDEBUG_gt_ToggleFullMapVisionCommand_Init() {
 
 bool libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Func(bool testConds, bool runActions) {
     if (!runActions) {
-      return true;
+        return true;
     }
 
     if ((DialogControlIsVisible(libUIUI_gv_uIDebugPanel.lv_mainDialog, EventPlayer()) == true)) {
-      DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), true);
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), true);
     } else {
-      DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), false);
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), false);
     }
 
     return true;
@@ -388,19 +376,19 @@ void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
 
 bool libDEBUG_gt_ToggleBuilderModeCommand_Func(bool testConds, bool runActions) {
     if (!runActions) {
-      return true;
+        return true;
     }
     if (libDEBUG_gv_BuilderModeIsEnabled) {
-      // Already enabled, disable all triggers
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Builder Mode"));
-      libDEBUG_gv_BuilderModeIsEnabled = false;
-      TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
+        // Already enabled, disable all triggers
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Builder Mode - Off"));
+        libDEBUG_gv_BuilderModeIsEnabled = false;
+        TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
 
     } else {
-      // Already disbled, enable asll triggers
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Builder Mode"));
-      libDEBUG_gv_BuilderModeIsEnabled = true;
-      TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, true);
+        // Already disbled, enable all triggers
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Builder Mode - On"));
+        libDEBUG_gv_BuilderModeIsEnabled = true;
+        TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, true);
 
     }
     return true;
@@ -430,14 +418,14 @@ bool libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Func(bool testCo
 
     // Actions
     if (!runActions) {
-      return true;
+        return true;
     }
 
     autoB2EDC8BC_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
     lv_unit_i = 1;
     for (;
-      ((autoB2EDC8BC_ai >= 0 && lv_unit_i <= autoB2EDC8BC_ae) || (autoB2EDC8BC_ai < 0 && lv_unit_i >= autoB2EDC8BC_ae)); lv_unit_i += autoB2EDC8BC_ai) {
-      UnitSetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_unit_i), lv_mouse, true);
+        ((autoB2EDC8BC_ai >= 0 && lv_unit_i <= autoB2EDC8BC_ae) || (autoB2EDC8BC_ai < 0 && lv_unit_i >= autoB2EDC8BC_ae)); lv_unit_i += autoB2EDC8BC_ai) {
+        UnitSetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_unit_i), lv_mouse, true);
     }
     return true;
 }
@@ -463,15 +451,15 @@ bool libDEBUG_gt_OutputUnitIDCommand_Func(bool testConds, bool runActions) {
 
     // Actions
     if (!runActions) {
-      return true;
+        return true;
     }
 
     auto905AD777_g = UnitGroupSelected(EventPlayer());
     auto905AD777_u = 1;
     for (; auto905AD777_u <= UnitGroupCount(auto905AD777_g, c_unitCountAll); auto905AD777_u += BoolToInt(lv_unit == UnitGroupUnit(auto905AD777_g, auto905AD777_u))) {
-      lv_unit = UnitGroupUnit(auto905AD777_g, auto905AD777_u);
-      lv_unittype = UnitGetType(lv_unit);
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_unittype));
+        lv_unit = UnitGroupUnit(auto905AD777_g, auto905AD777_u);
+        lv_unittype = UnitGetType(lv_unit);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_unittype));
     }
 
     return true;
@@ -491,16 +479,16 @@ void libDEBUG_gt_OutputUnitIDCommand_Init() {
 bool libDEBUG_gt_ToggleOutputUnitIDMode_Func(bool testConds, bool runActions) {
 
     if (!runActions) {
-      return true;
+        return true;
     }
     if (libDEBUG_gv_OutputUnitIDModeIsEnabled) {
-      TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, false);
-      libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Output Unit ID Mode"));
+        TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, false);
+        libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Output Unit ID Mode"));
     } else {
-      TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, true);
-      libDEBUG_gv_OutputUnitIDModeIsEnabled = true;
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Output Unit ID Mode"));
+        TriggerEnable(libDEBUG_gt_OutputUnitIDCommand, true);
+        libDEBUG_gv_OutputUnitIDModeIsEnabled = true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Output Unit ID Mode"));
     }
 
     return true;
@@ -525,15 +513,15 @@ bool libDEBUG_gt_ScoreModifier_Func(bool testConds, bool runActions) {
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "score") || (StringWord(EventChatMessage(false), 1) == "setscore")))) {
-      return false;
+        return false;
     }
 
     if (lv_field == null || lv_value == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | score FIELD SCORE"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: setscore HeroDamage 0"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score SoloKill 524287"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | score FIELD SCORE"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: setscore HeroDamage 0"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score SoloKill 524287"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
     PlayerScoreValueSetFromInt(EventPlayer(), lv_field, lv_valueParsed);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Modified Player " + IntToString(EventPlayer()) + "'s " + lv_field + " to " + IntToString(lv_valueParsed)));
@@ -554,14 +542,17 @@ void libDEBUG_gt_ScoreModifier_Init() {
 bool libDEBUG_gt_ToggleFreeCamera_Func(bool testConds, bool runActions) {
 
     if (libDEBUG_gv_ToggleFreeCameraIsEnabled) {
-      // Enabled, going to disble
-      libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
-      libDEBUG_gf_ToggleFreeCamera(false, EventPlayer());
+        // Enabled, going to disble
+        libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
+        CameraApplyInfo(EventPlayer(), CameraInfoDefault(), 0.0, -1, 10.0, false);
+        CameraSetMouseRotates(EventPlayer(), false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera Mode - Off")));
 
     } else {
-      // Disabled, going to enable
-      libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
-      libDEBUG_gf_ToggleFreeCamera(true, EventPlayer());
+        // Disabled, going to enable
+        libDEBUG_gv_ToggleFreeCameraIsEnabled = !libDEBUG_gv_ToggleFreeCameraIsEnabled;
+        CameraSetMouseRotates(EventPlayer(), true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Free Camera Mode - On")));
 
     }
     return true;
@@ -590,7 +581,7 @@ bool libDEBUG_gt_EasterEggDoABarrelRoll_Func(bool testConds, bool runActions) {
 
     // Actions
     if (!runActions) {
-      return true;
+        return true;
     }
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Barrel Roll, Barrel Roll ~~"));
@@ -600,9 +591,9 @@ bool libDEBUG_gt_EasterEggDoABarrelRoll_Func(bool testConds, bool runActions) {
 
     lv_i = 1;
     for (;
-      ((auto2CAE9C9B_ai >= 0 && lv_i <= auto2CAE9C9B_ae) || (auto2CAE9C9B_ai < 0 && lv_i >= auto2CAE9C9B_ae)); lv_i += auto2CAE9C9B_ai) {
-      CameraSetValue(1, c_cameraValueRoll, (lv_i * 4), 0.0625, -1, 100.0);
-      Wait(0.000001, c_timeReal);
+        ((auto2CAE9C9B_ai >= 0 && lv_i <= auto2CAE9C9B_ae) || (auto2CAE9C9B_ai < 0 && lv_i >= auto2CAE9C9B_ae)); lv_i += auto2CAE9C9B_ai) {
+        CameraSetValue(1, c_cameraValueRoll, (lv_i * 4), 0.0625, -1, 100.0);
+        Wait(0.000001, c_timeReal);
     }
     return true;
 }
@@ -628,72 +619,72 @@ bool libDEBUG_gt_OverrideRespawnPointCommand_Func(bool testConds, bool runAction
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
     if (!(((StringWord(EventChatMessage(false), 1) == "rsp") || (StringWord(EventChatMessage(false), 1) == "respawnpoint")))) {
-      return false;
+        return false;
     }
 
     if (lv_inputparam == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     if (lv_inputparam2 == null) {
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
-      UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      return true;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return true;
     }
 
     if (lv_inputparam == "set") {
-      if (lv_inputparam2 == "all") {
-
-          lv_i = 1;
-          for (;
-            ((1 >= 0 && lv_i <= 10) || (1 <= 0 && lv_i >= 10)); lv_i += 1) {
-            libGame_gv_players[lv_i].lv_spawnPoint = lv_cameraLocation;
-          }
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set All Players Respawn point to current camera point (" + lv_cameraLocationString + ")."));
-
-      } else {
-          if (StringToInt(lv_inputparam2) > 0) {
-            lv_player = StringToInt(lv_inputparam2);
-            libGame_gv_players[lv_player].lv_spawnPoint = lv_cameraLocation;
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set Player " + IntToString(lv_player) + "'s Respawn point to current camera point (" + lv_cameraLocationString + ")."));
-          }
-      }
-
-    } else {
-
-      if (lv_inputparam == "reset") {
-          if (lv_inputparam2 == "all") {
+        if (lv_inputparam2 == "all") {
 
             lv_i = 1;
             for (;
                 ((1 >= 0 && lv_i <= 10) || (1 <= 0 && lv_i >= 10)); lv_i += 1) {
-                libGame_gv_players[lv_i].lv_spawnPoint = PlayerStartLocation(lv_i);
+                libGame_gv_players[lv_i].lv_spawnPoint = lv_cameraLocation;
             }
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn point to their default spawn point."));
-          } else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set All Players Respawn point to current camera point (" + lv_cameraLocationString + ")."));
+
+        } else {
             if (StringToInt(lv_inputparam2) > 0) {
                 lv_player = StringToInt(lv_inputparam2);
-                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
-                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset Player " + IntToString(lv_player) + "'s Respawn point to default spawn point (" + libNtve_gf_ConvertPointToString(PlayerStartLocation(lv_player)) + ")"));
-
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameraLocation;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Set Player " + IntToString(lv_player) + "'s Respawn point to current camera point (" + lv_cameraLocationString + ")."));
             }
-          }
+        }
 
-      } else {
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
-          UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-      }
+    } else {
+
+        if (lv_inputparam == "reset") {
+            if (lv_inputparam2 == "all") {
+
+                lv_i = 1;
+                for (;
+                    ((1 >= 0 && lv_i <= 10) || (1 <= 0 && lv_i >= 10)); lv_i += 1) {
+                    libGame_gv_players[lv_i].lv_spawnPoint = PlayerStartLocation(lv_i);
+                }
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn point to their default spawn point."));
+            } else {
+                if (StringToInt(lv_inputparam2) > 0) {
+                    lv_player = StringToInt(lv_inputparam2);
+                    libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset Player " + IntToString(lv_player) + "'s Respawn point to default spawn point (" + libNtve_gf_ConvertPointToString(PlayerStartLocation(lv_player)) + ")"));
+
+                }
+            }
+
+        } else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set respawn point: respawnpoint | rsp {\"set\"|\"reset\"} {Player|\"all\"}"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: respawnpoint set all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        }
     }
 
     return true;
@@ -736,7 +727,7 @@ bool libDEBUG_InitLib_completed = false;
 
 void libDEBUG_InitLib() {
     if (libDEBUG_InitLib_completed) {
-      return;
+        return;
     }
     libDEBUG_InitLib_completed = true;
     libDEBUG_InitLibraries();
