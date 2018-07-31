@@ -34,7 +34,7 @@ trigger libDEBUG_gt_OverrideRespawnPointCommand;
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
 trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;
 trigger libDEBUG_gt_BuilderModeConfirmTeleportToMouse;
-// Hmm
+// Barrel Roll!
 trigger libDEBUG_gt_EasterEggDoABarrelRoll;
 // Library Initialization
 void libDEBUG_InitVariables ();
