@@ -295,18 +295,17 @@ DO A BARREL ROLL
 
 These commands are used by Blizzard internally, after forced to turn on the debug mode, some of them we can use it as well.
 
-- `togheroai` - Allows you to toggle AIs to players that have AI assigned.
-- `debugrespawn` - Instantly cause your hero to respawn.
-- `-devcheats` - Toggle QA debug menu. (Kinda redundant, as I have sync it with `\` key manually.) 
-- `-AI All` - Toggle AIs and apply them to all players (AI will take control over you.) <sup>*Conspiracy theory of AI taking control the world? hmm..*</sup>
+- `togheroai`: Allows you to toggle AIs to players that have AI assigned.
+- `debugrespawn`: Instantly cause your hero to respawn.
+- `-devcheats`: Toggle QA debug menu. (Kinda redundant, as I have sync it with `\` key manually.) 
+- `-AI All`: Toggle AIs and apply them to all players (AI will take control over you.) <sup>*Conspiracy theory of AI taking control the world? hmm..*</sup>
+    
+**---PENDING FOR UPDATE---**
 
+The command list are just a quick "grep" generated from all galaxy files. Documentation are not there yet, but might add later.
 
-    ---PENDING FOR UPDATE---
-    The command list are just a quick "grep" generated from all galaxy files. Documentation are not there yet, but might add later.
-
-
-    For now to see command list, please refer to `InternalCommands.txt`
-
+For now to see command list, please refer to [`InternalCommands.txt`](/InternalCommands.txt)
+ 
     Format: TriggerLibPath:lineNumber: TriggerAddEventChatMessage(TRIGGERFUNCTION, c_playerAny, CHATCOMMAND, OPTION);
 
     if OPTION is true, means the chat command does not have parameter, and if it is false, meaning you have to refer to the code to see the parameter.
