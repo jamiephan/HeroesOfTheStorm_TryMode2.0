@@ -293,6 +293,8 @@ DO A BARREL ROLL
 
 ## System Commands
 
+>This section is kinda outdated. Please refer to [Mimic](#internal-library-mimics) section.
+
 These commands are used by Blizzard internally, after forced to turn on the debug mode, some of them we can use it as well.
 
 - `togheroai`: Allows you to toggle AIs to players that have AI assigned.
@@ -309,6 +311,65 @@ For now to see command list, please refer to [`InternalCommands.txt`](/InternalC
     Format: TriggerLibPath:lineNumber: TriggerAddEventChatMessage(TRIGGERFUNCTION, c_playerAny, CHATCOMMAND, OPTION);
 
     if OPTION is true, means the chat command does not have parameter, and if it is false, meaning you have to refer to the code to see the parameter.
+    
+## Internal Library Mimics
+
+### **Currently Mimicked Internal Libraries:**
+
+Mod name | Library name | Library prefix | Mimicked Lib Prefix
+--- | --- | --- | ---
+`heroesdata.stormmod` | `SupportLib` | `libSprt` | `MimicSupportLib`
+
+Mimic Librarys are identical to internal trigger libs (Created by Blizzard). However, due to some restrictions, some functionalities cannot be easily used (for example it will detect whether it is a development build or production build, to prevent normal users accessing the commands.)
+
+Hence, I have create a mimic lib that is identical to internal libs, but modified a few things:
+
+### Renamed all triggers, variables, function etc.
+
+Well, common sense. To prevent conflict with the origional library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
+
+### Removed Game Cheat Detection (Dev/Prod build detect)
+
+Since there are two ways that Blizzard detect whether does the game are in dev mode (maybe by different Blizzard Staff), some of the triggers have them both validated:
+
+    if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        return false;
+    }
+
+This is most commonly used, however it can be easily bypass it, as `libCore_gv_dEBUGDebuggingEnabled` is just a variable that can be overwritten, which already done in `libDEBUG.galaxy`.
+
+However, another checking method on some triggers can not bypass:
+
+    if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == true))) {
+        return false;
+    }
+
+Because this `c_gameCheatCategoryDevelopment` is a **constant** that was pre-defined (which cannot be changed and will crash if you "forcefully" do so).
+
+Hence, all the mimic internal libs will remove `GameCheatsEnabled(c_gameCheatCategoryDevelopment)` validation check (but not `libCore_gv_dEBUGDebuggingEnabled`).
+
+### Override `TriggerDebugOutput()` with a custom command
+
+Since those code are for debug purpose only, if you have played around SC2 Maps, you should come around the `TriggerDebugOutput` function. This is internally, which looks something like this:
+
+![SC2 debug window](https://i.imgur.com/7IofkYI.png)
+
+However, I cannot find a way to get the debug window up despite manually calling the debug window out. This tool is extremely useful for debugging if Heroes can call it out. Well, unfortunately.
+
+However, those messages still carry out important infomation about the current state of the trigger call, therefore, I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageAreaDebug` instead, like how all the chat commands output.
+
+### Prefixing Chat Commands
+
+In order to prevent a chat command have conflict with the original lib (for example both internal and mimic lib listen for the same chat command and execute the same function), I have added a `m` prefix to all chat commands, regardless what characters do they start with.
+
+For example:
+
+Internal Command | Mimicked Command
+--- | --- 
+`invulnerablestructures` | `minvulnerablestructures`
+`BUILDINGSCALING` | `mBUILDINGSCALING`
+`-AI All` | `m-AI All`
+
 
 ## Builder Mode
 
