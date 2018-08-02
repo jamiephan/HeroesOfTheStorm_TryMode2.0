@@ -37,7 +37,12 @@ void libDEBUG_InitVariables() {
     libDEBUG_gv_BuilderModeIsEnabled = false;
     libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
     libDEBUG_gv_ToggleFreeCameraIsEnabled = false;
+    libDEBUG_gv_GreetingsModeIsEnabled = false;
 
+}
+
+void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool) {
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, lp_outputText);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -330,13 +335,12 @@ bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions
     if (libDEBUG_gv_FogOfWarIsEnabled == true) {
         VisRevealerCreate(EventPlayer(), RegionEntireMap());
         libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
         libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
     } else {
         VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
         libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
-
     }
     return true;
 }
@@ -697,6 +701,69 @@ void libDEBUG_gt_OverrideRespawnPointCommand_Init() {
     TriggerAddEventChatMessage(libDEBUG_gt_OverrideRespawnPointCommand, c_playerAny, "respawnpoint", false);
 }
 
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Greetings are polite and important.
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_GreetingsModeCommand_Func(bool testConds, bool runActions) {
+
+        if (!runActions) {
+            return true;
+        }
+
+        libDEBUG_gv_GreetingsModeIsEnabled = !libDEBUG_gv_GreetingsModeIsEnabled;
+        if(libDEBUG_gv_GreetingsModeIsEnabled){
+            TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, true);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Greetings Mode - On"));
+
+        } else{
+            TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, false);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Greetings Mode - Off"));
+
+        }
+
+        return true;
+    }
+
+    void libDEBUG_gt_GreetingsModeCommand_Init() {
+        libDEBUG_gt_GreetingsModeCommand = TriggerCreate("libDEBUG_gt_GreetingsModeCommand_Func");
+        TriggerEnable(libDEBUG_gt_GreetingsModeCommand, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_GreetingsModeCommand, c_playerAny, "GreetingsMode", true);
+    }
+
+       //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Greetings, Greetings. Hello.
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_GreetingModeOutputWithMouse_Func(bool testConds, bool runActions) {
+        string lv_unitName = StringReplaceWord(UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1)), "Hero", "", c_stringReplaceAll, c_stringCase);
+        string[7] lv_greetings;
+        lv_greetings[0] = "Hello";
+        lv_greetings[1] = "Greetings";
+        lv_greetings[2] = "Hi";
+        lv_greetings[3] = "Hey";
+        lv_greetings[4] = "Howdy";
+        lv_greetings[5] = "Yo";
+        lv_greetings[6] = "Hiya";
+        TextTagCreate(StringToText(lv_greetings[RandomInt(0, 6)] + ", " + lv_unitName), RandomInt(16, 100), CameraGetTarget(EventPlayer()), 0.0, true, false, PlayerGroupAll());
+        TextTagAttachToUnit(TextTagLastCreated(), UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1), 0.0);
+        TextTagShow(TextTagLastCreated(), PlayerGroupAll(), true);
+        TextTagSetColor(TextTagLastCreated(), c_textTagColorText, ColorWithAlpha(RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(50.0, 100.0)));
+        TextTagSetVelocity(TextTagLastCreated(), RandomFixed(1.0, 6.0), libNtve_gf_RandomAngle());
+        Wait(RandomFixed(1.0, 5.0), c_timeGame);
+        TextTagDestroy(TextTagLastCreated());
+        return true;
+    }
+
+    void libDEBUG_gt_GreetingModeOutputWithMouse_Init() {
+        libDEBUG_gt_GreetingModeOutputWithMouse = TriggerCreate("libDEBUG_gt_GreetingModeOutputWithMouse_Func");
+        TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, false);
+        TriggerAddEventMouseClicked(libDEBUG_gt_GreetingModeOutputWithMouse, c_playerAny, c_mouseButtonNone, true);
+
+    }
+
+
+
 // Init triggers
 
 void libDEBUG_InitTriggers() {
@@ -718,6 +785,8 @@ void libDEBUG_InitTriggers() {
     libDEBUG_gt_ToggleFreeCamera_Init();
     libDEBUG_gt_EasterEggDoABarrelRoll_Init();
     libDEBUG_gt_OverrideRespawnPointCommand_Init();
+    libDEBUG_gt_GreetingsModeCommand_Init();
+    libDEBUG_gt_GreetingModeOutputWithMouse_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

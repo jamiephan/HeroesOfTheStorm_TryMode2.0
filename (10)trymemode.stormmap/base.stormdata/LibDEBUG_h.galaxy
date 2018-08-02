@@ -10,8 +10,9 @@ bool libDEBUG_gv_FogOfWarIsEnabled;
 bool libDEBUG_gv_BuilderModeIsEnabled;
 bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
 bool libDEBUG_gv_ToggleFreeCameraIsEnabled;
+bool libDEBUG_gv_GreetingsModeIsEnabled;
 // Function Declarations
-
+void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
 // Trigger Declarations
 trigger libDEBUG_gt_greetingCommand;
 trigger libDEBUG_gt_SpawnUnitCommand;
@@ -30,12 +31,15 @@ trigger libDEBUG_gt_ToggleOutputUnitIDMode;
 trigger libDEBUG_gt_ScoreModifier;
 trigger libDEBUG_gt_ToggleFreeCamera;
 trigger libDEBUG_gt_OverrideRespawnPointCommand;
+trigger libDEBUG_gt_MassCdrCommand;
 // builder mode
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
 trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;
 trigger libDEBUG_gt_BuilderModeConfirmTeleportToMouse;
 // Barrel Roll!
 trigger libDEBUG_gt_EasterEggDoABarrelRoll;
+trigger libDEBUG_gt_GreetingsModeCommand;
+trigger libDEBUG_gt_GreetingModeOutputWithMouse;
 // Library Initialization
 void libDEBUG_InitVariables ();
 

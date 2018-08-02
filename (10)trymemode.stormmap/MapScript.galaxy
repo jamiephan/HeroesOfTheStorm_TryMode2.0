@@ -15,6 +15,7 @@ include "TriggerLibs/SoundLib"
 include "TriggerLibs/GameDataHelperLib"
 include "TriggerLibs/SupportLib"
 include "LibDEBUG"
+include "MimicSupportLib"
 
 //--------------------------------------------------------------------------------------------------
 // Library Initialization
@@ -30,6 +31,7 @@ void InitLibs () {
     libGDHL_InitLib();
     libSprt_InitLib();
     libDEBUG_InitLib();
+    MimicSupportLib_InitLib();
 }
 
 //--------------------------------------------------------------------------------------------------
