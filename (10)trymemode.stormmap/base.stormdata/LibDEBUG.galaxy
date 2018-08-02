@@ -514,6 +514,7 @@ bool libDEBUG_gt_ScoreModifier_Func(bool testConds, bool runActions) {
 
     string lv_field = StringWord(EventChatMessage(false), 2);
     string lv_value = StringWord(EventChatMessage(false), 3);
+    int lv_player = EventPlayer();
     int lv_valueParsed = StringToInt(lv_value);
 
     // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
@@ -522,14 +523,18 @@ bool libDEBUG_gt_ScoreModifier_Func(bool testConds, bool runActions) {
     }
 
     if (lv_field == null || lv_value == null) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | score FIELD SCORE"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for modify score: setscore | score FIELD SCORE [PLAYER]"));
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: setscore HeroDamage 0"));
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score SoloKill 524287"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: score Healing 1000 2"));
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
         return true;
     }
-    PlayerScoreValueSetFromInt(EventPlayer(), lv_field, lv_valueParsed);
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Modified Player " + IntToString(EventPlayer()) + "'s " + lv_field + " to " + IntToString(lv_valueParsed)));
+    if(!(StringWord(EventChatMessage(false), 4) == null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+    }
+    PlayerScoreValueSetFromInt(lv_player, lv_field, lv_valueParsed);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Modified Player " + IntToString(lv_player) + "'s " + lv_field + " to " + IntToString(lv_valueParsed)));
     return true;
 }
 

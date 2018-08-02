@@ -172,7 +172,7 @@ Remove all inventory items from selected units.
         rmi
 
 
-### `setscore` | `score` `FIELD` `VALUE`
+### `setscore` | `score` `FIELD` `VALUE` `[PLAYER]`
 
 Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.
 
@@ -189,14 +189,22 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
             Description: Determine the field to modify
         VALUE:
         	Data type: Integer
-            Requirement: Required
+            Requirements: Required
             Description: Set the value for the field above.
+        PLAYER:
+            Data type: Integer
+            Requirements: Optional
+            Desctioption: Set the target player's ID
+            Default Value: Your player ID (obtained from EventPlayer())
+            
 
     Example:
         setscore HeroDamage 0
         	(Set the field "Hero Damage" to 0 to the player who use this command)
         score SoloKill 524287
 	        (Set the field "Kils" to 5242873 to the player who use this command)
+        score Healing 1000 2
+            (Set the field "Healing" to 1000 to the player 2)
 
 
 ### `respawnpoint` | `rsp` `ACTION` `PLAYER`
