@@ -225,13 +225,14 @@ bool libDEBUG_gt_RespawnTimeCommand_Func(bool testConds, bool runActions) {
         return true;
     }
 
-    if (StringToInt(lv_inputparam) == 0) {
+    if (StringToFixed(lv_inputparam) < 0.0625) {
         // libCore_gv_bALDeathTimeOverride cannot set to 0, so set it to 1 game tick (0.0625s)
         libCore_gv_bALDeathTimeOverride = 0.0625;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Warning: The minimum respawn timer is 0.0625"));
     } else {
-        libCore_gv_bALDeathTimeOverride = StringToInt(lv_inputparam);
+        libCore_gv_bALDeathTimeOverride = StringToFixed(lv_inputparam);
     }
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + IntToString(StringToInt(lv_inputparam)))); //LOL
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + FixedToString(libCore_gv_bALDeathTimeOverride, 4)));
     return true;
 }
 void libDEBUG_gt_RespawnTimeCommand_Init() {
