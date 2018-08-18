@@ -70,6 +70,7 @@ bool libDEBUG_gt_SpawnUnitCommand_Func(bool testConds, bool runActions) {
 
     string lv_inputparam = StringWord(EventChatMessage(false), 2);
     string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
+    string lv_inputparam3 = StringWord(EventChatMessage(false), 4);
     int lv_triggeringPlayer;
     lv_triggeringPlayer = EventPlayer();
 
@@ -96,6 +97,10 @@ bool libDEBUG_gt_SpawnUnitCommand_Func(bool testConds, bool runActions) {
     libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam, 0, lv_triggeringPlayer, CameraGetTarget(EventPlayer()), null);
     UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale);
     // Enable group selection, like vikings and samuro with illusion master
+    if(lv_inputparam3 != null){
+        libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("... and invulnerable"));
+    }
     UISetDragSelectEnabled(PlayerGroupAll(), true);
     UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
     return true;
@@ -210,12 +215,17 @@ void libDEBUG_gt_RestartGameCommand_Init() {
 
 bool libDEBUG_gt_RespawnTimeCommand_Func(bool testConds, bool runActions) {
     string lv_inputparam;
-    lv_inputparam = StringWord(EventChatMessage(false), 2);
 
-    // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
-    if (!(((StringWord(EventChatMessage(false), 1) == "rst") || (StringWord(EventChatMessage(false), 1) == "respawntime")))) {
-        return false;
+    if(libDEBUG_gv_UIParams1 == null){
+        // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
+        if (!(((StringWord(EventChatMessage(false), 1) == "rst") || (StringWord(EventChatMessage(false), 1) == "respawntime")))) {
+            return false;
+        }
+        lv_inputparam = StringWord(EventChatMessage(false), 2);
+    } else{
+        lv_inputparam = libDEBUG_gv_UIParams1;
     }
+
 
     if (lv_inputparam == null) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for respawn time: respawntime | rst Time"));
@@ -458,7 +468,7 @@ bool libDEBUG_gt_OutputUnitIDCommand_Func(bool testConds, bool runActions) {
     if (!runActions) {
         return true;
     }
-
+    TriggerExecute(libUIUI_gt_UIPartyFrameUnitClicked, false, false);
     auto905AD777_g = UnitGroupSelected(EventPlayer());
     auto905AD777_u = 1;
     for (; auto905AD777_u <= UnitGroupCount(auto905AD777_g, c_unitCountAll); auto905AD777_u += BoolToInt(lv_unit == UnitGroupUnit(auto905AD777_g, auto905AD777_u))) {
@@ -768,6 +778,57 @@ void libDEBUG_gt_OverrideRespawnPointCommand_Init() {
 
     }
 
+        //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG - Select Talent by Command
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUG_gt_TalentSelectorCommand_Func(bool testConds, bool runActions) {
+
+        unit lv_unit = EventUnit();
+        string lv_inputparam = StringWord(EventChatMessage(false), 2);
+        string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
+        //Create a local variable to save the command parameter
+
+        // Check the first param (command itself does it match, as "summary" can trigger "sum" command.)
+        // The second one is for alias commands
+        if (!(((StringWord(EventChatMessage(false), 1) == "talent") || (StringWord(EventChatMessage(false), 1) == "tal")))) {
+            return false;
+        }
+        if (lv_inputparam == null) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set talent: talent | tal TALENTNAME [APPLYBEHAVIOUR]"));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: talent DiabloMalevolence DiabloMalevolenceApplyBehavior"));
+            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
+            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
+            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
+        return false;
+        }
+
+        if (!runActions) {
+            return true;
+        }
+
+        PlayerAddTalent(UnitGetOwner(lv_unit), lv_inputparam);
+         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("TalentSelectorCommand"));
+        if (lv_inputparam2 != null) {
+            UnitBehaviorAdd(lv_unit, lv_inputparam2, lv_unit, 1);
+        }
+        
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_inputparam));
+        //it will print out the message "TalentSelectorCommand" in the debug area on the screen.
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_inputparam2));
+        //it will print out the parameter from "lv_inputparam" in the debug area on the screen.
+        return true;
+    }
+
+    void libDEBUG_gt_TalentSelectorCommand_Init() {
+        libDEBUG_gt_TalentSelectorCommand = TriggerCreate("libDEBUG_gt_TalentSelectorCommand_Func");
+        TriggerEnable(libDEBUG_gt_TalentSelectorCommand, true);
+        TriggerAddEventChatMessage(libDEBUG_gt_TalentSelectorCommand, c_playerAny, "talent", false);
+        TriggerAddEventChatMessage(libDEBUG_gt_TalentSelectorCommand, c_playerAny, "tal", false);
+    }
+
 
 
 // Init triggers
@@ -793,6 +854,7 @@ void libDEBUG_InitTriggers() {
     libDEBUG_gt_OverrideRespawnPointCommand_Init();
     libDEBUG_gt_GreetingsModeCommand_Init();
     libDEBUG_gt_GreetingModeOutputWithMouse_Init();
+    libDEBUG_gt_TalentSelectorCommand_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

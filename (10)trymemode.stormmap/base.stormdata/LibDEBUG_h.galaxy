@@ -11,6 +11,11 @@ bool libDEBUG_gv_BuilderModeIsEnabled;
 bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
 bool libDEBUG_gv_ToggleFreeCameraIsEnabled;
 bool libDEBUG_gv_GreetingsModeIsEnabled;
+
+string libDEBUG_gv_UIParams1;
+string libDEBUG_gv_UIParams2;
+string libDEBUG_gv_UIParams3;
+string libDEBUG_gv_UIParams4;
 // Function Declarations
 void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
 // Trigger Declarations
@@ -32,6 +37,7 @@ trigger libDEBUG_gt_ScoreModifier;
 trigger libDEBUG_gt_ToggleFreeCamera;
 trigger libDEBUG_gt_OverrideRespawnPointCommand;
 trigger libDEBUG_gt_MassCdrCommand;
+trigger libDEBUG_gt_TalentSelectorCommand;
 // builder mode
 trigger libDEBUG_gt_ToggleBuilderModeCommand;
 trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;

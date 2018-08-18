@@ -1,0 +1,20 @@
+include "TriggerLibs/HeroesLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: DEBUG UI
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool libDEBUGUI_gv_DEBUGUIIsOn;
+int libDEBUGUI_gv_MainDialog;
+int libDEBUGUI_gv_MainDialogRestartGameButton;
+int libDEBUGUI_gv_MainDialogRespawnTimeButton;
+int libDEBUGUI_gv_MainDialogRespawnTimeTextbox;
+// Function Declarations
+
+// Trigger Declarations
+trigger libDEBUGUI_gt_ToggleDEBUGUI;
+trigger libDEBUGUI_gt_RestartGameButtonClicked;
+trigger libDEBUGUI_gt_RespawnTimerOverrideButtonClicked;
+// Library Initialization
+void libDEBUGUI_InitVariables ();
+

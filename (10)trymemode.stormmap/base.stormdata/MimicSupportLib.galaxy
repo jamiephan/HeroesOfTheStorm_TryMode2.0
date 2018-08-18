@@ -91,6 +91,10 @@ void MimicSupportLib_InitVariables () {
     MimicSupportLib_gv_soundRepeatDelay = 3.0;
     MimicSupportLib_gv_dEBUGXPBoostMultiplier = 2.0;
     MimicSupportLib_gv_dEBUGXPPassiveBoostMultiplier = 1.0;
+    MimicSupportLib_gv_dEBUGXPSourceHero = true;
+    MimicSupportLib_gv_dEBUGXPSourceMinion = true;
+    MimicSupportLib_gv_dEBUGXPSourceStructure = true;
+    MimicSupportLib_gv_dEBUGXPSourceCreep = true;
     MimicSupportLib_gv_dEBUGCombatTextEnabled = true;
     MimicSupportLib_gv_dEBUGDebugMessagesEnabled = true;
     MimicSupportLib_gv_dEBUGMapTextEnabled = true;
@@ -1236,18 +1240,19 @@ void MimicSupportLib_gf_QACheatsAddDebugRespawnButton () {
 void MimicSupportLib_gf_QACheatsCompileBehaviors () {
     // Automatic Variable Declarations
     // Implementation
-    MimicSupportLib_gv_compiledBehaviorList[1] = "PermaBlind";
-    MimicSupportLib_gv_compiledBehaviorList[2] = "PermaRoot";
-    MimicSupportLib_gv_compiledBehaviorList[3] = "PermaStun";
-    MimicSupportLib_gv_compiledBehaviorList[4] = "PermaPoly";
-    MimicSupportLib_gv_compiledBehaviorList[5] = "PermaSilence";
-    MimicSupportLib_gv_compiledBehaviorList[6] = "PermaFear";
-    MimicSupportLib_gv_compiledBehaviorList[7] = "PermaUnstoppable";
-    MimicSupportLib_gv_compiledBehaviorList[8] = "PermaInvulnerable";
-    MimicSupportLib_gv_compiledBehaviorList[9] = "PermaStasis";
-    MimicSupportLib_gv_compiledBehaviorList[10] = "PermaSleep";
-    MimicSupportLib_gv_compiledBehaviorList[11] = "PermaTimeStop";
-    MimicSupportLib_gv_compiledBehaviorList[12] = "DisableWeaponsBehavior";
+    MimicSupportLib_gv_compiledBehaviorList[1] = "PermaSlow";
+    MimicSupportLib_gv_compiledBehaviorList[2] = "PermaBlind";
+    MimicSupportLib_gv_compiledBehaviorList[3] = "PermaRoot";
+    MimicSupportLib_gv_compiledBehaviorList[4] = "PermaStun";
+    MimicSupportLib_gv_compiledBehaviorList[5] = "PermaPoly";
+    MimicSupportLib_gv_compiledBehaviorList[6] = "PermaSilence";
+    MimicSupportLib_gv_compiledBehaviorList[7] = "PermaFear";
+    MimicSupportLib_gv_compiledBehaviorList[8] = "PermaUnstoppable";
+    MimicSupportLib_gv_compiledBehaviorList[9] = "PermaInvulnerable";
+    MimicSupportLib_gv_compiledBehaviorList[10] = "PermaStasis";
+    MimicSupportLib_gv_compiledBehaviorList[11] = "PermaSleep";
+    MimicSupportLib_gv_compiledBehaviorList[12] = "PermaTimeStop";
+    MimicSupportLib_gv_compiledBehaviorList[13] = "DisableWeaponsBehavior";
 }
 
 void MimicSupportLib_gf_QACheatsCompileSpawnUnits () {
@@ -1281,7 +1286,7 @@ void MimicSupportLib_gf_QACheatsCleanseAllEffects () {
     int lv_i;
 
     // Automatic Variable Declarations
-    const int auto91B7752C_ae = 11;
+    const int auto91B7752C_ae = 13;
     const int auto91B7752C_ai = 1;
 
     // Variable Initialization
@@ -4440,9 +4445,9 @@ void MimicSupportLib_gt_SoundRepeatAbilityUsed_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Passive Exp Balancer
+// Trigger: DEBUG - Passive Exp Balancer (passivebalance)
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DEBUGPassiveExpBalancer_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Func (bool testConds, bool runActions) {
     // Variable Declarations
     fixed lv_oldBoostVal;
     int lv_team1Level;
@@ -4521,15 +4526,15 @@ bool MimicSupportLib_gt_DEBUGPassiveExpBalancer_Func (bool testConds, bool runAc
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DEBUGPassiveExpBalancer_Init () {
-    MimicSupportLib_gt_DEBUGPassiveExpBalancer = TriggerCreate("MimicSupportLib_gt_DEBUGPassiveExpBalancer_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGPassiveExpBalancer, c_playerAny, "mpassivebalance", true);
+void MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Init () {
+    MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance = TriggerCreate("MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance, c_playerAny, "mpassivebalance", true);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Equalize Experience
+// Trigger: DEBUG - Equalize Experience (eqxp)
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DEBUGEqualizeExperience_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_iterPlayer;
     fixed lv_highestXP;
@@ -4580,16 +4585,16 @@ bool MimicSupportLib_gt_DEBUGEqualizeExperience_Func (bool testConds, bool runAc
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DEBUGEqualizeExperience_Init () {
-    MimicSupportLib_gt_DEBUGEqualizeExperience = TriggerCreate("MimicSupportLib_gt_DEBUGEqualizeExperience_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGEqualizeExperience, c_playerAny, "meqexp", true);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGEqualizeExperience, c_playerAny, "meqxp", true);
+void MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Init () {
+    MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp = TriggerCreate("MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp, c_playerAny, "meqexp", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp, c_playerAny, "meqxp", true);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Boost Experience
+// Trigger: DEBUG - Boost Experience (eqexpboost)
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DEBUGBoostExperience_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_highestXPUnit;
     unit lv_lowestXPUnit;
@@ -4663,9 +4668,202 @@ bool MimicSupportLib_gt_DEBUGBoostExperience_Func (bool testConds, bool runActio
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DEBUGBoostExperience_Init () {
-    MimicSupportLib_gt_DEBUGBoostExperience = TriggerCreate("MimicSupportLib_gt_DEBUGBoostExperience_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGBoostExperience, c_playerAny, "meqexpboost", true);
+void MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Init () {
+    MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost = TriggerCreate("MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost, c_playerAny, "meqexpboost", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - XP Trickle Only (xptrickleonly)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 1) == "mxptrickleonly"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_dEBUGXPTrickleOnly = !(MimicSupportLib_gv_dEBUGXPTrickleOnly);
+    if ((MimicSupportLib_gv_dEBUGXPTrickleOnly == true)) {
+        MimicSupportLib_gv_dEBUGXPSourceHero = false;
+        MimicSupportLib_gv_dEBUGXPSourceMinion = false;
+        MimicSupportLib_gv_dEBUGXPSourceStructure = false;
+        MimicSupportLib_gv_dEBUGXPSourceCreep = false;
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_30CB3B0B"), true);
+    }
+    else {
+        MimicSupportLib_gv_dEBUGXPSourceHero = true;
+        MimicSupportLib_gv_dEBUGXPSourceMinion = true;
+        MimicSupportLib_gv_dEBUGXPSourceStructure = true;
+        MimicSupportLib_gv_dEBUGXPSourceCreep = true;
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_F5E9C663"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Init () {
+    MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly = TriggerCreate("MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly, c_playerAny, "mxptrickleonly", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - XP Hero (xphero)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGXPHeroxphero_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 1) == "mxphero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_dEBUGXPSourceHero = !(MimicSupportLib_gv_dEBUGXPSourceHero);
+    if ((MimicSupportLib_gv_dEBUGXPSourceHero == true)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_CB24D285"), true);
+    }
+    else {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_E248D8E6"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGXPHeroxphero_Init () {
+    MimicSupportLib_gt_DEBUGXPHeroxphero = TriggerCreate("MimicSupportLib_gt_DEBUGXPHeroxphero_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGXPHeroxphero, c_playerAny, "mxphero", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - XP Minion (xpminion)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGXPMinionxpminion_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 1) == "mxpminion"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_dEBUGXPSourceMinion = !(MimicSupportLib_gv_dEBUGXPSourceMinion);
+    if ((MimicSupportLib_gv_dEBUGXPSourceMinion == true)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_F6145551"), true);
+    }
+    else {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_C4646AEC"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGXPMinionxpminion_Init () {
+    MimicSupportLib_gt_DEBUGXPMinionxpminion = TriggerCreate("MimicSupportLib_gt_DEBUGXPMinionxpminion_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGXPMinionxpminion, c_playerAny, "mxpminion", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - XP Structure (xpstructure)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGXPStructurexpstructure_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 1) == "mxpstructure"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_dEBUGXPSourceStructure = !(MimicSupportLib_gv_dEBUGXPSourceStructure);
+    if ((MimicSupportLib_gv_dEBUGXPSourceStructure == true)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_EBC77719"), true);
+    }
+    else {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_39D26696"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGXPStructurexpstructure_Init () {
+    MimicSupportLib_gt_DEBUGXPStructurexpstructure = TriggerCreate("MimicSupportLib_gt_DEBUGXPStructurexpstructure_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGXPStructurexpstructure, c_playerAny, "mxpstructure", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - XP Creep (xpcreep)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGXPCreepxpcreep_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 1) == "mxpcreep"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_dEBUGXPSourceCreep = !(MimicSupportLib_gv_dEBUGXPSourceCreep);
+    if ((MimicSupportLib_gv_dEBUGXPSourceCreep == true)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_98AAB9FB"), true);
+    }
+    else {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_E71E43A5"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGXPCreepxpcreep_Init () {
+    MimicSupportLib_gt_DEBUGXPCreepxpcreep = TriggerCreate("MimicSupportLib_gt_DEBUGXPCreepxpcreep_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGXPCreepxpcreep, c_playerAny, "mxpcreep", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4776,9 +4974,9 @@ void MimicSupportLib_gt_DEBUGToggleSelectiontogselection_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Debug - Toggle Show XP Values (togshowxpvalues)
+// Trigger: DEBUG - Toggle Show XP Values (togshowxpvalues)
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
@@ -4804,9 +5002,9 @@ bool MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues_Func (bool testCo
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues_Init () {
-    MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues = TriggerCreate("MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues, c_playerAny, "mtogshowxpvalues", true);
+void MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues_Init () {
+    MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues = TriggerCreate("MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues, c_playerAny, "mtogshowxpvalues", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7477,6 +7675,7 @@ bool MimicSupportLib_gt_DEBUGShortHeroDeath_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
+
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
         }
@@ -7612,6 +7811,7 @@ bool MimicSupportLib_gt_DEBUGGameTime_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
+
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
         }
@@ -7775,6 +7975,7 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
 
     // Conditions
     if (testConds) {
+
         if (!((StringCompare(StringWord(lv_enteredString, 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
         }
@@ -7785,7 +7986,7 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
         return true;
     }
 
-    if ((StringWord(lv_enteredString, 1) == "talent")) {
+    if ((StringWord(lv_enteredString, 1) == "mtalent")) {
         lv_player = StringToInt(StringWord(lv_enteredString, 2));
         lv_tier = StringToInt(StringWord(lv_enteredString, 3));
         lv_button = StringToInt(StringWord(lv_enteredString, 4));
@@ -7794,13 +7995,13 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
         lv_player = UnitGetOwner(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1));
         lv_tier = libGame_gv_players[lv_player].lv_talent_HeroicTalentTier;
         autoD4B6119F_val = EventChatMessage(false);
-        if (autoD4B6119F_val == "ult1") {
+        if (autoD4B6119F_val == "mult1") {
             lv_button = 1;
         }
-        else if (autoD4B6119F_val == "ult2") {
+        else if (autoD4B6119F_val == "mult2") {
             lv_button = 2;
         }
-        else if (autoD4B6119F_val == "ult3") {
+        else if (autoD4B6119F_val == "mult3") {
             lv_button = 3;
         }
         else {
@@ -7854,6 +8055,7 @@ bool MimicSupportLib_gt_DEBUGXPRange_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
+
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
         }
@@ -7972,6 +8174,7 @@ bool MimicSupportLib_gt_DEBUGDPSTracker_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+
         if (!((UnitHasBehavior2(EventUnitDamageSourceUnit(), "DPSTracker") == true))) {
             return false;
         }
@@ -8004,6 +8207,7 @@ bool MimicSupportLib_gt_DEBUGClearDPSTrackerStats_Func (bool testConds, bool run
         if (!((TriggerIsEnabled(MimicSupportLib_gt_DEBUGDPSTracker) == true))) {
             return false;
         }
+
     }
 
     // Actions
@@ -8383,13 +8587,18 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_EnableSoundRepeat_Init();
     MimicSupportLib_gt_SoundRepeatAdjustDelay_Init();
     MimicSupportLib_gt_SoundRepeatAbilityUsed_Init();
-    MimicSupportLib_gt_DEBUGPassiveExpBalancer_Init();
-    MimicSupportLib_gt_DEBUGEqualizeExperience_Init();
-    MimicSupportLib_gt_DEBUGBoostExperience_Init();
+    MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Init();
+    MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Init();
+    MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Init();
+    MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Init();
+    MimicSupportLib_gt_DEBUGXPHeroxphero_Init();
+    MimicSupportLib_gt_DEBUGXPMinionxpminion_Init();
+    MimicSupportLib_gt_DEBUGXPStructurexpstructure_Init();
+    MimicSupportLib_gt_DEBUGXPCreepxpcreep_Init();
     MimicSupportLib_gt_DEBUGHelphelp_Init();
     MimicSupportLib_gt_DEBUGPlayerNumberplayernum_Init();
     MimicSupportLib_gt_DEBUGToggleSelectiontogselection_Init();
-    MimicSupportLib_gt_DebugToggleShowXPValuestogshowxpvalues_Init();
+    MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues_Init();
     MimicSupportLib_gt_DEBUGStartGamestartgame_Init();
     MimicSupportLib_gt_DEBUGDisablePingLimitfreepings_Init();
     MimicSupportLib_gt_DEBUGPauseGameStartTimerpausestart_Init();

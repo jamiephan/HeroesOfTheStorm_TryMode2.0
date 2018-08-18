@@ -1,0 +1,182 @@
+include "TriggerLibs/NativeLib"
+include "TriggerLibs/HeroesLib_h"
+include "TriggerLibs/GameLib_h"
+include "TriggerLibs/MapMechanicsLib_h"
+include "TriggerLibs/AILib_h"
+include "TriggerLibs/UILib_h"
+include "TriggerLibs/StartingExperienceLib_h"
+include "TriggerLibs/SoundLib_h"
+include "TriggerLibs/GameDataHelperLib_h"
+include "TriggerLibs/SupportLib_h"
+
+include "libDEBUGUI_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: DEBUG UI
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libDEBUGUI_InitLibraries() {
+    libNtve_InitVariables();
+    libCore_InitVariables();
+    libGame_InitVariables();
+    libMapM_InitVariables();
+    libAIAI_InitVariables();
+    libUIUI_InitVariables();
+    libStEx_InitVariables();
+    libSond_InitVariables();
+    libGDHL_InitVariables();
+}
+
+// Variable Initialization
+bool libDEBUGUI_InitVariables_completed = false;
+
+void libDEBUGUI_InitVariables() {
+    libDEBUGUI_gv_DEBUGUIIsOn = false;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG UI - Toggle Debug UI
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUGUI_gt_ToggleDEBUGUI_Func(bool testConds, bool runActions) {
+
+    int lv_textBoxX = 25;
+    int lv_textBoxY = 630;
+    int lv_buttonOffsetX = 80;
+    int lv_buttonOffsetY = -18;
+    int lv_buttonX = (lv_textBoxX + lv_buttonOffsetX);
+    int lv_buttonY = (lv_textBoxY + lv_buttonOffsetY);
+
+    libDEBUGUI_gv_DEBUGUIIsOn = !libDEBUGUI_gv_DEBUGUIIsOn;
+
+    if(libDEBUGUI_gv_DEBUGUIIsOn){
+        DialogCreate(300, 760, c_anchorTopRight, 100, 100, true);
+        libDEBUGUI_gv_MainDialog = DialogLastCreated();
+        
+        DialogSetImage(libDEBUGUI_gv_MainDialog, "Assets\\Textures\\storm_ui_store_gradientbackground_new.dds");
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 175, 25, c_anchorTop, 50, 0, StringToText("DEBUG LIB"), Color(100,100,100), false, 2.0);
+        libNtve_gf_CreateDialogItemButton(DialogLastCreated(), 35, 35, c_anchorTopRight, 5, 5, StringToText("Close"), StringExternal("Param/Value/lib_Sprt_4377DBE5"), "");
+        
+        // Restart Game Button
+        DialogControlCreateFromTemplate(libDEBUGUI_gv_MainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
+        DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 250, 100);
+        DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, 25, 670);
+        libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText("Restart Game"), PlayerGroupAll());
+        libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText("Restart Game (re | restart) - This can be used to reload XML files and galaxy modifications with ease. WARNING: It does not reload assets and mods, if you would like to do so, you will need to exit and reenter the game."), PlayerGroupAll());
+        libDEBUGUI_gv_MainDialogRestartGameButton = DialogControlLastCreated();
+
+        // Respawn Time Dialogs
+        DialogControlCreate(libDEBUGUI_gv_MainDialog, c_triggerControlTypeEditBox);
+        libDEBUGUI_gv_MainDialogRespawnTimeTextbox = DialogControlLastCreated();
+        DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 100, 50);
+        DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_textBoxX, lv_textBoxY);
+
+        DialogControlCreateFromTemplate(libDEBUGUI_gv_MainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
+        DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 175, 85);
+        DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_buttonX, lv_buttonY);
+        libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText("SpawnTime"), PlayerGroupAll());
+        libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText("Set the spawn time (rst | respawntime) - This can used to override the respawn time for all players. WARNING: Any non valid decimal/numbers (such as containing non-numeric characters or having multiple decimal points) will automatically convert to 0."), PlayerGroupAll());
+        libDEBUGUI_gv_MainDialogRespawnTimeButton = DialogControlLastCreated();
+     
+        
+        
+        
+        
+        
+        DialogSetVisible(libDEBUGUI_gv_MainDialog, PlayerGroupAll(), true);
+    } else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("UI now off"));
+        DialogSetVisible(libDEBUGUI_gv_MainDialog, PlayerGroupAll(), false);
+    }
+
+    
+
+    return true;
+}
+
+void libDEBUGUI_gt_ToggleDEBUGUI_Init() {
+    libDEBUGUI_gt_ToggleDEBUGUI = TriggerCreate("libDEBUGUI_gt_ToggleDEBUGUI_Func");
+    TriggerEnable(libDEBUGUI_gt_ToggleDEBUGUI, true);
+    TriggerAddEventKeyPressed(libDEBUGUI_gt_ToggleDEBUGUI, c_playerAny, c_keyGrave, true, c_keyModifierStateExclude, c_keyModifierStateExclude, c_keyModifierStateExclude);
+}
+
+
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUG UI - Restart Button Clicked
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUGUI_gt_RestartGameButtonClicked_Func(bool testConds, bool runActions) {
+        // Conditions
+        if (testConds) {
+            if (!((EventDialogControl() == libDEBUGUI_gv_MainDialogRestartGameButton))) {
+                return false;
+            }
+        }
+        TriggerExecute(libDEBUG_gt_RestartGameCommand, false, false);
+        return true;
+    }
+
+    void libDEBUGUI_gt_RestartGameButtonClicked_Init() {
+        libDEBUGUI_gt_RestartGameButtonClicked = TriggerCreate("libDEBUGUI_gt_RestartGameButtonClicked_Func");
+        TriggerEnable(libDEBUGUI_gt_RestartGameButtonClicked, true);
+        TriggerAddEventDialogControl(libDEBUGUI_gt_RestartGameButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+    
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    // Trigger: DEBUGUI - Respawn Timer Button Clicked
+    //--------------------------------------------------------------------------------------------------
+
+    bool libDEBUGUI_gt_RespawnTimerOverrideButtonClicked_Func(bool testConds, bool runActions) {
+
+        // Conditions
+        if (testConds) {
+            if (!((EventDialogControl() == libDEBUGUI_gv_MainDialogRespawnTimeButton))) {
+                return false;
+            }
+        }
+
+        libDEBUG_gv_UIParams1 = libNtve_gf_DialogItemEditValue(libDEBUGUI_gv_MainDialogRespawnTimeTextbox, 1);
+        if (libDEBUG_gv_UIParams1 == "now"){
+            TriggerExecute(libSprt_gt_QACheatsDebugRespawnButtonClicked, false, false);
+        } else {
+            TriggerExecute(libDEBUG_gt_RespawnTimeCommand, false, false);
+        }
+        libDEBUG_gv_UIParams1 = null;
+        //it will print out the message "RespawnTimerOverrideButtonClicked" in the debug area on the screen.
+        return true;
+    }
+
+    void libDEBUGUI_gt_RespawnTimerOverrideButtonClicked_Init() {
+        libDEBUGUI_gt_RespawnTimerOverrideButtonClicked = TriggerCreate("libDEBUGUI_gt_RespawnTimerOverrideButtonClicked_Func");
+        TriggerEnable(libDEBUGUI_gt_RespawnTimerOverrideButtonClicked, true);
+        TriggerAddEventDialogControl(libDEBUGUI_gt_RespawnTimerOverrideButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+    }
+
+
+
+// Init triggers
+void libDEBUGUI_InitTriggers() {
+    libDEBUGUI_gt_ToggleDEBUGUI_Init();
+    libDEBUGUI_gt_RestartGameButtonClicked_Init();
+    libDEBUGUI_gt_RespawnTimerOverrideButtonClicked_Init();
+
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libDEBUGUI_InitLib_completed = false;
+
+void libDEBUGUI_InitLib() {
+    if (libDEBUGUI_InitLib_completed) {
+        return;
+    }
+    libDEBUGUI_InitLib_completed = true;
+    libDEBUGUI_InitLibraries();
+    libDEBUGUI_InitVariables();
+    libDEBUGUI_InitTriggers();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug UI Lib Initialized"));
+    libCore_gv_dEBUGGameIsOnline = true;
+}
