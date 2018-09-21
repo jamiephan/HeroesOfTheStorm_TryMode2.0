@@ -1,0 +1,43 @@
+include "ModuleMimicLibs/MimicTriggerDebugOutput"
+include "ModuleMimicLibs/MimicGameDataHelperLib"
+include "ModuleMimicLibs/MimicGameLib"
+include "ModuleMimicLibs/MimicHeroesLib"
+include "ModuleMimicLibs/MimicMapMechanicsLib"
+include "ModuleMimicLibs/MimicSoundLib"
+include "ModuleMimicLibs/MimicStartingExperienceLib"
+include "ModuleMimicLibs/MimicSupportLib"
+include "ModuleMimicLibs/MimicUILib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Mimic Lib Loader
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libMIMC_InitLibraries() {
+    libMTDO_InitLib();
+    MimicGameDataHelperLib_InitLib();
+    MimicGameLib_InitLib();
+    MimicHeroesLib_InitLib();
+    MimicMapMechanicsLib_InitLib();
+    MimicSoundLib_InitLib();
+    MimicStartingExperienceLib_InitLib();
+    MimicSupportLib_InitLib();
+    MimicUILib_InitLib();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libMIMC_InitLib_completed = false;
+
+void libMIMC_InitLib () {
+    if (libMIMC_InitLib_completed) {
+        return;
+    }
+
+    libMIMC_InitLib_completed = true;
+
+    libMIMC_InitLibraries();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mimic Lib Loader Initialized"));
+}

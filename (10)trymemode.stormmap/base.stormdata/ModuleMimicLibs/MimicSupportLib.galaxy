@@ -8,7 +8,7 @@ include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/GameDataHelperLib_h"
 
-include "MimicSupportLib_h"
+include "ModuleMimicLibs/MimicSupportLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Support
@@ -78,6 +78,8 @@ void MimicSupportLib_InitVariables () {
     MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemListPulldown = c_invalidDialogControlId;
     MimicSupportLib_gv_qACheatsControlsPanel.lv_itemCountEditbox = c_invalidDialogControlId;
     MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemButton = c_invalidDialogControlId;
+    MimicSupportLib_gv_qACheatsControlsPanel.lv_respawnStructuresButton = c_invalidDialogControlId;
+    MimicSupportLib_gv_qACheatsControlsPanel.lv_killStructuresButton = c_invalidDialogControlId;
     for (init_i = 0; init_i <= 30; init_i += 1) {
         MimicSupportLib_gv_compiledBehaviorList[init_i] = "";
     }
@@ -775,7 +777,7 @@ void MimicSupportLib_gf_QACheatsUIInit () {
     }
 
     // Implementation
-    DialogCreate(300, 760, c_anchorTopRight, 100, 100, true);
+    DialogCreate(300, 860, c_anchorTopRight, 100, 50, true);
     MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog = DialogLastCreated();
     DialogSetImage(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, "Assets\\Textures\\storm_ui_store_gradientbackground_new.dds");
     libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 175, 25, c_anchorTop, 50, 0, StringExternal("Param/Value/lib_Sprt_3EA40164"), Color(100,100,100), false, 2.0);
@@ -795,6 +797,7 @@ void MimicSupportLib_gf_QACheatsUIInit () {
     MimicSupportLib_gf_QACheatsCompileSpawnItems();
     MimicSupportLib_gf_QACheatsPopulateSpawnItemsPulldown();
     MimicSupportLib_gf_QACheatsAddSpawnItemButton();
+    MimicSupportLib_gf_QACheatsAddStructureControlsButtons();
 }
 
 void MimicSupportLib_gf_QACheatsPopulateBehaviorPulldown () {
@@ -1044,10 +1047,10 @@ void MimicSupportLib_gf_QACheatsAddTeamCheckboxes () {
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_checkboxX = 30;
+    lv_checkboxX = 60;
     lv_checkboxY = 355;
-    lv_offsetX = 75;
-    lv_labelX = 55;
+    lv_offsetX = 110;
+    lv_labelX = 85;
     lv_labelY = 355;
 
     // Implementation
@@ -1065,11 +1068,6 @@ void MimicSupportLib_gf_QACheatsAddTeamCheckboxes () {
     DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_labelX, lv_labelY);
     lv_checkboxX = (lv_checkboxX + lv_offsetX);
     lv_labelX = (lv_labelX + lv_offsetX);
-    libNtve_gf_CreateDialogItemCheckBox(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, 25, 25, c_anchorTopLeft, lv_checkboxX, lv_checkboxY, StringExternal("Param/Value/lib_Sprt_0CE8F4F9"), false);
-    MimicSupportLib_gv_qACheatsControlsPanel.lv_neutralCheckbox = DialogControlLastCreated();
-    DialogControlCreateFromTemplate(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, c_triggerControlTypeLabel, "InputOptionsPanel/InputLabelTemplate");
-    libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringExternal("Param/Value/lib_Sprt_DADB52E0"), PlayerGroupAll());
-    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_labelX, lv_labelY);
 }
 
 void MimicSupportLib_gf_QACheatsAddUnitControlButtons () {
@@ -1226,12 +1224,44 @@ void MimicSupportLib_gf_QACheatsAddSpawnItemButton () {
     MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemButton = DialogControlLastCreated();
 }
 
+void MimicSupportLib_gf_QACheatsAddStructureControlsButtons () {
+    // Variable Declarations
+    int lv_buttonStartX;
+    int lv_buttonStartY;
+    int lv_buttonX;
+    int lv_buttonY;
+    int lv_offsetX;
+    int lv_offsetY;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_buttonStartX = 25;
+    lv_buttonStartY = 655;
+    lv_buttonX = lv_buttonStartX;
+    lv_buttonY = lv_buttonStartY;
+    lv_offsetX = 115;
+    lv_offsetY = 40;
+
+    // Implementation
+    DialogControlCreateFromTemplate(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
+    DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 150, 125);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_buttonX, lv_buttonY);
+    libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringExternal("Param/Value/lib_Sprt_F4A81FFD"), PlayerGroupAll());
+    MimicSupportLib_gv_qACheatsControlsPanel.lv_respawnStructuresButton = DialogControlLastCreated();
+    lv_buttonX = (lv_buttonX + lv_offsetX);
+    DialogControlCreateFromTemplate(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
+    DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 150, 125);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_buttonX, lv_buttonY);
+    libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringExternal("Param/Value/lib_Sprt_59E38088"), PlayerGroupAll());
+    MimicSupportLib_gv_qACheatsControlsPanel.lv_killStructuresButton = DialogControlLastCreated();
+}
+
 void MimicSupportLib_gf_QACheatsAddDebugRespawnButton () {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateFromTemplate(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
     DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 250, 100);
-    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, 25, 670);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, 25, 760);
     libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringExternal("Param/Value/lib_Sprt_0E09472A"), PlayerGroupAll());
     libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringExternal("Param/Value/lib_Sprt_4E1C1AFD"), PlayerGroupAll());
     MimicSupportLib_gv_qACheatsControlsPanel.lv_debugRespawnButton = DialogControlLastCreated();
@@ -1261,7 +1291,7 @@ void MimicSupportLib_gf_QACheatsCompileSpawnUnits () {
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[1] = "All Non-Structure Units";
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[2] = "Minion";
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[3] = "Summon (Locust)";
-    MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[4] = "Merc";
+    MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[4] = "Merc Defender";
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[5] = "Summoner Merc";
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[6] = "Boss";
     MimicSupportLib_gv_qACheatsCompiledSpawnUnitsList[7] = "Monster";
@@ -2725,10 +2755,11 @@ bool MimicSupportLib_gt_ToggleCheatsDialog_Func (bool testConds, bool runActions
     }
 
     if ((DialogIsVisible(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, EventPlayer()) == false)) {
-        DialogSetVisible(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), true);
+        DialogSetVisible(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, libCore_gv_playerGroupFromPlayer[EventPlayer()], true);
+        MimicSupportLib_gv_qACheatsSelectedUnit = UnitGroupUnit(UnitGroupFilterPlayer(libGame_gv_players[EventPlayer()].lv_heroUnitGroup, EventPlayer(), 0), 1);
     }
     else {
-        DialogSetVisible(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), false);
+        DialogSetVisible(MimicSupportLib_gv_qACheatsControlsPanel.lv_mainDialog, libCore_gv_playerGroupFromPlayer[EventPlayer()], false);
     }
     return true;
 }
@@ -3544,7 +3575,7 @@ bool MimicSupportLib_gt_QACheatsTeamCheckboxesClicked_Func (bool testConds, bool
             return false;
         }
 
-        if (!(((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_orderCheckbox) || (EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_chaosCheckbox) || (EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_neutralCheckbox)))) {
+        if (!(((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_orderCheckbox) || (EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_chaosCheckbox)))) {
             return false;
         }
     }
@@ -3557,12 +3588,10 @@ bool MimicSupportLib_gt_QACheatsTeamCheckboxesClicked_Func (bool testConds, bool
     if (((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_orderCheckbox) && (libNtve_gf_DialogItemIsChecked(EventDialogControl(), EventPlayer()) == true))) {
         MimicSupportLib_gv_qACheatsSelectedTeam = 11;
         libNtve_gf_SetDialogItemChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_chaosCheckbox, false, PlayerGroupAll());
-        libNtve_gf_SetDialogItemChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_neutralCheckbox, false, PlayerGroupAll());
     }
     else if (((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_chaosCheckbox) && (libNtve_gf_DialogItemIsChecked(EventDialogControl(), EventPlayer()) == true))) {
         MimicSupportLib_gv_qACheatsSelectedTeam = 12;
         libNtve_gf_SetDialogItemChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_orderCheckbox, false, PlayerGroupAll());
-        libNtve_gf_SetDialogItemChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_neutralCheckbox, false, PlayerGroupAll());
     }
     else if (((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_neutralCheckbox) && (libNtve_gf_DialogItemIsChecked(EventDialogControl(), EventPlayer()) == true))) {
         MimicSupportLib_gv_qACheatsSelectedTeam = 15;
@@ -3626,7 +3655,7 @@ bool MimicSupportLib_gt_QACheatsSpawnUnitsButtonClicked_Func (bool testConds, bo
         if (autoB3597D15_val == 1) {
             libNtve_gf_CreateUnitsWithDefaultFacing(1, "FootmanMinion", 0, MimicSupportLib_gv_qACheatsSelectedTeam, PointWithOffset(lv_currentPos, -6.0, -5.0), null);
             UnitGroupAdd(MimicSupportLib_gv_qACheatsSpawnedUnitsGroup, UnitLastCreated());
-            libNtve_gf_CreateUnitsWithDefaultFacing(1, "MercDefenderSiegeGiant", 0, MimicSupportLib_gv_qACheatsSelectedTeam, PointWithOffset(lv_currentPos, 0.0, -5.0), null);
+            libNtve_gf_CreateUnitsWithDefaultFacing(1, "MercDefenderSiegeGiant", 0, libCore_gv_cOMPUTER_Hostile, PointWithOffset(lv_currentPos, 0.0, -5.0), null);
             UnitGroupAdd(MimicSupportLib_gv_qACheatsSpawnedUnitsGroup, UnitLastCreated());
             libNtve_gf_CreateUnitsWithDefaultFacing(1, "MercSummonerLaner", 0, MimicSupportLib_gv_qACheatsSelectedTeam, PointWithOffset(lv_currentPos, 6.0, -5.0), null);
             UnitGroupAdd(MimicSupportLib_gv_qACheatsSpawnedUnitsGroup, UnitLastCreated());
@@ -3650,7 +3679,7 @@ bool MimicSupportLib_gt_QACheatsSpawnUnitsButtonClicked_Func (bool testConds, bo
             UnitBehaviorRemove(UnitLastCreated(), "LocustTimedLife", 1);
         }
         else if (autoB3597D15_val == 4) {
-            libNtve_gf_CreateUnitsWithDefaultFacing(1, "MercDefenderSiegeGiant", 0, MimicSupportLib_gv_qACheatsSelectedTeam, PointWithOffset(lv_currentPos, 0.0, lv_yOffset), null);
+            libNtve_gf_CreateUnitsWithDefaultFacing(1, "MercDefenderSiegeGiant", 0, libCore_gv_cOMPUTER_Hostile, PointWithOffset(lv_currentPos, 0.0, lv_yOffset), null);
             UnitGroupAdd(MimicSupportLib_gv_qACheatsSpawnedUnitsGroup, UnitLastCreated());
         }
         else if (autoB3597D15_val == 5) {
@@ -3940,6 +3969,127 @@ void MimicSupportLib_gt_QACheatsToggleDebugCameraCheckboxChecked_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: QA Cheats - Spawn Item Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    point lv_currentPos;
+    int lv_yOffset;
+    string lv_itemCouintEditBoxContents;
+    int lv_itemCount;
+
+    // Automatic Variable Declarations
+    int autoB40E258C_val;
+
+    // Variable Initialization
+    lv_itemCouintEditBoxContents = "";
+
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemButton))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_itemCouintEditBoxContents = libNtve_gf_DialogItemEditValue(MimicSupportLib_gv_qACheatsControlsPanel.lv_itemCountEditbox, EventPlayer());
+    lv_itemCount = StringToInt(lv_itemCouintEditBoxContents);
+    lv_currentPos = CameraGetTarget(EventPlayer());
+    autoB40E258C_val = DialogControlGetSelectedItem(MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemListPulldown, EventPlayer());
+    if (autoB40E258C_val == 1) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "RegenGlobeNeutral", 0, 1, lv_currentPos, null);
+    }
+    else if (autoB40E258C_val == 2) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemSeedPickup", 0, 1, lv_currentPos, null);
+    }
+    else if (autoB40E258C_val == 3) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemUnderworldPowerup", 0, 1, lv_currentPos, null);
+    }
+    else if (autoB40E258C_val == 4) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemCannonball", 0, 1, lv_currentPos, null);
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Init () {
+    MimicSupportLib_gt_QACheatsSpawnItemButtonClicked = TriggerCreate("MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func");
+    TriggerAddEventDialogControl(MimicSupportLib_gt_QACheatsSpawnItemButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: QA Cheats - Respawn Structures Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_respawnStructuresButton))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerExecute(MimicSupportLib_gt_DEBUGRespawnStructures, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked_Init () {
+    MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked = TriggerCreate("MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked_Func");
+    TriggerAddEventDialogControl(MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: QA Cheats - Kill Structures Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_QACheatsKillStructuresButtonClicked_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+
+        if (!((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_killStructuresButton))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerExecute(MimicSupportLib_gt_DEBUGKillStructures, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_QACheatsKillStructuresButtonClicked_Init () {
+    MimicSupportLib_gt_QACheatsKillStructuresButtonClicked = TriggerCreate("MimicSupportLib_gt_QACheatsKillStructuresButtonClicked_Func");
+    TriggerAddEventDialogControl(MimicSupportLib_gt_QACheatsKillStructuresButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: QA Cheats - Debug Respawn Button Clicked
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Func (bool testConds, bool runActions) {
@@ -4006,65 +4156,6 @@ bool MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Func (bool testConds, 
 void MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Init () {
     MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked = TriggerCreate("MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Func");
     TriggerAddEventDialogControl(MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: QA Cheats - Spawn Item Button Clicked
-//--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    point lv_currentPos;
-    int lv_yOffset;
-    string lv_itemCouintEditBoxContents;
-    int lv_itemCount;
-
-    // Automatic Variable Declarations
-    int autoB40E258C_val;
-
-    // Variable Initialization
-    lv_itemCouintEditBoxContents = "";
-
-    // Conditions
-    if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
-            return false;
-        }
-
-        if (!((EventDialogControl() == MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemButton))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_itemCouintEditBoxContents = libNtve_gf_DialogItemEditValue(MimicSupportLib_gv_qACheatsControlsPanel.lv_itemCountEditbox, EventPlayer());
-    lv_itemCount = StringToInt(lv_itemCouintEditBoxContents);
-    lv_currentPos = CameraGetTarget(EventPlayer());
-    autoB40E258C_val = DialogControlGetSelectedItem(MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemListPulldown, EventPlayer());
-    if (autoB40E258C_val == 1) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "RegenGlobeNeutral", 0, 1, lv_currentPos, null);
-    }
-    else if (autoB40E258C_val == 2) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemSeedPickup", 0, 1, lv_currentPos, null);
-    }
-    else if (autoB40E258C_val == 3) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemUnderworldPowerup", 0, 1, lv_currentPos, null);
-    }
-    else if (autoB40E258C_val == 4) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemCannonball", 0, 1, lv_currentPos, null);
-    }
-    else {
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Init () {
-    MimicSupportLib_gt_QACheatsSpawnItemButtonClicked = TriggerCreate("MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func");
-    TriggerAddEventDialogControl(MimicSupportLib_gt_QACheatsSpawnItemButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7535,34 +7626,6 @@ void MimicSupportLib_gt_DEBUGTargetJungleCreepState_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Unlock Ally Color Settings
-//--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DEBUGUnlockAllyColorSettings_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    MimicTriggerDebugOutput(1, (StringExternal("Param/Value/lib_Sprt_D5B51D42") + TextWithColor(PlayerName(EventPlayer()), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(EventPlayer(), false)))), true);
-    UIUnitColorStyleClearOverride(PlayerGroupSingle(EventPlayer()));
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DEBUGUnlockAllyColorSettings_Init () {
-    MimicSupportLib_gt_DEBUGUnlockAllyColorSettings = TriggerCreate("MimicSupportLib_gt_DEBUGUnlockAllyColorSettings_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGUnlockAllyColorSettings, c_playerAny, "mHeroColor", true);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - 60 Second Pause
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_DEBUG60SecondPause_Func (bool testConds, bool runActions) {
@@ -7675,6 +7738,9 @@ bool MimicSupportLib_gt_DEBUGShortHeroDeath_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
 
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
@@ -7726,6 +7792,9 @@ bool MimicSupportLib_gt_DEBUGInvulnerableStructures_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -7765,6 +7834,165 @@ bool MimicSupportLib_gt_DEBUGInvulnerableStructures_Func (bool testConds, bool r
 void MimicSupportLib_gt_DEBUGInvulnerableStructures_Init () {
     MimicSupportLib_gt_DEBUGInvulnerableStructures = TriggerCreate("MimicSupportLib_gt_DEBUGInvulnerableStructures_Func");
     TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGInvulnerableStructures, c_playerAny, "minvulnerablestructures", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Respawn Structures
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGRespawnStructures_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_townStructureType;
+    unit lv_structureUnit;
+    string lv_structureUnitType;
+    int lv_town;
+    int lv_structure;
+
+    // Automatic Variable Declarations
+    int auto3DCAC6E1_ae;
+    const int auto3DCAC6E1_ai = 1;
+    int auto5EA090CD_ae;
+    const int auto5EA090CD_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto3DCAC6E1_ae = libGame_gv_townTownCount;
+    lv_town = 1;
+    for ( ; ( (auto3DCAC6E1_ai >= 0 && lv_town <= auto3DCAC6E1_ae) || (auto3DCAC6E1_ai < 0 && lv_town >= auto3DCAC6E1_ae) ) ; lv_town += auto3DCAC6E1_ai ) {
+        auto5EA090CD_ae = libGame_gv_townTownData[lv_town].lv_structureCount;
+        lv_structure = 1;
+        for ( ; ( (auto5EA090CD_ai >= 0 && lv_structure <= auto5EA090CD_ae) || (auto5EA090CD_ai < 0 && lv_structure >= auto5EA090CD_ae) ) ; lv_structure += auto5EA090CD_ai ) {
+            if ((UnitIsAlive(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]) == false)) {
+                lv_structureUnitType = libGame_gv_townTownData[lv_town].lv_structureUnitIDs[lv_structure];
+                UnitRemove(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]);
+                UnitCreate(1, lv_structureUnitType, 0, libGame_gv_townTownData[lv_town].lv_owner, libGame_gv_townTownData[lv_town].lv_structureSpawnPoints[lv_structure], MimicSupportLib_gv_rS_Towns[lv_town].lv_structureArray[lv_structure].lv_buildingFacing, null);
+                libStEx_gf_MoveUnit(UnitLastCreated(), MimicSupportLib_gv_rS_Towns[lv_town].lv_structureArray[lv_structure].lv_buildingPosition, false);
+                lv_townStructureType = libGame_gf_TownGetTownStructurePresetFromUnit(lv_structureUnit);
+                libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure] = UnitLastCreated();
+                ActorSend(libNtve_gf_MainActorofUnit(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]), "Signal PlayBuild");
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGRespawnStructures_Init () {
+    MimicSupportLib_gt_DEBUGRespawnStructures = TriggerCreate("MimicSupportLib_gt_DEBUGRespawnStructures_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGRespawnStructures, c_playerAny, "m-rs", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Kill Structures
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGKillStructures_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_townStructureType;
+    unit lv_structureUnit;
+    string lv_structureUnitType;
+    int lv_town;
+    int lv_structure;
+
+    // Automatic Variable Declarations
+    int autoB895D9C6_ae;
+    const int autoB895D9C6_ai = 1;
+    int autoFE778185_ae;
+    const int autoFE778185_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoB895D9C6_ae = libGame_gv_townTownCount;
+    lv_town = 1;
+    for ( ; ( (autoB895D9C6_ai >= 0 && lv_town <= autoB895D9C6_ae) || (autoB895D9C6_ai < 0 && lv_town >= autoB895D9C6_ae) ) ; lv_town += autoB895D9C6_ai ) {
+        autoFE778185_ae = libGame_gv_townTownData[lv_town].lv_structureCount;
+        lv_structure = 1;
+        for ( ; ( (autoFE778185_ai >= 0 && lv_structure <= autoFE778185_ae) || (autoFE778185_ai < 0 && lv_structure >= autoFE778185_ae) ) ; lv_structure += autoFE778185_ai ) {
+            if ((UnitIsAlive(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]) == true)) {
+                UnitKill(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGKillStructures_Init () {
+    MimicSupportLib_gt_DEBUGKillStructures = TriggerCreate("MimicSupportLib_gt_DEBUGKillStructures_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGKillStructures, c_playerAny, "m-ks", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Collect Structure Data
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGCollectStructureData_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_town;
+    int lv_structure;
+
+    // Automatic Variable Declarations
+    int auto2EED8A50_ae;
+    const int auto2EED8A50_ai = 1;
+    int auto02FF66E0_ae;
+    const int auto02FF66E0_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(1.0, c_timeGame);
+    auto2EED8A50_ae = libGame_gv_townTownCount;
+    lv_town = 1;
+    for ( ; ( (auto2EED8A50_ai >= 0 && lv_town <= auto2EED8A50_ae) || (auto2EED8A50_ai < 0 && lv_town >= auto2EED8A50_ae) ) ; lv_town += auto2EED8A50_ai ) {
+        auto02FF66E0_ae = libGame_gv_townTownData[lv_town].lv_structureCount;
+        lv_structure = 1;
+        for ( ; ( (auto02FF66E0_ai >= 0 && lv_structure <= auto02FF66E0_ae) || (auto02FF66E0_ai < 0 && lv_structure >= auto02FF66E0_ae) ) ; lv_structure += auto02FF66E0_ai ) {
+            MimicSupportLib_gv_rS_Towns[lv_town].lv_structureArray[lv_structure].lv_buildingFacing = UnitGetFacing(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]);
+            MimicSupportLib_gv_rS_Towns[lv_town].lv_structureArray[lv_structure].lv_buildingType = libGame_gv_townTownData[lv_town].lv_structureUnitIDs[lv_structure];
+            MimicSupportLib_gv_rS_Towns[lv_town].lv_structureArray[lv_structure].lv_buildingPosition = UnitGetPosition(libGame_gv_townTownData[lv_town].lv_structureUnits[lv_structure]);
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGCollectStructureData_Init () {
+    MimicSupportLib_gt_DEBUGCollectStructureData = TriggerCreate("MimicSupportLib_gt_DEBUGCollectStructureData_Func");
+    TriggerAddEventMapInit(MimicSupportLib_gt_DEBUGCollectStructureData);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7811,6 +8039,9 @@ bool MimicSupportLib_gt_DEBUGGameTime_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
 
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
@@ -7975,6 +8206,9 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
 
         if (!((StringCompare(StringWord(lv_enteredString, 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
@@ -8055,6 +8289,9 @@ bool MimicSupportLib_gt_DEBUGXPRange_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
 
         if (!((StringCompare(StringWord(EventChatMessage(false), 1), EventChatMessage(true), c_stringNoCase) == 0))) {
             return false;
@@ -8092,6 +8329,9 @@ bool MimicSupportLib_gt_DEBUGAfkSystem_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8127,6 +8367,9 @@ bool MimicSupportLib_gt_DEBUGStartDPSTracker_Func (bool testConds, bool runActio
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8174,6 +8417,9 @@ bool MimicSupportLib_gt_DEBUGDPSTracker_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
 
         if (!((UnitHasBehavior2(EventUnitDamageSourceUnit(), "DPSTracker") == true))) {
             return false;
@@ -8208,6 +8454,9 @@ bool MimicSupportLib_gt_DEBUGClearDPSTrackerStats_Func (bool testConds, bool run
             return false;
         }
 
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8235,6 +8484,9 @@ bool MimicSupportLib_gt_DEBUGDPSTrackerTimerExpires_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8265,6 +8517,9 @@ bool MimicSupportLib_gt_DEBUGTemp_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8301,6 +8556,9 @@ bool MimicSupportLib_gt_DEBUGEnableBuildingScaling_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8393,6 +8651,9 @@ bool MimicSupportLib_gt_DEBUGEnabletownhalldetection_Func (bool testConds, bool 
 
     // Conditions
     if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+            return false;
+        }
     }
 
     // Actions
@@ -8576,8 +8837,10 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_QACheatsRefreshCooldownsButtonClicked_Init();
     MimicSupportLib_gt_QACheatsSetCameraAngleButtonClicked_Init();
     MimicSupportLib_gt_QACheatsToggleDebugCameraCheckboxChecked_Init();
-    MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Init();
     MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Init();
+    MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked_Init();
+    MimicSupportLib_gt_QACheatsKillStructuresButtonClicked_Init();
+    MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Init();
     MimicSupportLib_gt_DEBUGIntroVOInteractorItemintrovotest_Init();
     MimicSupportLib_gt_DEBUGIntroVOInteractorUsage_Init();
     MimicSupportLib_gt_DEBUGInspectTheBalanceProbebalanceprobe_Init();
@@ -8658,12 +8921,14 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_DEBUGTeamFightPerfTest_Init();
     MimicSupportLib_gt_DEBUGToggleJungleCampDebugtogcampdebug_Init();
     MimicSupportLib_gt_DEBUGTargetJungleCreepState_Init();
-    MimicSupportLib_gt_DEBUGUnlockAllyColorSettings_Init();
     MimicSupportLib_gt_DEBUG60SecondPause_Init();
     MimicSupportLib_gt_DEBUGTriggerASave_Init();
     MimicSupportLib_gt_DEBUGHeroIsAlive_Init();
     MimicSupportLib_gt_DEBUGShortHeroDeath_Init();
     MimicSupportLib_gt_DEBUGInvulnerableStructures_Init();
+    MimicSupportLib_gt_DEBUGRespawnStructures_Init();
+    MimicSupportLib_gt_DEBUGKillStructures_Init();
+    MimicSupportLib_gt_DEBUGCollectStructureData_Init();
     MimicSupportLib_gt_DEBUGGameTime_Init();
     MimicSupportLib_gt_DEBUGChooseTalent_Init();
     MimicSupportLib_gt_DEBUGXPRange_Init();
@@ -8694,6 +8959,7 @@ void MimicSupportLib_InitLib () {
     MimicSupportLib_InitLibraries();
     MimicSupportLib_InitVariables();
     MimicSupportLib_InitTriggers();
+	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("SupportLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

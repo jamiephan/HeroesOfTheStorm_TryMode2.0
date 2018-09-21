@@ -9,8 +9,10 @@ int libDEBUGUI_gv_MainDialog;
 int libDEBUGUI_gv_MainDialogRestartGameButton;
 int libDEBUGUI_gv_MainDialogRespawnTimeButton;
 int libDEBUGUI_gv_MainDialogRespawnTimeTextbox;
+int libDEBUGUI_gv_MainDialogSetSpawnUnitScaleButton;
+int libDEBUGUI_gv_MainDialogSetSpawnUnitScaleTextbox;
 // Function Declarations
-
+void libDEBUGUI_gf_InitOrCleanupUICommand(bool lp_option);
 // Trigger Declarations
 trigger libDEBUGUI_gt_ToggleDEBUGUI;
 trigger libDEBUGUI_gt_RestartGameButtonClicked;

@@ -11,6 +11,13 @@ include "TriggerLibs/SupportLib_h"
 
 include "libDEBUG_h"
 
+// include "LibDEBUGUI"
+include "ModuleMimicLibs/MimicLibsLoader"
+include "Modules/LibUtilities"
+include "Modules/LibFPSMODE"
+include "Modules/LibBuilderMode"
+include "Modules/LibFunny"
+
 //--------------------------------------------------------------------------------------------------
 // Library: DEBUG
 //--------------------------------------------------------------------------------------------------
@@ -25,6 +32,12 @@ void libDEBUG_InitLibraries() {
     libStEx_InitVariables();
     libSond_InitVariables();
     libGDHL_InitVariables();
+    // libDEBUGUI_InitLib();
+    // libMIMC_InitLib();
+    libUTIL_InitLib();
+    libFPSM_InitLib();
+    libBULM_InitLib();
+    libFUNY_InitLib();
 }
 
 // Variable Initialization
@@ -33,16 +46,29 @@ bool libDEBUG_InitVariables_completed = false;
 void libDEBUG_InitVariables() {
     libCore_gv_dEBUGDebuggingEnabled = true;
     libDEBUG_gv_SpawnUnitScale = 1.0;
-    libDEBUG_gv_FogOfWarIsEnabled = true;
-    libDEBUG_gv_BuilderModeIsEnabled = false;
     libDEBUG_gv_OutputUnitIDModeIsEnabled = false;
     libDEBUG_gv_ToggleFreeCameraIsEnabled = false;
-    libDEBUG_gv_GreetingsModeIsEnabled = false;
 
 }
 
-void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool) {
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, lp_outputText);
+// void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool) {
+//     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, lp_outputText);
+// }
+void libDEBUG_gf_OutputHelp(string lp_command){
+
+    // Respawn Timer Override Command Help
+    if(lp_command == libDEBUG_gv_CommandRespawnTimerOverride){
+        libDEBUG_gf_OutputTextMessage("Command for respawn time: respawntime | rst Time");
+        libDEBUG_gf_OutputTextMessage("Example: respawntime 0");
+        libDEBUG_gf_OutputTextMessage("Example: rst 10");
+    }
+
+
+    // Global Help Message
+    libDEBUG_gf_OutputTextMessage("For more details, please refer to README file.");
+}
+void libDEBUG_gf_OutputTextMessage(string lp_string){
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lp_string));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -58,8 +84,8 @@ bool libDEBUG_gt_greetingCommand_Func(bool testConds, bool runActions) {
 void libDEBUG_gt_greetingCommand_Init() {
     libDEBUG_gt_greetingCommand = TriggerCreate("libDEBUG_gt_greetingCommand_Func");
     TriggerEnable(libDEBUG_gt_greetingCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hello", true);
-    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, "hi", true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, libDEBUG_gv_CommandGreetings, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, libDEBUG_gv_CommandGreetingsAlt, true);
 
 }
 
@@ -67,10 +93,9 @@ void libDEBUG_gt_greetingCommand_Init() {
 // Trigger: DEBUG - Spawn unit command
 //--------------------------------------------------------------------------------------------------
 bool libDEBUG_gt_SpawnUnitCommand_Func(bool testConds, bool runActions) {
-
+    
     string lv_inputparam = StringWord(EventChatMessage(false), 2);
     string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
-    string lv_inputparam3 = StringWord(EventChatMessage(false), 4);
     int lv_triggeringPlayer;
     lv_triggeringPlayer = EventPlayer();
 
@@ -97,10 +122,6 @@ bool libDEBUG_gt_SpawnUnitCommand_Func(bool testConds, bool runActions) {
     libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_inputparam, 0, lv_triggeringPlayer, CameraGetTarget(EventPlayer()), null);
     UnitSetScale(UnitLastCreated(), 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale, 100.0 * libDEBUG_gv_SpawnUnitScale);
     // Enable group selection, like vikings and samuro with illusion master
-    if(lv_inputparam3 != null){
-        libNtve_gf_ChangeUnitDamage(UnitLastCreated(), libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("... and invulnerable"));
-    }
     UISetDragSelectEnabled(PlayerGroupAll(), true);
     UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
     return true;
@@ -193,63 +214,49 @@ void libDEBUG_gt_KillUnitCommand_Init() {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Restart game command
-//--------------------------------------------------------------------------------------------------
-
-bool libDEBUG_gt_RestartGameCommand_Func(bool testConds, bool runActions) {
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Attempting to restart......."));
-    RestartGame(PlayerGroupAll());
-    return true;
-}
-
-void libDEBUG_gt_RestartGameCommand_Init() {
-    libDEBUG_gt_RestartGameCommand = TriggerCreate("libDEBUG_gt_RestartGameCommand_Func");
-    TriggerEnable(libDEBUG_gt_RestartGameCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "restart", true);
-    TriggerAddEventChatMessage(libDEBUG_gt_RestartGameCommand, c_playerAny, "re", true);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Respawn time override command
 //--------------------------------------------------------------------------------------------------
 
 bool libDEBUG_gt_RespawnTimeCommand_Func(bool testConds, bool runActions) {
-    string lv_inputparam;
 
-    if(libDEBUG_gv_UIParams1 == null){
+    fixed lv_respawnTimer;
+    string lv_respawnTimerString;
+
+    if(libDEBUG_gv_IsUITrigger){
+        // Command is run from UI
+        lv_respawnTimerString = libDEBUG_gv_UIParams1;
+    } else {
+        // Command is run from Chat Command
         // Check the first param (command itself does it match, as "summary" can trigger "sum" command.) 
-        if (!(((StringWord(EventChatMessage(false), 1) == "rst") || (StringWord(EventChatMessage(false), 1) == "respawntime")))) {
+        if (!(((StringWord(EventChatMessage(false), 1) == libDEBUG_gv_CommandRespawnTimerOverride) || (StringWord(EventChatMessage(false), 1) == libDEBUG_gv_CommandRespawnTimerOverrideAlt)))) {
             return false;
         }
-        lv_inputparam = StringWord(EventChatMessage(false), 2);
-    } else{
-        lv_inputparam = libDEBUG_gv_UIParams1;
+        lv_respawnTimerString = StringWord(EventChatMessage(false), 2);
     }
 
-
-    if (lv_inputparam == null) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command for respawn time: respawntime | rst Time"));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: respawntime 0"));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Example: rst 10"));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-        return true;
+    if(lv_respawnTimerString == null){
+        libDEBUG_gf_OutputHelp(libDEBUG_gv_CommandRespawnTimerOverride);
+        return false;
     }
 
-    if (StringToFixed(lv_inputparam) < 0.0625) {
+    lv_respawnTimer = StringToFixed(lv_respawnTimerString);
+
+    if (lv_respawnTimer < 0.0625) {
         // libCore_gv_bALDeathTimeOverride cannot set to 0, so set it to 1 game tick (0.0625s)
         libCore_gv_bALDeathTimeOverride = 0.0625;
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Warning: The minimum respawn timer is 0.0625"));
+        libDEBUG_gf_OutputTextMessage("Warning: The minimum respawn timer is 0.0625");
     } else {
-        libCore_gv_bALDeathTimeOverride = StringToFixed(lv_inputparam);
+        libCore_gv_bALDeathTimeOverride = lv_respawnTimer;
     }
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Respawn timer set to " + FixedToString(libCore_gv_bALDeathTimeOverride, 4)));
+    libDEBUG_gf_OutputTextMessage("Respawn timer set to " + FixedToString(libCore_gv_bALDeathTimeOverride, 4) + " seconds.");
+
     return true;
 }
 void libDEBUG_gt_RespawnTimeCommand_Init() {
     libDEBUG_gt_RespawnTimeCommand = TriggerCreate("libDEBUG_gt_RespawnTimeCommand_Func");
     TriggerEnable(libDEBUG_gt_RespawnTimeCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "respawntime", false);
-    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, "rst", false);
+    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, libDEBUG_gv_CommandRespawnTimerOverride, false);
+    TriggerAddEventChatMessage(libDEBUG_gt_RespawnTimeCommand, c_playerAny, libDEBUG_gv_CommandRespawnTimerOverrideAlt, false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -335,32 +342,6 @@ void libDEBUG_gt_RemoveItemsFromUnit_Init() {
     TriggerAddEventChatMessage(libDEBUG_gt_RemoveItemsFromUnit, c_playerAny, "removeitems", true);
 }
 
-//--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Toggle Full Map vision
-//--------------------------------------------------------------------------------------------------
-
-bool libDEBUG_gt_ToggleFullMapVisionCommand_Func(bool testConds, bool runActions) {
-    if (!runActions) {
-        return true;
-    }
-    if (libDEBUG_gv_FogOfWarIsEnabled == true) {
-        VisRevealerCreate(EventPlayer(), RegionEntireMap());
-        libDEBUG_gv_FogOfWarRevealer = VisRevealerLastCreated();
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War disabled"));
-        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
-    } else {
-        VisRevealerDestroy(libDEBUG_gv_FogOfWarRevealer);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Fog Of War enabled"));
-        libDEBUG_gv_FogOfWarIsEnabled = !libDEBUG_gv_FogOfWarIsEnabled;
-    }
-    return true;
-}
-void libDEBUG_gt_ToggleFullMapVisionCommand_Init() {
-    libDEBUG_gt_ToggleFullMapVisionCommand = TriggerCreate("libDEBUG_gt_ToggleFullMapVisionCommand_Func");
-    TriggerEnable(libDEBUG_gt_ToggleFullMapVisionCommand, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_ToggleFullMapVisionCommand, c_playerAny, "togglefogofwar", true);
-    TriggerAddEventChatMessage(libDEBUG_gt_ToggleFullMapVisionCommand, c_playerAny, "tfow", true);
-}
 
 //--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Force using backslash key (same with debug key) to force open the QA cheat menu without using chat command -devcheats
@@ -385,71 +366,6 @@ void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
     TriggerAddEventKeyPressed(libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand, c_playerAny, c_keyBackSlash, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
 }
 
-//--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Toggle builder mode
-//--------------------------------------------------------------------------------------------------
-
-bool libDEBUG_gt_ToggleBuilderModeCommand_Func(bool testConds, bool runActions) {
-    if (!runActions) {
-        return true;
-    }
-    if (libDEBUG_gv_BuilderModeIsEnabled) {
-        // Already enabled, disable all triggers
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Builder Mode - Off"));
-        libDEBUG_gv_BuilderModeIsEnabled = false;
-        TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
-
-    } else {
-        // Already disbled, enable all triggers
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Builder Mode - On"));
-        libDEBUG_gv_BuilderModeIsEnabled = true;
-        TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, true);
-
-    }
-    return true;
-}
-
-void libDEBUG_gt_ToggleBuilderModeCommand_Init() {
-    libDEBUG_gt_ToggleBuilderModeCommand = TriggerCreate("libDEBUG_gt_ToggleBuilderModeCommand_Func");
-    TriggerEnable(libDEBUG_gt_ToggleBuilderModeCommand, true);
-    TriggerAddEventKeyPressed(libDEBUG_gt_ToggleBuilderModeCommand, c_playerAny, c_keyBackSpace, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Constantly teleport all selected units to the mouse location
-//--------------------------------------------------------------------------------------------------
-
-bool libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Func(bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_unit_i;
-    point lv_mouse;
-
-    // Automatic Variable Declarations
-    int autoB2EDC8BC_ae;
-    const int autoB2EDC8BC_ai = 1;
-
-    // Variable Initialization
-    lv_mouse = Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld());
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    autoB2EDC8BC_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-    lv_unit_i = 1;
-    for (;
-        ((autoB2EDC8BC_ai >= 0 && lv_unit_i <= autoB2EDC8BC_ae) || (autoB2EDC8BC_ai < 0 && lv_unit_i >= autoB2EDC8BC_ae)); lv_unit_i += autoB2EDC8BC_ai) {
-        UnitSetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_unit_i), lv_mouse, true);
-    }
-    return true;
-}
-
-void libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Init() {
-    libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand = TriggerCreate("libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Func");
-    TriggerEnable(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, false);
-    TriggerAddEventMouseMoved(libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand, c_playerAny);
-}
 
 //--------------------------------------------------------------------------------------------------
 // Trigger: Output the unit ID by right clicking the unit
@@ -540,7 +456,7 @@ bool libDEBUG_gt_ScoreModifier_Func(bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
         return true;
     }
-    if(!(StringWord(EventChatMessage(false), 4) == null)) {
+    if (!(StringWord(EventChatMessage(false), 4) == null)) {
         lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
     }
     PlayerScoreValueSetFromInt(lv_player, lv_field, lv_valueParsed);
@@ -585,44 +501,6 @@ void libDEBUG_gt_ToggleFreeCamera_Init() {
     TriggerAddEventChatMessage(libDEBUG_gt_ToggleFreeCamera, c_playerAny, "togglefreecamera", true);
 }
 
-//--------------------------------------------------------------------------------------------------
-// Trigger: Easter Egg - Do A Barrel Roll!
-//--------------------------------------------------------------------------------------------------
-
-bool libDEBUG_gt_EasterEggDoABarrelRoll_Func(bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_i;
-
-    // Automatic Variable Declarations
-    const int auto2CAE9C9B_ae = 90;
-    const int auto2CAE9C9B_ai = 1;
-
-    // Variable Initialization
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Barrel Roll, Barrel Roll ~~"));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Roll ~~"));
-
-    lv_i = 1;
-    for (;
-        ((auto2CAE9C9B_ai >= 0 && lv_i <= auto2CAE9C9B_ae) || (auto2CAE9C9B_ai < 0 && lv_i >= auto2CAE9C9B_ae)); lv_i += auto2CAE9C9B_ai) {
-        CameraSetValue(1, c_cameraValueRoll, (lv_i * 4), 0.0625, -1, 100.0);
-        Wait(0.000001, c_timeReal);
-    }
-    return true;
-}
-
-void libDEBUG_gt_EasterEggDoABarrelRoll_Init() {
-    libDEBUG_gt_EasterEggDoABarrelRoll = TriggerCreate("libDEBUG_gt_EasterEggDoABarrelRoll_Func");
-    TriggerEnable(libDEBUG_gt_EasterEggDoABarrelRoll, true);
-    TriggerAddEventChatMessage(libDEBUG_gt_EasterEggDoABarrelRoll, c_playerAny, "do a barrel roll", true);
-}
 
 //--------------------------------------------------------------------------------------------------
 // Trigger: Overrides the respawn point for player's unit
@@ -717,118 +595,21 @@ void libDEBUG_gt_OverrideRespawnPointCommand_Init() {
     TriggerAddEventChatMessage(libDEBUG_gt_OverrideRespawnPointCommand, c_playerAny, "respawnpoint", false);
 }
 
-    //--------------------------------------------------------------------------------------------------
-    // Trigger: DEBUG - Greetings are polite and important.
-    //--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Map Loaded Run Command
+//--------------------------------------------------------------------------------------------------
 
-    bool libDEBUG_gt_GreetingsModeCommand_Func(bool testConds, bool runActions) {
+bool libDEBUG_gt_MapLoaded_Func(bool testConds, bool runActions) {
+    // Stuff to run when map loaded
+     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Lib Initialized"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Lets start by saying 'hi', shall we?"));
+    return true;
+}
 
-        if (!runActions) {
-            return true;
-        }
-
-        libDEBUG_gv_GreetingsModeIsEnabled = !libDEBUG_gv_GreetingsModeIsEnabled;
-        if(libDEBUG_gv_GreetingsModeIsEnabled){
-            TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, true);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Greetings Mode - On"));
-
-        } else{
-            TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, false);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Greetings Mode - Off"));
-
-        }
-
-        return true;
-    }
-
-    void libDEBUG_gt_GreetingsModeCommand_Init() {
-        libDEBUG_gt_GreetingsModeCommand = TriggerCreate("libDEBUG_gt_GreetingsModeCommand_Func");
-        TriggerEnable(libDEBUG_gt_GreetingsModeCommand, true);
-        TriggerAddEventChatMessage(libDEBUG_gt_GreetingsModeCommand, c_playerAny, "GreetingsMode", true);
-    }
-
-       //--------------------------------------------------------------------------------------------------
-    // Trigger: DEBUG - Greetings, Greetings. Hello.
-    //--------------------------------------------------------------------------------------------------
-
-    bool libDEBUG_gt_GreetingModeOutputWithMouse_Func(bool testConds, bool runActions) {
-        string lv_unitName = StringReplaceWord(UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1)), "Hero", "", c_stringReplaceAll, c_stringCase);
-        string[7] lv_greetings;
-        lv_greetings[0] = "Hello";
-        lv_greetings[1] = "Greetings";
-        lv_greetings[2] = "Hi";
-        lv_greetings[3] = "Hey";
-        lv_greetings[4] = "Howdy";
-        lv_greetings[5] = "Yo";
-        lv_greetings[6] = "Hiya";
-        TextTagCreate(StringToText(lv_greetings[RandomInt(0, 6)] + ", " + lv_unitName), RandomInt(16, 100), CameraGetTarget(EventPlayer()), 0.0, true, false, PlayerGroupAll());
-        TextTagAttachToUnit(TextTagLastCreated(), UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1), 0.0);
-        TextTagShow(TextTagLastCreated(), PlayerGroupAll(), true);
-        TextTagSetColor(TextTagLastCreated(), c_textTagColorText, ColorWithAlpha(RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(50.0, 100.0)));
-        TextTagSetVelocity(TextTagLastCreated(), RandomFixed(1.0, 6.0), libNtve_gf_RandomAngle());
-        Wait(RandomFixed(1.0, 5.0), c_timeGame);
-        TextTagDestroy(TextTagLastCreated());
-        return true;
-    }
-
-    void libDEBUG_gt_GreetingModeOutputWithMouse_Init() {
-        libDEBUG_gt_GreetingModeOutputWithMouse = TriggerCreate("libDEBUG_gt_GreetingModeOutputWithMouse_Func");
-        TriggerEnable(libDEBUG_gt_GreetingModeOutputWithMouse, false);
-        TriggerAddEventMouseClicked(libDEBUG_gt_GreetingModeOutputWithMouse, c_playerAny, c_mouseButtonNone, true);
-
-    }
-
-        //--------------------------------------------------------------------------------------------------
-    // Trigger: DEBUG - Select Talent by Command
-    //--------------------------------------------------------------------------------------------------
-
-    bool libDEBUG_gt_TalentSelectorCommand_Func(bool testConds, bool runActions) {
-
-        unit lv_unit = EventUnit();
-        string lv_inputparam = StringWord(EventChatMessage(false), 2);
-        string lv_inputparam2 = StringWord(EventChatMessage(false), 3);
-        //Create a local variable to save the command parameter
-
-        // Check the first param (command itself does it match, as "summary" can trigger "sum" command.)
-        // The second one is for alias commands
-        if (!(((StringWord(EventChatMessage(false), 1) == "talent") || (StringWord(EventChatMessage(false), 1) == "tal")))) {
-            return false;
-        }
-        if (lv_inputparam == null) {
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Command of set talent: talent | tal TALENTNAME [APPLYBEHAVIOUR]"));
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: talent DiabloMalevolence DiabloMalevolenceApplyBehavior"));
-            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp set 1"));
-            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Examples: rsp reset all"));
-            // UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("For more details, please refer to README file."));
-        return false;
-        }
-
-        if (!runActions) {
-            return true;
-        }
-
-        PlayerAddTalent(UnitGetOwner(lv_unit), lv_inputparam);
-         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("TalentSelectorCommand"));
-        if (lv_inputparam2 != null) {
-            UnitBehaviorAdd(lv_unit, lv_inputparam2, lv_unit, 1);
-        }
-        
-
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_inputparam));
-        //it will print out the message "TalentSelectorCommand" in the debug area on the screen.
-
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lv_inputparam2));
-        //it will print out the parameter from "lv_inputparam" in the debug area on the screen.
-        return true;
-    }
-
-    void libDEBUG_gt_TalentSelectorCommand_Init() {
-        libDEBUG_gt_TalentSelectorCommand = TriggerCreate("libDEBUG_gt_TalentSelectorCommand_Func");
-        TriggerEnable(libDEBUG_gt_TalentSelectorCommand, true);
-        TriggerAddEventChatMessage(libDEBUG_gt_TalentSelectorCommand, c_playerAny, "talent", false);
-        TriggerAddEventChatMessage(libDEBUG_gt_TalentSelectorCommand, c_playerAny, "tal", false);
-    }
-
+void libDEBUG_gt_MapLoaded_Init() {
+    libDEBUG_gt_MapLoaded = TriggerCreate("libDEBUG_gt_MapLoaded_Func");
+    TriggerAddEventMapInit(libDEBUG_gt_MapLoaded);
+}
 
 
 // Init triggers
@@ -837,24 +618,18 @@ void libDEBUG_InitTriggers() {
     libDEBUG_gt_greetingCommand_Init();
     libDEBUG_gt_SpawnUnitCommand_Init();
     libDEBUG_gt_KillUnitCommand_Init();
-    libDEBUG_gt_RestartGameCommand_Init();
     libDEBUG_gt_RespawnTimeCommand_Init();
     libDEBUG_gt_SpawnSetScaleCommand_Init();
     libDEBUG_gt_SpawnItemToUnitCommand_Init();
     libDEBUG_gt_RemoveItemsFromUnit_Init();
-    libDEBUG_gt_ToggleFullMapVisionCommand_Init();
     libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init();
-    libDEBUG_gt_ToggleBuilderModeCommand_Init();
-    libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand_Init();
     libDEBUG_gt_OutputUnitIDCommand_Init();
     libDEBUG_gt_ToggleOutputUnitIDMode_Init();
     libDEBUG_gt_ScoreModifier_Init();
     libDEBUG_gt_ToggleFreeCamera_Init();
-    libDEBUG_gt_EasterEggDoABarrelRoll_Init();
     libDEBUG_gt_OverrideRespawnPointCommand_Init();
-    libDEBUG_gt_GreetingsModeCommand_Init();
-    libDEBUG_gt_GreetingModeOutputWithMouse_Init();
-    libDEBUG_gt_TalentSelectorCommand_Init();
+    libDEBUG_gt_MapLoaded_Init();
+
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -870,6 +645,4 @@ void libDEBUG_InitLib() {
     libDEBUG_InitLibraries();
     libDEBUG_InitVariables();
     libDEBUG_InitTriggers();
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Lib Initialized"));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Lets start by saying 'hi', shall we?"));
 }

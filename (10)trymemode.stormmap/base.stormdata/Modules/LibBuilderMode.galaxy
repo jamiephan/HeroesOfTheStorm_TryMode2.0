@@ -1,0 +1,147 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Builder Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libBULM_gv_isBulderModeEnabled;
+
+// Trigger Declarations
+trigger libBULM_gt_MapInit;
+trigger libBULM_gt_ToggleBuilderMode;
+trigger libBULM_gt_MoveSelectedUnitsToCursor;
+
+// Library Initialization
+void libBULM_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: Builder Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libBULM_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libBULM_InitVariables_completed = false;
+
+void libBULM_InitVariables () {
+    if (libBULM_InitVariables_completed) {
+        return;
+    }
+
+    libBULM_InitVariables_completed = true;
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libBULM_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Builder Mode Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libBULM_gt_MapInit_Init () {
+    libBULM_gt_MapInit = TriggerCreate("libBULM_gt_MapInit_Func");
+    TriggerAddEventMapInit(libBULM_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleBuilderMode
+//--------------------------------------------------------------------------------------------------
+bool libBULM_gt_ToggleBuilderMode_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libBULM_gv_isBulderModeEnabled = !(libBULM_gv_isBulderModeEnabled);
+    if ((libBULM_gv_isBulderModeEnabled == true)) {
+        UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Builder Mode Enabled"));
+        TriggerEnable(libBULM_gt_MoveSelectedUnitsToCursor, true);
+    }
+    else {
+        UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Builder Mode Disabled"));
+        TriggerEnable(libBULM_gt_MoveSelectedUnitsToCursor, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libBULM_gt_ToggleBuilderMode_Init () {
+    libBULM_gt_ToggleBuilderMode = TriggerCreate("libBULM_gt_ToggleBuilderMode_Func");
+    TriggerAddEventKeyPressed(libBULM_gt_ToggleBuilderMode, c_playerAny, c_keyBackSpace, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MoveSelectedUnitsToCursor
+//--------------------------------------------------------------------------------------------------
+bool libBULM_gt_MoveSelectedUnitsToCursor_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    point lv_mouse;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int autoE1004115_ae;
+    const int autoE1004115_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_mouse = Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld());
+    autoE1004115_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (autoE1004115_ai >= 0 && lv_i <= autoE1004115_ae) || (autoE1004115_ai < 0 && lv_i >= autoE1004115_ae) ) ; lv_i += autoE1004115_ai ) {
+        UnitSetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_mouse, true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libBULM_gt_MoveSelectedUnitsToCursor_Init () {
+    libBULM_gt_MoveSelectedUnitsToCursor = TriggerCreate("libBULM_gt_MoveSelectedUnitsToCursor_Func");
+    TriggerEnable(libBULM_gt_MoveSelectedUnitsToCursor, false);
+    TriggerAddEventMouseMoved(libBULM_gt_MoveSelectedUnitsToCursor, c_playerAny);
+}
+
+void libBULM_InitTriggers () {
+    libBULM_gt_MapInit_Init();
+    libBULM_gt_ToggleBuilderMode_Init();
+    libBULM_gt_MoveSelectedUnitsToCursor_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libBULM_InitLib_completed = false;
+
+void libBULM_InitLib () {
+    if (libBULM_InitLib_completed) {
+        return;
+    }
+
+    libBULM_InitLib_completed = true;
+
+    libBULM_InitLibraries();
+    libBULM_InitVariables();
+    libBULM_InitTriggers();
+}
+

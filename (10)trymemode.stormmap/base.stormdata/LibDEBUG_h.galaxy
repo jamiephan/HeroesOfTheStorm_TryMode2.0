@@ -4,31 +4,40 @@ include "TriggerLibs/HeroesLib"
 // Library: DEBUG
 //--------------------------------------------------------------------------------------------------
 // Variable Declarations
+
+// Constant Chat Command
+
+// This will be changed soon
+const string libDEBUG_gv_CommandGreetings = "hello";
+const string libDEBUG_gv_CommandGreetingsAlt = "hi";
+
+const string libDEBUG_gv_CommandRespawnTimerOverride = "respawntime";
+const string libDEBUG_gv_CommandRespawnTimerOverrideAlt = "rst";
+
+
 fixed libDEBUG_gv_SpawnUnitScale;
-revealer libDEBUG_gv_FogOfWarRevealer;
-bool libDEBUG_gv_FogOfWarIsEnabled;
-bool libDEBUG_gv_BuilderModeIsEnabled;
 bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
 bool libDEBUG_gv_ToggleFreeCameraIsEnabled;
-bool libDEBUG_gv_GreetingsModeIsEnabled;
 
+// UI Lib
+bool libDEBUG_gv_IsUITrigger;
 string libDEBUG_gv_UIParams1;
 string libDEBUG_gv_UIParams2;
 string libDEBUG_gv_UIParams3;
 string libDEBUG_gv_UIParams4;
 // Function Declarations
-void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
+// void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
+void libDEBUG_gf_OutputHelp(string lp_command);
+void libDEBUG_gf_OutputTextMessage(string lp_string);
 // Trigger Declarations
 trigger libDEBUG_gt_greetingCommand;
 trigger libDEBUG_gt_SpawnUnitCommand;
 trigger libDEBUG_gt_KillUnitCommand;
 trigger libDEBUG_gt_SpawnSetScaleCommand;
-trigger libDEBUG_gt_RestartGameCommand;
 trigger libDEBUG_gt_SwapHeroCommand;
 trigger libDEBUG_gt_RespawnTimeCommand;
 trigger libDEBUG_gt_SpawnItemToUnitCommand;
 trigger libDEBUG_gt_RemoveItemsFromUnit;
-trigger libDEBUG_gt_ToggleFullMapVisionCommand;
 trigger libDEBUG_gt_ForceBackSpaceOpenQACheatCommand;
 trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
 trigger libDEBUG_gt_OutputUnitIDCommand;
@@ -36,16 +45,8 @@ trigger libDEBUG_gt_ToggleOutputUnitIDMode;
 trigger libDEBUG_gt_ScoreModifier;
 trigger libDEBUG_gt_ToggleFreeCamera;
 trigger libDEBUG_gt_OverrideRespawnPointCommand;
-trigger libDEBUG_gt_MassCdrCommand;
-trigger libDEBUG_gt_TalentSelectorCommand;
-// builder mode
-trigger libDEBUG_gt_ToggleBuilderModeCommand;
-trigger libDEBUG_gt_TeleportAllSelectedUnitsToMouseLocationCommand;
-trigger libDEBUG_gt_BuilderModeConfirmTeleportToMouse;
-// Barrel Roll!
-trigger libDEBUG_gt_EasterEggDoABarrelRoll;
-trigger libDEBUG_gt_GreetingsModeCommand;
-trigger libDEBUG_gt_GreetingModeOutputWithMouse;
+trigger libDEBUG_gt_MapLoaded;
+
 // Library Initialization
 void libDEBUG_InitVariables ();
 

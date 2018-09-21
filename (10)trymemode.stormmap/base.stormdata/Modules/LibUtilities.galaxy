@@ -1,0 +1,299 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Utilities
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libUTIL_gv_isUIEnabled;
+revealer libUTIL_gv_revealer;
+bool libUTIL_gv_isFOWEnabled;
+bool libUTIL_gv_isMassCDREnabled;
+int libUTIL_gv_massCDRPlayer;
+
+// Trigger Declarations
+trigger libUTIL_gt_MapInit;
+trigger libUTIL_gt_ToggleUI;
+trigger libUTIL_gt_ToggleFOW;
+trigger libUTIL_gt_ToggleMassCDR;
+trigger libUTIL_gt_RunMassCDR;
+trigger libUTIL_gt_RestartGame;
+trigger libUTIL_gt_ModifyUnitProperty;
+
+// Library Initialization
+void libUTIL_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: Utilities
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libUTIL_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libUTIL_InitVariables_completed = false;
+
+void libUTIL_InitVariables () {
+    if (libUTIL_InitVariables_completed) {
+        return;
+    }
+
+    libUTIL_InitVariables_completed = true;
+
+    libUTIL_gv_isUIEnabled = true;
+    libUTIL_gv_isFOWEnabled = true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Utilities Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_MapInit_Init () {
+    libUTIL_gt_MapInit = TriggerCreate("libUTIL_gt_MapInit_Func");
+    TriggerAddEventMapInit(libUTIL_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleUI
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleUI_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isUIEnabled = !(libUTIL_gv_isUIEnabled);
+    if ((libUTIL_gv_isUIEnabled == true)) {
+        libNtve_gf_HideGameUI(true, PlayerGroupAll());
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned on UI: All abilities will be enabled"));
+    }
+    else {
+        libNtve_gf_HideGameUI(false, PlayerGroupAll());
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned off UI: All abilities will be disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleUI_Init () {
+    libUTIL_gt_ToggleUI = TriggerCreate("libUTIL_gt_ToggleUI_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleUI, c_playerAny, "tui", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleFOW
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleFOW_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isFOWEnabled = !(libUTIL_gv_isFOWEnabled);
+    if ((libUTIL_gv_isFOWEnabled == true)) {
+        VisRevealerDestroy(libUTIL_gv_revealer);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Fog Of War"));
+    }
+    else {
+        VisRevealerCreate(EventPlayer(), RegionEntireMap());
+        libUTIL_gv_revealer = VisRevealerLastCreated();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Fog Of War"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleFOW_Init () {
+    libUTIL_gt_ToggleFOW = TriggerCreate("libUTIL_gt_ToggleFOW_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleFOW, c_playerAny, "tfow", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleFOW, c_playerAny, "togglefogofwar", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleMassCDR
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleMassCDR_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isMassCDREnabled = !(libUTIL_gv_isMassCDREnabled);
+    if ((libUTIL_gv_isMassCDREnabled == true)) {
+        libUTIL_gv_massCDRPlayer = EventPlayer();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mass CDR Enabled"));
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mass CDR Disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleMassCDR_Init () {
+    libUTIL_gt_ToggleMassCDR = TriggerCreate("libUTIL_gt_ToggleMassCDR_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "macdr", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "masscdr", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RunMassCDR
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RunMassCDR_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int autoF588521D_ae;
+    const int autoF588521D_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libUTIL_gv_isMassCDREnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoF588521D_ae = UnitGroupCount(UnitGroupSelected(libUTIL_gv_massCDRPlayer), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (autoF588521D_ai >= 0 && lv_i <= autoF588521D_ae) || (autoF588521D_ai < 0 && lv_i >= autoF588521D_ae) ) ; lv_i += autoF588521D_ai ) {
+        lv_unit = UnitGroupUnit(UnitGroupSelected(libUTIL_gv_massCDRPlayer), lv_i);
+        UnitSetPropertyFixed(lv_unit, c_unitPropEnergyPercent, 100.0);
+    }
+    //libGame_gf_HeroRefreshCooldowns(libUTIL_gv_massCDRPlayer, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RunMassCDR_Init () {
+    libUTIL_gt_RunMassCDR = TriggerCreate("libUTIL_gt_RunMassCDR_Func");
+    TriggerAddEventTimePeriodic(libUTIL_gt_RunMassCDR, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RestartGame
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RestartGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Attempting to restart......."));
+    RestartGame(PlayerGroupAll());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RestartGame_Init () {
+    libUTIL_gt_RestartGame = TriggerCreate("libUTIL_gt_RestartGame_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "re", true);
+    TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "restart", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Modify Unit Property
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    fixed lv_value;
+    int lv_type;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int auto49B52A42_ae;
+    const int auto49B52A42_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "up") || (StringWord(EventChatMessage(false), 1) == "unitproperty")))) {
+            return false;
+        }
+
+        if (!(((StringWord(EventChatMessage(false), 2) != null) && (StringWord(EventChatMessage(false), 3) != null)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
+    lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+    auto49B52A42_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (auto49B52A42_ai >= 0 && lv_i <= auto49B52A42_ae) || (auto49B52A42_ai < 0 && lv_i >= auto49B52A42_ae) ) ; lv_i += auto49B52A42_ai ) {
+        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
+        UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ModifyUnitProperty_Init () {
+    libUTIL_gt_ModifyUnitProperty = TriggerCreate("libUTIL_gt_ModifyUnitProperty_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ModifyUnitProperty, c_playerAny, "up", false);
+    TriggerAddEventChatMessage(libUTIL_gt_ModifyUnitProperty, c_playerAny, "unitproperty", false);
+}
+
+void libUTIL_InitTriggers () {
+    libUTIL_gt_MapInit_Init();
+    libUTIL_gt_ToggleUI_Init();
+    libUTIL_gt_ToggleFOW_Init();
+    libUTIL_gt_ToggleMassCDR_Init();
+    libUTIL_gt_RunMassCDR_Init();
+    libUTIL_gt_RestartGame_Init();
+    libUTIL_gt_ModifyUnitProperty_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_InitLib_completed = false;
+
+void libUTIL_InitLib () {
+    if (libUTIL_InitLib_completed) {
+        return;
+    }
+
+    libUTIL_InitLib_completed = true;
+
+    libUTIL_InitLibraries();
+    libUTIL_InitVariables();
+    libUTIL_InitTriggers();
+}
+

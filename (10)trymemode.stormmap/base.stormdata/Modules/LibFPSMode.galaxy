@@ -1,0 +1,586 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: FPS Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libFPSM_gv_isFPSModeEnabled;
+bool libFPSM_gv_isLookingUp;
+bool libFPSM_gv_isLookingDown;
+bool libFPSM_gv_isLookingLeft;
+bool libFPSM_gv_isLookingRight;
+bool libFPSM_gv_isMovingFoward;
+
+// Trigger Declarations
+trigger libFPSM_gt_MapInit;
+trigger libFPSM_gt_ToggleFPSMode;
+trigger libFPSM_gt_LockCameraToUnit;
+trigger libFPSM_gt_LookUp;
+trigger libFPSM_gt_StartLookUp;
+trigger libFPSM_gt_EndLookUp;
+trigger libFPSM_gt_LookDown;
+trigger libFPSM_gt_StartLookDown;
+trigger libFPSM_gt_EndLookDown;
+trigger libFPSM_gt_LookLeft;
+trigger libFPSM_gt_StartLookLeft;
+trigger libFPSM_gt_EndLookLeft;
+trigger libFPSM_gt_LookRight;
+trigger libFPSM_gt_StartLookRight;
+trigger libFPSM_gt_EndLookRight;
+trigger libFPSM_gt_MoveFoward;
+trigger libFPSM_gt_StartMoveFoward;
+trigger libFPSM_gt_EndMoveFoward;
+
+// Library Initialization
+void libFPSM_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: FPS Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libFPSM_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libFPSM_InitVariables_completed = false;
+
+void libFPSM_InitVariables () {
+    if (libFPSM_InitVariables_completed) {
+        return;
+    }
+
+    libFPSM_InitVariables_completed = true;
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("FPS Mode Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_MapInit_Init () {
+    libFPSM_gt_MapInit = TriggerCreate("libFPSM_gt_MapInit_Func");
+    TriggerAddEventMapInit(libFPSM_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleFPSMode
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_ToggleFPSMode_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isFPSModeEnabled = !(libFPSM_gv_isFPSModeEnabled);
+    if ((libFPSM_gv_isFPSModeEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("FPS Mode Enabled"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Use arrow keys to control the camera and \"U\" key for going forward."));
+        CameraSetValue(1, c_cameraValueDistance, 0.0, 0.0, -1, 10.0);
+        CameraSetValue(1, c_cameraValueHeightOffset, 2.5, 0.0, -1, 10.0);
+        CameraSetValue(1, c_cameraValuePitch, 0.0, 0.0, -1, 10.0);
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("FPS Mode Disabled"));
+        CameraApplyInfo(1, CameraInfoDefault(), 0.0, -1, 10.0, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_ToggleFPSMode_Init () {
+    libFPSM_gt_ToggleFPSMode = TriggerCreate("libFPSM_gt_ToggleFPSMode_Func");
+    TriggerAddEventChatMessage(libFPSM_gt_ToggleFPSMode, c_playerAny, "fps", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LockCameraToUnit
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_LockCameraToUnit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CameraPan(1, RegionGetCenter(RegionCircle(UnitGetPosition(UnitGroupUnit(UnitGroupSelected(1), 1)), 1.0)), 0.0625, -1, 10, false);
+    CameraSetValue(1, c_cameraValueYaw, UnitGetFacing(UnitGroupUnit(UnitGroupSelected(1), 1)), 0.0625, -1, 10);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_LockCameraToUnit_Init () {
+    libFPSM_gt_LockCameraToUnit = TriggerCreate("libFPSM_gt_LockCameraToUnit_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_LockCameraToUnit, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LookUp
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_LookUp_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isLookingUp == true))) {
+            return false;
+        }
+
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CameraSetValue(1, c_cameraValuePitch, (CameraGetPitch(1) - 8.0), 0.1, -1, 10.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_LookUp_Init () {
+    libFPSM_gt_LookUp = TriggerCreate("libFPSM_gt_LookUp_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_LookUp, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartLookUp
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_StartLookUp_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingUp = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_StartLookUp_Init () {
+    libFPSM_gt_StartLookUp = TriggerCreate("libFPSM_gt_StartLookUp_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_StartLookUp, c_playerAny, c_keyUp, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndLookUp
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_EndLookUp_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingUp = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_EndLookUp_Init () {
+    libFPSM_gt_EndLookUp = TriggerCreate("libFPSM_gt_EndLookUp_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_EndLookUp, c_playerAny, c_keyUp, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LookDown
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_LookDown_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isLookingDown == true))) {
+            return false;
+        }
+
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CameraSetValue(1, c_cameraValuePitch, (CameraGetPitch(1) + 8.0), 0.1, -1, 10.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_LookDown_Init () {
+    libFPSM_gt_LookDown = TriggerCreate("libFPSM_gt_LookDown_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_LookDown, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartLookDown
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_StartLookDown_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingDown = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_StartLookDown_Init () {
+    libFPSM_gt_StartLookDown = TriggerCreate("libFPSM_gt_StartLookDown_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_StartLookDown, c_playerAny, c_keyDown, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndLookDown
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_EndLookDown_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingDown = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_EndLookDown_Init () {
+    libFPSM_gt_EndLookDown = TriggerCreate("libFPSM_gt_EndLookDown_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_EndLookDown, c_playerAny, c_keyDown, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LookLeft
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_LookLeft_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isLookingLeft == true))) {
+            return false;
+        }
+
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitSetFacing(UnitGroupUnit(UnitGroupSelected(1), 1), (UnitGetFacing(UnitGroupUnit(UnitGroupSelected(1), 1)) + 8.0), 0.0625);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_LookLeft_Init () {
+    libFPSM_gt_LookLeft = TriggerCreate("libFPSM_gt_LookLeft_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_LookLeft, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartLookLeft
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_StartLookLeft_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingLeft = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_StartLookLeft_Init () {
+    libFPSM_gt_StartLookLeft = TriggerCreate("libFPSM_gt_StartLookLeft_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_StartLookLeft, c_playerAny, c_keyLeft, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndLookLeft
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_EndLookLeft_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingLeft = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_EndLookLeft_Init () {
+    libFPSM_gt_EndLookLeft = TriggerCreate("libFPSM_gt_EndLookLeft_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_EndLookLeft, c_playerAny, c_keyLeft, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LookRight
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_LookRight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isLookingRight == true))) {
+            return false;
+        }
+
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitSetFacing(UnitGroupUnit(UnitGroupSelected(1), 1), (UnitGetFacing(UnitGroupUnit(UnitGroupSelected(1), 1)) - 8.0), 0.0625);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_LookRight_Init () {
+    libFPSM_gt_LookRight = TriggerCreate("libFPSM_gt_LookRight_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_LookRight, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartLookRight
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_StartLookRight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingRight = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_StartLookRight_Init () {
+    libFPSM_gt_StartLookRight = TriggerCreate("libFPSM_gt_StartLookRight_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_StartLookRight, c_playerAny, c_keyRight, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndLookRight
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_EndLookRight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isFPSModeEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isLookingRight = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_EndLookRight_Init () {
+    libFPSM_gt_EndLookRight = TriggerCreate("libFPSM_gt_EndLookRight_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_EndLookRight, c_playerAny, c_keyRight, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MoveFoward
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_MoveFoward_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFPSM_gv_isMovingFoward == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitIssueOrder(UnitGroupUnit(UnitGroupSelected(1), 1), OrderTargetingPoint(AbilityCommand("move", 0), PointWithOffsetPolar(UnitGetPosition(UnitGroupUnit(UnitGroupSelected(1), 1)), 1.0, UnitGetFacing(UnitGroupUnit(UnitGroupSelected(1), 1)))), c_orderQueueReplace);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_MoveFoward_Init () {
+    libFPSM_gt_MoveFoward = TriggerCreate("libFPSM_gt_MoveFoward_Func");
+    TriggerAddEventTimePeriodic(libFPSM_gt_MoveFoward, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartMoveFoward
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_StartMoveFoward_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isMovingFoward = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_StartMoveFoward_Init () {
+    libFPSM_gt_StartMoveFoward = TriggerCreate("libFPSM_gt_StartMoveFoward_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_StartMoveFoward, c_playerAny, c_keyU, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndMoveFoward
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_gt_EndMoveFoward_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFPSM_gv_isMovingFoward = false;
+    UnitIssueOrder(UnitGroupUnit(UnitGroupSelected(1), 1), Order(AbilityCommand("stop", 1)), c_orderQueueReplace);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFPSM_gt_EndMoveFoward_Init () {
+    libFPSM_gt_EndMoveFoward = TriggerCreate("libFPSM_gt_EndMoveFoward_Func");
+    TriggerAddEventKeyPressed(libFPSM_gt_EndMoveFoward, c_playerAny, c_keyU, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+void libFPSM_InitTriggers () {
+    libFPSM_gt_MapInit_Init();
+    libFPSM_gt_ToggleFPSMode_Init();
+    libFPSM_gt_LockCameraToUnit_Init();
+    libFPSM_gt_LookUp_Init();
+    libFPSM_gt_StartLookUp_Init();
+    libFPSM_gt_EndLookUp_Init();
+    libFPSM_gt_LookDown_Init();
+    libFPSM_gt_StartLookDown_Init();
+    libFPSM_gt_EndLookDown_Init();
+    libFPSM_gt_LookLeft_Init();
+    libFPSM_gt_StartLookLeft_Init();
+    libFPSM_gt_EndLookLeft_Init();
+    libFPSM_gt_LookRight_Init();
+    libFPSM_gt_StartLookRight_Init();
+    libFPSM_gt_EndLookRight_Init();
+    libFPSM_gt_MoveFoward_Init();
+    libFPSM_gt_StartMoveFoward_Init();
+    libFPSM_gt_EndMoveFoward_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libFPSM_InitLib_completed = false;
+
+void libFPSM_InitLib () {
+    if (libFPSM_InitLib_completed) {
+        return;
+    }
+
+    libFPSM_InitLib_completed = true;
+
+    libFPSM_InitLibraries();
+    libFPSM_InitVariables();
+    libFPSM_InitTriggers();
+}
+

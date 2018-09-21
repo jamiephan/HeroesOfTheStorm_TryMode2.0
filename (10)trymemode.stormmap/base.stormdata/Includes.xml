@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <Includes id="Mods/HeroesData.StormMod">
-  <!-- Include mods here without modify DocumentHeader Binary. Feels Good Man.-->
+  <!-- Include Mods here without Modify DocumentHeader Binary. Feels Good Man.-->
+
+  <!-- The XML path is (Remember it should be Camel Case, most of the time). -->
   <!-- <Path value="Mods/XXX/XXX.StormMod" /> -->
+
+  <!-- Here Are some included Mods that you can comment it out: -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/ArenaMode.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/ArenaShared.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/AttackDefend.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/GardenArena.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/PunisherArena.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/TempleArena.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/ArenaModeMods/TrialGrounds.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/BlackheartsRevenge.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/DeadmansStand.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/EscapeFromBraxis.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEBrawlMod.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEBrawlStarcraft.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEBrawlStarcraftTempart.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEBrawlUIMod.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEMod.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/Coop/PvEStarcraft.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/HanamuraPayloadPush.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/LunarFestival.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/OneLane/BraxisOutpost.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/OneLane/IndustrialDistrict.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/OneLane/LostCavern.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/OneLane/OneLaneMapShared.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/OneLane/SilverCity.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/BrawlMapMods/PullParty.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesBrawlMods/heroselectionMods/InGameHeroSelection.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/AlteracPass.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/BattlefieldOfEternity.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/BlackheartsBay.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/BraxisHoldout.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/BraxisHoldoutData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/ConveyorBelts.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/CursedHollow.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/DragonShire.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/GardenOfTerror.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/GardenOfTerrorData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/Hanamura.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/HanamuraData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/HauntedMines.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/HeavenHell.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/InfernalShrines.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/InfernalShrinesData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/OverwatchData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/SkyTemple.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/SkyTempleData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/Starcraft.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/TombfTheSpiderQueen.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/TowersOfDoom.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/VolskayaData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/VolskayaHeroes.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/VolskayaMechanics.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/VolskayaSound.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/WarcraftData.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/WarheadJunction.StormMod" /> -->
+  <!-- <Path value="Mods/HeroesMapMods/BattleGroundMapMods/WarheadJunctionData.StormMod" /> -->
 </Includes>

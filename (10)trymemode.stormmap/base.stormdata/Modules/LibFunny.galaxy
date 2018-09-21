@@ -1,0 +1,205 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Funny Stuff
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libFUNY_gv_isGreetingModeEnabled;
+
+// Trigger Declarations
+trigger libFUNY_gt_MapInit;
+trigger libFUNY_gt_GreetingModeOutput;
+trigger libFUNY_gt_ToggleGreetingMode;
+trigger libFUNY_gt_DoABarrelRoll;
+
+// Library Initialization
+void libFUNY_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: Funny Stuff
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libFUNY_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libFUNY_InitVariables_completed = false;
+
+void libFUNY_InitVariables () {
+    if (libFUNY_InitVariables_completed) {
+        return;
+    }
+
+    libFUNY_InitVariables_completed = true;
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Funny Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_MapInit_Init () {
+    libFUNY_gt_MapInit = TriggerCreate("libFUNY_gt_MapInit_Func");
+    TriggerAddEventMapInit(libFUNY_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: GreetingModeOutput
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_GreetingModeOutput_Func (bool testConds, bool runActions) {
+    int init_i;
+
+    // Variable Declarations
+    text[4] lv_text;
+    string lv_unit;
+    string lv_unitname;
+    string[8] lv_greetings;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unitname = "";
+    for (init_i = 0; init_i <= 7; init_i += 1) {
+        lv_greetings[init_i] = "";
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_unit = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1));
+    lv_unitname = (lv_unit);
+    lv_greetings[0] = "Hello";
+    lv_greetings[1] = "Greetings";
+    lv_greetings[2] = "Hi";
+    lv_greetings[3] = "Hey";
+    lv_greetings[4] = "Howdy";
+    lv_greetings[5] = "Yo";
+    lv_greetings[6] = "Hiya";
+    lv_unitname = StringReplaceWord((lv_unit), "Hero", "", c_stringReplaceAll, c_stringCase);
+    lv_text[0] = StringToText(lv_greetings[RandomInt(0, 6)]);
+    lv_text[1] = StringToText(", ");
+    lv_text[2] = StringToText(lv_unitname);
+    TextTagCreate(((lv_text[0] + lv_text[1]) + lv_text[2]), RandomInt(16, 100), UnitGetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1)), 0.0, true, false, PlayerGroupAll());
+    TextTagAttachToUnit(TextTagLastCreated(), UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1), 0.0);
+    TextTagSetColor(TextTagLastCreated(), c_textTagColorText, ColorWithAlpha(RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0), RandomFixed(0.0, 100.0)));
+    TextTagSetVelocity(TextTagLastCreated(), RandomFixed(1.0, 6.0), libNtve_gf_RandomAngle());
+    TextTagShow(TextTagLastCreated(), PlayerGroupAll(), true);
+    Wait(RandomFixed(1.0, 5.0), c_timeGame);
+    TextTagDestroy(TextTagLastCreated());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_GreetingModeOutput_Init () {
+    libFUNY_gt_GreetingModeOutput = TriggerCreate("libFUNY_gt_GreetingModeOutput_Func");
+    TriggerEnable(libFUNY_gt_GreetingModeOutput, false);
+    TriggerAddEventMouseClicked(libFUNY_gt_GreetingModeOutput, c_playerAny, c_mouseButtonNone, true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleGreetingMode
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_ToggleGreetingMode_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFUNY_gv_isGreetingModeEnabled = !(libFUNY_gv_isGreetingModeEnabled);
+    if ((libFUNY_gv_isGreetingModeEnabled == true)) {
+        TriggerEnable(libFUNY_gt_GreetingModeOutput, true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Greetings Mode"));
+    }
+    else {
+        TriggerEnable(libFUNY_gt_GreetingModeOutput, false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Greetings Mode"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_ToggleGreetingMode_Init () {
+    libFUNY_gt_ToggleGreetingMode = TriggerCreate("libFUNY_gt_ToggleGreetingMode_Func");
+    TriggerAddEventChatMessage(libFUNY_gt_ToggleGreetingMode, c_playerAny, "greetingmode", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Do A Barrel Roll 
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_DoABarrelRoll_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+
+    // Automatic Variable Declarations
+    const int auto5C89AC27_ae = 90;
+    const int auto5C89AC27_ai = 1;
+
+    // Variable Initialization
+    lv_i = 1;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Barrel Roll, Barrel Roll ~~"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Barrel Roll ~~"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("~~ Do The Barrel Roll ~~"));
+    lv_i = 1;
+    for ( ; ( (auto5C89AC27_ai >= 0 && lv_i <= auto5C89AC27_ae) || (auto5C89AC27_ai < 0 && lv_i >= auto5C89AC27_ae) ) ; lv_i += auto5C89AC27_ai ) {
+        CameraSetValue(EventPlayer(), c_cameraValueRoll, (lv_i * 4.0), 0.0625, -1, 100.0);
+        Wait(0.0001, c_timeReal);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_DoABarrelRoll_Init () {
+    libFUNY_gt_DoABarrelRoll = TriggerCreate("libFUNY_gt_DoABarrelRoll_Func");
+    TriggerAddEventChatMessage(libFUNY_gt_DoABarrelRoll, c_playerAny, "do a barrel roll", true);
+}
+
+void libFUNY_InitTriggers () {
+    libFUNY_gt_MapInit_Init();
+    libFUNY_gt_GreetingModeOutput_Init();
+    libFUNY_gt_ToggleGreetingMode_Init();
+    libFUNY_gt_DoABarrelRoll_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_InitLib_completed = false;
+
+void libFUNY_InitLib () {
+    if (libFUNY_InitLib_completed) {
+        return;
+    }
+
+    libFUNY_InitLib_completed = true;
+
+    libFUNY_InitLibraries();
+    libFUNY_InitVariables();
+    libFUNY_InitTriggers();
+}
+

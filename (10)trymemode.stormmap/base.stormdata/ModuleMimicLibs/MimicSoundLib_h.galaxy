@@ -1,0 +1,95 @@
+include "TriggerLibs/HeroesLib_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Sound
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int MimicSoundLib_gv_heroVO_TalentChoicePercentChance_C = 20;
+const fixed MimicSoundLib_gv_heroVO_PissedWindow = 4.5;
+const int MimicSoundLib_gv_heroVO_PissedClickThreshold = 2;
+const int MimicSoundLib_gv_heroVO_SpecialKillLinePercentChance_C = 15;
+const int MimicSoundLib_gv_heroVO_ComebackLevelGapThreshold_C = 3;
+const fixed MimicSoundLib_gv_heroVO_CelebrateTimerDuration_C = 2.0;
+const fixed MimicSoundLib_gv_heroVO_HeroIntroLineGateCheckRadius_C = 6.5;
+const fixed MimicSoundLib_gv_heroVO_HeroIntroLineAllyCheckRadius_C = 45.0;
+const int MimicSoundLib_gv_heroVO_HeroIntroLineChance_C = 80;
+const fixed MimicSoundLib_gv_heroVO_GetHitLifePercentThresholdHigh_C = 0.5;
+const fixed MimicSoundLib_gv_heroVO_GetHitLifePercentThreshold_C = 0.25;
+const fixed MimicSoundLib_gv_heroVO_GetHitLifePercentThresholdLow_C = 0.1;
+const fixed MimicSoundLib_gv_heroVO_HeroGoHealCooldownTime_C = 60.0;
+const fixed MimicSoundLib_gv_heroVO_HeroGoHealHPPercentThreshold_C = 40.0;
+const fixed MimicSoundLib_gv_heroVO_HealThankYouLineDelay_C = 1.0;
+const int MimicSoundLib_gv_heroVO_HealThankYouLinePercentChance_C = 35;
+const fixed MimicSoundLib_gv_heroVO_HealThankYouLineCooldown_C = 10.0;
+
+// Variable Declarations
+bool MimicSoundLib_gv_heroVO_Enabled;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_PissedResetTime;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroTakedownVOTimers;
+playergroup[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroTakedownVOAlliesGroup;
+int[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroTakedownVOLastEnemyPlayerKilled;
+bool[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroTakedownVOEnemyWasOnKillingSpree;
+bool[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroTakedownVOWasComebackKill;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_AlliedTakedownVOTimers;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_TeamKilledVOTimers;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_CelebrateVOTimers;
+playergroup[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_CelebrateVOAlliesGroup;
+timer MimicSoundLib_gv_heroVO_HeroIntroLineTimer;
+int[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HeroGoHealCalls;
+fixed[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVOHeroGoHealLastT;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_HealThankYouCooldownTimer;
+timer[libCore_gv_bALMaxPlayers + 1] MimicSoundLib_gv_heroVO_RetreatResetTimer;
+bool[libCore_gv_bALMaxEnginePlayerCount + 1] MimicSoundLib_gv_soundtrack_UniqueSoundtrackEnabled;
+int MimicSoundLib_gv_soundtrack_MapSoundtrackIndex;
+bool MimicSoundLib_gv_soundtrack_MapSoundtrackPlaying;
+bool MimicSoundLib_gv_soundtrack_IntroSoundtrackPlaying;
+string MimicSoundLib_gv_soundtrack_NewDefaultSoundtrack;
+
+// Function Declarations
+void MimicSoundLib_gf_MuteMostSoundChannelsForGameOverState (bool lp_muteOption);
+void MimicSoundLib_gf_SoundAnnouncerVOPlayAnnouncerVOForPlayer (int lp_event, int lp_player);
+string MimicSoundLib_gf_HeroVOHeroLineForEvent (int lp_vOEvent, int lp_speakingPlayer);
+void MimicSoundLib_gf_HeroVOPlayHeroLine (int lp_vOEvent, int lp_speakingPlayer, playergroup lp_targetPlayerGroup);
+void MimicSoundLib_gf_HeroVOPlayHeroLineInWorld (int lp_vOEvent, int lp_speakingPlayer, playergroup lp_targetPlayerGroup);
+void MimicSoundLib_gf_HeroVOPlayHeroLineWithDelay (int lp_vOEvent, int lp_speakingPlayer, playergroup lp_targetPlayerGroup, fixed lp_delay);
+void MimicSoundLib_gf_HeroVOPlayHeroLineWithDelayAndRandomChance (int lp_vOEvent, int lp_speakingPlayer, playergroup lp_targetPlayerGroup, fixed lp_delay, int lp_chance);
+string MimicSoundLib_gf_HeroVOHeroTakedownSoundLink (unit lp_killingHero, unit lp_dyingHero);
+void MimicSoundLib_gf_HeroVORegisterHeroTakedownForPlayer (int lp_player, playergroup lp_awardGroup, int lp_enemyPlayerKilled, int lp_deadPlayerKillingSpreeCount, int lp_levelGap);
+void MimicSoundLib_gf_HeroVOStartHeroTakedownVOTimerForPlayer (int lp_player, fixed lp_duration);
+void MimicSoundLib_gf_HeroVOPlayKillLine (string lp_killVOLine, int lp_speakingPlayer, int lp_killingPlayer);
+void MimicSoundLib_gf_HeroVOStartAlliedTakedownVOTimerForPlayer (int lp_player, fixed lp_duration);
+void MimicSoundLib_gf_HeroVOStartTeamKilledVOTimerForPlayer (int lp_player, fixed lp_duration);
+void MimicSoundLib_gf_HeroVOStartCelebrateVOTimerForPlayer (int lp_player, playergroup lp_allyPlayerGroup);
+void MimicSoundLib_gf_HeroVOPlayHeroIntroLinesForPlayer (int lp_player, int lp_allyPlayer);
+void MimicSoundLib_gf_HeroVOCheckForIntroLines (int lp_player);
+void MimicSoundLib_gf_HeroVOHeroGetHitResponse (fixed lp_damagingAmount, unit lp_damagedUnit);
+void MimicSoundLib_gf_HeroVOPlayHealThankYouLine (int lp_speakingPlayer, playergroup lp_targetPlayerGroup);
+void MimicSoundLib_gf_HeroVOHeroBeginsHearthing (int lp_speakingPlayer);
+void MimicSoundLib_gf_HeroVOPlayTryMeModeIntro (int lp_speakingPlayer, playergroup lp_targetPlayerGroup);
+void MimicSoundLib_gf_HeroVOPlayResurrected (int lp_speakingPlayer, playergroup lp_targetPlayerGroup);
+bool MimicSoundLib_gf_SoundtrackIsIntroPlaying ();
+void MimicSoundLib_gf_SoundtrackUpdateMapSoundtrackIndex ();
+void MimicSoundLib_gf_SoundtrackSetUniqueSoundtrackState (bool lp_uniqueSoundtrackState);
+void MimicSoundLib_gf_SoundtrackPlayMapIntroSoundtrackForAllPlayers ();
+void MimicSoundLib_gf_SoundtrackApplyNewDefaultSoundtrackForPlayerGroup (string lp_soundtrack, playergroup lp_playerGroup);
+void MimicSoundLib_gf_SoundtrackPlayMapSoundtrackAsDefaultSoundtrackForAllPlayers ();
+void MimicSoundLib_gf_SoundtrackStopDeadSoundtrackforPlayer (int lp_player);
+void MimicSoundLib_gf_DigitalSoundEffectsEnableDisableSoundStateForPlayer (bool lp_enableDisable, int lp_player, string lp_soundEffect);
+
+// Trigger Declarations
+trigger MimicSoundLib_gt_IncludeSound;
+trigger MimicSoundLib_gt_HeroVOCheckForHeroVOAfterAnnouncerEvents;
+trigger MimicSoundLib_gt_HeroVOPissedTimerExpires;
+trigger MimicSoundLib_gt_HeroVOHeroTakedownVOTimerExpires;
+trigger MimicSoundLib_gt_HeroVOAlliedTakedownVOTimerExpires;
+trigger MimicSoundLib_gt_HeroVOHeroTeamKilledVOTimerExpires;
+trigger MimicSoundLib_gt_HeroVOHeroCelebrateVOTimerExpires;
+trigger MimicSoundLib_gt_HeroVOCelebrateVOForMapObjective;
+trigger MimicSoundLib_gt_UIFloatingCombatTextDamageDealt;
+trigger MimicSoundLib_gt_HeroVOHeroGoHeal;
+trigger MimicSoundLib_gt_HeroVOPlayHealThankYouLineTrigger;
+trigger MimicSoundLib_gt_HeroVOTalentChosenVO;
+
+// Library Initialization
+void MimicSoundLib_InitVariables ();
+

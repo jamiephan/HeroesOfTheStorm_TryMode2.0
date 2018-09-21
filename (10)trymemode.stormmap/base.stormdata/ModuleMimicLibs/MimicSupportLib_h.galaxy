@@ -1,4 +1,5 @@
 include "TriggerLibs/HeroesLib_h"
+include "TriggerLibs/GameLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Support
@@ -50,6 +51,18 @@ struct MimicSupportLib_gs_QACheatsControlsPanel {
     int lv_spawnItemListPulldown;
     int lv_itemCountEditbox;
     int lv_spawnItemButton;
+    int lv_respawnStructuresButton;
+    int lv_killStructuresButton;
+};
+
+struct MimicSupportLib_gs_MMFieldOfSlaughterTown2 {
+    point lv_buildingPosition;
+    string lv_buildingType;
+    fixed lv_buildingFacing;
+};
+
+struct MimicSupportLib_gs_RS_Town {
+    MimicSupportLib_gs_MMFieldOfSlaughterTown2[libGame_gv_townMaxStructureCount + 1] lv_structureArray;
 };
 
 // Variable Declarations
@@ -107,6 +120,7 @@ bool MimicSupportLib_gv_dEBUGCinematicsModeEnabled;
 bool MimicSupportLib_gv_dEBUGMapTextEnabled;
 bool MimicSupportLib_gv_dEBUGBonusMinionXP;
 bool MimicSupportLib_gv_dEBUGNoRegen;
+MimicSupportLib_gs_RS_Town[libGame_gv_townMaxTownCount + 1] MimicSupportLib_gv_rS_Towns;
 fixed MimicSupportLib_gv_debug_GameTimeDelta;
 unitgroup MimicSupportLib_gv_dEBUGDPSTrackerGroup;
 fixed MimicSupportLib_gv_dEBUGDPSTrackerTotalDamage;
@@ -151,6 +165,7 @@ void MimicSupportLib_gf_QACheatsAddUnitControlButtons ();
 void MimicSupportLib_gf_QACheatsAddCameraControls ();
 void MimicSupportLib_gf_QACheatsPopulateSpawnItemsPulldown ();
 void MimicSupportLib_gf_QACheatsAddSpawnItemButton ();
+void MimicSupportLib_gf_QACheatsAddStructureControlsButtons ();
 void MimicSupportLib_gf_QACheatsAddDebugRespawnButton ();
 void MimicSupportLib_gf_QACheatsCompileBehaviors ();
 void MimicSupportLib_gf_QACheatsCompileSpawnUnits ();
@@ -222,8 +237,10 @@ trigger MimicSupportLib_gt_QACheatsMoveUnitButtonClicked;
 trigger MimicSupportLib_gt_QACheatsRefreshCooldownsButtonClicked;
 trigger MimicSupportLib_gt_QACheatsSetCameraAngleButtonClicked;
 trigger MimicSupportLib_gt_QACheatsToggleDebugCameraCheckboxChecked;
-trigger MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked;
 trigger MimicSupportLib_gt_QACheatsSpawnItemButtonClicked;
+trigger MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked;
+trigger MimicSupportLib_gt_QACheatsKillStructuresButtonClicked;
+trigger MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked;
 trigger MimicSupportLib_gt_DEBUGIntroVOInteractorItemintrovotest;
 trigger MimicSupportLib_gt_DEBUGIntroVOInteractorUsage;
 trigger MimicSupportLib_gt_DEBUGInspectTheBalanceProbebalanceprobe;
@@ -304,12 +321,14 @@ trigger MimicSupportLib_gt_DEBUGProgressAllQuests;
 trigger MimicSupportLib_gt_DEBUGTeamFightPerfTest;
 trigger MimicSupportLib_gt_DEBUGToggleJungleCampDebugtogcampdebug;
 trigger MimicSupportLib_gt_DEBUGTargetJungleCreepState;
-trigger MimicSupportLib_gt_DEBUGUnlockAllyColorSettings;
 trigger MimicSupportLib_gt_DEBUG60SecondPause;
 trigger MimicSupportLib_gt_DEBUGTriggerASave;
 trigger MimicSupportLib_gt_DEBUGHeroIsAlive;
 trigger MimicSupportLib_gt_DEBUGShortHeroDeath;
 trigger MimicSupportLib_gt_DEBUGInvulnerableStructures;
+trigger MimicSupportLib_gt_DEBUGRespawnStructures;
+trigger MimicSupportLib_gt_DEBUGKillStructures;
+trigger MimicSupportLib_gt_DEBUGCollectStructureData;
 trigger MimicSupportLib_gt_DEBUGGameTime;
 trigger MimicSupportLib_gt_DEBUGChooseTalent;
 trigger MimicSupportLib_gt_DEBUGXPRange;

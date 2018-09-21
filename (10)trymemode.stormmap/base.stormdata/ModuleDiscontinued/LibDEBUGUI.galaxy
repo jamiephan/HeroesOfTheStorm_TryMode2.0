@@ -34,6 +34,23 @@ void libDEBUGUI_InitVariables() {
     libDEBUGUI_gv_DEBUGUIIsOn = false;
 }
 
+void libDEBUGUI_gf_InitOrCleanupUICommand(bool lp_option){
+
+    libDEBUG_gv_UIParams1 = null;
+    libDEBUG_gv_UIParams2 = null;
+    libDEBUG_gv_UIParams3 = null;
+    libDEBUG_gv_UIParams4 = null;
+
+    if(lp_option){
+        // Start UI command
+        libDEBUG_gv_IsUITrigger = true;
+    } else {
+        // Stop UI Command
+        libDEBUG_gv_IsUITrigger = false;
+    }
+
+};
+
 // Triggers
 //--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG UI - Toggle Debug UI
@@ -79,6 +96,18 @@ bool libDEBUGUI_gt_ToggleDEBUGUI_Func(bool testConds, bool runActions) {
         libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText("Set the spawn time (rst | respawntime) - This can used to override the respawn time for all players. WARNING: Any non valid decimal/numbers (such as containing non-numeric characters or having multiple decimal points) will automatically convert to 0."), PlayerGroupAll());
         libDEBUGUI_gv_MainDialogRespawnTimeButton = DialogControlLastCreated();
      
+                // Respawn Time Dialogs
+        DialogControlCreate(libDEBUGUI_gv_MainDialog, c_triggerControlTypeEditBox);
+        libDEBUGUI_gv_MainDialogRespawnTimeTextbox = DialogControlLastCreated();
+        DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 100, 50);
+        DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_textBoxX, lv_textBoxY);
+
+        DialogControlCreateFromTemplate(libDEBUGUI_gv_MainDialog, c_triggerControlTypeButton, "GameMenuDialog/GameMenuButtonTemplate/Button");
+        DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 175, 85);
+        DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopLeft, lv_buttonX, lv_buttonY);
+        libNtve_gf_SetDialogItemText(DialogControlLastCreated(), StringToText("SpawnTime"), PlayerGroupAll());
+        libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText("Set the spawn time (rst | respawntime) - This can used to override the respawn time for all players. WARNING: Any non valid decimal/numbers (such as containing non-numeric characters or having multiple decimal points) will automatically convert to 0."), PlayerGroupAll());
+        libDEBUGUI_gv_MainDialogRespawnTimeButton = DialogControlLastCreated();
         
         
         
@@ -136,6 +165,8 @@ void libDEBUGUI_gt_ToggleDEBUGUI_Init() {
                 return false;
             }
         }
+        
+        libDEBUGUI_gf_InitOrCleanupUICommand(true);
 
         libDEBUG_gv_UIParams1 = libNtve_gf_DialogItemEditValue(libDEBUGUI_gv_MainDialogRespawnTimeTextbox, 1);
         if (libDEBUG_gv_UIParams1 == "now"){
@@ -143,8 +174,8 @@ void libDEBUGUI_gt_ToggleDEBUGUI_Init() {
         } else {
             TriggerExecute(libDEBUG_gt_RespawnTimeCommand, false, false);
         }
-        libDEBUG_gv_UIParams1 = null;
-        //it will print out the message "RespawnTimerOverrideButtonClicked" in the debug area on the screen.
+
+        libDEBUGUI_gf_InitOrCleanupUICommand(false);
         return true;
     }
 

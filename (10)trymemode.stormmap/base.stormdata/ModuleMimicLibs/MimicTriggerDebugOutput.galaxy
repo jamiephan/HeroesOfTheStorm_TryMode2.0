@@ -1,0 +1,58 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Mimic TriggerDebugOutput
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Function Declarations
+void MimicTriggerDebugOutput (int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
+
+//--------------------------------------------------------------------------------------------------
+// Library: Mimic TriggerDebugOutput
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libMTDO_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libMTDO_InitVariables_completed = false;
+
+void libMTDO_InitVariables() {
+    if (libMTDO_InitVariables_completed) {
+        return;
+    }
+
+    libMTDO_InitVariables_completed = true;
+
+    //Force Enable Debug mode
+    libCore_gv_dEBUGDebuggingEnabled = true;
+}
+
+
+// Functions
+void MimicTriggerDebugOutput (int lp_uselessInt, text lp_outputText, bool lp_uselessBool) {
+    // Automatic Variable Declarations
+    // Implementation
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, lp_outputText);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libMTDO_InitLib_completed = false;
+
+void libMTDO_InitLib () {
+    if (libMTDO_InitLib_completed) {
+        return;
+    }
+
+    libMTDO_InitLib_completed = true;
+
+    libMTDO_InitLibraries();
+    libMTDO_InitVariables();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("MimicTriggerDebugOutput Lib Initialized"));
+}
