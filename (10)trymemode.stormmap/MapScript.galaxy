@@ -14,7 +14,7 @@ include "TriggerLibs/UILib"
 include "TriggerLibs/SoundLib"
 include "TriggerLibs/GameDataHelperLib"
 include "TriggerLibs/SupportLib"
-include "LibDEBUG"
+include "LibTryMeMode"
 
 //--------------------------------------------------------------------------------------------------
 // Library Initialization
@@ -29,7 +29,7 @@ void InitLibs () {
     libSond_InitLib();
     libGDHL_InitLib();
     libSprt_InitLib();
-    libDEBUG_InitLib();
+    libTRYM_InitLib();
 }
 
 //--------------------------------------------------------------------------------------------------

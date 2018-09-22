@@ -1,0 +1,78 @@
+include "TriggerLibs/NativeLib"
+include "Modules/LibUtilities"
+include "Modules/LibFPSMODE"
+include "Modules/LibBuilderMode"
+include "Modules/LibFunny"
+include "Modules/LibUnits"
+include "Modules/LibPlayers"
+include "Modules/LibFreeCameraMode"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Module Loader
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Trigger Declarations
+trigger libMODL_gt_MapInit;
+
+//--------------------------------------------------------------------------------------------------
+// Library: Module Loader
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libMODL_InitLibraries () {
+    libNtve_InitVariables();
+    libUTIL_InitLib();
+    libFPSM_InitLib();
+    libBULM_InitLib();
+    libFUNY_InitLib();
+    libUNIT_InitLib();
+    libPLYR_InitLib();
+    libFRCM_InitLib();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libMODL_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Module Loader Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libMODL_gt_MapInit_Init () {
+    libMODL_gt_MapInit = TriggerCreate("libMODL_gt_MapInit_Func");
+    TriggerAddEventMapInit(libMODL_gt_MapInit);
+}
+
+void libMODL_InitTriggers () {
+    libMODL_gt_MapInit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libMODL_InitLib_completed = false;
+
+void libMODL_InitLib () {
+    if (libMODL_InitLib_completed) {
+        return;
+    }
+
+    libMODL_InitLib_completed = true;
+
+    libMODL_InitLibraries();
+    libMODL_InitTriggers();
+    
+    // Need to change to debug mode before MapInit Event is called
+    libCore_gv_dEBUGDebuggingEnabled = true;
+}
+

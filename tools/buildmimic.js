@@ -166,7 +166,7 @@ loadercontent += `
 // Validating: templates
 
 // External Library Initialization
-void libMIMC_InitLibraries() {
+void libMICL_InitLibraries() {
     libMTDO_InitLib();
 `;
 for (let i = 0; i < extractFilesArr.length; i++) {
@@ -178,16 +178,20 @@ loadercontent += `}
 //--------------------------------------------------------------------------------------------------
 // Library Initialization
 //--------------------------------------------------------------------------------------------------
-bool libMIMC_InitLib_completed = false;
+bool libMICL_InitLib_completed = false;
 
-void libMIMC_InitLib () {
-    if (libMIMC_InitLib_completed) {
+void libMICL_InitLib () {
+    if (libMICL_InitLib_completed) {
         return;
     }
 
-    libMIMC_InitLib_completed = true;
+    libMICL_InitLib_completed = true;
 
-    libMIMC_InitLibraries();
+    libMICL_InitLibraries();
+
+    // Need to change to debug mode before MapInit Event is called
+    libCore_gv_dEBUGDebuggingEnabled = true;
+    
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mimic Lib Loader Initialized"));
 }
 `;
@@ -226,9 +230,6 @@ void libMTDO_InitVariables() {
     }
 
     libMTDO_InitVariables_completed = true;
-
-    //Force Enable Debug mode
-    libCore_gv_dEBUGDebuggingEnabled = true;
 }
 
 
@@ -301,7 +302,7 @@ console.log('5. Open the .galaxy with a text editor and find the last line of in
 console.log(`6. Add the following code after the last line: include "${outputDirName}/MimicLibsLoader"`);
 console.log('7. Then, locate a function named XXXX_InitLibraries() (XXXX should be the ID if the your lib)');
 console.log('    (If you are editing MapScript.galaxy, it should only have InitLibs() instead.)');
-console.log('8. Inside the function, Append the code: libMIMC_InitLib();');
+console.log('8. Inside the function, Append the code: libMICL_InitLib();');
 console.log(
   '9. After, open the map and see does the "Initialized" message popup for each Lib without error and you are done'
 );

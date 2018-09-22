@@ -11,13 +11,6 @@ include "TriggerLibs/HeroesLib"
 const string libDEBUG_gv_CommandGreetings = "hello";
 const string libDEBUG_gv_CommandGreetingsAlt = "hi";
 
-const string libDEBUG_gv_CommandRespawnTimerOverride = "respawntime";
-const string libDEBUG_gv_CommandRespawnTimerOverrideAlt = "rst";
-
-
-fixed libDEBUG_gv_SpawnUnitScale;
-bool libDEBUG_gv_OutputUnitIDModeIsEnabled;
-bool libDEBUG_gv_ToggleFreeCameraIsEnabled;
 
 // UI Lib
 bool libDEBUG_gv_IsUITrigger;
@@ -26,25 +19,11 @@ string libDEBUG_gv_UIParams2;
 string libDEBUG_gv_UIParams3;
 string libDEBUG_gv_UIParams4;
 // Function Declarations
-// void MimicTriggerDebugOutput(int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
 void libDEBUG_gf_OutputHelp(string lp_command);
 void libDEBUG_gf_OutputTextMessage(string lp_string);
 // Trigger Declarations
 trigger libDEBUG_gt_greetingCommand;
-trigger libDEBUG_gt_SpawnUnitCommand;
-trigger libDEBUG_gt_KillUnitCommand;
-trigger libDEBUG_gt_SpawnSetScaleCommand;
-trigger libDEBUG_gt_SwapHeroCommand;
-trigger libDEBUG_gt_RespawnTimeCommand;
-trigger libDEBUG_gt_SpawnItemToUnitCommand;
-trigger libDEBUG_gt_RemoveItemsFromUnit;
-trigger libDEBUG_gt_ForceBackSpaceOpenQACheatCommand;
 trigger libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand;
-trigger libDEBUG_gt_OutputUnitIDCommand;
-trigger libDEBUG_gt_ToggleOutputUnitIDMode;
-trigger libDEBUG_gt_ScoreModifier;
-trigger libDEBUG_gt_ToggleFreeCamera;
-trigger libDEBUG_gt_OverrideRespawnPointCommand;
 trigger libDEBUG_gt_MapLoaded;
 
 // Library Initialization

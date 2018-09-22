@@ -19,7 +19,6 @@ trigger libUTIL_gt_ToggleFOW;
 trigger libUTIL_gt_ToggleMassCDR;
 trigger libUTIL_gt_RunMassCDR;
 trigger libUTIL_gt_RestartGame;
-trigger libUTIL_gt_ModifyUnitProperty;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -95,6 +94,7 @@ bool libUTIL_gt_ToggleUI_Func (bool testConds, bool runActions) {
 void libUTIL_gt_ToggleUI_Init () {
     libUTIL_gt_ToggleUI = TriggerCreate("libUTIL_gt_ToggleUI_Func");
     TriggerAddEventChatMessage(libUTIL_gt_ToggleUI, c_playerAny, "tui", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleUI, c_playerAny, "toggleui", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -151,8 +151,8 @@ bool libUTIL_gt_ToggleMassCDR_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libUTIL_gt_ToggleMassCDR_Init () {
     libUTIL_gt_ToggleMassCDR = TriggerCreate("libUTIL_gt_ToggleMassCDR_Func");
-    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "macdr", true);
-    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "masscdr", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "tcdr", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleMassCDR, c_playerAny, "togglecdr", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -186,8 +186,9 @@ bool libUTIL_gt_RunMassCDR_Func (bool testConds, bool runActions) {
     for ( ; ( (autoF588521D_ai >= 0 && lv_i <= autoF588521D_ae) || (autoF588521D_ai < 0 && lv_i >= autoF588521D_ae) ) ; lv_i += autoF588521D_ai ) {
         lv_unit = UnitGroupUnit(UnitGroupSelected(libUTIL_gv_massCDRPlayer), lv_i);
         UnitSetPropertyFixed(lv_unit, c_unitPropEnergyPercent, 100.0);
+        libSprt_gf_DEBUGRefreshCooldownsforUnit(libUTIL_gv_massCDRPlayer, lv_unit);
     }
-    //libGame_gf_HeroRefreshCooldowns(libUTIL_gv_massCDRPlayer, false);
+    libGame_gf_HeroRefreshCooldowns(libUTIL_gv_massCDRPlayer, false);
     return true;
 }
 
@@ -219,57 +220,6 @@ void libUTIL_gt_RestartGame_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "restart", true);
 }
 
-//--------------------------------------------------------------------------------------------------
-// Trigger: Modify Unit Property
-//--------------------------------------------------------------------------------------------------
-bool libUTIL_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    string lv_unittype;
-    fixed lv_value;
-    int lv_type;
-    int lv_i;
-
-    // Automatic Variable Declarations
-    int auto49B52A42_ae;
-    const int auto49B52A42_ai = 1;
-
-    // Variable Initialization
-
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "up") || (StringWord(EventChatMessage(false), 1) == "unitproperty")))) {
-            return false;
-        }
-
-        if (!(((StringWord(EventChatMessage(false), 2) != null) && (StringWord(EventChatMessage(false), 3) != null)))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
-    lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
-    auto49B52A42_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-    lv_i = 1;
-    for ( ; ( (auto49B52A42_ai >= 0 && lv_i <= auto49B52A42_ae) || (auto49B52A42_ai < 0 && lv_i >= auto49B52A42_ae) ) ; lv_i += auto49B52A42_ai ) {
-        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
-        UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUTIL_gt_ModifyUnitProperty_Init () {
-    libUTIL_gt_ModifyUnitProperty = TriggerCreate("libUTIL_gt_ModifyUnitProperty_Func");
-    TriggerAddEventChatMessage(libUTIL_gt_ModifyUnitProperty, c_playerAny, "up", false);
-    TriggerAddEventChatMessage(libUTIL_gt_ModifyUnitProperty, c_playerAny, "unitproperty", false);
-}
-
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ToggleUI_Init();
@@ -277,7 +227,6 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ToggleMassCDR_Init();
     libUTIL_gt_RunMassCDR_Init();
     libUTIL_gt_RestartGame_Init();
-    libUTIL_gt_ModifyUnitProperty_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

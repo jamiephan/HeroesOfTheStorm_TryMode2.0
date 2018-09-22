@@ -1,0 +1,442 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Units
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libUNIT_gv_toggleOutputIDEnabled;
+fixed libUNIT_gv_unitScale;
+
+// Trigger Declarations
+trigger libUNIT_gt_ModifyUnitProperty;
+trigger libUNIT_gt_RunOutputUnitID;
+trigger libUNIT_gt_ToggleOutputID;
+trigger libUNIT_gt_Removeallitemsfromunits;
+trigger libUNIT_gt_SpawnItemtounit;
+trigger libUNIT_gt_KillUnits;
+trigger libUNIT_gt_SetUnitScale;
+trigger libUNIT_gt_SummonUnit;
+trigger libUNIT_gt_MapInit;
+
+// Library Initialization
+void libUNIT_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: Units
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libUNIT_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libUNIT_InitVariables_completed = false;
+
+void libUNIT_InitVariables () {
+    if (libUNIT_InitVariables_completed) {
+        return;
+    }
+
+    libUNIT_InitVariables_completed = true;
+
+    libUNIT_gv_unitScale = 1.0;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Modify Unit Property
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    fixed lv_value;
+    int lv_type;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int auto5C02B8F9_ae;
+    const int auto5C02B8F9_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "up") || (StringWord(EventChatMessage(false), 1) == "unitproperty")))) {
+            return false;
+        }
+
+        if (!(((StringWord(EventChatMessage(false), 2) != null) && (StringWord(EventChatMessage(false), 3) != null)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
+    lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+    auto5C02B8F9_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (auto5C02B8F9_ai >= 0 && lv_i <= auto5C02B8F9_ae) || (auto5C02B8F9_ai < 0 && lv_i >= auto5C02B8F9_ae) ) ; lv_i += auto5C02B8F9_ai ) {
+        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
+        UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ModifyUnitProperty_Init () {
+    libUNIT_gt_ModifyUnitProperty = TriggerCreate("libUNIT_gt_ModifyUnitProperty_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ModifyUnitProperty, c_playerAny, "up", false);
+    TriggerAddEventChatMessage(libUNIT_gt_ModifyUnitProperty, c_playerAny, "unitproperty", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run Output Unit ID
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RunOutputUnitID_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_unittype = UnitGetType(EventUnit());
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Clicked Unit ID: " + (lv_unittype))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RunOutputUnitID_Init () {
+    libUNIT_gt_RunOutputUnitID = TriggerCreate("libUNIT_gt_RunOutputUnitID_Func");
+    TriggerEnable(libUNIT_gt_RunOutputUnitID, false);
+    TriggerAddEventUnitClick(libUNIT_gt_RunOutputUnitID, null, c_playerAny);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Output ID
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ToggleOutputID_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_toggleOutputIDEnabled = !(libUNIT_gv_toggleOutputIDEnabled);
+    if ((libUNIT_gv_toggleOutputIDEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Toggle Output ID Enabled: Click on a unit to see their Unit ID"));
+        TriggerEnable(libUNIT_gt_RunOutputUnitID, true);
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Toggle Output ID Disabled"));
+        TriggerEnable(libUNIT_gt_RunOutputUnitID, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ToggleOutputID_Init () {
+    libUNIT_gt_ToggleOutputID = TriggerCreate("libUNIT_gt_ToggleOutputID_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleOutputID, c_playerAny, "toi", true);
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleOutputID, c_playerAny, "toggleoutputid", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove all items from units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_Removeallitemsfromunits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_item;
+    string lv_itemtype;
+    string lv_unittype;
+    int lv_j;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int auto20BF2C35_ae;
+    const int auto20BF2C35_ai = 1;
+    int autoD728F771_ae;
+    const int autoD728F771_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto20BF2C35_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (auto20BF2C35_ai >= 0 && lv_i <= auto20BF2C35_ae) || (auto20BF2C35_ai < 0 && lv_i >= auto20BF2C35_ae) ) ; lv_i += auto20BF2C35_ai ) {
+        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
+        autoD728F771_ae = UnitInventoryCount(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), c_unitInventoryCountCarried);
+        lv_j = 1;
+        for ( ; ( (autoD728F771_ai >= 0 && lv_j <= autoD728F771_ae) || (autoD728F771_ai < 0 && lv_j >= autoD728F771_ae) ) ; lv_j += autoD728F771_ai ) {
+            lv_item = UnitInventoryItem(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_j);
+            lv_itemtype = UnitGetType(lv_item);
+            UnitInventoryRemove(UnitInventoryItem(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_j));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed " + (lv_itemtype)) + (" From " + (lv_unittype)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_Removeallitemsfromunits_Init () {
+    libUNIT_gt_Removeallitemsfromunits = TriggerCreate("libUNIT_gt_Removeallitemsfromunits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_Removeallitemsfromunits, c_playerAny, "removeitems", true);
+    TriggerAddEventChatMessage(libUNIT_gt_Removeallitemsfromunits, c_playerAny, "rmi", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Spawn Item to unit
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SpawnItemtounit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    string lv_item;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int autoC18BEB46_ae;
+    const int autoC18BEB46_ai = 1;
+
+    // Variable Initialization
+    lv_item = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adi") || (StringWord(EventChatMessage(false), 1) == "additem")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid item to spawn"));
+    }
+    else {
+        lv_item = StringWord(EventChatMessage(false), 2);
+        autoC18BEB46_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+        lv_i = 1;
+        for ( ; ( (autoC18BEB46_ai >= 0 && lv_i <= autoC18BEB46_ae) || (autoC18BEB46_ai < 0 && lv_i >= autoC18BEB46_ae) ) ; lv_i += autoC18BEB46_ai ) {
+            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
+            if ((UnitInventoryCount(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), c_unitInventoryCountEmpty) == 0)) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Unable to add " + lv_item) + (" to " + (lv_unittype)))));
+            }
+            else {
+                UnitInventoryCreate(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), (lv_item));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Tried to add " + lv_item) + (" to " + (lv_unittype)))));
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SpawnItemtounit_Init () {
+    libUNIT_gt_SpawnItemtounit = TriggerCreate("libUNIT_gt_SpawnItemtounit_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_SpawnItemtounit, c_playerAny, "adi", false);
+    TriggerAddEventChatMessage(libUNIT_gt_SpawnItemtounit, c_playerAny, "additem", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Kill Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_KillUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+
+    // Automatic Variable Declarations
+    int autoAC97E488_ae;
+    const int autoAC97E488_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoAC97E488_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+    lv_i = 1;
+    for ( ; ( (autoAC97E488_ai >= 0 && lv_i <= autoAC97E488_ae) || (autoAC97E488_ai < 0 && lv_i >= autoAC97E488_ae) ) ; lv_i += autoAC97E488_ai ) {
+        UnitKill(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_KillUnits_Init () {
+    libUNIT_gt_KillUnits = TriggerCreate("libUNIT_gt_KillUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_KillUnits, c_playerAny, "killunits", true);
+    TriggerAddEventChatMessage(libUNIT_gt_KillUnits, c_playerAny, "ku", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Set Unit Scale
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SetUnitScale_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "ss") || (StringWord(EventChatMessage(false), 1) == "setscale")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringToFixed(StringWord(EventChatMessage(false), 2)) == 0.0)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid scale number or scale is 0."));
+    }
+    else {
+        libUNIT_gv_unitScale = StringToFixed(StringWord(EventChatMessage(false), 2));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Changed summon unit with scale " + FixedToString(libUNIT_gv_unitScale, c_fixedPrecisionAny))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SetUnitScale_Init () {
+    libUNIT_gt_SetUnitScale = TriggerCreate("libUNIT_gt_SetUnitScale_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_SetUnitScale, c_playerAny, "ss", false);
+    TriggerAddEventChatMessage(libUNIT_gt_SetUnitScale, c_playerAny, "setscale", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Summon Unit
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_amount;
+    string lv_unittype;
+    string lv_unitname;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    int autoE55C84B8_ae;
+    const int autoE55C84B8_ai = 1;
+
+    // Variable Initialization
+    lv_unitname = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "summon") || (StringWord(EventChatMessage(false), 1) == "sum")))) {
+            return false;
+        }
+
+        if (!((StringWord(EventChatMessage(false), 2) != null))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 3) == null)) {
+        lv_player = EventPlayer();
+    }
+    else {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+    }
+    if ((StringToInt(StringWord(EventChatMessage(false), 4)) == 0)) {
+        lv_amount = 1;
+    }
+    else {
+        lv_amount = StringToInt(StringWord(EventChatMessage(false), 4));
+    }
+    lv_unitname = StringWord(EventChatMessage(false), 2);
+    lv_unittype = (lv_unitname);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Trying to spawn " + lv_unitname) + (", for Player " + IntToString(lv_player)))));
+    autoE55C84B8_ae = lv_amount;
+    lv_i = 1;
+    for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+        UnitSetScale(UnitLastCreated(), (libUNIT_gv_unitScale * 100.0), (libUNIT_gv_unitScale * 100.0), (libUNIT_gv_unitScale * 100.0));
+    }
+    UISetDragSelectEnabled(PlayerGroupAll(), true);
+    UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnit_Init () {
+    libUNIT_gt_SummonUnit = TriggerCreate("libUNIT_gt_SummonUnit_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_SummonUnit, c_playerAny, "summon", false);
+    TriggerAddEventChatMessage(libUNIT_gt_SummonUnit, c_playerAny, "sum", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Unit Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_MapInit_Init () {
+    libUNIT_gt_MapInit = TriggerCreate("libUNIT_gt_MapInit_Func");
+    TriggerAddEventMapInit(libUNIT_gt_MapInit);
+}
+
+void libUNIT_InitTriggers () {
+    libUNIT_gt_ModifyUnitProperty_Init();
+    libUNIT_gt_RunOutputUnitID_Init();
+    libUNIT_gt_ToggleOutputID_Init();
+    libUNIT_gt_Removeallitemsfromunits_Init();
+    libUNIT_gt_SpawnItemtounit_Init();
+    libUNIT_gt_KillUnits_Init();
+    libUNIT_gt_SetUnitScale_Init();
+    libUNIT_gt_SummonUnit_Init();
+    libUNIT_gt_MapInit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_InitLib_completed = false;
+
+void libUNIT_InitLib () {
+    if (libUNIT_InitLib_completed) {
+        return;
+    }
+
+    libUNIT_InitLib_completed = true;
+
+    libUNIT_InitLibraries();
+    libUNIT_InitVariables();
+    libUNIT_InitTriggers();
+}
+

@@ -1,0 +1,112 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Free Camera Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Variable Declarations
+bool libFRCM_gv_isFreeCameraModeEnabled;
+
+// Trigger Declarations
+trigger libFRCM_gt_ToggleFreeCameraMode;
+trigger libFRCM_gt_MapInit;
+
+// Library Initialization
+void libFRCM_InitVariables ();
+
+//--------------------------------------------------------------------------------------------------
+// Library: Free Camera Mode
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libFRCM_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libFRCM_InitVariables_completed = false;
+
+void libFRCM_InitVariables () {
+    if (libFRCM_InitVariables_completed) {
+        return;
+    }
+
+    libFRCM_InitVariables_completed = true;
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleFreeCameraMode
+//--------------------------------------------------------------------------------------------------
+bool libFRCM_gt_ToggleFreeCameraMode_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFRCM_gv_isFreeCameraModeEnabled = !(libFRCM_gv_isFreeCameraModeEnabled);
+    if ((libFRCM_gv_isFreeCameraModeEnabled == true)) {
+        CameraSetMouseRotates(EventPlayer(), true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Free Camera Mode: Enabled"));
+    }
+    else {
+        CameraApplyInfo(EventPlayer(), CameraInfoDefault(), 0.0, -1, 10.0, false);
+        CameraSetMouseRotates(EventPlayer(), false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Free Camera Mode: Disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFRCM_gt_ToggleFreeCameraMode_Init () {
+    libFRCM_gt_ToggleFreeCameraMode = TriggerCreate("libFRCM_gt_ToggleFreeCameraMode_Func");
+    TriggerAddEventChatMessage(libFRCM_gt_ToggleFreeCameraMode, c_playerAny, "togglefreecamera", true);
+    TriggerAddEventChatMessage(libFRCM_gt_ToggleFreeCameraMode, c_playerAny, "tfc", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libFRCM_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Free Camera Mode Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFRCM_gt_MapInit_Init () {
+    libFRCM_gt_MapInit = TriggerCreate("libFRCM_gt_MapInit_Func");
+    TriggerAddEventMapInit(libFRCM_gt_MapInit);
+}
+
+void libFRCM_InitTriggers () {
+    libFRCM_gt_ToggleFreeCameraMode_Init();
+    libFRCM_gt_MapInit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libFRCM_InitLib_completed = false;
+
+void libFRCM_InitLib () {
+    if (libFRCM_InitLib_completed) {
+        return;
+    }
+
+    libFRCM_InitLib_completed = true;
+
+    libFRCM_InitLibraries();
+    libFRCM_InitVariables();
+    libFRCM_InitTriggers();
+}
+

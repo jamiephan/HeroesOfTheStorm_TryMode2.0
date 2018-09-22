@@ -1,0 +1,266 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Players
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// Trigger Declarations
+trigger libPLYR_gt_OverrideRespawnPoint;
+trigger libPLYR_gt_OverrideScoreBoard;
+trigger libPLYR_gt_MapInit;
+trigger libPLYR_gt_OverrideRespawnTime;
+
+//--------------------------------------------------------------------------------------------------
+// Library: Players
+//--------------------------------------------------------------------------------------------------
+// Validating: templates
+
+// External Library Initialization
+void libPLYR_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Override Respawn Point
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    point lv_cameralocation;
+    int lv_player;
+    string lv_action;
+
+    // Automatic Variable Declarations
+    playergroup auto61B0F10C_g;
+    playergroup auto9EDB3770_g;
+
+    // Variable Initialization
+    lv_action = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "respawnpoint") || (StringWord(EventChatMessage(false), 1) == "rsp")))) {
+            return false;
+        }
+
+        if (!((!((StringWord(EventChatMessage(false), 2) == null))))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_action = StringWord(EventChatMessage(false), 2);
+    lv_cameralocation = CameraGetTarget(EventPlayer());
+    if ((!(((StringWord(EventChatMessage(false), 2) == "set") || (StringWord(EventChatMessage(false), 2) == "reset"))))) {
+        return false;
+    }
+
+    if ((lv_action == "set")) {
+        if ((StringWord(EventChatMessage(false), 3) == "all")) {
+            auto61B0F10C_g = PlayerGroupAll();
+            lv_player = -1;
+            while (true) {
+                lv_player = PlayerGroupNextPlayer(auto61B0F10C_g, lv_player);
+                if (lv_player < 0) { break; }
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set All Players Respawn point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation))));
+            return true;
+        }
+        else {
+            if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
+                lv_player = EventPlayer();
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
+                return true;
+            }
+            else {
+                lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
+                return true;
+            }
+        }
+        return true;
+    }
+
+    if ((lv_action == "reset")) {
+        if ((StringWord(EventChatMessage(false), 3) == "all")) {
+            auto9EDB3770_g = PlayerGroupAll();
+            lv_player = -1;
+            while (true) {
+                lv_player = PlayerGroupNextPlayer(auto9EDB3770_g, lv_player);
+                if (lv_player < 0) { break; }
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn Point to their default spawn point."));
+            return true;
+        }
+        else {
+            if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
+                lv_player = EventPlayer();
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
+                return true;
+            }
+            else {
+                lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
+                return true;
+            }
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_OverrideRespawnPoint_Init () {
+    libPLYR_gt_OverrideRespawnPoint = TriggerCreate("libPLYR_gt_OverrideRespawnPoint_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideRespawnPoint, c_playerAny, "respawnpoint", false);
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideRespawnPoint, c_playerAny, "rsp", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Override Score Board
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_OverrideScoreBoard_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_value;
+    string lv_field;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_field = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "setscore") || (StringWord(EventChatMessage(false), 1) == "score")))) {
+            return false;
+        }
+
+        if (!((!(((StringWord(EventChatMessage(false), 2) == null) && (StringWord(EventChatMessage(false), 3) == null)))))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_field = StringWord(EventChatMessage(false), 2);
+    lv_value = StringToInt(StringWord(EventChatMessage(false), 3));
+    if ((StringWord(EventChatMessage(false), 4) == null)) {
+        lv_player = EventPlayer();
+    }
+    else {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Tried to modify Player " + (IntToString(lv_player) + "'s ")) + (lv_field + (" to " + IntToString(lv_value))))));
+    PlayerScoreValueSetFromInt(lv_player, (lv_field), lv_value);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_OverrideScoreBoard_Init () {
+    libPLYR_gt_OverrideScoreBoard = TriggerCreate("libPLYR_gt_OverrideScoreBoard_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideScoreBoard, c_playerAny, "setscore", false);
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideScoreBoard, c_playerAny, "score", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Player Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_MapInit_Init () {
+    libPLYR_gt_MapInit = TriggerCreate("libPLYR_gt_MapInit_Func");
+    TriggerAddEventMapInit(libPLYR_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Override Respawn Time
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_OverrideRespawnTime_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_respawntime;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "respawntime") || (StringWord(EventChatMessage(false), 1) == "rst")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_respawntime = StringToFixed(StringWord(EventChatMessage(false), 2));
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid Respawn Time"));
+        return false;
+    }
+
+    if ((lv_respawntime < 0.0625)) {
+        lv_respawntime = 0.0625;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Warning: Respawn time cannot be set lower than 0.0625."));
+    }
+
+    libCore_gv_bALDeathTimeOverride = lv_respawntime;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Override Respawn Timer to " + FixedToString(lv_respawntime, c_fixedPrecisionAny))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_OverrideRespawnTime_Init () {
+    libPLYR_gt_OverrideRespawnTime = TriggerCreate("libPLYR_gt_OverrideRespawnTime_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideRespawnTime, c_playerAny, "respawntime", false);
+    TriggerAddEventChatMessage(libPLYR_gt_OverrideRespawnTime, c_playerAny, "rst", false);
+}
+
+void libPLYR_InitTriggers () {
+    libPLYR_gt_OverrideRespawnPoint_Init();
+    libPLYR_gt_OverrideScoreBoard_Init();
+    libPLYR_gt_MapInit_Init();
+    libPLYR_gt_OverrideRespawnTime_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_InitLib_completed = false;
+
+void libPLYR_InitLib () {
+    if (libPLYR_InitLib_completed) {
+        return;
+    }
+
+    libPLYR_InitLib_completed = true;
+
+    libPLYR_InitLibraries();
+    libPLYR_InitTriggers();
+}
+

@@ -14,7 +14,7 @@ include "ModuleMimicLibs/MimicUILib"
 // Validating: templates
 
 // External Library Initialization
-void libMIMC_InitLibraries() {
+void libMICL_InitLibraries() {
     libMTDO_InitLib();
     MimicGameDataHelperLib_InitLib();
     MimicGameLib_InitLib();
@@ -29,15 +29,19 @@ void libMIMC_InitLibraries() {
 //--------------------------------------------------------------------------------------------------
 // Library Initialization
 //--------------------------------------------------------------------------------------------------
-bool libMIMC_InitLib_completed = false;
+bool libMICL_InitLib_completed = false;
 
-void libMIMC_InitLib () {
-    if (libMIMC_InitLib_completed) {
+void libMICL_InitLib () {
+    if (libMICL_InitLib_completed) {
         return;
     }
 
-    libMIMC_InitLib_completed = true;
+    libMICL_InitLib_completed = true;
 
-    libMIMC_InitLibraries();
+    libMICL_InitLibraries();
+
+    // Need to change to debug mode before MapInit Event is called
+    libCore_gv_dEBUGDebuggingEnabled = true;
+    
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mimic Lib Loader Initialized"));
 }

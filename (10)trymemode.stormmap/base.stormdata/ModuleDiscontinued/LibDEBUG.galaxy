@@ -1,0 +1,128 @@
+include "TriggerLibs/NativeLib"
+include "TriggerLibs/HeroesLib_h"
+include "TriggerLibs/GameLib_h"
+include "TriggerLibs/MapMechanicsLib_h"
+include "TriggerLibs/AILib_h"
+include "TriggerLibs/UILib_h"
+include "TriggerLibs/StartingExperienceLib_h"
+include "TriggerLibs/SoundLib_h"
+include "TriggerLibs/GameDataHelperLib_h"
+include "TriggerLibs/SupportLib_h"
+
+include "libDEBUG_h"
+
+include "ModuleMimicLibs/MimicLibsLoader"
+include "Modules/LibModuleLoader"
+
+//--------------------------------------------------------------------------------------------------
+// Library: DEBUG
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libDEBUG_InitLibraries() {
+    libNtve_InitVariables();
+    libCore_InitVariables();
+    libGame_InitVariables();
+    libMapM_InitVariables();
+    libAIAI_InitVariables();
+    libUIUI_InitVariables();
+    libStEx_InitVariables();
+    libSond_InitVariables();
+    libGDHL_InitVariables();
+    // libMICL_InitLib();
+    libMODL_InitLib();
+}
+
+// Variable Initialization
+bool libDEBUG_InitVariables_completed = false;
+
+void libDEBUG_InitVariables() {
+}
+
+void libDEBUG_gf_OutputTextMessage(string lp_string){
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(lp_string));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Greeting Command
+//--------------------------------------------------------------------------------------------------
+bool libDEBUG_gt_greetingCommand_Func(bool testConds, bool runActions) {
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringToText("Greetings, ") + PlayerName(EventPlayer()) + StringToText(". Welcome to Try Mode 2.0!")));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Your Player ID is " + IntToString(EventPlayer())));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDEBUG_gt_greetingCommand_Init() {
+    libDEBUG_gt_greetingCommand = TriggerCreate("libDEBUG_gt_greetingCommand_Func");
+    TriggerEnable(libDEBUG_gt_greetingCommand, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, libDEBUG_gv_CommandGreetings, true);
+    TriggerAddEventChatMessage(libDEBUG_gt_greetingCommand, c_playerAny, libDEBUG_gv_CommandGreetingsAlt, true);
+
+}
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force using backslash key (same with debug key) to force open the QA cheat menu without using chat command -devcheats
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Func(bool testConds, bool runActions) {
+    if (!runActions) {
+        return true;
+    }
+
+    if ((DialogControlIsVisible(libUIUI_gv_uIDebugPanel.lv_mainDialog, EventPlayer()) == true)) {
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), true);
+    } else {
+        DialogSetVisible(libSprt_gv_qACheatsControlsPanel.lv_mainDialog, PlayerGroupAll(), false);
+    }
+
+    return true;
+}
+void libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init() {
+    libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand = TriggerCreate("libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Func");
+    TriggerEnable(libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand, true);
+    TriggerAddEventKeyPressed(libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand, c_playerAny, c_keyBackSlash, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Map Loaded Run Command
+//--------------------------------------------------------------------------------------------------
+
+bool libDEBUG_gt_MapLoaded_Func(bool testConds, bool runActions) {
+    // Stuff to run when map loaded
+     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Lib Initialized"));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Lets start by saying 'hi', shall we?"));
+    return true;
+}
+
+void libDEBUG_gt_MapLoaded_Init() {
+    libDEBUG_gt_MapLoaded = TriggerCreate("libDEBUG_gt_MapLoaded_Func");
+    TriggerAddEventMapInit(libDEBUG_gt_MapLoaded);
+}
+
+
+// Init triggers
+
+void libDEBUG_InitTriggers() {
+    libDEBUG_gt_greetingCommand_Init();
+    libDEBUG_gt_ForceBackSlashKeyOpenQACheatCommand_Init();
+    libDEBUG_gt_MapLoaded_Init();
+
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libDEBUG_InitLib_completed = false;
+
+void libDEBUG_InitLib() {
+    if (libDEBUG_InitLib_completed) {
+        return;
+    }
+    libDEBUG_InitLib_completed = true;
+    libDEBUG_InitLibraries();
+    libDEBUG_InitVariables();
+    libDEBUG_InitTriggers();
+    
+    // Need to change to debug mode before MapInit Event called.
+    libCore_gv_dEBUGDebuggingEnabled = true;
+}

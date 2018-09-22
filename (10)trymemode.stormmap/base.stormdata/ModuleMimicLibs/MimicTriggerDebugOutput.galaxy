@@ -27,9 +27,6 @@ void libMTDO_InitVariables() {
     }
 
     libMTDO_InitVariables_completed = true;
-
-    //Force Enable Debug mode
-    libCore_gv_dEBUGDebuggingEnabled = true;
 }
 
 
