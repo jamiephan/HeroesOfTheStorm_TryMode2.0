@@ -4,6 +4,28 @@ A modified Try Mode Map to create a better experience for **Heroes of the Storm 
 
 ![I believe, I can fly. I believe, I can touch the sky.](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
+# Important Notice for v2.38.0 (Kerrigan/BW Rework Patch)
+
+![heckin bamboozled](https://i.redd.it/9d2dk4yrrjaz.png)
+
+**Heckin bamboozled by Blizzard**
+
+The whole inventory class was removed base on PTR experience. This includes functions such as:
+
+ - `UnitInventoryCount()`
+ - `UnitInventoryItem()`
+ - `UnitInventoryRemove()`
+ - `UnitInventoryCreate()`
+
+And was replaced with UnitBehaviorAdd().
+
+The replacement for `UnitInventoryCreate()` is now:
+
+    unit unit;
+    string item;
+    integer amount;
+    UnitBehaviorAdd(unit, item, unit, amount);
+
 # In-game chat commands
 
 ## How to use:
