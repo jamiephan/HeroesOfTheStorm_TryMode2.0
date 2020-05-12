@@ -9,7 +9,6 @@ include "TriggerLibs/NativeLib"
 bool libFUNY_gv_isGreetingModeEnabled;
 
 // Trigger Declarations
-trigger libFUNY_gt_testbehavior;
 trigger libFUNY_gt_MapInit;
 trigger libFUNY_gt_GreetingModeOutput;
 trigger libFUNY_gt_ToggleGreetingMode;
@@ -41,26 +40,6 @@ void libFUNY_InitVariables () {
 }
 
 // Triggers
-//--------------------------------------------------------------------------------------------------
-// Trigger: testbehavior
-//--------------------------------------------------------------------------------------------------
-bool libFUNY_gt_testbehavior_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText("YEET"));
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libFUNY_gt_testbehavior_Init () {
-    libFUNY_gt_testbehavior = TriggerCreate("libFUNY_gt_testbehavior_Func");
-    TriggerAddEventUnitBehaviorChange(libFUNY_gt_testbehavior, null, ("testbehavior"), c_unitBehaviorChangeCreate);
-}
-
 //--------------------------------------------------------------------------------------------------
 // Trigger: MapInit
 //--------------------------------------------------------------------------------------------------
@@ -201,7 +180,6 @@ void libFUNY_gt_DoABarrelRoll_Init () {
 }
 
 void libFUNY_InitTriggers () {
-    libFUNY_gt_testbehavior_Init();
     libFUNY_gt_MapInit_Init();
     libFUNY_gt_GreetingModeOutput_Init();
     libFUNY_gt_ToggleGreetingMode_Init();

@@ -258,7 +258,7 @@ bool libUTIL_gt_WinGame_Func (bool testConds, bool runActions) {
     }
 
     if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <wg|wingame> <Team:Int>"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <wg|wingame> <TeamID>"));
     }
     else {
         lv_team = StringToInt(StringWord(EventChatMessage(false), 2));
@@ -293,7 +293,7 @@ bool libUTIL_gt_StartGame_Func (bool testConds, bool runActions) {
 void libUTIL_gt_StartGame_Init () {
     libUTIL_gt_StartGame = TriggerCreate("libUTIL_gt_StartGame_Func");
     TriggerAddEventChatMessage(libUTIL_gt_StartGame, c_playerAny, "sg", true);
-    TriggerAddEventChatMessage(libUTIL_gt_StartGame, c_playerAny, "start", true);
+    TriggerAddEventChatMessage(libUTIL_gt_StartGame, c_playerAny, "startgame", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -315,7 +315,7 @@ bool libUTIL_gt_EndGame_Func (bool testConds, bool runActions) {
 void libUTIL_gt_EndGame_Init () {
     libUTIL_gt_EndGame = TriggerCreate("libUTIL_gt_EndGame_Func");
     TriggerAddEventChatMessage(libUTIL_gt_EndGame, c_playerAny, "eg", true);
-    TriggerAddEventChatMessage(libUTIL_gt_EndGame, c_playerAny, "end", true);
+    TriggerAddEventChatMessage(libUTIL_gt_EndGame, c_playerAny, "endgame", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ bool libUTIL_gt_RestartGame_Func (bool testConds, bool runActions) {
 void libUTIL_gt_RestartGame_Init () {
     libUTIL_gt_RestartGame = TriggerCreate("libUTIL_gt_RestartGame_Func");
     TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "re", true);
-    TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "restart", true);
+    TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "restartgame", true);
 }
 
 void libUTIL_InitTriggers () {

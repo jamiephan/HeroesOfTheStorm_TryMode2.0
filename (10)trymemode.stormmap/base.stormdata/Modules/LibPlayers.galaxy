@@ -164,11 +164,11 @@ bool libPLYR_gt_TogglePause2_Func (bool testConds, bool runActions) {
     libPLYR_gv_isEnableTalentTree = !(libPLYR_gv_isEnableTalentTree);
     if ((libPLYR_gv_isEnableTalentTree == true)) {
         SetTalentsEnabled(true);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled pause game when showing talent panel."));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Talent Tree"));
     }
     else {
         SetTalentsEnabled(false);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled pause game when showing talent panel."));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Talent Tree"));
     }
     return true;
 }
@@ -204,7 +204,7 @@ bool libPLYR_gt_AddTalent_Func (bool testConds, bool runActions) {
     }
 
     if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adt|addtalent> <BehaviorName> [Player=EventPlayer]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adt|addtalent> <TalentName> [Player=EventPlayer]"));
     }
     else {
         if ((StringWord(EventChatMessage(false), 3) != null)) {
@@ -248,7 +248,7 @@ bool libPLYR_gt_RemoveTalent_Func (bool testConds, bool runActions) {
     }
 
     if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmt|removetalent> <BehaviorName> [Player=EventPlayer]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmt|removetalent> <TalentName> [Player=EventPlayer]"));
     }
     else {
         if ((StringWord(EventChatMessage(false), 3) != null)) {
@@ -306,11 +306,12 @@ bool libPLYR_gt_EnableOrDisableTalent_Func (bool testConds, bool runActions) {
         }
 
         if ((lv_isEnable == 1)) {
-            //SetTalentEnabled((lv_talentName), true);
+            SetTalentEnabled((lv_talentName), true);
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
         }
         else {
-            //SetTalentEnabled((lv_talentName), false);
+            SetTalentsEnabled(true);
+            SetTalentEnabled((lv_talentName), false);
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
         }
     }
@@ -519,7 +520,7 @@ bool libPLYR_gt_SetMasteryRing_Func (bool testConds, bool runActions) {
         }
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set Hero Mastery Ring to Level " + IntToString(lv_level))));
         if ((libPLYR_gv_haveUsedSetMasteryRingTrigger == true)) {
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Notice: Reapply Mastery Ring modification requires unit to respawn for UI to take effect."));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Notice: Reapply Mastery Ring modification may requires unit to respawn for UI to take effect."));
         }
         else {
             libPLYR_gv_haveUsedSetMasteryRingTrigger = true;

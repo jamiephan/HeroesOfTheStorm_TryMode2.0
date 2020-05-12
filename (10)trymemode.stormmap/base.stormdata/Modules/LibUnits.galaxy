@@ -16,8 +16,8 @@ trigger libUNIT_gt_GetUnitOwnership;
 trigger libUNIT_gt_SendActorMessage;
 trigger libUNIT_gt_PlayAnimation;
 trigger libUNIT_gt_RemoveAnimation;
-trigger libUNIT_gt_AddEffectsOnCamera;
-trigger libUNIT_gt_RemovedEffectsFromCamera;
+trigger libUNIT_gt_AddEffectstoCamera;
+trigger libUNIT_gt_RemoveEffectsfromCamera;
 trigger libUNIT_gt_AddEffects;
 trigger libUNIT_gt_RemoveEffect;
 trigger libUNIT_gt_AddBehavior;
@@ -332,43 +332,9 @@ void libUNIT_gt_RemoveAnimation_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Add Effects On Camera
+// Trigger: Add Effects to Camera
 //--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_AddEffectsOnCamera_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "rmec") || (StringWord(EventChatMessage(false), 1) == "removeeffectcamera")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
-    }
-    else {
-        GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_AddEffectsOnCamera_Init () {
-    libUNIT_gt_AddEffectsOnCamera = TriggerCreate("libUNIT_gt_AddEffectsOnCamera_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffectsOnCamera, c_playerAny, "rmec", false);
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffectsOnCamera, c_playerAny, "removeeffectcamera", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Removed Effects From Camera
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_RemovedEffectsFromCamera_Func (bool testConds, bool runActions) {
+bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
@@ -393,10 +359,44 @@ bool libUNIT_gt_RemovedEffectsFromCamera_Func (bool testConds, bool runActions) 
 }
 
 //--------------------------------------------------------------------------------------------------
-void libUNIT_gt_RemovedEffectsFromCamera_Init () {
-    libUNIT_gt_RemovedEffectsFromCamera = TriggerCreate("libUNIT_gt_RemovedEffectsFromCamera_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_RemovedEffectsFromCamera, c_playerAny, "adec", false);
-    TriggerAddEventChatMessage(libUNIT_gt_RemovedEffectsFromCamera, c_playerAny, "addeffectcamera", false);
+void libUNIT_gt_AddEffectstoCamera_Init () {
+    libUNIT_gt_AddEffectstoCamera = TriggerCreate("libUNIT_gt_AddEffectstoCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "adec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "addeffectcamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Effects from Camera
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveEffectsfromCamera_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmec") || (StringWord(EventChatMessage(false), 1) == "removeeffectcamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
+    }
+    else {
+        GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveEffectsfromCamera_Init () {
+    libUNIT_gt_RemoveEffectsfromCamera = TriggerCreate("libUNIT_gt_RemoveEffectsfromCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "rmec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "removeeffectcamera", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -956,8 +956,8 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_SendActorMessage_Init();
     libUNIT_gt_PlayAnimation_Init();
     libUNIT_gt_RemoveAnimation_Init();
-    libUNIT_gt_AddEffectsOnCamera_Init();
-    libUNIT_gt_RemovedEffectsFromCamera_Init();
+    libUNIT_gt_AddEffectstoCamera_Init();
+    libUNIT_gt_RemoveEffectsfromCamera_Init();
     libUNIT_gt_AddEffects_Init();
     libUNIT_gt_RemoveEffect_Init();
     libUNIT_gt_AddBehavior_Init();
