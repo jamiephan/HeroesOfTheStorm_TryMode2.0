@@ -207,7 +207,7 @@ void gf_TemporarilyDisableButtonPressedTriggers (bool lp_enableShortly);
 void gf_TurnMinionsOnOff (bool lp_onOff, bool lp_message);
 void gf_DisplaySetHeroLevelUI ();
 void gf_CloseSetHeroLevelUI ();
-void gf_SetHeroLevel (int lp_level);
+void gf_SetHeroLevel (int lp_level, bool lp_isRespec);
 void gf_UpdateScaling (int lp_level);
 void gf_UIDebugPanelPopulateHeroDropdownForPlayer2 ();
 void gf_UIDebugPanelPopulateHeroDropdownForPlayer ();
@@ -658,10 +658,10 @@ void gf_CloseSetHeroLevelUI () {
     DialogControlSetVisible(gv_tryMeModePanel.lv_levelFrame, PlayerGroupAll(), false);
     gv_setHeroLevelUIOn = false;
     gv_heroCurrentLevel = FixedToInt(libNtve_gf_DialogItemValue(gv_tryMeModePanel.lv_levelSlider, gv_pLAYER_TryMe_C));
-    gf_SetHeroLevel(gv_heroCurrentLevel);
+    gf_SetHeroLevel(gv_heroCurrentLevel, false);
 }
 
-void gf_SetHeroLevel (int lp_level) {
+void gf_SetHeroLevel (int lp_level, bool lp_isRespec) {
     // Variable Declarations
     int lv_currentLevel;
     int lv_realLevel;
@@ -676,35 +676,39 @@ void gf_SetHeroLevel (int lp_level) {
     lv_defaultIndex = 1;
 
     // Implementation
-    if ((lv_realLevel == lv_currentLevel)) {
-        return ;
-    }
-
     lv_xP = libCore_gf_GetTotalXPForLevel(lv_realLevel);
     Wait(0.0625, c_timeGame);
     if (((PlayerHero(gv_pLAYER_TryMe_C) == "Cho") || (PlayerHero(gv_pLAYER_TryMe_C) == "Gall"))) {
         libGame_gf_SendEventCustomTryMeModeSetLevel(gv_pLAYER_TryMe_C, lv_xP);
     }
     else {
-        libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_TryMe_C)), libCore_gf_DataSkinsGetSkinIndexFromSkinLink(PlayerSkin(gv_pLAYER_TryMe_C)), libCore_gf_DataMountGetMountIndexFromMountLink(PlayerMount(gv_pLAYER_TryMe_C)), lv_xP, gv_pLAYER_TryMe_C, gv_pLAYER_TryMe_C);
-    }
-    if ((gv_pLAYER_AI_AllyHero != null)) {
-        libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_defaultIndex, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_xP, gv_pLAYER_AI_Ally_C, gv_pLAYER_AI_Ally_C);
-    }
+        if ((lp_isRespec == true)) {
+            libUIUI_gv_uIDebugPanelSpawnAtCamera = true;
+        }
 
-    if ((gv_pLAYER_AI_EnemyHero != null)) {
-        libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Enemy_C)), 0, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Enemy_C)), lv_xP, gv_pLAYER_AI_Enemy_C, gv_pLAYER_TryMe_C);
+        libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_TryMe_C)), libCore_gf_DataSkinsGetSkinIndexFromSkinLink(PlayerSkin(gv_pLAYER_TryMe_C)), libCore_gf_DataMountGetMountIndexFromMountLink(PlayerMount(gv_pLAYER_TryMe_C)), lv_xP, gv_pLAYER_TryMe_C, gv_pLAYER_TryMe_C);
+        libUIUI_gv_uIDebugPanelSpawnAtCamera = false;
+    }
+    if ((lp_isRespec == false)) {
+        if ((gv_pLAYER_AI_AllyHero != null)) {
+            libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_defaultIndex, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Ally_C)), lv_xP, gv_pLAYER_AI_Ally_C, gv_pLAYER_AI_Ally_C);
+        }
+
+        if ((gv_pLAYER_AI_EnemyHero != null)) {
+            libUIUI_gf_UIDebugPanelSpawnOrSwapHeroForPlayer(libCore_gf_GetIndexFromHero(PlayerHero(gv_pLAYER_AI_Enemy_C)), 0, gf_HeroDefaultMountIndex(PlayerHero(gv_pLAYER_AI_Enemy_C)), lv_xP, gv_pLAYER_AI_Enemy_C, gv_pLAYER_TryMe_C);
+        }
+
+        Wait(0.0625, c_timeGame);
+        UnitIssueOrder(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+        UnitSetFacing(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_TryMe_C)), 0.0);
+        UnitIssueOrder(libGame_gv_players[gv_pLAYER_AI_Ally_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+        UnitSetFacing(libGame_gv_players[gv_pLAYER_AI_Ally_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_AI_Ally_C)), 0.0);
+        UnitIssueOrder(libGame_gv_players[gv_pLAYER_AI_Enemy_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+        UnitSetFacing(libGame_gv_players[gv_pLAYER_AI_Enemy_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_AI_Enemy_C)), 0.0);
+        libGame_gf_CameraPanCameraForPlayerAndUpdateMapBoundsIfNecessary(gv_pLAYER_TryMe_C, UnitGetPosition(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit), 0.0, -1, 0.0, false);
     }
 
     ShowTalentPanel(libCore_gv_playerGroupFromPlayer[gv_pLAYER_TryMe_C], true, 1);
-    Wait(0.0625, c_timeGame);
-    UnitIssueOrder(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-    UnitSetFacing(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_TryMe_C)), 0.0);
-    UnitIssueOrder(libGame_gv_players[gv_pLAYER_AI_Ally_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-    UnitSetFacing(libGame_gv_players[gv_pLAYER_AI_Ally_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_AI_Ally_C)), 0.0);
-    UnitIssueOrder(libGame_gv_players[gv_pLAYER_AI_Enemy_C].lv_heroUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-    UnitSetFacing(libGame_gv_players[gv_pLAYER_AI_Enemy_C].lv_heroUnit, PointGetFacing(PlayerStartLocation(gv_pLAYER_AI_Enemy_C)), 0.0);
-    libGame_gf_CameraPanCameraForPlayerAndUpdateMapBoundsIfNecessary(gv_pLAYER_TryMe_C, UnitGetPosition(libGame_gv_players[gv_pLAYER_TryMe_C].lv_heroUnit), 0.0, -1, 0.0, false);
     gf_UpdateScaling(lv_realLevel);
 }
 
@@ -1123,6 +1127,11 @@ void gf_Createalltownstructures () {
         if (lv_itBuilding == null) { break; }
         gv_buildingScopesCount += 1;
         gv_buildingScopes[gv_buildingScopesCount] = ActorScopeFromUnit(lv_itBuilding);
+        if (((UnitGetType(lv_itBuilding) == "TownCannonTowerL2") || (UnitGetType(lv_itBuilding) == "TownTownHallL2") || (UnitGetType(lv_itBuilding) == "TownTownHallL3"))) {
+            UnitBehaviorAdd(lv_itBuilding, "TowerCFHUpdateNearbyHeroes", lv_itBuilding, 1);
+            UnitBehaviorAdd(lv_itBuilding, "TowerCFHFocusedTargetTracker", lv_itBuilding, 1);
+        }
+
     }
     TriggerExecute(libGame_gt_InitializeTownSystem, true, true);
     Wait(0.0625, c_timeGame);
@@ -2281,8 +2290,8 @@ bool gt_RespecButtonPressed_Func (bool testConds, bool runActions) {
     }
 
     gf_TemporarilyDisableButtonPressedTriggers(true);
-    libGame_gf_TalentsRespecHeroForPlayer(gv_pLAYER_TryMe_C);
-    ShowTalentPanel(libCore_gv_playerGroupFromPlayer[gv_pLAYER_TryMe_C], true, 1);
+    gv_heroCurrentLevel = FixedToInt(libNtve_gf_DialogItemValue(gv_tryMeModePanel.lv_levelSlider, gv_pLAYER_TryMe_C));
+    gf_SetHeroLevel(gv_heroCurrentLevel, true);
     Wait(0.0625, c_timeGame);
     SoundPlayForPlayer(SoundLink("UI_Game_Flyin_TalentsReset", -1), c_maxPlayers, libCore_gv_playerGroupFromPlayer[gv_pLAYER_TryMe_C], 100.0, 0.0);
     UIDisplayMessage(PlayerGroupSingle(gv_pLAYER_TryMe_C), c_messageAreaChat, StringExternal("Param/Value/B40E70D4"));

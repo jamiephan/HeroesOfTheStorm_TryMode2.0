@@ -14,6 +14,8 @@
 <Actor id="Storm_Doodad_KingsCrest_MayPole"/>
 <Actor id="Storm_Doodad_KingsCrest_StreetLamp"/>
 <AnnouncerPack id="LadyofThorns"/>
+<Behavior id="TowerCFHFocusedTargetTracker"/>
+<Behavior id="TowerCFHUpdateNearbyHeroes"/>
 <Goal id="MidLaneBeacon"/>
 <Hero id="Arthas"/>
 <Mount id="HorseBlack"/>
@@ -34,7 +36,7 @@
 <Unit id="TownTownHallL3"/>
 <Unit id="MercDefenderSiegeGiant"/>
 <Unit id="TownTownHallL2"/>
-<Unit id="HealingPadSearchUnit"/>
+<Unit id="HallOfStormsLocationUnit"/>
 <Unit id="RangedMinion"/>
 <Unit id="KingsCore"/>
 <Unit id="JungleGraveGolemDefender"/>

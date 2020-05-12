@@ -10,15 +10,26 @@ bool libUNIT_gv_toggleOutputIDEnabled;
 fixed libUNIT_gv_unitScale;
 
 // Trigger Declarations
+trigger libUNIT_gt_MapInit;
+trigger libUNIT_gt_ChangeUnitOwnership;
+trigger libUNIT_gt_GetUnitOwnership;
+trigger libUNIT_gt_SendActorMessage;
+trigger libUNIT_gt_PlayAnimation;
+trigger libUNIT_gt_RemoveAnimation;
+trigger libUNIT_gt_AddEffectsOnCamera;
+trigger libUNIT_gt_RemovedEffectsFromCamera;
+trigger libUNIT_gt_AddEffects;
+trigger libUNIT_gt_RemoveEffect;
+trigger libUNIT_gt_AddBehavior;
+trigger libUNIT_gt_RemoveBehavior;
+trigger libUNIT_gt_CountBehavior;
+trigger libUNIT_gt_GetBehaviors;
 trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
-trigger libUNIT_gt_Removeallitemsfromunits;
-trigger libUNIT_gt_SpawnItemtounit;
 trigger libUNIT_gt_KillUnits;
 trigger libUNIT_gt_SetUnitScale;
 trigger libUNIT_gt_SummonUnit;
-trigger libUNIT_gt_MapInit;
 
 // Library Initialization
 void libUNIT_InitVariables ();
@@ -47,6 +58,656 @@ void libUNIT_InitVariables () {
 }
 
 // Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Unit Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_MapInit_Init () {
+    libUNIT_gt_MapInit = TriggerCreate("libUNIT_gt_MapInit_Func");
+    TriggerAddEventMapInit(libUNIT_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Change Unit Ownership
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ChangeUnitOwnership_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoCA7C7E78_g;
+    int autoCA7C7E78_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "cuo") || (StringWord(EventChatMessage(false), 1) == "changeunitownership")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <cuo|changeunitownership> <Player>"));
+    }
+    else {
+        autoCA7C7E78_g = UnitGroupSelected(EventPlayer());
+        autoCA7C7E78_u = UnitGroupCount(autoCA7C7E78_g, c_unitCountAll);
+        for (;; autoCA7C7E78_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(autoCA7C7E78_g, autoCA7C7E78_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UnitSetOwner(lv_currentUnit, StringToInt(StringWord(EventChatMessage(false), 2)), true);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Converted Unit " + (lv_unittype)) + ("'s Ownership to Player " + StringWord(EventChatMessage(false), 2)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ChangeUnitOwnership_Init () {
+    libUNIT_gt_ChangeUnitOwnership = TriggerCreate("libUNIT_gt_ChangeUnitOwnership_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ChangeUnitOwnership, c_playerAny, "cuo", false);
+    TriggerAddEventChatMessage(libUNIT_gt_ChangeUnitOwnership, c_playerAny, "changeunitownership", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Unit Ownership
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_GetUnitOwnership_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoAB218B34_g;
+    int autoAB218B34_u;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoAB218B34_g = UnitGroupSelected(EventPlayer());
+    autoAB218B34_u = UnitGroupCount(autoAB218B34_g, c_unitCountAll);
+    for (;; autoAB218B34_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoAB218B34_g, autoAB218B34_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((lv_unittype) + ("'s owner is Player " + IntToString(UnitGetOwner(lv_currentUnit))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_GetUnitOwnership_Init () {
+    libUNIT_gt_GetUnitOwnership = TriggerCreate("libUNIT_gt_GetUnitOwnership_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_GetUnitOwnership, c_playerAny, "guo", true);
+    TriggerAddEventChatMessage(libUNIT_gt_GetUnitOwnership, c_playerAny, "getunitownership", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Send Actor Message
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SendActorMessage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    string lv_actorMessage;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    const int auto5C487D67_ae = 20;
+    const int auto5C487D67_ai = 1;
+    unitgroup auto7137D06A_g;
+    int auto7137D06A_u;
+
+    // Variable Initialization
+    lv_actorMessage = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "sam") || (StringWord(EventChatMessage(false), 1) == "sendactormessage")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <sam|sendactormessage> <ActorMessage (include space)>"));
+    }
+    else {
+        lv_actorMessage = StringWord(EventChatMessage(false), 2);
+        lv_i = 3;
+        for ( ; ( (auto5C487D67_ai >= 0 && lv_i <= auto5C487D67_ae) || (auto5C487D67_ai < 0 && lv_i >= auto5C487D67_ae) ) ; lv_i += auto5C487D67_ai ) {
+            if ((StringWord(EventChatMessage(false), lv_i) != null)) {
+                lv_actorMessage = ((lv_actorMessage + " ") + StringWord(EventChatMessage(false), lv_i));
+            }
+
+        }
+        auto7137D06A_g = UnitGroupSelected(EventPlayer());
+        auto7137D06A_u = UnitGroupCount(auto7137D06A_g, c_unitCountAll);
+        for (;; auto7137D06A_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto7137D06A_g, auto7137D06A_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            libNtve_gf_SendActorMessageToUnit(lv_currentUnit, (lv_actorMessage));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Sent Actor Message \"" + (lv_actorMessage + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SendActorMessage_Init () {
+    libUNIT_gt_SendActorMessage = TriggerCreate("libUNIT_gt_SendActorMessage_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_SendActorMessage, c_playerAny, "sam", false);
+    TriggerAddEventChatMessage(libUNIT_gt_SendActorMessage, c_playerAny, "sendactormessage", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Play Animation
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_PlayAnimation_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_animation;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto29C02920_g;
+    int auto29C02920_u;
+
+    // Variable Initialization
+    lv_animation = "Stand";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "pa") || (StringWord(EventChatMessage(false), 1) == "playanimation")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <pa|playanimation> <AnimationName>"));
+    }
+    else {
+        lv_animation = StringWord(EventChatMessage(false), 2);
+        auto29C02920_g = UnitGroupSelected(EventPlayer());
+        auto29C02920_u = UnitGroupCount(auto29C02920_g, c_unitCountAll);
+        for (;; auto29C02920_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto29C02920_g, auto29C02920_u);
+            if (lv_currentUnit == null) { break; }
+            libNtve_gf_PlayAnimation(libNtve_gf_MainActorofUnit(lv_currentUnit), c_animNameDefault, lv_animation, 0, c_animTimeDefault);
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Played Animation \"" + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_PlayAnimation_Init () {
+    libUNIT_gt_PlayAnimation = TriggerCreate("libUNIT_gt_PlayAnimation_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_PlayAnimation, c_playerAny, "pa", false);
+    TriggerAddEventChatMessage(libUNIT_gt_PlayAnimation, c_playerAny, "playanimation", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Animation
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveAnimation_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto77E10E7C_g;
+    int auto77E10E7C_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rma") || (StringWord(EventChatMessage(false), 1) == "removeanimation")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rma|removeanimation> <AnimationName>"));
+    }
+    else {
+        auto77E10E7C_g = UnitGroupSelected(EventPlayer());
+        auto77E10E7C_u = UnitGroupCount(auto77E10E7C_g, c_unitCountAll);
+        for (;; auto77E10E7C_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto77E10E7C_g, auto77E10E7C_u);
+            if (lv_currentUnit == null) { break; }
+            libNtve_gf_ClearAnimation(libNtve_gf_MainActorofUnit(lv_currentUnit), StringWord(EventChatMessage(false), 2));
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Animation \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveAnimation_Init () {
+    libUNIT_gt_RemoveAnimation = TriggerCreate("libUNIT_gt_RemoveAnimation_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "rma", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "removeanimation", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Effects On Camera
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddEffectsOnCamera_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmec") || (StringWord(EventChatMessage(false), 1) == "removeeffectcamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
+    }
+    else {
+        GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddEffectsOnCamera_Init () {
+    libUNIT_gt_AddEffectsOnCamera = TriggerCreate("libUNIT_gt_AddEffectsOnCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectsOnCamera, c_playerAny, "rmec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectsOnCamera, c_playerAny, "removeeffectcamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Removed Effects From Camera
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemovedEffectsFromCamera_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adec") || (StringWord(EventChatMessage(false), 1) == "addeffectcamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName>"));
+    }
+    else {
+        PlayerCreateEffectPoint(EventPlayer(), (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" on camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemovedEffectsFromCamera_Init () {
+    libUNIT_gt_RemovedEffectsFromCamera = TriggerCreate("libUNIT_gt_RemovedEffectsFromCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemovedEffectsFromCamera, c_playerAny, "adec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemovedEffectsFromCamera, c_playerAny, "addeffectcamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Effects
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_count;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto25375630_g;
+    int auto25375630_u;
+    int auto82B5A334_ae;
+    const int auto82B5A334_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "ade") || (StringWord(EventChatMessage(false), 1) == "addeffect")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ade|addeffect> <EffectName> [amount]"));
+    }
+    else {
+        lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
+        if ((lv_count == 0)) {
+            lv_count = 1;
+        }
+
+        auto25375630_g = UnitGroupSelected(EventPlayer());
+        auto25375630_u = UnitGroupCount(auto25375630_g, c_unitCountAll);
+        for (;; auto25375630_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto25375630_g, auto25375630_u);
+            if (lv_currentUnit == null) { break; }
+            auto82B5A334_ae = lv_count;
+            lv_i = 0;
+            for ( ; ( (auto82B5A334_ai >= 0 && lv_i <= auto82B5A334_ae) || (auto82B5A334_ai < 0 && lv_i >= auto82B5A334_ae) ) ; lv_i += auto82B5A334_ai ) {
+                lv_unittype = UnitGetType(lv_currentUnit);
+                UnitCreateEffectUnit(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), lv_currentUnit);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added " + (IntToString(lv_count) + " Effects \"")) + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddEffects_Init () {
+    libUNIT_gt_AddEffects = TriggerCreate("libUNIT_gt_AddEffects_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "ade", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "addeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Effect
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveEffect_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoCC1E0A15_g;
+    int autoCC1E0A15_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rme") || (StringWord(EventChatMessage(false), 1) == "removeeffect")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rme|removeeffect> <EffectName>"));
+    }
+    else {
+        autoCC1E0A15_g = UnitGroupSelected(EventPlayer());
+        autoCC1E0A15_u = UnitGroupCount(autoCC1E0A15_g, c_unitCountAll);
+        for (;; autoCC1E0A15_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(autoCC1E0A15_g, autoCC1E0A15_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            GameDestroyEffects(UnitGetPosition(lv_currentUnit), 1.0, 0, (StringWord(EventChatMessage(false), 2)));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveEffect_Init () {
+    libUNIT_gt_RemoveEffect = TriggerCreate("libUNIT_gt_RemoveEffect_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "rme", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "removeeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Behavior
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehavior_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto8FFBEB1E_g;
+    int auto8FFBEB1E_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adb") || (StringWord(EventChatMessage(false), 1) == "addbehavior")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adb|addbehavior> <BehaviorName>"));
+    }
+    else {
+        auto8FFBEB1E_g = UnitGroupSelected(EventPlayer());
+        auto8FFBEB1E_u = UnitGroupCount(auto8FFBEB1E_g, c_unitCountAll);
+        for (;; auto8FFBEB1E_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto8FFBEB1E_g, auto8FFBEB1E_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UnitBehaviorAdd(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), lv_currentUnit, 1);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Behavior \"" + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehavior_Init () {
+    libUNIT_gt_AddBehavior = TriggerCreate("libUNIT_gt_AddBehavior_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddBehavior, c_playerAny, "adb", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddBehavior, c_playerAny, "addbehavior", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Behavior
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveBehavior_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoA22B81BF_g;
+    int autoA22B81BF_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmb") || (StringWord(EventChatMessage(false), 1) == "removebehavior")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmb|removebehavior> <BehaviorName>"));
+    }
+    else {
+        autoA22B81BF_g = UnitGroupSelected(EventPlayer());
+        autoA22B81BF_u = UnitGroupCount(autoA22B81BF_g, c_unitCountAll);
+        for (;; autoA22B81BF_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(autoA22B81BF_g, autoA22B81BF_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UnitBehaviorRemove(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), 1);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Behavior \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveBehavior_Init () {
+    libUNIT_gt_RemoveBehavior = TriggerCreate("libUNIT_gt_RemoveBehavior_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveBehavior, c_playerAny, "rmb", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveBehavior, c_playerAny, "removebehavior", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Count Behavior
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_CountBehavior_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_behaviorCounter;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto08F3678D_g;
+    int auto08F3678D_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "ctb") || (StringWord(EventChatMessage(false), 1) == "countbehavior")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ctb|countbehavior> <BehaviorName>"));
+    }
+    else {
+        auto08F3678D_g = UnitGroupSelected(EventPlayer());
+        auto08F3678D_u = UnitGroupCount(auto08F3678D_g, c_unitCountAll);
+        for (;; auto08F3678D_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto08F3678D_g, auto08F3678D_u);
+            if (lv_currentUnit == null) { break; }
+            lv_behaviorCounter = UnitBehaviorCount(lv_currentUnit, (StringWord(EventChatMessage(false), 2)));
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(((lv_unittype) + (": " + (StringWord(EventChatMessage(false), 2) + (" -> " + IntToString(lv_behaviorCounter)))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_CountBehavior_Init () {
+    libUNIT_gt_CountBehavior = TriggerCreate("libUNIT_gt_CountBehavior_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_CountBehavior, c_playerAny, "ctb", false);
+    TriggerAddEventChatMessage(libUNIT_gt_CountBehavior, c_playerAny, "countbehavior", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Behaviors
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_GetBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_currentUnitBehavior;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto91CCF080_g;
+    int auto91CCF080_u;
+    unit auto5EE0852D_u;
+    int auto5EE0852D_i;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto91CCF080_g = UnitGroupSelected(EventPlayer());
+    auto91CCF080_u = UnitGroupCount(auto91CCF080_g, c_unitCountAll);
+    for (;; auto91CCF080_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(auto91CCF080_g, auto91CCF080_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        auto5EE0852D_u = lv_currentUnit;
+        auto5EE0852D_i = 1;
+        for ( ; auto5EE0852D_i <= UnitBehaviorCountAll(auto5EE0852D_u) ; auto5EE0852D_i += BoolToInt(lv_currentUnitBehavior == UnitBehaviorGet(auto5EE0852D_u, auto5EE0852D_i)) ) {
+            lv_currentUnitBehavior = UnitBehaviorGet(auto5EE0852D_u, auto5EE0852D_i);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(((lv_unittype) + (": " + (lv_currentUnitBehavior)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_GetBehaviors_Init () {
+    libUNIT_gt_GetBehaviors = TriggerCreate("libUNIT_gt_GetBehaviors_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_GetBehaviors, c_playerAny, "getb", true);
+    TriggerAddEventChatMessage(libUNIT_gt_GetBehaviors, c_playerAny, "getbehavior", true);
+}
+
 //--------------------------------------------------------------------------------------------------
 // Trigger: Modify Unit Property
 //--------------------------------------------------------------------------------------------------
@@ -152,109 +813,6 @@ void libUNIT_gt_ToggleOutputID_Init () {
     libUNIT_gt_ToggleOutputID = TriggerCreate("libUNIT_gt_ToggleOutputID_Func");
     TriggerAddEventChatMessage(libUNIT_gt_ToggleOutputID, c_playerAny, "toi", true);
     TriggerAddEventChatMessage(libUNIT_gt_ToggleOutputID, c_playerAny, "toggleoutputid", true);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Remove all items from units
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_Removeallitemsfromunits_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_item;
-    string lv_itemtype;
-    string lv_unittype;
-    int lv_j;
-    int lv_i;
-
-    // Automatic Variable Declarations
-    int auto20BF2C35_ae;
-    const int auto20BF2C35_ai = 1;
-    int autoD728F771_ae;
-    const int autoD728F771_ai = 1;
-
-    // Variable Initialization
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    auto20BF2C35_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-    lv_i = 1;
-    for ( ; ( (auto20BF2C35_ai >= 0 && lv_i <= auto20BF2C35_ae) || (auto20BF2C35_ai < 0 && lv_i >= auto20BF2C35_ae) ) ; lv_i += auto20BF2C35_ai ) {
-        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
-        autoD728F771_ae = UnitInventoryCount(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), c_unitInventoryCountCarried);
-        lv_j = 1;
-        for ( ; ( (autoD728F771_ai >= 0 && lv_j <= autoD728F771_ae) || (autoD728F771_ai < 0 && lv_j >= autoD728F771_ae) ) ; lv_j += autoD728F771_ai ) {
-            lv_item = UnitInventoryItem(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_j);
-            lv_itemtype = UnitGetType(lv_item);
-            UnitInventoryRemove(UnitInventoryItem(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_j));
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed " + (lv_itemtype)) + (" From " + (lv_unittype)))));
-        }
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_Removeallitemsfromunits_Init () {
-    libUNIT_gt_Removeallitemsfromunits = TriggerCreate("libUNIT_gt_Removeallitemsfromunits_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_Removeallitemsfromunits, c_playerAny, "removeitems", true);
-    TriggerAddEventChatMessage(libUNIT_gt_Removeallitemsfromunits, c_playerAny, "rmi", true);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Spawn Item to unit
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_SpawnItemtounit_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    string lv_unittype;
-    string lv_item;
-    int lv_i;
-
-    // Automatic Variable Declarations
-    int autoC18BEB46_ae;
-    const int autoC18BEB46_ai = 1;
-
-    // Variable Initialization
-    lv_item = "";
-
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "adi") || (StringWord(EventChatMessage(false), 1) == "additem")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid item to spawn"));
-    }
-    else {
-        lv_item = StringWord(EventChatMessage(false), 2);
-        autoC18BEB46_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-        lv_i = 1;
-        for ( ; ( (autoC18BEB46_ai >= 0 && lv_i <= autoC18BEB46_ae) || (autoC18BEB46_ai < 0 && lv_i >= autoC18BEB46_ae) ) ; lv_i += autoC18BEB46_ai ) {
-            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
-            if ((UnitInventoryCount(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), c_unitInventoryCountEmpty) == 0)) {
-                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Unable to add " + lv_item) + (" to " + (lv_unittype)))));
-            }
-            else {
-                UnitInventoryCreate(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), (lv_item));
-                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Tried to add " + lv_item) + (" to " + (lv_unittype)))));
-            }
-        }
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_SpawnItemtounit_Init () {
-    libUNIT_gt_SpawnItemtounit = TriggerCreate("libUNIT_gt_SpawnItemtounit_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_SpawnItemtounit, c_playerAny, "adi", false);
-    TriggerAddEventChatMessage(libUNIT_gt_SpawnItemtounit, c_playerAny, "additem", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -391,36 +949,27 @@ void libUNIT_gt_SummonUnit_Init () {
     TriggerAddEventChatMessage(libUNIT_gt_SummonUnit, c_playerAny, "sum", false);
 }
 
-//--------------------------------------------------------------------------------------------------
-// Trigger: MapInit
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_MapInit_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Unit Lib Initialized"));
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_MapInit_Init () {
-    libUNIT_gt_MapInit = TriggerCreate("libUNIT_gt_MapInit_Func");
-    TriggerAddEventMapInit(libUNIT_gt_MapInit);
-}
-
 void libUNIT_InitTriggers () {
+    libUNIT_gt_MapInit_Init();
+    libUNIT_gt_ChangeUnitOwnership_Init();
+    libUNIT_gt_GetUnitOwnership_Init();
+    libUNIT_gt_SendActorMessage_Init();
+    libUNIT_gt_PlayAnimation_Init();
+    libUNIT_gt_RemoveAnimation_Init();
+    libUNIT_gt_AddEffectsOnCamera_Init();
+    libUNIT_gt_RemovedEffectsFromCamera_Init();
+    libUNIT_gt_AddEffects_Init();
+    libUNIT_gt_RemoveEffect_Init();
+    libUNIT_gt_AddBehavior_Init();
+    libUNIT_gt_RemoveBehavior_Init();
+    libUNIT_gt_CountBehavior_Init();
+    libUNIT_gt_GetBehaviors_Init();
     libUNIT_gt_ModifyUnitProperty_Init();
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();
-    libUNIT_gt_Removeallitemsfromunits_Init();
-    libUNIT_gt_SpawnItemtounit_Init();
     libUNIT_gt_KillUnits_Init();
     libUNIT_gt_SetUnitScale_Init();
     libUNIT_gt_SummonUnit_Init();
-    libUNIT_gt_MapInit_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

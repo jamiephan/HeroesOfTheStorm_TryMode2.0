@@ -14,10 +14,14 @@ int libUTIL_gv_massCDRPlayer;
 
 // Trigger Declarations
 trigger libUTIL_gt_MapInit;
+trigger libUTIL_gt_ClearTextMessage;
 trigger libUTIL_gt_ToggleUI;
 trigger libUTIL_gt_ToggleFOW;
 trigger libUTIL_gt_ToggleMassCDR;
 trigger libUTIL_gt_RunMassCDR;
+trigger libUTIL_gt_WinGame;
+trigger libUTIL_gt_StartGame;
+trigger libUTIL_gt_EndGame;
 trigger libUTIL_gt_RestartGame;
 
 // Library Initialization
@@ -66,6 +70,39 @@ bool libUTIL_gt_MapInit_Func (bool testConds, bool runActions) {
 void libUTIL_gt_MapInit_Init () {
     libUTIL_gt_MapInit = TriggerCreate("libUTIL_gt_MapInit_Func");
     TriggerAddEventMapInit(libUTIL_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: ClearTextMessage
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ClearTextMessage_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "cls") || (StringWord(EventChatMessage(false), 1) == "clear")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("All Messages will be cleared after " + (StringWord(EventChatMessage(false), 2) + " seconds."))));
+        Wait(StringToFixed(StringWord(EventChatMessage(false), 2)), c_timeGame);
+    }
+
+    UIClearMessages(PlayerGroupAll(), c_messageAreaAll);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ClearTextMessage_Init () {
+    libUTIL_gt_ClearTextMessage = TriggerCreate("libUTIL_gt_ClearTextMessage_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ClearTextMessage, c_playerAny, "cls", false);
+    TriggerAddEventChatMessage(libUTIL_gt_ClearTextMessage, c_playerAny, "clear", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -199,6 +236,89 @@ void libUTIL_gt_RunMassCDR_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: WinGame
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_WinGame_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_team;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "wg") || (StringWord(EventChatMessage(false), 1) == "wingame")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <wg|wingame> <Team:Int>"));
+    }
+    else {
+        lv_team = StringToInt(StringWord(EventChatMessage(false), 2));
+        libGame_gf_GameOver(lv_team);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_WinGame_Init () {
+    libUTIL_gt_WinGame = TriggerCreate("libUTIL_gt_WinGame_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_WinGame, c_playerAny, "wg", false);
+    TriggerAddEventChatMessage(libUTIL_gt_WinGame, c_playerAny, "wingame", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: StartGame
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_StartGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Starting Game ..."));
+    libSprt_gf_DEBUGStartGame();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_StartGame_Init () {
+    libUTIL_gt_StartGame = TriggerCreate("libUTIL_gt_StartGame_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_StartGame, c_playerAny, "sg", true);
+    TriggerAddEventChatMessage(libUTIL_gt_StartGame, c_playerAny, "start", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: EndGame
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_EndGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Kicking All Players ..."));
+    KickFromGame(PlayerGroupAll());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_EndGame_Init () {
+    libUTIL_gt_EndGame = TriggerCreate("libUTIL_gt_EndGame_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_EndGame, c_playerAny, "eg", true);
+    TriggerAddEventChatMessage(libUTIL_gt_EndGame, c_playerAny, "end", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: RestartGame
 //--------------------------------------------------------------------------------------------------
 bool libUTIL_gt_RestartGame_Func (bool testConds, bool runActions) {
@@ -222,10 +342,14 @@ void libUTIL_gt_RestartGame_Init () {
 
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
+    libUTIL_gt_ClearTextMessage_Init();
     libUTIL_gt_ToggleUI_Init();
     libUTIL_gt_ToggleFOW_Init();
     libUTIL_gt_ToggleMassCDR_Init();
     libUTIL_gt_RunMassCDR_Init();
+    libUTIL_gt_WinGame_Init();
+    libUTIL_gt_StartGame_Init();
+    libUTIL_gt_EndGame_Init();
     libUTIL_gt_RestartGame_Init();
 }
 

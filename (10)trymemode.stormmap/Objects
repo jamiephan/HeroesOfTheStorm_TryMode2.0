@@ -3,10 +3,10 @@
     <ObjectUnit Id="285302464" Position="72.3674,52.4406,0" Scale="1,1,1" UnitType="DeadUnitCameraTarget" Player="1"/>
     <ObjectUnit Id="1838286673" Position="71.6323,52.4406,0" Scale="1,1,1" UnitType="DeadUnitCameraTarget" Player="1"/>
     <ObjectUnit Id="230" Position="72,58,0" Scale="1,1,1" UnitType="HealingHeroDummy" Player="4"/>
-    <ObjectUnit Id="988" Position="29,53,0" Rotation="2.356" Scale="1,1,1" UnitType="HealingPadSearchUnit" Player="11">
+    <ObjectUnit Id="988" Position="29,53,0" Rotation="2.356" Scale="1,1,1" UnitType="HallOfStormsLocationUnit" Player="11">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
-    <ObjectUnit Id="989" Position="120,52,0" Rotation="3.9267" Scale="1,1,1" UnitType="HealingPadSearchUnit" Player="12">
+    <ObjectUnit Id="989" Position="120,52,0" Rotation="3.9267" Scale="1,1,1" UnitType="HallOfStormsLocationUnit" Player="12">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
     <ObjectUnit Id="210" Position="45,66,0" Rotation="2.356" Scale="1,1,1" UnitType="KingsCore" Player="11">

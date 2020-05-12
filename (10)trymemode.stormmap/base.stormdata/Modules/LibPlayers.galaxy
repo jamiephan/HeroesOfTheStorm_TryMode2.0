@@ -5,11 +5,28 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Variable Declarations
+bool libPLYR_gv_isRunningMassQuest;
+bool libPLYR_gv_isPauseGameWhenShowingTalentPanel;
+bool libPLYR_gv_isEnableTalentTree;
+bool libPLYR_gv_haveUsedSetMasteryRingTrigger;
+
 // Trigger Declarations
+trigger libPLYR_gt_MapInit;
+trigger libPLYR_gt_RunMassQuest;
+trigger libPLYR_gt_ToggleRunMassQuest;
+trigger libPLYR_gt_TogglePause;
+trigger libPLYR_gt_TogglePause2;
+trigger libPLYR_gt_AddTalent;
+trigger libPLYR_gt_RemoveTalent;
+trigger libPLYR_gt_EnableOrDisableTalent;
 trigger libPLYR_gt_OverrideRespawnPoint;
 trigger libPLYR_gt_OverrideScoreBoard;
-trigger libPLYR_gt_MapInit;
+trigger libPLYR_gt_SetMasteryRing;
 trigger libPLYR_gt_OverrideRespawnTime;
+
+// Library Initialization
+void libPLYR_InitVariables ();
 
 //--------------------------------------------------------------------------------------------------
 // Library: Players
@@ -21,7 +38,292 @@ void libPLYR_InitLibraries () {
     libNtve_InitVariables();
 }
 
+// Variable Initialization
+bool libPLYR_InitVariables_completed = false;
+
+void libPLYR_InitVariables () {
+    if (libPLYR_InitVariables_completed) {
+        return;
+    }
+
+    libPLYR_InitVariables_completed = true;
+
+    libPLYR_gv_isEnableTalentTree = true;
+}
+
 // Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: MapInit
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_MapInit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Player Lib Initialized"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_MapInit_Init () {
+    libPLYR_gt_MapInit = TriggerCreate("libPLYR_gt_MapInit_Func");
+    TriggerAddEventMapInit(libPLYR_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run Mass Quest
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libSprt_gf_DEBUGIncrementAllQuests(1, 100);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_RunMassQuest_Init () {
+    libPLYR_gt_RunMassQuest = TriggerCreate("libPLYR_gt_RunMassQuest_Func");
+    TriggerEnable(libPLYR_gt_RunMassQuest, false);
+    TriggerAddEventTimePeriodic(libPLYR_gt_RunMassQuest, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Run Mass Quest
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_ToggleRunMassQuest_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libPLYR_gv_isRunningMassQuest = !(libPLYR_gv_isRunningMassQuest);
+    if ((libPLYR_gv_isRunningMassQuest == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Mass Quest Completion"));
+        TriggerEnable(libPLYR_gt_RunMassQuest, true);
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Mass Quest Completion"));
+        TriggerEnable(libPLYR_gt_RunMassQuest, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_ToggleRunMassQuest_Init () {
+    libPLYR_gt_ToggleRunMassQuest = TriggerCreate("libPLYR_gt_ToggleRunMassQuest_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "tmq", true);
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "togglemassquest", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Pause Game When Show Talent
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_TogglePause_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libPLYR_gv_isPauseGameWhenShowingTalentPanel = !(libPLYR_gv_isPauseGameWhenShowingTalentPanel);
+    if ((libPLYR_gv_isPauseGameWhenShowingTalentPanel == true)) {
+        SetTalentTreePauseGameWhenSelectionPanelShown(true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled pause game when showing talent panel."));
+    }
+    else {
+        SetTalentTreePauseGameWhenSelectionPanelShown(false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled pause game when showing talent panel."));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_TogglePause_Init () {
+    libPLYR_gt_TogglePause = TriggerCreate("libPLYR_gt_TogglePause_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_TogglePause, c_playerAny, "tpgt", true);
+    TriggerAddEventChatMessage(libPLYR_gt_TogglePause, c_playerAny, "togglepausegametalent", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Talent Tree
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_TogglePause2_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libPLYR_gv_isEnableTalentTree = !(libPLYR_gv_isEnableTalentTree);
+    if ((libPLYR_gv_isEnableTalentTree == true)) {
+        SetTalentsEnabled(true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled pause game when showing talent panel."));
+    }
+    else {
+        SetTalentsEnabled(false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled pause game when showing talent panel."));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_TogglePause2_Init () {
+    libPLYR_gt_TogglePause2 = TriggerCreate("libPLYR_gt_TogglePause2_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_TogglePause2, c_playerAny, "ttt", true);
+    TriggerAddEventChatMessage(libPLYR_gt_TogglePause2, c_playerAny, "toggletalenttree", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Talent
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_AddTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adt") || (StringWord(EventChatMessage(false), 1) == "addtalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adt|addtalent> <BehaviorName> [Player=EventPlayer]"));
+    }
+    else {
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        PlayerAddTalent(lv_player, (StringWord(EventChatMessage(false), 2)));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added Talent \"" + StringWord(EventChatMessage(false), 2)) + ("\" to Player " + IntToString(lv_player)))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_AddTalent_Init () {
+    libPLYR_gt_AddTalent = TriggerCreate("libPLYR_gt_AddTalent_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_AddTalent, c_playerAny, "adt", false);
+    TriggerAddEventChatMessage(libPLYR_gt_AddTalent, c_playerAny, "addtalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Talent
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_RemoveTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmt") || (StringWord(EventChatMessage(false), 1) == "removetalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmt|removetalent> <BehaviorName> [Player=EventPlayer]"));
+    }
+    else {
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        PlayerRemoveTalent(lv_player, (StringWord(EventChatMessage(false), 2)));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed Talent \"" + StringWord(EventChatMessage(false), 2)) + ("\" from Player " + IntToString(lv_player)))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_RemoveTalent_Init () {
+    libPLYR_gt_RemoveTalent = TriggerCreate("libPLYR_gt_RemoveTalent_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveTalent, c_playerAny, "rmt", false);
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveTalent, c_playerAny, "removetalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Enable/Disable Talent
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_EnableOrDisableTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_talentName;
+    int lv_isEnable;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_talentName = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "ent") || (StringWord(EventChatMessage(false), 1) == "enabletalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ent|enabletalent> <TalentName> [enable=1*, disable=0]"));
+    }
+    else {
+        lv_talentName = StringWord(EventChatMessage(false), 2);
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_isEnable = StringToInt(StringWord(EventChatMessage(false), 3));
+            if ((lv_isEnable > 1)) {
+                lv_isEnable = 1;
+            }
+
+        }
+
+        if ((lv_isEnable == 1)) {
+            //SetTalentEnabled((lv_talentName), true);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
+        }
+        else {
+            //SetTalentEnabled((lv_talentName), false);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_EnableOrDisableTalent_Init () {
+    libPLYR_gt_EnableOrDisableTalent = TriggerCreate("libPLYR_gt_EnableOrDisableTalent_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_EnableOrDisableTalent, c_playerAny, "ent", false);
+    TriggerAddEventChatMessage(libPLYR_gt_EnableOrDisableTalent, c_playerAny, "enabletalent", false);
+}
+
 //--------------------------------------------------------------------------------------------------
 // Trigger: Override Respawn Point
 //--------------------------------------------------------------------------------------------------
@@ -177,23 +479,60 @@ void libPLYR_gt_OverrideScoreBoard_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: MapInit
+// Trigger: Set Mastery Ring
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_MapInit_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_SetMasteryRing_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_currentUnit;
+    int lv_level;
+
     // Automatic Variable Declarations
+    unitgroup auto7BC3CC12_g;
+    int auto7BC3CC12_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "smr") || (StringWord(EventChatMessage(false), 1) == "setmasteryring")))) {
+            return false;
+        }
+    }
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Player Lib Initialized"));
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <mw|masteryring> <level:Int>"));
+    }
+    else {
+        lv_level = StringToInt(StringWord(EventChatMessage(false), 2));
+        libNtve_gf_SetUpgradeLevelForPlayer(EventPlayer(), ("HeroRingMasteryUpgrade"), lv_level);
+        auto7BC3CC12_g = UnitGroupSelected(EventPlayer());
+        auto7BC3CC12_u = UnitGroupCount(auto7BC3CC12_g, c_unitCountAll);
+        for (;; auto7BC3CC12_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto7BC3CC12_g, auto7BC3CC12_u);
+            if (lv_currentUnit == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(lv_currentUnit, ("Signal MasteryRingCreation"));
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set Hero Mastery Ring to Level " + IntToString(lv_level))));
+        if ((libPLYR_gv_haveUsedSetMasteryRingTrigger == true)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Notice: Reapply Mastery Ring modification requires unit to respawn for UI to take effect."));
+        }
+        else {
+            libPLYR_gv_haveUsedSetMasteryRingTrigger = true;
+        }
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_MapInit_Init () {
-    libPLYR_gt_MapInit = TriggerCreate("libPLYR_gt_MapInit_Func");
-    TriggerAddEventMapInit(libPLYR_gt_MapInit);
+void libPLYR_gt_SetMasteryRing_Init () {
+    libPLYR_gt_SetMasteryRing = TriggerCreate("libPLYR_gt_SetMasteryRing_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_SetMasteryRing, c_playerAny, "smr", false);
+    TriggerAddEventChatMessage(libPLYR_gt_SetMasteryRing, c_playerAny, "setmasteryring", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -242,9 +581,17 @@ void libPLYR_gt_OverrideRespawnTime_Init () {
 }
 
 void libPLYR_InitTriggers () {
+    libPLYR_gt_MapInit_Init();
+    libPLYR_gt_RunMassQuest_Init();
+    libPLYR_gt_ToggleRunMassQuest_Init();
+    libPLYR_gt_TogglePause_Init();
+    libPLYR_gt_TogglePause2_Init();
+    libPLYR_gt_AddTalent_Init();
+    libPLYR_gt_RemoveTalent_Init();
+    libPLYR_gt_EnableOrDisableTalent_Init();
     libPLYR_gt_OverrideRespawnPoint_Init();
     libPLYR_gt_OverrideScoreBoard_Init();
-    libPLYR_gt_MapInit_Init();
+    libPLYR_gt_SetMasteryRing_Init();
     libPLYR_gt_OverrideRespawnTime_Init();
 }
 
@@ -261,6 +608,7 @@ void libPLYR_InitLib () {
     libPLYR_InitLib_completed = true;
 
     libPLYR_InitLibraries();
+    libPLYR_InitVariables();
     libPLYR_InitTriggers();
 }
 
