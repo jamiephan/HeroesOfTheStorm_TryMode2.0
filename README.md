@@ -1,6 +1,6 @@
 
-# HeroesOfTheStorm_TryMode2.0
-A modified Try Mode Map for Heroes of the Stoem to create a better experience for **Heroes of the Storm - Try mode**.
+# Heroes Of The Storm - TryMode 2.0
+A modified Try Mode Map for Heroes of the Storm to create a better experience for **Heroes of the Storm - Try mode**.
 
 ![I believe, I can fly. I believe, I can touch the sky.](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
@@ -30,6 +30,10 @@ Here is a quick look of the QA cheat menu:
 - [ ] Package and Release a .stormmap to run directly
 - [ ] Tools to automatically symlink/copy to install the map
 - [ ] Tools or scripts to automatically associate *.stormmap in win32
+- [ ] Tools to generate shortcut for win32 to link to the current (10)trymode.stormmap
+- [ ] Tool to generate XML for mimic abilities with `<CBehaviorAbility>`
+- [ ] Fix the MimicTriggerLib Tool
+
 
 ## How to install:
 
