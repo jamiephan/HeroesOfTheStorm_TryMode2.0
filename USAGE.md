@@ -462,6 +462,21 @@ This can output all the selected Units ID to the left of the screen with a left 
         toi
         toggleoutputid
 
+### `togglenoweaponcd` | `tnwcd`
+
+Toggle No Weapon Cooldown
+
+This command will attempt to remove the unit's weapon cooldown, aka faster attack speed.
+
+    Parameters: 
+        none
+
+    Example:
+        tnwcd
+        togglenoweaponcd
+
+        
+
 
 ## Players (`LibPlayers.galaxy`)
 

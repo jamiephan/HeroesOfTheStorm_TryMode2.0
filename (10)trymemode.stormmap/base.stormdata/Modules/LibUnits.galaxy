@@ -6,20 +6,24 @@ include "TriggerLibs/NativeLib"
 // Validating: templates
 
 // Variable Declarations
+int libUNIT_gv_noWeaponCDPlayer;
+bool libUNIT_gv_isNoWeaponCDEnabled;
 bool libUNIT_gv_toggleOutputIDEnabled;
 fixed libUNIT_gv_unitScale;
 
 // Trigger Declarations
 trigger libUNIT_gt_MapInit;
+trigger libUNIT_gt_AddEffectstoCamera;
+trigger libUNIT_gt_RemoveEffectsfromCamera;
+trigger libUNIT_gt_AddEffects;
+trigger libUNIT_gt_RemoveEffect;
+trigger libUNIT_gt_ToggleNoWeaponCD;
+trigger libUNIT_gt_RunNoWeaponCD;
 trigger libUNIT_gt_ChangeUnitOwnership;
 trigger libUNIT_gt_GetUnitOwnership;
 trigger libUNIT_gt_SendActorMessage;
 trigger libUNIT_gt_PlayAnimation;
 trigger libUNIT_gt_RemoveAnimation;
-trigger libUNIT_gt_AddEffectstoCamera;
-trigger libUNIT_gt_RemoveEffectsfromCamera;
-trigger libUNIT_gt_AddEffects;
-trigger libUNIT_gt_RemoveEffect;
 trigger libUNIT_gt_AddBehavior;
 trigger libUNIT_gt_RemoveBehavior;
 trigger libUNIT_gt_CountBehavior;
@@ -76,6 +80,264 @@ bool libUNIT_gt_MapInit_Func (bool testConds, bool runActions) {
 void libUNIT_gt_MapInit_Init () {
     libUNIT_gt_MapInit = TriggerCreate("libUNIT_gt_MapInit_Func");
     TriggerAddEventMapInit(libUNIT_gt_MapInit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Effects to Camera
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adec") || (StringWord(EventChatMessage(false), 1) == "addeffectcamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName>"));
+    }
+    else {
+        PlayerCreateEffectPoint(EventPlayer(), (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" on camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddEffectstoCamera_Init () {
+    libUNIT_gt_AddEffectstoCamera = TriggerCreate("libUNIT_gt_AddEffectstoCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "adec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "addeffectcamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Effects from Camera
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveEffectsfromCamera_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmec") || (StringWord(EventChatMessage(false), 1) == "removeeffectcamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
+    }
+    else {
+        GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveEffectsfromCamera_Init () {
+    libUNIT_gt_RemoveEffectsfromCamera = TriggerCreate("libUNIT_gt_RemoveEffectsfromCamera_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "rmec", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "removeeffectcamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Effects
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_count;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto25375630_g;
+    int auto25375630_u;
+    int auto82B5A334_ae;
+    const int auto82B5A334_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "ade") || (StringWord(EventChatMessage(false), 1) == "addeffect")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ade|addeffect> <EffectName> [amount]"));
+    }
+    else {
+        lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
+        if ((lv_count == 0)) {
+            lv_count = 1;
+        }
+
+        auto25375630_g = UnitGroupSelected(EventPlayer());
+        auto25375630_u = UnitGroupCount(auto25375630_g, c_unitCountAll);
+        for (;; auto25375630_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto25375630_g, auto25375630_u);
+            if (lv_currentUnit == null) { break; }
+            auto82B5A334_ae = lv_count;
+            lv_i = 0;
+            for ( ; ( (auto82B5A334_ai >= 0 && lv_i <= auto82B5A334_ae) || (auto82B5A334_ai < 0 && lv_i >= auto82B5A334_ae) ) ; lv_i += auto82B5A334_ai ) {
+                lv_unittype = UnitGetType(lv_currentUnit);
+                UnitCreateEffectUnit(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), lv_currentUnit);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added " + (IntToString(lv_count) + " Effects \"")) + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddEffects_Init () {
+    libUNIT_gt_AddEffects = TriggerCreate("libUNIT_gt_AddEffects_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "ade", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "addeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Effect
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveEffect_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoCC1E0A15_g;
+    int autoCC1E0A15_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rme") || (StringWord(EventChatMessage(false), 1) == "removeeffect")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rme|removeeffect> <EffectName>"));
+    }
+    else {
+        autoCC1E0A15_g = UnitGroupSelected(EventPlayer());
+        autoCC1E0A15_u = UnitGroupCount(autoCC1E0A15_g, c_unitCountAll);
+        for (;; autoCC1E0A15_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(autoCC1E0A15_g, autoCC1E0A15_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            GameDestroyEffects(UnitGetPosition(lv_currentUnit), 1.0, 0, (StringWord(EventChatMessage(false), 2)));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveEffect_Init () {
+    libUNIT_gt_RemoveEffect = TriggerCreate("libUNIT_gt_RemoveEffect_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "rme", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "removeeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle No Weapon CD
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ToggleNoWeaponCD_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_isNoWeaponCDEnabled = !(libUNIT_gv_isNoWeaponCDEnabled);
+    libUNIT_gv_noWeaponCDPlayer = EventPlayer();
+    if ((libUNIT_gv_isNoWeaponCDEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("No Weapon CD Enabled"));
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("No Weapon CD Disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ToggleNoWeaponCD_Init () {
+    libUNIT_gt_ToggleNoWeaponCD = TriggerCreate("libUNIT_gt_ToggleNoWeaponCD_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleNoWeaponCD, c_playerAny, "togglenoweaponcd", true);
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleNoWeaponCD, c_playerAny, "tnwcd", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run No Weapon CD
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RunNoWeaponCD_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto7DDCF65F_g;
+    int auto7DDCF65F_u;
+    const int auto62EEB2CE_ae = 10;
+    const int auto62EEB2CE_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_isNoWeaponCDEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto7DDCF65F_g = UnitGroupSelected(libUNIT_gv_noWeaponCDPlayer);
+    auto7DDCF65F_u = UnitGroupCount(auto7DDCF65F_g, c_unitCountAll);
+    for (;; auto7DDCF65F_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(auto7DDCF65F_g, auto7DDCF65F_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        lv_i = 1;
+        for ( ; ( (auto62EEB2CE_ai >= 0 && lv_i <= auto62EEB2CE_ae) || (auto62EEB2CE_ai < 0 && lv_i >= auto62EEB2CE_ae) ) ; lv_i += auto62EEB2CE_ai ) {
+            UnitWeaponSetPeriodRemaining(lv_currentUnit, lv_i, 0.0);
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RunNoWeaponCD_Init () {
+    libUNIT_gt_RunNoWeaponCD = TriggerCreate("libUNIT_gt_RunNoWeaponCD_Func");
+    TriggerAddEventTimePeriodic(libUNIT_gt_RunNoWeaponCD, 0.0625, c_timeGame);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -329,187 +591,6 @@ void libUNIT_gt_RemoveAnimation_Init () {
     libUNIT_gt_RemoveAnimation = TriggerCreate("libUNIT_gt_RemoveAnimation_Func");
     TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "rma", false);
     TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "removeanimation", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Add Effects to Camera
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "adec") || (StringWord(EventChatMessage(false), 1) == "addeffectcamera")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName>"));
-    }
-    else {
-        PlayerCreateEffectPoint(EventPlayer(), (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" on camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_AddEffectstoCamera_Init () {
-    libUNIT_gt_AddEffectstoCamera = TriggerCreate("libUNIT_gt_AddEffectstoCamera_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "adec", false);
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffectstoCamera, c_playerAny, "addeffectcamera", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Remove Effects from Camera
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_RemoveEffectsfromCamera_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "rmec") || (StringWord(EventChatMessage(false), 1) == "removeeffectcamera")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
-    }
-    else {
-        GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_RemoveEffectsfromCamera_Init () {
-    libUNIT_gt_RemoveEffectsfromCamera = TriggerCreate("libUNIT_gt_RemoveEffectsfromCamera_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "rmec", false);
-    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffectsfromCamera, c_playerAny, "removeeffectcamera", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Add Effects
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_i;
-    int lv_count;
-    string lv_unittype;
-    unit lv_currentUnit;
-
-    // Automatic Variable Declarations
-    unitgroup auto25375630_g;
-    int auto25375630_u;
-    int auto82B5A334_ae;
-    const int auto82B5A334_ai = 1;
-
-    // Variable Initialization
-
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "ade") || (StringWord(EventChatMessage(false), 1) == "addeffect")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ade|addeffect> <EffectName> [amount]"));
-    }
-    else {
-        lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
-        if ((lv_count == 0)) {
-            lv_count = 1;
-        }
-
-        auto25375630_g = UnitGroupSelected(EventPlayer());
-        auto25375630_u = UnitGroupCount(auto25375630_g, c_unitCountAll);
-        for (;; auto25375630_u -= 1) {
-            lv_currentUnit = UnitGroupUnitFromEnd(auto25375630_g, auto25375630_u);
-            if (lv_currentUnit == null) { break; }
-            auto82B5A334_ae = lv_count;
-            lv_i = 0;
-            for ( ; ( (auto82B5A334_ai >= 0 && lv_i <= auto82B5A334_ae) || (auto82B5A334_ai < 0 && lv_i >= auto82B5A334_ae) ) ; lv_i += auto82B5A334_ai ) {
-                lv_unittype = UnitGetType(lv_currentUnit);
-                UnitCreateEffectUnit(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), lv_currentUnit);
-            }
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added " + (IntToString(lv_count) + " Effects \"")) + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
-        }
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_AddEffects_Init () {
-    libUNIT_gt_AddEffects = TriggerCreate("libUNIT_gt_AddEffects_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "ade", false);
-    TriggerAddEventChatMessage(libUNIT_gt_AddEffects, c_playerAny, "addeffect", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Remove Effect
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_RemoveEffect_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    string lv_unittype;
-    unit lv_currentUnit;
-
-    // Automatic Variable Declarations
-    unitgroup autoCC1E0A15_g;
-    int autoCC1E0A15_u;
-
-    // Variable Initialization
-
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "rme") || (StringWord(EventChatMessage(false), 1) == "removeeffect")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rme|removeeffect> <EffectName>"));
-    }
-    else {
-        autoCC1E0A15_g = UnitGroupSelected(EventPlayer());
-        autoCC1E0A15_u = UnitGroupCount(autoCC1E0A15_g, c_unitCountAll);
-        for (;; autoCC1E0A15_u -= 1) {
-            lv_currentUnit = UnitGroupUnitFromEnd(autoCC1E0A15_g, autoCC1E0A15_u);
-            if (lv_currentUnit == null) { break; }
-            lv_unittype = UnitGetType(lv_currentUnit);
-            GameDestroyEffects(UnitGetPosition(lv_currentUnit), 1.0, 0, (StringWord(EventChatMessage(false), 2)));
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
-        }
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_RemoveEffect_Init () {
-    libUNIT_gt_RemoveEffect = TriggerCreate("libUNIT_gt_RemoveEffect_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "rme", false);
-    TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "removeeffect", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -951,15 +1032,17 @@ void libUNIT_gt_SummonUnit_Init () {
 
 void libUNIT_InitTriggers () {
     libUNIT_gt_MapInit_Init();
+    libUNIT_gt_AddEffectstoCamera_Init();
+    libUNIT_gt_RemoveEffectsfromCamera_Init();
+    libUNIT_gt_AddEffects_Init();
+    libUNIT_gt_RemoveEffect_Init();
+    libUNIT_gt_ToggleNoWeaponCD_Init();
+    libUNIT_gt_RunNoWeaponCD_Init();
     libUNIT_gt_ChangeUnitOwnership_Init();
     libUNIT_gt_GetUnitOwnership_Init();
     libUNIT_gt_SendActorMessage_Init();
     libUNIT_gt_PlayAnimation_Init();
     libUNIT_gt_RemoveAnimation_Init();
-    libUNIT_gt_AddEffectstoCamera_Init();
-    libUNIT_gt_RemoveEffectsfromCamera_Init();
-    libUNIT_gt_AddEffects_Init();
-    libUNIT_gt_RemoveEffect_Init();
     libUNIT_gt_AddBehavior_Init();
     libUNIT_gt_RemoveBehavior_Init();
     libUNIT_gt_CountBehavior_Init();
