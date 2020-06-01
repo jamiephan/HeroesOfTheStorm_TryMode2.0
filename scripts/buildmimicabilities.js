@@ -9,6 +9,8 @@ require('./helper/envValidator').check();
 
 const XMLFiles = HeroesFiles.ReadEach(HeroesFiles.AllXMLs);
 
+const idPrefix = 'M';
+
 
 let finalXML = '<?xml version="1.0" encoding="us-ascii"?>\n\n';
 finalXML += '<!-- ======================================================== -->\n';
@@ -39,12 +41,12 @@ XMLFiles.forEach((obj) => {
       return;
     }
 
+    finalXML += '\n<!-- ///////////////////////////////////-->\n';
+    finalXML += `<!-- Start Abilities in {${obj.fileName}}-->\n`;
+    finalXML += '<!-- ///////////////////////////////////-->\n';
     Object.keys(catalog).forEach((k) => {
       if (!Array.isArray(catalog[k])) return;
 
-      finalXML += '\n<!-- ///////////////////////////////////-->\n';
-      finalXML += `<!-- Start Abilities in {${obj.fileName}}-->\n`;
-      finalXML += '<!-- ///////////////////////////////////-->\n';
       catalog[k].forEach((a) => {
         try {
           const name = a.$.id;
@@ -53,7 +55,7 @@ XMLFiles.forEach((obj) => {
           const face = a.CmdButtonArray[0].$.DefaultButtonFace || name;
           const verb = a.CmdButtonArray[0].$.index || 'Execute';
 
-          finalXML += `    <CBehaviorAbility id="M${name}">\n`;
+          finalXML += `    <CBehaviorAbility id="${idPrefix}${name}">\n`;
           if (!(requirement === undefined)) {
             // eslint-disable-next-line max-len
             finalXML += `        <!-- Requirement Behavior Detected. Please add the behavior: ${requirement} -->\n`;
@@ -61,15 +63,22 @@ XMLFiles.forEach((obj) => {
           // eslint-disable-next-line max-len
           finalXML += `        <Buttons Face="${face}" Type="AbilCmd" AbilCmd="${name},${verb}" Behavior="${name}" />\n`;
           finalXML += '    </CBehaviorAbility>\n';
-          console.log(`Added Ability: ${name}, face: ${face}, req: ${requirement}`);
+          // eslint-disable-next-line max-len
+          console.log(
+            `Generated Ability: ${name}`,
+            `\tButton Face: ${face}`,
+            `\tVerb: ${verb}`,
+            `\tRequirement: ${requirement === undefined ? 'None' : requirement}`,
+            `\tPrefixed Id: ${idPrefix}${name}`,
+          );
         } catch (e) {
           console.log(`Error when adding ability from ${obj.fileName}`);
         }
       });
-      finalXML += '<!-- ///////////////////////////////////-->\n';
-      finalXML += `<!-- End Abilities in {${obj.fileName}}-->\n`;
-      finalXML += '<!-- ///////////////////////////////////-->\n';
     });
+    finalXML += '<!-- ///////////////////////////////////-->\n';
+    finalXML += `<!-- End Abilities in {${obj.fileName}}-->\n`;
+    finalXML += '<!-- ///////////////////////////////////-->\n';
   });
 });
 
