@@ -2,9 +2,75 @@
 
 All tools require `nodejs` to do so. After installed `nodejs` and cloned the repo, do a `npm install`.
 
-In addition, it requires a Linux Enviorment to do so. If you on Linux, great, if you on Windows, try using `WSL` with `Ubuntu` installed.
+>Note: Due to how the storm-extract library works, this only support Nodejs 10.
+
+In addition, it requires a Linux Enviorment to do so. If you are on Linux, great, if you are on Windows, try using `WSL` with `Ubuntu` installed.
 
 >TODO: Make it compatible with Windows.
+
+# Pre-usage Configuration
+
+All the settings are stored in the `.env` file of the root directory. Please modify it to fit your needs. 
+
+Generally only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. 
+
+
+# Scripts
+
+>Note: Tools that requires extraction from the Heroes of the Storm game file will take a while.
+
+
+## Finder Tool for `*.s2ma`
+
+**Command**: `npm run s2ma`
+
+
+`*.s2ma` files are the generated libs for Heroes of the Storm. But most importantly it will also contain actual map files as well.
+
+The tool will find all of the `*.s2ma` files and output them to `s2ma/` directory.
+
+To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mpq/download.html).
+
+---
+
+## Ability Mimic Generator
+
+**Command**: `npm run buildmimicabilities`
+
+This tools will search through most the abilities (Q, W, E, R, which are `<CAbil*>`) and map them to a a corresponding `<CBehaviorAbility>`. With the id having prefixed `"M"`.
+
+For example `<CAbilEffectInstant id="ZeratulCleave">` => `<CBehaviorAbility id="MZeratulCleave">`.
+
+The reason for this is you can add any abilities to any heroes freely (which will appear on the items bar, the top bar where active buttons like ice block, cleanse placed)
+
+To do so, just simply add the behavior to the selected units (e.g using the [chat command](USAGE.md) `adb MZeratulCleave`)
+
+Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilties requirements will be shown inside the generated XML file.
+
+>Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod afterall.
+
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
+
+Altering `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
+
+
+Demo: Alarak with Zera's Cleave, VP, 2 banner from varian, Gazlowe's Turret 
+
+![Alarak with extra abilites](https://i.imgur.com/11ogJyt.png)
+
+
+---
+
+## Automatically generate `GameData.XML`
+
+**Command**: `npm run buildxml`
+
+This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, that will include all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods`, which will scan through all its subdirectories. 
+
+>Note: It **will ignore** any files that does not end with `.xml` (case insensitive) and **does not** validate whether the XML file is valid (syntax error, etc). TODO: Also validate XML syntax.
+
+---
+
 
 ## Mimic Lib Generator
 
@@ -97,29 +163,6 @@ Internal Command | Mimicked Command
 `-AI All` | `m-AI All`
 
 
----
-
-## Finder Tool for `*.s2ma`
-
-**Command**: `npm run s2ma`
-
->Note: Due to poorly designed *(sigh...)*, it will take a while depends on your processing power.
-
-`*.s2ma` files are the generated libs for Heroes of the Storm. But most importantly it will also contain actual map files as well.
-
-The tool will find all of the `*.s2ma` files and output them to `s2ma/` directory.
-
-To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mpq/download.html).
-
-## Automatically generate `GameData.XML`
-
-**Command**: `npm run buildxml`
-
-This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`. 
-
->Note: It **will ignore** any files that does not end with `.xml` (case insensitive) and **does not** validate whether the XML file is valid (syntax error, etc).
-
----
 
 ## Trigger code generator
 
