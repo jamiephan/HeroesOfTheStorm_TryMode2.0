@@ -9,21 +9,21 @@ if (path == undefined) {
 }
 const outputDirName = 'ModuleMimicLibs';
 
-if (fs.existsSync(__dirname + '/temp/')) {
-  rimraf.sync(fs.realpathSync(__dirname + '/temp/'));
+if (fs.existsSync(`${__dirname}/temp/`)) {
+  rimraf.sync(fs.realpathSync(`${__dirname}/temp/`));
 }
-fs.mkdirSync(__dirname + '/temp/');
+fs.mkdirSync(`${__dirname}/temp/`);
 
-if (fs.existsSync(__dirname + '/../(10)trymemode.stormmap/base.stormdata/' + outputDirName + '/')) {
-  rimraf.sync(fs.realpathSync(__dirname + '/../(10)trymemode.stormmap/base.stormdata/' + outputDirName + '/'));
+if (fs.existsSync(`${__dirname}/../(10)trymemode.stormmap/base.stormdata/${outputDirName}/`)) {
+  rimraf.sync(fs.realpathSync(`${__dirname}/../(10)trymemode.stormmap/base.stormdata/${outputDirName}/`));
 }
-fs.mkdirSync(__dirname + '/../(10)trymemode.stormmap/base.stormdata/' + outputDirName + '/');
+fs.mkdirSync(`${__dirname}/../(10)trymemode.stormmap/base.stormdata/${outputDirName}/`);
 
-const savePath = fs.realpathSync(__dirname + '/../(10)trymemode.stormmap/base.stormdata/' + outputDirName + '/');
-const tempPath = fs.realpathSync(__dirname + '/temp/');
+const savePath = fs.realpathSync(`${__dirname}/../(10)trymemode.stormmap/base.stormdata/${outputDirName}/`);
+const tempPath = fs.realpathSync(`${__dirname}/temp/`);
 
-String.prototype.replaceAll = function(search, replacement) {
-  var target = this;
+String.prototype.replaceAll = function (search, replacement) {
+  const target = this;
   return target.replace(new RegExp(search, 'g'), replacement);
 };
 
@@ -44,16 +44,16 @@ const extractFilesArr = [
 ];
 
 const extractFilesCASCPath = extractFilesArr.map(
-  l => `mods/heroesdata.stormmod/base.stormdata/TriggerLibs/${l}.galaxy`
+  (l) => `mods/heroesdata.stormmod/base.stormdata/TriggerLibs/${l}.galaxy`,
 );
 const extractFilesCASCPathH = extractFilesArr.map(
-  l => `mods/heroesdata.stormmod/base.stormdata/TriggerLibs/${l}_h.galaxy`
+  (l) => `mods/heroesdata.stormmod/base.stormdata/TriggerLibs/${l}_h.galaxy`,
 );
-console.log(`Extracting all Galaxy Files`);
+console.log('Extracting all Galaxy Files');
 stormExtract.extractFiles(path, tempPath, extractFilesCASCPath);
 console.log(' -> done');
 
-console.log(`Extracting all Galaxy Header Files`);
+console.log('Extracting all Galaxy Header Files');
 stormExtract.extractFiles(path, tempPath, extractFilesCASCPathH);
 console.log(' -> done');
 
@@ -64,20 +64,20 @@ for (let i = 0; i < extractFilesArr.length; i++) {
     `mods/heroesdata.stormmod/base.stormdata/TriggerLibs/${libname}_h.galaxy`,
   ];
   console.log(`Reading ${libname}.galaxy and ${libname}_h.galaxy`);
-  let libcontent = fs.readFileSync(tempPath + '/' + files[0], 'utf8');
-  let libcontenth = fs.readFileSync(tempPath + '/' + files[1], 'utf8');
+  let libcontent = fs.readFileSync(`${tempPath}/${files[0]}`, 'utf8');
+  let libcontenth = fs.readFileSync(`${tempPath}/${files[1]}`, 'utf8');
   console.log(' -> done');
 
   console.log(`Finding abbreviation of ${libname}.galaxy and ${libname}_h.galaxy`);
   const abbr = libcontent
     .split('\n')
-    .filter(l => /^void lib[a-zA-Z]{4,4}_InitLib \(\) \{/s.test(l))[0]
+    .filter((l) => /^void lib[a-zA-Z]{4,4}_InitLib \(\) \{/s.test(l))[0]
     .split('_')[0]
     .replace('void ', '');
-  console.log(' -> ' + abbr);
+  console.log(` -> ${abbr}`);
 
   console.log(`Modifying ${libname}.galaxy and ${libname}_h.galaxy`);
-  libcontent = libcontent.replaceAll(abbr, 'Mimic' + libname);
+  libcontent = libcontent.replaceAll(abbr, `Mimic${libname}`);
   libcontent = libcontent.replaceAll('!((libCore_gv_dEBUGDebuggingEnabled == true))', 'false');
   libcontent = libcontent.replaceAll('!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == true))', 'false');
   libcontent = libcontent.replaceAll('TriggerDebugOutput', 'MimicTriggerDebugOutput');
@@ -90,36 +90,36 @@ for (let i = 0; i < extractFilesArr.length; i++) {
     if (
       /TriggerAddEventChatMessage\([a-zA-Z0-9_]{0,}\, c_playerAny, "[a-zA-Z0-9\_\-\ ]{0,}", (true|false)\);/s.test(line)
     ) {
-      var cmdWithQuote = line.split(`,`)[2];
-      var cmd = cmdWithQuote.split(`"`)[1];
+      const cmdWithQuote = line.split(',')[2];
+      const cmd = cmdWithQuote.split('"')[1];
       libcontentR[j] = line.replace(cmdWithQuote, ` "m${cmd}"`);
     }
 
     if (/if .*?StringWord\(EventChatMessage\(false\), 1\) .*?= "[a-zA-Z0-9_\- ]{0,}".*? \{/s.test(line)) {
-      var cmd1 = line.split(`"`)[1];
+      const cmd1 = line.split('"')[1];
       libcontentR[j] = line.replace(cmd1, `m${cmd1}`);
     }
     if (/if .*?StringWord\(lv_.*?, 1\) .*?= "[a-zA-Z0-9_\- ]{0,}".*? \{/s.test(line)) {
-      var cmd4 = line.split(`"`)[1];
+      const cmd4 = line.split('"')[1];
       libcontentR[j] = line.replace(cmd4, `m${cmd4}`);
     }
 
     if (
       /if.*?StringWord\(EventChatMessage\(false\), 1\) .*= "[a-zA-Z0-9_\- ]{0,}"\) .*.* \(StringWord\(EventChatMessage\(false\), 1\) .*.* "[a-zA-Z0-9_\- ]{0,}".*? {/s.test(
-        line
+        line,
       )
     ) {
-      var cmd2 = line.split(`"`)[1];
-      var cmd3 = line.split(`"`)[3];
-      line = line.replace(cmd2, 'm' + cmd2);
-      line = line.replace(cmd3, 'm' + cmd3);
+      const cmd2 = line.split('"')[1];
+      const cmd3 = line.split('"')[3];
+      line = line.replace(cmd2, `m${cmd2}`);
+      line = line.replace(cmd3, `m${cmd3}`);
       libcontentR[j] = line;
     }
     if (/if.*?GameCheatsEnabled\(c_gameCheatCategoryDevelopment\) == true.*? {/s.test(line)) {
       libcontentR[j] = line.replace('true', 'false');
     }
     if (/if \(auto.*_val == "ult[0-9]"\) {/s.test(line)) {
-      libcontentR[j] = line.replace(line.split(`"`)[1], 'm' + line.split(`"`)[1]);
+      libcontentR[j] = line.replace(line.split('"')[1], `m${line.split('"')[1]}`);
     }
 
     // Add a message when lib loaded
@@ -134,9 +134,9 @@ for (let i = 0; i < extractFilesArr.length; i++) {
 
   libcontent = libcontent.replaceAll(
     `include "TriggerLibs/${libname}_h"`,
-    `include "${outputDirName}/Mimic${libname}_h"`
+    `include "${outputDirName}/Mimic${libname}_h"`,
   );
-  libcontenth = libcontenth.replaceAll(abbr, 'Mimic' + libname);
+  libcontenth = libcontenth.replaceAll(abbr, `Mimic${libname}`);
   console.log(' -> done');
 
   console.log(`Saving modified ${libname}.galaxy and ${libname}_h.galaxy to ${savePath}`);
@@ -268,31 +268,31 @@ console.log('==============================================');
 console.log('');
 console.log('All Done! The Mimic libs have been generated and modified. The changes includes:');
 console.log('');
-console.log(`    -> Modifying to !((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))`);
-console.log(`       So that it always return true to bypass dev build check`);
+console.log('    -> Modifying to !((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))');
+console.log('       So that it always return true to bypass dev build check');
 console.log('');
-console.log(`    -> Append "m" before any chat commands (TriggerAddEventChatMessage) and their checks`);
-console.log(`       Which will prevent most of the conflict to the main lib.`);
-console.log(`       For example swapping hero command: sh -> msh`);
-console.log(`       For example spawn QA Cheats panel: -devcheats -> m-devcheats`);
+console.log('    -> Append "m" before any chat commands (TriggerAddEventChatMessage) and their checks');
+console.log('       Which will prevent most of the conflict to the main lib.');
+console.log('       For example swapping hero command: sh -> msh');
+console.log('       For example spawn QA Cheats panel: -devcheats -> m-devcheats');
 console.log('');
-console.log(`    -> Replace The variables, triggers, etc, prefix with Mimic[LibFileName]`);
-console.log(`       This will prevent name conflict and code duplicates.`);
-console.log(`       For example: libSprt_gt_ToggleCheatsDialog -> MimicSupportLib_gt_ToggleCheatsDialog`);
+console.log('    -> Replace The variables, triggers, etc, prefix with Mimic[LibFileName]');
+console.log('       This will prevent name conflict and code duplicates.');
+console.log('       For example: libSprt_gt_ToggleCheatsDialog -> MimicSupportLib_gt_ToggleCheatsDialog');
 console.log('');
-console.log(`    -> Replace TriggerDebugOutput() with a custom MimicTriggerDebugOutput()`);
-console.log(`       This allows to output useful messages without the Trigger Output Window.`);
+console.log('    -> Replace TriggerDebugOutput() with a custom MimicTriggerDebugOutput()');
+console.log('       This allows to output useful messages without the Trigger Output Window.');
 console.log(`       Note: The code is located at ${outputDirName}/TriggerDebugOutput.galaxy `);
 console.log('');
-console.log(`    -> Force enable debug mode: libCore_gv_dEBUGDebuggingEnabled = true;`);
-console.log(`       This allows to use some debug-only functions.`);
+console.log('    -> Force enable debug mode: libCore_gv_dEBUGDebuggingEnabled = true;');
+console.log('       This allows to use some debug-only functions.');
 console.log(`       Note: The code is located at ${outputDirName}/TriggerDebugOutput.galaxy `);
 console.log('');
 console.log('==============================================');
 console.log('');
 console.log('IGNORE BELOW IF YOU ARE USING THE CUSTOM TRY MODE MAP FROM JAMIEPHAN');
 console.log('');
-console.log(`If you want to use all of the mimic libs in you map or lib, do the following:`);
+console.log('If you want to use all of the mimic libs in you map or lib, do the following:');
 console.log('');
 console.log(`1. Copy the whole directory in ${savePath}`);
 console.log('2. And save it to /Path/To/Your/MapOrLib/base.stormdata/');
@@ -304,7 +304,7 @@ console.log('7. Then, locate a function named XXXX_InitLibraries() (XXXX should 
 console.log('    (If you are editing MapScript.galaxy, it should only have InitLibs() instead.)');
 console.log('8. Inside the function, Append the code: libMICL_InitLib();');
 console.log(
-  '9. After, open the map and see does the "Initialized" message popup for each Lib without error and you are done'
+  '9. After, open the map and see does the "Initialized" message popup for each Lib without error and you are done',
 );
 console.log('');
 console.log('If you would like to only include certain mimic libs, do the following:');
@@ -321,7 +321,7 @@ console.log('');
 console.log('4. Then, locate a function named XXXX_InitLibraries() (XXXX should be the ID of the your lib)');
 console.log('    (If you are editing MapScript.galaxy, it should only have InitLibs() instead.)');
 console.log('5. Copy and add the code to the last line of the function:');
-console.log(`    libMTDO_InitLib();`);
+console.log('    libMTDO_InitLib();');
 console.log('6. Inside the function, Append the codes corresponding to your choices above');
 console.log('    Note: This requires percision and fail to do so will not able to load the map properly:');
 for (let i = 0; i < extractFilesArr.length; i++) {
