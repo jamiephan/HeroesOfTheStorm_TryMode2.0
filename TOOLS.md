@@ -8,11 +8,29 @@ In addition, it requires a Linux Enviorment to do so. If you are on Linux, great
 
 >TODO: Make it compatible with Windows.
 
-# Pre-usage Configuration
+# Pre-usage Configuration (\*Required)
 
-All the settings are stored in the `.env` file of the root directory. Please modify it to fit your needs. 
+All the settings are stored in the `.env` file in the root of the project directory.
 
-Generally only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. 
+Before using any tools, rename `.env.example` into `.env` (remove the `.example` at the end) and modify the configuation to fit your need.
+
+This tool uses `dotenv` to load the configs into Enviorment Variables (`process.env`). The settings are `key=value` pairs with strings having double quote.
+
+Example: `HEROES_OF_THE_STORM_INSTALL_LOCATION="/mnt/c/Program Files/Heroes of the Storm"`.
+
+The current values required are:
+
+| Key                                          | Type   | Description                                                                                                                                                                                                                  |
+|----------------------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `HEROES_OF_THE_STORM_INSTALL_LOCATION`       | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`.)                                                               |
+| `TOOLS_XML_MAIN_XML_PATH`                    | String | The location of `base.stormdata/gamedata.xml` file. Default: `./(10)trymemode.stormmap/base.stormdata/GameData.xml`                                                                                                          |
+| `TOOLS_GAMEDATA_DIR`                         | String | The location of `base.stormdata` directory. Default: `./(10)trymemode.stormmap/base.stormdata`                                                                                                                               |
+| `TOOLS_XML_MODS_DIR`                         | String | The location where the XML mods are stored. Default: `./(10)trymemode.stormmap/base.stormdata/Mods`                                                                                                                          |
+| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMods/AbilityMimic.xml` |
+| `TOOLS_S2MA_SAVE_LOCATION`                   | String | The location directory where the found s2ma files will be saved. Default: `./s2ma`                                                                                                                                           |
+
+
+>Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
 
 
 # Scripts
