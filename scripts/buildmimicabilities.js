@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 const XMLParser = require('xml2js').parseString;
 const fs = require('fs');
+const path = require('path');
 const HeroesFiles = require('./helper/HeoresFileWalker');
 const autoXMLinclude = require('./helper/autoXMLinclude');
 
@@ -83,9 +84,26 @@ XMLFiles.forEach((obj) => {
 });
 
 finalXML += '</Catalog>\n';
+
+console.log('===================');
+
+// if parent dir of TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION does not exist
+// As fs.writeFile() will throw not found error if the parent dir does not exist.
+if (!fs.existsSync(path.dirname(process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION))) {
+  fs.mkdirSync(
+    path.dirname(process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION), {
+      recursive: true,
+    },
+  );
+  console.log(`Created directory: ${path.dirname(process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION)}`);
+}
+
 fs.writeFileSync(
   process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION,
   finalXML,
   { encoding: 'utf8' },
 );
+
+console.log(`Created file: ${process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION}`);
+console.log('===================');
 autoXMLinclude();
