@@ -3,7 +3,6 @@ const tmp = require('tmp');
 const fs = require('fs');
 const path = require('path');
 
-require('dotenv').config();
 require('./envValidator').check();
 
 const preEnvChecker = () => {

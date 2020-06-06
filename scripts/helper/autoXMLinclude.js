@@ -1,7 +1,6 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 
-require('dotenv').config();
 require('./envValidator').check();
 
 

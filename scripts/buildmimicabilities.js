@@ -5,9 +5,6 @@ const path = require('path');
 const HeroesFiles = require('./helper/HeoresFileWalker');
 const autoXMLinclude = require('./helper/autoXMLinclude');
 
-require('dotenv').config();
-require('./helper/envValidator').check();
-
 const XMLFiles = HeroesFiles.ReadEach(HeroesFiles.AllXMLs);
 
 const idPrefix = 'M';
