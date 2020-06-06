@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0#readme",
     "dependencies": {
+        "app-root-path": "^3.0.0",
         "dotenv": "^8.2.0",
         "prompt": "^1.0.0",
         "rimraf": "^2.6.2",
