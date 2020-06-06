@@ -6,6 +6,23 @@ const path = require('path');
 require('dotenv').config();
 require('./envValidator').check();
 
+const preEnvChecker = () => {
+  const requiredNodeVersion = 10;
+  const requiredPlatform = 'linux';
+
+  if (requiredNodeVersion !== parseInt(process.versions.node.split('.')[0], 10)) {
+    // eslint-disable-next-line max-len
+    throw new Error('This tool currently only supports node 10.x.x; Note: If you switch node version after npm install, you will need to re-run npm install again.');
+  }
+
+  if (process.platform !== requiredPlatform) {
+    throw new Error('This tool currently only supports Linux / WSL.');
+  }
+};
+
+preEnvChecker();
+
+
 /**
  * Return a list of file contents that based on the filtered regex.
  * @param {RegExp} regex Regex to test the file name during file searching
