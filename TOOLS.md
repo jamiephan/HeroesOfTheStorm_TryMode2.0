@@ -37,6 +37,17 @@ The current values required are:
 
 >Note: Tools that requires extraction from the Heroes of the Storm game file will take a while.
 
+## Symbolic Linker Tool
+
+**Command**: `npm run symlink`
+
+This tool will create a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, which will "mirror" the directory, such that you can continue to edit the files in the directory but will also take effect in the Heroes actual try mode map.
+
+This command should not need to use more than once if it completed successfully.
+
+>Note: For some reason symlink created in WSL Enviorment does not work, please change the `.env` `HEROES_OF_THE_STORM_INSTALL_LOCATION` to a windows path first (e.g `C:/games/Heroes of the Storm` instead of `/mnt/c/games/Heroes of the Storm`), run `npm run symlink` in CMD (not WSL), then change it back to linux path for other commands.
+
+
 
 ## Finder Tool for `*.s2ma`
 
