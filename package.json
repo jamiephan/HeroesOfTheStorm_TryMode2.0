@@ -8,7 +8,8 @@
         "buildmimic": "bash -c -i \"node ./scripts/buildmimic.js\"",
         "buildmimicabilities": "bash -c -i \"node ./scripts/buildmimicabilities.js\"",
         "s2ma": "bash -c -i \"node ./scripts/s2ma.js\"",
-        "triggergenerator": "node ./scripts/triggerGenerator.js"
+        "triggergenerator": "node ./scripts/triggerGenerator.js",
+        "symlink": "node ./scripts/symlink.js"
     },
     "repository": {
         "type": "git",
