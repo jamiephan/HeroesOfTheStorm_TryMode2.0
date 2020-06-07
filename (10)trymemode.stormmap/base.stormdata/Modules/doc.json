@@ -1,0 +1,884 @@
+{
+    "_metadata": {
+        "tagetMarkdownFile": "./USAGE.md",
+        "MDTitle": "Usage",
+        "MDDescription": "Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).\n>Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.\n\nMost commands have a short alias command, they both have identical functionality which let you to type less."
+    },
+    "libraries": [
+        {
+            "_metadata": {
+                "libraryName": "Module Loader",
+                "libraryFile": "LibModuleLoader.galaxy",
+                "libraryId": "LibMODL",
+                "libraryDescription": "A unified Module Loader Lib that allows you to choose which module to load",
+                "overrideMarkdown": true,
+                "overrideMarkdownContent": "This module contains various of utilities command such as restarting try mode, etc"
+            }
+        },
+        {
+            "_metadata": {
+                "libraryName": "Utilities",
+                "libraryFile": "LibUtilities.galaxy",
+                "libraryId": "LibUTIL",
+                "libraryDescription": "A Library that have utilities tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
+                "overrideMarkdown": false,
+                "overrideMarkdownContent": null
+            },
+            "commands": [
+                {
+                    "shortCommand": "tfow",
+                    "command": "togglefogofwar",
+                    "description": "Toggle Fog Of War. This can enable or disable full map vision.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tfow",
+                            "description": "Toggle Full Map Vision"
+                        },
+                        {
+                            "command": "togglefogofwar",
+                            "description": "Toggle Full Map Vision"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "tui",
+                    "command": "toggleui",
+                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If UI is off, all abilites will be disabled.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tui",
+                            "description": "Toggle In game UI"
+                        },
+                        {
+                            "command": "toggleui",
+                            "description": "Toggle In game UI"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "cls",
+                    "command": "clear",
+                    "description": "Allow to clear all text messages, including chat and debug messages.",
+                    "parameters": [
+                        {
+                            "name": "seconds",
+                            "required": false,
+                            "description": "Defines the delay to clear text messages in seconds.",
+                            "defaultValue": 0.0,
+                            "type": "float"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "cls",
+                            "description": "Clear all texts instantly"
+                        },
+                        {
+                            "command": "clear",
+                            "description": "Clear all texts after 5.4 seconds"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "re",
+                    "command": "restartgame",
+                    "description": "Allow to restart and reload the map, without exit and re-enter it. This is extremely useful when you want to try the new modified XML files or scripts. \n >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to actually exit the map and re-enter if you need to do so.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "re",
+                            "description": "Restart the game instantly"
+                        },
+                        {
+                            "command": "restartgame",
+                            "description": "Restart the game instantly"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "sg",
+                    "command": "startgame",
+                    "description": "Allow to start the game instantly (timer start, gate open, etc).",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "sg",
+                            "description": "Start the game instantly"
+                        },
+                        {
+                            "command": "startgame",
+                            "description": "Start the game instantly"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "eg",
+                    "command": "endgame",
+                    "description": "End the game instantly and kick all players from the game.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "eg",
+                            "description": "End the game instantly"
+                        },
+                        {
+                            "command": "endgame",
+                            "description": "End the game instantly"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "wg",
+                    "command": "wingame",
+                    "description": "Instantly declare a win for a team and end the game.\nGenerally left team is **Team 1** and right team is **Team 2**.",
+                    "parameters": [
+                        {
+                            "name": "TeamID",
+                            "required": true,
+                            "description": "Defines the team ID to win the game.",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "wg 1",
+                            "description": "Win the game for Team 1"
+                        },
+                        {
+                            "command": "wingame 2",
+                            "description": "Win the game for Team 2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_metadata": {
+                "libraryName": "Units",
+                "libraryFile": "LibUnits.galaxy",
+                "libraryId": "LibUNIT",
+                "libraryDescription": "A library with commands related to selected units, such as kill, spawn, etc.",
+                "overrideMarkdown": false,
+                "overrideMarkdownContent": null
+            },
+            "commands": [
+                {
+                    "shortCommand": "ku",
+                    "command": "killunits",
+                    "description": "Instantly kill all selected unit(s).",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "ku",
+                            "description": "Instantly kill all selected unit(s)."
+                        },
+                        {
+                            "command": "killunits",
+                            "description": "Instantly kill all selected unit(s)."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "toi",
+                    "command": "toggleoutputid",
+                    "description": "Toggle displaying units'id mode. Which will shows the unit's id on the sceen with a left click.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "toi",
+                            "description": "Toggle displaying units'id mode."
+                        },
+                        {
+                            "command": "toggleoutputid",
+                            "description": "Toggle displaying units'id mode."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "sum",
+                    "command": "summon",
+                    "description": "Spawn unit(s) at the centre of your camera location.\n>Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master. However, there are some issues that have conflict to `/ac` QA Cheat menu, which I recommand you first turn `/ac` on if you would like to use this command.\n\n>Note: If your hero is Samuro, it will have some weird behavior for multi selection.",
+                    "parameters": [
+                        {
+                            "name": "UnitId",
+                            "required": true,
+                            "description": "Define the unit to be spawned. You can get the id from <CUnit id=\"xxx\"> in the game XML files.",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "Define which player to own the unit that spawned.",
+                            "type": "string",
+                            "defaultValue": "The player id of whoever used this command."
+                        },
+                        {
+                            "name": "Amount",
+                            "required": false,
+                            "description": "Define the amount of unit(s) to be spawned",
+                            "type": "string",
+                            "defaultValue": 1
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "summon TownTownHallL2",
+                            "description": "Summon a tower structure to the player who used the command"
+                        },
+                        {
+                            "command": "summon HeroRaynor 1 5",
+                            "description": "Summon 5 Raynor Hero units for player 1"
+                        },
+                        {
+                            "command": "sum JungleGraveGolemDefender 6",
+                            "description": "Summon A boss golem for player 6"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "ss",
+                    "command": "setscale",
+                    "description": "Set the scale of the summon units for the command `summon`.\n\n>Note: 1.0 is default scale for all of the units.\n\n>Note: This is UI change only, the relative attack range, movement speed, etc will not change.",
+                    "parameters": [
+                        {
+                            "name": "ScaleAmount",
+                            "required": true,
+                            "description": "Set the scale for the summon unit afterwards.",
+                            "type": "float"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "setscale 0.1",
+                            "description": "Set the scale of the summon unit to 0.1 (1/10, or 10% of the normal size)"
+                        },
+                        {
+                            "command": "ss 1.5",
+                            "description": "Set the scale of the summon unit to 1.5 (50% bigger than normal size)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "up",
+                    "command": "unitproperty",
+                    "description": "Allow to modify a selected units' property, such as  Max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "required": true,
+                            "description": "Set the type of the property to be modified. Please refer to the table above.",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "value",
+                            "required": true,
+                            "description": "The value to be set for the property type",
+                            "type": "float"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "up 0 1",
+                            "description": "Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO"
+                        },
+                        {
+                            "command": "unitproperty 6 10000",
+                            "description": "Set the selected unit's Max Energy for 10000 (usually means resource bar, such as mana, Tracer bullet, Chen's brew etc.)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "getb",
+                    "command": "getbehavior",
+                    "description": "List all active behaviors for selected units.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "getb",
+                            "description": "List all active behaviors for selected units"
+                        },
+                        {
+                            "command": "getbehavior",
+                            "description": "List all active behaviors for selected units"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "adb",
+                    "command": "addbehavior",
+                    "description": "Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
+                    "parameters": [
+                        {
+                            "name": "BehaviorId",
+                            "required": true,
+                            "description": "Defines the behavior id to be added to selected units",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "addbehavior MedivhArcaneBrillianceItem",
+                            "description": "Add Medivh's Arcane Brilliance Ability to selected units"
+                        },
+                        {
+                            "command": "adb PermaInvulnerable",
+                            "description": "Make all selected units permanent Invulnerable"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmb",
+                    "command": "removebehavior",
+                    "description": "Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.\n\n> Tips: You can get active behaviors with the `getbehavior` command above.",
+                    "parameters": [
+                        {
+                            "name": "BehaviorId",
+                            "required": true,
+                            "description": "Defines the behavior id to be removed from selected units",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "removebehavior MedivhArcaneBrillianceItem",
+                            "description": "Remove Medivh's Arcane Brilliance Ability from selected units"
+                        },
+                        {
+                            "command": "rmb PermaInvulnerable",
+                            "description": "No longer makes all selected units permanent Invulnerable"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "ctb",
+                    "command": "countbehavior",
+                    "description": "Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.\n\n> Tips: You can get active behaviors with the `getbehavior` command above.",
+                    "parameters": [
+                        {
+                            "name": "BehaviorId",
+                            "required": true,
+                            "description": "Defines the behavior id to be counted from selected units",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "countbehavior MedivhArcaneBrillianceItem",
+                            "description": "Count Medivh's Arcane Brilliance Ability from selected units"
+                        },
+                        {
+                            "command": "ctb PermaInvulnerable",
+                            "description": "Count selected unit's permanent Invulnerable behavior"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "ade",
+                    "command": "addeffect",
+                    "description": "Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
+                    "parameters": [
+                        {
+                            "name": "EffectId",
+                            "required": true,
+                            "description": "Defines the effect id to be added to selected unit(s).",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "addeffect StormSuicide",
+                            "description": "Make the unit \"suicide\" a.k.a kill the unit"
+                        },
+                        {
+                            "command": "ade MedivhPolyBombPersistent",
+                            "description": "Make all selected units affect by Medivh's Polybomb"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "adec",
+                    "command": "addeffectcamera",
+                    "description": "Add an Effect to the center of the camera. Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
+                    "parameters": [
+                        {
+                            "name": "EffectId",
+                            "required": true,
+                            "description": "Defines the effect id to be added to the center of the camera.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "addeffectcamera DropUnderworldPowerupPersistent",
+                            "description": "Add some Haunted Mines Skulls to camera location"
+                        },
+                        {
+                            "command": "adec UnderworldBossRootsCreatePersistent",
+                            "description": "Add Haunted Mines's boss root animation to camera location"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rme",
+                    "command": "addeffect",
+                    "description": "Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
+                    "parameters": [
+                        {
+                            "name": "EffectId",
+                            "required": true,
+                            "description": "Defines the effect id to be removed from selected unit(s).",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "removeeffect MedivhPolyBombPersistent",
+                            "description": "No longer make selected unit(s) affect by Medivh's Polybomb"
+                        },
+                        {
+                            "command": "rme MedivhPolyBombPersistent",
+                            "description": "No longer make selected unit(s) affect by Medivh's Polybomb"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmec",
+                    "command": "removeeffectcamera",
+                    "description": "Remove an Effect from the center of the camera. Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
+                    "parameters": [
+                        {
+                            "name": "EffectId",
+                            "required": true,
+                            "description": "Defines the effect id to be removed from the center of the camera.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "removeeffectcamera DropUnderworldPowerupPersistent",
+                            "description": "Remove Haunted Mines Skulls from camera location"
+                        },
+                        {
+                            "command": "rmec UnderworldBossRootsCreatePersistent",
+                            "description": "Remove Haunted Mines's boss root animation from camera location"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "pa",
+                    "command": "playanimation",
+                    "description": "Play an Animation for selected unit(s).\n>Note: There are Walk, Attack, A to Z animations etc",
+                    "parameters": [
+                        {
+                            "name": "AnimationId",
+                            "required": true,
+                            "description": "Defines the Animation ID to be played on selected unit(s)",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "playanimation Attack",
+                            "description": "Play the Attack Animation for selected unit(s)"
+                        },
+                        {
+                            "command": "pa Walk",
+                            "description": "Play the Walk animation for selected unit(s)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rma",
+                    "command": "removeanimation",
+                    "description": "Remove an Animation from selected unit(s).\n>Note: There are Walk, Attack, A to Z animations etc",
+                    "parameters": [
+                        {
+                            "name": "AnimationId",
+                            "required": true,
+                            "description": "Defines the Animation ID to be removed from selected unit(s)",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "removeanimation Attack",
+                            "description": "Stop the Attack Animation for selected unit(s)"
+                        },
+                        {
+                            "command": "rma Walk",
+                            "description": "Stop the Walk animation for selected unit(s)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "sam",
+                    "command": "sendactormessage",
+                    "description": "Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on send=\"xxx\">`.\n>Note: The command allows spaces for the parameter, since most actor messages have spaces.",
+                    "parameters": [
+                        {
+                            "name": "ActorMessage",
+                            "required": true,
+                            "description": "Defines the Actor Message to be sent. (This parameter allows spaces.)",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "sendactormessage AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale",
+                            "description": "Play the A Spell animation, different on each hero"
+                        },
+                        {
+                            "command": "sam StatusIncrement StatusBarHide",
+                            "description": "Hide the status bar, HP bar"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "guo",
+                    "command": "getunitownership",
+                    "description": "Gets the Ownership (Player ID) of selected unit(s).",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "guo",
+                            "description": "Gets the Ownership (Player ID) of selected unit(s)."
+                        },
+                        {
+                            "command": "getunitownership",
+                            "description": "Gets the Ownership (Player ID) of selected unit(s)."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "cuo",
+                    "command": "changeunitownership",
+                    "description": "Changes ownership of the selected unit(s).\n>Note: 0 is neutral, which cannot be selected once owership have changed.",
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": true,
+                            "description": "The new owner of the selected unit(s).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "changeunitownership 1",
+                            "description": "Change all selected units's ownership to Player 1"
+                        },
+                        {
+                            "command": "cuo6",
+                            "description": "Change all selected units's ownership to Player 6"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "tnwcd",
+                    "command": "togglenoweaponcd",
+                    "description": "Constantly resetting the weapons (auto attack) cooldown, effectively increasing weapon speed.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tnwcd",
+                            "description": "Constantly resetting the weapons (auto attack) cooldown"
+                        },
+                        {
+                            "command": "togglenoweaponcd",
+                            "description": "Constantly resetting the weapons (auto attack) cooldown"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_metadata": {
+                "libraryName": "Players",
+                "libraryFile": "LibPlayers.galaxy",
+                "libraryId": "LibPLYR",
+                "libraryDescription": "Commands that are related to Players, eg, scoreboard, respawn timer, etc",
+                "overrideMarkdown": false,
+                "overrideMarkdownContent": null
+            },
+            "commands": [
+                {
+                    "shortCommand": "tmq",
+                    "command": "togglemassquest",
+                    "description": "Toggle mass quest completion mode. This can gives player 1600 quest stacks per second.\n>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tmq",
+                            "description": "Toggle mass quest completion mode."
+                        },
+                        {
+                            "command": "togglemassquest",
+                            "description": "Toggle mass quest completion mode."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "smr",
+                    "command": "setmasteryring",
+                    "description": "Set the Mastery Ring level. The ring below the hero will be automatically updated.\n>Note: If the new Level is lower than the current one, you may need to respawn(e.g suicide) the selected units.",
+                    "parameters": [
+                        {
+                            "name": "MasteryRingLevel",
+                            "required": true,
+                            "description": "The level of the mastery ring to be set.",
+                            "type": "integer "
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "setmasteryring 0",
+                            "description": "Remove the mastery ring from the player"
+                        },
+                        {
+                            "command": "smr 3",
+                            "description": "Set the mastery ring to Level 3."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "ttt",
+                    "command": "toggletalenttree",
+                    "description": "Toggle the display of the talents selection tree.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "ttt",
+                            "description": "Toggle the display of the talents selection tree."
+                        },
+                        {
+                            "command": "toggletalenttree",
+                            "description": "Toggle the display of the talents selection tree."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "tpgt",
+                    "command": "togglepausegametalent",
+                    "description": "Toggle whether to pause the game when viewing talents, similar to heores tutorial.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tpgt",
+                            "description": "Toggle whether to pause the game when viewing talents"
+                        },
+                        {
+                            "command": "togglepausegametalent",
+                            "description": "Toggle whether to pause the game when viewing talents"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmt",
+                    "command": "remvetalent",
+                    "description": "Remove a talent from a player, generally found in `<CTalent id=\"xxxx\">`.\n>Note: Some of the talents won't work, so you might want to experiment a bit.",
+                    "parameters": [
+                        {
+                            "name": "TalentId",
+                            "required": true,
+                            "description": "The talent id to be removed",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The target player id to have the talent being removed.",
+                            "type": "string",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "removetalent MedivhForceOfWillArcaneExplosion",
+                            "description": "Removed Medivh's Arcane Explosion Talent from Player 1"
+                        },
+                        {
+                            "command": "rmt MalfurionCelestialAlignment 2",
+                            "description": "Removed Malfurion's Celest>ial Alignment Talent from Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "ent",
+                    "command": "enabletalent",
+                    "description": "Enable / Disable a talent for all player. Generally found in `<CTalent id=\"xxxx\">`.\n>Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player.",
+                    "parameters": [
+                        {
+                            "name": "TalentId",
+                            "required": true,
+                            "description": "The talent id to be enabled/disabled.",
+                            "type": "string"
+                        },
+                        {
+                            "name": "isEnable",
+                            "required": false,
+                            "description": "Set whether the talent should be enabled or disabled. (0 = disable, 1 = enable)",
+                            "type": "integer",
+                            "defaultValue": 1
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "enabletalent RagnarosLavaWave 1",
+                            "description": "Enable Rag's Lava Wave talent, which was disabled in ARAM."
+                        },
+                        {
+                            "command": "ent MaievUmbralBindPursuitOfVengeance 0",
+                            "description": "Disable Maiev's Pursuit Of Vengeance talent"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rst",
+                    "command": "respawntime",
+                    "description": "Override the current respawn timer for all players.\n>Notice: Due to the system limitation, if you set to 0, it will change it to 0.0625 automatically (1 game tick).",
+                    "parameters": [
+                        {
+                            "name": "seconds",
+                            "required": true,
+                            "description": "The respawn time to be set for all players",
+                            "type": "float"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "respawntime 99",
+                            "description": "set the respawn timer to 99 seconds"
+                        },
+                        {
+                            "command": "rst 0",
+                            "description": "set the respawn timer to 0.0625 second"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "score",
+                    "command": "setscore",
+                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
+                    "parameters": [
+                        {
+                            "name": "Field",
+                            "required": true,
+                            "description": "The field to be modified in the scoreboard.",
+                            "type": "string"
+                        },
+                        {
+                            "name": "Value",
+                            "required": true,
+                            "description": "The value to be set for the field in the scoreboard.",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The player id for the modification to be applied.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "setscore HeroDamage 0",
+                            "description": "Set the field \"Hero Damage\" to 0 for the player who use this command."
+                        },
+                        {
+                            "command": "score SoloKill 524287",
+                            "description": "Set the field \"Kils\" to 5242873 for the player who use this command"
+                        },
+                        {
+                            "command": "score Healing 1000 2",
+                            "description": "Set the field \"Healing\" to 1000 for the player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rsp",
+                    "command": "respawnpoint",
+                    "description": "Modify the respawn point for a player. Either at the current camera location or its default location.",
+                    "parameters": [
+                        {
+                            "name": "Action",
+                            "required": true,
+                            "description": "Choose the action of the comman. (set = set the respawn location at camera location, reset = reset all respawn location)",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId/all",
+                            "required": false,
+                            "description": "Set the player id for the spawn modification to take effect, use \"all\" for all players.",
+                            "type": "integer/string",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "respawnpoint set all",
+                            "description": "set the respawn point for all players at the current camera location"
+                        },
+                        {
+                            "command": "rsp set",
+                            "description": "set the respawn point to player who uses the command at the current camera location"
+                        },
+                        {
+                            "command": "respawnpoint set 6",
+                            "description": "set the respawn point for player 6 at camera location"
+                        },
+                        {
+                            "command": "rsp reset 2",
+                            "description": "reset player 2's respawn point to default location"
+                        },
+                        {
+                            "command": "rsp reset all",
+                            "description": "reset all player's respawn point to its default respawn location (hall of storms)."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_metadata": {
+                "libraryName": "Builder Mode",
+                "libraryFile": "LibBuilderMode.galaxy",
+                "libraryId": "libBULM",
+                "libraryDescription": "A Builder Library that allows you to place objects anywhere in the map.",
+                "overrideMarkdown": true,
+                "overrideMarkdownContent": "**This system is still in a early development.**\n\n\n\nBuilder mode allows you to place objects to anywhere in the map. The units will constantly teleport to your cursor (follow your cursor). Remember to select `/ac` and `ts` in QA menu (this will added automatically in future development).\n\n\n\nTo use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.\n\n\n\nTo place the unit(s), press `backspace` again to deactivate builder mode.\n\n"
+            }
+        },
+        {
+            "_metadata": {
+                "libraryName": "FPS Mode",
+                "libraryFile": "LibFPSMode.galaxy",
+                "libraryId": "libFPSM",
+                "libraryDescription": "A First Person Shooter like Library that allows you to see the map in first person camera.",
+                "overrideMarkdown": true,
+                "overrideMarkdownContent": "**This system is still in a early development.**\n\n\n\nFPS Mode allows you to look at the map by using a first person camera on your unit. The camera will constantly look forward and turn as well as long as the mode is activated.\n\n\n\nTo toggle FPS mode, simply use the `fps` chat command.\n\n\n\n### Controls:\n\n\n\n - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)\n\n - `← (arrow key)` : Turn your unit and camera to left.\n\n - `→ (arrow key)` : Turn your unit and camera to right.\n\n - `↑ (arrow key)` : Turn your camera upwards.\n\n - `↓ (arrow key)` : Turn your camera downwards.\n\n"
+            }
+        },
+        {
+            "_metadata": {
+                "libraryName": "Free Camera Mode",
+                "libraryFile": "LibFreeCameraMode.galaxy",
+                "libraryId": "libFRCM",
+                "libraryDescription": "Free Camera Mode allows you to change the angle of the camera easily.",
+                "overrideMarkdown": true,
+                "overrideMarkdownContent": "**This system is still in a early development.**\n\nFree Camera Mode allows you to use `Middle Mouse Wheel` to freely change your camera angel and direction.\n\nTo enable or disable, simply use the chat command `tfc` or `togglefreecamera`!\n\n>Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active\n"
+            }
+        },
+        {
+            "_metadata": {
+                "libraryName": "Funny Module",
+                "libraryFile": "LibFunny.galaxy",
+                "libraryId": "libFUNY",
+                "libraryDescription": "Random useless stuff just for the lolz.",
+                "overrideMarkdown": true,
+                "overrideMarkdownContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ=="
+            }
+        }
+    ]
+}
