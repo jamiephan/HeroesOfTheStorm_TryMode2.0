@@ -19,6 +19,7 @@ trigger libUTIL_gt_ToggleUI;
 trigger libUTIL_gt_ToggleFOW;
 trigger libUTIL_gt_ToggleMassCDR;
 trigger libUTIL_gt_RunMassCDR;
+trigger libUTIL_gt_ToggleDebugMode;
 trigger libUTIL_gt_WinGame;
 trigger libUTIL_gt_StartGame;
 trigger libUTIL_gt_EndGame;
@@ -236,6 +237,40 @@ void libUTIL_gt_RunMassCDR_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: ToggleDebugMode
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleDebugMode_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    bool lv_debugModeProxyVariable;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libCore_gv_dEBUGDebuggingEnabled = !(libCore_gv_dEBUGDebuggingEnabled);
+    lv_debugModeProxyVariable = libCore_gv_dEBUGDebuggingEnabled;
+    if ((lv_debugModeProxyVariable == true)) {
+        libUTIL_gv_massCDRPlayer = EventPlayer();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Mode Enabled"));
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Mode Disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleDebugMode_Init () {
+    libUTIL_gt_ToggleDebugMode = TriggerCreate("libUTIL_gt_ToggleDebugMode_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleDebugMode, c_playerAny, "tdb", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleDebugMode, c_playerAny, "toggledebugmode", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: WinGame
 //--------------------------------------------------------------------------------------------------
 bool libUTIL_gt_WinGame_Func (bool testConds, bool runActions) {
@@ -347,6 +382,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ToggleFOW_Init();
     libUTIL_gt_ToggleMassCDR_Init();
     libUTIL_gt_RunMassCDR_Init();
+    libUTIL_gt_ToggleDebugMode_Init();
     libUTIL_gt_WinGame_Init();
     libUTIL_gt_StartGame_Init();
     libUTIL_gt_EndGame_Init();

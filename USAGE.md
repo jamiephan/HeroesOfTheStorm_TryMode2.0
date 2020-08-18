@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 18 Aug 2020 16:02:16 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 18 Aug 2020 16:24:21 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -28,6 +28,17 @@ This module is for loading other modules. Do not modify this file in SC2Editor.
 # Utilities Library (`LibUtilities.galaxy`):
 A Library that have utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
+## (`toggledebugmode` | `tdb`) 
+#### Description: 
+Toggle Debug Mode (the `libCore_gv_dEBUGDebuggingEnabled` variable)
+
+#### Parameters:
+    None
+#### Examples:
+    > tdb
+    	(Toggle Debug Mode)
+    > toggledebugmode
+    	(Toggle Debug Mode)
 ## (`togglefogofwar` | `tfow`) 
 #### Description: 
 Toggle Fog Of War. This can enable or disable full map vision.

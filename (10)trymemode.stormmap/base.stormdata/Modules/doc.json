@@ -26,6 +26,22 @@
             },
             "commands": [
                 {
+                    "shortCommand": "tdb",
+                    "command": "toggledebugmode",
+                    "description": "Toggle Debug Mode (the `libCore_gv_dEBUGDebuggingEnabled` variable)",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "tdb",
+                            "description": "Toggle Debug Mode"
+                        },
+                        {
+                            "command": "toggledebugmode",
+                            "description": "Toggle Debug Mode"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "tfow",
                     "command": "togglefogofwar",
                     "description": "Toggle Fog Of War. This can enable or disable full map vision.",
