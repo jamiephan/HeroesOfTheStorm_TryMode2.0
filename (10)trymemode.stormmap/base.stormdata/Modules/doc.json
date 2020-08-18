@@ -12,7 +12,7 @@
                 "libraryId": "LibMODL",
                 "libraryDescription": "A unified Module Loader Lib that allows you to choose which module to load",
                 "overrideMarkdown": true,
-                "overrideMarkdownContent": "This module contains various of utilities command such as restarting try mode, etc"
+                "overrideMarkdownContent": "This module is for loading other modules. Do not modify this file in SC2Editor."
             }
         },
         {

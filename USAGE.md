@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 07 Jun 2020 07:40:36 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 18 Aug 2020 16:02:16 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -22,7 +22,7 @@ The commands documentation sits on each library. Please see below:
 # Module Loader Library (`LibModuleLoader.galaxy`):
 A unified Module Loader Lib that allows you to choose which module to load
 
-This module contains various of utilities command such as restarting try mode, etc
+This module is for loading other modules. Do not modify this file in SC2Editor.
 
 ---
 # Utilities Library (`LibUtilities.galaxy`):
