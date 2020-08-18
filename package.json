@@ -9,7 +9,8 @@
         "buildmimicabilities": "bash -c -i \"node ./scripts/buildmimicabilities.js\"",
         "s2ma": "bash -c -i \"node ./scripts/s2ma.js\"",
         "triggergenerator": "node ./scripts/triggerGenerator.js",
-        "symlink": "node ./scripts/symlink.js"
+        "symlink": "node ./scripts/symlink.js",
+        "generateusagedoc": "node ./scripts/generateUsageDoc.js"
     },
     "repository": {
         "type": "git",
