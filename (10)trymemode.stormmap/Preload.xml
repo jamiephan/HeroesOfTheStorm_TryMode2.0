@@ -14,8 +14,6 @@
 <Actor id="Storm_Doodad_KingsCrest_MayPole"/>
 <Actor id="Storm_Doodad_KingsCrest_StreetLamp"/>
 <AnnouncerPack id="LadyofThorns"/>
-<Behavior id="TowerCFHFocusedTargetTracker"/>
-<Behavior id="TowerCFHUpdateNearbyHeroes"/>
 <Goal id="MidLaneBeacon"/>
 <Hero id="Arthas"/>
 <Mount id="HorseBlack"/>
