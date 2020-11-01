@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 18 Aug 2020 16:24:21 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 01 Nov 2020 10:23:19 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -54,7 +54,7 @@ Toggle Fog Of War. This can enable or disable full map vision.
 #### Description: 
 Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.
 
->Note: If UI is off, all abilites will be disabled.
+>Note: If UI is off, all abilities will be disabled.
 
 #### Parameters:
     None
@@ -144,19 +144,19 @@ Instantly kill all selected unit(s).
     	(Instantly kill all selected unit(s).)
 ## (`toggleoutputid` | `toi`) 
 #### Description: 
-Toggle displaying units'id mode. Which will shows the unit's id on the sceen with a left click.
+Toggle displaying units' id mode. Which will shows the unit's id on the screen with a left click.
 
 #### Parameters:
     None
 #### Examples:
     > toi
-    	(Toggle displaying units'id mode.)
+    	(Toggle displaying units' id mode.)
     > toggleoutputid
-    	(Toggle displaying units'id mode.)
+    	(Toggle displaying units' id mode.)
 ## (`summon` | `sum`) `<UnitId>` `[PlayerId]` `[Amount]`
 #### Description: 
 Spawn unit(s) at the centre of your camera location.
->Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master. However, there are some issues that have conflict to `/ac` QA Cheat menu, which I recommand you first turn `/ac` on if you would like to use this command.
+>Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master. However, there are some issues that have conflict to `/ac` QA Cheat menu, which I recommend you first turn `/ac` on if you would like to use this command.
 
 >Note: If your hero is Samuro, it will have some weird behavior for multi selection.
 
@@ -202,7 +202,7 @@ Set the scale of the summon units for the command `summon`.
     	(Set the scale of the summon unit to 1.5 (50% bigger than normal size))
 ## (`unitproperty` | `up`) `<type>` `<value>`
 #### Description: 
-Allow to modify a selected units' property, such as  Max health, regen, movement speed etc.
+Allow to modify a selected units' property, such as max health, regen, movement speed etc.
 
 
 |Type|Galaxy file constant|
@@ -417,7 +417,7 @@ Gets the Ownership (Player ID) of selected unit(s).
 ## (`changeunitownership` | `cuo`) `<PlayerId>`
 #### Description: 
 Changes ownership of the selected unit(s).
->Note: 0 is neutral, which cannot be selected once owership have changed.
+>Note: 0 is neutral, which cannot be selected once ownership have changed.
 
 #### Parameters:
     <PlayerId>

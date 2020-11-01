@@ -1,20 +1,27 @@
 # Tools
 
-All tools require `nodejs` to do so. After installed `nodejs` and cloned the repo, do a `npm install`.
+## Prerequisite
 
->Note: Due to how the storm-extract library works, this only support Nodejs 10.
+In order for the tools to work, some specific environment configurations must be done. 
 
-In addition, it requires a Linux Enviorment to do so. If you are on Linux, great, if you are on Windows, try using `WSL` with `Ubuntu` installed.
+- Environment: `Linux` (or `WSL`)
+- System Libraries:
+    - cmake 
+    - libbz2-dev 
+    - zlib1g-dev 
+    - python 
+    - build-essential
+- Nodejs: `10.X.X` (Other versions might not work)
 
->TODO: Make it compatible with Windows.
+After installed the libraries and application above, in this directory, run `npm install`.
 
 # Pre-usage Configuration (\*Required)
 
 All the settings are stored in the `.env` file in the root of the project directory.
 
-Before using any tools, rename `.env.example` into `.env` (remove the `.example` at the end) and modify the configuation to fit your need.
+Before using any tools, rename `.env.example` into `.env` (remove the `.example` at the end) and modify the configuration to fit your need.
 
-This tool uses `dotenv` to load the configs into Enviorment Variables (`process.env`). The settings are `key=value` pairs with strings having double quote.
+This tool uses `dotenv` to load the configs into Environment Variables (`process.env`). The settings are `key=value` pairs with strings having double quote.
 
 Example: `HEROES_OF_THE_STORM_INSTALL_LOCATION="/mnt/c/Program Files/Heroes of the Storm"`.
 
@@ -74,7 +81,7 @@ The reason for this is you can add any abilities to any heroes freely (which wil
 
 To do so, just simply add the behavior to the selected units (e.g using the [chat command](USAGE.md) `adb MZeratulCleave`)
 
-Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilties requirements will be shown inside the generated XML file.
+Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
 >Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod afterall.
 
@@ -83,7 +90,7 @@ Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/Heroe
 Altering `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
 
 
-Demo: Alarak with Zera's Cleave, VP, 2 banner from varian, Gazlowe's Turret 
+Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret 
 
 ![Alarak with extra abilites](https://i.imgur.com/11ogJyt.png)
 
@@ -103,7 +110,7 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 ## Mimic Lib Generator
 
-**BREAKING: THIS TOOLCURRENTLY DOES NOT WORK, PLEASE DO NOT USE IT.**
+**BREAKING: THIS TOOL CURRENTLY DOES NOT WORK, PLEASE DO NOT USE IT.**
 
 **Command**: `npm run buildmimic '/path/to/heroesofthestorm/'`
 
@@ -132,7 +139,7 @@ Currently will mimic:
 
 ### Internal Library Mimics
 
-Mimic Librarys are identical to internal trigger libs (Created by Blizzard). However, due to some restrictions, some functionalities cannot be easily used (for example it will detect whether it is a development build or production build, to prevent normal users accessing the commands.)
+Mimic Libraries are identical to internal trigger libs (Created by Blizzard). However, due to some restrictions, some functionalities cannot be easily used (for example it will detect whether it is a development build or production build, to prevent normal users accessing the commands.)
 
 The Mimic Libs are from `heroesdata.stormmod/base.stormdata/TriggerLibs` and they are stored in `base.stormdata/ModuleMimicLibs`.
 
@@ -145,7 +152,7 @@ Hence, I have create a mimic lib that is identical to internal libs, but modifie
 
 #### Renamed all triggers, variables, function etc.
 
-Well, common sense. To prevent conflict with the origional library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
+Well, common sense. To prevent conflict with the original library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
 
 #### Changed Game Cheat Detection (Dev/Prod build detect)
 
@@ -175,9 +182,9 @@ Since those code are for debug purpose only, if you have played around SC2 Maps,
 
 However, I cannot find a way to get the debug window up despite manually calling the debug window out. This tool is extremely useful for debugging if Heroes can call it out. Well, unfortunately.
 
-Those messages still carry out important infomation about the current state of the trigger call, therefore, I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageTitleDebug` instead, like how all the chat commands output.
+Those messages still carry out important information about the current state of the trigger call, therefore, I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageTitleDebug` instead, like how all the chat commands output.
 
-The Lib that countain this command is also generated via the mimic [tool](#Tools), which is `ModulesMimicLibs/MimicTriggerDebugOutput.galaxy`.
+The Lib that countian this command is also generated via the mimic [tool](#Tools), which is `ModulesMimicLibs/MimicTriggerDebugOutput.galaxy`.
 
 #### Prefixing Chat Commands
 

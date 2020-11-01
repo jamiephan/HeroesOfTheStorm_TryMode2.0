@@ -38,7 +38,7 @@ Generally, You can override the XML Keys that the game has. The game will use yo
 
 All XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories, file name, amount are not limited.
 
-I also recommand using the tool `generatexml` to build the XML file, for more, see [TOOLS.md](TOOLS.md).
+I also recommend using the tool `generatexml` to build the XML file, for more, see [TOOLS.md](TOOLS.md).
 
 ## Editing the Galaxy Script Files
 
@@ -123,10 +123,10 @@ To add the Heroes Specific script, in the Actions:
 Select Custom Script:
 ![](https://i.imgur.com/CYPtAdg.png)
 
-And Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the varables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable):
+And Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable):
 ![](https://i.imgur.com/ZXAT6DT.png)
 
-If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the gaalxy file), it most likely complain and won't let you save:
+If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the galaxy file), it most likely complain and won't let you save:
 ![](https://i.imgur.com/8mMezMF.png)
 
 To able to save the SC2Mod file, append `//` before the custom script:
@@ -151,7 +151,7 @@ If you loaded this map, you will noticed the loading screen have changed to our 
 
 ![Try mode 2.0 loading screen](https://i.imgur.com/dbggpQN.png)
 
-I recommend using a plugin [NVIDIA Texture Tools for Adobe Photoshop](https://developer.nvidia.com/nvidia-texture-tools-adobe-photoshop) to do edit the .dds files with photoship. 
+I recommend using a plugin [NVIDIA Texture Tools for Adobe Photoshop](https://developer.nvidia.com/nvidia-texture-tools-adobe-photoshop) to do edit the .dds files with Photoshop. 
 
 >Note: When saving, remember to choose `No MIP maps` inside the `MIP Map Generation` section. 
 *(Took me a long time to figure it out why the texture is not loading.....)*

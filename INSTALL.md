@@ -24,6 +24,6 @@ After you installed, Launch the try mode in game and you should see the message 
 
 Start by typing "hi" in the chat message (in-game allies or all chat, not private or channel chat) and you should see your name responded.
 
-If you see something like this, maybe the game just updated with broken compatability, please wait for update or create an issue.
+If you see something like this, maybe the game just updated with broken compatibility, please wait for update or create an issue.
 
 ![Map script error](https://i.imgur.com/cjXbq07.jpg)

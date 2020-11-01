@@ -60,7 +60,7 @@
                 {
                     "shortCommand": "tui",
                     "command": "toggleui",
-                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If UI is off, all abilites will be disabled.",
+                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If UI is off, all abilities will be disabled.",
                     "parameters": [],
                     "examples": [
                         {
@@ -199,23 +199,23 @@
                 {
                     "shortCommand": "toi",
                     "command": "toggleoutputid",
-                    "description": "Toggle displaying units'id mode. Which will shows the unit's id on the sceen with a left click.",
+                    "description": "Toggle displaying units' id mode. Which will shows the unit's id on the screen with a left click.",
                     "parameters": [],
                     "examples": [
                         {
                             "command": "toi",
-                            "description": "Toggle displaying units'id mode."
+                            "description": "Toggle displaying units' id mode."
                         },
                         {
                             "command": "toggleoutputid",
-                            "description": "Toggle displaying units'id mode."
+                            "description": "Toggle displaying units' id mode."
                         }
                     ]
                 },
                 {
                     "shortCommand": "sum",
                     "command": "summon",
-                    "description": "Spawn unit(s) at the centre of your camera location.\n>Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master. However, there are some issues that have conflict to `/ac` QA Cheat menu, which I recommand you first turn `/ac` on if you would like to use this command.\n\n>Note: If your hero is Samuro, it will have some weird behavior for multi selection.",
+                    "description": "Spawn unit(s) at the centre of your camera location.\n>Note: It will also enable multi-selection, like Vikings and Samuro with Illusion Master. However, there are some issues that have conflict to `/ac` QA Cheat menu, which I recommend you first turn `/ac` on if you would like to use this command.\n\n>Note: If your hero is Samuro, it will have some weird behavior for multi selection.",
                     "parameters": [
                         {
                             "name": "UnitId",
@@ -279,7 +279,7 @@
                 {
                     "shortCommand": "up",
                     "command": "unitproperty",
-                    "description": "Allow to modify a selected units' property, such as  Max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
+                    "description": "Allow to modify a selected units' property, such as max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
                     "parameters": [
                         {
                             "name": "type",
@@ -570,7 +570,7 @@
                 {
                     "shortCommand": "cuo",
                     "command": "changeunitownership",
-                    "description": "Changes ownership of the selected unit(s).\n>Note: 0 is neutral, which cannot be selected once owership have changed.",
+                    "description": "Changes ownership of the selected unit(s).\n>Note: 0 is neutral, which cannot be selected once ownership have changed.",
                     "parameters": [
                         {
                             "name": "PlayerId",
