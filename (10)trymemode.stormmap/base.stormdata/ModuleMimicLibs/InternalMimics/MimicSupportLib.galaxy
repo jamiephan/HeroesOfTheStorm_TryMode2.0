@@ -8,7 +8,7 @@ include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/GameDataHelperLib_h"
 
-include "ModuleMimicLibs/MimicSupportLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicSupportLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Support
@@ -42,6 +42,7 @@ void MimicSupportLib_InitVariables () {
     for (init_i = 0; init_i <= MimicSupportLib_gv_dataMiningMaxNumberOfDifferentManaRegenSources; init_i += 1) {
         MimicSupportLib_gv_dataMiningManaRegenSourceNames[init_i] = "";
     }
+    MimicSupportLib_gv_heroMasteryRingsMaxRank = 3;
     MimicSupportLib_gv_qACheatsSpawnedUnitsGroup = UnitGroupEmpty();
     MimicSupportLib_gv_qACheatsSelectedBehavior = 1;
     MimicSupportLib_gv_qACheatsSelectedSpawnUnit = 1;
@@ -683,7 +684,7 @@ void MimicSupportLib_gf_DataMiningSendStartGameEvents () {
     }
 }
 
-void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_WinningTeam) {
+void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_team) {
     // Variable Declarations
     int lv_player;
     int lv_source;
@@ -738,7 +739,7 @@ void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_WinningTeam) {
         StatEventAddDataInt(StatEventLastCreated(), "PlayerID", lv_player);
         StatEventAddDataString(StatEventLastCreated(), "Hero", (UnitGetType(libGame_gv_players[lv_player].lv_heroUnit)));
         StatEventAddDataInt(StatEventLastCreated(), "Level", libGame_gv_teams[libGame_gf_TeamNumberOfPlayer(lv_player)].lv_teamLevel);
-        if ((libGame_gf_TeamNumberOfPlayer(lv_player) == lp_WinningTeam)) {
+        if ((libGame_gf_TeamNumberOfPlayer(lv_player) == lp_team)) {
             StatEventAddDataString(StatEventLastCreated(), "Win/Loss", "Win");
         }
         else {
@@ -757,6 +758,88 @@ void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_WinningTeam) {
         StatEventSend(StatEventLastCreated());
     }
     MimicSupportLib_gf_DataMiningTurnDataMiningTriggersOnOff(false);
+}
+
+void MimicSupportLib_gf_SetHeroMasteryRingLevel (int lp_player) {
+    // Variable Declarations
+    int lv_i;
+    string lv_playerHero;
+    int lv_playerMasteryLevel;
+    string lv_heroCatalogID;
+    string lv_masteryRingString;
+    int lv_iteratorString;
+    string lv_combinedHeroString;
+    string lv_combinedRewardArrayStringValue;
+    int lv_lastSuccessfulUpgradeLevel;
+
+    // Automatic Variable Declarations
+    int auto311B52FA_ae;
+    const int auto311B52FA_ai = 1;
+    unitgroup auto31D416DD_g;
+    int auto31D416DD_u;
+    unit auto31D416DD_var;
+
+    // Variable Initialization
+    lv_playerHero = PlayerHero(lp_player);
+    lv_playerMasteryLevel = PlayerHeroMasteryTier(lp_player, PlayerHero(lp_player));
+    lv_heroCatalogID = (lv_playerHero);
+    lv_masteryRingString = "MasteryRing";
+    lv_iteratorString = 1;
+    lv_combinedHeroString = "";
+    lv_combinedRewardArrayStringValue = "";
+
+    // Implementation
+    auto311B52FA_ae = MimicSupportLib_gv_heroMasteryRingsMaxRank;
+    lv_i = 1;
+    for ( ; ( (auto311B52FA_ai >= 0 && lv_i <= auto311B52FA_ae) || (auto311B52FA_ai < 0 && lv_i >= auto311B52FA_ae) ) ; lv_i += auto311B52FA_ai ) {
+        lv_combinedHeroString = (lv_heroCatalogID + lv_masteryRingString + IntToString(lv_iteratorString));
+        lv_combinedRewardArrayStringValue = CatalogFieldValueGet(c_gameCatalogHero, lv_playerHero, "HeroMasteryRingArray[" + IntToString(lv_iteratorString) + "]", lp_player);
+        if ((lv_playerMasteryLevel >= lv_iteratorString) && (PlayerHasReward(lp_player, (lv_combinedRewardArrayStringValue)) == true)) {
+            lv_lastSuccessfulUpgradeLevel = lv_iteratorString;
+            lv_iteratorString += 1;
+            if ((lv_iteratorString > MimicSupportLib_gv_heroMasteryRingsMaxRank)) {
+                lv_iteratorString = MimicSupportLib_gv_heroMasteryRingsMaxRank;
+                break;
+            }
+
+        }
+        else {
+            break;
+        }
+    }
+    libNtve_gf_SetUpgradeLevelForPlayer(lp_player, "HeroRingMasteryUpgrade", lv_lastSuccessfulUpgradeLevel);
+    if (((lv_playerHero == "Cho") || (lv_playerHero == "Gall"))) {
+        if ((lv_lastSuccessfulUpgradeLevel > libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_pairedHighestHeroRingMasteryLevel)) {
+            libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_pairedHighestHeroRingMasteryLevel = lv_lastSuccessfulUpgradeLevel;
+        }
+
+    }
+    else {
+        auto31D416DD_g = libGame_gv_players[lp_player].lv_heroUnitGroup;
+        auto31D416DD_u = UnitGroupCount(auto31D416DD_g, c_unitCountAll);
+        for (;; auto31D416DD_u -= 1) {
+            auto31D416DD_var = UnitGroupUnitFromEnd(auto31D416DD_g, auto31D416DD_u);
+            if (auto31D416DD_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(auto31D416DD_var, "Signal MasteryRingCreation");
+        }
+    }
+}
+
+void MimicSupportLib_gf_ChoGallHeroMasteryRing (int lp_player) {
+    // Automatic Variable Declarations
+    unitgroup autoE98F73C3_g;
+    int autoE98F73C3_u;
+    unit autoE98F73C3_var;
+
+    // Implementation
+    libNtve_gf_SetUpgradeLevelForPlayer(libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_choPlayer, "HeroRingMasteryUpgrade", libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_pairedHighestHeroRingMasteryLevel);
+    autoE98F73C3_g = libGame_gv_players[libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_choPlayer].lv_heroUnitGroup;
+    autoE98F73C3_u = UnitGroupCount(autoE98F73C3_g, c_unitCountAll);
+    for (;; autoE98F73C3_u -= 1) {
+        autoE98F73C3_var = UnitGroupUnitFromEnd(autoE98F73C3_g, autoE98F73C3_u);
+        if (autoE98F73C3_var == null) { break; }
+        libNtve_gf_SendActorMessageToUnit(autoE98F73C3_var, "Signal MasteryRingCreation");
+    }
 }
 
 void MimicSupportLib_gf_QACheatsUIInit () {
@@ -1329,7 +1412,7 @@ void MimicSupportLib_gf_QACheatsCleanseAllEffects () {
     }
 }
 
-void MimicSupportLib_gf_SoundRepeatRepeatSound () {
+void MimicSupportLib_gf_DEBUGSoundRepeatRepeatSound () {
     // Automatic Variable Declarations
     // Implementation
     while ((MimicSupportLib_gv_soundRepeatActive == true)) {
@@ -1352,7 +1435,7 @@ void MimicSupportLib_gf_SoundRepeatRepeatSound () {
 void MimicSupportLib_gf_DEBUGStartGame () {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return ;
     }
 
@@ -1371,7 +1454,7 @@ void MimicSupportLib_gf_DEBUGSpawnCreepCamps () {
     // Variable Initialization
 
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return ;
     }
 
@@ -1389,7 +1472,7 @@ void MimicSupportLib_gf_DEBUGSpawnCreepCamps () {
 void MimicSupportLib_gf_DEBUGToggleSelection () {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return ;
     }
 
@@ -1427,7 +1510,7 @@ void MimicSupportLib_gf_DEBUGToggleSpawnatCameraorBaseSelection () {
 bool auto_MimicSupportLib_gf_DEBUGToggleSpawnatCameraorBaseSelection_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1460,7 +1543,7 @@ void MimicSupportLib_gf_DEBUGToggleMinionSpawning () {
 bool auto_MimicSupportLib_gf_DEBUGToggleMinionSpawning_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1495,7 +1578,7 @@ void MimicSupportLib_gf_DEBUGToggleTrickleXP () {
 bool auto_MimicSupportLib_gf_DEBUGToggleTrickleXP_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1528,7 +1611,7 @@ void MimicSupportLib_gf_DEBUGToggleCombatText () {
 bool auto_MimicSupportLib_gf_DEBUGToggleCombatText_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1565,7 +1648,7 @@ void MimicSupportLib_gf_DEBUGToggleAllCombatText () {
 bool auto_MimicSupportLib_gf_DEBUGToggleAllCombatText_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1601,7 +1684,7 @@ void MimicSupportLib_gf_DEBUGToggleSavedHeroCheckbox () {
 bool auto_MimicSupportLib_gf_DEBUGToggleSavedHeroCheckbox_TriggerFunc (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -1628,18 +1711,12 @@ void MimicSupportLib_gf_DEBUGRefreshCooldownsforUnit (int lp_player, unit lp_uni
     string lv_abilLink;
     string lv_cooldownLink;
     string lv_chargeLink;
-    string lv_itemUnitType;
-    int lv_itemIndex;
     int lv_currentRank;
-    int lv_itItems;
-    int lv_itAbilitiesOnItems;
-    string lv_itemLink;
     unitgroup lv_unitGroup;
 
     // Automatic Variable Declarations
     int auto8A789BA6_ae;
     const int auto8A789BA6_ai = 1;
-    int autoFBC6DAF3_ae;
 
     // Variable Initialization
     lv_cooldownLink = "";
@@ -1661,17 +1738,6 @@ void MimicSupportLib_gf_DEBUGRefreshCooldownsforUnit (int lp_player, unit lp_uni
             PlayerAddChargeUsed(lv_ownerofUnit, lv_cooldownLink, -1.0);
         }
 
-    }
-    autoFBC6DAF3_ae = UnitInventoryCount(lp_unit, c_unitInventoryCountCarried);
-    lv_itItems = 1;
-    for ( ; lv_itItems <= autoFBC6DAF3_ae ; lv_itItems += 1 ) {
-        lv_itemUnitType = UnitGetType(UnitInventoryItem(lp_unit, lv_itItems));
-        lv_itemLink = (CatalogFieldValueGet(c_gameCatalogUnit, lv_itemUnitType, "Item", c_playerAny));
-        lv_abilLink = (CatalogFieldValueGet(c_gameCatalogItem, lv_itemLink, "Abil", c_playerAny));
-        lv_cooldownLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Cooldown.Link", lv_ownerofUnit);
-        libNtve_gf_UnitRemoveCooldown(lp_unit, lv_cooldownLink);
-        lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.Link", lv_ownerofUnit);
-        UnitAddChargeUsed(lp_unit, lv_chargeLink, -1.0);
     }
 }
 
@@ -1774,11 +1840,6 @@ void MimicSupportLib_gf_DEBUGIncrementAllQuests (int lp_player, int lp_count) {
                 UnitSetTokenCount(lv_itSelectedUnit, CatalogFieldValueGet(c_gameCatalogBehavior, lv_tokenBehavior, "TokenId", c_playerAny), lv_newTokenCount, lv_itSelectedUnit);
                 if ((lv_tokenBehavior == "ButcherFreshMeatTokenCounter")) {
                     lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, "ButcherFreshMeatDummy", "Cost[" + IntToString(0) + "].Charge.Link", lp_player);
-                    UnitAddChargeUsed(lv_itSelectedUnit, lv_chargeLink, (-(lv_newTokenCount - lv_currentTokenCount)));
-                }
-
-                if ((lv_tokenBehavior == "WitchDoctorVoodooRitualTokenCounter")) {
-                    lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, "WitchDoctorVoodooRitualDummy", "Cost[" + IntToString(0) + "].Charge.Link", lp_player);
                     UnitAddChargeUsed(lv_itSelectedUnit, lv_chargeLink, (-(lv_newTokenCount - lv_currentTokenCount)));
                 }
 
@@ -2174,9 +2235,9 @@ void MimicSupportLib_gt_PerformanceTestMaintainHeroHealth_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Stat Tracking - Start for Player
+// Trigger: DEBUG - Stat Tracking - Start for Player
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_StatTrackingStartforPlayer_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_trackerPlayer;
     int lv_trackerPlayerHeroIndex;
@@ -2193,7 +2254,7 @@ bool MimicSupportLib_gt_StatTrackingStartforPlayer_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2229,16 +2290,16 @@ bool MimicSupportLib_gt_StatTrackingStartforPlayer_Func (bool testConds, bool ru
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_StatTrackingStartforPlayer_Init () {
-    MimicSupportLib_gt_StatTrackingStartforPlayer = TriggerCreate("MimicSupportLib_gt_StatTrackingStartforPlayer_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStartforPlayer, c_playerAny, "mStatTrackStart", false);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStartforPlayer, c_playerAny, "mStatTrackerStart", false);
+void MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer_Init () {
+    MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer = TriggerCreate("MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer, c_playerAny, "mStatTrackStart", false);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer, c_playerAny, "mStatTrackerStart", false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Stat Tracking - Log Break
+// Trigger: DEBUG - Stat Tracking - Log Break
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_StatTrackingLogBreak_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGStatTrackingLogBreak_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_trackerPlayer;
     int lv_trackerPlayerHeroIndex;
@@ -2255,7 +2316,7 @@ bool MimicSupportLib_gt_StatTrackingLogBreak_Func (bool testConds, bool runActio
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2291,16 +2352,16 @@ bool MimicSupportLib_gt_StatTrackingLogBreak_Func (bool testConds, bool runActio
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_StatTrackingLogBreak_Init () {
-    MimicSupportLib_gt_StatTrackingLogBreak = TriggerCreate("MimicSupportLib_gt_StatTrackingLogBreak_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingLogBreak, c_playerAny, "mStatTrackBreak", false);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingLogBreak, c_playerAny, "mStatTrackerBreak", false);
+void MimicSupportLib_gt_DEBUGStatTrackingLogBreak_Init () {
+    MimicSupportLib_gt_DEBUGStatTrackingLogBreak = TriggerCreate("MimicSupportLib_gt_DEBUGStatTrackingLogBreak_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingLogBreak, c_playerAny, "mStatTrackBreak", false);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingLogBreak, c_playerAny, "mStatTrackerBreak", false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Stat Tracking - Stop
+// Trigger: DEBUG - Stat Tracking - Stop
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_StatTrackingStop_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGStatTrackingStop_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_triggeringPlayer;
     int lv_entriesInDataTable;
@@ -2322,7 +2383,7 @@ bool MimicSupportLib_gt_StatTrackingStop_Func (bool testConds, bool runActions) 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2358,16 +2419,16 @@ bool MimicSupportLib_gt_StatTrackingStop_Func (bool testConds, bool runActions) 
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_StatTrackingStop_Init () {
-    MimicSupportLib_gt_StatTrackingStop = TriggerCreate("MimicSupportLib_gt_StatTrackingStop_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStop, c_playerAny, "mStatTrackStop", false);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStop, c_playerAny, "mStatTrackerStop", false);
+void MimicSupportLib_gt_DEBUGStatTrackingStop_Init () {
+    MimicSupportLib_gt_DEBUGStatTrackingStop = TriggerCreate("MimicSupportLib_gt_DEBUGStatTrackingStop_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStop, c_playerAny, "mStatTrackStop", false);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStop, c_playerAny, "mStatTrackerStop", false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Stat Tracking - Start Tracking for All Players
+// Trigger: DEBUG - Stat Tracking - Start Tracking for All Players
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_itPlayer;
 
@@ -2378,7 +2439,7 @@ bool MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Func (bool testCo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2399,14 +2460,14 @@ bool MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Func (bool testCo
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Init () {
-    MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers = TriggerCreate("MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Func");
+void MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers_Init () {
+    MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers = TriggerCreate("MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Stat Tracking - Stop Tracking for All Players
+// Trigger: DEBUG - Stat Tracking - Stop Tracking for All Players
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_itPlayer;
 
@@ -2417,7 +2478,7 @@ bool MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Func (bool testCon
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2438,12 +2499,12 @@ bool MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Func (bool testCon
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Init () {
-    MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers = TriggerCreate("MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers, c_playerAny, "mStatTrackStopAll", true);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers, c_playerAny, "mStatTrackerStopAll", true);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers, c_playerAny, "mstattrackstopall", true);
-    TriggerAddEventChatMessage(MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers, c_playerAny, "mstattrackerstopall", true);
+void MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers_Init () {
+    MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers = TriggerCreate("MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers, c_playerAny, "mStatTrackStopAll", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers, c_playerAny, "mStatTrackerStopAll", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers, c_playerAny, "mstattrackstopall", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers, c_playerAny, "mstattrackerstopall", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2610,6 +2671,7 @@ bool MimicSupportLib_gt_StatTrackingHealingTracking_Func (bool testConds, bool r
     lv_healingEffectCountAsStr = IntToString(DataTableGetInt(true, (lv_lookupNamePrefix + ":EffectCount" + lv_healingEffectPlayerAsStr)));
     DataTableSetInt(true, (lv_lookupNamePrefix + ":EffectCount" + lv_healingEffectPlayerAsStr), (DataTableGetInt(true, (lv_lookupNamePrefix + ":EffectCount" + lv_healingEffectPlayerAsStr)) + 1));
     DataTableSetFixed(true, (lv_lookupNamePrefix + ":HealingDone" + lv_healingEffectPlayerAsStr), (DataTableGetFixed(true, (lv_lookupNamePrefix + ":HealingDone" + lv_healingEffectPlayerAsStr)) + lv_healingDone));
+    libGame_gv_scoreValues[lv_healingPlayer].lv_healing += FixedToInt(lv_healingDone);
     return true;
 }
 
@@ -2711,13 +2773,379 @@ void MimicSupportLib_gt_DataMiningPeriodicDataSendPeriodicEventTrigger_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force Hero Mastery Ring 0
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGForceHeroMasteryRing0_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    unitgroup autoDB9E388B_g;
+    int autoDB9E388B_u;
+    unit autoDB9E388B_var;
+    int autoC5F27F1E_ae;
+    unitgroup autoF68CEDB8_g;
+    int autoF68CEDB8_u;
+    unit autoF68CEDB8_var;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventChatMessage(false) == "m-mre0")) {
+        lv_player = 6;
+    }
+
+    if ((EventChatMessage(false) == "m-mra0")) {
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_C5AE1FBC"), true);
+        autoC5F27F1E_ae = libCore_gv_bALMaxPlayers;
+        lv_i = 1;
+        for ( ; lv_i <= autoC5F27F1E_ae ; lv_i += 1 ) {
+            libNtve_gf_SetUpgradeLevelForPlayer(lv_i, "HeroRingMasteryUpgrade", 0);
+            autoF68CEDB8_g = libGame_gv_players[lv_i].lv_heroUnitGroup;
+            autoF68CEDB8_u = UnitGroupCount(autoF68CEDB8_g, c_unitCountAll);
+            for (;; autoF68CEDB8_u -= 1) {
+                autoF68CEDB8_var = UnitGroupUnitFromEnd(autoF68CEDB8_g, autoF68CEDB8_u);
+                if (autoF68CEDB8_var == null) { break; }
+                libNtve_gf_SendActorMessageToUnit(autoF68CEDB8_var, "Signal MasteryRingCreation");
+            }
+        }
+    }
+    else {
+        TextExpressionSetToken("Param/Expression/lib_Sprt_6EEBE7A1", "A", IntToText(lv_player));
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_6EEBE7A1"), true);
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_player, "HeroRingMasteryUpgrade", 0);
+        autoDB9E388B_g = libGame_gv_players[lv_player].lv_heroUnitGroup;
+        autoDB9E388B_u = UnitGroupCount(autoDB9E388B_g, c_unitCountAll);
+        for (;; autoDB9E388B_u -= 1) {
+            autoDB9E388B_var = UnitGroupUnitFromEnd(autoDB9E388B_g, autoDB9E388B_u);
+            if (autoDB9E388B_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(autoDB9E388B_var, "Signal MasteryRingCreation");
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGForceHeroMasteryRing0_Init () {
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing0 = TriggerCreate("MimicSupportLib_gt_DEBUGForceHeroMasteryRing0_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing0, c_playerAny, "m-mr0", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing0, c_playerAny, "m-mre0", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing0, c_playerAny, "m-mra0", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force Hero Mastery Ring 1
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGForceHeroMasteryRing1_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    unitgroup auto7EEB58A8_g;
+    int auto7EEB58A8_u;
+    unit auto7EEB58A8_var;
+    int auto18438449_ae;
+    unitgroup auto3FCC575C_g;
+    int auto3FCC575C_u;
+    unit auto3FCC575C_var;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventChatMessage(false) == "m-mre1")) {
+        lv_player = 6;
+    }
+
+    if ((EventChatMessage(false) == "m-mra1")) {
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_43C803F8"), true);
+        auto18438449_ae = libCore_gv_bALMaxPlayers;
+        lv_i = 1;
+        for ( ; lv_i <= auto18438449_ae ; lv_i += 1 ) {
+            libNtve_gf_SetUpgradeLevelForPlayer(lv_i, "HeroRingMasteryUpgrade", 1);
+            auto3FCC575C_g = libGame_gv_players[lv_i].lv_heroUnitGroup;
+            auto3FCC575C_u = UnitGroupCount(auto3FCC575C_g, c_unitCountAll);
+            for (;; auto3FCC575C_u -= 1) {
+                auto3FCC575C_var = UnitGroupUnitFromEnd(auto3FCC575C_g, auto3FCC575C_u);
+                if (auto3FCC575C_var == null) { break; }
+                libNtve_gf_SendActorMessageToUnit(auto3FCC575C_var, "Signal MasteryRingCreation");
+            }
+        }
+    }
+    else {
+        TextExpressionSetToken("Param/Expression/lib_Sprt_AAD84D88", "A", IntToText(lv_player));
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_AAD84D88"), true);
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_player, "HeroRingMasteryUpgrade", 1);
+        auto7EEB58A8_g = libGame_gv_players[lv_player].lv_heroUnitGroup;
+        auto7EEB58A8_u = UnitGroupCount(auto7EEB58A8_g, c_unitCountAll);
+        for (;; auto7EEB58A8_u -= 1) {
+            auto7EEB58A8_var = UnitGroupUnitFromEnd(auto7EEB58A8_g, auto7EEB58A8_u);
+            if (auto7EEB58A8_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(auto7EEB58A8_var, "Signal MasteryRingCreation");
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGForceHeroMasteryRing1_Init () {
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing1 = TriggerCreate("MimicSupportLib_gt_DEBUGForceHeroMasteryRing1_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing1, c_playerAny, "m-mr1", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing1, c_playerAny, "m-mre1", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing1, c_playerAny, "m-mra1", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force Hero Mastery Ring 2
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGForceHeroMasteryRing2_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    unitgroup autoCE596295_g;
+    int autoCE596295_u;
+    unit autoCE596295_var;
+    int autoF7B63C6E_ae;
+    unitgroup auto1E2BEC69_g;
+    int auto1E2BEC69_u;
+    unit auto1E2BEC69_var;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventChatMessage(false) == "m-mre2")) {
+        lv_player = 6;
+    }
+
+    if ((EventChatMessage(false) == "m-mra2")) {
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_8395C080"), true);
+        autoF7B63C6E_ae = libCore_gv_bALMaxPlayers;
+        lv_i = 1;
+        for ( ; lv_i <= autoF7B63C6E_ae ; lv_i += 1 ) {
+            libNtve_gf_SetUpgradeLevelForPlayer(lv_i, "HeroRingMasteryUpgrade", 2);
+            auto1E2BEC69_g = libGame_gv_players[lv_i].lv_heroUnitGroup;
+            auto1E2BEC69_u = UnitGroupCount(auto1E2BEC69_g, c_unitCountAll);
+            for (;; auto1E2BEC69_u -= 1) {
+                auto1E2BEC69_var = UnitGroupUnitFromEnd(auto1E2BEC69_g, auto1E2BEC69_u);
+                if (auto1E2BEC69_var == null) { break; }
+                libNtve_gf_SendActorMessageToUnit(auto1E2BEC69_var, "Signal MasteryRingCreation");
+            }
+        }
+    }
+    else {
+        TextExpressionSetToken("Param/Expression/lib_Sprt_B1FD42AF", "A", IntToText(lv_player));
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_B1FD42AF"), true);
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_player, "HeroRingMasteryUpgrade", 2);
+        autoCE596295_g = libGame_gv_players[lv_player].lv_heroUnitGroup;
+        autoCE596295_u = UnitGroupCount(autoCE596295_g, c_unitCountAll);
+        for (;; autoCE596295_u -= 1) {
+            autoCE596295_var = UnitGroupUnitFromEnd(autoCE596295_g, autoCE596295_u);
+            if (autoCE596295_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(autoCE596295_var, "Signal MasteryRingCreation");
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGForceHeroMasteryRing2_Init () {
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing2 = TriggerCreate("MimicSupportLib_gt_DEBUGForceHeroMasteryRing2_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing2, c_playerAny, "m-mr2", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing2, c_playerAny, "m-mre2", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing2, c_playerAny, "m-mra2", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force Hero Mastery Ring 3
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGForceHeroMasteryRing3_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    unitgroup auto57FC40ED_g;
+    int auto57FC40ED_u;
+    unit auto57FC40ED_var;
+    int auto5CD613F0_ae;
+    unitgroup auto688AC00F_g;
+    int auto688AC00F_u;
+    unit auto688AC00F_var;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventChatMessage(false) == "m-mre3")) {
+        lv_player = 6;
+    }
+
+    if ((EventChatMessage(false) == "m-mra3")) {
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_9F8C0AB0"), true);
+        auto5CD613F0_ae = libCore_gv_bALMaxPlayers;
+        lv_i = 1;
+        for ( ; lv_i <= auto5CD613F0_ae ; lv_i += 1 ) {
+            libNtve_gf_SetUpgradeLevelForPlayer(lv_i, "HeroRingMasteryUpgrade", 3);
+            auto688AC00F_g = libGame_gv_players[lv_i].lv_heroUnitGroup;
+            auto688AC00F_u = UnitGroupCount(auto688AC00F_g, c_unitCountAll);
+            for (;; auto688AC00F_u -= 1) {
+                auto688AC00F_var = UnitGroupUnitFromEnd(auto688AC00F_g, auto688AC00F_u);
+                if (auto688AC00F_var == null) { break; }
+                libNtve_gf_SendActorMessageToUnit(auto688AC00F_var, "Signal MasteryRingCreation");
+            }
+        }
+    }
+    else {
+        TextExpressionSetToken("Param/Expression/lib_Sprt_AA0119B9", "A", IntToText(lv_player));
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_AA0119B9"), true);
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_player, "HeroRingMasteryUpgrade", 3);
+        auto57FC40ED_g = libGame_gv_players[lv_player].lv_heroUnitGroup;
+        auto57FC40ED_u = UnitGroupCount(auto57FC40ED_g, c_unitCountAll);
+        for (;; auto57FC40ED_u -= 1) {
+            auto57FC40ED_var = UnitGroupUnitFromEnd(auto57FC40ED_g, auto57FC40ED_u);
+            if (auto57FC40ED_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(auto57FC40ED_var, "Signal MasteryRingCreation");
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGForceHeroMasteryRing3_Init () {
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing3 = TriggerCreate("MimicSupportLib_gt_DEBUGForceHeroMasteryRing3_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing3, c_playerAny, "m-mr3", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing3, c_playerAny, "m-mre3", true);
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRing3, c_playerAny, "m-mra3", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Force Hero Mastery Ring Rando
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_k;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    int autoB3844838_ae;
+    unitgroup auto7F5A7DC7_g;
+    int auto7F5A7DC7_u;
+    unit auto7F5A7DC7_var;
+    int autoF65E787E_ae;
+    unitgroup autoE82B844E_g;
+    int autoE82B844E_u;
+    unit autoE82B844E_var;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TextExpressionSetToken("Param/Expression/lib_Sprt_AF44B7C2", "A", IntToText(lv_player));
+    MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_AF44B7C2"), true);
+    autoB3844838_ae = libCore_gv_bALMaxPlayers;
+    lv_k = 1;
+    for ( ; lv_k <= autoB3844838_ae ; lv_k += 1 ) {
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_k, "HeroRingMasteryUpgrade", 0);
+        auto7F5A7DC7_g = libGame_gv_players[lv_k].lv_heroUnitGroup;
+        auto7F5A7DC7_u = UnitGroupCount(auto7F5A7DC7_g, c_unitCountAll);
+        for (;; auto7F5A7DC7_u -= 1) {
+            auto7F5A7DC7_var = UnitGroupUnitFromEnd(auto7F5A7DC7_g, auto7F5A7DC7_u);
+            if (auto7F5A7DC7_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(auto7F5A7DC7_var, "Signal MasteryRingCreation");
+        }
+    }
+    Wait(0.0625, c_timeGame);
+    autoF65E787E_ae = libCore_gv_bALMaxPlayers;
+    lv_k = 1;
+    for ( ; lv_k <= autoF65E787E_ae ; lv_k += 1 ) {
+        libNtve_gf_SetUpgradeLevelForPlayer(lv_k, "HeroRingMasteryUpgrade", RandomInt(0, MimicSupportLib_gv_heroMasteryRingsMaxRank));
+        autoE82B844E_g = libGame_gv_players[lv_k].lv_heroUnitGroup;
+        autoE82B844E_u = UnitGroupCount(autoE82B844E_g, c_unitCountAll);
+        for (;; autoE82B844E_u -= 1) {
+            autoE82B844E_var = UnitGroupUnitFromEnd(autoE82B844E_g, autoE82B844E_u);
+            if (autoE82B844E_var == null) { break; }
+            libNtve_gf_SendActorMessageToUnit(autoE82B844E_var, "Signal MasteryRingCreation");
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando_Init () {
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando = TriggerCreate("MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando, c_playerAny, "m-mrrando", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: QA Cheats - Init
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_QACheatsInit_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2744,7 +3172,7 @@ bool MimicSupportLib_gt_ToggleCheatsDialog_Func (bool testConds, bool runActions
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -2782,7 +3210,7 @@ bool MimicSupportLib_gt_QACheatsCloseButtonClicked_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -2813,7 +3241,7 @@ bool MimicSupportLib_gt_QACheatsAlliedControlCheckboxClicked_Func (bool testCond
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -2871,7 +3299,7 @@ bool MimicSupportLib_gt_QACheatsShowMapCheckboxClicked_Func (bool testConds, boo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -2902,7 +3330,7 @@ bool MimicSupportLib_gt_QACheatsVisionCheckboxClicked_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -2946,7 +3374,7 @@ bool MimicSupportLib_gt_QACheatsCooldownsCheckboxClicked_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -2977,7 +3405,7 @@ bool MimicSupportLib_gt_QACheatsGridCheckboxClicked_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3008,7 +3436,7 @@ bool MimicSupportLib_gt_QACheatsVisualizeEffectsCheckboxClicked_Func (bool testC
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3039,7 +3467,7 @@ bool MimicSupportLib_gt_QACheatsToggleFreeCheckboxClicked_Func (bool testConds, 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3070,7 +3498,7 @@ bool MimicSupportLib_gt_QACheatsToggleSelectionCheckboxClicked_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3123,7 +3551,7 @@ bool MimicSupportLib_gt_QACheatsToggleDisableWeaponsCheckboxChecked_Func (bool t
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3226,7 +3654,7 @@ bool MimicSupportLib_gt_QACheatsDisableWeaponsOnSpawn_Func (bool testConds, bool
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3281,7 +3709,7 @@ bool MimicSupportLib_gt_QACheatsDisableWeaponsOnChenUlt_Func (bool testConds, bo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3325,7 +3753,7 @@ bool MimicSupportLib_gt_QACheatsUnitSelected_Func (bool testConds, bool runActio
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3363,7 +3791,7 @@ bool MimicSupportLib_gt_QACheatsBehaviorDropdownSelectionChange_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3394,7 +3822,7 @@ bool MimicSupportLib_gt_QACheatsBehaviorApplyButtonClicked_Func (bool testConds,
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3425,7 +3853,7 @@ bool MimicSupportLib_gt_QACheatsBehaviorRemoveButtonClicked_Func (bool testConds
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3456,7 +3884,7 @@ bool MimicSupportLib_gt_QACheatsBehaviorCleanseButtonClicked_Func (bool testCond
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3495,7 +3923,7 @@ bool MimicSupportLib_gt_QACheatsExecuteSpeedButtonClicked_Func (bool testConds, 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3540,7 +3968,7 @@ bool MimicSupportLib_gt_QACheatsSpawnUnitsDropdownSelectionChange_Func (bool tes
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3571,7 +3999,7 @@ bool MimicSupportLib_gt_QACheatsTeamCheckboxesClicked_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3625,7 +4053,7 @@ bool MimicSupportLib_gt_QACheatsSpawnUnitsButtonClicked_Func (bool testConds, bo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3739,7 +4167,7 @@ bool MimicSupportLib_gt_QACheatsDebugKillUnitButtonClicked_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3778,7 +4206,7 @@ bool MimicSupportLib_gt_QACheatsRefreshUnitButtonClicked_Func (bool testConds, b
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3818,7 +4246,7 @@ bool MimicSupportLib_gt_QACheatsMoveUnitButtonClicked_Func (bool testConds, bool
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3859,7 +4287,7 @@ bool MimicSupportLib_gt_QACheatsRefreshCooldownsButtonClicked_Func (bool testCon
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3905,7 +4333,7 @@ bool MimicSupportLib_gt_QACheatsSetCameraAngleButtonClicked_Func (bool testConds
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3944,7 +4372,7 @@ bool MimicSupportLib_gt_QACheatsToggleDebugCameraCheckboxChecked_Func (bool test
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -3986,7 +4414,7 @@ bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4034,7 +4462,7 @@ bool MimicSupportLib_gt_QACheatsRespawnStructuresButtonClicked_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4065,7 +4493,7 @@ bool MimicSupportLib_gt_QACheatsKillStructuresButtonClicked_Func (bool testConds
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4107,7 +4535,7 @@ bool MimicSupportLib_gt_QACheatsDebugRespawnButtonClicked_Func (bool testConds, 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4174,7 +4602,7 @@ bool MimicSupportLib_gt_DEBUGIntroVOInteractorItemintrovotest_Func (bool testCon
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4190,7 +4618,7 @@ bool MimicSupportLib_gt_DEBUGIntroVOInteractorItemintrovotest_Func (bool testCon
     else {
         lv_unit = UnitGroupUnit(UnitGroupSelected(lv_player), 1);
         lv_unitGroup = UnitGroupSelected(lv_player);
-        UnitInventoryCreate(libAIAI_gv_aIHeroes[lv_player].lv_currentHeroUnit, "IntroVOInteractor");
+        UnitBehaviorAdd(libAIAI_gv_aIHeroes[lv_player].lv_currentHeroUnit, "IntroVOInteractor", libAIAI_gv_aIHeroes[lv_player].lv_currentHeroUnit, 1);
     }
     return true;
 }
@@ -4216,7 +4644,7 @@ bool MimicSupportLib_gt_DEBUGIntroVOInteractorUsage_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4262,7 +4690,7 @@ bool MimicSupportLib_gt_DEBUGInspectTheBalanceProbebalanceprobe_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4306,7 +4734,7 @@ bool MimicSupportLib_gt_DEBUGResetTheBalanceProbebalancereset_Func (bool testCon
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4348,7 +4776,7 @@ bool MimicSupportLib_gt_DEBUGTimedBalanceProbebalancetimer_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4420,13 +4848,13 @@ void MimicSupportLib_gt_DEBUGBalanceProbeTimerExpires_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Enable Sound Repeat
+// Trigger: DEBUG - Enable Sound Repeat
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_EnableSoundRepeat_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGEnableSoundRepeat_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4439,7 +4867,7 @@ bool MimicSupportLib_gt_EnableSoundRepeat_Func (bool testConds, bool runActions)
     if ((MimicSupportLib_gv_soundRepeatActive == false)) {
         MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_7CB411CC"), true);
         MimicSupportLib_gv_soundRepeatActive = true;
-        MimicSupportLib_gf_SoundRepeatRepeatSound();
+        MimicSupportLib_gf_DEBUGSoundRepeatRepeatSound();
     }
     else {
         MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_75796628"), true);
@@ -4449,15 +4877,15 @@ bool MimicSupportLib_gt_EnableSoundRepeat_Func (bool testConds, bool runActions)
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_EnableSoundRepeat_Init () {
-    MimicSupportLib_gt_EnableSoundRepeat = TriggerCreate("MimicSupportLib_gt_EnableSoundRepeat_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_EnableSoundRepeat, c_playerAny, "m-soundrepeat", true);
+void MimicSupportLib_gt_DEBUGEnableSoundRepeat_Init () {
+    MimicSupportLib_gt_DEBUGEnableSoundRepeat = TriggerCreate("MimicSupportLib_gt_DEBUGEnableSoundRepeat_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGEnableSoundRepeat, c_playerAny, "m-soundrepeat", true);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Sound Repeat - Adjust Delay
+// Trigger: DEBUG - Sound Repeat - Adjust Delay
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_SoundRepeatAdjustDelay_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay_Func (bool testConds, bool runActions) {
     // Variable Declarations
     fixed lv_delay;
 
@@ -4466,7 +4894,7 @@ bool MimicSupportLib_gt_SoundRepeatAdjustDelay_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4486,19 +4914,19 @@ bool MimicSupportLib_gt_SoundRepeatAdjustDelay_Func (bool testConds, bool runAct
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_SoundRepeatAdjustDelay_Init () {
-    MimicSupportLib_gt_SoundRepeatAdjustDelay = TriggerCreate("MimicSupportLib_gt_SoundRepeatAdjustDelay_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_SoundRepeatAdjustDelay, c_playerAny, "m-soundrepeatdelay", false);
+void MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay_Init () {
+    MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay = TriggerCreate("MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay, c_playerAny, "m-soundrepeatdelay", false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Sound Repeat - Ability Used
+// Trigger: DEBUG - Sound Repeat - Ability Used
 //--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_SoundRepeatAbilityUsed_Func (bool testConds, bool runActions) {
+bool MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4530,9 +4958,9 @@ bool MimicSupportLib_gt_SoundRepeatAbilityUsed_Func (bool testConds, bool runAct
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_SoundRepeatAbilityUsed_Init () {
-    MimicSupportLib_gt_SoundRepeatAbilityUsed = TriggerCreate("MimicSupportLib_gt_SoundRepeatAbilityUsed_Func");
-    TriggerAddEventUnitAbility(MimicSupportLib_gt_SoundRepeatAbilityUsed, null, null, c_abilEffectStageCast, false);
+void MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed_Init () {
+    MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed = TriggerCreate("MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed_Func");
+    TriggerAddEventUnitAbility(MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed, null, null, c_abilEffectStageCast, false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4623,6 +5051,48 @@ void MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Which players are AI? (whoisai)
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_itPlayer;
+
+    // Automatic Variable Declarations
+    int auto550C5206_ae;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto550C5206_ae = libCore_gv_bALMaxPlayers;
+    lv_itPlayer = 1;
+    for ( ; lv_itPlayer <= auto550C5206_ae ; lv_itPlayer += 1 ) {
+        if ((libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_itPlayer) == true)) {
+            TextExpressionSetToken("Param/Expression/lib_Sprt_B480E703", "A", IntToText(lv_itPlayer));
+            MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Sprt_B480E703"), true);
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai_Init () {
+    MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai = TriggerCreate("MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai, c_playerAny, "mwhoisai", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Equalize Experience (eqxp)
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Func (bool testConds, bool runActions) {
@@ -4638,7 +5108,7 @@ bool MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4700,7 +5170,7 @@ bool MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4771,7 +5241,7 @@ bool MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Func (bool testConds, bo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4810,13 +5280,45 @@ void MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Suppress Debug Messages
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGSuppressDebugMessages_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((MimicSupportLib_gv_dEBUGDebugMessagesEnabled == true)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_5C253C81"), true);
+        TriggerDebugOutputEnable(false);
+        MimicSupportLib_gv_dEBUGDebugMessagesEnabled = false;
+    }
+    else {
+        TriggerDebugOutputEnable(true);
+        MimicSupportLib_gv_dEBUGDebugMessagesEnabled = true;
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Sprt_B619AFF5"), true);
+    }
+    TriggerEnable(TriggerGetCurrent(), false);
+    Wait(2.0, c_timeGame);
+    TriggerEnable(TriggerGetCurrent(), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGSuppressDebugMessages_Init () {
+    MimicSupportLib_gt_DEBUGSuppressDebugMessages = TriggerCreate("MimicSupportLib_gt_DEBUGSuppressDebugMessages_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGSuppressDebugMessages, c_playerAny, "mSuppressDebug", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - XP Hero (xphero)
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_DEBUGXPHeroxphero_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4853,7 +5355,7 @@ bool MimicSupportLib_gt_DEBUGXPMinionxpminion_Func (bool testConds, bool runActi
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4890,7 +5392,7 @@ bool MimicSupportLib_gt_DEBUGXPStructurexpstructure_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4927,7 +5429,7 @@ bool MimicSupportLib_gt_DEBUGXPCreepxpcreep_Func (bool testConds, bool runAction
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -4972,7 +5474,7 @@ bool MimicSupportLib_gt_DEBUGHelphelp_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5012,7 +5514,7 @@ bool MimicSupportLib_gt_DEBUGPlayerNumberplayernum_Func (bool testConds, bool ru
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5043,7 +5545,7 @@ bool MimicSupportLib_gt_DEBUGToggleSelectiontogselection_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5071,7 +5573,7 @@ bool MimicSupportLib_gt_DEBUGToggleShowXPValuestogshowxpvalues_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5105,7 +5607,7 @@ bool MimicSupportLib_gt_DEBUGStartGamestartgame_Func (bool testConds, bool runAc
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -5143,7 +5645,7 @@ bool MimicSupportLib_gt_DEBUGDisablePingLimitfreepings_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5184,7 +5686,7 @@ bool MimicSupportLib_gt_DEBUGPauseGameStartTimerpausestart_Func (bool testConds,
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5221,7 +5723,7 @@ bool MimicSupportLib_gt_DEBUGTurnOnNormalCreepCampscreepcamp_Func (bool testCond
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -5260,7 +5762,7 @@ bool MimicSupportLib_gt_DEBUGRespawnCreepCampsrespawncamps_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5291,43 +5793,6 @@ void MimicSupportLib_gt_DEBUGRespawnCreepCampsrespawncamps_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DEBUG - Destroy Inventory Items (deleteitems)
-//--------------------------------------------------------------------------------------------------
-bool MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    unitgroup autoFF14262E_g;
-    int autoFF14262E_u;
-    unit autoFF14262E_var;
-
-    // Conditions
-    if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    autoFF14262E_g = UnitInventoryGroup(libGame_gv_players[EventPlayer()].lv_heroUnit);
-    autoFF14262E_u = UnitGroupCount(autoFF14262E_g, c_unitCountAll);
-    for (;; autoFF14262E_u -= 1) {
-        autoFF14262E_var = UnitGroupUnitFromEnd(autoFF14262E_g, autoFF14262E_u);
-        if (autoFF14262E_var == null) { break; }
-        UnitInventoryRemove(autoFF14262E_var);
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems_Init () {
-    MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems = TriggerCreate("MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems_Func");
-    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems, c_playerAny, "mdeleteitems", true);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Spawn Hero (spawnhero)
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_DEBUGSpawnHerospawnhero_Func (bool testConds, bool runActions) {
@@ -5347,7 +5812,7 @@ bool MimicSupportLib_gt_DEBUGSpawnHerospawnhero_Func (bool testConds, bool runAc
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5408,7 +5873,7 @@ bool MimicSupportLib_gt_DEBUGRespawnHerodebugrespawn_Func (bool testConds, bool 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5482,7 +5947,7 @@ bool MimicSupportLib_gt_DEBUGSelectHerodebugselect_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5529,7 +5994,7 @@ bool MimicSupportLib_gt_DEBUGKillHerodebugkill_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5568,7 +6033,7 @@ bool MimicSupportLib_gt_DEBUGAIHeroMimicheromimic_Func (bool testConds, bool run
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5604,7 +6069,7 @@ bool MimicSupportLib_gt_DEBUGAISetHerosethero_Func (bool testConds, bool runActi
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5661,7 +6126,7 @@ bool MimicSupportLib_gt_DEBUGAISetAllHerosetallheroes_Func (bool testConds, bool
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5715,7 +6180,7 @@ bool MimicSupportLib_gt_DEBUGLogRandomHeroesForPlayer_Func (bool testConds, bool
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5765,7 +6230,7 @@ bool MimicSupportLib_gt_DEBUGLevelAIHerosheroxp_Func (bool testConds, bool runAc
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5804,7 +6269,7 @@ bool MimicSupportLib_gt_DEBUGToggleFloatingCombatTexttogcombattext_Func (bool te
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5837,7 +6302,7 @@ bool MimicSupportLib_gt_DEBUGToggleMinionSpawningtogminionspawn_Func (bool testC
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5870,7 +6335,7 @@ bool MimicSupportLib_gt_DEBUGToggleMinionSystemPausedtogminionpause_Func (bool t
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5915,7 +6380,7 @@ bool MimicSupportLib_gt_DEBUGToggleMinionSystemOnOfftogminionsystem_Func (bool t
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5951,7 +6416,7 @@ bool MimicSupportLib_gt_DEBUGToggleMinionBonusXPOnOff_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5984,7 +6449,7 @@ bool MimicSupportLib_gt_DEBUGToggleTowerSystemOnOfftogtowersystem_Func (bool tes
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6018,7 +6483,7 @@ bool MimicSupportLib_gt_DEBUGTowerSystemOntowerson_Func (bool testConds, bool ru
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6047,7 +6512,7 @@ bool MimicSupportLib_gt_DEBUGTowerSystemOfftowersoff_Func (bool testConds, bool 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6076,7 +6541,7 @@ bool MimicSupportLib_gt_DEBUGToggleXPTrickletogtrickle_Func (bool testConds, boo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6115,7 +6580,7 @@ bool MimicSupportLib_gt_DEBUGScalecatchupXPBonuscatchupxpbonus_Func (bool testCo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6148,7 +6613,7 @@ bool MimicSupportLib_gt_DEBUGScalecatchupXPPenaltycatchupxppenalty_Func (bool te
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6175,7 +6640,7 @@ bool MimicSupportLib_gt_DEBUGToggleSoloXPtogsoloxp_Func (bool testConds, bool ru
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6217,7 +6682,7 @@ bool MimicSupportLib_gt_DEBUGScaleCampscampscale_Func (bool testConds, bool runA
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6249,7 +6714,7 @@ bool MimicSupportLib_gt_DEBUGHaveAITakeOverAI_Func (bool testConds, bool runActi
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6297,7 +6762,7 @@ bool MimicSupportLib_gt_DEBUGHaveAITakeOverAIAll_Func (bool testConds, bool runA
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6345,7 +6810,7 @@ bool MimicSupportLib_gt_DEBUGHaveAITakeOverAIAllOff_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6391,7 +6856,7 @@ bool MimicSupportLib_gt_DEBUGHaveAITakeOverAIAllOn_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6438,7 +6903,7 @@ bool MimicSupportLib_gt_DEBUGAIShowTalentBuildaishowtalentbuild_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6497,7 +6962,7 @@ bool MimicSupportLib_gt_DEBUGAICycleThroughAllHeroesailoadeveryhero_Func (bool t
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6551,7 +7016,7 @@ bool MimicSupportLib_gt_DEBUGDisplayHeroAIDebugInfoaidebug_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6594,7 +7059,7 @@ bool MimicSupportLib_gt_DEBUGDisplayDefenderAIDebugInfodefenderdebug_Func (bool 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6627,7 +7092,7 @@ bool MimicSupportLib_gt_DEBUGVictorydebugvictory_Func (bool testConds, bool runA
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6671,7 +7136,7 @@ bool MimicSupportLib_gt_DEBUGStructures1ShotMinionskillerstructures_Func (bool t
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6722,7 +7187,7 @@ bool MimicSupportLib_gt_DEBUGIncreasedMinionDamagekillerminions_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6764,7 +7229,7 @@ bool MimicSupportLib_gt_DEBUGRefreshCooldownscdr_Func (bool testConds, bool runA
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6797,7 +7262,7 @@ bool MimicSupportLib_gt_DEBUGDefeatdebugdefeat_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6829,7 +7294,7 @@ bool MimicSupportLib_gt_DEBUGUpvotedebugupvote_Func (bool testConds, bool runAct
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6856,7 +7321,7 @@ bool MimicSupportLib_gt_DEBUGTiedebugtie_Func (bool testConds, bool runActions) 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6893,7 +7358,7 @@ bool MimicSupportLib_gt_DEBUGToggleHeroAItogheroai_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6954,7 +7419,7 @@ bool MimicSupportLib_gt_DEBUGStopAIThinkTree_Func (bool testConds, bool runActio
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6996,7 +7461,7 @@ bool MimicSupportLib_gt_DEBUGStartAIThinkTree_Func (bool testConds, bool runActi
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7037,7 +7502,7 @@ bool MimicSupportLib_gt_DEBUGStopRegenstopregen_Func (bool testConds, bool runAc
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7091,7 +7556,7 @@ bool MimicSupportLib_gt_DEBUGStopHealthRegenForAllPlayersnoregen_Func (bool test
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7163,7 +7628,7 @@ bool MimicSupportLib_gt_DEBUGToggleCoreShieldMechanictogcoreshield_Func (bool te
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7212,7 +7677,7 @@ bool MimicSupportLib_gt_DEBUGToggleDebugOutputtogdebug_Func (bool testConds, boo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7258,7 +7723,7 @@ bool MimicSupportLib_gt_DEBUGToggleForCinematicstogcine_Func (bool testConds, bo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7316,7 +7781,7 @@ bool MimicSupportLib_gt_DEBUGToggleForMapTexttogmaptext_Func (bool testConds, bo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7359,7 +7824,7 @@ bool MimicSupportLib_gt_DEBUGTurnOffWeather_Func (bool testConds, bool runAction
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7386,7 +7851,7 @@ bool MimicSupportLib_gt_DEBUGTurnOnMinionSpellResist_Func (bool testConds, bool 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7415,7 +7880,7 @@ bool MimicSupportLib_gt_DEBUGCompleteAllQuests_Func (bool testConds, bool runAct
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7448,7 +7913,7 @@ bool MimicSupportLib_gt_DEBUGProgressAllQuests_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7497,7 +7962,7 @@ bool MimicSupportLib_gt_DEBUGTeamFightPerfTest_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7557,7 +8022,7 @@ bool MimicSupportLib_gt_DEBUGToggleJungleCampDebugtogcampdebug_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7597,7 +8062,7 @@ bool MimicSupportLib_gt_DEBUGTargetJungleCreepState_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7632,7 +8097,7 @@ bool MimicSupportLib_gt_DEBUG60SecondPause_Func (bool testConds, bool runActions
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7666,7 +8131,7 @@ bool MimicSupportLib_gt_DEBUGTriggerASave_Func (bool testConds, bool runActions)
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7676,7 +8141,7 @@ bool MimicSupportLib_gt_DEBUGTriggerASave_Func (bool testConds, bool runActions)
         return true;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -7697,7 +8162,7 @@ bool MimicSupportLib_gt_DEBUGHeroIsAlive_Func (bool testConds, bool runActions) 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7738,7 +8203,7 @@ bool MimicSupportLib_gt_DEBUGShortHeroDeath_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -7792,7 +8257,7 @@ bool MimicSupportLib_gt_DEBUGInvulnerableStructures_Func (bool testConds, bool r
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7857,7 +8322,7 @@ bool MimicSupportLib_gt_DEBUGRespawnStructures_Func (bool testConds, bool runAct
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7915,7 +8380,7 @@ bool MimicSupportLib_gt_DEBUGKillStructures_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7964,7 +8429,7 @@ bool MimicSupportLib_gt_DEBUGCollectStructureData_Func (bool testConds, bool run
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8039,7 +8504,7 @@ bool MimicSupportLib_gt_DEBUGGameTime_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -8206,7 +8671,7 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -8220,7 +8685,7 @@ bool MimicSupportLib_gt_DEBUGChooseTalent_Func (bool testConds, bool runActions)
         return true;
     }
 
-    if ((StringWord(lv_enteredString, 1) == "mtalent")) {
+    if ((StringWord(lv_enteredString, 1) == "talent")) {
         lv_player = StringToInt(StringWord(lv_enteredString, 2));
         lv_tier = StringToInt(StringWord(lv_enteredString, 3));
         lv_button = StringToInt(StringWord(lv_enteredString, 4));
@@ -8289,7 +8754,7 @@ bool MimicSupportLib_gt_DEBUGXPRange_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -8329,7 +8794,7 @@ bool MimicSupportLib_gt_DEBUGAfkSystem_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8367,7 +8832,7 @@ bool MimicSupportLib_gt_DEBUGStartDPSTracker_Func (bool testConds, bool runActio
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8417,7 +8882,7 @@ bool MimicSupportLib_gt_DEBUGDPSTracker_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -8454,7 +8919,7 @@ bool MimicSupportLib_gt_DEBUGClearDPSTrackerStats_Func (bool testConds, bool run
             return false;
         }
 
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8484,7 +8949,7 @@ bool MimicSupportLib_gt_DEBUGDPSTrackerTimerExpires_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8517,7 +8982,7 @@ bool MimicSupportLib_gt_DEBUGTemp_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8539,6 +9004,34 @@ void MimicSupportLib_gt_DEBUGTemp_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Don't Start
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGDontStart_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_StopTimer(libGame_gv_openTheGatesTimer);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_Sprt_36895C0E"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGDontStart_Init () {
+    MimicSupportLib_gt_DEBUGDontStart = TriggerCreate("MimicSupportLib_gt_DEBUGDontStart_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGDontStart, c_playerAny, "mdontstart", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: DEBUG - Enable Building Scaling
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_DEBUGEnableBuildingScaling_Func (bool testConds, bool runActions) {
@@ -8556,7 +9049,7 @@ bool MimicSupportLib_gt_DEBUGEnableBuildingScaling_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8651,7 +9144,7 @@ bool MimicSupportLib_gt_DEBUGEnabletownhalldetection_Func (bool testConds, bool 
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8696,7 +9189,7 @@ bool MimicSupportLib_gt_DEBUGToggleEUPTLogging_Func (bool testConds, bool runAct
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -8747,7 +9240,7 @@ bool MimicSupportLib_gt_DEBUGGetBaseUnitStats_Func (bool testConds, bool runActi
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -8788,6 +9281,300 @@ void MimicSupportLib_gt_DEBUGGetBaseUnitStats_Init () {
     TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGGetBaseUnitStats, c_playerAny, "m-gbs", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Wizard to Sappers
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGWizardtoSappers_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_composition;
+    int lv_group;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_group = 2;
+
+    // Conditions
+    if (testConds) {
+        if (!(((true == true) || (true == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((MimicSupportLib_gv_dEBUGSapperMinionsEnabled == false)) {
+        MimicSupportLib_gv_dEBUGSapperMinionsEnabled = true;
+        lv_composition = (libCore_ge_MinionWaveCompositionsTypes_Standard);
+        libCore_gf_DataInitializeScalingDataForMinion("MercGoblinSapperLaner", libCore_ge_MinionTypes_Wizard);
+        libCore_gv_dataMinionWaveCompositions[lv_composition].lv_groupMinionType[lv_group] = libCore_ge_MinionTypes_Wizard;
+        libCore_gv_dataMinionWaveCompositions[lv_composition].lv_groupMinionCount[lv_group] = 1;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_Sprt_F2C49B06"));
+    }
+    else {
+        MimicSupportLib_gv_dEBUGSapperMinionsEnabled = false;
+        lv_composition = (libCore_ge_MinionWaveCompositionsTypes_Standard);
+        libCore_gf_DataInitializeScalingDataForMinion("WizardMinion", libCore_ge_MinionTypes_Wizard);
+        libCore_gv_dataMinionWaveCompositions[lv_composition].lv_groupMinionType[lv_group] = libCore_ge_MinionTypes_Wizard;
+        libCore_gv_dataMinionWaveCompositions[lv_composition].lv_groupMinionCount[lv_group] = 1;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_Sprt_AB6B812E"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGWizardtoSappers_Init () {
+    MimicSupportLib_gt_DEBUGWizardtoSappers = TriggerCreate("MimicSupportLib_gt_DEBUGWizardtoSappers_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGWizardtoSappers, c_playerAny, "m-sappers", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Sapper Health Globes
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGSapperHealthGlobes_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_owner;
+    int lv_regenGlobeOwner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicSupportLib_gv_dEBUGSapperMinionsEnabled == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "MercGoblinSapperLaner"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_owner = UnitGetOwner(EventUnit());
+    if ((lv_owner == libCore_gv_cOMPUTER_TeamOrder)) {
+        lv_regenGlobeOwner = libCore_gv_cOMPUTER_TeamChaos;
+    }
+    else {
+        lv_regenGlobeOwner = libCore_gv_cOMPUTER_TeamOrder;
+    }
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "RegenGlobe", c_unitCreateIgnorePlacement, lv_regenGlobeOwner, UnitGetPosition(EventUnit()), null);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGSapperHealthGlobes_Init () {
+    MimicSupportLib_gt_DEBUGSapperHealthGlobes = TriggerCreate("MimicSupportLib_gt_DEBUGSapperHealthGlobes_Func");
+    TriggerAddEventUnitDied(MimicSupportLib_gt_DEBUGSapperHealthGlobes, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Sapper Suicide Damage
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGSapperSuicideDamage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_amount;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicSupportLib_gv_dEBUGSapperMinionsEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_amount = StringToFixed(StringSub(EventChatMessage(false), 15, 19));
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "MercLanerGoblinSapperStructureSuicideDamage", "Amount", libStEx_gv_pLAYER_11_ORDER, lv_amount);
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "MercLanerGoblinSapperStructureSuicideDamage", "Amount", libStEx_gv_pLAYER_12_CHAOS, lv_amount);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_Sprt_994D2C73") + FixedToText(lv_amount, c_fixedPrecisionAny)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGSapperSuicideDamage_Init () {
+    MimicSupportLib_gt_DEBUGSapperSuicideDamage = TriggerCreate("MimicSupportLib_gt_DEBUGSapperSuicideDamage_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGSapperSuicideDamage, c_playerAny, "m-sapperdamage", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Sapper Attack Damage
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGSapperAttackDamage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_amount;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicSupportLib_gv_dEBUGSapperMinionsEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_amount = StringToFixed(StringSub(EventChatMessage(false), 15, 19));
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "MercLanerGoblinSapperDamage", "Amount", libStEx_gv_pLAYER_11_ORDER, lv_amount);
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "MercLanerGoblinSapperDamage", "Amount", libStEx_gv_pLAYER_12_CHAOS, lv_amount);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_Sprt_37A8E363") + FixedToText(lv_amount, c_fixedPrecisionAny)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGSapperAttackDamage_Init () {
+    MimicSupportLib_gt_DEBUGSapperAttackDamage = TriggerCreate("MimicSupportLib_gt_DEBUGSapperAttackDamage_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGSapperAttackDamage, c_playerAny, "m-sapperattack", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Sapper Health
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGSapperHealth_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_amount;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicSupportLib_gv_dEBUGSapperMinionsEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_amount = StringToFixed(StringSub(EventChatMessage(false), 15, 19));
+    CatalogFieldValueSetFixed(c_gameCatalogUnit, "MercGoblinSapperLaner", "LifeStart", libStEx_gv_pLAYER_11_ORDER, lv_amount);
+    CatalogFieldValueSetFixed(c_gameCatalogUnit, "MercGoblinSapperLaner", "LifeMax", libStEx_gv_pLAYER_11_ORDER, lv_amount);
+    CatalogFieldValueSetFixed(c_gameCatalogUnit, "MercGoblinSapperLaner", "LifeStart", libStEx_gv_pLAYER_12_CHAOS, lv_amount);
+    CatalogFieldValueSetFixed(c_gameCatalogUnit, "MercGoblinSapperLaner", "LifeMax", libStEx_gv_pLAYER_12_CHAOS, lv_amount);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_Sprt_AF23E390") + FixedToText(lv_amount, c_fixedPrecisionAny)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGSapperHealth_Init () {
+    MimicSupportLib_gt_DEBUGSapperHealth = TriggerCreate("MimicSupportLib_gt_DEBUGSapperHealth_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGSapperHealth, c_playerAny, "m-sapperhealth", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Apply Armor Value Change
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGApplyArmorValueChange_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup auto00D6CE5D_g;
+    int auto00D6CE5D_u;
+    unit auto00D6CE5D_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto00D6CE5D_g = UnitGroupSelected(EventPlayer());
+    auto00D6CE5D_u = UnitGroupCount(auto00D6CE5D_g, c_unitCountAll);
+    for (;; auto00D6CE5D_u -= 1) {
+        auto00D6CE5D_var = UnitGroupUnitFromEnd(auto00D6CE5D_g, auto00D6CE5D_u);
+        if (auto00D6CE5D_var == null) { break; }
+        if ((UnitHasBehavior2(auto00D6CE5D_var, "DebugDummyBehavior") == false)) {
+            UnitBehaviorAdd(auto00D6CE5D_var, "DebugDummyBehavior", auto00D6CE5D_var, 1);
+        }
+
+        if ((StringToFixed(StringWord(EventChatMessage(false), 2)) != 0.0)) {
+            MimicSupportLib_gv_dEBUGBaselineArmorValue = StringToFixed(StringWord(EventChatMessage(false), 2));
+        }
+        else {
+            MimicSupportLib_gv_dEBUGBaselineArmorValue = 0.0;
+        }
+        CatalogFieldValueModifyFixed(c_gameCatalogBehavior, "DebugDummyBehavior", "ArmorModification.AllArmorBonus", UnitGetOwner(auto00D6CE5D_var), MimicSupportLib_gv_dEBUGBaselineArmorValue, c_upgradeOperationSet);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGApplyArmorValueChange_Init () {
+    MimicSupportLib_gt_DEBUGApplyArmorValueChange = TriggerCreate("MimicSupportLib_gt_DEBUGApplyArmorValueChange_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGApplyArmorValueChange, c_playerAny, "m-armor ", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: DEBUG - Apply Spell Power Value Change
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup auto708275C8_g;
+    int auto708275C8_u;
+    unit auto708275C8_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto708275C8_g = UnitGroupSelected(EventPlayer());
+    auto708275C8_u = UnitGroupCount(auto708275C8_g, c_unitCountAll);
+    for (;; auto708275C8_u -= 1) {
+        auto708275C8_var = UnitGroupUnitFromEnd(auto708275C8_g, auto708275C8_u);
+        if (auto708275C8_var == null) { break; }
+        if ((UnitHasBehavior2(auto708275C8_var, "DebugDummyBehavior") == false)) {
+            UnitBehaviorAdd(auto708275C8_var, "DebugDummyBehavior", auto708275C8_var, 1);
+        }
+
+        if ((StringToFixed(StringWord(EventChatMessage(false), 2)) != 0.0)) {
+            MimicSupportLib_gv_dEBUGBaselineSpellPowerValue = (StringToFixed(StringWord(EventChatMessage(false), 2)) / 100.0);
+        }
+        else {
+            MimicSupportLib_gv_dEBUGBaselineSpellPowerValue = 0.0;
+        }
+        CatalogFieldValueModifyFixed(c_gameCatalogBehavior, "DebugDummyBehavior", "Modification.UnifiedDamageDealtFraction[" + IntToString(2) + "]", UnitGetOwner(auto708275C8_var), MimicSupportLib_gv_dEBUGBaselineSpellPowerValue, c_upgradeOperationSet);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Init () {
+    MimicSupportLib_gt_DEBUGApplySpellPowerValueChange = TriggerCreate("MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Func");
+    TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGApplySpellPowerValueChange, c_playerAny, "m-sp", false);
+}
+
 void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_IncludeSupport_Init();
     MimicSupportLib_gt_AISpawningTest_Init();
@@ -8798,16 +9585,21 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_PerformanceTestGetFPS_Init();
     MimicSupportLib_gt_PerformanceTestOutputFPSToFile_Init();
     MimicSupportLib_gt_PerformanceTestMaintainHeroHealth_Init();
-    MimicSupportLib_gt_StatTrackingStartforPlayer_Init();
-    MimicSupportLib_gt_StatTrackingLogBreak_Init();
-    MimicSupportLib_gt_StatTrackingStop_Init();
-    MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers_Init();
-    MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers_Init();
+    MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer_Init();
+    MimicSupportLib_gt_DEBUGStatTrackingLogBreak_Init();
+    MimicSupportLib_gt_DEBUGStatTrackingStop_Init();
+    MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers_Init();
+    MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers_Init();
     MimicSupportLib_gt_StatTrackingDamageTracking_Init();
     MimicSupportLib_gt_StatTrackingHealingTracking_Init();
     MimicSupportLib_gt_StatTrackingGameOver_Init();
     MimicSupportLib_gt_DataMiningListenForRegenGlobes_Init();
     MimicSupportLib_gt_DataMiningPeriodicDataSendPeriodicEventTrigger_Init();
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing0_Init();
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing1_Init();
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing2_Init();
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRing3_Init();
+    MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando_Init();
     MimicSupportLib_gt_QACheatsInit_Init();
     MimicSupportLib_gt_ToggleCheatsDialog_Init();
     MimicSupportLib_gt_QACheatsCloseButtonClicked_Init();
@@ -8847,13 +9639,15 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_DEBUGResetTheBalanceProbebalancereset_Init();
     MimicSupportLib_gt_DEBUGTimedBalanceProbebalancetimer_Init();
     MimicSupportLib_gt_DEBUGBalanceProbeTimerExpires_Init();
-    MimicSupportLib_gt_EnableSoundRepeat_Init();
-    MimicSupportLib_gt_SoundRepeatAdjustDelay_Init();
-    MimicSupportLib_gt_SoundRepeatAbilityUsed_Init();
+    MimicSupportLib_gt_DEBUGEnableSoundRepeat_Init();
+    MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay_Init();
+    MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed_Init();
     MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance_Init();
+    MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai_Init();
     MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp_Init();
     MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost_Init();
     MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly_Init();
+    MimicSupportLib_gt_DEBUGSuppressDebugMessages_Init();
     MimicSupportLib_gt_DEBUGXPHeroxphero_Init();
     MimicSupportLib_gt_DEBUGXPMinionxpminion_Init();
     MimicSupportLib_gt_DEBUGXPStructurexpstructure_Init();
@@ -8867,7 +9661,6 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_DEBUGPauseGameStartTimerpausestart_Init();
     MimicSupportLib_gt_DEBUGTurnOnNormalCreepCampscreepcamp_Init();
     MimicSupportLib_gt_DEBUGRespawnCreepCampsrespawncamps_Init();
-    MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems_Init();
     MimicSupportLib_gt_DEBUGSpawnHerospawnhero_Init();
     MimicSupportLib_gt_DEBUGRespawnHerodebugrespawn_Init();
     MimicSupportLib_gt_DEBUGSelectHerodebugselect_Init();
@@ -8938,10 +9731,18 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_DEBUGClearDPSTrackerStats_Init();
     MimicSupportLib_gt_DEBUGDPSTrackerTimerExpires_Init();
     MimicSupportLib_gt_DEBUGTemp_Init();
+    MimicSupportLib_gt_DEBUGDontStart_Init();
     MimicSupportLib_gt_DEBUGEnableBuildingScaling_Init();
     MimicSupportLib_gt_DEBUGEnabletownhalldetection_Init();
     MimicSupportLib_gt_DEBUGToggleEUPTLogging_Init();
     MimicSupportLib_gt_DEBUGGetBaseUnitStats_Init();
+    MimicSupportLib_gt_DEBUGWizardtoSappers_Init();
+    MimicSupportLib_gt_DEBUGSapperHealthGlobes_Init();
+    MimicSupportLib_gt_DEBUGSapperSuicideDamage_Init();
+    MimicSupportLib_gt_DEBUGSapperAttackDamage_Init();
+    MimicSupportLib_gt_DEBUGSapperHealth_Init();
+    MimicSupportLib_gt_DEBUGApplyArmorValueChange_Init();
+    MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8959,7 +9760,6 @@ void MimicSupportLib_InitLib () {
     MimicSupportLib_InitLibraries();
     MimicSupportLib_InitVariables();
     MimicSupportLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("SupportLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

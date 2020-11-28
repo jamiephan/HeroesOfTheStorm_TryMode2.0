@@ -1,12 +1,12 @@
 include "ModuleMimicLibs/MimicTriggerDebugOutput"
-include "ModuleMimicLibs/MimicGameDataHelperLib"
-include "ModuleMimicLibs/MimicGameLib"
-include "ModuleMimicLibs/MimicHeroesLib"
-include "ModuleMimicLibs/MimicMapMechanicsLib"
-include "ModuleMimicLibs/MimicSoundLib"
-include "ModuleMimicLibs/MimicStartingExperienceLib"
-include "ModuleMimicLibs/MimicSupportLib"
-include "ModuleMimicLibs/MimicUILib"
+include "ModuleMimicLibs/InternalMimics/MimicGameDataHelperLib"
+include "ModuleMimicLibs/InternalMimics/MimicGameLib"
+include "ModuleMimicLibs/InternalMimics/MimicHeroesLib"
+include "ModuleMimicLibs/InternalMimics/MimicMapMechanicsLib"
+include "ModuleMimicLibs/InternalMimics/MimicSoundLib"
+include "ModuleMimicLibs/InternalMimics/MimicStartingExperienceLib"
+include "ModuleMimicLibs/InternalMimics/MimicSupportLib"
+include "ModuleMimicLibs/InternalMimics/MimicUILib"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Mimic Lib Loader
@@ -24,6 +24,7 @@ void libMICL_InitLibraries() {
     MimicStartingExperienceLib_InitLib();
     MimicSupportLib_InitLib();
     MimicUILib_InitLib();
+    libTrac_gv_tracerRecallDebugMode = true;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -37,11 +38,6 @@ void libMICL_InitLib () {
     }
 
     libMICL_InitLib_completed = true;
-
     libMICL_InitLibraries();
-
-    // Need to change to debug mode before MapInit Event is called
-    libCore_gv_dEBUGDebuggingEnabled = true;
-    
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Mimic Lib Loader Initialized"));
 }

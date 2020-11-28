@@ -90,17 +90,18 @@ const fixed MimicMapMechanicsLib_gv_mMGardensDragonWarningTime_C = 30.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerStartTime_C = 60.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerRespawnTime_C = 90.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonKnightStartingTime_C = 55.0;
-const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCaptureTime_C = 4.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerOverCaptureTime_C = 0.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonballTowerCaptureRadius_C = 4.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonStatueReminderTimerTime_C = 15.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonStatueChannelTime_C = 3.0;
 const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonStatueHelperTextTagHeightOffset_C = -2.5;
+const fixed MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCaptureTime_C = 4.0;
 const int MimicMapMechanicsLib_gv_vehicle_MaxNumberOfVehicles_C = 30;
 
 // Structures
 struct MimicMapMechanicsLib_gs_JungleCampDefenderData {
     bool lv_campIsSoloable;
+    bool lv_campIsElite;
     bool lv_defendersCoweronDeath;
     bool[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfDefendersPerCamp + 1] lv_defenderCoweringUnit;
     fixed lv_initialSpawnDelay;
@@ -114,6 +115,7 @@ struct MimicMapMechanicsLib_gs_JungleCampDefenderData {
     fixed lv_xPAwardForCapture;
     int lv_numberOfRanks;
     int[libCore_gv_dataScalingMaxScalingTicks + 1] lv_campLevel;
+    string lv_aIGoalLink;
 };
 
 struct MimicMapMechanicsLib_gs_JungleCampPathData {
@@ -127,6 +129,19 @@ struct MimicMapMechanicsLib_gs_JungleCampMercData {
     int lv_numberOfRanks;
 };
 
+struct MimicMapMechanicsLib_gs_JungleCampUI {
+    int lv_jungleCreepCampsParentPanel;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsDialog;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCamp_PositionControl;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfoPanel;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfo_Label_Timer;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfo_Label_Title;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfo_Label_PlayerName;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfo_Label_Description;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfo_Label_Debug;
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_jungleCreepCampsInfoPanel2;
+};
+
 struct MimicMapMechanicsLib_gs_JungleCreepCamps {
     int lv_mapDataCampType;
     int lv_mapDataCampDefenderType;
@@ -137,6 +152,7 @@ struct MimicMapMechanicsLib_gs_JungleCreepCamps {
     string lv_mapDataMinimapIcon;
     fixed lv_mapDataMinimapIconScale;
     bool lv_mapDataMinimapIconUseTeamColor;
+    bool lv_mapDataCampIsElite;
     int lv_mapDataMercSpawnType;
     int lv_mapDataBattleshipSpawnType;
     unit lv_mapDataCampBuildingBuilding;
@@ -163,6 +179,7 @@ struct MimicMapMechanicsLib_gs_JungleCreepCamps {
     int lv_defenderDefendersBribedCount;
     int lv_mercNumberOfMinionsSpawned;
     string[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfMercsSpawned + 1] lv_mercSpawnedMinionUnitType;
+    fixed[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfMercsSpawned + 1] lv_mercSpawnedMinionAIThreatValueforAITeamDelegateSystem;
     int lv_mercNumberOfRanks;
     bool[libCore_gv_bALMaxTeams + 1] lv_mercMercCampHasSingleWaypoint;
     MimicMapMechanicsLib_gs_JungleCampPathData[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfPaths + 1] lv_mercOrderMercCampPathing;
@@ -174,6 +191,7 @@ struct MimicMapMechanicsLib_gs_JungleCreepCamps {
     int lv_piratesNumberOfRanks;
     unit lv_campIconUnit;
     unit lv_campOwnershipFlagUnit;
+    point lv_campOwnershipFlagPosition;
     int lv_campHelperTextTagOrder;
     int lv_campHelperTextTagChaos;
     int lv_capturingPlayer;
@@ -239,6 +257,7 @@ fixed MimicMapMechanicsLib_gv_mercSapperDefaultSpawnTime_C;
 fixed MimicMapMechanicsLib_gv_mercSapperDefaultRespawnTime_C;
 MimicMapMechanicsLib_gs_JungleCampDefenderData[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfDefenderTypes + 1] MimicMapMechanicsLib_gv_dataJungleCampDefenderData;
 MimicMapMechanicsLib_gs_JungleCampMercData[MimicMapMechanicsLib_gv_dataJungleMaxNumberOfMercTypes + 1] MimicMapMechanicsLib_gv_dataJungleCampMercData;
+MimicMapMechanicsLib_gs_JungleCampUI MimicMapMechanicsLib_gv_uIJungleCampPanel;
 bool MimicMapMechanicsLib_gv_jungleCreepCampsInitialized;
 int MimicMapMechanicsLib_gv_jungleCreepCampsCurrentCallbackIndex;
 MimicMapMechanicsLib_gs_JungleCreepCamps[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] MimicMapMechanicsLib_gv_jungleCreepCamps;
@@ -314,8 +333,10 @@ bool MimicMapMechanicsLib_gv_mMRavenTimers2;
 bool MimicMapMechanicsLib_gv_mMRavenEventFirstTime;
 text MimicMapMechanicsLib_gv_mMGardensDragonDragonballKnightNameC;
 text MimicMapMechanicsLib_gv_mMGardensDragonDragonballShrineNameC;
+unit MimicMapMechanicsLib_gv_mMGardensDragonTowerMoonBeamTarget;
 unit MimicMapMechanicsLib_gv_mMGardensDragonTowerMoon;
 unit MimicMapMechanicsLib_gv_mMGardensDragonTowerStar;
+unit MimicMapMechanicsLib_gv_mMGardensDragonTowerStarBeamTarget;
 sound MimicMapMechanicsLib_gv_mMGardensDragonAmbientSound;
 unit MimicMapMechanicsLib_gv_mMGardensDragonUnit;
 int MimicMapMechanicsLib_gv_mMGardensDragonPlayer;
@@ -337,6 +358,7 @@ MimicMapMechanicsLib_gs_MMGardensDragonDragonballTowers[MimicMapMechanicsLib_gv_
 actor MimicMapMechanicsLib_gv_mMGardensDragonSoundRegionActor;
 region MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion;
 int MimicMapMechanicsLib_gv_mMGardensDragonDragonCaptures;
+point MimicMapMechanicsLib_gv_mMGardensDragonSpawnPoint;
 bool MimicMapMechanicsLib_gv_mMDragonballsTransmissionShrinesRechargeFirstTime;
 MimicMapMechanicsLib_gs_Vehicle[MimicMapMechanicsLib_gv_vehicle_MaxNumberOfVehicles_C + 1] MimicMapMechanicsLib_gv_vehicle;
 int MimicMapMechanicsLib_gv_vehicle_VehicleCount;
@@ -355,8 +377,8 @@ point MimicMapMechanicsLib_gf_JungleDetermineMercWaypoint (int lp_owningTeam, in
 void MimicMapMechanicsLib_gf_JungleInitializeDoubloonCampData (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleInitializeDoubloonSmallCampData (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleInitializeTryMeCampData (int lp_camp);
-void MimicMapMechanicsLib_gf_JungleInitializeCreepCamp (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleInitializeCreepCampDelayMinimapIcons (unit lp_unit, fixed lp_delayTime);
+void MimicMapMechanicsLib_gf_JungleInitializeCreepCamp (int lp_camp);
 int MimicMapMechanicsLib_gf_JungleGetJungleCampForUnit (unit lp_unit);
 int MimicMapMechanicsLib_gf_JungleGetJungleUnitIndexForUnit (unit lp_unit);
 string MimicMapMechanicsLib_gf_JungleGetCurrentIconForJungleCamp (int lp_camp, bool lp_alive);
@@ -369,6 +391,7 @@ void MimicMapMechanicsLib_gf_JungleUpdateTextTagForCamp (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleSwitchToTextTagForCamp (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleUpdateMinimapTooltipForCamp (int lp_camp);
 void MimicMapMechanicsLib_gf_JungleRespawnCreepsForCamp (int lp_camp);
+void MimicMapMechanicsLib_gf_JungleDebugResetCamp (int lp_Player, int lp_Camp);
 void MimicMapMechanicsLib_gf_JungleTransitionCampIntoState (int lp_camp, int lp_state);
 void MimicMapMechanicsLib_gf_JungleHibernateCampDefender (unit lp_defender);
 void MimicMapMechanicsLib_gf_JungleStopHibernatingCampDefender (unit lp_defender, point lp_location);
@@ -421,7 +444,7 @@ int MimicMapMechanicsLib_gf_MMRavenSpawnPointSide (int lp_index);
 void MimicMapMechanicsLib_gf_MMRavenStartSpawnTimer5090 ();
 void MimicMapMechanicsLib_gf_MMRavenCreatePreviewTribute (point lp_previewLocation);
 void MimicMapMechanicsLib_gf_MMRavenTributeCollectionThresholdReached (int lp_winningTeam);
-void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayer);
+void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayerID);
 void MimicMapMechanicsLib_gf_MMRavenApplyCurseEffectOnMinion (unit lp_unit);
 void MimicMapMechanicsLib_gf_MMRavenRemoveCurseEffectOnMinion (unit lp_minion);
 void MimicMapMechanicsLib_gf_MMRavenPlayCurseSound (int lp_cursedTeam);
@@ -484,7 +507,7 @@ trigger MimicMapMechanicsLib_gt_JungleCampOwnershipChange;
 trigger MimicMapMechanicsLib_gt_JungleMercLeaderDies;
 trigger MimicMapMechanicsLib_gt_JungleMercOgreShieldUsedOgre;
 trigger MimicMapMechanicsLib_gt_JungleMercOgreShieldUsedHero;
-trigger MimicMapMechanicsLib_gt_JungleMercDamageDetection;
+trigger MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection;
 trigger MimicMapMechanicsLib_gt_JungleSiegeGiantTaunt;
 trigger MimicMapMechanicsLib_gt_InitializeMapMechanics;
 trigger MimicMapMechanicsLib_gt_MMHelpbuttonClicked;
@@ -504,6 +527,7 @@ trigger MimicMapMechanicsLib_gt_MMRavenTributeCollectStarted;
 trigger MimicMapMechanicsLib_gt_MMRavenTributeCollectCanceled;
 trigger MimicMapMechanicsLib_gt_MMRavenTributeCollectInterrupted;
 trigger MimicMapMechanicsLib_gt_MMRavenTributeObtained;
+trigger MimicMapMechanicsLib_gt_MMRavenCurseReapplication;
 trigger MimicMapMechanicsLib_gt_MMRavenCurseStartLightTransition;
 trigger MimicMapMechanicsLib_gt_MMRavenCurseFinished;
 trigger MimicMapMechanicsLib_gt_MMRavenObjectiveUIHandler;

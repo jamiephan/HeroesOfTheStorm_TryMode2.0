@@ -4,7 +4,7 @@ include "TriggerLibs/GameLib_h"
 include "TriggerLibs/AILib_h"
 include "TriggerLibs/StartingExperienceLib_h"
 
-include "ModuleMimicLibs/MimicSoundLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicSoundLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Sound
@@ -490,10 +490,6 @@ void MimicSoundLib_gf_HeroVOCheckForIntroLines (int lp_player) {
     // Implementation
     lv_heroUnit = libGame_gv_players[lp_player].lv_heroUnit;
     if ((lv_heroUnit == null)) {
-        return ;
-    }
-
-    if ((RandomInt(1, 100) > MimicSoundLib_gv_heroVO_HeroIntroLineChance_C)) {
         return ;
     }
 
@@ -1428,7 +1424,7 @@ bool MimicSoundLib_gt_HeroVOHeroGoHeal_Func (bool testConds, bool runActions) {
         	lv_player = PlayerGroupNextPlayer(auto06C78789_g, lv_player);
         	if (lv_player<0) { break; }
         	lv_heroUnit = libGame_gv_players[lv_player].lv_heroUnit;
-        if ((UnitIsAlive(lv_heroUnit) == true) && (UnitHasBehavior2(lv_heroUnit, "Dead") == false) && (libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player) == false) && (MimicSoundLib_gv_heroVO_HeroGoHealCalls[lv_player] <= 2) && (libStEx_gf_PlayerIsInCombat(lv_player) == false) && (UnitHasBehavior2(lv_heroUnit, "HealingFountainCooldown") == false) && (UnitHasBehavior2(lv_heroUnit, "HomeShieldProtection") == false) && (TimerGetElapsed(libGame_gv_gameTimer) > (MimicSoundLib_gv_heroVOHeroGoHealLastT[lv_player] + MimicSoundLib_gv_heroVO_HeroGoHealCooldownTime_C)) && (UnitGetPropertyFixed(lv_heroUnit, c_unitPropLifeExpectedPercent, c_unitPropCurrent) <= MimicSoundLib_gv_heroVO_HeroGoHealHPPercentThreshold_C) && (UnitGroupCount(libNtve_gf_UnitsInRegionWithAllianceToPlayerMatchingCondition("TownMoonwell", "TownMoonwellL2", "TownMoonwellL3", lv_player, c_unitAllianceAlly, RegionCircle(UnitGetPosition(lv_heroUnit), 25.0), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) > 0) && ((PlayerGroupHasPlayer(libGame_gv_players[lv_player].lv_heroData.lv_heroRoles, (c_heroRoleSupport)) == false) || (UnitGetPropertyFixed(lv_heroUnit, c_unitPropEnergyPercent, c_unitPropCurrent) < 50.0))) {
+        if ((UnitIsAlive(lv_heroUnit) == true) && (UnitHasBehavior2(lv_heroUnit, "Dead") == false) && (libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player) == false) && (MimicSoundLib_gv_heroVO_HeroGoHealCalls[lv_player] <= 2) && (libStEx_gf_PlayerIsInCombat(lv_player) == false) && (UnitHasBehavior2(lv_heroUnit, "HealingFountainCooldown") == false) && (UnitHasBehavior2(lv_heroUnit, "HallOfStormsProtectionBuff") == false) && (TimerGetElapsed(libGame_gv_gameTimer) > (MimicSoundLib_gv_heroVOHeroGoHealLastT[lv_player] + MimicSoundLib_gv_heroVO_HeroGoHealCooldownTime_C)) && (UnitGetPropertyFixed(lv_heroUnit, c_unitPropLifeExpectedPercent, c_unitPropCurrent) <= MimicSoundLib_gv_heroVO_HeroGoHealHPPercentThreshold_C) && (UnitGroupCount(libNtve_gf_UnitsInRegionWithAllianceToPlayerMatchingCondition("TownMoonwell", "TownMoonwellL2", "TownMoonwellL3", lv_player, c_unitAllianceAlly, RegionCircle(UnitGetPosition(lv_heroUnit), 25.0), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) > 0) && ((libGame_gv_players[lv_player].lv_heroData.lv_expandedRole != c_expandedRoleHealer) || (libGame_gv_players[lv_player].lv_heroData.lv_expandedRole != c_expandedRoleSupport) || (UnitGetPropertyFixed(lv_heroUnit, c_unitPropEnergyPercent, c_unitPropCurrent) < 50.0))) {
             lv_nearbyAllyHeroes = UnitGroupAlliance(lv_player, c_unitAllianceAllyExcludeSelf, RegionCircle(UnitGetPosition(lv_heroUnit), 15.0), libCore_gv_filtersHeroic, 0);
             autoA90464AA_g = lv_nearbyAllyHeroes;
             autoA90464AA_u = UnitGroupCount(autoA90464AA_g, c_unitCountAll);
@@ -1561,7 +1557,6 @@ void MimicSoundLib_InitLib () {
     MimicSoundLib_InitLibraries();
     MimicSoundLib_InitVariables();
     MimicSoundLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("SoundLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

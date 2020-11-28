@@ -8,7 +8,7 @@ include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/GameDataHelperLib_h"
 include "TriggerLibs/SupportLib_h"
-// include "ModuleMimicLibs/MimicLibsLoader"
+include "ModuleMimicLibs/MimicLibsLoader"
 include "Modules/LibModuleLoader"
 
 //--------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ trigger libTRYM_gt_ForceBackslashKeySyncQACheat;
 // External Library Initialization
 void libTRYM_InitLibraries () {
     libNtve_InitVariables();
-    // libMICL_InitLib();
+    libMICL_InitLib();
     libMODL_InitLib();
 }
 

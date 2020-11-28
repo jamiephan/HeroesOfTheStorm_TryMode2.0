@@ -7,7 +7,7 @@ include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/SupportLib_h"
 
-include "ModuleMimicLibs/MimicMapMechanicsLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicMapMechanicsLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Maps
@@ -44,6 +44,37 @@ void MimicMapMechanicsLib_InitVariables () {
     MimicMapMechanicsLib_gv_genericMercBossCampInitialSpawnDelay_C = 300.0;
     MimicMapMechanicsLib_gv_mercSapperDefaultSpawnTime_C = 60.0;
     MimicMapMechanicsLib_gv_mercSapperDefaultRespawnTime_C = 150.0;
+    for (init_i = 0; init_i <= MimicMapMechanicsLib_gv_dataJungleMaxNumberOfDefenderTypes; init_i += 1) {
+        MimicMapMechanicsLib_gv_dataJungleCampDefenderData[init_i].lv_aIGoalLink = "MercenaryCamp";
+    }
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsParentPanel = c_invalidDialogControlId;
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsDialog[init_i1] = c_invalidDialogId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCamp_PositionControl[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Timer[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Title[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Debug[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i1 += 1) {
+        MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel2[init_i1] = c_invalidDialogControlId;
+    }
     for (init_i = 0; init_i <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i += 1) {
         MimicMapMechanicsLib_gv_jungleCreepCamps[init_i].lv_mapDataCampType = MimicMapMechanicsLib_ge_JungleCampTypes_MercCamp;
         MimicMapMechanicsLib_gv_jungleCreepCamps[init_i].lv_mapDataCampDefenderType = MimicMapMechanicsLib_ge_JungleCampDefenderTypes_Custom;
@@ -149,6 +180,7 @@ void MimicMapMechanicsLib_gf_InitializeSiegeTrooperMercType (int lp_campType, te
     lv_campTypeInt = (lp_campType);
 
     // Implementation
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_aIGoalLink = "MercenaryCampShockTrooper";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_defendersCoweronDeath = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C;
@@ -183,6 +215,7 @@ void MimicMapMechanicsLib_gf_InitializeSummonerMercType (int lp_campType, text l
     lv_campTypeInt = (lp_campType);
 
     // Implementation
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_aIGoalLink = "MercenaryCampSummoner";
     TriggerEnable(MimicMapMechanicsLib_gt_SummonerMinionLanerScaling, true);
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C;
@@ -219,6 +252,7 @@ void MimicMapMechanicsLib_gf_InitializeHellbatMercType (int lp_campType, text lp
     lv_campTypeInt = (lp_campType);
 
     // Implementation
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_aIGoalLink = "MercenaryCampShockTrooper";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_defendersCoweronDeath = lp_cowerOnDeath;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_initialSpawnDelay = lp_initialSpawnDelay;
@@ -250,6 +284,7 @@ void MimicMapMechanicsLib_gf_InitializeSapperMercType (int lp_campType, text lp_
     lv_campTypeInt = (lp_campType);
 
     // Implementation
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_aIGoalLink = "MercenaryCampSappers";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_campTypeMinimapLabel = lp_mercName;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeInt].lv_initialSpawnDelay = lp_initialSpawnDelay;
@@ -315,11 +350,13 @@ void MimicMapMechanicsLib_gf_JungleInitializeDefenderData (int lp_camp) {
     if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType != MimicMapMechanicsLib_ge_JungleCampDefenderTypes_Custom)) {
         lv_campTypeIndex = (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType);
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderCampIsSoloable = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_campIsSoloable;
+        MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_aICampGoalLink = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_aIGoalLink;
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderDefendersCoweronDeath = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_defendersCoweronDeath;
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderInitialSpawnDelay = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_initialSpawnDelay;
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderRespawnTime = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_respawnTime;
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderNumberofCreeps = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_numberOfCreeps;
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderCampTypeMinimapLabel = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_campTypeMinimapLabel;
+        MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampIsElite = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_campIsElite;
         auto6AB4C519_ae = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campTypeIndex].lv_numberOfCreeps;
         lv_i = 1;
         for ( ; ( (auto6AB4C519_ai >= 0 && lv_i <= auto6AB4C519_ae) || (auto6AB4C519_ai < 0 && lv_i >= auto6AB4C519_ae) ) ; lv_i += auto6AB4C519_ai ) {
@@ -383,6 +420,8 @@ void MimicMapMechanicsLib_gf_JungleInitializeMercCampData (int lp_camp) {
     lv_i = 1;
     for ( ; ( (autoD92817D3_ai >= 0 && lv_i <= autoD92817D3_ae) || (autoD92817D3_ai < 0 && lv_i >= autoD92817D3_ae) ) ; lv_i += autoD92817D3_ai ) {
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionUnitType[lv_i] = MimicMapMechanicsLib_gv_dataJungleCampMercData[lv_campTypeIndex].lv_spawnedMinionUnitTypes[lv_i];
+        MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionUnitType[lv_i] = MimicMapMechanicsLib_gv_dataJungleCampMercData[lv_campTypeIndex].lv_spawnedMinionUnitTypes[lv_i];
+        MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionAIThreatValueforAITeamDelegateSystem[lv_i] = CatalogFieldValueGetAsFixed(c_gameCatalogUnit, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionUnitType[lv_i], "AIBaseThreat", libCore_gv_cOMPUTER_Neutral);
     }
     MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercNumberOfRanks = MimicMapMechanicsLib_gv_dataJungleCampMercData[lv_campTypeIndex].lv_numberOfRanks;
     lv_team = 1;
@@ -596,53 +635,11 @@ void MimicMapMechanicsLib_gf_JungleInitializeDoubloonSmallCampData (int lp_camp)
     // Implementation
     lv_campTypeIndex = (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataBattleshipSpawnType);
     MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_piratesNumberOfRanks = MimicMapMechanicsLib_gv_dataJungleCampMercData[lv_campTypeIndex].lv_numberOfRanks;
+    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCapturePointSplatModel = "TownMercCampCaptureBeaconSmall";
 }
 
 void MimicMapMechanicsLib_gf_JungleInitializeTryMeCampData (int lp_camp) {
     // Automatic Variable Declarations
-}
-
-void MimicMapMechanicsLib_gf_JungleInitializeCreepCamp (int lp_camp) {
-    // Variable Declarations
-    string lv_iconScaleString;
-    string lv_iconUnitType;
-    unit lv_iconUnit;
-    string lv_icon;
-    const int lv_textTagHeightOffset = 4;
-    const fixed lv_iconScale = 0.7;
-    string lv_timerString;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_iconScaleString = "";
-    lv_timerString = "";
-
-    // Implementation
-    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit = UnitGroupUnit(UnitGroup("LootBannerSconce", c_playerAny, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataDefenderLeashRegion, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1);
-    if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit == null)) {
-        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_MapM_59C36C74"), true);
-        return ;
-    }
-
-    MimicMapMechanicsLib_gf_JungleDropLootBannerinMercCamp(lp_camp, PlayerGroupSingle(libCore_gv_cOMPUTER_Hostile));
-    if (((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataMinimapIconUseTeamColor == true) || (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_MercCamp))) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, "JungleCampIconUnitTeamColor", c_unitCreateIgnorePlacement, 0, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, null);
-    }
-    else {
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, "JungleCampIconUnit", c_unitCreateIgnorePlacement, 0, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, null);
-    }
-    lv_iconUnit = UnitLastCreated();
-    TextTagCreate(StringToText(""), 16, UnitGetPosition(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit), lv_textTagHeightOffset, true, false, PlayerGroupAll());
-    TextTagShow(TextTagLastCreated(), PlayerGroupAll(), false);
-    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder = TextTagLastCreated();
-    TextTagCreate(StringToText(""), 16, UnitGetPosition(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit), lv_textTagHeightOffset, true, false, PlayerGroupAll());
-    TextTagShow(TextTagLastCreated(), PlayerGroupAll(), false);
-    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos = TextTagLastCreated();
-    libNtve_gf_SendActorMessageToUnit(lv_iconUnit, "SetMinimapVisibility");
-    lv_icon = MimicMapMechanicsLib_gf_JungleGetCurrentIconForJungleCamp(lp_camp, true);
-    libNtve_gf_SendActorMessageToUnit(lv_iconUnit, "MinimapIcon " + lv_icon);
-    libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), (("MinimapIconScale " + FixedToString(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataMinimapIconScale, c_fixedPrecisionAny))));
-    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campIconUnit = lv_iconUnit;
 }
 
 trigger auto_MimicMapMechanicsLib_gf_JungleInitializeCreepCampDelayMinimapIcons_Trigger = null;
@@ -669,6 +666,75 @@ bool auto_MimicMapMechanicsLib_gf_JungleInitializeCreepCampDelayMinimapIcons_Tri
     Wait(lp_delayTime, c_timeGame);
     libNtve_gf_SendActorMessageToUnit(lp_unit, "SetMinimapVisibility 1");
     return true;
+}
+
+void MimicMapMechanicsLib_gf_JungleInitializeCreepCamp (int lp_camp) {
+    int init_i;
+
+    // Variable Declarations
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_infoPanel;
+    string lv_iconScaleString;
+    string lv_iconUnitType;
+    unit lv_iconUnit;
+    string lv_icon;
+    const int lv_textTagHeightOffset = 5;
+    const fixed lv_iconScale = 0.7;
+    string lv_timerString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    for (init_i = 0; init_i <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i += 1) {
+        lv_infoPanel[init_i] = c_invalidDialogControlId;
+    }
+    lv_iconScaleString = "";
+    lv_timerString = "";
+
+    // Implementation
+    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit = UnitGroupUnit(UnitGroup("LootBannerSconce", c_playerAny, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataDefenderLeashRegion, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1);
+    if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit == null)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_MapM_59C36C74"), true);
+        MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_stateIsEnabled = false;
+        return ;
+    }
+
+    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagPosition = UnitGetPosition(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit);
+    MimicMapMechanicsLib_gf_JungleDropLootBannerinMercCamp(lp_camp, PlayerGroupSingle(libCore_gv_cOMPUTER_Hostile));
+    if (((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataMinimapIconUseTeamColor == true) || (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_MercCamp))) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "JungleCampIconUnitTeamColor", c_unitCreateIgnorePlacement, 0, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, null);
+    }
+    else {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "JungleCampIconUnit", c_unitCreateIgnorePlacement, 0, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, null);
+    }
+    lv_iconUnit = UnitLastCreated();
+    DialogCreate(1, 1, c_anchorTop, 0, 0, true);
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsDialog[lp_camp] = DialogLastCreated();
+    DialogSetPositionRelativeToUnitWithAnchor(DialogLastCreated(), MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit, "Ref_Overhead", c_anchorCenter, 0, 0);
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypePanel);
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCamp_PositionControl[lp_camp] = DialogControlLastCreated();
+    DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenLowerContainer/MercCampPanel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsParentPanel = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsParentPanel, c_triggerControlTypePanel, "JungleCampInfoPanel/JungleCampInfoPanelTemplate");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp] = DialogControlLastCreated();
+    lv_infoPanel[lp_camp] = DialogControlLastCreated();
+    DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
+    DialogControlSetPositionRelative(DialogControlLastCreated(), PlayerGroupAll(), c_anchorCenter, MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCamp_PositionControl[lp_camp], c_anchorBottom, 0, 0);
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "CampTimerLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Timer[lp_camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "CampTitleLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Title[lp_camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "PlayerNameLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "CampDescriptionLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "DebugLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Debug[lp_camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_camp], c_triggerControlTypeLabel, "CampEliteLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel2[lp_camp] = DialogControlLastCreated();
+    libNtve_gf_SendActorMessageToUnit(lv_iconUnit, "SetMinimapVisibility");
+    lv_icon = MimicMapMechanicsLib_gf_JungleGetCurrentIconForJungleCamp(lp_camp, true);
+    libNtve_gf_SendActorMessageToUnit(lv_iconUnit, "MinimapIcon " + lv_icon);
+    libNtve_gf_SendActorMessageToUnit(UnitLastCreated(), (("MinimapIconScale " + FixedToString(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataMinimapIconScale, c_fixedPrecisionAny))));
+    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campIconUnit = lv_iconUnit;
 }
 
 int MimicMapMechanicsLib_gf_JungleGetJungleCampForUnit (unit lp_unit) {
@@ -938,7 +1004,13 @@ void MimicMapMechanicsLib_gf_JungleUpdateTextTagForCamp (int lp_camp) {
     int lv_defenderType;
     text lv_titleText;
     text lv_subText;
+    text lv_descText;
+    text lv_subTextBlue;
+    text lv_subTextRed;
     text lv_formattedTitleText;
+    text lv_formattedTitleTextBlue;
+    text lv_formattedTitleTextRed;
+    text lv_playerNameText;
     text lv_playerNameTextBlue;
     text lv_playerNameTextRed;
     text lv_debugDamageText;
@@ -948,16 +1020,20 @@ void MimicMapMechanicsLib_gf_JungleUpdateTextTagForCamp (int lp_camp) {
     lv_campType = MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampType;
     lv_defenderType = MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType;
     lv_titleText = StringExternal("Param/Value/lib_MapM_72002658");
-    lv_subText = StringExternal("Param/Value/lib_MapM_D8516A21");
+    lv_subText = StringToText("");
+    lv_descText = StringExternal("Param/Value/lib_MapM_2B2EEB9C");
+    lv_subTextBlue = StringToText("");
+    lv_subTextRed = StringToText("");
     lv_formattedTitleText = StringToText("");
+    lv_formattedTitleTextBlue = StringToText("");
+    lv_formattedTitleTextRed = StringToText("");
+    lv_playerNameText = StringToText("");
     lv_playerNameTextBlue = StringToText("");
     lv_playerNameTextRed = StringToText("");
     lv_debugDamageText = StringToText("");
 
     // Implementation
-    if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_aIState == MimicMapMechanicsLib_ge_JungleCampStates_Hibernating)) {
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos, PlayerGroupAll(), false);
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, PlayerGroupAll(), false);
+    if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_stateIsEnabled == false)) {
         return ;
     }
 
@@ -976,13 +1052,15 @@ void MimicMapMechanicsLib_gf_JungleUpdateTextTagForCamp (int lp_camp) {
     else if (((lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_GraveGolem) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp1) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp2) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp3))) {
         lv_titleText = StringExternal("Param/Value/lib_MapM_3BE90BC3");
     }
-    TextExpressionSetToken("Param/Expression/lib_MapM_11B9AFF9", "A", lv_titleText);
-    lv_formattedTitleText = TextExpressionAssemble("Param/Expression/lib_MapM_11B9AFF9");
+    if ((MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_defenderType].lv_campIsElite == true)) {
+        DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel2[lp_camp], PlayerGroupAll(), "CampEliteStatus", "CampIsElite");
+    }
+    else {
+        DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel2[lp_camp], PlayerGroupAll(), "CampEliteStatus", "CampNotElite");
+    }
     if (((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer >= 1) && (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer <= libCore_gv_bALMaxPlayers))) {
-        TextExpressionSetToken("Param/Expression/lib_MapM_9A96809B", "A", PlayerName(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer));
-        lv_playerNameTextBlue = TextExpressionAssemble("Param/Expression/lib_MapM_9A96809B");
-        TextExpressionSetToken("Param/Expression/lib_MapM_E914B34B", "A", PlayerName(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer));
-        lv_playerNameTextRed = TextExpressionAssemble("Param/Expression/lib_MapM_E914B34B");
+        TextExpressionSetToken("Param/Expression/lib_MapM_50C2893A", "A", PlayerName(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer));
+        lv_playerNameText = TextExpressionAssemble("Param/Expression/lib_MapM_50C2893A");
     }
 
     if ((TimerGetRemaining(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_stateCreepRespawnTimer) > 0.0)) {
@@ -992,43 +1070,55 @@ void MimicMapMechanicsLib_gf_JungleUpdateTextTagForCamp (int lp_camp) {
         TextExpressionSetToken("Param/Expression/lib_MapM_5E46FF3A", "A", TextTimeFormat(StringToText("<mintotal/>:<sec2/>"), FixedToInt(TimerGetRemaining(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_stateCreepRespawnTimer))));
         ActorSendAsText(libNtve_gf_MainActorofUnit(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campIconUnit), TextExpressionAssemble("Param/Expression/lib_MapM_5E46FF3A"));
     }
-    else {
-        if ((MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_defenderType].lv_customTextTagInfoText != null)) {
-            lv_subText = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_defenderType].lv_customTextTagInfoText;
-        }
-        else if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderDamagesCoreOnCapture == true)) {
-            lv_subText = StringExternal("Param/Value/lib_MapM_F93FF8F2");
-        }
-        else if (((lv_campType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonCamp) || (lv_campType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonSmallCamp))) {
-            lv_subText = StringExternal("Param/Value/lib_MapM_39EC2271");
-        }
-        else if (((lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_GraveGolem) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp1) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp2) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp3))) {
-            lv_subText = StringExternal("Param/Value/lib_MapM_FEC29940");
-        }
+
+    if ((MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_defenderType].lv_customTextTagInfoText != null)) {
+        lv_descText = MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_defenderType].lv_customTextTagInfoText;
     }
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && (libSprt_gv_dEBUGMapTextEnabled == true)) {
+    else if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_defenderDamagesCoreOnCapture == true)) {
+        lv_descText = StringExternal("Param/Value/lib_MapM_F93FF8F2");
+    }
+    else if (((lv_campType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonCamp) || (lv_campType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonSmallCamp))) {
+        lv_descText = StringExternal("Param/Value/lib_MapM_39EC2271");
+    }
+    else if (((lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_GraveGolem) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp1) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp2) || (lv_defenderType == MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp3))) {
+        lv_descText = StringExternal("Param/Value/lib_MapM_FEC29940");
+    }
+    if ((true == true) && (libSprt_gv_dEBUGMapTextEnabled == true)) {
         TextExpressionSetToken("Param/Expression/lib_MapM_80E63651", "A", IntToText(FixedToInt(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_statTrackingDamageDoneByLastCapture)));
         lv_debugDamageText = TextExpressionAssemble("Param/Expression/lib_MapM_80E63651");
     }
 
     if (((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer >= 1) && (MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer <= libCore_gv_bALMaxPlayers))) {
         if ((libGame_gf_TeamNumberOfPlayer(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_capturingPlayer) == libGame_gv_teamOrderIndex_C)) {
-            TextTagSetText(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, (lv_formattedTitleText + lv_playerNameTextBlue + lv_subText + lv_debugDamageText));
-            TextTagSetText(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos, (lv_formattedTitleText + lv_playerNameTextRed + lv_subText + lv_debugDamageText));
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), "TeamCaptured", "BlueTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), "TeamCaptured", "RedTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), "TeamCaptured", "BlueTeam");
         }
         else {
-            TextTagSetText(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, (lv_formattedTitleText + lv_playerNameTextRed + lv_subText + lv_debugDamageText));
-            TextTagSetText(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos, (lv_formattedTitleText + lv_playerNameTextBlue + lv_subText + lv_debugDamageText));
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), "TeamCaptured", "RedTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), "TeamCaptured", "BlueTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), "TeamCaptured", "RedTeam");
         }
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), true);
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos, libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), true);
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), true);
+        if ((TimerGetRemaining(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_stateCreepRespawnTimer) > 0.0)) {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_camp], PlayerGroupAll(), "ShowHideDescription", "HideDesc");
+        }
+        else {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_camp], PlayerGroupAll(), "ShowHideDescription", "ShowDesc");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], PlayerGroupAll(), "TeamCaptured", "CapturedReset");
+        }
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Timer[lp_camp], lv_subText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Title[lp_camp], lv_titleText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_camp], lv_playerNameText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_camp], lv_descText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Debug[lp_camp], lv_debugDamageText, PlayerGroupAll());
     }
     else {
-        TextTagSetText(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, (lv_formattedTitleText + lv_subText + lv_debugDamageText));
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, PlayerGroupAll(), true);
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagChaos, PlayerGroupAll(), false);
-        TextTagShow(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campHelperTextTagOrder, PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), true);
+        DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_camp], PlayerGroupAll(), "TeamCaptured", "NotCaptured");
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Timer[lp_camp], lv_subText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Title[lp_camp], lv_titleText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_camp], lv_playerNameText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_camp], lv_descText, PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Debug[lp_camp], lv_debugDamageText, PlayerGroupAll());
     }
 }
 
@@ -1185,6 +1275,87 @@ bool auto_MimicMapMechanicsLib_gf_JungleRespawnCreepsForCamp_TriggerFunc (bool t
     return true;
 }
 
+void MimicMapMechanicsLib_gf_JungleDebugResetCamp (int lp_Player, int lp_Camp) {
+    int init_i;
+
+    // Variable Declarations
+    int[MimicMapMechanicsLib_gv_jungleMaxCamps + 1] lv_infoPanel;
+    int lv_titleText;
+    int lv_subTimerText;
+    int lv_descText;
+    text lv_playerNameText;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    for (init_i = 0; init_i <= MimicMapMechanicsLib_gv_jungleMaxCamps; init_i += 1) {
+        lv_infoPanel[init_i] = c_invalidDialogControlId;
+    }
+    lv_titleText = c_invalidDialogControlId;
+    lv_subTimerText = c_invalidDialogControlId;
+    lv_descText = c_invalidDialogControlId;
+    lv_playerNameText = StringToText("");
+
+    // Implementation
+    libCore_gf_DataLootContentLoadBannerDataIntoIndex("NeutralMercCamp", libCore_gv_cOMPUTER_Hostile);
+    UnitCreate(1, "LootBannerSconce", c_unitCreateIgnorePlacement, libGame_gf_ComputerPlayerInTeam(libGame_gf_TeamNumberOfPlayer(lp_Player)), MimicMapMechanicsLib_gv_jungleCreepCamps[lp_Camp].lv_campOwnershipFlagPosition, 270.0, null);
+    MimicMapMechanicsLib_gv_jungleCreepCamps[lp_Camp].lv_campOwnershipFlagUnit = UnitLastCreated();
+    MimicMapMechanicsLib_gf_JungleDropLootBannerinMercCamp(lp_Camp, PlayerGroupSingle(lp_Player));
+    DialogControlDestroy(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp]);
+    DialogCreate(1, 1, c_anchorTop, 0, 0, true);
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsDialog[lp_Camp] = DialogLastCreated();
+    DialogSetPositionRelativeToUnitWithAnchor(DialogLastCreated(), MimicMapMechanicsLib_gv_jungleCreepCamps[lp_Camp].lv_campOwnershipFlagUnit, "Ref_Overhead", c_anchorCenter, 0, 0);
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypePanel);
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCamp_PositionControl[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenLowerContainer/MercCampPanel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsParentPanel = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsParentPanel, c_triggerControlTypePanel, "JungleCampInfoPanel/JungleCampInfoPanelTemplate");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp] = DialogControlLastCreated();
+    lv_infoPanel[lp_Camp] = DialogControlLastCreated();
+    DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
+    DialogControlSetPositionRelative(DialogControlLastCreated(), PlayerGroupAll(), c_anchorCenter, MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCamp_PositionControl[lp_Camp], c_anchorBottom, 0, 0);
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "CampTimerLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Timer[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "CampTitleLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Title[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "PlayerNameLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "CampDescriptionLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "DebugLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Debug[lp_Camp] = DialogControlLastCreated();
+    DialogControlHookup(lv_infoPanel[lp_Camp], c_triggerControlTypeLabel, "CampEliteLabel");
+    MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel2[lp_Camp] = DialogControlLastCreated();
+    if (((lp_Player >= 1) && (lp_Player <= libCore_gv_bALMaxPlayers))) {
+        TextExpressionSetToken("Param/Expression/lib_MapM_104CCD72", "A", PlayerName(lp_Player));
+        lv_playerNameText = TextExpressionAssemble("Param/Expression/lib_MapM_104CCD72");
+    }
+
+    if (((lp_Player >= 1) && (lp_Player <= libCore_gv_bALMaxPlayers))) {
+        if ((libGame_gf_TeamNumberOfPlayer(lp_Player) == libGame_gv_teamOrderIndex_C)) {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), "TeamCaptured", "BlueTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), "TeamCaptured", "RedTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), "TeamCaptured", "BlueTeam");
+        }
+        else {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), "TeamCaptured", "RedTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), "TeamCaptured", "BlueTeam");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), "TeamCaptured", "RedTeam");
+        }
+        if ((TimerGetRemaining(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_Camp].lv_stateCreepRespawnTimer) > 0.0)) {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_Camp], PlayerGroupAll(), "ShowHideDescription", "HideDesc");
+        }
+        else {
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_Description[lp_Camp], PlayerGroupAll(), "ShowHideDescription", "ShowDesc");
+            DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], PlayerGroupAll(), "TeamCaptured", "CapturedReset");
+        }
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_Camp], lv_playerNameText, PlayerGroupAll());
+    }
+    else {
+        DialogControlSetAnimationState(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfoPanel[lp_Camp], PlayerGroupAll(), "TeamCaptured", "NotCaptured");
+        libNtve_gf_SetDialogItemText(MimicMapMechanicsLib_gv_uIJungleCampPanel.lv_jungleCreepCampsInfo_Label_PlayerName[lp_Camp], lv_playerNameText, PlayerGroupAll());
+    }
+}
+
 void MimicMapMechanicsLib_gf_JungleTransitionCampIntoState (int lp_camp, int lp_state) {
     // Variable Declarations
     unit lv_itUnit;
@@ -1272,7 +1443,6 @@ bool auto_MimicMapMechanicsLib_gf_JungleHibernateCampDefender_TriggerFunc (bool 
     UnitIssueOrder(lp_defender, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
     libNtve_gf_MakeUnitInvulnerable(lp_defender, true);
     UnitSetState(lp_defender, c_unitStateTargetable, false);
-    UnitSetState(lp_defender, c_unitStateStoppable, false);
     UnitSetState(lp_defender, c_unitStateStatusBar, false);
     UnitSetState(lp_defender, c_unitStateFidget, false);
     UnitBehaviorRemoveCategory(lp_defender, c_behaviorCategoryReveal);
@@ -1332,10 +1502,6 @@ bool auto_MimicMapMechanicsLib_gf_JungleStopHibernatingCampDefender_TriggerFunc 
     Wait(2.0, c_timeGame);
     libNtve_gf_MakeUnitInvulnerable(lp_defender, false);
     UnitSetState(lp_defender, c_unitStateTargetable, true);
-    if ((lv_campDefenderType != MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp1) && (lv_campDefenderType != MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp2) && (lv_campDefenderType != MimicMapMechanicsLib_ge_JungleCampDefenderTypes_BossCamp3) && (lv_campDefenderType != MimicMapMechanicsLib_ge_JungleCampDefenderTypes_GraveGolem) && (UnitTypeTestFlag(UnitGetType(lp_defender), c_unitFlagMovable) == true)) {
-        UnitSetState(lp_defender, c_unitStateStoppable, true);
-    }
-
     UnitSetState(lp_defender, c_unitStateStatusBar, true);
     UnitSetState(lp_defender, c_unitStateFidget, true);
     return true;
@@ -1353,7 +1519,6 @@ void MimicMapMechanicsLib_gf_JungleStartHibernateCamps () {
 
     // Implementation
     MimicMapMechanicsLib_gv_jungleAllCampsShouldBeHibernating = true;
-    TriggerEnable(MimicMapMechanicsLib_gt_JungleRespawnTimerTextTagCountdown, false);
     autoF0D500E2_ae = MimicMapMechanicsLib_gv_jungleNumberOfCreepCamps;
     lv_itCamp = 1;
     for ( ; ( (autoF0D500E2_ai >= 0 && lv_itCamp <= autoF0D500E2_ae) || (autoF0D500E2_ai < 0 && lv_itCamp >= autoF0D500E2_ae) ) ; lv_itCamp += autoF0D500E2_ai ) {
@@ -1428,7 +1593,6 @@ void MimicMapMechanicsLib_gf_JungleStopHibernateCamps () {
                 MimicMapMechanicsLib_gf_JungleTransitionCampIntoState(lv_itCamp, MimicMapMechanicsLib_ge_JungleCampStates_Dead);
             }
             if ((UnitGroupCount(libAIAI_gf_DefenderGroup(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_aIDefenderAIIndex), c_unitCountAlive) > 0) && (UnitGroupCount(libAIAI_gf_DefenderGroup(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_aIDefenderAIIndex), c_unitCountAlive) < MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_defenderNumberofCreeps)) {
-                TimerStart(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_stateCreepRespawnTimer, MimicMapMechanicsLib_gv_bALJungleLeashRespawnTime, false, c_timeGame);
             }
 
         }
@@ -1477,7 +1641,6 @@ void MimicMapMechanicsLib_gf_JungleStopHibernateCampsByLeaderUnit (string lp_lan
                     MimicMapMechanicsLib_gf_JungleTransitionCampIntoState(lv_itCamp, MimicMapMechanicsLib_ge_JungleCampStates_Dead);
                 }
                 if ((UnitGroupCount(libAIAI_gf_DefenderGroup(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_aIDefenderAIIndex), c_unitCountAlive) > 0) && (UnitGroupCount(libAIAI_gf_DefenderGroup(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_aIDefenderAIIndex), c_unitCountAlive) < MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_defenderNumberofCreeps)) {
-                    TimerStart(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_itCamp].lv_stateCreepRespawnTimer, MimicMapMechanicsLib_gv_bALJungleLeashRespawnTime, false, c_timeGame);
                 }
 
             }
@@ -1524,14 +1687,17 @@ void MimicMapMechanicsLib_gf_JungleGrantCaptureRewards (int lp_camp, int lp_owne
     int lv_killingFaction;
     string lv_campPortrait;
     playergroup lv_creditGroup;
+    fixed lv_grantedXP;
+    fixed lv_captureRadiusScoreCredit;
 
     // Automatic Variable Declarations
     unitgroup auto65C1FEA2_g;
     int auto65C1FEA2_u;
+    unitgroup auto6F574477_g;
+    int auto6F574477_u;
     playergroup auto6FC0000D_g;
-    playergroup auto7D3C6A92_g;
     playergroup auto92E53E49_g;
-    playergroup auto63642BED_g;
+    playergroup auto7D3C6A92_g;
     int auto9C82785C_val;
     const int auto55464B3F_n = 3;
     int auto55464B3F_i;
@@ -1540,6 +1706,7 @@ void MimicMapMechanicsLib_gf_JungleGrantCaptureRewards (int lp_camp, int lp_owne
 
     // Variable Initialization
     lv_creditGroup = PlayerGroupEmpty();
+    lv_captureRadiusScoreCredit = (MimicMapMechanicsLib_gv_bALJungleCampCaptureRadius + 5.0);
 
     // Implementation
     if ((lp_owner == libCore_gv_cOMPUTER_TeamOrder)) {
@@ -1574,13 +1741,22 @@ void MimicMapMechanicsLib_gf_JungleGrantCaptureRewards (int lp_camp, int lp_owne
     }
     StatEventAddDataFixed(StatEventLastCreated(), "GameTime", libUIUI_gf_HeroesGameTime());
     StatEventSend(StatEventLastCreated());
-    auto65C1FEA2_g = UnitGroupSearch(null, lp_owner, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, MimicMapMechanicsLib_gv_bALJungleCampCaptureRadius, libCore_gv_filtersHeroicAllyorPlayerandnotHallucinationorBenign, 0);
+    auto65C1FEA2_g = UnitGroupSearch(null, lp_owner, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, lv_captureRadiusScoreCredit, libCore_gv_filtersHeroicAllyorPlayerandnotHallucinationorBenign, 0);
     auto65C1FEA2_u = UnitGroupCount(auto65C1FEA2_g, c_unitCountAll);
     for (;; auto65C1FEA2_u -= 1) {
         lv_itUnit = UnitGroupUnitFromEnd(auto65C1FEA2_g, auto65C1FEA2_u);
         if (lv_itUnit == null) { break; }
         PlayerGroupAdd(lv_creditGroup, UnitGetOwner(lv_itUnit));
     }
+    auto6F574477_g = UnitGroupSearch("HeroGall", lp_owner, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, lv_captureRadiusScoreCredit, libCore_gv_filtersHeroicjustexcludingMissile, 0);
+    auto6F574477_u = UnitGroupCount(auto6F574477_g, c_unitCountAll);
+    for (;; auto6F574477_u -= 1) {
+        lv_itUnit = UnitGroupUnitFromEnd(auto6F574477_g, auto6F574477_u);
+        if (lv_itUnit == null) { break; }
+        PlayerGroupAdd(lv_creditGroup, UnitGetOwner(lv_itUnit));
+    }
+    lv_grantedXP = UnitXPGetCurrentXP(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit, null);
+    lv_grantedXP += MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture;
     auto6FC0000D_g = lv_creditGroup;
     lv_itPlayer = -1;
     while (true) {
@@ -1590,37 +1766,29 @@ void MimicMapMechanicsLib_gf_JungleGrantCaptureRewards (int lp_camp, int lp_owne
         libGame_gv_scoreValues[lv_itPlayer].lv_creepCampsCaptured += 1;
         UnitCreateEffectUnit(libGame_gv_players[lv_itPlayer].lv_heroUnit, "JungleCampCaptureParticipationSet", libGame_gv_players[lv_itPlayer].lv_heroUnit);
         libSond_gf_HeroVOStartCelebrateVOTimerForPlayer(lv_itPlayer, lv_creditGroup);
+        libGame_gf_ScoreValuesRecordXPContributionForPlayer(lv_itPlayer, (lv_grantedXP / PlayerGroupCount(lv_creditGroup)), false);
     }
-    if ((MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture != 0.0)) {
-        if ((libCore_gv_dEBUGSoloXPOn == true)) {
-            auto7D3C6A92_g = lv_creditGroup;
-            lv_itPlayer = -1;
-            while (true) {
-                	lv_itPlayer = PlayerGroupNextPlayer(auto7D3C6A92_g, lv_itPlayer);
-                	if (lv_itPlayer<0) { break; }
-                	libGame_gf_GrantXPToPlayer(MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture, lv_itPlayer, libGame_ge_XPSources_Creep);
-                libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_itPlayer, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_captureCircleOfPowerUnit, libCore_ge_FloatingTextType_XPMedium, FixedToInt(MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture));
-            }
-        }
-        else {
-            auto92E53E49_g = libGame_gf_PlayersOnTeamHeroes(libGame_gf_TeamNumberOfPlayer(lp_owner), false);
-            lv_itPlayer = -1;
-            while (true) {
-                	lv_itPlayer = PlayerGroupNextPlayer(auto92E53E49_g, lv_itPlayer);
-                	if (lv_itPlayer<0) { break; }
-                	libGame_gf_GrantXPToPlayer(MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture, lv_itPlayer, libGame_ge_XPSources_Creep);
-                libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_itPlayer, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_captureCircleOfPowerUnit, libCore_ge_FloatingTextType_XPMedium, FixedToInt(MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture));
-            }
-        }
-        auto63642BED_g = lv_creditGroup;
+    if ((libCore_gv_dEBUGSoloXPOn == true)) {
+        auto7D3C6A92_g = lv_creditGroup;
         lv_itPlayer = -1;
         while (true) {
-            	lv_itPlayer = PlayerGroupNextPlayer(auto63642BED_g, lv_itPlayer);
+            	lv_itPlayer = PlayerGroupNextPlayer(auto7D3C6A92_g, lv_itPlayer);
             	if (lv_itPlayer<0) { break; }
-            	libGame_gf_ScoreValuesRecordXPContributionForPlayer(lv_itPlayer, (FixedToInt(MimicMapMechanicsLib_gv_dataJungleCampDefenderData[(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampDefenderType)].lv_xPAwardForCapture) / PlayerGroupCount(lv_creditGroup)), false);
+            	libGame_gf_GrantXPToPlayer(lv_grantedXP, lv_itPlayer, libGame_ge_XPSources_Creep);
+            libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_itPlayer, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_captureCircleOfPowerUnit, libCore_ge_FloatingTextType_XPMedium, FixedToInt(lv_grantedXP));
         }
     }
-
+    else {
+        auto92E53E49_g = libGame_gf_PlayersOnTeamHeroes(libGame_gf_TeamNumberOfPlayer(lp_owner), false);
+        lv_itPlayer = -1;
+        while (true) {
+            	lv_itPlayer = PlayerGroupNextPlayer(auto92E53E49_g, lv_itPlayer);
+            	if (lv_itPlayer<0) { break; }
+            	libGame_gf_GrantXPToPlayer(lv_grantedXP, lv_itPlayer, libGame_ge_XPSources_Creep);
+            libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_itPlayer, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_captureCircleOfPowerUnit, libCore_ge_FloatingTextType_XPMedium, FixedToInt(lv_grantedXP));
+        }
+    }
+    UnitXPSetCurrentXP(MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campOwnershipFlagUnit, null, 0.0);
     if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_campAwardsRegenGlobe == true)) {
         if ((lp_owner == libCore_gv_cOMPUTER_TeamOrder)) {
             libNtve_gf_CreateUnitsWithDefaultFacing(1, "RegenGlobe", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_TeamOrder, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mapDataCampCaptainSpawnPoint, null);
@@ -1775,11 +1943,13 @@ void MimicMapMechanicsLib_gf_JungleSpawnMercMinions (int lp_camp, int lp_owner, 
 
         UnitSetCustomValue(lv_minion, libCore_gf_CustomValueIndex(libCore_ge_CustomValueIndexes_JungleLanerCreepCampIndex), IntToFixed(lp_camp));
         UnitSetCustomValue(lv_minion, libCore_gf_CustomValueIndex(libCore_ge_CustomValueIndexes_MercLanerGroupIndex), IntToFixed(MimicMapMechanicsLib_gv_jungleNumberOfActiveMercGroups));
+        UnitSetCustomValue(lv_minion, libCore_gf_CustomValueIndex(libCore_ge_CustomValueIndexes_AIThreatBase), MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionAIThreatValueforAITeamDelegateSystem[lv_i]);
         UnitGroupAdd(MimicMapMechanicsLib_gv_jungleMiniMapIconGroup[MimicMapMechanicsLib_gv_jungleNumberOfActiveMercGroups], lv_minion);
         lv_lane = MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercLaneToSpawnIn[lv_team];
         MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercLaneLastSpawnedIn[lv_team] = MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercLaneToSpawnIn[lv_team];
         lv_waypoint = MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnFirstWaypointIndex[lv_team];
         libAIAI_gf_MinionAIStartMinionAI(-1, lv_minion, lv_lane, lv_waypoint, true, false, false, 0, false);
+        libAIAI_gf_AITeamDelegateAddRemoveMercLanertoLane(lv_team, lv_lane, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionUnitType[lv_i], libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Add, MimicMapMechanicsLib_gv_jungleCreepCamps[lp_camp].lv_mercSpawnedMinionAIThreatValueforAITeamDelegateSystem[lv_i]);
     }
     MimicMapMechanicsLib_gf_JungleSetMiniMapIconForMercMinions(lp_camp, MimicMapMechanicsLib_gv_jungleNumberOfActiveMercGroups, MimicMapMechanicsLib_gf_JungleGetPortraitForJungleCamp(lp_camp), MimicMapMechanicsLib_gv_jungleMiniMapIconGroup[MimicMapMechanicsLib_gv_jungleNumberOfActiveMercGroups]);
     MimicMapMechanicsLib_gf_JungleCreateMercPath(MimicMapMechanicsLib_gv_jungleMiniMapLeader[MimicMapMechanicsLib_gv_jungleNumberOfActiveMercGroups], true);
@@ -2569,8 +2739,8 @@ bool auto_MimicMapMechanicsLib_gf_MapSetRepulseRegion_TriggerFunc (bool testCond
 
     // Automatic Variable Declarations
     // Implementation
-    TriggerEnable(libGame_gt_BaseRepulserFieldLaunchMissile, false);
-    TriggerEnable(libGame_gt_BaseSafeZonePunt, true);
+    TriggerEnable(libGame_gt_HallOfStormsKnockbackLaunchMissile, false);
+    TriggerEnable(libGame_gt_HallOfStormsKnockbackUnitEntersRegion, true);
     MimicMapMechanicsLib_gv_mMRepulseRegions[lp_team] = lp_pulseRegion;
     MimicMapMechanicsLib_gv_mMRepulseRegionPunchTarget[lp_team][1] = lp_punchTargetLocation1;
     MimicMapMechanicsLib_gv_mMRepulseRegionPunchTarget[lp_team][2] = lp_punchTargetLocation2;
@@ -2608,8 +2778,8 @@ bool auto_MimicMapMechanicsLib_gf_MMRepulseRegionAddToPunchedGroup_TriggerFunc (
 void MimicMapMechanicsLib_gf_MapSetSafeRegion (int lp_team, region lp_safeRegion) {
     // Automatic Variable Declarations
     // Implementation
-    TriggerEnable(libGame_gt_BaseUnitEntersSafeZone, true);
-    TriggerEnable(libGame_gt_BaseUnitExitsSafeZone, true);
+    TriggerEnable(libGame_gt_HallOfStormsUnitEntersRegion, true);
+    TriggerEnable(libGame_gt_HallOfStormsUnitExitsRegion, true);
     MimicMapMechanicsLib_gv_mMSafeRegions[lp_team] = lp_safeRegion;
     TriggerExecute(MimicMapMechanicsLib_gt_MMSafeRegionBehavior, true, false);
 }
@@ -2625,23 +2795,27 @@ void MimicMapMechanicsLib_gf_RestrictAbilitiesToRegionForUnit (unit lp_unit, reg
     // Variable Initialization
 
     // Implementation
-    autoED27FBF2_ae = (CatalogFieldValueCount(c_gameCatalogUnit, UnitGetType(lp_unit), "AbilArray", UnitGetOwner(lp_unit)) - 1);
-    lv_itAbility = 0;
-    for ( ; lv_itAbility <= autoED27FBF2_ae ; lv_itAbility += 1 ) {
-        lv_ability = (CatalogFieldValueGet(c_gameCatalogUnit, UnitGetType(lp_unit), "AbilArray[" + IntToString(lv_itAbility) + "].Link", UnitGetOwner(lp_unit)));
-        if ((CatalogEntryIsValid(c_gameCatalogAbil, lv_ability) == true)) {
-            if ((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode)) {
-                UnitAbilitySetRequiredRegion(lp_unit, lv_ability, lp_region, "");
-            }
-            else {
-                if (((CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "AbilityCategories[TargetAcrossMapPlane]", c_playerAny) == "1") || ((lv_ability == "AbathurToxicNest") && (PlayerHasTalent(UnitGetOwner(lp_unit), "AbathurMasteryBallistospores") == true)))) {
-                }
-                else {
+    if (((MimicMapMechanicsLib_gf_MapMechanicExistsOnMap("HauntedMinesRework") == true) && ((UnitGetType(lp_unit) == "HeroDeathwing") || (UnitGetType(lp_unit) == "DeathwingDragonflightUnit")))) {
+    }
+    else {
+        autoED27FBF2_ae = (CatalogFieldValueCount(c_gameCatalogUnit, UnitGetType(lp_unit), "AbilArray", UnitGetOwner(lp_unit)) - 1);
+        lv_itAbility = 0;
+        for ( ; lv_itAbility <= autoED27FBF2_ae ; lv_itAbility += 1 ) {
+            lv_ability = (CatalogFieldValueGet(c_gameCatalogUnit, UnitGetType(lp_unit), "AbilArray[" + IntToString(lv_itAbility) + "].Link", UnitGetOwner(lp_unit)));
+            if ((CatalogEntryIsValid(c_gameCatalogAbil, lv_ability) == true)) {
+                if ((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode)) {
                     UnitAbilitySetRequiredRegion(lp_unit, lv_ability, lp_region, "");
                 }
+                else {
+                    if (((CatalogFieldValueGet(c_gameCatalogAbil, lv_ability, "AbilityCategories[TargetAcrossMapPlane]", c_playerAny) == "1") || ((lv_ability == "AbathurToxicNest") && (PlayerHasTalent(UnitGetOwner(lp_unit), "AbathurMasteryBallistospores") == true)))) {
+                    }
+                    else {
+                        UnitAbilitySetRequiredRegion(lp_unit, lv_ability, lp_region, "");
+                    }
+                }
             }
-        }
 
+        }
     }
 }
 
@@ -2919,12 +3093,12 @@ void MimicMapMechanicsLib_gf_MMRavenTributeCollectionThresholdReached (int lp_wi
     }
 }
 
-void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayer) {
+void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayerID) {
     // Variable Declarations
     int lv_itPlayer;
     int lv_index;
     int lv_cursedTeam;
-    int lv_enemyTeam;
+    int lv_enemyTeamWinningTeam;
     int lv_townIndex;
     int lv_structureIndex;
     unit lv_structureUnit;
@@ -2941,29 +3115,31 @@ void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayer) {
     // Variable Initialization
 
     // Implementation
-    lv_cursedTeam = libGame_gf_TeamNumberOfPlayer(lp_cursedPlayer);
-    lv_enemyTeam = libGame_gf_EnemyTeam(lv_cursedTeam);
+    lv_cursedTeam = libGame_gf_TeamNumberOfPlayer(lp_cursedPlayerID);
+    lv_enemyTeamWinningTeam = libGame_gf_EnemyTeam(lv_cursedTeam);
     MimicMapMechanicsLib_gf_MMRavenPlayCurseSound(lv_cursedTeam);
     SoundChannelMute(PlayerGroupAll(), c_soundCategoryAmbient, true);
     SoundtrackStop(PlayerGroupAll(), c_soundtrackCategoryMusic, true);
     libSond_gf_SoundtrackApplyNewDefaultSoundtrackForPlayerGroup("Storm_Music_RavenKing_Cursed", PlayerGroupAll());
-    libGame_gf_SendEventMapCursedHollowCurseStarts(lv_enemyTeam);
+    libGame_gf_SendEventMapCursedHollowCurseStarts(lv_enemyTeamWinningTeam);
     ActorSend(MimicMapMechanicsLib_gv_mapMechanicControllerActor, "Signal MM1On");
     ActorSend(MimicMapMechanicsLib_gv_mapMechanicControllerActor, "Signal RainOn");
-    libGame_gv_teams[lv_enemyTeam].lv_map_CursesPlacedOnEnemyTeam += 1;
+    libGame_gv_teams[lv_enemyTeamWinningTeam].lv_map_CursesPlacedOnEnemyTeam += 1;
     StatEventCreate("RavenCurseActivated");
     StatEventAddDataInt(StatEventLastCreated(), "Event", (libGame_gv_teams[1].lv_map_CursesPlacedOnEnemyTeam + libGame_gv_teams[2].lv_map_CursesPlacedOnEnemyTeam));
-    StatEventAddDataFixed(StatEventLastCreated(), "TeamID", lv_enemyTeam);
-    StatEventAddDataInt(StatEventLastCreated(), "TeamScore", MimicMapMechanicsLib_gv_mMRavenTeamStats[lv_enemyTeam].lv_triburteCollected);
+    StatEventAddDataFixed(StatEventLastCreated(), "TeamID", lv_enemyTeamWinningTeam);
+    StatEventAddDataInt(StatEventLastCreated(), "TeamScore", MimicMapMechanicsLib_gv_mMRavenTeamStats[lv_enemyTeamWinningTeam].lv_triburteCollected);
     StatEventAddDataInt(StatEventLastCreated(), "OpponentScore", MimicMapMechanicsLib_gv_mMRavenTeamStats[lv_cursedTeam].lv_triburteCollected);
     StatEventAddDataFixed(StatEventLastCreated(), "GameTime", libUIUI_gf_HeroesGameTime());
     StatEventSend(StatEventLastCreated());
-    MimicMapMechanicsLib_gf_PreCurseSiegeDamageCache(lv_enemyTeam);
-    MimicMapMechanicsLib_gv_mMRavenTeamStats[libGame_gf_TeamNumberOfPlayer(lp_cursedPlayer)].lv_cursed = true;
+    MimicMapMechanicsLib_gf_PreCurseSiegeDamageCache(lv_enemyTeamWinningTeam);
+    MimicMapMechanicsLib_gv_mMRavenTeamStats[libGame_gf_TeamNumberOfPlayer(lp_cursedPlayerID)].lv_cursed = true;
+    libAIAI_gf_AITeamDelegateActivateDeactivateMapReward(libAIAI_ge_AITeamDelegateActivateDeactivateMapToken_Activate);
+    libAIAI_gf_AITeamDelegateResetMapEventProgressforTeam(lv_enemyTeamWinningTeam);
     auto1E839FCC_ae = libGame_gv_townTownCount;
     lv_townIndex = 1;
     for ( ; ( (auto1E839FCC_ai >= 0 && lv_townIndex <= auto1E839FCC_ae) || (auto1E839FCC_ai < 0 && lv_townIndex >= auto1E839FCC_ae) ) ; lv_townIndex += auto1E839FCC_ai ) {
-        if ((libGame_gv_townTownData[lv_townIndex].lv_owner == lp_cursedPlayer)) {
+        if ((libGame_gv_townTownData[lv_townIndex].lv_owner == lp_cursedPlayerID)) {
             autoCEB3961F_ae = libGame_gv_townTownData[lv_townIndex].lv_structureCount;
             lv_structureIndex = 1;
             for ( ; ( (autoCEB3961F_ai >= 0 && lv_structureIndex <= autoCEB3961F_ae) || (autoCEB3961F_ai < 0 && lv_structureIndex >= autoCEB3961F_ae) ) ; lv_structureIndex += autoCEB3961F_ai ) {
@@ -2979,7 +3155,7 @@ void MimicMapMechanicsLib_gf_MMRavenCurseStart (int lp_cursedPlayer) {
         }
 
     }
-    auto4E0D066B_g = UnitGroup(null, lp_cursedPlayer, RegionEntireMap(), libCore_gv_filtersMinionsTownMinions, 0);
+    auto4E0D066B_g = UnitGroup(null, lp_cursedPlayerID, RegionEntireMap(), libCore_gv_filtersMinionsTownMinions, 0);
     auto4E0D066B_u = UnitGroupCount(auto4E0D066B_g, c_unitCountAll);
     for (;; auto4E0D066B_u -= 1) {
         auto4E0D066B_var = UnitGroupUnitFromEnd(auto4E0D066B_g, auto4E0D066B_u);
@@ -3319,7 +3495,7 @@ bool auto_MimicMapMechanicsLib_gf_MMGardensDragonInitTowers_TriggerFunc (bool te
 
     // Variable Declarations
     unit lv_u;
-    unit lv_utarget;
+    unit lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ;
     int lv_player;
     fixed lv_beam_fulldistance;
     fixed lv_beam_count;
@@ -3364,7 +3540,7 @@ bool auto_MimicMapMechanicsLib_gf_MMGardensDragonInitTowers_TriggerFunc (bool te
         if (lv_u == null) { break; }
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount += 1;
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineUnit = lv_u;
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, "DragonballCaptureBeacon", c_unitCreateIgnorePlacement, UnitGetOwner(lv_u), UnitGetPosition(lv_u), lv_u);
+        UnitCreate(1, "DragonballCaptureBeacon", c_unitCreateIgnorePlacement, UnitGetOwner(lv_u), UnitGetPosition(lv_u), 300.0, lv_u);
         libGame_gf_CapturePointCreate(UnitLastCreated(), MimicMapMechanicsLib_gv_mMGardensDragonDragonballTowerCaptureRadius_C, MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCaptureTime_C, MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerOverCaptureTime_C, libGame_ge_CapturePointDecay_DoNotDecay, libGame_ge_CapturePointDecay_Owner, true);
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_captureBeaconIndex = libGame_gf_LastCreatedCapturePoint();
         libGame_gf_CapturePointDisable(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_captureBeaconIndex);
@@ -3375,19 +3551,19 @@ bool auto_MimicMapMechanicsLib_gf_MMGardensDragonInitTowers_TriggerFunc (bool te
             	if (lv_player<0) { break; }
             	VisRevealArea(lv_player, RegionCircle(UnitGetPosition(lv_u), 0.75), 0.125, false);
         }
-        auto254889A9_g = UnitGroup("GardensDragonShrineTargetSun", c_playerAny, null, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1);
+        auto254889A9_g = UnitGroup("GardensDragonShrineTargetSun", c_playerAny, null, UnitFilter(0, 0, 0, 0), 1);
         auto254889A9_u = UnitGroupCount(auto254889A9_g, c_unitCountAll);
         for (;; auto254889A9_u -= 1) {
-            lv_utarget = UnitGroupUnitFromEnd(auto254889A9_g, auto254889A9_u);
-            if (lv_utarget == null) { break; }
-            MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit = lv_utarget;
+            lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ = UnitGroupUnitFromEnd(auto254889A9_g, auto254889A9_u);
+            if (lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ == null) { break; }
+            MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit = lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ;
         }
         MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion = RegionCircle(UnitGetPosition(lv_u), 1.0);
         lv_beam_count = 0.0;
-        lv_beam_fulldistance = DistanceBetweenPoints(UnitGetPosition(lv_u), UnitGetPosition(lv_utarget));
+        lv_beam_fulldistance = DistanceBetweenPoints(UnitGetPosition(lv_u), UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit));
         while ((lv_beam_count < lv_beam_fulldistance)) {
             lv_beam_count += 1.0;
-            RegionAddCircle(MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion, true, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_u), lv_beam_count, UnitGetPosition(lv_utarget)), 1.0);
+            RegionAddCircle(MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion, true, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_u), lv_beam_count, UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit)), 1.0);
         }
     }
     auto4ED31F5E_g = UnitGroup("DragonShireShrineMoon", c_playerAny, null, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1);
@@ -3397,7 +3573,7 @@ bool auto_MimicMapMechanicsLib_gf_MMGardensDragonInitTowers_TriggerFunc (bool te
         if (lv_u == null) { break; }
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount += 1;
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineUnit = lv_u;
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, "DragonballCaptureBeacon", c_unitCreateIgnorePlacement, UnitGetOwner(lv_u), UnitGetPosition(lv_u), lv_u);
+        UnitCreate(1, "DragonballCaptureBeacon", c_unitCreateIgnorePlacement, UnitGetOwner(lv_u), UnitGetPosition(lv_u), 300.0, lv_u);
         libGame_gf_CapturePointCreate(UnitLastCreated(), MimicMapMechanicsLib_gv_mMGardensDragonDragonballTowerCaptureRadius_C, MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCaptureTime_C, MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerOverCaptureTime_C, libGame_ge_CapturePointDecay_DoNotDecay, libGame_ge_CapturePointDecay_Owner, true);
         MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_captureBeaconIndex = libGame_gf_LastCreatedCapturePoint();
         libGame_gf_CapturePointDisable(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_captureBeaconIndex);
@@ -3408,18 +3584,18 @@ bool auto_MimicMapMechanicsLib_gf_MMGardensDragonInitTowers_TriggerFunc (bool te
             	if (lv_player<0) { break; }
             	VisRevealArea(lv_player, RegionCircle(UnitGetPosition(lv_u), 0.75), 0.125, false);
         }
-        autoC3C6CAFA_g = UnitGroup("GardensDragonShrineTargetMoon", c_playerAny, null, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1);
+        autoC3C6CAFA_g = UnitGroup("GardensDragonShrineTargetMoon", c_playerAny, null, UnitFilter(0, 0, 0, 0), 1);
         autoC3C6CAFA_u = UnitGroupCount(autoC3C6CAFA_g, c_unitCountAll);
         for (;; autoC3C6CAFA_u -= 1) {
-            lv_utarget = UnitGroupUnitFromEnd(autoC3C6CAFA_g, autoC3C6CAFA_u);
-            if (lv_utarget == null) { break; }
-            MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit = lv_utarget;
+            lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ = UnitGroupUnitFromEnd(autoC3C6CAFA_g, autoC3C6CAFA_u);
+            if (lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ == null) { break; }
+            MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit = lv_utargetZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ;
         }
         lv_beam_count = 0.0;
-        lv_beam_fulldistance = DistanceBetweenPoints(UnitGetPosition(lv_u), UnitGetPosition(lv_utarget));
+        lv_beam_fulldistance = DistanceBetweenPoints(UnitGetPosition(lv_u), UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit));
         while ((lv_beam_count < lv_beam_fulldistance)) {
             lv_beam_count += 1.0;
-            RegionAddCircle(MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion, true, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_u), lv_beam_count, UnitGetPosition(lv_utarget)), 1.0);
+            RegionAddCircle(MimicMapMechanicsLib_gv_mMGardensDragonSoundRegion, true, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_u), lv_beam_count, UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[MimicMapMechanicsLib_gv_mMGardensDragonDragonTowerCount].lv_shrineBeamTargetUnit)), 1.0);
         }
     }
     if ((CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "UseVehiclePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", 0) == 0.0)) {
@@ -4170,6 +4346,7 @@ bool MimicMapMechanicsLib_gt_DataJungleCampDefenderDoubloons_Func (bool testCond
     lv_campType = (MimicMapMechanicsLib_ge_JungleCampDefenderTypes_Doubloons);
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_defendersCoweronDeath = false;
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_aIGoalLink = "MercenaryCampDoubloon";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_respawnTime = 150.0;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_numberOfCreeps = 2;
@@ -4272,6 +4449,7 @@ bool MimicMapMechanicsLib_gt_DataJungleCampDefenderSiegeGiants_Func (bool testCo
 
     lv_campType = (MimicMapMechanicsLib_ge_JungleCampDefenderTypes_SiegeGiants);
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campIsSoloable = true;
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_aIGoalLink = "MercenaryCampSiegeGiants";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_defendersCoweronDeath = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_respawnTime = 180.0;
@@ -4377,6 +4555,7 @@ bool MimicMapMechanicsLib_gt_DataJungleCampDefenderKnights_Func (bool testConds,
 
     lv_campType = (MimicMapMechanicsLib_ge_JungleCampDefenderTypes_Knights);
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campIsSoloable = true;
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_aIGoalLink = "MercenaryCampKnights";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_defendersCoweronDeath = false;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_respawnTime = 240.0;
@@ -4483,11 +4662,13 @@ bool MimicMapMechanicsLib_gt_DataJungleCampDefenderGraveGolem_Func (bool testCon
     lv_campType = (MimicMapMechanicsLib_ge_JungleCampDefenderTypes_GraveGolem);
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campIsSoloable = true;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_defendersCoweronDeath = false;
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_aIGoalLink = "MercenaryCampGraveGolem";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_initialSpawnDelay = MimicMapMechanicsLib_gv_genericMercBossCampInitialSpawnDelay_C;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_respawnTime = 300.0;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_numberOfCreeps = 1;
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_creepUnitTypes[1] = "JungleGraveGolemDefender";
     MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_xPAwardForCapture = libCore_gv_data_XP_GraveGolemCapture_C;
+    MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campIsElite = true;
     if ((MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campTypeMinimapLabel == null)) {
         MimicMapMechanicsLib_gv_dataJungleCampDefenderData[lv_campType].lv_campTypeMinimapLabel = StringExternal("Param/Value/lib_MapM_E13C6C4C");
     }
@@ -4701,6 +4882,7 @@ bool MimicMapMechanicsLib_gt_InitializeJungleCamps_Func (bool testConds, bool ru
     int lv_i;
     int lv_camp;
     string lv_actorMessageString;
+    fixed lv_capturePointRadius;
 
     // Automatic Variable Declarations
     int auto7E730838_ae;
@@ -4709,6 +4891,7 @@ bool MimicMapMechanicsLib_gt_InitializeJungleCamps_Func (bool testConds, bool ru
 
     // Variable Initialization
     lv_actorMessageString = "";
+    lv_capturePointRadius = MimicMapMechanicsLib_gv_bALJungleCampCaptureRadius;
 
     // Conditions
     if (testConds) {
@@ -4741,6 +4924,7 @@ bool MimicMapMechanicsLib_gt_InitializeJungleCamps_Func (bool testConds, bool ru
 
         if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonSmallCamp)) {
             MimicMapMechanicsLib_gf_JungleInitializeDoubloonSmallCampData(lv_camp);
+            lv_capturePointRadius = 1.7;
         }
 
         if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_TryMeCamp)) {
@@ -4756,7 +4940,7 @@ bool MimicMapMechanicsLib_gt_InitializeJungleCamps_Func (bool testConds, bool ru
         }
 
         MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_captureCircleOfPowerUnit = UnitLastCreated();
-        libGame_gf_CapturePointCreate(UnitLastCreated(), MimicMapMechanicsLib_gv_bALJungleCampCaptureRadius, MimicMapMechanicsLib_gv_bALJungleCampCaptureTime, 0.0, libGame_ge_CapturePointDecay_DoNotDecay, libGame_ge_CapturePointDecay_Owner, false);
+        libGame_gf_CapturePointCreate(UnitLastCreated(), lv_capturePointRadius, MimicMapMechanicsLib_gv_bALJungleCampCaptureTime, 0.0, libGame_ge_CapturePointDecay_DoNotDecay, libGame_ge_CapturePointDecay_Owner, false);
         MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_captureCapturePointIndex = libGame_gf_LastCreatedCapturePoint();
         libGame_gf_CapturePointDisable(MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_captureCapturePointIndex);
         MimicMapMechanicsLib_gf_JungleInitializeCreepCamp(lv_camp);
@@ -5040,7 +5224,7 @@ bool MimicMapMechanicsLib_gt_JungleAllDefendersKilled_Func (bool testConds, bool
 
     }
     if ((lv_camp > 0)) {
-        if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_MercCamp)) {
+        if (((MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_MercCamp) || (MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_mapDataCampType == MimicMapMechanicsLib_ge_JungleCampTypes_DoubloonSmallCamp))) {
             if ((MimicMapMechanicsLib_gv_jungleCreepCamps[lv_camp].lv_defenderCampInstantlyGrantsReward == false)) {
                 MimicMapMechanicsLib_gf_JungleTurnOnCampCaptureBeacon(lv_camp);
             }
@@ -5384,9 +5568,9 @@ void MimicMapMechanicsLib_gt_JungleMercOgreShieldUsedHero_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Jungle - Merc Damage Detection
+// Trigger: DEBUG - Jungle - Merc Damage Detection
 //--------------------------------------------------------------------------------------------------
-bool MimicMapMechanicsLib_gt_JungleMercDamageDetection_Func (bool testConds, bool runActions) {
+bool MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_MercCamp;
 
@@ -5395,7 +5579,7 @@ bool MimicMapMechanicsLib_gt_JungleMercDamageDetection_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -5419,20 +5603,20 @@ bool MimicMapMechanicsLib_gt_JungleMercDamageDetection_Func (bool testConds, boo
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicMapMechanicsLib_gt_JungleMercDamageDetection_Init () {
-    MimicMapMechanicsLib_gt_JungleMercDamageDetection = TriggerCreate("MimicMapMechanicsLib_gt_JungleMercDamageDetection_Func");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerMeleeKnightDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerRangedMageWeaponDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerSiegeGiantConfusionDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerSiegeGiantDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "OgreKingLanerWeaponDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperNonStructureSuicideDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperStructureSuicideDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSiegeTrooperLanerWeaponDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSummonerLanerMinionWeaponDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSummonerLanerWeaponDamage");
-    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_JungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "TerranHellbatWeaponDamage");
+void MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection_Init () {
+    MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection = TriggerCreate("MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection_Func");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerMeleeKnightDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerRangedMageWeaponDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerSiegeGiantConfusionDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerSiegeGiantDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "OgreKingLanerWeaponDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperNonStructureSuicideDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperStructureSuicideDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercLanerGoblinSapperDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSiegeTrooperLanerWeaponDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSummonerLanerMinionWeaponDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "MercSummonerLanerWeaponDamage");
+    TriggerAddEventUnitDamaged(MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection, null, c_unitDamageTypeAny, c_unitDamageEither, "TerranHellbatWeaponDamage");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5665,7 +5849,7 @@ bool MimicMapMechanicsLib_gt_MMRepulseRegionPunchBehavior_Func (bool testConds, 
             for (;; autoC80E67AA_u -= 1) {
                 lv_itUnit = UnitGroupUnitFromEnd(autoC80E67AA_g, autoC80E67AA_u);
                 if (lv_itUnit == null) { break; }
-                if ((libGame_gf_TeamNumberOfPlayer(UnitGetOwner(lv_itUnit)) == libGame_gf_EnemyTeam(lv_itTeam)) && (UnitGroupHasUnit(MimicMapMechanicsLib_gv_mMRepulseRegionPunchedGroup, lv_itUnit) == false) && (UnitHasBehavior2(lv_itUnit, "UnitNotPuntableByRepulserField") == false) && ((UnitGetMoverLink(lv_itUnit) == "Ground") || (UnitTypeTestAttribute(UnitGetType(lv_itUnit), c_unitAttributeSummoned) == true))) {
+                if ((libGame_gf_TeamNumberOfPlayer(UnitGetOwner(lv_itUnit)) == libGame_gf_EnemyTeam(lv_itTeam)) && (UnitGroupHasUnit(MimicMapMechanicsLib_gv_mMRepulseRegionPunchedGroup, lv_itUnit) == false) && (UnitHasBehavior2(lv_itUnit, "HallOfStormsKnockbackImmunity") == false) && ((UnitGetMoverLink(lv_itUnit) == "Ground") || (UnitTypeTestAttribute(UnitGetType(lv_itUnit), c_unitAttributeSummoned) == true))) {
                     lv_pos = UnitGetPosition(lv_itUnit);
                     lv_punchTargetIndexMin = 0;
                     lv_itPunchTargetIndex = 1;
@@ -5817,7 +6001,7 @@ bool MimicMapMechanicsLib_gt_EnableDisableMapEvent_Func (bool testConds, bool ru
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -5827,7 +6011,7 @@ bool MimicMapMechanicsLib_gt_EnableDisableMapEvent_Func (bool testConds, bool ru
         return true;
     }
 
-    if ((EventChatMessage(false) == "EnableEvent")) {
+    if ((EventChatMessage(false) == "mEnableEvent")) {
         MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_MapM_62CC6D3C"), true);
         MimicMapMechanicsLib_gf_EnableDisableMapEvent(true);
     }
@@ -6032,6 +6216,7 @@ bool MimicMapMechanicsLib_gt_MMRavenSpawnTribute_Func (bool testConds, bool runA
     libNtve_gf_CreateUnitsWithDefaultFacing(1, "RavenLordTributeWarning", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_Neutral, lv_spawnPoint, null);
     MimicMapMechanicsLib_gv_mMRavenTributeWarning = UnitLastCreated();
     UnitGroupAdd(MimicMapMechanicsLib_gv_mMRavenTributeWarnings, UnitLastCreated());
+    libAIAI_gf_AITeamDelegateSetPeriodicMapValueAction(libAIAI_ge_AITeamDelegateMapNonEventMapValueOperations_Decrease);
     MimicMapMechanicsLib_gf_ShareVisionofUnitForBothTeams(UnitLastCreated());
     libNtve_gf_CreateUnitsWithDefaultFacing(1, "RavenLordTribute", c_unitCreateIgnorePlacement, libCore_gv_cOMPUTER_Neutral, lv_spawnPoint, null);
     UnitBehaviorAdd(UnitLastCreated(), "MapMechanicCoolUp", UnitLastCreated(), 1);
@@ -6048,6 +6233,7 @@ bool MimicMapMechanicsLib_gt_MMRavenSpawnTribute_Func (bool testConds, bool runA
     MimicMapMechanicsLib_gf_ShareVisionofUnitForBothTeams(UnitLastCreated());
     ActorCreate(ActorScopeFromUnit(UnitLastCreated()), "UI_Game_Ping_Tribute_Ready", null, null, null);
     UnitGroupAddUnitGroup(MimicMapMechanicsLib_gv_mMRavenTributes, UnitLastCreatedGroup());
+    libAIAI_gf_AITeamDelegateActivateDeactivateMapEvent(libAIAI_ge_AITeamDelegateActivateDeactivateMapToken_Activate);
     TriggerEnable(MimicMapMechanicsLib_gt_MMRavenTributeObtained, true);
     libGame_gf_SendEventMapCursedHollowTributeSpawned(UnitLastCreated());
     MimicMapMechanicsLib_gv_mMRavenEventFirstTime = false;
@@ -6286,6 +6472,8 @@ bool MimicMapMechanicsLib_gt_MMRavenTributeObtained_Func (bool testConds, bool r
     UnitKill(lv_macGuffinUnit);
     MimicMapMechanicsLib_gv_mMRavenTeamStats[lv_collectedTeam].lv_triburteCollected += 1;
     MimicMapMechanicsLib_gv_mapMechanicUsedTracker[lv_collectedPlayer].lv_ravenTribute = true;
+    libAIAI_gf_AITeamDelegateActivateDeactivateMapEvent(libAIAI_ge_AITeamDelegateActivateDeactivateMapToken_Deactivate);
+    libAIAI_gf_AITeamDelegateAdjustMapEventProgressforTeam(1, lv_collectedTeam);
     StatEventCreate("TributeCollected");
     StatEventAddDataInt(StatEventLastCreated(), "Event", MimicMapMechanicsLib_gv_mMRavenTributesCollected);
     StatEventAddDataFixed(StatEventLastCreated(), "TeamID", lv_collectedTeam);
@@ -6318,6 +6506,36 @@ void MimicMapMechanicsLib_gt_MMRavenTributeObtained_Init () {
     MimicMapMechanicsLib_gt_MMRavenTributeObtained = TriggerCreate("MimicMapMechanicsLib_gt_MMRavenTributeObtained_Func");
     TriggerEnable(MimicMapMechanicsLib_gt_MMRavenTributeObtained, false);
     TriggerAddEventPlayerEffectUsed(MimicMapMechanicsLib_gt_MMRavenTributeObtained, c_playerAny, "CaptureMacGuffinCastComplete");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: MM Raven Curse Reapplication
+//--------------------------------------------------------------------------------------------------
+bool MimicMapMechanicsLib_gt_MMRavenCurseReapplication_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_structure;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_structure = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((TimerGetRemaining(MimicMapMechanicsLib_gv_mMRavenCurseTimer) > 0.0)) {
+        UnitBehaviorAdd(lv_structure, "RavenLordsCurseStructures", lv_structure, 1);
+        UnitBehaviorSetDuration(lv_structure, "RavenLordsCurseStructures", TimerGetRemaining(MimicMapMechanicsLib_gv_mMRavenCurseTimer));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicMapMechanicsLib_gt_MMRavenCurseReapplication_Init () {
+    MimicMapMechanicsLib_gt_MMRavenCurseReapplication = TriggerCreate("MimicMapMechanicsLib_gt_MMRavenCurseReapplication_Func");
+    TriggerAddEventPlayerEffectUsed(MimicMapMechanicsLib_gt_MMRavenCurseReapplication, c_playerAny, "RavenCurseReapplicationCheckDummySet");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6406,6 +6624,7 @@ bool MimicMapMechanicsLib_gt_MMRavenCurseFinished_Func (bool testConds, bool run
     MimicMapMechanicsLib_gv_mMRavenTeamStats[1].lv_cursed = false;
     MimicMapMechanicsLib_gv_mMRavenTeamStats[2].lv_cursed = false;
     MimicMapMechanicsLib_gv_mMRavenCurseLifted = true;
+    libAIAI_gf_AITeamDelegateActivateDeactivateMapReward(libAIAI_ge_AITeamDelegateActivateDeactivateMapToken_Deactivate);
     libGame_gf_SpecialLightingEventEnd("StormRavenCourtCurseFinal", PlayerGroupAll(), 2.0);
     MimicMapMechanicsLib_gv_mMRavenTributeNextSpawnPoint = MimicMapMechanicsLib_gf_MMRavenRandomSpawnPoint();
     if ((MimicMapMechanicsLib_gv_mMRavenUseTributePreviews == true)) {
@@ -6577,7 +6796,7 @@ bool MimicMapMechanicsLib_gt_MMRavenDebugStartWarning_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -6614,7 +6833,7 @@ bool MimicMapMechanicsLib_gt_MMRavenDebugStartElunees_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6643,7 +6862,7 @@ bool MimicMapMechanicsLib_gt_MMRavenDebugStartNexten_Func (bool testConds, bool 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -6679,7 +6898,7 @@ bool MimicMapMechanicsLib_gt_MMRavenDebugStartCurseec_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7301,7 +7520,10 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonTransformChannelFinish_Func (bool te
     TimerStart(MimicMapMechanicsLib_gv_mMGardensDragonDragonKnightLifeTimer, lv_duration, false, c_timeGame);
     TriggerEnable(MimicMapMechanicsLib_gt_MMGardensDragonDragonKnightDiesorExpires, true);
     MimicMapMechanicsLib_gv_mMGardensDragonUnit = libGame_gv_players[EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster)].lv_activeVehicle;
-    UnitSetPosition(MimicMapMechanicsLib_gv_mMGardensDragonUnit, PointWithOffset(UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonUnit), 0.0, -3.0), false);
+    if ((libNtve_gf_UnitInRegion(MimicMapMechanicsLib_gv_mMGardensDragonUnit, RegionCircle(MimicMapMechanicsLib_gv_mMGardensDragonDragonKnightRespawnPoint, 1.0)) == true)) {
+        UnitSetPosition(MimicMapMechanicsLib_gv_mMGardensDragonUnit, MimicMapMechanicsLib_gv_mMGardensDragonSpawnPoint, false);
+    }
+
     UnitSetState(MimicMapMechanicsLib_gv_mMGardensDragonUnit, c_unitStateStatusBar, true);
     MimicMapMechanicsLib_gv_mMGardensDragonPlayer = EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster);
     StatEventCreate("DragonKnightActivated");
@@ -7309,7 +7531,6 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonTransformChannelFinish_Func (bool te
     StatEventAddDataFixed(StatEventLastCreated(), "TeamID", libGame_gf_TeamNumberOfPlayer(MimicMapMechanicsLib_gv_mMGardensDragonPlayer));
     StatEventAddDataFixed(StatEventLastCreated(), "GameTime", libUIUI_gf_HeroesGameTime());
     StatEventSend(StatEventLastCreated());
-    AddUnitOfInterest(MimicMapMechanicsLib_gv_mMGardensDragonUnit, 0.0, 0.0, "KillDragonKnight", libAIAI_gf_ConvertIntegertoGoalTeam(libGame_gf_EnemyTeam(lv_dragonPilotTeam)), 0);
     RemoveUnitOfInterest(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[1].lv_shrineUnit, "DefendDragonShrine", libNtve_ge_GoalTeam_Both);
     RemoveUnitOfInterest(MimicMapMechanicsLib_gv_mMGardensDragonDragonTowers[2].lv_shrineUnit, "DefendDragonShrine", libNtve_ge_GoalTeam_Both);
     RemoveUnitOfInterest(MimicMapMechanicsLib_gv_mMGardensDragonStatue, "ActivateDragonKnight", libAIAI_gf_ConvertIntegertoGoalTeam(lv_dragonPilotTeam));
@@ -7337,7 +7558,7 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonTransformChannelFinish_Func (bool te
     TextTagDestroy(MimicMapMechanicsLib_gv_mMGardensDragonStatueTextTagAllyOwned);
     TextTagDestroy(MimicMapMechanicsLib_gv_mMGardensDragonStatueTextTagEnemyOwned);
     MimicMapMechanicsLib_gv_mapMechanicUsedTracker[EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster)].lv_dragonStatue = true;
-    libGame_gf_DropLootBannerinSconce(UnitGroupUnit(UnitGroup("LootBannerSconce", c_playerAny, RegionCircle(UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonUnit), 6.0), UnitFilter(0, 0, 0, 0), 1), 1), libGame_gv_players[MimicMapMechanicsLib_gv_mMGardensDragonPlayer].lv_lootContent.lv_loot_Banner.lv_bannerID, MimicMapMechanicsLib_gv_mMGardensDragonPlayer, true);
+    libGame_gf_DropLootBannerinSconce(UnitGroupUnit(UnitGroup("LootBannerSconce", c_playerAny, RegionCircle(UnitGetPosition(MimicMapMechanicsLib_gv_mMGardensDragonUnit), 8.0), UnitFilter(0, 0, 0, 0), 1), 1), libGame_gv_players[MimicMapMechanicsLib_gv_mMGardensDragonPlayer].lv_lootContent.lv_loot_Banner.lv_bannerID, MimicMapMechanicsLib_gv_mMGardensDragonPlayer, true);
     MimicMapMechanicsLib_gf_MMGardensDragonDragonHasEnteredArtHooks();
     MimicMapMechanicsLib_gf_MMDragonballsTransmissionDragonActiveQ(libGame_gf_TeamNumberOfPlayer(EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster)));
     return true;
@@ -7536,7 +7757,7 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonDisableEvent_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7570,7 +7791,7 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonDebugCheatStartObelisksso_Func (bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7604,7 +7825,7 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonCreateDragon_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7617,10 +7838,12 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonCreateDragon_Func (bool testConds, b
     TriggerEnable(MimicMapMechanicsLib_gt_MMGardensDragonDragonTowerChangeOwnershipEventFires, true);
     UnitCreate(1, "VehicleDragon", c_unitCreateIgnorePlacement, 0, UnitGetPosition(UnitGroupUnit(libGame_gv_players[EventPlayer()].lv_heroUnitGroup, 1)), 270.0, null);
     MimicMapMechanicsLib_gv_mMGardensDragonStatue = UnitLastCreated();
+    UnitBehaviorAdd(UnitLastCreated(), "DragonKnightDontDie", UnitLastCreated(), 1);
     MimicMapMechanicsLib_gf_AddVehicle(MimicMapMechanicsLib_gv_mMGardensDragonStatue);
     UnitSetState(MimicMapMechanicsLib_gv_mMGardensDragonStatue, c_unitStateStatusBar, false);
     TimerPause(MimicMapMechanicsLib_gv_mMGardensDragonDragonKnightLifeTimer, true);
     MimicMapMechanicsLib_gf_MMGardensDragonActivateStatueForTeam(libGame_gf_ComputerPlayerInTeam(libGame_gf_TeamNumberOfPlayer(EventPlayer())));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_MapM_2F72E606"));
     return true;
 }
 
@@ -7637,7 +7860,7 @@ bool MimicMapMechanicsLib_gt_MMGardensDragonExtendLife_Func (bool testConds, boo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7664,7 +7887,7 @@ bool MimicMapMechanicsLib_gt_DEBUGAddVehicle_Func (bool testConds, bool runActio
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7691,7 +7914,7 @@ bool MimicMapMechanicsLib_gt_DEBUGRemoveVehicle_Func (bool testConds, bool runAc
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7718,7 +7941,7 @@ bool MimicMapMechanicsLib_gt_DEBUGLinkVehicle_Func (bool testConds, bool runActi
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -7765,7 +7988,7 @@ void MimicMapMechanicsLib_InitTriggers () {
     MimicMapMechanicsLib_gt_JungleMercLeaderDies_Init();
     MimicMapMechanicsLib_gt_JungleMercOgreShieldUsedOgre_Init();
     MimicMapMechanicsLib_gt_JungleMercOgreShieldUsedHero_Init();
-    MimicMapMechanicsLib_gt_JungleMercDamageDetection_Init();
+    MimicMapMechanicsLib_gt_DEBUGJungleMercDamageDetection_Init();
     MimicMapMechanicsLib_gt_JungleSiegeGiantTaunt_Init();
     MimicMapMechanicsLib_gt_InitializeMapMechanics_Init();
     MimicMapMechanicsLib_gt_MMHelpbuttonClicked_Init();
@@ -7785,6 +8008,7 @@ void MimicMapMechanicsLib_InitTriggers () {
     MimicMapMechanicsLib_gt_MMRavenTributeCollectCanceled_Init();
     MimicMapMechanicsLib_gt_MMRavenTributeCollectInterrupted_Init();
     MimicMapMechanicsLib_gt_MMRavenTributeObtained_Init();
+    MimicMapMechanicsLib_gt_MMRavenCurseReapplication_Init();
     MimicMapMechanicsLib_gt_MMRavenCurseStartLightTransition_Init();
     MimicMapMechanicsLib_gt_MMRavenCurseFinished_Init();
     MimicMapMechanicsLib_gt_MMRavenObjectiveUIHandler_Init();
@@ -7835,7 +8059,6 @@ void MimicMapMechanicsLib_InitLib () {
     MimicMapMechanicsLib_InitLibraries();
     MimicMapMechanicsLib_InitVariables();
     MimicMapMechanicsLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("MapMechanicsLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

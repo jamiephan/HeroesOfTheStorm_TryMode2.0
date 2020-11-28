@@ -4,7 +4,7 @@ include "TriggerLibs/GameLib_h"
 include "TriggerLibs/MapMechanicsLib_h"
 include "TriggerLibs/UILib_h"
 
-include "ModuleMimicLibs/MimicStartingExperienceLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicStartingExperienceLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Starting Experience
@@ -2078,19 +2078,19 @@ void MimicStartingExperienceLib_gf_TutorialHeroTalentRecommendation () {
     else if (auto8F850C63_val == "Muradin") {
         SetTalentHighlighted("MuradinCombatStyleThirdWind", true);
         SetTalentHighlighted("MuradinMasteryThunderburn", true);
-        SetTalentHighlighted("MuradinStormboltPiercingBolt", true);
-        SetTalentHighlighted("MuradinHeroicAbilityAvatar", true);
-        SetTalentHighlighted("GenericTalentBurningRage", true);
         SetTalentHighlighted("MuradinMasteryDwarfTossHeavyImpact", true);
+        SetTalentHighlighted("MuradinHeroicAbilityAvatar", true);
+        SetTalentHighlighted("MuradinBronzebeardRage", true);
+        SetTalentHighlighted("MuradinMasteryDwarfTossDwarfLaunch", true);
         SetTalentHighlighted("MuradinMasteryAvatarUnstoppableForce", true);
     }
     else if (auto8F850C63_val == "Tyrande") {
+        SetTalentHighlighted("TyrandeMarkofMending", true);
         SetTalentHighlighted("TyrandeMasteryLunarBlaze", true);
         SetTalentHighlighted("TyrandeMoonlitArrows", true);
         SetTalentHighlighted("TyrandeHuntressFury", true);
         SetTalentHighlighted("TyrandeHeroicAbilityStarfall", true);
         SetTalentHighlighted("TyrandeMasteryLightofEluneQuickeningBlessing", true);
-        SetTalentHighlighted("TyrandeOverflowingLight", true);
         SetTalentHighlighted("TyrandeMasteryStarfallCelestialWrath", true);
     }
     else {
@@ -2884,13 +2884,6 @@ bool MimicStartingExperienceLib_gt_SE_TrainingModeTipInitData_Func (bool testCon
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Abilities)].lv_name = StringExternal("Param/Value/lib_StEx_44414396");
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Abilities)].lv_description = StringExternal("Param/Value/lib_StEx_D36B2FCF");
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Abilities)].lv_vO = "TutorialVO|Line00568";
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo1)].lv_iD = MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo1;
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo1)].lv_name = StringToText("");
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo1)].lv_description = StringExternal("Param/Value/lib_StEx_37E7365C");
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo1)].lv_vO = "TutorialVO|Line00569";
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo2)].lv_iD = MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo2;
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo2)].lv_name = StringToText("");
-    MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Ammo2)].lv_description = StringExternal("Param/Value/lib_StEx_FD5E621E");
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Bushes)].lv_iD = MimicStartingExperienceLib_ge_SE_TrainingModeTips_Bushes;
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Bushes)].lv_name = StringToText("");
     MimicStartingExperienceLib_gv_sE_TrainingModeTips[(MimicStartingExperienceLib_ge_SE_TrainingModeTips_Bushes)].lv_description = StringExternal("Param/Value/lib_StEx_D9433DF9");
@@ -3616,7 +3609,7 @@ bool MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButto
 void MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton_Init () {
     MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton = TriggerCreate("MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton_Func");
     TriggerEnable(MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton, false);
-    TriggerAddEventUnitAbility(MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton, UnitRefFromVariable("libGame_gv_players[MimicStartingExperienceLib_gv_sE_Player].lv_heroUnit"), AbilityCommand("PortBackToBase", 0), c_abilEffectStageCast, false);
+    TriggerAddEventUnitAbility(MimicStartingExperienceLib_gt_SE_TrainingModeTipHearthstoneUnhighlightButton, UnitRefFromVariable("libGame_gv_players[MimicStartingExperienceLib_gv_sE_Player].lv_heroUnit"), AbilityCommand("Hearthstone", 0), c_abilEffectStageCast, false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4060,7 +4053,7 @@ bool MimicStartingExperienceLib_gt_SE_TrainingModeTipDebugEnable_Func (bool test
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4100,7 +4093,7 @@ bool MimicStartingExperienceLib_gt_SE_TrainingModeTipDebugModeOnOff_Func (bool t
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4151,13 +4144,13 @@ void MimicStartingExperienceLib_gt_DebugEncounter_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: DPS Cheat
+// Trigger: DEBUG - DPS Cheat
 //--------------------------------------------------------------------------------------------------
-bool MimicStartingExperienceLib_gt_DPSCheat_Func (bool testConds, bool runActions) {
+bool MimicStartingExperienceLib_gt_DEBUGDPSCheat_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -4173,9 +4166,9 @@ bool MimicStartingExperienceLib_gt_DPSCheat_Func (bool testConds, bool runAction
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicStartingExperienceLib_gt_DPSCheat_Init () {
-    MimicStartingExperienceLib_gt_DPSCheat = TriggerCreate("MimicStartingExperienceLib_gt_DPSCheat_Func");
-    TriggerAddEventChatMessage(MimicStartingExperienceLib_gt_DPSCheat, c_playerAny, "m-dpsobj", true);
+void MimicStartingExperienceLib_gt_DEBUGDPSCheat_Init () {
+    MimicStartingExperienceLib_gt_DEBUGDPSCheat = TriggerCreate("MimicStartingExperienceLib_gt_DEBUGDPSCheat_Func");
+    TriggerAddEventChatMessage(MimicStartingExperienceLib_gt_DEBUGDPSCheat, c_playerAny, "m-dpsobj", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5530,7 +5523,7 @@ void MimicStartingExperienceLib_InitTriggers () {
     MimicStartingExperienceLib_gt_SE_TrainingModeTipDebugEnable_Init();
     MimicStartingExperienceLib_gt_SE_TrainingModeTipDebugModeOnOff_Init();
     MimicStartingExperienceLib_gt_DebugEncounter_Init();
-    MimicStartingExperienceLib_gt_DPSCheat_Init();
+    MimicStartingExperienceLib_gt_DEBUGDPSCheat_Init();
     MimicStartingExperienceLib_gt_PlayerHitsRetryDuringDPSMeterObjective_Init();
     MimicStartingExperienceLib_gt_ObjectiveTalentCreate_Init();
     MimicStartingExperienceLib_gt_ObjectiveTalentComplete_Init();
@@ -5589,7 +5582,6 @@ void MimicStartingExperienceLib_InitLib () {
     MimicStartingExperienceLib_InitLibraries();
     MimicStartingExperienceLib_InitVariables();
     MimicStartingExperienceLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("StartingExperienceLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

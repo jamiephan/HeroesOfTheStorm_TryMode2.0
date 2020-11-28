@@ -5,9 +5,10 @@ include "TriggerLibs/AILib_h"
 include "TriggerLibs/UILib_h"
 include "TriggerLibs/StartingExperienceLib_h"
 include "TriggerLibs/SoundLib_h"
+include "TriggerLibs/GameDataHelperLib_h"
 include "TriggerLibs/SupportLib_h"
 
-include "ModuleMimicLibs/MimicHeroesLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicHeroesLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Core
@@ -21,6 +22,7 @@ void MimicHeroesLib_InitLibraries () {
     libUIUI_InitVariables();
     libStEx_InitVariables();
     libSond_InitVariables();
+    libGDHL_InitVariables();
     libSprt_InitVariables();
 }
 
@@ -37,7 +39,7 @@ void MimicHeroesLib_InitVariables () {
 
     MimicHeroesLib_InitVariables_completed = true;
 
-    MimicHeroesLib_gv_dEBUGDebuggingEnabled = GameCheatsEnabled(c_gameCheatCategoryDevelopment);
+    ;
     MimicHeroesLib_gv_dEBUGDeathRecapEnabled = true;
     MimicHeroesLib_gv_dEBUGPingLimitEnabled = true;
     MimicHeroesLib_gv_sYSGameMode = MimicHeroesLib_ge_GameModes_Normal;
@@ -86,6 +88,11 @@ void MimicHeroesLib_InitVariables () {
     MimicHeroesLib_gv_bALXPRadius = 12.75;
     MimicHeroesLib_gv_bALHeroKillCreditTimeWindow = 5.0;
     MimicHeroesLib_gv_bALDeathTimeScaler = 1.0;
+    MimicHeroesLib_gv_brettTimersDeathModifier = 5.0;
+    MimicHeroesLib_gv_brettTimersKillModifier = -1.5;
+    MimicHeroesLib_gv_brettTimersTakedownModifier = -0.5;
+    MimicHeroesLib_gv_brettTimersMinimumTimer = 5.0;
+    MimicHeroesLib_gv_brettTimersMaximumTimer = 65.0;
     MimicHeroesLib_gv_talents_RelentlessCCReduction75_C = 0.75;
     MimicHeroesLib_gv_data_XP_HeroValuePerLevel_C = 50.0;
     for (init_i = 0; init_i <= MimicHeroesLib_gv_bALMaxTeams; init_i += 1) {
@@ -277,19 +284,18 @@ int MimicHeroesLib_gf_DataAnnouncerVOAddOutsideMapDataField (string lp_soundStri
     // Variable Initialization
 
     // Implementation
+    MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex += 1;
     if ((MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex > MimicHeroesLib_gv_dataAnnouncerVOMaxNumberOfAnnouncerEvents)) {
         TextExpressionSetToken("Param/Expression/lib_Core_9E884F52", "A", StringToText(lp_soundString));
         TextExpressionSetToken("Param/Expression/lib_Core_9E884F52", "B", IntToText(MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex));
         TextExpressionSetToken("Param/Expression/lib_Core_9E884F52", "C", IntToText(MimicHeroesLib_gv_dataAnnouncerVOMaxNumberOfAnnouncerEvents));
         MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Core_9E884F52"), true);
-        MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex += 1;
         return MimicHeroesLib_ge_AnnouncerVOEvents_Null;
     }
 
     lv_presetValue = MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex;
     MimicHeroesLib_gv_dataAnnouncerVODataFieldMap[MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex].lv_vOString = lp_soundString;
     MimicHeroesLib_gv_dataAnnouncerVODataFieldMap[MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex].lv_playAtGameEnd = lp_playAtGameEnd;
-    MimicHeroesLib_gv_dataAnnouncerVOExtraAnnouncerEventsIndex += 1;
     return lv_presetValue;
 }
 
@@ -378,15 +384,15 @@ void MimicHeroesLib_gf_UpdateTassadarAbilityStats (unit lp_tassadar) {
     // Automatic Variable Declarations
     // Variable Initialization
     lv_player = UnitGetOwner(lp_tassadar);
-    lv_basePeriod = CatalogFieldValueGetAsFixed(c_gameCatalogWeapon, "TassadarDistortionBeam", "Period", 0);
+    lv_basePeriod = CatalogFieldValueGetAsFixed(c_gameCatalogWeapon, "TassadarResonanceBeam", "Period", 0);
     lv_multiplier = MimicHeroesLib_gf_GetWeaponAttackSpeedForUnit(lp_tassadar);
     lv_finalPeriod = (lv_multiplier * lv_basePeriod);
 
     // Implementation
     if ((lv_finalPeriod != 0.0)) {
-        CatalogFieldValueSetFixed(c_gameCatalogEffect, "DistortionBeamCreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
-        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarDistortionBeamPrismaticLinkTalentSearch1CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
-        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarDistortionBeamPrismaticLinkTalentSearch2CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
+        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamCreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
+        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamKhaydarinAmuletTalentSearch1CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
+        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamKhaydarinAmuletTalentSearch2CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
     }
 
 }
@@ -408,6 +414,10 @@ void MimicHeroesLib_gf_DataHeroesAddManualSpawnHero (int lp_heroID, bool lp_isAt
             MimicHeroesLib_gv_dataHeroesManualSpawnHeroIDs[lv_index].lv_heroIndex = lp_heroID;
             MimicHeroesLib_gv_dataHeroesManualSpawnHeroIDs[lv_index].lv_attached = lp_isAttachedHero;
             MimicHeroesLib_gv_dataHeroesManualSpawnHeroIDs[lv_index].lv_core = lp_isCoreHero;
+            return ;
+        }
+
+        if ((MimicHeroesLib_gv_dataHeroesManualSpawnHeroIDs[lv_index].lv_heroIndex == lp_heroID)) {
             return ;
         }
 
@@ -690,6 +700,7 @@ void MimicHeroesLib_gf_DataClearHeroDataAtIndex (int lp_index) {
         libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isTrait = false;
         libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_usesCharges = false;
         libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isAffectedByOverdrive = false;
+        libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isMountReplacement = false;
     }
     lv_itLevelUpAbility = 1;
     for ( ; ( (autoEF8238A5_ai >= 0 && lv_itLevelUpAbility <= autoEF8238A5_ae) || (autoEF8238A5_ai < 0 && lv_itLevelUpAbility >= autoEF8238A5_ae) ) ; lv_itLevelUpAbility += autoEF8238A5_ai ) {
@@ -720,18 +731,17 @@ void MimicHeroesLib_gf_DataClearHeroDataAtIndex (int lp_index) {
     }
     libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_skinCount = 0;
     libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_skinArray[libGame_gv_players[lv_itPlayerIndex].lv_heroData.lv_skinCount] = "Default";
+    libGame_gv_players[lp_index].lv_aIHeroDelegateTokenValue = libAIAI_gv_aITeamDelegateHeroTokenValueDefault_C;
 }
 
 void MimicHeroesLib_gf_DataLoadHeroDataIntoIndex (string lp_heroLink, int lp_index) {
     // Variable Declarations
     string lv_heroID;
     string lv_unitType;
-    int lv_classInt;
-    int lv_multiclassInt;
+    int lv_roleInt;
+    int lv_expandedRoleInt;
     int lv_universeInt;
     int lv_genderInt;
-    int lv_requiredRewardCount;
-    int lv_multiclassCount;
     int lv_introCutsceneSizeInt;
     int lv_numberOfLevelUpAbils;
     int lv_numberOfLevelUpAbilMods;
@@ -740,19 +750,11 @@ void MimicHeroesLib_gf_DataLoadHeroDataIntoIndex (string lp_heroLink, int lp_ind
     int lv_itLevelUpAbility;
     int lv_itLevelUpAbilityMod;
     int lv_playerIndex;
-    int lv_itRequiredReward;
     int lv_itSkin;
     int lv_itMountCategory;
     int lv_itAlternateHero;
-    int lv_itRoleMulticlass;
 
     // Automatic Variable Declarations
-    int autoBA58DC7D_ae;
-    const int autoBA58DC7D_ai = 1;
-    int autoF22F85DE_ae;
-    const int autoF22F85DE_ai = 1;
-    int auto494E5EAC_ae;
-    const int auto494E5EAC_ai = 1;
     int auto825074B2_ae;
     const int auto825074B2_ai = 1;
     int auto05955D95_ae;
@@ -791,48 +793,14 @@ void MimicHeroesLib_gf_DataLoadHeroDataIntoIndex (string lp_heroLink, int lp_ind
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_heroCatalogLink = (lv_heroID);
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_unitType = lv_unitType;
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_name = UnitTypeGetName(lv_unitType);
-        lv_classInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Role", c_playerAny);
+        lv_roleInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Role", c_playerAny);
+        lv_expandedRoleInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "ExpandedRole", c_playerAny);
         lv_universeInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Universe", c_playerAny);
         lv_genderInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Gender", c_playerAny);
-        libGame_gv_players[lv_playerIndex].lv_heroData.lv_class = lv_classInt;
+        libGame_gv_players[lv_playerIndex].lv_heroData.lv_role = lv_roleInt;
+        libGame_gv_players[lv_playerIndex].lv_heroData.lv_expandedRole = lv_expandedRoleInt;
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_universe = lv_universeInt;
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_gender = lv_genderInt;
-        if ((lv_requiredRewardCount > MimicHeroesLib_gv_data_MaxRequiredRewards_C)) {
-            TextExpressionSetToken("Param/Expression/lib_Core_A1504B5A", "A", StringToText(lv_heroID));
-            TextExpressionSetToken("Param/Expression/lib_Core_A1504B5A", "B", IntToText(MimicHeroesLib_gv_data_MaxRequiredRewards_C));
-            MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Core_A1504B5A"), true);
-            return ;
-        }
-
-        autoBA58DC7D_ae = lv_requiredRewardCount;
-        lv_itRequiredReward = 1;
-        for ( ; ( (autoBA58DC7D_ai >= 0 && lv_itRequiredReward <= autoBA58DC7D_ae) || (autoBA58DC7D_ai < 0 && lv_itRequiredReward >= autoBA58DC7D_ae) ) ; lv_itRequiredReward += autoBA58DC7D_ai ) {
-            libGame_gv_players[lv_playerIndex].lv_heroData.lv_requiredRewardArray[lv_itRequiredReward] = (CatalogFieldValueGet(c_gameCatalogHero, lv_heroID, "RequiredRewardArray[" + IntToString((lv_itRequiredReward - 1)) + "]", c_playerAny));
-        }
-        lv_multiclassCount = CatalogFieldValueCount(c_gameCatalogHero, lv_heroID, "RolesMultiClass", c_playerAny);
-        if (((lv_multiclassCount > MimicHeroesLib_gv_dataHeroesNumberOfHeroClasses) || (lv_multiclassCount <= 0))) {
-            TextExpressionSetToken("Param/Expression/lib_Core_BA74DCFF", "A", StringToText(lv_heroID));
-            TextExpressionSetToken("Param/Expression/lib_Core_BA74DCFF", "B", IntToText(lv_multiclassCount));
-            MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Core_BA74DCFF"), true);
-            return ;
-        }
-
-        libGame_gv_players[lv_playerIndex].lv_heroData.lv_heroRolesCount = lv_multiclassCount;
-        autoF22F85DE_ae = lv_multiclassCount;
-        lv_itRoleMulticlass = 1;
-        for ( ; ( (autoF22F85DE_ai >= 0 && lv_itRoleMulticlass <= autoF22F85DE_ae) || (autoF22F85DE_ai < 0 && lv_itRoleMulticlass >= autoF22F85DE_ae) ) ; lv_itRoleMulticlass += autoF22F85DE_ai ) {
-            lv_multiclassInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "RolesMultiClass[" + IntToString((lv_itRoleMulticlass - 1)) + "]", c_playerAny);
-            PlayerGroupAdd(libGame_gv_players[lv_playerIndex].lv_heroData.lv_heroRoles, lv_multiclassInt);
-        }
-        lv_multiclassCount = CatalogFieldValueCount(c_gameCatalogHero, lv_heroID, "RoleScoreValueOverride", c_playerAny);
-        libGame_gv_players[lv_playerIndex].lv_heroData.lv_heroScoreOverrideCount = lv_multiclassCount;
-        auto494E5EAC_ae = lv_multiclassCount;
-        lv_itRoleMulticlass = 1;
-        for ( ; ( (auto494E5EAC_ai >= 0 && lv_itRoleMulticlass <= auto494E5EAC_ae) || (auto494E5EAC_ai < 0 && lv_itRoleMulticlass >= auto494E5EAC_ae) ) ; lv_itRoleMulticlass += auto494E5EAC_ai ) {
-            lv_multiclassInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "RoleScoreValueOverride[" + IntToString((lv_itRoleMulticlass - 1)) + "]", c_playerAny);
-            PlayerGroupAdd(libGame_gv_players[lv_playerIndex].lv_heroData.lv_heroScoreOverride, lv_multiclassInt);
-        }
-        libGame_gv_players[lv_playerIndex].lv_heroData.lv_requiredRewardCount = lv_requiredRewardCount;
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_isMelee = (CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Melee", c_playerAny) != 0);
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_description = StringExternal(CatalogFieldValueGet(c_gameCatalogHero, lv_heroID, "Description", c_playerAny));
         libGame_gv_players[lv_playerIndex].lv_heroData.lv_portrait = (CatalogFieldValueGet(c_gameCatalogHero, lv_heroID, "Portrait", c_playerAny));
@@ -878,6 +846,7 @@ void MimicHeroesLib_gf_DataLoadHeroDataIntoIndex (string lp_heroLink, int lp_ind
                 libGame_gv_players[lv_playerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isTrait = (CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "HeroAbilArray[" + IntToString((lv_itAbility - 1)) + "].Flags[" + IntToString(c_heroAbilFlagTrait) + "]", c_playerAny) == 1);
                 libGame_gv_players[lv_playerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_usesCharges = (CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "HeroAbilArray[" + IntToString((lv_itAbility - 1)) + "].Flags[" + IntToString(c_heroAbilFlagUsesCharges) + "]", c_playerAny) == 1);
                 libGame_gv_players[lv_playerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isAffectedByOverdrive = (CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "HeroAbilArray[" + IntToString((lv_itAbility - 1)) + "].Flags[" + IntToString(c_heroAbilFlagAffectedByOverdrive) + "]", c_playerAny) == 1);
+                libGame_gv_players[lv_playerIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isMountReplacement = (CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "HeroAbilArray[" + IntToString((lv_itAbility - 1)) + "].Flags[" + IntToString(c_heroAbilFlagMountReplacement) + "]", c_playerAny) == 1);
             }
         }
         else {
@@ -946,6 +915,14 @@ void MimicHeroesLib_gf_DataLoadHeroDataIntoIndex (string lp_heroLink, int lp_ind
         for ( ; ( (auto982C7F79_ai >= 0 && lv_itSkin <= auto982C7F79_ae) || (auto982C7F79_ai < 0 && lv_itSkin >= auto982C7F79_ae) ) ; lv_itSkin += auto982C7F79_ai ) {
             MimicHeroesLib_gf_DataHeroesAddSkinPlusVariationsToHero(lv_playerIndex, (CatalogFieldValueGet(c_gameCatalogHero, lv_heroID, "VariationArray[" + IntToString(lv_itSkin) + "]", c_playerAny)));
         }
+    }
+
+    if ((lp_heroLink == "Rexxar")) {
+        libGame_gv_players[lp_index].lv_aIHeroDelegateTokenValue = libGDHL_gv_aIHeroDelegateTokenValueRexxarValue;
+    }
+
+    if ((lp_heroLink == "LostVikings")) {
+        libGame_gv_players[lp_index].lv_aIHeroDelegateTokenValue = libGDHL_gv_aIHeroDelegateTokenValueAnyVikingAliveValue;
     }
 
 }
@@ -1722,7 +1699,20 @@ fixed MimicHeroesLib_gf_HeroDeathTime (int lp_player, int lp_level) {
         return MimicHeroesLib_gv_bALDeathTimeOverride;
     }
 
-    lv_deathTime = (MimicHeroesLib_gv_bALDeathTimes[lp_level] * MimicHeroesLib_gv_bALDeathTimeScaler);
+    if ((MimicHeroesLib_gv_brettTimersEnabled == true)) {
+        lv_deathTime = (MimicHeroesLib_gv_bALDeathTimes[lp_level] + libGame_gv_players[lp_player].lv_brettTimersTimeMod);
+        if ((lv_deathTime < MimicHeroesLib_gv_brettTimersMinimumTimer)) {
+            lv_deathTime = MimicHeroesLib_gv_brettTimersMinimumTimer;
+        }
+
+        if ((lv_deathTime > MimicHeroesLib_gv_brettTimersMaximumTimer)) {
+            lv_deathTime = MimicHeroesLib_gv_brettTimersMaximumTimer;
+        }
+
+    }
+    else {
+        lv_deathTime = (MimicHeroesLib_gv_bALDeathTimes[lp_level] * MimicHeroesLib_gv_bALDeathTimeScaler);
+    }
     if ((MimicHeroesLib_gv_sYSDeathTimerCap > 0.0)) {
         lv_deathTime = MinF(lv_deathTime, MimicHeroesLib_gv_sYSDeathTimerCap);
     }
@@ -4217,6 +4207,7 @@ bool MimicHeroesLib_gt_DataHeroesHeroData_Func (bool testConds, bool runActions)
     int lv_itHeroIndex;
     int lv_classInt;
     int lv_classCount;
+    string lv_previousHeroID;
 
     // Automatic Variable Declarations
     int auto4FFE58C7_ae;
@@ -4224,6 +4215,7 @@ bool MimicHeroesLib_gt_DataHeroesHeroData_Func (bool testConds, bool runActions)
 
     // Variable Initialization
     lv_heroID = "";
+    lv_previousHeroID = "";
 
     // Actions
     if (!runActions) {
@@ -4238,12 +4230,19 @@ bool MimicHeroesLib_gt_DataHeroesHeroData_Func (bool testConds, bool runActions)
     lv_itHeroIndex = 1;
     for ( ; ( (auto4FFE58C7_ai >= 0 && lv_itHeroIndex <= auto4FFE58C7_ae) || (auto4FFE58C7_ai < 0 && lv_itHeroIndex >= auto4FFE58C7_ae) ) ; lv_itHeroIndex += auto4FFE58C7_ai ) {
         lv_heroID = CatalogFieldValueGet(c_gameCatalogConfig, "Config", "HeroArray[" + IntToString((lv_itHeroIndex - 1)) + "]", c_playerAny);
+        if ((lv_heroID == "")) {
+            TextExpressionSetToken("Param/Expression/lib_Core_62EAE737", "A", StringToText(lv_previousHeroID));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_Core_62EAE737"));
+            lv_heroID = "TestHero";
+        }
+
         lv_classInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroID, "Role", c_playerAny);
         lv_classCount = DataTableGetInt(true, ("Heroes_HeroClass_" + IntToString(lv_classInt) + "_HeroCount"));
         lv_classCount += 1;
         DataTableSetInt(true, ("Heroes_HeroClass_" + IntToString(lv_classInt) + "_HeroCount"), lv_classCount);
         DataTableSetInt(true, ("Heroes_HeroClass_" + IntToString(lv_classInt) + "_Index_" + IntToString(lv_classCount) + "_Index"), lv_itHeroIndex);
         MimicHeroesLib_gf_DataHeroesAddHeroIDToDataTable(lv_itHeroIndex, (lv_heroID));
+        lv_previousHeroID = lv_heroID;
     }
     return true;
 }
@@ -4593,54 +4592,136 @@ void MimicHeroesLib_gt_DataDeathTimes_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Data - Death Times Test Cheat
+// Trigger: Brett Timers - Set Variables
 //--------------------------------------------------------------------------------------------------
-bool MimicHeroesLib_gt_DataDeathTimesTestCheat_Func (bool testConds, bool runActions) {
+bool MimicHeroesLib_gt_BrettTimersSetVariables_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
     // Actions
     if (!runActions) {
         return true;
     }
 
     MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Core_01538C0F"), true);
-    MimicHeroesLib_gv_bALDeathTimes[1] = 15.0;
-    MimicHeroesLib_gv_bALDeathTimes[2] = 16.0;
-    MimicHeroesLib_gv_bALDeathTimes[3] = 17.0;
-    MimicHeroesLib_gv_bALDeathTimes[4] = 18.0;
-    MimicHeroesLib_gv_bALDeathTimes[5] = 19.0;
-    MimicHeroesLib_gv_bALDeathTimes[6] = 20.0;
-    MimicHeroesLib_gv_bALDeathTimes[7] = 21.0;
-    MimicHeroesLib_gv_bALDeathTimes[8] = 22.0;
-    MimicHeroesLib_gv_bALDeathTimes[9] = 23.0;
-    MimicHeroesLib_gv_bALDeathTimes[10] = 24.0;
-    MimicHeroesLib_gv_bALDeathTimes[11] = 26.0;
-    MimicHeroesLib_gv_bALDeathTimes[12] = 29.0;
-    MimicHeroesLib_gv_bALDeathTimes[13] = 32.0;
-    MimicHeroesLib_gv_bALDeathTimes[14] = 36.0;
-    MimicHeroesLib_gv_bALDeathTimes[15] = 40.0;
-    MimicHeroesLib_gv_bALDeathTimes[16] = 44.0;
-    MimicHeroesLib_gv_bALDeathTimes[17] = 50.0;
-    MimicHeroesLib_gv_bALDeathTimes[18] = 56.0;
-    MimicHeroesLib_gv_bALDeathTimes[19] = 62.0;
-    MimicHeroesLib_gv_bALDeathTimes[20] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[21] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[22] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[23] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[24] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[25] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[26] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[27] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[28] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[29] = 65.0;
-    MimicHeroesLib_gv_bALDeathTimes[30] = 65.0;
+    MimicHeroesLib_gv_brettTimersEnabled = true;
+    MimicHeroesLib_gv_bALDeathTimes[1] = 5.0;
+    MimicHeroesLib_gv_bALDeathTimes[2] = 5.0;
+    MimicHeroesLib_gv_bALDeathTimes[3] = 5.0;
+    MimicHeroesLib_gv_bALDeathTimes[4] = 5.0;
+    MimicHeroesLib_gv_bALDeathTimes[5] = 5.0;
+    MimicHeroesLib_gv_bALDeathTimes[6] = 6.0;
+    MimicHeroesLib_gv_bALDeathTimes[7] = 8.0;
+    MimicHeroesLib_gv_bALDeathTimes[8] = 10.0;
+    MimicHeroesLib_gv_bALDeathTimes[9] = 12.0;
+    MimicHeroesLib_gv_bALDeathTimes[10] = 14.0;
+    MimicHeroesLib_gv_bALDeathTimes[11] = 16.0;
+    MimicHeroesLib_gv_bALDeathTimes[12] = 18.0;
+    MimicHeroesLib_gv_bALDeathTimes[13] = 20.0;
+    MimicHeroesLib_gv_bALDeathTimes[14] = 22.0;
+    MimicHeroesLib_gv_bALDeathTimes[15] = 25.0;
+    MimicHeroesLib_gv_bALDeathTimes[16] = 28.0;
+    MimicHeroesLib_gv_bALDeathTimes[17] = 31.0;
+    MimicHeroesLib_gv_bALDeathTimes[18] = 34.0;
+    MimicHeroesLib_gv_bALDeathTimes[19] = 37.0;
+    MimicHeroesLib_gv_bALDeathTimes[20] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[21] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[22] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[23] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[24] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[25] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[26] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[27] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[28] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[29] = 40.0;
+    MimicHeroesLib_gv_bALDeathTimes[30] = 40.0;
     MimicHeroesLib_gv_bALMaxDeathTime = MimicHeroesLib_gv_bALDeathTimes[MimicHeroesLib_gv_bALMaxLevel];
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicHeroesLib_gt_DataDeathTimesTestCheat_Init () {
-    MimicHeroesLib_gt_DataDeathTimesTestCheat = TriggerCreate("MimicHeroesLib_gt_DataDeathTimesTestCheat_Func");
-    TriggerAddEventChatMessage(MimicHeroesLib_gt_DataDeathTimesTestCheat, c_playerAny, "mDeathTimes", true);
+void MimicHeroesLib_gt_BrettTimersSetVariables_Init () {
+    MimicHeroesLib_gt_BrettTimersSetVariables = TriggerCreate("MimicHeroesLib_gt_BrettTimersSetVariables_Func");
+    TriggerAddEventChatMessage(MimicHeroesLib_gt_BrettTimersSetVariables, c_playerAny, "m-bretttimers", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Brett Timers - Check Death Timer Mod
+//--------------------------------------------------------------------------------------------------
+bool MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TextExpressionSetToken("Param/Expression/lib_Core_D9E58343", "B", IntToText(lv_player));
+    TextExpressionSetToken("Param/Expression/lib_Core_D9E58343", "A", FixedToText(libGame_gv_players[lv_player].lv_brettTimersTimeMod, 2));
+    MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_Core_D9E58343"), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod_Init () {
+    MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod = TriggerCreate("MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod_Func");
+    TriggerAddEventChatMessage(MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod, c_playerAny, "m-mybretttimer", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Brett Timers - Takedown Participation
+//--------------------------------------------------------------------------------------------------
+bool MimicHeroesLib_gt_BrettTimersTakedownParticipation_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_lastHitPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+    lv_lastHitPlayer = libGame_gf_HeroParticipatedInTakedownLastHitPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicHeroesLib_gv_brettTimersEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGame_gv_players[lv_player].lv_brettTimersTimeMod += MimicHeroesLib_gv_brettTimersTakedownModifier;
+    if ((lv_lastHitPlayer == lv_player)) {
+        libGame_gv_players[lv_player].lv_brettTimersTimeMod += MimicHeroesLib_gv_brettTimersKillModifier;
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicHeroesLib_gt_BrettTimersTakedownParticipation_Init () {
+    MimicHeroesLib_gt_BrettTimersTakedownParticipation = TriggerCreate("MimicHeroesLib_gt_BrettTimersTakedownParticipation_Func");
+    libGame_gf_HeroParticipatedInTakedown(MimicHeroesLib_gt_BrettTimersTakedownParticipation);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4824,7 +4905,7 @@ bool MimicHeroesLib_gt_InitializeStormMod_Func (bool testConds, bool runActions)
     TimerStart(libGame_gv_gobalTimer, c_timerDurationInfinite, false, c_timeGame);
     SetScoreTimer(libGame_gv_gameTimer);
     UnitEventSetNullVariableInvalid(true);
-    TriggerExecute(MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput, true, false);
+    TriggerExecute(MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput, true, false);
     TriggerExecute(MimicHeroesLib_gt_InitializeData, true, false);
     TriggerExecute(libGame_gt_InitializeBanks, true, false);
     TriggerExecute(libGame_gt_InitializePlayers, true, false);
@@ -4901,9 +4982,9 @@ void MimicHeroesLib_gt_InitializeStormMod_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Initialize Data Mining And Debug Output
+// Trigger: DEBUG - Initialize Data Mining And Debug Output
 //--------------------------------------------------------------------------------------------------
-bool MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Func (bool testConds, bool runActions) {
+bool MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
@@ -4917,7 +4998,7 @@ bool MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Func (bool testConds, 
     TriggerDebugSetTypeFile(6, (MimicHeroesLib_gv_debugPathDeathTimerRenderPrioritiesLog + ".txt"));
     TriggerDebugSetTypeFile(7, (MimicHeroesLib_gv_debugPathIndividualStatTrackerLog + ".txt"));
     TriggerDebugSetTypeFile(8, (MimicHeroesLib_gv_debugPathMVPLog + ".txt"));
-    if ((MimicHeroesLib_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         TriggerDebugOutputEnable(false);
     }
 
@@ -4925,8 +5006,8 @@ bool MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Func (bool testConds, 
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Init () {
-    MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput = TriggerCreate("MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Func");
+void MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput_Init () {
+    MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput = TriggerCreate("MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5111,13 +5192,15 @@ void MimicHeroesLib_InitTriggers () {
     MimicHeroesLib_gt_DataMinionWaveCompositionData_Init();
     MimicHeroesLib_gt_DataInitializeMountData_Init();
     MimicHeroesLib_gt_DataDeathTimes_Init();
-    MimicHeroesLib_gt_DataDeathTimesTestCheat_Init();
+    MimicHeroesLib_gt_BrettTimersSetVariables_Init();
+    MimicHeroesLib_gt_BrettTimersCheckDeathTimerMod_Init();
+    MimicHeroesLib_gt_BrettTimersTakedownParticipation_Init();
     MimicHeroesLib_gt_DataInitializeSkinData_Init();
     MimicHeroesLib_gt_DataEnableGranularBountyXPMathDisplay_Init();
     MimicHeroesLib_gt_DataXPInitializeLevelXPValues_Init();
     MimicHeroesLib_gt_DataXPInitializeBrawlMetaXPValues_Init();
     MimicHeroesLib_gt_InitializeStormMod_Init();
-    MimicHeroesLib_gt_InitializeDataMiningAndDebugOutput_Init();
+    MimicHeroesLib_gt_DEBUGInitializeDataMiningAndDebugOutput_Init();
     MimicHeroesLib_gt_InitializeData_Init();
     MimicHeroesLib_gt_InitializeMiscStuff_Init();
     MimicHeroesLib_gt__SendTransmissionTick_Init();
@@ -5139,7 +5222,6 @@ void MimicHeroesLib_InitLib () {
     MimicHeroesLib_InitLibraries();
     MimicHeroesLib_InitVariables();
     MimicHeroesLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("HeroesLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/GameLib"
@@ -5148,5 +5230,6 @@ include "TriggerLibs/AILib"
 include "TriggerLibs/UILib"
 include "TriggerLibs/StartingExperienceLib"
 include "TriggerLibs/SoundLib"
+include "TriggerLibs/GameDataHelperLib"
 include "TriggerLibs/SupportLib"
 

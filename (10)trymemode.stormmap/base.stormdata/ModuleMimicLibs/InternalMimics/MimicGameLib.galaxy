@@ -8,7 +8,7 @@ include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/GameDataHelperLib_h"
 include "TriggerLibs/SupportLib_h"
 
-include "ModuleMimicLibs/MimicGameLib_h"
+include "ModuleMimicLibs/InternalMimics/MimicGameLib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: Game
@@ -45,7 +45,6 @@ void MimicGameLib_InitVariables () {
     MimicGameLib_InitVariables_completed = true;
 
     for (init_i = 0; init_i <= libCore_gv_bALMaxTeams; init_i += 1) {
-        MimicGameLib_gv_teams[init_i].lv_teamLevel = 1;
         MimicGameLib_gv_teams[init_i].lv_teamPlayerGroup = PlayerGroupEmpty();
         MimicGameLib_gv_teams[init_i].lv_teamPlayerGroupNoNPCPlayers = PlayerGroupEmpty();
         MimicGameLib_gv_teams[init_i].lv_multikillTimer = TimerCreate();
@@ -109,7 +108,7 @@ void MimicGameLib_InitVariables () {
         }
     }
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
-        MimicGameLib_gv_mVPStats[init_i].lv_role = c_heroRoleWarrior;
+        MimicGameLib_gv_mVPStats[init_i].lv_role = c_expandedRoleTank;
         MimicGameLib_gv_mVPStats[init_i].lv_mvpRoles = PlayerGroupEmpty();
     }
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
@@ -191,11 +190,6 @@ void MimicGameLib_InitVariables () {
     for (init_i = 0; init_i <= 2; init_i += 1) {
         MimicGameLib_gv_minion_CatapultGroup[init_i] = UnitGroupEmpty();
     }
-    for (init_i = 0; init_i <= libCore_gv_bALMaxTeams; init_i += 1) {
-        for (init_j = 0; init_j <= 3; init_j += 1) {
-            MimicGameLib_gv_minion_SpawnStaggeredCatapult[init_i][init_j] = true;
-        }
-    }
     MimicGameLib_gv_minionScalingEnabled = true;
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
         for (init_j = 0; init_j <= MimicGameLib_gv_moonwellMaxMoonwellCount; init_j += 1) {
@@ -207,7 +201,7 @@ void MimicGameLib_InitVariables () {
     }
     MimicGameLib_gv_townDestructionRemovesCoreInvulnerable = true;
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
-        MimicGameLib_gv_onFireRollingWindowSums[init_i].lv_role = c_heroRoleWarrior;
+        MimicGameLib_gv_onFireRollingWindowSums[init_i].lv_role = c_expandedRoleTank;
         MimicGameLib_gv_onFireRollingWindowSums[init_i].lv_mvpRoles = PlayerGroupEmpty();
     }
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
@@ -218,7 +212,7 @@ void MimicGameLib_InitVariables () {
     }
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
         for (init_j = 0; init_j <= MimicGameLib_gv_onFireWindowCount; init_j += 1) {
-            MimicGameLib_gv_onFireRollingWindowValues[init_i][init_j].lv_role = c_heroRoleWarrior;
+            MimicGameLib_gv_onFireRollingWindowValues[init_i][init_j].lv_role = c_expandedRoleTank;
             MimicGameLib_gv_onFireRollingWindowValues[init_i][init_j].lv_mvpRoles = PlayerGroupEmpty();
         }
     }
@@ -251,11 +245,12 @@ void MimicGameLib_InitVariables () {
         MimicGameLib_gv_players[init_i].lv_multikillTimer = TimerCreate();
         MimicGameLib_gv_players[init_i].lv_bribeChargeStackRequirement = 20;
         MimicGameLib_gv_players[init_i].lv_bribeTokenLink = "TalentBribeTokenCounter";
+        MimicGameLib_gv_players[init_i].lv_aIHeroDelegateTokenValue = libAIAI_gv_aITeamDelegateHeroTokenValueDefault_C;
         MimicGameLib_gv_players[init_i].lv_heroSpawnReady = true;
         MimicGameLib_gv_players[init_i].lv_playerLeftAnnouncementTimer = TimerCreate();
-        MimicGameLib_gv_players[init_i].lv_heroData.lv_class = c_heroRoleWarrior;
+        MimicGameLib_gv_players[init_i].lv_heroData.lv_role = c_heroRoleWarrior;
+        MimicGameLib_gv_players[init_i].lv_heroData.lv_expandedRole = c_expandedRoleTank;
         MimicGameLib_gv_players[init_i].lv_heroData.lv_heroRoles = PlayerGroupEmpty();
-        MimicGameLib_gv_players[init_i].lv_heroData.lv_heroScoreOverride = PlayerGroupEmpty();
         MimicGameLib_gv_players[init_i].lv_heroData.lv_universe = c_heroUniverseWarcraft;
         MimicGameLib_gv_players[init_i].lv_heroData.lv_gender = c_heroGenderMale;
         for (init_i2 = 0; init_i2 <= libCore_gv_dataHeroesMaxAbilitiesPerHero; init_i2 += 1) {
@@ -300,7 +295,7 @@ void MimicGameLib_InitVariables () {
         MimicGameLib_gv_players[init_i].lv_mountData.lv_mountModel = "HorseMount";
         MimicGameLib_gv_players[init_i].lv_mountData.lv_mountActor = "MountModel";
         MimicGameLib_gv_players[init_i].lv_mountData.lv_mountModelScale = 1.0;
-        MimicGameLib_gv_players[init_i].lv_mountData.lv_mountModelWalkAnimMoveSpeed = 4.5;
+        MimicGameLib_gv_players[init_i].lv_mountData.lv_mountModelWalkAnimMoveSpeed = 4.8;
         MimicGameLib_gv_players[init_i].lv_mountData.lv_mountPoseAnimGroup = "Ride";
         MimicGameLib_gv_players[init_i].lv_mountData.lv_mountPoseAnimGroupStatus = "Ride";
         for (init_i2 = 0; init_i2 <= libCore_gv_dataMountsMaxActorMessageCount; init_i2 += 1) {
@@ -350,8 +345,6 @@ void MimicGameLib_InitVariables () {
     for (init_i = 0; init_i <= MimicGameLib_gv_townMaxTownCount; init_i += 1) {
         MimicGameLib_gv_townTownData[init_i].lv_townHallIndex = -1;
     }
-    MimicGameLib_gv_baseRepulserFieldLaunchDistance = 12.0;
-    MimicGameLib_gv_baseRepulserFieldLaunchCutoffDistance = -1.0;
     MimicGameLib_gv_townBasicMinimapHealthMontior = true;
     MimicGameLib_gv_vehicleDragonKnightBullRushLaunchDistance = -30.0;
     MimicGameLib_gv_vehicleDragonKnightBullRushCutoffDistance = -1.0;
@@ -362,15 +355,15 @@ void MimicGameLib_InitVariables () {
 
 // Presets
 string MimicGameLib_ge_BehaviorCategoriesStorm_Ident (int lp_val) {
-         if (lp_val == c_behaviorCategoryPermanent) { return "CategoryPermanent"; }
-    else if (lp_val == c_behaviorCategoryRestorable) { return "CategoryRestorable"; }
-    else if (lp_val == c_behaviorCategoryTemporary) { return "CategoryTemporary"; }
+         if (lp_val == c_behaviorCategoryPermanent) { return "Permanent"; }
+    else if (lp_val == c_behaviorCategoryRestorable) { return "ShowUIBar"; }
+    else if (lp_val == c_behaviorCategoryTemporary) { return "Temporary"; }
     else if (lp_val == c_behaviorCategoryTemporaryCloak) { return "TemporaryCloak"; }
-    else if (lp_val == c_behaviorCategoryInvulnerable) { return "BuffInvulnerable"; }
-    else if (lp_val == c_behaviorCategorySlow) { return "DebuffMovementSpeed"; }
-    else if (lp_val == c_behaviorCategoryFast) { return "BuffMovementSpeed"; }
-    else if (lp_val == c_behaviorCategoryStun) { return "DebuffStun"; }
-    else if (lp_val == c_behaviorCategoryReveal) { return "DebuffRevealed"; }
+    else if (lp_val == c_behaviorCategoryInvulnerable) { return "Invulnerable"; }
+    else if (lp_val == c_behaviorCategorySlow) { return "MovementSpeed"; }
+    else if (lp_val == c_behaviorCategoryFast) { return "MovementSpeedBuff"; }
+    else if (lp_val == c_behaviorCategoryStun) { return "Stun"; }
+    else if (lp_val == c_behaviorCategoryReveal) { return "Revealed"; }
     else if (lp_val == c_behaviorCategoryCleansable) { return "Cleansable"; }
     else if (lp_val == c_behaviorCategoryProtected) { return "BuffProtected"; }
     else if (lp_val == c_behaviorCategoryFear) { return "DebuffFear"; }
@@ -381,20 +374,20 @@ string MimicGameLib_ge_BehaviorCategoriesStorm_Ident (int lp_val) {
     else if (lp_val == c_behaviorCategoryDebuffAbilityPower) { return "DebuffAbilityPower"; }
     else if (lp_val == c_behaviorCategoryKnockedOut) { return "KnockedOut"; }
     else if (lp_val == c_behaviorCategorySleeping) { return "Sleeping"; }
-    else if (lp_val == c_behaviorCategoryBuffUnstoppable) { return "BuffUnstoppable"; }
-    else if (lp_val == c_behaviorCategoryBuffResistant) { return "BuffResistant"; }
-    else if (lp_val == c_behaviorCategoryBuffAutoattackDPS) { return "BuffAutoattackDPS"; }
-    else if (lp_val == c_behaviorCategoryBuffAbilityPower) { return "BuffAbilityPower"; }
-    else if (lp_val == c_behaviorCategoryDebuffRoot) { return "DebuffRoot"; }
-    else if (lp_val == c_behaviorCategoryDebuffStasis) { return "DebuffStasis"; }
-    else if (lp_val == c_behaviorCategoryDebuffSilence) { return "DebuffSilence"; }
-    else if (lp_val == c_behaviorCategoryDebuffBlind) { return "DebuffBlind"; }
-    else if (lp_val == c_behaviorCategoryDebuffVulnerable) { return "DebuffVulnerable"; }
-    else if (lp_val == c_behaviorCategoryDebuffAutoattackDPS) { return "DebuffAutoattackDPS"; }
-    else if (lp_val == c_behaviorCategoryBuffTempMaxHealth) { return "BuffTemporaryMaxHealthIncrease"; }
-    else if (lp_val == c_behaviorCategoryBuffPermanentMaxHealth) { return "BuffPermanentMaxHealthIncrease"; }
+    else if (lp_val == c_behaviorCategoryBuffUnstoppable) { return "Unstoppable"; }
+    else if (lp_val == c_behaviorCategoryBuffResistant) { return "Resistant"; }
+    else if (lp_val == c_behaviorCategoryBuffAutoattackDPS) { return "AutoattackDPSBuff"; }
+    else if (lp_val == c_behaviorCategoryBuffAbilityPower) { return "AbilityPowerBuff"; }
+    else if (lp_val == c_behaviorCategoryDebuffRoot) { return "Root"; }
+    else if (lp_val == c_behaviorCategoryDebuffStasis) { return "Stasis"; }
+    else if (lp_val == c_behaviorCategoryDebuffSilence) { return "Silence"; }
+    else if (lp_val == c_behaviorCategoryDebuffBlind) { return "Blind"; }
+    else if (lp_val == c_behaviorCategoryDebuffVulnerable) { return "Vulnerable"; }
+    else if (lp_val == c_behaviorCategoryDebuffAutoattackDPS) { return "AutoattackDPS"; }
+    else if (lp_val == c_behaviorCategoryBuffTempMaxHealth) { return "MaxHealthTemporaryBuff"; }
+    else if (lp_val == c_behaviorCategoryBuffPermanentMaxHealth) { return "MaxHealthPermanentIncrease"; }
     else if (lp_val == c_behaviorCategorySpecialDeathState) { return "SpecialDeathState"; }
-    else if (lp_val == c_behaviorCategoryDamageOverTime) { return "DebuffDamageOverTime"; }
+    else if (lp_val == c_behaviorCategoryDamageOverTime) { return "DamageOverTime"; }
     else if (lp_val == c_behaviorCategoryPushOrPull) { return "PushorPullEffect"; }
     else if (lp_val == c_behaviorCategoryMount) { return "Mount"; }
     else if (lp_val == c_behaviorCategoryPersistentCloak) { return "PersistentCloak"; }
@@ -408,7 +401,12 @@ string MimicGameLib_ge_BehaviorCategoriesStorm_Ident (int lp_val) {
     else if (lp_val == c_behaviorCategoryAbsorbing) { return "Absorbing"; }
     else if (lp_val == c_behaviorCategoryHideNameplate) { return "HideNameplate"; }
     else if (lp_val == c_behaviorCategoryHideStatusFrame) { return "HideStatusFrame"; }
-    else if (lp_val == c_behaviorCategoryHideStatusFrame+1) { return "Any"; }
+    else if (lp_val == c_behaviorCategoryHostileStasisRemoved) { return "HostileStasisRemoved"; }
+    else if (lp_val == c_behaviorCategoryUnreducible) { return "Unreducible"; }
+    else if (lp_val == c_behaviorCategoryImmuneToAllyDisplacement) { return "ImmuneToAllyDisplacement"; }
+    else if (lp_val == c_behaviorCategoryImmuneToEnemyDisplacement) { return "ImmuneToEnemyDisplacement"; }
+    else if (lp_val == c_behaviorCategoryStackingComboMarker) { return "StackingComboMarker"; }
+    else if (lp_val == c_behaviorCategoryStackingComboMarker+1) { return "Any"; }
     return null;
 }
 
@@ -1486,26 +1484,6 @@ void MimicGameLib_gf_CCRecognitionCCReduction (unit lp_unit, string lp_cCBehavio
 
 }
 
-bool MimicGameLib_gf_CCReductionStunReduceable (string lp_behavior) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((lp_behavior != "L90ETCMoshPitStun") && (lp_behavior != "L90ETCMoshPitDisplayBehavior") && (lp_behavior != "StitchesGorgeTargetTimer") && (lp_behavior != "StitchesGorgeInitialTargetBehavior") && (lp_behavior != "OctoGrabStun") && (lp_behavior != "HaymakerTargetBehaviorMicroStun") && (lp_behavior != "HaymakerTargetBehaviorStun") && (lp_behavior != "DevouringMawTargetBehavior")) {
-        return true;
-    }
-
-    return false;
-}
-
-bool MimicGameLib_gf_CCReductionSilencedReduceable (string lp_behavior) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((lp_behavior != "SylvanasMindControlTarget")) {
-        return true;
-    }
-
-    return false;
-}
-
 void MimicGameLib_gf_DeathRecapSpecialCaseEvent (trigger t) {
     // Automatic Variable Declarations
     // Implementation
@@ -2220,7 +2198,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
     lv_mVPStatstoDisplayIterator = 1;
 
     // Implementation
-    if (((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Debug) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_TryMe) || (MimicGameLib_gv_endofMatchAwardsDisabled == true) || ((GameIsMatchmade() == false) && (libCore_gv_dEBUGDebuggingEnabled == false) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_Tutorial1) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_TutorialMapMechanics)))) {
+    if (((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Debug) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_TryMe) || (MimicGameLib_gv_endofMatchAwardsDisabled == true) || ((GameIsMatchmade() == false) && (true == false) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_Tutorial1) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_TutorialMapMechanics)))) {
         return ;
     }
 
@@ -2234,7 +2212,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
     lv_iterator = 1;
     for ( ; lv_iterator <= auto1F73EC8A_ae ; lv_iterator += 1 ) {
         MimicGameLib_gv_mVPStats[lv_iterator].lv_team = MimicGameLib_gf_TeamNumberOfPlayer(lv_iterator);
-        MimicGameLib_gv_mVPStats[lv_iterator].lv_role = MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_class;
+        MimicGameLib_gv_mVPStats[lv_iterator].lv_role = MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_expandedRole;
         libNtve_gf_AddPlayerGroupToPlayerGroup(MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_heroRoles, MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles);
         MimicGameLib_gv_mVPStats[lv_iterator].lv_heroDamageDone = PlayerScoreValueGetAsFixed(lv_iterator, "HeroDamage");
         MimicGameLib_gf_SetAwardValueandWeight(lv_iterator, MimicGameLib_gv_mVPStats[lv_iterator].lv_heroDamageDone, MimicGameLib_ge_SecondaryAwards_Painbringer);
@@ -2335,7 +2313,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
 
         }
 
-        if ((lv_topDamageTakerPerTeam[MimicGameLib_gv_mVPStats[lv_iterator].lv_team] == lv_iterator) && (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_heroRoleWarrior)) == true)) {
+        if ((lv_topDamageTakerPerTeam[MimicGameLib_gv_mVPStats[lv_iterator].lv_team] == lv_iterator) && ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleBruiser)) == true))) {
             MimicGameLib_gv_mVPStats[lv_iterator].lv_mVPScore += MimicGameLib_gf_GetMVPAwardAmount(MimicGameLib_gv_mVPStats[lv_iterator].lv_unitType, MimicGameLib_ge_MVPAwards_TopDamageTakenasWarrioronTeam);
             if ((lv_topDamageTakenAmountPerTeam[MimicGameLib_gv_mVPStats[lv_iterator].lv_team] > lv_topDamageTakenAmountPerTeam[MimicGameLib_gv_mVPStats[lv_iterator].lv_enemyTeam])) {
                 lv_topDamageTakerinGame = lv_iterator;
@@ -2380,11 +2358,11 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
             lv_thoroughputBonus[lv_iterator] += (MimicGameLib_gv_thoroughputBonusMultiplier * (MimicGameLib_gv_mVPStats[lv_iterator].lv_xPContribution / lv_topXPContributionAmountinGame));
         }
 
-        if ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_heroRoleSupport)) == true) && (lv_topHealAmount > 0.0)) {
+        if (((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleSupport)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleHealer)) == true)) && (lv_topHealAmount > 0.0)) {
             lv_thoroughputBonus[lv_iterator] += (MimicGameLib_gv_thoroughputBonusMultiplier * (MimicGameLib_gv_mVPStats[lv_iterator].lv_healAmount / lv_topHealAmount));
         }
 
-        if ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_heroRoleWarrior)) == true) && (lv_topDamageTakenAmountinGame > 0.0)) {
+        if (((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[lv_iterator].lv_mvpRoles, (c_expandedRoleBruiser)) == true)) && (lv_topDamageTakenAmountinGame > 0.0)) {
             lv_thoroughputBonus[lv_iterator] += (MimicGameLib_gv_thoroughputBonusMultiplier * (MimicGameLib_gv_mVPStats[lv_iterator].lv_damageTaken / lv_topDamageTakenAmountinGame) * MimicGameLib_gv_thoroughputBonusExtraStatMultiplier);
         }
 
@@ -2418,7 +2396,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
     MimicGameLib_gv_playerHasWonAward[MimicGameLib_gv_mVPPlayer] = true;
     MimicGameLib_gf_BuildInitialSecondaryAwardList();
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(MimicGameLib_gv_mVPPlayer, "EndOfMatchAwardMVPBoolean", 1);
-    if ((lv_topDamageTakerinGame == MimicGameLib_gv_mVPPlayer) && (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_heroRoleWarrior)) == true) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
+    if ((lv_topDamageTakerinGame == MimicGameLib_gv_mVPPlayer) && ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleBruiser)) == true)) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
         MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatPriority = MimicGameLib_ge_MVPStatPriority_BestinGame;
         MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatLabel = StringExternal("Param/Value/lib_Game_4229130A");
         MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatValue = (((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0);
@@ -2426,7 +2404,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
         lv_mVPStatstoDisplayIterator += 1;
     }
     else {
-        if ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_heroRoleWarrior)) == true) && ((lv_topDamageTakerPerTeam[1] == MimicGameLib_gv_mVPPlayer) || (lv_topDamageTakerPerTeam[2] == MimicGameLib_gv_mVPPlayer)) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
+        if (((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleBruiser)) == true)) && ((lv_topDamageTakerPerTeam[1] == MimicGameLib_gv_mVPPlayer) || (lv_topDamageTakerPerTeam[2] == MimicGameLib_gv_mVPPlayer)) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
             MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatPriority = MimicGameLib_ge_MVPStatPriority_BestinTeam;
             MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatLabel = StringExternal("Param/Value/lib_Game_6AC097A5");
             MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatValue = (((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0);
@@ -2434,7 +2412,7 @@ void MimicGameLib_gf_AssignMVP (int lp_winningTeam) {
             lv_mVPStatstoDisplayIterator += 1;
         }
         else {
-            if ((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_heroRoleWarrior)) == true) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
+            if (((PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_mvpRoles, (c_expandedRoleBruiser)) == true)) && ((((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0) > lv_mVPStatThresholdBeforePuttingIntoUISlots) && (lv_mVPStatstoDisplayIterator <= MimicGameLib_gv_maxMVPStatSlots)) {
                 MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatPriority = MimicGameLib_ge_MVPStatPriority_Notable;
                 MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatLabel = StringExternal("Param/Value/lib_Game_429A5F34");
                 MimicGameLib_gv_mVPStatstoDisplay[lv_mVPStatstoDisplayIterator].lv_mVPStatValue = (((MimicGameLib_gv_mVPStats[MimicGameLib_gv_mVPPlayer].lv_damageTaken * 0.1) / MimicGameLib_gv_teamAwardTotalValues[MimicGameLib_gf_TeamNumberOfPlayer(MimicGameLib_gv_mVPPlayer)][MimicGameLib_ge_SecondaryAwards_Bulwark]) * 100.0);
@@ -2712,10 +2690,10 @@ void MimicGameLib_gf_SetAwardValueandWeight (int lp_player, fixed lp_awardValue,
     MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_value = lp_awardValue;
     if ((MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_base == 0.0)) {
     }
-    else if (((lp_award == MimicGameLib_ge_SecondaryAwards_Bulwark) || (lp_award == MimicGameLib_ge_SecondaryAwards_Guardian)) && (PlayerGroupHasPlayer(MimicGameLib_gv_players[lp_player].lv_heroData.lv_heroRoles, (c_heroRoleWarrior)) == false)) {
+    else if (((lp_award == MimicGameLib_ge_SecondaryAwards_Bulwark) || (lp_award == MimicGameLib_ge_SecondaryAwards_Guardian)) && (MimicGameLib_gv_players[lp_player].lv_heroData.lv_expandedRole != c_expandedRoleTank) && (MimicGameLib_gv_players[lp_player].lv_heroData.lv_expandedRole != c_expandedRoleBruiser)) {
         return ;
     }
-    else if (((lp_award == MimicGameLib_ge_SecondaryAwards_Bulwark) || (lp_award == MimicGameLib_ge_SecondaryAwards_Guardian)) && (PlayerGroupHasPlayer(MimicGameLib_gv_players[lp_player].lv_heroData.lv_heroRoles, (c_heroRoleWarrior)) == true)) {
+    else if (((lp_award == MimicGameLib_ge_SecondaryAwards_Bulwark) || (lp_award == MimicGameLib_ge_SecondaryAwards_Guardian)) && ((MimicGameLib_gv_players[lp_player].lv_heroData.lv_expandedRole == c_expandedRoleTank) || (MimicGameLib_gv_players[lp_player].lv_heroData.lv_expandedRole == c_expandedRoleBruiser))) {
         MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_weight = ((MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_value / (MimicGameLib_gv_mVPStats[lp_player].lv_deaths + 3.0)) / MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_base);
         MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_weight *= MimicGameLib_gv_playerAwardEligibility[lp_player][(lp_award)].lv_weightModifier;
     }
@@ -3645,6 +3623,32 @@ bool MimicGameLib_gf_HeroAIEndingCampAttackSuccess () {
     // Automatic Variable Declarations
     // Implementation
     return DataTableGetBool(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroAIEndingCampAttack_C, MimicGameLib_gv_eventParam_HeroAIEndingCampAttack_Success_C));
+}
+
+void MimicGameLib_gf_HeroParticipatedInCreepTakedown (trigger t) {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerAddEventGeneric(t, MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C);
+}
+
+void MimicGameLib_gf_SendEventHeroParticipatedInCreepTakedown (int lp_player, unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    DataTableSetInt(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C, MimicGameLib_gv_eventParam_HeroParticipatedInCreepTakedown_Player_C), lp_player);
+    DataTableSetUnit(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C, MimicGameLib_gv_eventParam_HeroParticipatedInCreepTakedown_NPC_C), lp_unit);
+    TriggerSendEvent(MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C);
+}
+
+int MimicGameLib_gf_HeroParticipatedInCreepTakedownKillingPlayer () {
+    // Automatic Variable Declarations
+    // Implementation
+    return DataTableGetInt(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C, MimicGameLib_gv_eventParam_HeroParticipatedInCreepTakedown_Player_C));
+}
+
+unit MimicGameLib_gf_HeroParticipatedInCreepTakedownCreep () {
+    // Automatic Variable Declarations
+    // Implementation
+    return DataTableGetUnit(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroParticipatedInCreepTakedown_C, MimicGameLib_gv_eventParam_HeroParticipatedInCreepTakedown_NPC_C));
 }
 
 void MimicGameLib_gf_ClearHeroSpecificUI (trigger t) {
@@ -5438,6 +5442,8 @@ void MimicGameLib_gf_PickingHeroesForPlayers () {
     const int autoB53EFE3A_ai = 1;
     const int auto27F3DF11_ae = libCore_gv_bALMaxPlayers;
     const int auto27F3DF11_ai = 1;
+    const int auto067654F8_ae = libCore_gv_bALMaxPlayers;
+    const int auto067654F8_ai = 1;
 
     // Variable Initialization
 
@@ -5469,6 +5475,13 @@ void MimicGameLib_gf_PickingHeroesForPlayers () {
     for ( ; ( (auto27F3DF11_ai >= 0 && lv_playerIndex <= auto27F3DF11_ae) || (auto27F3DF11_ai < 0 && lv_playerIndex >= auto27F3DF11_ae) ) ; lv_playerIndex += auto27F3DF11_ai ) {
         if ((PlayerStatus(lv_playerIndex) != c_playerStatusUnused) && (MimicGameLib_gv_players[lv_playerIndex].lv_heroIndex != 0)) {
             PlayerSetHero(lv_playerIndex, libCore_gf_GetHeroFromIndex(MimicGameLib_gv_players[lv_playerIndex].lv_heroIndex));
+        }
+
+    }
+    lv_playerIndex = 1;
+    for ( ; ( (auto067654F8_ai >= 0 && lv_playerIndex <= auto067654F8_ae) || (auto067654F8_ai < 0 && lv_playerIndex >= auto067654F8_ae) ) ; lv_playerIndex += auto067654F8_ai ) {
+        if ((PlayerStatus(lv_playerIndex) != c_playerStatusUnused) && (MimicGameLib_gv_players[lv_playerIndex].lv_heroIndex != 0)) {
+            libSprt_gf_SetHeroMasteryRingLevel(lv_playerIndex);
         }
 
     }
@@ -5993,6 +6006,7 @@ void MimicGameLib_gf_ApplyLevelUpHeroStatsForHeroSingleLevel (unit lp_hero) {
             }
         }
     }
+    CatalogFieldValueSet(c_gameCatalogGame, "Dflt", "MaxVitalForFractionalDamage[" + IntToString(c_unitVitalLife) + "]", MimicGameLib_gf_ComputerPlayerInTeam(MimicGameLib_gf_EnemyTeamNumberOfPlayer(lv_player)), CatalogFieldValueGet(c_gameCatalogGame, "Dflt", "MaxVitalForFractionalDamage[" + IntToString(c_unitVitalLife) + "]", lv_player));
 }
 
 void MimicGameLib_gf_RemoveLevelUpHeroStatsForPlayer (string lp_heroUnitType, int lp_player) {
@@ -6470,7 +6484,7 @@ bool auto_MimicGameLib_gf_HeroDeathAwardXP_TriggerFunc (bool testConds, bool run
         return true;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && (libSprt_gv_dEBUGXPSourceHero == false)) {
+    if ((true == true) && (libSprt_gv_dEBUGXPSourceHero == false)) {
         return true;
     }
 
@@ -6819,12 +6833,14 @@ void MimicGameLib_gf_HeroDeathRespawnHeroforPlayer (bool lp_respawnMounted, int 
     // Variable Declarations
     int lv_i;
     unit lv_heroUnit;
+    int lv_teamID;
 
     // Automatic Variable Declarations
     // Variable Initialization
 
     // Implementation
     lv_heroUnit = MimicGameLib_gv_players[lp_player].lv_heroUnit;
+    lv_teamID = MimicGameLib_gf_TeamNumberOfPlayer(lp_player);
     if ((UnitHasBehavior2(lv_heroUnit, "AbnormalRespawn") == true)) {
         return ;
     }
@@ -6843,7 +6859,7 @@ void MimicGameLib_gf_HeroDeathRespawnHeroforPlayer (bool lp_respawnMounted, int 
         UnitSetPropertyFixed(lv_heroUnit, c_unitPropEnergyPercent, 100.0);
     }
     MimicGameLib_gv_players[lp_player].lv_isDead = false;
-    UnitCreateEffectUnit(lv_heroUnit, "HealingPadSet", lv_heroUnit);
+    UnitCreateEffectUnit(lv_heroUnit, "HallOfStormsAllyApplySet", lv_heroUnit);
     if ((UnitGetType(lv_heroUnit) == "HeroMurky")) {
         libGDHL_gf_HeroMurkyRespawnLogicCheck(lp_player);
     }
@@ -6869,11 +6885,13 @@ void MimicGameLib_gf_HeroDeathRespawnHeroforPlayer (bool lp_respawnMounted, int 
     MimicGameLib_gv_players[lp_player].lv_cameraPlayerUnitGroupToFocusOn = libNtve_gf_ConvertUnitToUnitGroup(lv_heroUnit);
     MimicGameLib_gf_CameraUpdateCameraForPlayer(lp_player);
     libUIUI_gf_UIHeroConsoleShowHideUnitStatusFrameForPlayer(true, lp_player);
-    if ((lp_respawnMounted == true) && ((UnitHasBehavior2(lv_heroUnit, "HomeShieldProtection") == true) || (UnitGetType(lv_heroUnit) == "HeroMurky"))) {
+    if ((lp_respawnMounted == true) && ((UnitHasBehavior2(lv_heroUnit, "HallOfStormsProtectionBuff") == true) || (UnitGetType(lv_heroUnit) == "HeroMurky"))) {
         MimicGameLib_gf_ApplyMountBehaviorToHero(lv_heroUnit);
         MimicGameLib_gf_SendEventHeroSpecialCaseMounting(lp_player);
     }
 
+    libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Add, MimicGameLib_gv_players[lp_player].lv_aIHeroDelegateTokenValue, lv_teamID, libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroAlive);
+    libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove, MimicGameLib_gv_players[lp_player].lv_aIHeroDelegateTokenValue, lv_teamID, libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroDead);
 }
 
 void MimicGameLib_gf_HeroDeathAddSecondaryTexttoAnnouncementforPlayer (int lp_playerID, text lp_text) {
@@ -6937,6 +6955,7 @@ void MimicGameLib_gf_HeroDeathHeroKilledAnnouncementToKillingTeamPlayer (int lp_
                 lv_duration = MimicGameLib_gv_announcement_KillAnnouncementDuration_C;
                 libUIUI_gf_NotificationDisplaySetMultikillTimerLabelsForPlayer(lp_killingTeamPlayer, lv_timerHeaderText, StringExternal("Param/Value/lib_Game_EA230E99"));
                 MimicGameLib_gf_SendEventPlayerAchievesMultiKill(lp_killingTeamPlayer, MimicGameLib_gv_players[lp_killingTeamPlayer].lv_multikillStreak);
+                MimicGameLib_gv_scoreValues[lp_killingTeamPlayer].lv_multikill += 1;
             }
             else if (auto869E4A78_val == 3) {
                 lv_vOEvent = libCore_ge_AnnouncerVOEvents_TripleKill;
@@ -7368,6 +7387,29 @@ bool MimicGameLib_gf_HeroSelectionIsHeroSelectedForPlayersTeam (int lp_heroIndex
     return false;
 }
 
+bool MimicGameLib_gf_HeroSelectionIsSkinAlreadyInUsebyAnyPlayer (int lp_skinIndex) {
+    // Variable Declarations
+    int lv_itPlayer;
+
+    // Automatic Variable Declarations
+    playergroup autoF2B31097_g;
+
+    // Variable Initialization
+
+    // Implementation
+    autoF2B31097_g = PlayerGroupActive();
+    lv_itPlayer = -1;
+    while (true) {
+        	lv_itPlayer = PlayerGroupNextPlayer(autoF2B31097_g, lv_itPlayer);
+        	if (lv_itPlayer<0) { break; }
+        	if ((MimicGameLib_gv_players[lv_itPlayer].lv_selectedSkin != 0) && (MimicGameLib_gv_players[lv_itPlayer].lv_selectedSkin == lp_skinIndex)) {
+            return true;
+        }
+
+    }
+    return false;
+}
+
 int MimicGameLib_gf_HeroSelectionRandomlyPickAnyUnusedHero (int lp_choosingPlayer, bool lp_allowAnyTier, bool lp_ignoreCheck) {
     // Variable Declarations
     int lv_itHeroIndex;
@@ -7405,45 +7447,93 @@ int MimicGameLib_gf_HeroSelectionRandomlyPickAnyUnusedHero (int lp_choosingPlaye
     return DataTableGetInt(false, ("RAND_PickHero_" + IntToString(RandomInt(1, lv_numGoodCandidates))));
 }
 
-int MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithFilter (int lp_choosingPlayer, bool lp_allowMelee, bool lp_allowTank, bool lp_allowDamage, bool lp_allowSupport, bool lp_allowSiege) {
+int MimicGameLib_gf_HeroSelectionRandomlyPickMetaUnusedHero (int lp_choosingPlayer) {
+    // Variable Declarations
+    int lv_player;
+    int lv_playerRole;
+    int[7] lv_teamRoles;
+    bool lv_allowTank;
+    bool lv_allowBruiser;
+    bool lv_allowRangedAssassin;
+    bool lv_allowMeleeAssassin;
+    bool lv_allowHealer;
+    bool lv_allowSupport;
+
+    // Automatic Variable Declarations
+    const int autoA12230EB_ae = libCore_gv_bALMaxPlayers;
+    const int autoA12230EB_ai = 1;
+
+    // Variable Initialization
+    lv_playerRole = c_expandedRoleTank;
+
+    // Implementation
+    lv_player = 1;
+    for ( ; ( (autoA12230EB_ai >= 0 && lv_player <= autoA12230EB_ae) || (autoA12230EB_ai < 0 && lv_player >= autoA12230EB_ae) ) ; lv_player += autoA12230EB_ai ) {
+        if ((PlayerStatus(lv_player) != c_playerStatusUnused) && (MimicGameLib_gv_players[lv_player].lv_faction == MimicGameLib_gv_players[lp_choosingPlayer].lv_faction) && (MimicGameLib_gv_players[lv_player].lv_heroIndex != 0)) {
+            lv_playerRole = MimicGameLib_gv_players[lv_player].lv_heroData.lv_expandedRole;
+            lv_teamRoles[lv_playerRole] += 1;
+        }
+
+    }
+    if ((lv_teamRoles[(c_expandedRoleHealer)] == 0)) {
+        lv_allowHealer = true;
+        return MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole(lp_choosingPlayer, lv_allowTank, lv_allowBruiser, lv_allowRangedAssassin, lv_allowMeleeAssassin, lv_allowHealer, lv_allowSupport);
+    }
+    if ((lv_teamRoles[(c_expandedRoleTank)] == 0)) {
+        lv_allowTank = true;
+        return MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole(lp_choosingPlayer, lv_allowTank, lv_allowBruiser, lv_allowRangedAssassin, lv_allowMeleeAssassin, lv_allowHealer, lv_allowSupport);
+    }
+    if ((lv_teamRoles[(c_expandedRoleRangedAssassin)] == 0)) {
+        lv_allowRangedAssassin = true;
+        return MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole(lp_choosingPlayer, lv_allowTank, lv_allowBruiser, lv_allowRangedAssassin, lv_allowMeleeAssassin, lv_allowHealer, lv_allowSupport);
+    }
+    lv_allowMeleeAssassin = true;
+    lv_allowBruiser = true;
+    lv_allowSupport = true;
+    return MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole(lp_choosingPlayer, lv_allowTank, lv_allowBruiser, lv_allowRangedAssassin, lv_allowMeleeAssassin, lv_allowHealer, lv_allowSupport);
+}
+
+int MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole (int lp_choosingPlayer, bool lp_allowTank, bool lp_allowBruiser, bool lp_allowRangedAssassin, bool lp_allowMeleeAssassin, bool lp_allowHealer, bool lp_allowSupport) {
     // Variable Declarations
     int lv_itHeroIndex;
     int lv_numGoodCandidates;
-    bool lv_heroIndex_IsMelee;
-    int lv_heroClassInt;
-    int lv_heroIndex_Class;
+    int lv_heroRoleInt;
+    int lv_heroRole;
 
     // Automatic Variable Declarations
-    int auto6771DB47_ae;
-    const int auto6771DB47_ai = 1;
+    int auto8AB41EE4_ae;
+    const int auto8AB41EE4_ai = 1;
 
     // Variable Initialization
-    lv_heroIndex_Class = c_heroRoleWarrior;
+    lv_heroRole = c_expandedRoleTank;
 
     // Implementation
-    auto6771DB47_ae = libCore_gv_dataHeroesNumberOfHeroes;
+    auto8AB41EE4_ae = libCore_gv_dataHeroesNumberOfHeroes;
     lv_itHeroIndex = 1;
-    for ( ; ( (auto6771DB47_ai >= 0 && lv_itHeroIndex <= auto6771DB47_ae) || (auto6771DB47_ai < 0 && lv_itHeroIndex >= auto6771DB47_ae) ) ; lv_itHeroIndex += auto6771DB47_ai ) {
-        lv_heroIndex_IsMelee = (CatalogFieldValueGetAsInt(c_gameCatalogHero, DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex))), "Melee", c_playerAny) != 0);
-        lv_heroClassInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex))), "Role", c_playerAny);
-        lv_heroIndex_Class = lv_heroClassInt;
-        if ((lv_heroIndex_IsMelee == true) && (lp_allowMelee == false)) {
+    for ( ; ( (auto8AB41EE4_ai >= 0 && lv_itHeroIndex <= auto8AB41EE4_ae) || (auto8AB41EE4_ai < 0 && lv_itHeroIndex >= auto8AB41EE4_ae) ) ; lv_itHeroIndex += auto8AB41EE4_ai ) {
+        lv_heroRoleInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex))), "ExpandedRole", c_playerAny);
+        lv_heroRole = lv_heroRoleInt;
+        if ((lv_heroRole == c_expandedRoleTank) && (lp_allowTank == false)) {
             continue;
         }
 
-        if ((lv_heroIndex_Class == c_heroRoleWarrior) && (lp_allowTank == false)) {
+        if ((lv_heroRole == c_expandedRoleBruiser) && (lp_allowBruiser == false)) {
             continue;
         }
 
-        if ((lv_heroIndex_Class == c_heroRoleDamage) && (lp_allowDamage == false)) {
+        if ((lv_heroRole == c_expandedRoleRangedAssassin) && (lp_allowRangedAssassin == false)) {
             continue;
         }
 
-        if ((lv_heroIndex_Class == c_heroRoleSupport) && (lp_allowSupport == false)) {
+        if ((lv_heroRole == c_expandedRoleMeleeAssassin) && (lp_allowMeleeAssassin == false)) {
             continue;
         }
 
-        if ((lv_heroIndex_Class == c_heroRoleSpecialist) && (lp_allowSiege == false)) {
+        if ((lv_heroRole == c_expandedRoleHealer) && (lp_allowHealer == false)) {
+            continue;
+        }
+
+        if ((lv_heroRole == c_expandedRoleSupport) && (lp_allowSupport == false)) {
             continue;
         }
 
@@ -7467,143 +7557,6 @@ int MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithFilter (int lp_choosi
     }
 
     return DataTableGetInt(false, ("RAND_PickHero_" + IntToString(RandomInt(1, lv_numGoodCandidates))));
-}
-
-int MimicGameLib_gf_HeroSelectionRandomlyPickComplementaryUnusedHero (int lp_choosingPlayer, bool lp_enemyTeamHasSupport, bool lp_enemyTeamHasWarrior, int lp_enemyTeamRandomCount) {
-    // Variable Declarations
-    int lv_player;
-    int lv_itHeroClass;
-    int[libCore_gv_dataHeroesNumberOfHeroClasses + 1] lv_classCount;
-    int lv_meleeHeroCount;
-    bool lv_allowMelee;
-    bool lv_allowTank;
-    bool lv_allowDamage;
-    bool lv_allowSupport;
-    bool lv_allowSiege;
-    int lv_warriorSupportCount;
-    int lv_itRoleMultiClass;
-
-    // Automatic Variable Declarations
-    const int auto16ED23D9_ae = libCore_gv_bALMaxPlayers;
-    const int auto16ED23D9_ai = 1;
-    playergroup auto7FAE02B5_g;
-
-    // Variable Initialization
-    lv_allowTank = true;
-    lv_allowDamage = true;
-    lv_allowSupport = true;
-    lv_allowSiege = true;
-
-    // Implementation
-    lv_player = 1;
-    for ( ; ( (auto16ED23D9_ai >= 0 && lv_player <= auto16ED23D9_ae) || (auto16ED23D9_ai < 0 && lv_player >= auto16ED23D9_ae) ) ; lv_player += auto16ED23D9_ai ) {
-        if ((PlayerStatus(lv_player) != c_playerStatusUnused) && (MimicGameLib_gv_players[lv_player].lv_faction == MimicGameLib_gv_players[lp_choosingPlayer].lv_faction) && (MimicGameLib_gv_players[lv_player].lv_heroIndex != 0)) {
-            if ((MimicGameLib_gv_players[lv_player].lv_heroData.lv_isMelee == true)) {
-                lv_meleeHeroCount += 1;
-            }
-
-            auto7FAE02B5_g = MimicGameLib_gv_players[lv_player].lv_heroData.lv_heroRoles;
-            lv_itRoleMultiClass = -1;
-            while (true) {
-                	lv_itRoleMultiClass = PlayerGroupNextPlayer(auto7FAE02B5_g, lv_itRoleMultiClass);
-                	if (lv_itRoleMultiClass<0) { break; }
-                	lv_classCount[lv_itRoleMultiClass] += 1;
-            }
-        }
-
-    }
-    if ((lp_enemyTeamHasSupport == true) && (lv_classCount[(c_heroRoleSupport)] == 0)) {
-        lv_allowTank = false;
-        lv_allowDamage = false;
-        lv_allowSiege = false;
-    }
-    else if ((lp_enemyTeamHasWarrior == true) && (lv_classCount[(c_heroRoleWarrior)] == 0)) {
-        lv_allowSupport = false;
-        lv_allowDamage = false;
-        lv_allowSiege = false;
-    }
-    else if ((lv_classCount[(c_heroRoleSupport)] == 0) && (lv_classCount[(c_heroRoleWarrior)] == 0) && (lp_enemyTeamRandomCount > 0)) {
-        lv_allowDamage = false;
-        lv_allowSiege = false;
-    }
-    else if ((((lv_classCount[(c_heroRoleSupport)] == 0) && (lp_enemyTeamRandomCount > 0)) || ((lv_classCount[(c_heroRoleWarrior)] == 0) && (lp_enemyTeamRandomCount > 0)) || (lv_classCount[(c_heroRoleDamage)] == 0) || (lv_classCount[(c_heroRoleSpecialist)] == 0))) {
-        if ((lv_classCount[(c_heroRoleSupport)] > 0)) {
-            lv_warriorSupportCount += 1;
-        }
-
-        if ((lv_classCount[(c_heroRoleWarrior)] > 0)) {
-            lv_warriorSupportCount += 1;
-        }
-
-        if ((lp_enemyTeamRandomCount > lv_warriorSupportCount)) {
-            lv_allowSupport = ((lv_classCount[(c_heroRoleSupport)] == 0) && (lp_enemyTeamRandomCount > 0));
-            lv_allowTank = ((lv_classCount[(c_heroRoleWarrior)] == 0) && (lp_enemyTeamRandomCount > 0));
-        }
-        else {
-            lv_allowSupport = false;
-            lv_allowTank = false;
-        }
-        lv_allowDamage = (lv_classCount[(c_heroRoleDamage)] == 0);
-        lv_allowSiege = (lv_classCount[(c_heroRoleSpecialist)] == 0);
-    }
-    else if (true) {
-        lv_allowSupport = false;
-        lv_allowTank = false;
-    }
-    if ((lv_allowTank == true) && (lv_allowDamage == false) && (lv_allowSupport == false) && (lv_allowSiege == false)) {
-        lv_allowMelee = true;
-    }
-    else {
-        lv_allowMelee = (lv_meleeHeroCount < 2);
-    }
-    return MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithFilter(lp_choosingPlayer, lv_allowMelee, lv_allowTank, lv_allowDamage, lv_allowSupport, lv_allowSiege);
-}
-
-int MimicGameLib_gf_HeroSelectionRandomlyPickBasedOnEnemyComposition (int lp_choosingPlayer) {
-    // Variable Declarations
-    int lv_player;
-    int[libCore_gv_dataHeroesNumberOfHeroClasses + 1] lv_classCount;
-    int lv_itHeroClass;
-    bool lv_enemyTeamHasSupport;
-    bool lv_enemyTeamHasWarrior;
-    int lv_enemyTeamRandomCount;
-    int lv_itRoleMultiClass;
-
-    // Automatic Variable Declarations
-    const int auto950627DC_ae = libCore_gv_bALMaxPlayers;
-    const int auto950627DC_ai = 1;
-    playergroup auto5318CA0F_g;
-
-    // Variable Initialization
-
-    // Implementation
-    lv_player = 1;
-    for ( ; ( (auto950627DC_ai >= 0 && lv_player <= auto950627DC_ae) || (auto950627DC_ai < 0 && lv_player >= auto950627DC_ae) ) ; lv_player += auto950627DC_ai ) {
-        if ((PlayerStatus(lv_player) != c_playerStatusUnused) && (MimicGameLib_gv_players[lv_player].lv_faction != MimicGameLib_gv_players[lp_choosingPlayer].lv_faction)) {
-            if ((MimicGameLib_gv_players[lv_player].lv_heroIndex != 0)) {
-                auto5318CA0F_g = MimicGameLib_gv_players[lv_player].lv_heroData.lv_heroRoles;
-                lv_itRoleMultiClass = -1;
-                while (true) {
-                    	lv_itRoleMultiClass = PlayerGroupNextPlayer(auto5318CA0F_g, lv_itRoleMultiClass);
-                    	if (lv_itRoleMultiClass<0) { break; }
-                    	lv_classCount[lv_itRoleMultiClass] += 1;
-                }
-            }
-            else {
-                lv_enemyTeamRandomCount += 1;
-            }
-        }
-
-    }
-    if ((lv_classCount[(c_heroRoleSupport)] > 0)) {
-        lv_enemyTeamHasSupport = true;
-    }
-
-    if ((lv_classCount[(c_heroRoleWarrior)] > 0)) {
-        lv_enemyTeamHasWarrior = true;
-    }
-
-    return MimicGameLib_gf_HeroSelectionRandomlyPickComplementaryUnusedHero(lp_choosingPlayer, lv_enemyTeamHasSupport, lv_enemyTeamHasWarrior, lv_enemyTeamRandomCount);
 }
 
 void MimicGameLib_gf_HeroSelectionSetBNetHeroAndSkinSelectionsForAllPlayers () {
@@ -7633,7 +7586,7 @@ void MimicGameLib_gf_HeroSelectionSetBNetHeroAndSkinSelectionsForAllPlayers () {
             continue;
         }
 
-        if (((MimicGameLib_gf_HeroSelectionIsHeroSelectedForPlayersTeam(lv_heroIndex, lv_itPlayer) == false) || ((libCore_gv_dEBUGDebuggingEnabled == true) && (libCore_gv_dEBUGGameIsOnline == false)))) {
+        if (((MimicGameLib_gf_HeroSelectionIsHeroSelectedForPlayersTeam(lv_heroIndex, lv_itPlayer) == false) || ((true == true) && (libCore_gv_dEBUGGameIsOnline == false)))) {
             MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = lv_heroIndex;
             libCore_gf_DataLoadHeroDataIntoIndex(libCore_gf_GetHeroFromIndex(MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex), lv_itPlayer);
             if (((libCore_gv_sYSGameMode != libCore_ge_GameModes_TryMe) && ((MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex == libCore_gf_GetIndexFromHero("Gall")) || (MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex == libCore_gf_GetIndexFromHero("Cho"))))) {
@@ -7859,6 +7812,7 @@ void MimicGameLib_gf_HeroSelectionRandomlyPickSkin (int lp_choosingPlayer) {
     int lv_randomChoice;
     string lv_skinLink;
     int lv_index;
+    int lv_randomSkinAttempts;
 
     // Automatic Variable Declarations
     int auto2E01BCDC_ae;
@@ -7887,6 +7841,15 @@ void MimicGameLib_gf_HeroSelectionRandomlyPickSkin (int lp_choosingPlayer) {
         else {
             lv_randomChoice = RandomInt(2, lv_allowedSkinCount);
             lv_skinLink = MimicGameLib_gv_players[lv_index].lv_heroData.lv_skinArray[DataTableGetInt(false, ("RAND_PickSkin_" + IntToString(lv_randomChoice)))];
+            while ((MimicGameLib_gf_HeroSelectionIsSkinAlreadyInUsebyAnyPlayer(libCore_gf_DataSkinsGetSkinIndexFromSkinLink(lv_skinLink)) == true)) {
+                lv_randomSkinAttempts += 1;
+                lv_randomChoice = RandomInt(2, lv_allowedSkinCount);
+                lv_skinLink = MimicGameLib_gv_players[lv_index].lv_heroData.lv_skinArray[DataTableGetInt(false, ("RAND_PickSkin_" + IntToString(lv_randomChoice)))];
+                if ((lv_randomSkinAttempts >= (lv_allowedSkinCount * 3))) {
+                    break;
+                }
+
+            }
         }
     }
     MimicGameLib_gv_players[lp_choosingPlayer].lv_selectedSkin = libCore_gf_DataSkinsGetSkinIndexFromSkinLink(lv_skinLink);
@@ -8053,6 +8016,43 @@ void MimicGameLib_gf_HeroSelectionRandomlyPickVoiceLine (int lp_choosingPlayer) 
     PlayerSetVoiceLine(lp_choosingPlayer, lv_voiceLine);
 }
 
+bool MimicGameLib_gf_HeroAbilityIsAffectedByCDR (int lp_player, string lp_abilityLink) {
+    // Variable Declarations
+    int lv_itAbility;
+
+    // Automatic Variable Declarations
+    int auto2E98BEEF_ae;
+    const int auto2E98BEEF_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    auto2E98BEEF_ae = MimicGameLib_gv_players[lp_player].lv_heroData.lv_numberOfAbilities;
+    lv_itAbility = 1;
+    for ( ; ( (auto2E98BEEF_ai >= 0 && lv_itAbility <= auto2E98BEEF_ae) || (auto2E98BEEF_ai < 0 && lv_itAbility >= auto2E98BEEF_ae) ) ; lv_itAbility += auto2E98BEEF_ai ) {
+        if ((MimicGameLib_gv_players[lp_player].lv_heroData.lv_abilities[lv_itAbility].lv_ability == lp_abilityLink)) {
+            return MimicGameLib_gv_players[lp_player].lv_heroData.lv_abilities[lv_itAbility].lv_isAffectedByCooldownReduction;
+        }
+
+    }
+    return false;
+}
+
+bool MimicGameLib_gf_HeroAbilityCooldownCanBeReset (int lp_player, string lp_abilityLink) {
+    // Variable Declarations
+    int lv_itAbility;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((AbilityClass(lp_abilityLink) != c_classIdCAbilEffect) && (AbilityClass(lp_abilityLink) != c_classIdCAbilEffectInstant) && (AbilityClass(lp_abilityLink) != c_classIdCAbilEffectTarget) && (AbilityClass(lp_abilityLink) != c_classIdCAbilAugment) && (AbilityClass(lp_abilityLink) != c_classIdCAbilBehavior) && (AbilityClass(lp_abilityLink) != c_classIdCAbilMorph) && (AbilityClass(lp_abilityLink) != c_classIdCAbilMorphPlacement)) {
+        return false;
+    }
+
+    return true;
+}
+
 void MimicGameLib_gf_HeroRefreshCooldowns (int lp_player, bool lp_resetPlayerHeroUnits) {
     // Variable Declarations
     int lv_itAbility;
@@ -8077,7 +8077,6 @@ void MimicGameLib_gf_HeroRefreshCooldowns (int lp_player, bool lp_resetPlayerHer
     int auto30FAF137_u;
     int auto342EB673_ae;
     const int auto342EB673_ai = 1;
-    int auto4F156570_ae;
     const int auto67F3B775_ae = libMapM_gv_vehicle_MaxNumberOfVehicles_C;
     const int auto67F3B775_ai = 1;
     int autoBC2476EA_ae;
@@ -8112,34 +8111,20 @@ void MimicGameLib_gf_HeroRefreshCooldowns (int lp_player, bool lp_resetPlayerHer
                 continue;
             }
         }
-        auto342EB673_ae = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_numberOfAbilities;
+        auto342EB673_ae = UnitAbilityCount(lv_itUnit);
         lv_itAbility = 1;
         for ( ; ( (auto342EB673_ai >= 0 && lv_itAbility <= auto342EB673_ae) || (auto342EB673_ai < 0 && lv_itAbility >= auto342EB673_ae) ) ; lv_itAbility += auto342EB673_ai ) {
-            if ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isAffectedByCooldownReduction == true)) {
-                lv_abilLink = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_ability;
+            lv_abilLink = UnitAbilityGet(lv_itUnit, lv_itAbility);
+            if ((MimicGameLib_gf_HeroAbilityCooldownCanBeReset(lv_heroIndex, lv_abilLink) == true)) {
                 lv_cooldownLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(lv_itUnit));
                 libNtve_gf_UnitRemoveCooldown(lv_itUnit, lv_cooldownLink);
                 libNtve_gf_PlayerRemoveCooldown(lp_player, lv_cooldownLink);
                 lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.Link", UnitGetOwner(lv_itUnit));
                 lv_chargeCount = CatalogFieldValueGetAsInt(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.CountMax", UnitGetOwner(lv_itUnit));
                 UnitAddChargeUsed(lv_itUnit, lv_chargeLink, (-lv_chargeCount));
-                PlayerAddChargeUsed(lp_player, lv_cooldownLink, (-lv_chargeCount));
+                PlayerAddChargeUsed(lp_player, lv_chargeLink, (-lv_chargeCount));
             }
 
-        }
-        auto4F156570_ae = UnitInventoryCount(lv_itUnit, c_unitInventoryCountCarried);
-        lv_itItems = 1;
-        for ( ; lv_itItems <= auto4F156570_ae ; lv_itItems += 1 ) {
-            lv_itemUnitType = UnitGetType(UnitInventoryItem(lv_itUnit, lv_itItems));
-            lv_itemLink = (CatalogFieldValueGet(c_gameCatalogUnit, lv_itemUnitType, "Item", c_playerAny));
-            lv_abilLink = (CatalogFieldValueGet(c_gameCatalogItem, lv_itemLink, "Abil", c_playerAny));
-            lv_cooldownLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(lv_itUnit));
-            libNtve_gf_UnitRemoveCooldown(lv_itUnit, lv_cooldownLink);
-            libNtve_gf_PlayerRemoveCooldown(lp_player, lv_cooldownLink);
-            lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.Link", UnitGetOwner(lv_itUnit));
-            lv_chargeCount = CatalogFieldValueGetAsInt(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.CountMax", UnitGetOwner(lv_itUnit));
-            UnitAddChargeUsed(lv_itUnit, lv_chargeLink, (-lv_chargeCount));
-            PlayerAddChargeUsed(lp_player, lv_chargeLink, (-lv_chargeCount));
         }
     }
     lv_vehicleIndex = 1;
@@ -8158,6 +8143,51 @@ void MimicGameLib_gf_HeroRefreshCooldowns (int lp_player, bool lp_resetPlayerHer
 
     }
     MimicGameLib_gf_SendEventSpecialCaseTalentCooldownReset(lp_player);
+}
+
+void MimicGameLib_gf_StormUniversalModifyCooldownonUnitCDRforAbilities (unit lp_targetUnit, fixed lp_cooldownChange, bool lp_includeTrait, bool lp_includeHeroic, bool lp_includeMount) {
+    // Variable Declarations
+    int lv_playerID;
+    int lv_itAbility;
+    int lv_heroIndex;
+    string lv_abilLink;
+    string lv_cooldownLink;
+    fixed lv_currentCooldownAmount;
+    fixed lv_newCooldownAmount;
+    string lv_chargeLink;
+    fixed lv_currentChargeAmount;
+    fixed lv_newChargeAmount;
+
+    // Automatic Variable Declarations
+    int auto3743938C_ae;
+    const int auto3743938C_ai = 1;
+
+    // Variable Initialization
+    lv_cooldownLink = "";
+    lv_chargeLink = "";
+
+    // Implementation
+    lv_heroIndex = libCore_gf_GetHeroIndexForUnitType(UnitGetType(lp_targetUnit));
+    lv_playerID = UnitGetOwner(lp_targetUnit);
+    auto3743938C_ae = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_numberOfAbilities;
+    lv_itAbility = 1;
+    for ( ; ( (auto3743938C_ai >= 0 && lv_itAbility <= auto3743938C_ae) || (auto3743938C_ai < 0 && lv_itAbility >= auto3743938C_ae) ) ; lv_itAbility += auto3743938C_ai ) {
+        if ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isAffectedByCooldownReduction == true)) {
+            if ((((lp_includeHeroic == false) && (MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isHeroic == true)) || ((lp_includeTrait == false) && (MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isTrait == true)) || ((lp_includeMount == false) && ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_isMountReplacement == true) || (MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_ability == "Mount"))))) {
+                continue;
+            }
+
+            lv_abilLink = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_ability;
+            lv_cooldownLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Cooldown.Link", lv_playerID);
+            UnitModifyCooldown(lp_targetUnit, lv_cooldownLink, lp_cooldownChange, c_cooldownOperationAdd);
+            if ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_abilities[lv_itAbility].lv_usesCharges == true)) {
+                lv_chargeLink = CatalogFieldValueGet(c_gameCatalogAbil, lv_abilLink, "Cost[" + IntToString(0) + "].Charge.Link", lv_playerID);
+                UnitAddChargeRegenRemaining(lp_targetUnit, lv_chargeLink, lp_cooldownChange);
+            }
+
+        }
+
+    }
 }
 
 void MimicGameLib_gf_CalculateClosestLaneDataForLane (point lp_testPoint, int lp_curLane) {
@@ -8661,48 +8691,26 @@ void MimicGameLib_gf_MinionPauseUnpauseMinionSystemForTeam (bool lp_pauseUnpause
 
 void MimicGameLib_gf_MinionSpawnMinion (int lp_lane, int lp_owner, int lp_type, point lp_spawnPoint) {
     // Variable Declarations
-    int lv_team;
-    int lv_bruiserLevel;
-    string lv_spawnUnitType;
-    int lv_minionTypeIndex;
+    int lv_minionTeam;
+    string lv_minionUnitType;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_minionTeam = MimicGameLib_gf_TeamNumberOfPlayer(lp_owner);
+    lv_minionUnitType = libCore_gf_DataMinionUnitTypeFromPreset(lp_type);
 
     // Implementation
-    if (((MimicGameLib_gv_gameOver == true) || (MimicGameLib_gv_minionSpawningEnabled == false))) {
+    if (((MimicGameLib_gv_gameOver == true) || (MimicGameLib_gv_minionSpawningEnabled == false) || (lv_minionUnitType == null))) {
         return ;
     }
 
-    if ((lp_owner == libCore_gv_cOMPUTER_TeamOrder)) {
-        lv_team = 1;
-    }
-    else {
-        lv_team = 2;
-    }
-    lv_spawnUnitType = libCore_gf_DataMinionUnitTypeFromPreset(lp_type);
-    if ((lv_spawnUnitType == null)) {
+    if (((lp_type == libCore_ge_MinionTypes_Catapult) || (lp_type == libCore_ge_MinionTypes_CustomCatapult1) || (lp_type == libCore_ge_MinionTypes_CustomCatapult2)) && ((MimicGameLib_gv_minionMapNeverSpawnsCatapults == true) || ((MimicGameLib_gv_minion_CapCatapults == true) && (UnitGroupCount(MimicGameLib_gv_minion_CatapultGroup[lv_minionTeam], c_unitCountAlive) >= MimicGameLib_gv_minion_CatapultCap_C)) || (MimicGameLib_gf_TownsAliveinLane(MimicGameLib_gf_EnemyTeam(lv_minionTeam), lp_lane) >= 2) || ((MimicGameLib_gf_TownsAliveinLane(MimicGameLib_gf_EnemyTeam(lv_minionTeam), lp_lane) == 1) && (ModI((MimicGameLib_gv_minionWaveSpawnCounter - MimicGameLib_gv_minion_PeriodicCatapultsFirstWave), MimicGameLib_gv_minion_PeriodicCatapultsWavePeriod_C) != 0)))) {
         return ;
     }
 
-    if (((MimicGameLib_gf_TownAliveinLane(MimicGameLib_gf_EnemyTeam(lv_team), lp_lane) == true) || (MimicGameLib_gv_minionMapNeverSpawnsCatapults == true) || ((MimicGameLib_gv_minion_CapCatapults == true) && (UnitGroupCount(MimicGameLib_gv_minion_CatapultGroup[lv_team], c_unitCountAlive) > MimicGameLib_gv_minion_CatapultCap_C))) && ((lp_type == libCore_ge_MinionTypes_Catapult) || (lp_type == libCore_ge_MinionTypes_CustomCatapult1) || (lp_type == libCore_ge_MinionTypes_CustomCatapult2))) {
-        return ;
-    }
-    else {
-        if ((MimicGameLib_gv_minionMapNeverSpawnsCatapults == false) && (MimicGameLib_gf_TownAliveinLane(MimicGameLib_gf_EnemyTeam(lv_team), lp_lane) == false) && ((lp_type == libCore_ge_MinionTypes_Catapult) || (lp_type == libCore_ge_MinionTypes_CustomCatapult1) || (lp_type == libCore_ge_MinionTypes_CustomCatapult2)) && (MimicGameLib_gv_minionStaggerCatapultSpawning == true)) {
-            if ((MimicGameLib_gv_minion_SpawnStaggeredCatapult[lv_team][lp_lane] == false)) {
-                MimicGameLib_gv_minion_SpawnStaggeredCatapult[lv_team][lp_lane] = true;
-                return ;
-            }
-            else {
-                MimicGameLib_gv_minion_SpawnStaggeredCatapult[lv_team][lp_lane] = false;
-            }
-        }
-
-    }
-    libNtve_gf_CreateUnitsAtPoint2(1, lv_spawnUnitType, 0, lp_owner, lp_spawnPoint, null);
+    libNtve_gf_CreateUnitsAtPoint2(1, lv_minionUnitType, 0, lp_owner, lp_spawnPoint, null);
     if ((MimicGameLib_gv_minion_CapCatapults == true) && ((lp_type == libCore_ge_MinionTypes_Catapult) || (lp_type == libCore_ge_MinionTypes_CustomCatapult1) || (lp_type == libCore_ge_MinionTypes_CustomCatapult2))) {
-        UnitGroupAdd(MimicGameLib_gv_minion_CatapultGroup[lv_team], UnitLastCreated());
+        UnitGroupAdd(MimicGameLib_gv_minion_CatapultGroup[lv_minionTeam], UnitLastCreated());
     }
 
     if ((MimicGameLib_gv_minionTakesReducedSpellDamage == true)) {
@@ -8710,14 +8718,13 @@ void MimicGameLib_gf_MinionSpawnMinion (int lp_lane, int lp_owner, int lp_type, 
     }
 
     if ((MimicGameLib_gv_minionScalingEnabled == true)) {
-        lv_minionTypeIndex = (lp_type);
         MimicGameLib_gf_UpdateScalingForUnit(UnitLastCreated(), MimicGameLib_gv_scalingTicks, 0);
     }
 
     MimicGameLib_gf_CalculateSpawnedMinionGoalPoints(lp_owner, lp_spawnPoint);
     libAIAI_gf_MinionAIStartMinionAI(-1, UnitLastCreated(), lp_lane, MimicGameLib_gv_spawnedMinionFirstWaypointIndex, false, false, false, 0, false);
-    MimicGameLib_gf_SendEventMinionGroupCreated(UnitLastCreatedGroup());
-    if ((libMapM_gv_mMRavenTeamStats[MimicGameLib_gf_TeamNumberOfPlayer(lp_owner)].lv_cursed == true)) {
+    libAIAI_gf_AITeamDelegateAddRemoveMinionThreattoLane(lv_minionTeam, lp_lane, lv_minionUnitType, libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Add);
+    if ((libMapM_gv_mMRavenTeamStats[lv_minionTeam].lv_cursed == true)) {
         libMapM_gf_MMRavenApplyCurseEffectOnMinion(UnitLastCreated());
     }
 
@@ -8916,8 +8923,17 @@ void MimicGameLib_gf_CalculateSpawnedMinionGoalPointsFromClosestLaneData (int lp
 void MimicGameLib_gf_ApplyMountBehaviorToHero (unit lp_hero) {
     // Automatic Variable Declarations
     // Implementation
-    if ((MimicGameLib_gv_players[libCore_gf_GetHeroIndexForUnitType(UnitGetType(lp_hero))].lv_heroData.lv_usesMounts == true)) {
+    if ((MimicGameLib_gv_players[libCore_gf_GetHeroIndexForUnitType(UnitGetType(lp_hero))].lv_heroData.lv_usesMounts == true) && (MimicGameLib_gv_players[UnitGetOwner(lp_hero)].lv_defaultMountOverride == null)) {
         UnitBehaviorAdd(lp_hero, "Mounted", lp_hero, 1);
+    }
+
+    if ((MimicGameLib_gv_players[libCore_gf_GetHeroIndexForUnitType(UnitGetType(lp_hero))].lv_heroData.lv_usesMounts == true) && (MimicGameLib_gv_players[UnitGetOwner(lp_hero)].lv_defaultMountOverride != null)) {
+        if ((PlayerHasTalent(UnitGetOwner(lp_hero), "JunkratIHateWaitingTalent") == true)) {
+            UnitBehaviorAdd(lp_hero, MimicGameLib_gv_players[UnitGetOwner(lp_hero)].lv_defaultMountOverride, lp_hero, 1);
+        }
+        else {
+            UnitBehaviorAdd(lp_hero, "Mounted", lp_hero, 1);
+        }
     }
 
 }
@@ -8961,6 +8977,7 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
     int lv_xPSource;
     unitgroup lv_nearbyUnitsAlliedToKilledUnit;
     unit lv_itAlliedUnit;
+    unitgroup lv_experienceAwardedVisualizationGroup;
 
     // Automatic Variable Declarations
     unitgroup auto8BF37171_g;
@@ -8979,6 +8996,7 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
     lv_killCreditGroup = PlayerGroupEmpty();
     lv_xPAwardGroup = PlayerGroupEmpty();
     lv_nearbyUnitsAlliedToKilledUnit = UnitGroupEmpty();
+    lv_experienceAwardedVisualizationGroup = UnitGroupEmpty();
 
     // Implementation
     if ((lp_killingPlayer > 0) && (lp_killingPlayer <= libCore_gv_bALMaxEnginePlayerCount)) {
@@ -9017,6 +9035,7 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
 
         if (((UnitHasBehavior2(lv_itUnit, "EarnsXP") == true) || ((UnitTypeTestAttribute(UnitGetType(lv_itUnit), c_unitAttributeHeroic) == true) && (UnitHasBehavior2(lv_itUnit, "AbathurUltimateEvolutionVehicleCasterBehavior") == false) && (UnitTestState(lv_itUnit, c_unitStateHallucination) == false)))) {
             lv_creditPlayer = UnitGetOwner(lv_itUnit);
+            UnitGroupAdd(lv_experienceAwardedVisualizationGroup, lv_itUnit);
             if ((lv_creditPlayer <= libCore_gv_bALMaxPlayers)) {
                 PlayerGroupAdd(lv_killCreditGroup, lv_creditPlayer);
             }
@@ -9076,7 +9095,7 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
         return ;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true)) {
+    if ((true == true)) {
         auto3202C57A_val = lp_killedUnitClassification;
         if (auto3202C57A_val == c_unitAttributeMinion) {
             if ((libSprt_gv_dEBUGXPSourceMinion == false)) {
@@ -9091,7 +9110,7 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
 
         }
         else if (auto3202C57A_val == c_unitAttributeCreep) {
-            if ((libSprt_gv_dEBUGXPSourceCreep == false)) {
+            if ((libSprt_gv_dEBUGXPSourceCreep == true)) {
                 return ;
             }
 
@@ -9160,6 +9179,9 @@ void MimicGameLib_gf_AwardXPForNPCKill (unit lp_killedUnit, int lp_killedUnitPla
         if (auto6BF10103_val == c_unitAttributeStructure) {
             lv_xPSource = MimicGameLib_ge_XPSources_Structure;
         }
+        else if (auto6BF10103_val == c_unitAttributeMerc) {
+            lv_xPSource = MimicGameLib_ge_XPSources_Creep;
+        }
         else if (auto6BF10103_val == c_unitAttributeCreep) {
             lv_xPSource = MimicGameLib_ge_XPSources_Creep;
         }
@@ -9218,25 +9240,6 @@ bool auto_MimicGameLib_gf_BuildingDiesCameraShake_TriggerFunc (bool testConds, b
         	CameraShake(lv_itPlayer, lp_intensity, "Shake", 0.1, 0.4, 0.5);
     }
     return true;
-}
-
-void MimicGameLib_gf_GazloweSalvageProc (int lp_killingPlayer, unit lp_minion) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((UnitGetType(MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit) == "HeroTinker") && (UnitHasBehavior2(lp_minion, "UnitGivesNoXP") == false)) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, "TinkerSalvageScrap", 0, lp_killingPlayer, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lp_minion), 1.0, UnitGetPosition(MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lp_minion))].lv_core)), null);
-        UnitBehaviorAdd(UnitLastCreated(), "TinkerSalvageScrapTimedLife", MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit, 1);
-    }
-
-}
-
-void MimicGameLib_gf_GazloweReduceReuseRecycleProc (int lp_killingPlayer, unit lp_minion) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((UnitGetType(MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit) == "HeroTinker") && (UnitBehaviorCount(MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit, "ReduceReuseRecycleCarryBehavior") == 1) && (UnitTypeTestAttribute(UnitGetType(lp_minion), c_unitAttributeStructure) == false)) {
-        UnitCreateEffectPoint(MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit, "ReduceReuseRecycleCreateUnit", libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lp_minion), 1.0, UnitGetPosition(MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(lp_killingPlayer)].lv_core)));
-    }
-
 }
 
 void MimicGameLib_gf_BribeProc (int lp_killingPlayer, unit lp_minion) {
@@ -9308,6 +9311,54 @@ void MimicGameLib_gf_LeoricMithrilMaceProc (int lp_killingPlayer, unit lp_minion
 
 }
 
+void MimicGameLib_gf_StitchesPatchworkCreationProc (int lp_killingPlayer, unit lp_minion) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+    int lv_stackCount;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit;
+    lv_player = UnitGetOwner(lv_unit);
+
+    // Implementation
+    if ((PlayerHasTalent(lp_killingPlayer, "StitchesPatchworkCreation") == true)) {
+        UnitCreateEffectUnit(lv_unit, "StitchesPatchworkCreationCreateMinionHealer", lv_unit);
+    }
+
+}
+
+void MimicGameLib_gf_BrightwingHyperShiftProc (int lp_killingPlayer, unit lp_minion) {
+    // Variable Declarations
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit;
+
+    // Implementation
+    if ((UnitHasBehavior2(lv_unit, "BrightwingPhaseShiftHyperShiftCarryBehavior") == true)) {
+        UnitCreateEffectUnit(lv_unit, "BrightwingPhaseShiftHyperShiftModifyUnit", lv_unit);
+    }
+
+}
+
+void MimicGameLib_gf_BrightwingPixieCharmProc (int lp_killingPlayer, unit lp_minion) {
+    // Variable Declarations
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit;
+
+    // Implementation
+    if ((UnitHasBehavior2(lv_unit, "FaerieDragonPixieCharm") == true)) {
+        UnitCreateEffectUnit(lv_unit, "BrightwingPixieCharmAddMinionTokenCount", lv_unit);
+    }
+
+}
+
 void MimicGameLib_gf_CreepDies (unit lp_creepUnit, int lp_killingPlayer, fixed lp_killXP) {
     // Variable Declarations
     int lv_camp;
@@ -9356,16 +9407,19 @@ void MimicGameLib_gf_CreepDies (unit lp_creepUnit, int lp_killingPlayer, fixed l
         libAIAI_gf_DefenderAICreepDies(lv_defenderAIIndex, lp_creepUnit, lp_killingPlayer);
     }
 
-    MimicGameLib_gf_AwardXPForNPCKill(lp_creepUnit, UnitGetOwner(lp_creepUnit), c_unitAttributeCreep, lp_killingPlayer, lp_killXP);
+    UnitXPAddXP(libMapM_gv_jungleCreepCamps[lv_camp].lv_campOwnershipFlagUnit, null, lp_killXP);
+    MimicGameLib_gf_SendEventHeroParticipatedInCreepTakedown(lp_killingPlayer, lp_creepUnit);
 }
 
 void MimicGameLib_gf_MinionDies (unit lp_minionUnit, int lp_killingPlayer, fixed lp_killXP) {
     // Variable Declarations
     int lv_minionOwner;
     int lv_regenGlobeOwner;
+    int lv_unitAttribute;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_unitAttribute = c_unitAttributeMinion;
 
     // Implementation
     if ((UnitHasBehavior2(lp_minionUnit, "SuppressRegenGlobeCreation") == false)) {
@@ -9380,34 +9434,75 @@ void MimicGameLib_gf_MinionDies (unit lp_minionUnit, int lp_killingPlayer, fixed
             libNtve_gf_CreateUnitsWithDefaultFacing(1, "RegenGlobe", c_unitCreateIgnorePlacement, lv_regenGlobeOwner, UnitGetPosition(lp_minionUnit), null);
         }
 
-        MimicGameLib_gf_AwardXPForNPCKill(lp_minionUnit, lv_minionOwner, c_unitAttributeMinion, lp_killingPlayer, libCore_gf_DataXPXPForMinion(lp_killXP, PlayerGroupPlayer(PlayerGroupAlliance(c_playerGroupAlly, lp_killingPlayer), 1), lp_minionUnit));
+        if ((UnitTypeTestAttribute(UnitGetType(lp_minionUnit), c_unitAttributeMerc) == true)) {
+            lv_unitAttribute = c_unitAttributeMerc;
+        }
+
+        MimicGameLib_gf_AwardXPForNPCKill(lp_minionUnit, lv_minionOwner, lv_unitAttribute, lp_killingPlayer, libCore_gf_DataXPXPForMinion(lp_killXP, PlayerGroupPlayer(PlayerGroupAlliance(c_playerGroupAlly, lp_killingPlayer), 1), lp_minionUnit));
+        if (((lp_killingPlayer >= 1) && (lp_killingPlayer <= libCore_gv_bALMaxPlayers))) {
+            MimicGameLib_gv_scoreValues[lp_killingPlayer].lv_minionKills += 1;
+        }
+
     }
 
+    if ((UnitTypeTestAttribute(UnitGetType(lp_minionUnit), c_unitAttributeMerc) == true) && (UnitTypeTestAttribute(UnitGetType(lp_minionUnit), c_unitAttributeMapCreature) == false)) {
+        libAIAI_gf_AITeamDelegateAddRemoveMercLanertoLane(MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lp_minionUnit)), libAIAI_gf_MinionAIGetLaneForMinion(lp_minionUnit), UnitGetType(lp_minionUnit), libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove, UnitGetCustomValue(lp_minionUnit, libCore_gf_CustomValueIndex(libCore_ge_CustomValueIndexes_AIThreatBase)));
+    }
+    else {
+        libAIAI_gf_AITeamDelegateAddRemoveMinionThreattoLane(MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lp_minionUnit)), libAIAI_gf_MinionAIGetLaneForMinion(lp_minionUnit), UnitGetType(lp_minionUnit), libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove);
+    }
 }
 
 bool MimicGameLib_gf_TownAliveinLane (int lp_team, int lp_laneID) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (MimicGameLib_gf_TownsAliveinLane(lp_team, lp_laneID) > 0);
+}
+
+int MimicGameLib_gf_TownsAliveinLane (int lp_team, int lp_lane) {
     // Variable Declarations
-    int lv_townID;
+    int lv_townCount;
+    int lv_town;
 
     // Automatic Variable Declarations
-    int auto6BF31565_ae;
-    const int auto6BF31565_ai = 1;
+    int auto5E7C8C8A_ae;
+    const int auto5E7C8C8A_ai = 1;
 
     // Variable Initialization
 
     // Implementation
-    auto6BF31565_ae = MimicGameLib_gv_townTownCount;
-    lv_townID = 1;
-    for ( ; ( (auto6BF31565_ai >= 0 && lv_townID <= auto6BF31565_ae) || (auto6BF31565_ai < 0 && lv_townID >= auto6BF31565_ae) ) ; lv_townID += auto6BF31565_ai ) {
-        if ((MimicGameLib_gv_townTownData[lv_townID].lv_owner == MimicGameLib_gf_ComputerPlayerInTeam(lp_team)) && (MimicGameLib_gv_townTownData[lv_townID].lv_lane == lp_laneID) && (MimicGameLib_gv_townTownData[lv_townID].lv_townHallIndex > 0) && (UnitIsAlive(MimicGameLib_gv_townTownData[lv_townID].lv_structureUnits[MimicGameLib_gv_townTownData[lv_townID].lv_townHallIndex]) == true)) {
-            return true;
-        }
-
-        if (true) {
+    auto5E7C8C8A_ae = MimicGameLib_gv_townTownCount;
+    lv_town = 1;
+    for ( ; ( (auto5E7C8C8A_ai >= 0 && lv_town <= auto5E7C8C8A_ae) || (auto5E7C8C8A_ai < 0 && lv_town >= auto5E7C8C8A_ae) ) ; lv_town += auto5E7C8C8A_ai ) {
+        if ((MimicGameLib_gv_townTownData[lv_town].lv_owner == MimicGameLib_gf_ComputerPlayerInTeam(lp_team)) && (MimicGameLib_gv_townTownData[lv_town].lv_lane == lp_lane) && (MimicGameLib_gv_townTownData[lv_town].lv_townHallIndex > 0) && (UnitIsAlive(MimicGameLib_gv_townTownData[lv_town].lv_structureUnits[MimicGameLib_gv_townTownData[lv_town].lv_townHallIndex]) == true)) {
+            lv_townCount += 1;
         }
 
     }
-    return false;
+    return lv_townCount;
+}
+
+int MimicGameLib_gf_TownsTotalinLane (int lp_team, int lp_lane) {
+    // Variable Declarations
+    int lv_townCount;
+    int lv_town;
+
+    // Automatic Variable Declarations
+    int autoE387911A_ae;
+    const int autoE387911A_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    autoE387911A_ae = MimicGameLib_gv_townTownCount;
+    lv_town = 1;
+    for ( ; ( (autoE387911A_ai >= 0 && lv_town <= autoE387911A_ae) || (autoE387911A_ai < 0 && lv_town >= autoE387911A_ae) ) ; lv_town += autoE387911A_ai ) {
+        if ((MimicGameLib_gv_townTownData[lv_town].lv_owner == MimicGameLib_gf_ComputerPlayerInTeam(lp_team)) && (MimicGameLib_gv_townTownData[lv_town].lv_lane == lp_lane) && (MimicGameLib_gv_townTownData[lv_town].lv_townHallIndex > 0)) {
+            lv_townCount += 1;
+        }
+
+    }
+    return lv_townCount;
 }
 
 fixed MimicGameLib_gf_GetOnFireAwardAmount (string lp_heroUnit, int lp_awardCategory) {
@@ -9565,7 +9660,7 @@ void MimicGameLib_gf_CalculateOnFireScore () {
     lv_iterator = 1;
     for ( ; lv_iterator <= autoD7ED01DE_ae ; lv_iterator += 1 ) {
         MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_team = MimicGameLib_gf_TeamNumberOfPlayer(lv_iterator);
-        MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_role = MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_class;
+        MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_role = MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_expandedRole;
         libNtve_gf_AddPlayerGroupToPlayerGroup(MimicGameLib_gv_players[lv_iterator].lv_heroData.lv_heroRoles, MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_mvpRoles);
         MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_team = MimicGameLib_gf_TeamNumberOfPlayer(lv_iterator);
         MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_enemyTeam = MimicGameLib_gf_EnemyTeamNumberOfPlayer(lv_iterator);
@@ -9643,7 +9738,7 @@ void MimicGameLib_gf_CalculateOnFireScore () {
 
         }
 
-        if ((lv_topDamageTakerPerTeam[MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_team] == lv_iterator) && (PlayerGroupHasPlayer(MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_mvpRoles, (c_heroRoleWarrior)) == true)) {
+        if ((lv_topDamageTakerPerTeam[MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_team] == lv_iterator) && ((PlayerGroupHasPlayer(MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_mvpRoles, (c_expandedRoleTank)) == true) || (PlayerGroupHasPlayer(MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_mvpRoles, (c_expandedRoleBruiser)) == true))) {
             MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_mVPScore += MimicGameLib_gf_GetMVPAwardAmount(MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_unitType, MimicGameLib_ge_MVPAwards_TopDamageTakenasWarrioronTeam);
             if ((lv_topDamageTakenAmountPerTeam[MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_team] > lv_topDamageTakenAmountPerTeam[MimicGameLib_gv_onFireRollingWindowSums[lv_iterator].lv_enemyTeam])) {
                 lv_topDamageTakerinGame = lv_iterator;
@@ -10219,7 +10314,7 @@ void MimicGameLib_gf_GrantXPToPlayer (fixed lp_incomingXP, int lp_player, int lp
         return ;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true)) {
+    if ((true == true)) {
         autoDF74543F_val = lp_source;
         if (autoDF74543F_val == MimicGameLib_ge_XPSources_Hero) {
             if ((libSprt_gv_dEBUGXPSourceHero == false)) {
@@ -10249,14 +10344,14 @@ void MimicGameLib_gf_GrantXPToPlayer (fixed lp_incomingXP, int lp_player, int lp
         }
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && (libSprt_gv_dEBUGXPBoostEnable == true)) {
+    if ((true == true) && (libSprt_gv_dEBUGXPBoostEnable == true)) {
         if ((MimicGameLib_gf_TeamNumberOfPlayer(lp_player) == libSprt_gv_dEBUGXPBoostTeam)) {
             lv_xP = (lv_xP * libSprt_gv_dEBUGXPBoostMultiplier);
         }
 
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && (libSprt_gv_dEBUGXPPassiveBalancerEnable == true)) {
+    if ((true == true) && (libSprt_gv_dEBUGXPPassiveBalancerEnable == true)) {
         if ((MimicGameLib_gf_TeamNumberOfPlayer(lp_player) == libSprt_gv_dEBUGXPPassiveBoostTeam)) {
             lv_xP = (lv_xP * libSprt_gv_dEBUGXPPassiveBoostMultiplier);
         }
@@ -10347,6 +10442,7 @@ bool auto_MimicGameLib_gf_LevelUpHero_TriggerFunc (bool testConds, bool runActio
     lv_level = MimicGameLib_gf_GetCustomValueLevelofHeroUnit(lp_hero);
     lv_heroIndex = MimicGameLib_gv_players[lv_player].lv_heroIndex;
     lv_team = MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lp_hero));
+    libAIAI_gf_AITeamDelegateUpdateTeamLevelDifference(lv_player, lv_level);
     MimicGameLib_gv_teams[lv_team].lv_teamLevel = MaxI(MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(lv_player)].lv_teamLevel, lv_level);
     MimicGameLib_gv_scoreValues[lv_player].lv_level = lv_level;
     if ((libSond_gf_SoundtrackIsIntroPlaying() == false) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_ArenaMode) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_AttackDefend)) {
@@ -10496,6 +10592,7 @@ bool auto_MimicGameLib_gf_SpawnHero_TriggerFunc (bool testConds, bool runActions
 
     libNtve_gf_CreateUnitsAtPoint2(1, MimicGameLib_gv_players[lp_heroIndex].lv_heroData.lv_unitType, c_unitCreateIgnorePlacement, lp_player, lp_spawnLocation, null);
     MimicGameLib_gv_players[lp_player].lv_heroUnit = UnitLastCreated();
+    PlayerSetHeroUnit(lp_player, MimicGameLib_gv_players[lp_player].lv_heroUnit);
     libAIAI_gv_aIHeroes[lp_player].lv_currentHeroUnit = MimicGameLib_gv_players[lp_player].lv_heroUnit;
     UnitGroupClear(MimicGameLib_gv_players[lp_player].lv_heroUnitGroup);
     UnitGroupAdd(MimicGameLib_gv_players[lp_player].lv_heroUnitGroup, UnitLastCreated());
@@ -10533,7 +10630,6 @@ bool auto_MimicGameLib_gf_SpawnHero_TriggerFunc (bool testConds, bool runActions
     StatEventAddDataString(StatEventLastCreated(), "Hero", (MimicGameLib_gv_players[lp_heroIndex].lv_heroData.lv_unitType));
     StatEventSend(StatEventLastCreated());
     ActorScopeSend(ActorScopeFromUnit(MimicGameLib_gv_players[lp_player].lv_heroUnit), "StatusIncrement PreventDestroyOnDeath");
-    UnitBehaviorAdd(MimicGameLib_gv_players[lp_player].lv_heroUnit, "NearShop", MimicGameLib_gv_players[lp_player].lv_heroUnit, 1);
     if ((MimicGameLib_gv_heroDeath_RespawnMounted == true) && (MimicGameLib_gv_players[lp_player].lv_disableMount == false)) {
         MimicGameLib_gf_SendEventHeroSpecialCaseMounting(lp_player);
         MimicGameLib_gf_ApplyMountBehaviorToHero(MimicGameLib_gv_players[lp_player].lv_heroUnit);
@@ -10561,6 +10657,7 @@ bool auto_MimicGameLib_gf_SpawnHero_TriggerFunc (bool testConds, bool runActions
     MimicGameLib_gf_LevelUpHero(MimicGameLib_gv_players[lp_player].lv_heroUnit);
     libUIUI_gf_UIObserverUIAddPlayerToObserverUI(lp_player);
     libSond_gv_soundtrack_UniqueSoundtrackEnabled[lp_player] = false;
+    libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Add, MimicGameLib_gv_players[lp_player].lv_aIHeroDelegateTokenValue, MimicGameLib_gf_TeamNumberOfPlayer(lp_player), libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroAlive);
     MimicGameLib_gf_SendEventHeroSpawn(lp_player);
     return true;
 }
@@ -10601,7 +10698,7 @@ bool auto_MimicGameLib_gf_SpawnHeroesForTeam_TriggerFunc (bool testConds, bool r
     while (true) {
         	lv_itPlayer = PlayerGroupNextPlayer(auto6879AF6E_g, lv_itPlayer);
         	if (lv_itPlayer<0) { break; }
-        	if ((lv_itPlayer == 1) && (libCore_gv_dEBUGDebuggingEnabled == true) && (BankValueGetAsFlag(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "SavedHero") == true) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueHeroIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueSkinIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueMountIndex") != 0)) {
+        	if ((lv_itPlayer == 1) && (true == true) && (BankValueGetAsFlag(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "SavedHero") == true) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueHeroIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueSkinIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueMountIndex") != 0)) {
             MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueHeroIndex");
             MimicGameLib_gv_players[lv_itPlayer].lv_selectedSkin = BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueSkinIndex");
             MimicGameLib_gv_players[lv_itPlayer].lv_selectedMount = BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueMountIndex");
@@ -10627,7 +10724,7 @@ bool auto_MimicGameLib_gf_SpawnHeroesForTeam_TriggerFunc (bool testConds, bool r
             Wait(MimicGameLib_gv_individualHeroSpawnMiniDelay_C, c_timeGame);
         }
 
-        if ((lv_itPlayer == 1) && (libCore_gv_dEBUGDebuggingEnabled == true) && (BankValueGetAsFlag(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "SavedHero") == true) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueHeroIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueSkinIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueMountIndex") != 0)) {
+        if ((lv_itPlayer == 1) && (true == true) && (BankValueGetAsFlag(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "SavedHero") == true) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueHeroIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueSkinIndex") != 0) && (BankValueGetAsInt(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "TrueMountIndex") != 0)) {
             libUIUI_gv_uIPartyFrameMaxLevelForTeam[lp_team] = 0;
             MimicGameLib_gf_GrantXPToPlayer(BankValueGetAsFixed(MimicGameLib_gv_players[lv_itPlayer].lv_bankData.lv_bank, "Debug Menu Options", "HeroLevelXP"), lv_itPlayer, MimicGameLib_ge_XPSources_Debug);
         }
@@ -11171,14 +11268,10 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
     // Automatic Variable Declarations
     const int autoA70CB022_ae = 7;
     const int autoA70CB022_ai = 1;
-    playergroup autoD72F65EA_g;
-    int autoD72F65EA_var;
-    int autoD482BBB2_val;
+    int auto6381B585_val;
     int autoE4DEA447_val;
     int auto4351418E_val;
-    playergroup auto2D9D1B0F_g;
-    int auto2D9D1B0F_var;
-    int autoDCD541B0_val;
+    int auto7FC2C1DC_val;
     int autoC92E084A_val;
     int autoD6CBF14B_val;
     playergroup auto9665A00A_g;
@@ -11203,7 +11296,7 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
         lv_earnedMetaXPValue = FixedToInt(UnitGetPropertyFixed(MimicGameLib_gv_players[lp_player].lv_heroUnit, c_unitPropXP, c_unitPropCurrent));
     }
     lv_rewardedMetaXPValue = lv_earnedMetaXPValue;
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && (libUIUI_gv_uIDebugPanelDebugMetaXPValue > 0)) {
+    if ((true == true) && (libUIUI_gv_uIDebugPanelDebugMetaXPValue > 0)) {
         MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "MetaExperience", libUIUI_gv_uIDebugPanelDebugMetaXPValue);
         MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "ExperienceFromTrickle", libUIUI_gv_uIDebugPanelDebugMetaXPValue);
     }
@@ -11233,30 +11326,32 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WatchTowerCaptures", MimicGameLib_gv_scoreValues[lp_player].lv_watchTowersCaptured);
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "Level", MimicGameLib_gv_scoreValues[lp_player].lv_level);
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "TownKills", MimicGameLib_gv_scoreValues[lp_player].lv_townKills);
+    MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "MinionKills", MimicGameLib_gv_scoreValues[lp_player].lv_minionKills);
+    MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "RegenGlobes", MimicGameLib_gv_scoreValues[lp_player].lv_regenGlobes);
     lv_it_TalentTier = 1;
     for ( ; ( (autoA70CB022_ai >= 0 && lv_it_TalentTier <= autoA70CB022_ae) || (autoA70CB022_ai < 0 && lv_it_TalentTier >= autoA70CB022_ae) ) ; lv_it_TalentTier += autoA70CB022_ai ) {
         MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, (("Tier" + IntToString(lv_it_TalentTier) + "Talent")), MimicGameLib_gv_talents_TalentChoices[lp_player][lv_it_TalentTier].lv_selection);
     }
-    autoD72F65EA_g = MimicGameLib_gv_players[lp_player].lv_heroData.lv_heroRoles;
-    autoD72F65EA_var = -1;
-    while (true) {
-        	autoD72F65EA_var = PlayerGroupNextPlayer(autoD72F65EA_g, autoD72F65EA_var);
-        	if (autoD72F65EA_var<0) { break; }
-        	autoD482BBB2_val = autoD72F65EA_var;
-        if (autoD482BBB2_val == c_heroRoleWarrior) {
-            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysWarrior", 1);
-        }
-        else if (autoD482BBB2_val == c_heroRoleDamage) {
-            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysAssassin", 1);
-        }
-        else if (autoD482BBB2_val == c_heroRoleSupport) {
-            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysSupport", 1);
-        }
-        else if (autoD482BBB2_val == c_heroRoleSpecialist) {
-            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysSpecialist", 1);
-        }
-        else {
-        }
+    auto6381B585_val = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_expandedRole;
+    if (auto6381B585_val == 1) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysWarrior", 1);
+    }
+    else if (auto6381B585_val == 2) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysWarrior", 1);
+    }
+    else if (auto6381B585_val == 3) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysAssassin", 1);
+    }
+    else if (auto6381B585_val == 4) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysAssassin", 1);
+    }
+    else if (auto6381B585_val == 5) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysSupport", 1);
+    }
+    else if (auto6381B585_val == 6) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysSupport", 1);
+    }
+    else {
     }
     autoE4DEA447_val = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_universe;
     if (autoE4DEA447_val == c_heroUniverseWarcraft) {
@@ -11283,26 +11378,26 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
     else {
     }
     if ((MimicGameLib_gv_players[lp_player].lv_victoryDefeat == c_gameOverVictory)) {
-        auto2D9D1B0F_g = MimicGameLib_gv_players[lp_player].lv_heroData.lv_heroRoles;
-        auto2D9D1B0F_var = -1;
-        while (true) {
-            	auto2D9D1B0F_var = PlayerGroupNextPlayer(auto2D9D1B0F_g, auto2D9D1B0F_var);
-            	if (auto2D9D1B0F_var<0) { break; }
-            	autoDCD541B0_val = auto2D9D1B0F_var;
-            if (autoDCD541B0_val == c_heroRoleWarrior) {
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsWarrior", 1);
-            }
-            else if (autoDCD541B0_val == c_heroRoleDamage) {
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsAssassin", 1);
-            }
-            else if (autoDCD541B0_val == c_heroRoleSupport) {
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsSupport", 1);
-            }
-            else if (autoDCD541B0_val == c_heroRoleSpecialist) {
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsSpecialist", 1);
-            }
-            else {
-            }
+        auto7FC2C1DC_val = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_expandedRole;
+        if (auto7FC2C1DC_val == 1) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsWarrior", 1);
+        }
+        else if (auto7FC2C1DC_val == 2) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsWarrior", 1);
+        }
+        else if (auto7FC2C1DC_val == 3) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsAssassin", 1);
+        }
+        else if (auto7FC2C1DC_val == 4) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsAssassin", 1);
+        }
+        else if (auto7FC2C1DC_val == 5) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsSupport", 1);
+        }
+        else if (auto7FC2C1DC_val == 6) {
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "WinsSupport", 1);
+        }
+        else {
         }
         autoC92E084A_val = MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_universe;
         if (autoC92E084A_val == c_heroUniverseWarcraft) {
@@ -11384,6 +11479,21 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "RavenTeamNumberOfTimesCursedTheEnemy", MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(lp_player)].lv_map_CursesPlacedOnEnemyTeam);
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "DragonTeamNumberOfDragonCaptures", MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(lp_player)].lv_map_DragonCaptures);
     MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "MinesTeamSkullsCollected", MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(lp_player)].lv_map_SkullsCollected);
+    if ((MimicGameLib_gv_scoreValues[lp_player].lv_deaths <= 3.0)) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "LessThan4Deaths", 1);
+    }
+    else {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "LessThan4Deaths", 0);
+    }
+    if ((MimicGameLib_gv_teams[MimicGameLib_gf_EnemyTeamNumberOfPlayer(lp_player)].lv_townKills <= 2)) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "LessThan3TownStructuresLost", 1);
+    }
+    else {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "LessThan3TownStructuresLost", 0);
+    }
+    MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PhysicalDamage", MimicGameLib_gv_scoreValues[lp_player].lv_physicalDamage);
+    MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "SpellDamage", MimicGameLib_gv_scoreValues[lp_player].lv_spellDamage);
+    MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "Multikill", MimicGameLib_gv_scoreValues[lp_player].lv_multikill);
 }
 
 void MimicGameLib_gf_ScoreValuesRecordXPContributionForPlayer (int lp_player, fixed lp_amount, bool lp_resetAfk) {
@@ -11510,12 +11620,6 @@ void MimicGameLib_gf_TalentsSetupTalentChoicesFromHeroDataForPlayer (int lp_hero
         }
 
         lv_rank = 1;
-        if ((CatalogFieldValueCount(c_gameCatalogTalent, lv_talentID, "RankArray", c_playerAny) != 0)) {
-            MimicGameLib_gv_talents_TalentChoices[lp_player][lv_tier].lv_talentData[lv_column].lv_item = (CatalogFieldValueGet(c_gameCatalogTalent, lv_talentID, "RankArray[" + IntToString((lv_rank - 1)) + "].Item", c_playerAny));
-        }
-        else {
-            MimicGameLib_gv_talents_TalentChoices[lp_player][lv_tier].lv_talentData[lv_column].lv_item = "";
-        }
         lv_currentTalentModNumber = 0;
         MimicGameLib_gv_talents_TalentChoices[lp_player][lv_tier].lv_talentData[lv_column].lv_totalModifications = 0;
         lv_numberOfAbilitiesModified = CatalogFieldValueCount(c_gameCatalogTalent, lv_talentID, "AbilityModificationArray", c_playerAny);
@@ -11588,8 +11692,6 @@ void MimicGameLib_gf_TalentsRespecHeroForPlayer (int lp_player) {
     const int auto6316811D_ai = 1;
     unitgroup autoFF6805AB_g;
     int autoFF6805AB_u;
-    const int auto322ED411_ae = libCore_gv_bALPlayerTotalInventorySlots;
-    const int auto322ED411_ai = 1;
     unitgroup auto9DEBA187_g;
     int auto9DEBA187_u;
     int auto70A8A24D_ae;
@@ -11619,17 +11721,6 @@ void MimicGameLib_gf_TalentsRespecHeroForPlayer (int lp_player) {
                     UnitBehaviorRemove(lv_itHeroUnit, MimicGameLib_gv_talents_TalentChoices[lp_player][lv_itChoice].lv_talentData[lv_itButton].lv_behaviors[lv_itBehavior], 1);
                 }
             }
-            if ((MimicGameLib_gv_talents_TalentChoices[lp_player][lv_itChoice].lv_talentData[lv_itButton].lv_item != null)) {
-                lv_itSlot = 1;
-                for ( ; ( (auto322ED411_ai >= 0 && lv_itSlot <= auto322ED411_ae) || (auto322ED411_ai < 0 && lv_itSlot >= auto322ED411_ae) ) ; lv_itSlot += auto322ED411_ai ) {
-                    if ((UnitGetType(UnitInventoryItem(lv_heroUnit, lv_itSlot)) == MimicGameLib_gv_talents_TalentChoices[lp_player][lv_itChoice].lv_talentData[lv_itButton].lv_item)) {
-                        UnitRemove(UnitInventoryItem(lv_heroUnit, lv_itSlot));
-                        break;
-                    }
-
-                }
-            }
-
         }
     }
     auto9DEBA187_g = MimicGameLib_gv_players[lp_player].lv_heroUnitGroup;
@@ -11726,7 +11817,6 @@ void MimicGameLib_gf_TalentsChooseTalentForPlayer (int lp_tierIndex, int lp_butt
         for ( ; ( (auto5F4D4827_ai >= 0 && lv_itBehavior <= auto5F4D4827_ae) || (auto5F4D4827_ai < 0 && lv_itBehavior >= auto5F4D4827_ae) ) ; lv_itBehavior += auto5F4D4827_ai ) {
             UnitBehaviorAdd(lv_heroUnit, MimicGameLib_gv_talents_TalentChoices[lp_player][lp_tierIndex].lv_talentData[lp_buttonIndex].lv_behaviors[lv_itBehavior], lv_heroUnit, 1);
         }
-        UnitInventoryCreate(lv_heroUnit, MimicGameLib_gv_talents_TalentChoices[lp_player][lp_tierIndex].lv_talentData[lp_buttonIndex].lv_item);
         MimicGameLib_gf_SendEventHeroGainTalent((MimicGameLib_gv_talents_TalentChoices[lp_player][lp_tierIndex].lv_talentData[lp_buttonIndex].lv_talentCatalogLink), lp_player);
         MimicGameLib_gf_ApplyAbilityModificationsForPlayerAtTalent(lp_player, lp_tierIndex, lp_buttonIndex);
     }
@@ -11793,6 +11883,31 @@ void MimicGameLib_gf_TeleportPetstoHeroLocation (int lp_player, point lp_preTele
 
         }
     }
+}
+
+void MimicGameLib_gf_ModifyTokenCount (int lp_modification, string lp_tokenCounterBehavior, unit lp_unit) {
+    // Variable Declarations
+    int lv_count;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_count = FixedToInt(UnitGetTokenCount(lp_unit, (lp_tokenCounterBehavior)));
+    lv_count += lp_modification;
+    UnitSetTokenCount(lp_unit, (lp_tokenCounterBehavior), lv_count, lp_unit);
+}
+
+void MimicGameLib_gf_ResetTokenCount (string lp_tokenCounterBehavior, unit lp_unit) {
+    // Variable Declarations
+    int lv_defaultValue;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_defaultValue = CatalogFieldValueGetAsInt(c_gameCatalogBehavior, lp_tokenCounterBehavior, "Min", libCore_gv_cOMPUTER_Neutral);
+    UnitSetTokenCount(lp_unit, (lp_tokenCounterBehavior), lv_defaultValue, lp_unit);
 }
 
 void MimicGameLib_gf_TownAddStructureToTownArray (int lp_townIndex, unit lp_structureUnit, int lp_structurePresetValue, int lp_enemyTeam) {
@@ -12171,15 +12286,13 @@ void MimicGameLib_gf_ControlGroupsEnterVehicleSamuro (unit lp_vehicle, unit lp_h
     UnitControlGroupAddUnit(lp_player, 4, lp_vehicle);
     UnitControlGroupRemoveUnit(lp_player, 1, lp_hero);
     UnitControlGroupRemoveUnit(lp_player, 4, lp_hero);
-    UnitInventoryCreate(lp_vehicle, "SamuroIllusionMasterToggleAIItem");
-    MimicGameLib_gv_inventoryItem_Samuro[lp_player] = UnitInventoryLastCreated();
+    UnitBehaviorAdd(lp_vehicle, "SamuroIllusionMasterToggleAIBehaviorAbil", lp_vehicle, 1);
 }
 
 void MimicGameLib_gf_ControlGroupsExitVehicleSamuro (unit lp_vehicle, unit lp_hero, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
-    UnitInventoryRemove(MimicGameLib_gv_inventoryItem_Samuro[lp_player]);
-    MimicGameLib_gv_inventoryItem_Samuro[lp_player] = null;
+    UnitBehaviorRemove(lp_vehicle, "SamuroIllusionMasterToggleAIBehaviorAbil", 1);
     UnitControlGroupAddUnit(lp_player, 1, lp_hero);
     UnitControlGroupAddUnit(lp_player, 4, lp_hero);
     UnitControlGroupRemoveUnit(lp_player, 1, lp_vehicle);
@@ -12193,9 +12306,8 @@ void MimicGameLib_gf_ControlGroupsSwapVehicleSamuro (unit lp_originVehicle, unit
     UnitControlGroupAddUnit(lp_player, 4, lp_newVehicle);
     UnitControlGroupRemoveUnit(lp_player, 1, lp_originVehicle);
     UnitControlGroupRemoveUnit(lp_player, 4, lp_originVehicle);
-    UnitInventoryRemove(MimicGameLib_gv_inventoryItem_Samuro[lp_player]);
-    UnitInventoryCreate(lp_newVehicle, "SamuroIllusionMasterToggleAIItem");
-    MimicGameLib_gv_inventoryItem_Samuro[lp_player] = UnitInventoryLastCreated();
+    UnitBehaviorRemove(lp_originVehicle, "SamuroIllusionMasterToggleAIBehaviorAbil", 1);
+    UnitBehaviorAdd(lp_newVehicle, "SamuroIllusionMasterToggleAIBehaviorAbil", lp_newVehicle, 1);
 }
 
 void MimicGameLib_gf_UnitSelectionEnterVehicle (unit lp_vehicle, unit lp_hero, int lp_player) {
@@ -12597,7 +12709,7 @@ bool MimicGameLib_gt_InitializeGameSystems_Func (bool testConds, bool runActions
         }
         else {
         }
-        MimicGameLib_gv_teams[lv_itTeam].lv_hearthStone = UnitGroupUnit(UnitGroup("HealingPadSearchUnit", MimicGameLib_gf_ComputerPlayerInTeam(lv_itTeam), lv_baseRegion, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1);
+        MimicGameLib_gv_teams[lv_itTeam].lv_hearthStone = UnitGroupUnit(UnitGroup("HallOfStormsLocationUnit", MimicGameLib_gf_ComputerPlayerInTeam(lv_itTeam), lv_baseRegion, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1);
     }
     GameTimeOfDayPause(true);
     return true;
@@ -12669,7 +12781,7 @@ bool MimicGameLib_gt_InitializePlayers_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == true) && ((libCore_gv_sYSGameMode == libCore_ge_GameModes_Normal) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Sandbox) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend))) {
+    if ((true == true) && ((libCore_gv_sYSGameMode == libCore_ge_GameModes_Normal) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Sandbox) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend))) {
         lv_itTeam = (libCore_gv_bALMaxTeams + 1);
         for ( ; ( (auto1FB8724F_ai >= 0 && lv_itTeam <= auto1FB8724F_ae) || (auto1FB8724F_ai < 0 && lv_itTeam >= auto1FB8724F_ae) ) ; lv_itTeam += auto1FB8724F_ai ) {
             lv_group = GameAttributePlayersForTeam(lv_itTeam);
@@ -13520,7 +13632,7 @@ bool MimicGameLib_gt_CapturePointLogic_Func (bool testConds, bool runActions) {
         for (;; autoC5905908_u -= 1) {
             lv_itUnit = UnitGroupUnitFromEnd(autoC5905908_g, autoC5905908_u);
             if (lv_itUnit == null) { break; }
-            if (((UnitFilterMatch(lv_itUnit, UnitGetOwner(lv_itUnit), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterBenign - 32)))) == true) || (UnitHasBehavior2(lv_itUnit, "CapturePointAllowed") == true)) && ((UnitBehaviorCount(lv_itUnit, "UltimateEvolutionBuff") == 1) || (UnitBehaviorCount(lv_itUnit, "CapturePointAllowed") == 1) || (UnitTestState(lv_itUnit, c_unitStateHallucination) == false))) {
+            if (((UnitFilterMatch(lv_itUnit, UnitGetOwner(lv_itUnit), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterBenign - 32)))) == true) || (UnitHasBehavior2(lv_itUnit, "CapturePointAllowed") == true)) && (((UnitBehaviorCount(lv_itUnit, "UltimateEvolutionBuff") == 1) && (UnitBehaviorCount(lv_itUnit, "CapturePointAllowed") == 1)) || ((UnitTestState(lv_itUnit, c_unitStateHallucination) == false)))) {
                 UnitBehaviorAdd(lv_itUnit, "HeroGenericHeroOnCapturePoint", lv_itUnit, 1);
                 if ((MimicGameLib_gv_players[UnitGetOwner(lv_itUnit)].lv_faction == MimicGameLib_ge_Faction_Order)) {
                     lv_orderTeamHeroes += 1;
@@ -14276,10 +14388,11 @@ bool MimicGameLib_gt_CCRecognitionStun_Func (bool testConds, bool runActions) {
         libUIUI_gf_HeroConsoleUnitStatusBarsUpdateStunDeathBar(lv_behavior, UnitGetOwner(lv_unit));
     }
 
-    if ((MimicGameLib_gf_CCReductionStunReduceable(lv_behavior) == true)) {
+    if (((UnitBehaviorHasCategoryFlag(lv_behavior, c_behaviorCategoryUnreducible) == true) && (UnitBehaviorHasCategoryFlag(lv_behavior, c_behaviorCategoryStun) == true))) {
+    }
+    else {
         MimicGameLib_gf_CCRecognitionCCReduction(lv_unit, lv_behavior);
     }
-
     if (((lv_unit == MimicGameLib_gv_players[UnitGetOwner(lv_unit)].lv_heroUnit) || (lv_unit == MimicGameLib_gv_players[UnitGetOwner(lv_unit)].lv_activeVehicle))) {
         if ((lv_behavior == "StitchesHooked")) {
             libUIUI_gf_FullscreenOverlaysCreateCCEffectFlashForPlayer(UnitGetOwner(lv_unit), 0.0);
@@ -14684,11 +14797,11 @@ bool MimicGameLib_gt_DEBUGManualAssignAward_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -15478,6 +15591,232 @@ void MimicGameLib_gt_InitializeSecondaryAwardList_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: OldXP Enable/Disable
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_OldXPEnableDisable_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((MimicGameLib_gv_oldXPCheat == false)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Game_0C17214B"), true);
+        MimicGameLib_gv_oldXPCheat = true;
+    }
+    else {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Game_798CA662"), true);
+        MimicGameLib_gv_oldXPCheat = false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_OldXPEnableDisable_Init () {
+    MimicGameLib_gt_OldXPEnableDisable = TriggerCreate("MimicGameLib_gt_OldXPEnableDisable_Func");
+    TriggerAddEventChatMessage(MimicGameLib_gt_OldXPEnableDisable, c_playerAny, "m-oldxp", true);
+    TriggerAddEventChatMessage(MimicGameLib_gt_OldXPEnableDisable, c_playerAny, "m-oldexp", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Experience Globe - Scaling
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ExperienceGlobeScaling_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_xPScaling;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_xPScaling = 2.0;
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicGameLib_gv_oldXPCheat == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder, (CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder) + lv_xPScaling));
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamChaos, (CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamChaos) + lv_xPScaling));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ExperienceGlobeScaling_Init () {
+    MimicGameLib_gt_ExperienceGlobeScaling = TriggerCreate("MimicGameLib_gt_ExperienceGlobeScaling_Func");
+    MimicGameLib_gf_ScalingIncremented(MimicGameLib_gt_ExperienceGlobeScaling);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Experience Globe - Spawn
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ExperienceGlobeSpawn_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_unitOwner;
+    int lv_killingPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = EventUnit();
+    lv_unitOwner = EventPlayer();
+    lv_killingPlayer = libNtve_gf_KillingPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((MimicGameLib_gv_oldXPCheat == false) && (UnitHasBehavior2(EventUnit(), "ExperienceGlobeSpawn") == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libNtve_gf_KillingPlayer() >= 1) && (libNtve_gf_KillingPlayer() <= libCore_gv_bALMaxPlayers) && (MimicGameLib_gf_TeamNumberOfPlayer(lv_killingPlayer) != MimicGameLib_gf_TeamNumberOfPlayer(EventPlayer()))) {
+        UnitCreateEffectUnit(lv_unit, "ExperienceGlobeDummyImpactSetLastHit", MimicGameLib_gv_players[lv_killingPlayer].lv_heroUnit);
+    }
+    else {
+        if ((UnitGetOwner(lv_unit) == libCore_gv_cOMPUTER_TeamOrder)) {
+            PlayerCreateEffectPoint(libCore_gv_cOMPUTER_TeamChaos, "HeroGenericGenerateExperienceGlobeCreateUnit", UnitGetPosition(lv_unit));
+        }
+        else {
+            if ((UnitGetOwner(lv_unit) == libCore_gv_cOMPUTER_TeamChaos)) {
+                PlayerCreateEffectPoint(libCore_gv_cOMPUTER_TeamOrder, "HeroGenericGenerateExperienceGlobeCreateUnit", UnitGetPosition(lv_unit));
+            }
+            else {
+                MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Game_C11D8B82"), true);
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ExperienceGlobeSpawn_Init () {
+    MimicGameLib_gt_ExperienceGlobeSpawn = TriggerCreate("MimicGameLib_gt_ExperienceGlobeSpawn_Func");
+    TriggerAddEventUnitDied(MimicGameLib_gt_ExperienceGlobeSpawn, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Experience Globe - Grant XP
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ExperienceGlobeGrantXP_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_itPlayer;
+    playergroup lv_xPAwardGroup;
+    int lv_targetPlayer;
+    fixed lv_xPAmount;
+
+    // Automatic Variable Declarations
+    playergroup auto4D2B2D44_g;
+
+    // Variable Initialization
+    lv_itPlayer = c_playerAny;
+    lv_xPAwardGroup = PlayerGroupEmpty();
+    lv_targetPlayer = EventPlayerEffectUsedUnitOwner(c_effectPlayerTarget);
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicGameLib_gv_oldXPCheat == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_xPAmount = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder);
+    lv_xPAwardGroup = PlayerGroupCopy(MimicGameLib_gf_AlliedPlayerGroupOfPlayer(lv_targetPlayer));
+    auto4D2B2D44_g = lv_xPAwardGroup;
+    lv_itPlayer = -1;
+    while (true) {
+        	lv_itPlayer = PlayerGroupNextPlayer(auto4D2B2D44_g, lv_itPlayer);
+        	if (lv_itPlayer<0) { break; }
+        	MimicGameLib_gf_GrantXPToPlayer(lv_xPAmount, lv_itPlayer, MimicGameLib_ge_XPSources_Minion);
+    }
+    MimicGameLib_gf_ScoreValuesRecordXPContributionForPlayer(lv_targetPlayer, lv_xPAmount, true);
+    if ((EventPlayerEffectUsed() == "ExperienceGlobeDummyImpactSetLastHit")) {
+        libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_targetPlayer, EventPlayerEffectUsedUnit(c_effectUnitSource), libCore_ge_FloatingTextType_XPSelf, FixedToInt(lv_xPAmount));
+    }
+    else {
+        libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_targetPlayer, EventPlayerEffectUsedUnit(c_effectUnitSource), libCore_ge_FloatingTextType_XPSmall, FixedToInt(lv_xPAmount));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ExperienceGlobeGrantXP_Init () {
+    MimicGameLib_gt_ExperienceGlobeGrantXP = TriggerCreate("MimicGameLib_gt_ExperienceGlobeGrantXP_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_ExperienceGlobeGrantXP, c_playerAny, "ExperienceGlobeDummyImpactSetMinion");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_ExperienceGlobeGrantXP, c_playerAny, "ExperienceGlobeDummyImpactSetLastHit");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OldXP Enabled - Minion Veterency
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_OldXPEnabledMinionVeterency_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((MimicGameLib_gv_oldXPCheat == true) && (UnitTypeTestAttribute(UnitGetType(EventUnitCreatedUnit()), c_unitAttributeMinion) == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitHasBehavior2(EventUnitCreatedUnit(), "FootmanMinionScaling") == true)) {
+        UnitBehaviorAdd(EventUnitCreatedUnit(), "FootmanMinionXPScaling", EventUnitCreatedUnit(), 1);
+        UnitXPAddXP(EventUnitCreatedUnit(), "FootmanMinionXPScaling", MimicGameLib_gv_scalingTicks);
+    }
+    else {
+        if ((UnitHasBehavior2(EventUnitCreatedUnit(), "WizardMinionScaling") == true)) {
+            UnitBehaviorAdd(EventUnitCreatedUnit(), "WizardMinionXPScaling", EventUnitCreatedUnit(), 1);
+            UnitXPAddXP(EventUnitCreatedUnit(), "WizardMinionXPScaling", MimicGameLib_gv_scalingTicks);
+        }
+        else {
+            if ((UnitHasBehavior2(EventUnitCreatedUnit(), "RangedMinionScaling") == true)) {
+                UnitBehaviorAdd(EventUnitCreatedUnit(), "RangedMinionXPScaling", EventUnitCreatedUnit(), 1);
+                UnitXPAddXP(EventUnitCreatedUnit(), "RangedMinionXPScaling", MimicGameLib_gv_scalingTicks);
+            }
+            else {
+                if ((UnitHasBehavior2(EventUnitCreatedUnit(), "CatapultMinionScaling") == true)) {
+                    UnitBehaviorAdd(EventUnitCreatedUnit(), "CatapultMinionXPScaling", EventUnitCreatedUnit(), 1);
+                    UnitXPAddXP(EventUnitCreatedUnit(), "CatapultMinionXPScaling", MimicGameLib_gv_scalingTicks);
+                }
+
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_OldXPEnabledMinionVeterency_Init () {
+    MimicGameLib_gt_OldXPEnabledMinionVeterency = TriggerCreate("MimicGameLib_gt_OldXPEnabledMinionVeterency_Func");
+    TriggerAddEventUnitCreated(MimicGameLib_gt_OldXPEnabledMinionVeterency, null, null, null);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Start Game
 //--------------------------------------------------------------------------------------------------
 bool MimicGameLib_gt_StartGame_Func (bool testConds, bool runActions) {
@@ -15568,7 +15907,7 @@ bool MimicGameLib_gt_StartGame_Func (bool testConds, bool runActions) {
     }
 
     TriggerExecute(libStEx_gt_TrainingModeInit, true, false);
-    TriggerExecute(libSprt_gt_StatTrackingStartTrackingforAllPlayers, true, false);
+    TriggerExecute(libSprt_gt_DEBUGStatTrackingStartTrackingforAllPlayers, true, false);
     return true;
 }
 
@@ -15612,9 +15951,9 @@ bool MimicGameLib_gt_PickingHeroesNormalMode_Func (bool testConds, bool runActio
                     MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gv_players[1].lv_heroIndex;
                 }
                 else {
-                    MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gf_HeroSelectionRandomlyPickBasedOnEnemyComposition(lv_itPlayer);
+                    MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gf_HeroSelectionRandomlyPickMetaUnusedHero(lv_itPlayer);
                     if ((MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex == 0)) {
-                        MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithFilter(lv_itPlayer, true, true, true, false, true);
+                        MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole(lv_itPlayer, true, true, true, true, true, false);
                         if ((MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex == 0)) {
                             MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex = MimicGameLib_gf_HeroSelectionRandomlyPickAnyUnusedHero(lv_itPlayer, false, false);
                             if ((MimicGameLib_gv_players[lv_itPlayer].lv_heroIndex == 0)) {
@@ -16700,6 +17039,42 @@ void MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero Death - Stitches Patchwork Creation Talent Participated In Takedown
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_killingPlayer;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_killingPlayer = MimicGameLib_gf_HeroParticipatedInTakedownKillingPlayer();
+    lv_unit = MimicGameLib_gv_players[lv_killingPlayer].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(MimicGameLib_gf_HeroParticipatedInTakedownKillingPlayer(), "StitchesPatchworkCreation") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(lv_unit, "StitchesPatchworkCreationCreateTakedownHealer", lv_unit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Init () {
+    MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown = TriggerCreate("MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Func");
+    MimicGameLib_gf_HeroParticipatedInTakedown(MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown);
+    TriggerAddEventUnitHealed(MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown, null, c_unitVitalAny, null);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero Death - Hero Dies
 //--------------------------------------------------------------------------------------------------
 bool MimicGameLib_gt_HeroDeathHeroDies_Func (bool testConds, bool runActions) {
@@ -16707,11 +17082,13 @@ bool MimicGameLib_gt_HeroDeathHeroDies_Func (bool testConds, bool runActions) {
     unit lv_deadUnit;
     int lv_deadPlayer;
     int lv_killingPlayer;
+    int lv_deadPlayerTeamID;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_deadUnit = EventUnit();
     lv_deadPlayer = EventPlayer();
+    lv_deadPlayerTeamID = MimicGameLib_gf_TeamNumberOfPlayer(lv_deadPlayer);
 
     // Conditions
     if (testConds) {
@@ -16758,9 +17135,15 @@ bool MimicGameLib_gt_HeroDeathHeroDies_Func (bool testConds, bool runActions) {
     MimicGameLib_gf_CameraUpdateCameraForPlayer(lv_deadPlayer);
     MimicGameLib_gf_SendEventHeroKilled(lv_killingPlayer, lv_deadUnit);
     MimicGameLib_gf_HeroDeathStartRespawnTimer(lv_deadPlayer, libCore_gf_HeroDeathTime(lv_deadPlayer, UnitLevel(MimicGameLib_gv_players[lv_deadPlayer].lv_heroUnit)));
+    if ((libCore_gv_brettTimersEnabled == true)) {
+        MimicGameLib_gv_players[lv_deadPlayer].lv_brettTimersTimeMod += libCore_gv_brettTimersDeathModifier;
+    }
+
     MimicGameLib_gf_HeroDeathUpdateUIElementsForDeath(true, true, true, lv_deadPlayer, lv_killingPlayer);
     MimicGameLib_gf_HeroDeathEnableDisableDeadSoundStateForPlayer(true, lv_deadPlayer);
     MimicGameLib_gf_HeroDeathPortHeroBackAndSetDeathState(lv_deadPlayer, MimicGameLib_gv_players[lv_deadPlayer].lv_spawnPoint);
+    libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove, MimicGameLib_gv_players[lv_deadPlayer].lv_aIHeroDelegateTokenValue, lv_deadPlayerTeamID, libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroAlive);
+    libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Add, MimicGameLib_gv_players[lv_deadPlayer].lv_aIHeroDelegateTokenValue, lv_deadPlayerTeamID, libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroDead);
     return true;
 }
 
@@ -17379,6 +17762,10 @@ bool MimicGameLib_gt_HeroDeathSpecialDeathStateDiesTyraelUther_Func (bool testCo
     MimicGameLib_gf_HeroDeathEnableDisableDeadSoundStateForPlayer(true, lv_deadPlayer);
     MimicGameLib_gf_HeroDeathPortHeroBackAndSetDeathState(lv_deadPlayer, MimicGameLib_gv_players[lv_deadPlayer].lv_spawnPoint);
     MimicGameLib_gf_AfkPauseWarningTimerForPlayer(lv_deadPlayer, true);
+    if ((libCore_gv_brettTimersEnabled == true)) {
+        MimicGameLib_gv_players[lv_deadPlayer].lv_brettTimersTimeMod += libCore_gv_brettTimersDeathModifier;
+    }
+
     return true;
 }
 
@@ -17532,6 +17919,64 @@ bool MimicGameLib_gt_PlayerLeavesGame_Func (bool testConds, bool runActions) {
 void MimicGameLib_gt_PlayerLeavesGame_Init () {
     MimicGameLib_gt_PlayerLeavesGame = TriggerCreate("MimicGameLib_gt_PlayerLeavesGame_Func");
     TriggerAddEventPlayerLeft(MimicGameLib_gt_PlayerLeavesGame, c_playerAny, c_gameResultUndecided);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Player Leaves Game (IsHumanPlayer)
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_itUnit;
+    int lv_itPlayer;
+    int lv_team;
+    int lv_enemyTeam;
+
+    // Automatic Variable Declarations
+    unitgroup auto534FCED5_g;
+    int auto534FCED5_u;
+    unitgroup auto9C0B1166_g;
+    int auto9C0B1166_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicGameLib_gv_gameOver == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGroupCount(MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup, c_unitCountAll) == 0)) {
+        Wait(5.0, c_timeGame);
+        auto9C0B1166_g = MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup;
+        auto9C0B1166_u = UnitGroupCount(auto9C0B1166_g, c_unitCountAll);
+        for (;; auto9C0B1166_u -= 1) {
+            lv_itUnit = UnitGroupUnitFromEnd(auto9C0B1166_g, auto9C0B1166_u);
+            if (lv_itUnit == null) { break; }
+            UnitBehaviorAdd(lv_itUnit, "IsHumanPlayer", lv_itUnit, 1);
+        }
+    }
+    else {
+        auto534FCED5_g = MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup;
+        auto534FCED5_u = UnitGroupCount(auto534FCED5_g, c_unitCountAll);
+        for (;; auto534FCED5_u -= 1) {
+            lv_itUnit = UnitGroupUnitFromEnd(auto534FCED5_g, auto534FCED5_u);
+            if (lv_itUnit == null) { break; }
+            UnitBehaviorAdd(lv_itUnit, "IsHumanPlayer", lv_itUnit, 1);
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Init () {
+    MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer = TriggerCreate("MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Func");
+    TriggerAddEventPlayerLeft(MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer, c_playerAny, c_gameResultUndecided);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -18360,6 +18805,10 @@ bool MimicGameLib_gt_HeroMount_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
+        if (!((UnitHasBehavior2(lv_mountingUnit, "Mounted") == true))) {
+            return false;
+        }
+
         if (!((UnitGetOwner(lv_mountingUnit) > 0))) {
             return false;
         }
@@ -18398,17 +18847,12 @@ bool MimicGameLib_gt_HeroMount_Func (bool testConds, bool runActions) {
         UnitCreateEffectUnit(lv_mountingUnit, "SiegeModeRemoveSet", lv_mountingUnit);
     }
 
-    if ((UnitHasBehavior2(lv_mountingUnit, "ArthasFrozenTempestCaster") == true)) {
-        UnitBehaviorRemove(lv_mountingUnit, "ArthasFrozenTempestCaster", 1);
-    }
-
     ActorSend(lv_heroActor, (("StatusSet " + lv_poseAnimGroupStatus + " 1")));
     lv_actorNameForMount = MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_mountActor;
     if ((UnitHasBehavior2(lv_mountingUnit, "IsMorphMounted") == true)) {
         lv_actorNameForMount = MimicGameLib_gv_morphMountModelActor;
     }
 
-    ActorSend(lv_heroActor, (("AnimGroupRemove Ready Instant")));
     if ((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_noAttachedMountModel == false)) {
         ActorSend(lv_heroActor, "PhysicsTerminate");
         lv_mountModel = MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_mountModel;
@@ -18542,19 +18986,6 @@ bool MimicGameLib_gt_HeroDismount_Func (bool testConds, bool runActions) {
         ActorSend(lv_heroActor, (("AnimBlendTimeApply 0")));
         ActorSend(lv_heroActor, (("AnimGroupRemove " + lv_poseAnimGroup + " Instant")));
         ActorSend(lv_heroActor, (("AnimBlendTimeApply")));
-        if ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_isFlyer == true)) {
-            ActorSend(lv_heroActor, libNtve_gf_RefSet("::Host", "FlyerBillboard"));
-            ActorSend(lv_heroActor, libNtve_gf_HostSiteOpsSet("::Host", "", 0, 0));
-        }
-        else {
-            if (((UnitHasBehavior2(lv_dismountingUnit, "HeroGenericAbnormalDismount") == true) || (UnitHasBehavior2(lv_dismountingUnit, "TychusOverkillTargetedActive") == true))) {
-            }
-            else {
-                ActorSend(lv_heroActor, libNtve_gf_RefClear("::Host"));
-                ActorSend(lv_heroActor, libNtve_gf_HostSiteOpsSet("::Host", "SOpBasicScopeFollow", 0, 0));
-                ActorSend(lv_heroActor, libNtve_gf_Signal("HostSetFromTriggers"));
-            }
-        }
         ActorSend(ActorFromScope(ActorScopeFromUnit(EventUnit()), lv_mountActorName), libNtve_gf_Destroy());
     }
     else {
@@ -18614,6 +19045,466 @@ void MimicGameLib_gt_HeroDismountOnCheerDanceTauntUsed_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Apply Engine Interaction Behaviors
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ApplyEngineInteractionBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_unit = MimicGameLib_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!(((PlayerMount(lv_player) == "MountTrainEngineToys19") || (PlayerMount(lv_player) == "MountTrainEngineToys19Var1") || (PlayerMount(lv_player) == "MountTrainEngineToys19Var2") || (PlayerMount(lv_player) == "MountTrainEngineToys19Var3") || (PlayerMount(lv_player) == "MountTrainEngineToys19Var4") || (PlayerMount(lv_player) == "MountTrainEngineToys19Var5")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicGameLib_gv_playerIsEngine[lv_player] = true;
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar0", lv_unit, 1);
+    }
+
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19Var1")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar1", lv_unit, 1);
+    }
+
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19Var2")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar2", lv_unit, 1);
+    }
+
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19Var3")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar3", lv_unit, 1);
+    }
+
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19Var4")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar4", lv_unit, 1);
+    }
+
+    if ((PlayerMount(lv_player) == "MountTrainEngineToys19Var5")) {
+        UnitBehaviorAdd(lv_unit, "IsEngineVar5", lv_unit, 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ApplyEngineInteractionBehaviors_Init () {
+    MimicGameLib_gt_ApplyEngineInteractionBehaviors = TriggerCreate("MimicGameLib_gt_ApplyEngineInteractionBehaviors_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_ApplyEngineInteractionBehaviors, null, "Mounted", c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove  Engine Interaction Behaviors
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_RemoveEngineInteractionBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+    int lv_int;
+
+    // Automatic Variable Declarations
+    const int autoB621CB98_ae = 10;
+    const int autoB621CB98_ai = 1;
+
+    // Variable Initialization
+    lv_unit = EventUnit();
+    lv_player = UnitGetOwner(lv_unit);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((MimicGameLib_gv_playerIsEngine[lv_player] == true)) {
+        MimicGameLib_gv_playerIsEngine[lv_player] = false;
+        MimicGameLib_gv_choochooSize[lv_player] = 0;
+        MimicGameLib_gv_cabooseEngineOwner[lv_player] = 0;
+        lv_int = 1;
+        for ( ; ( (autoB621CB98_ai >= 0 && lv_int <= autoB621CB98_ae) || (autoB621CB98_ai < 0 && lv_int >= autoB621CB98_ae) ) ; lv_int += autoB621CB98_ai ) {
+            MimicGameLib_gv_choochooTrains[lv_player][lv_int] = null;
+        }
+    }
+
+    UnitBehaviorRemove(lv_unit, "IsEngineVar0", 1);
+    UnitBehaviorRemove(lv_unit, "IsEngineVar1", 1);
+    UnitBehaviorRemove(lv_unit, "IsEngineVar2", 1);
+    UnitBehaviorRemove(lv_unit, "IsEngineVar3", 1);
+    UnitBehaviorRemove(lv_unit, "IsEngineVar4", 1);
+    UnitBehaviorRemove(lv_unit, "IsEngineVar5", 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_RemoveEngineInteractionBehaviors_Init () {
+    MimicGameLib_gt_RemoveEngineInteractionBehaviors = TriggerCreate("MimicGameLib_gt_RemoveEngineInteractionBehaviors_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_RemoveEngineInteractionBehaviors, null, "Mounted", c_unitBehaviorChangeDeactivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Mount Caboose
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_MountCaboose_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_mountingUnit;
+    int lv_mountingPlayer;
+    string lv_mountingUnitType;
+    actor lv_heroActor;
+    int lv_heroIndex;
+    int lv_mountIndex;
+    string lv_poseAnimGroup;
+    string lv_poseAnimGroupStatus;
+    fixed lv_mountScale;
+    fixed lv_mountWalkAnimMoveSpeed;
+    string lv_mountModel;
+    string lv_actorNameForMount;
+    actor lv_mountActor;
+
+    // Automatic Variable Declarations
+    playergroup auto34FCCFC4_g;
+    int auto34FCCFC4_var;
+
+    // Variable Initialization
+    lv_mountingUnit = EventUnit();
+    lv_mountingPlayer = UnitGetOwner(lv_mountingUnit);
+    lv_mountingUnitType = UnitGetType(lv_mountingUnit);
+    lv_heroActor = libNtve_gf_MainActorofUnit(lv_mountingUnit);
+    lv_heroIndex = lv_mountingPlayer;
+    lv_poseAnimGroup = "";
+    lv_poseAnimGroupStatus = "";
+    lv_mountModel = "MountTrainCartToys19";
+    lv_actorNameForMount = "MountCabooseActor";
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitHasBehavior2(lv_mountingUnit, "MountCaboose") == true))) {
+            return false;
+        }
+
+        if (!((UnitGetOwner(lv_mountingUnit) > 0))) {
+            return false;
+        }
+
+        if (!((UnitGetOwner(lv_mountingUnit) <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitHasBehavior2(lv_mountingUnit, "UltimateEvolutionTimedLife") == true)) {
+        auto34FCCFC4_g = MimicGameLib_gf_AlliedPlayerGroupOfPlayer(lv_mountingPlayer);
+        auto34FCCFC4_var = -1;
+        while (true) {
+            	auto34FCCFC4_var = PlayerGroupNextPlayer(auto34FCCFC4_g, auto34FCCFC4_var);
+            	if (auto34FCCFC4_var<0) { break; }
+            	if ((UnitGetType(lv_mountingUnit) == UnitGetType(MimicGameLib_gv_players[auto34FCCFC4_var].lv_heroUnit))) {
+                lv_mountIndex = auto34FCCFC4_var;
+                break;
+            }
+
+        }
+    }
+    else {
+        lv_mountIndex = lv_mountingPlayer;
+    }
+    lv_mountIndex = lv_mountingPlayer;
+    lv_poseAnimGroup = "Ridebeast";
+    lv_poseAnimGroupStatus = "Ridebeast";
+    lv_mountScale = 1.0;
+    lv_mountWalkAnimMoveSpeed = 5.72;
+    if ((UnitHasBehavior2(lv_mountingUnit, "SiegeMode") == true)) {
+        UnitCreateEffectUnit(lv_mountingUnit, "SiegeModeRemoveSet", lv_mountingUnit);
+    }
+
+    ActorSend(lv_heroActor, (("StatusSet " + lv_poseAnimGroupStatus + " 1")));
+    lv_actorNameForMount = MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_mountActor;
+    if ((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_noAttachedMountModel == false)) {
+        ActorSend(lv_heroActor, "PhysicsTerminate");
+        lv_mountModel = "MountTrainCartToys19";
+        ActorSend(lv_heroActor, libNtve_gf_Create(lv_actorNameForMount, (lv_mountModel)));
+        lv_mountActor = ActorFromActor(lv_heroActor, lv_actorNameForMount);
+        libCore_gf_SendMountActorMessagesToActor(lv_mountIndex, lv_mountActor);
+        if ((MimicGameLib_gv_players[lv_heroIndex].lv_heroData.lv_isFlyer == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_RefSet("::Host", "FlyerBillboard"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar0") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar1") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var1_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var1_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var1_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar2") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var2_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var2_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var2_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar3") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var3_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var3_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var3_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar4") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var4_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var4_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var4_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        if ((UnitHasBehavior2(lv_mountingUnit, "CabooseVar5") == true)) {
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var5_Diff"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var5_Emis"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Var5_Spec"));
+            ActorSend(lv_mountActor, libNtve_gf_TextureSelectByID("Storm_Mount_TrainCart_Toys19_Norm"));
+        }
+
+        ActorSend(lv_mountActor, libNtve_gf_SetScaleAbsolute(lv_mountScale, lv_mountScale, lv_mountScale, 0.0));
+        ActorSend(lv_heroActor, (("AnimGroupApply " + lv_poseAnimGroup + " {} {} Instant")));
+        ActorSend(lv_heroActor, libNtve_gf_RefSet("::Host", lv_actorNameForMount));
+        ActorSend(lv_heroActor, libNtve_gf_HostSiteOpsSet("::Host", "SOpAttachMount", 0, 0));
+        ActorSend(lv_heroActor, libNtve_gf_RefSet("::HostForProps", "PropsHost"));
+        ActorSend(lv_mountActor, libNtve_gf_RefSet("::HostForProps", (lv_mountingUnitType)));
+    }
+    else {
+        ActorSend(lv_heroActor, (("AnimGroupApply " + lv_poseAnimGroup)));
+    }
+    ActorSend(lv_heroActor, libNtve_gf_SetWalkAnimMoveSpeed(lv_mountWalkAnimMoveSpeed));
+    ActorSend(lv_mountActor, libNtve_gf_Signal("MountSound"));
+    ActorSend(lv_heroActor, libNtve_gf_Create((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_mountUpFXActor), ""));
+    ActorSend(lv_heroActor, libNtve_gf_Create("MountDismountSound", ("Mount_Generic_Player_Activate_End")));
+    ActorSend(lv_heroActor, libNtve_gf_Create("MountLoopingSound", ("Mount_TrainCartToys19_Idle")));
+    ActorSend(lv_heroActor, libNtve_gf_Create("MountStationarySound", ("Mount_TrainCartToys19_Idle_ChooChoo")));
+    ActorSend(lv_heroActor, libNtve_gf_Create("MountMovingSound", ("Mount_TrainCartToys19_Ride")));
+    CatalogLinkReplace(lv_mountingPlayer, c_gameCatalogSound, "GenericMountMoveStartSound", ("Mount_TrainCartToys19_Start"));
+    CatalogLinkReplace(lv_mountingPlayer, c_gameCatalogSound, "GenericMountMoveStopSound", ("Mount_TrainCartToys19_Stop"));
+    CatalogLinkReplace(lv_mountingPlayer, c_gameCatalogSound, "GenericMountTurboSound", ("StormNoSound"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_MountCaboose_Init () {
+    MimicGameLib_gt_MountCaboose = TriggerCreate("MimicGameLib_gt_MountCaboose_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_MountCaboose, null, "MountCaboose", c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Dismount Caboose
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_DismountCaboose_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_dismountingUnit;
+    int lv_dismountingPlayer;
+    int lv_heroIndex;
+    actor lv_heroActor;
+    int lv_mountIndex;
+    fixed lv_heroWalkAnimMoveSpeed;
+    string lv_poseAnimGroup;
+    string lv_poseAnimGroupStatus;
+    string lv_mountModel;
+    string lv_mountActorName;
+
+    // Automatic Variable Declarations
+    playergroup auto736967E5_g;
+    int auto736967E5_var;
+
+    // Variable Initialization
+    lv_dismountingUnit = EventUnit();
+    lv_dismountingPlayer = UnitGetOwner(lv_dismountingUnit);
+    lv_heroIndex = libCore_gf_GetHeroIndexForUnitType(UnitGetType(lv_dismountingUnit));
+    lv_heroActor = libNtve_gf_MainActorofUnit(lv_dismountingUnit);
+    lv_poseAnimGroup = "";
+    lv_poseAnimGroupStatus = "";
+    lv_mountModel = "MountTrainCartToys19";
+    lv_mountActorName = "MountCabooseActor";
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_dismountingPlayer <= libCore_gv_bALMaxEnginePlayerCount))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(lv_dismountingUnit, "ToyTrainFollowAbilityRemove", lv_dismountingUnit);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar0", 1);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar1", 1);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar2", 1);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar3", 1);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar4", 1);
+    UnitBehaviorRemove(lv_dismountingUnit, "CabooseVar5", 1);
+    if ((UnitHasBehavior2(lv_dismountingUnit, "UltimateEvolutionTimedLife") == true)) {
+        auto736967E5_g = MimicGameLib_gf_AlliedPlayerGroupOfPlayer(lv_dismountingPlayer);
+        auto736967E5_var = -1;
+        while (true) {
+            	auto736967E5_var = PlayerGroupNextPlayer(auto736967E5_g, auto736967E5_var);
+            	if (auto736967E5_var<0) { break; }
+            	if ((UnitGetType(lv_dismountingUnit) == UnitGetType(MimicGameLib_gv_players[auto736967E5_var].lv_heroUnit))) {
+                lv_mountIndex = auto736967E5_var;
+                break;
+            }
+
+        }
+    }
+    else {
+        lv_mountIndex = lv_dismountingPlayer;
+    }
+    lv_heroWalkAnimMoveSpeed = CatalogFieldValueGetAsFixed(c_gameCatalogActor, UnitGetType(lv_dismountingUnit), "WalkAnimMoveSpeed", lv_dismountingPlayer);
+    lv_poseAnimGroup = "Ridebeast";
+    lv_poseAnimGroupStatus = "Ridebeast";
+    lv_mountActorName = "MountCabooseActor";
+    ActorSend(lv_heroActor, (("StatusSet " + lv_poseAnimGroupStatus + " 0")));
+    if ((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_isMorphMount == true)) {
+        lv_mountActorName = "MountCabooseActor";
+    }
+
+    if ((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_noAttachedMountModel == false)) {
+        ActorSend(lv_heroActor, (("AnimBlendTimeApply 0")));
+        ActorSend(lv_heroActor, (("AnimGroupRemove " + lv_poseAnimGroup + " Instant")));
+        ActorSend(lv_heroActor, (("AnimBlendTimeApply")));
+        ActorSend(ActorFromScope(ActorScopeFromUnit(EventUnit()), "MountModel"), libNtve_gf_Destroy());
+    }
+    else {
+        ActorSend(lv_heroActor, (("AnimGroupRemove " + lv_poseAnimGroup)));
+    }
+    ActorSend(lv_heroActor, libNtve_gf_SetWalkAnimMoveSpeed(lv_heroWalkAnimMoveSpeed));
+    if ((UnitIsAlive(lv_dismountingUnit) == true)) {
+        ActorSend(lv_heroActor, libNtve_gf_Create((MimicGameLib_gv_players[lv_mountIndex].lv_mountData.lv_dismountFXActor), ""));
+    }
+
+    ActorSend(lv_heroActor, libNtve_gf_Create("MountDismountSound", ("Mount_TrainCartToys19_Dismiss")));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_DismountCaboose_Init () {
+    MimicGameLib_gt_DismountCaboose = TriggerCreate("MimicGameLib_gt_DismountCaboose_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_DismountCaboose, null, "MountCaboose", c_unitBehaviorChangeDeactivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Caboose Follow Logic
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_CabooseFollowLogic_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_cabooseUnit;
+    unit lv_engineUnit;
+    int lv_cabooseOwner;
+    int lv_engine;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_cabooseUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_engineUnit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    lv_cabooseOwner = UnitGetOwner(lv_cabooseUnit);
+    lv_engine = UnitGetOwner(lv_engineUnit);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorAdd(lv_cabooseUnit, "ToyTrainFollowAbility", lv_cabooseUnit, 1);
+    MimicGameLib_gv_cabooseEngineOwner[lv_cabooseOwner] = lv_engine;
+    if ((MimicGameLib_gv_choochooSize[lv_engine] == 0)) {
+        UnitIssueOrder(lv_cabooseUnit, OrderTargetingUnit(AbilityCommand("ToyTrainFollowAbility", 0), lv_engineUnit), c_orderQueueReplace);
+        MimicGameLib_gv_playerIsEngine[lv_engine] = true;
+        MimicGameLib_gv_choochooSize[lv_engine] += 1;
+    }
+    else {
+        UnitIssueOrder(lv_cabooseUnit, OrderTargetingUnit(AbilityCommand("ToyTrainFollowAbility", 0), MimicGameLib_gv_choochooTrains[lv_engine][MimicGameLib_gv_choochooSize[lv_engine]]), c_orderQueueReplace);
+        MimicGameLib_gv_choochooSize[lv_engine] += 1;
+    }
+    MimicGameLib_gv_choochooTrains[lv_engine][MimicGameLib_gv_choochooSize[lv_engine]] = lv_cabooseUnit;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_CabooseFollowLogic_Init () {
+    MimicGameLib_gt_CabooseFollowLogic = TriggerCreate("MimicGameLib_gt_CabooseFollowLogic_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_CabooseFollowLogic, c_playerAny, "MountCabooseSmartCommandSet");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Unit Loses Toy Train Follow Behavior
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_UnitLosesToyTrainFollowBehavior_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_owner;
+    int lv_cabooseChecker;
+    int lv_choochooClearer;
+    int lv_cabooseIndex;
+
+    // Automatic Variable Declarations
+    const int auto4868FB37_ae = 10;
+    const int auto4868FB37_ai = 1;
+    const int auto3DC0D354_ae = 10;
+    const int auto3DC0D354_ai = 1;
+
+    // Variable Initialization
+    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_owner = UnitGetOwner(lv_unit);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_cabooseChecker = 1;
+    for ( ; ( (auto4868FB37_ai >= 0 && lv_cabooseChecker <= auto4868FB37_ae) || (auto4868FB37_ai < 0 && lv_cabooseChecker >= auto4868FB37_ae) ) ; lv_cabooseChecker += auto4868FB37_ai ) {
+        if ((MimicGameLib_gv_choochooTrains[MimicGameLib_gv_cabooseEngineOwner[lv_owner]][lv_cabooseChecker] == lv_unit)) {
+            lv_cabooseIndex = lv_cabooseChecker;
+            lv_choochooClearer = lv_cabooseChecker;
+            for ( ; ( (auto3DC0D354_ai >= 0 && lv_choochooClearer <= auto3DC0D354_ae) || (auto3DC0D354_ai < 0 && lv_choochooClearer >= auto3DC0D354_ae) ) ; lv_choochooClearer += auto3DC0D354_ai ) {
+                if ((MimicGameLib_gv_choochooTrains[MimicGameLib_gv_cabooseEngineOwner[lv_owner]][lv_choochooClearer] != null)) {
+                    MimicGameLib_gv_choochooTrains[MimicGameLib_gv_cabooseEngineOwner[lv_owner]][lv_choochooClearer] = null;
+                    MimicGameLib_gv_choochooSize[MimicGameLib_gv_cabooseEngineOwner[lv_owner]] -= 1;
+                }
+
+            }
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_UnitLosesToyTrainFollowBehavior_Init () {
+    MimicGameLib_gt_UnitLosesToyTrainFollowBehavior = TriggerCreate("MimicGameLib_gt_UnitLosesToyTrainFollowBehavior_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_UnitLosesToyTrainFollowBehavior, c_playerAny, "ToyTrainFollowAbilityRemove");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Game General NPC Proc Listener
 //--------------------------------------------------------------------------------------------------
 bool MimicGameLib_gt_GameGeneralNPCProcListener_Func (bool testConds, bool runActions) {
@@ -18638,16 +19529,17 @@ bool MimicGameLib_gt_GameGeneralNPCProcListener_Func (bool testConds, bool runAc
     }
 
     if ((UnitTypeTestAttribute(lv_unitTypeOfMinion, c_unitAttributeStructure) == true)) {
-        MimicGameLib_gf_GazloweSalvageProc(lv_killingPlayer, lv_minion);
         return true;
     }
 
     if ((UnitTypeTestAttribute(lv_unitTypeOfMinion, c_unitAttributeMinion) == true) && (UnitFilterMatch(lv_minion, lv_killingPlayer, UnitFilter(0, 0, (1 << c_targetFilterCreep) | (1 << c_targetFilterMerc), 0)) == true)) {
         MimicGameLib_gf_LeoricMithrilMaceProc(lv_killingPlayer, lv_minion);
-        MimicGameLib_gf_GazloweReduceReuseRecycleProc(lv_killingPlayer, lv_minion);
         MimicGameLib_gf_BribeProc(lv_killingPlayer, lv_minion);
         MimicGameLib_gf_DiabloBlackSoulstoneProc(lv_killingPlayer, lv_minion);
         MimicGameLib_gf_GenericSeasonedMarksmanProc(lv_killingPlayer, lv_minion);
+        MimicGameLib_gf_BrightwingHyperShiftProc(lv_killingPlayer, lv_minion);
+        MimicGameLib_gf_BrightwingPixieCharmProc(lv_killingPlayer, lv_minion);
+        MimicGameLib_gf_StitchesPatchworkCreationProc(lv_killingPlayer, lv_minion);
     }
 
     return true;
@@ -18762,6 +19654,21 @@ bool MimicGameLib_gt_TownStructureDies_Func (bool testConds, bool runActions) {
     lv_townIndex = MimicGameLib_gf_TownGetTownForUnit(lv_dyingStructureUnit);
     lv_structureType = MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_dyingStructureUnit);
     lv_victimTeam = MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_dyingStructureUnit));
+    if ((MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_dyingStructureUnit) == MimicGameLib_ge_TownStructureTypes_TownHall) && (MimicGameLib_gv_minionMapNeverSpawnsCatapults == false)) {
+        if ((MimicGameLib_gf_TownsAliveinLane(lv_victimTeam, MimicGameLib_gv_townTownData[lv_townIndex].lv_lane) == 1)) {
+            libUIUI_gf_UIFloatingCombatTextPeriodicCatapults(StringExternal("Param/Value/lib_Game_CA15EA74"), UnitGetPosition(lv_dyingStructureUnit));
+            if ((MimicGameLib_gv_minion_PeriodicCatapultsFirstWave == 0)) {
+                MimicGameLib_gv_minion_PeriodicCatapultsFirstWave = (MimicGameLib_gv_minionWaveSpawnCounter + 1);
+            }
+
+        }
+
+        if ((MimicGameLib_gf_TownsAliveinLane(lv_victimTeam, MimicGameLib_gv_townTownData[lv_townIndex].lv_lane) == 0)) {
+            libUIUI_gf_UIFloatingCombatTextPeriodicCatapults(StringExternal("Param/Value/lib_Game_3DAE31F1"), UnitGetPosition(lv_dyingStructureUnit));
+        }
+
+    }
+
     MimicGameLib_gf_AwardXPForNPCKill(lv_dyingStructureUnit, EventPlayer(), c_unitAttributeStructure, libNtve_gf_KillingPlayer(), EventUnitDamageKillXP());
     if ((UnitGetOwner(lv_dyingStructureUnit) == libCore_gv_cOMPUTER_TeamOrder)) {
         lv_killingFaction = MimicGameLib_ge_Faction_Chaos;
@@ -18788,12 +19695,20 @@ bool MimicGameLib_gt_TownStructureDies_Func (bool testConds, bool runActions) {
         if ((lv_killingFaction == MimicGameLib_ge_Faction_Order)) {
             MimicGameLib_gv_teams[1].lv_townKills += 1;
             MimicGameLib_gv_teams[2].lv_townsRemaining -= 1;
+            if ((libCore_gv_mAPMapStringID != "TowersOfDoom")) {
+                libCore_gv_data_XP_TrickleTotalTownHallMod[1] += libCore_gv_data_XP_TrickleTownHallMod_C;
+            }
+
         }
         else {
             MimicGameLib_gv_teams[2].lv_townKills += 1;
+            if ((libCore_gv_mAPMapStringID != "TowersOfDoom")) {
+                libCore_gv_data_XP_TrickleTotalTownHallMod[2] += libCore_gv_data_XP_TrickleTownHallMod_C;
+            }
+
             MimicGameLib_gv_teams[1].lv_townsRemaining -= 1;
         }
-        autoE376AD85_g = UnitGroup(null, c_playerAny, RegionCircle(UnitGetPosition(lv_dyingStructureUnit), 15.0), libCore_gv_filtersHeroic, 0);
+        autoE376AD85_g = UnitGroup(null, c_playerAny, RegionCircle(UnitGetPosition(lv_dyingStructureUnit), 20.0), libCore_gv_filtersHeroic, 0);
         autoE376AD85_u = UnitGroupCount(autoE376AD85_g, c_unitCountAll);
         for (;; autoE376AD85_u -= 1) {
             lv_itUnit = UnitGroupUnitFromEnd(autoE376AD85_g, autoE376AD85_u);
@@ -18815,6 +19730,7 @@ bool MimicGameLib_gt_TownStructureDies_Func (bool testConds, bool runActions) {
             	lv_itPlayer = PlayerGroupNextPlayer(auto8BB7E864_g, lv_itPlayer);
             	if (lv_itPlayer<0) { break; }
             	libSond_gf_HeroVOStartCelebrateVOTimerForPlayer(lv_itPlayer, lv_killingPlayersGroup);
+            MimicGameLib_gv_scoreValues[lv_itPlayer].lv_townKills += 1;
         }
         if ((MimicGameLib_gv_townDestructionRemovesCoreInvulnerable == true) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_TryMe) && (MimicGameLib_gf_TownAliveinLane(lv_victimTeam, MimicGameLib_gv_townTownData[lv_townIndex].lv_lane) == false)) {
             UnitBehaviorRemove(MimicGameLib_gv_teams[lv_victimTeam].lv_core, "CoreInvulnerability", 1);
@@ -18827,6 +19743,7 @@ bool MimicGameLib_gt_TownStructureDies_Func (bool testConds, bool runActions) {
         MimicGameLib_gf_TownRemoveMoonwellMinimapIconsFromTown(lv_townIndex);
     }
 
+    libAIAI_gf_AITeamDelegateUpdateFortKeepcountinLaneforTeam(lv_victimTeam, AILaneWaypointGetClosestLane(UnitGetPosition(lv_dyingStructureUnit)));
     return true;
 }
 
@@ -18898,7 +19815,7 @@ bool MimicGameLib_gt_CoreDiesGameOver_Func (bool testConds, bool runActions) {
     libAIAI_gf_MinionAIPauseUnpauseMinionAISystem(true);
     VisRevealerCreate(libCore_gv_cOMPUTER_TeamOrder, RegionCircle(UnitGetPosition(EventUnit()), 4.0));
     VisRevealerCreate(libCore_gv_cOMPUTER_TeamChaos, RegionCircle(UnitGetPosition(EventUnit()), 4.0));
-    MimicGameLib_gf_BuildingDiesCameraShake(lv_coreAnimationWaitExplodeTime, "ImmuneToSkillshots", libCore_gv_activeHumanPlayers);
+    MimicGameLib_gf_BuildingDiesCameraShake(lv_coreAnimationWaitExplodeTime, "Massive", libCore_gv_activeHumanPlayers);
     autoE67D1356_g = libCore_gv_activeHumanPlayers;
     autoE67D1356_var = -1;
     while (true) {
@@ -18999,7 +19916,7 @@ bool MimicGameLib_gt_OnFireStart_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if (((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Debug) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_TryMe) || (MimicGameLib_gv_endofMatchAwardsDisabled == true) || ((GameIsMatchmade() == false) && (libCore_gv_dEBUGDebuggingEnabled == false) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_Tutorial1) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_TutorialMapMechanics)))) {
+    if (((libCore_gv_sYSGameMode == libCore_ge_GameModes_ArenaMode) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_AttackDefend) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_Debug) || (libCore_gv_sYSGameMode == libCore_ge_GameModes_TryMe) || (MimicGameLib_gv_endofMatchAwardsDisabled == true) || ((GameIsMatchmade() == false) && (true == false) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_Tutorial1) && (libCore_gv_sYSGameMode != libCore_ge_GameModes_TutorialMapMechanics)))) {
         return true;
     }
 
@@ -19056,6 +19973,7 @@ void MimicGameLib_gt_OnFireForcedUpdate_Init () {
     MimicGameLib_gt_OnFireForcedUpdate = TriggerCreate("MimicGameLib_gt_OnFireForcedUpdate_Func");
     MimicGameLib_gf_MercCampCaptured(MimicGameLib_gt_OnFireForcedUpdate);
     MimicGameLib_gf_HeroKilled(MimicGameLib_gt_OnFireForcedUpdate);
+    MimicGameLib_gf_HeroEntersSpecialDeathState(MimicGameLib_gt_OnFireForcedUpdate);
     MimicGameLib_gf_TownStructureEntersSpecialDeathState(MimicGameLib_gt_OnFireForcedUpdate);
 }
 
@@ -19250,11 +20168,8 @@ bool MimicGameLib_gt_HeroDamageTracking_Func (bool testConds, bool runActions) {
             MimicGameLib_gv_scoreValues[lv_eventPlayer].lv_damageSoaked += FixedToInt(EventUnitDamageAbsorbed());
             MimicGameLib_gf_AddGuardianDamage(EventUnitDamageAbsorbed(), lv_eventPlayer);
             MimicGameLib_gf_AddScrapperDamage(lv_damageTaken, lv_eventUnitDamageSourcePlayer);
-            if ((true)) {
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lv_eventPlayer, "DamageTaken", MimicGameLib_gv_scoreValues[lv_eventPlayer].lv_damageTaken);
-                MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lv_eventPlayer, "DamageSoaked", MimicGameLib_gv_scoreValues[lv_eventPlayer].lv_damageSoaked);
-            }
-
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lv_eventPlayer, "DamageTaken", MimicGameLib_gv_scoreValues[lv_eventPlayer].lv_damageTaken);
+            MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lv_eventPlayer, "DamageSoaked", MimicGameLib_gv_scoreValues[lv_eventPlayer].lv_damageSoaked);
         }
 
         if ((UnitTypeTestAttribute(lv_damagingUnitType, c_unitAttributeHeroic) == true) && (UnitTestState(EventUnitDamageSourceUnit(), c_unitStateHallucination) == false)) {
@@ -19465,7 +20380,7 @@ bool MimicGameLib_gt_XPTrickle_Func (bool testConds, bool runActions) {
     for (;; autoAEA68A5B_u -= 1) {
         lv_u = UnitGroupUnitFromEnd(autoAEA68A5B_g, autoAEA68A5B_u);
         if (lv_u == null) { break; }
-        MimicGameLib_gf_GrantXPToPlayer((libCore_gv_data_XP_TrickleAmount_C * MimicGameLib_gv_xPTrickleModifier[MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_u))]), UnitGetOwner(lv_u), MimicGameLib_ge_XPSources_Trickle);
+        MimicGameLib_gf_GrantXPToPlayer((libCore_gv_data_XP_TrickleAmount_C * (MimicGameLib_gv_xPTrickleModifier[MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_u))] + libCore_gv_data_XP_TrickleTotalTownHallMod[MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_u))])), UnitGetOwner(lv_u), MimicGameLib_ge_XPSources_Trickle);
     }
     return true;
 }
@@ -19507,6 +20422,10 @@ bool MimicGameLib_gt_PlayerHomeShieldProtectionOn_Func (bool testConds, bool run
         if (!((UnitGetType(lv_heroUnit) != "HeroAbathur"))) {
             return false;
         }
+
+        if (!((UnitGetType(lv_heroUnit) != "SamuroMirrorImage"))) {
+            return false;
+        }
     }
 
     // Actions
@@ -19514,7 +20433,7 @@ bool MimicGameLib_gt_PlayerHomeShieldProtectionOn_Func (bool testConds, bool run
         return true;
     }
 
-    UnitCreateEffectUnit(lv_heroUnit, "HeroGenericHomeShieldProtectionMountModifyCooldown", lv_heroUnit);
+    UnitCreateEffectUnit(lv_heroUnit, "MountSummonCooldownResetModifyUnit", lv_heroUnit);
     if (((MimicGameLib_gv_players[lv_heroUnitOwner].lv_heroUnit == lv_heroUnit) || (MimicGameLib_gv_players[lv_heroUnitOwner].lv_activeVehicle == lv_heroUnit))) {
         MimicGameLib_gf_PlayerTurnMountCostsOnOffForPlayer(lv_heroUnitOwner, false);
     }
@@ -19525,7 +20444,7 @@ bool MimicGameLib_gt_PlayerHomeShieldProtectionOn_Func (bool testConds, bool run
 //--------------------------------------------------------------------------------------------------
 void MimicGameLib_gt_PlayerHomeShieldProtectionOn_Init () {
     MimicGameLib_gt_PlayerHomeShieldProtectionOn = TriggerCreate("MimicGameLib_gt_PlayerHomeShieldProtectionOn_Func");
-    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_PlayerHomeShieldProtectionOn, null, "HomeShieldProtection", c_unitBehaviorChangeActivate);
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_PlayerHomeShieldProtectionOn, null, "HallOfStormsProtectionBuff", c_unitBehaviorChangeActivate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19558,6 +20477,10 @@ bool MimicGameLib_gt_PlayerHomeShieldProtectionOff_Func (bool testConds, bool ru
         if (!((UnitGetType(lv_heroUnit) != "HeroAbathur"))) {
             return false;
         }
+
+        if (!((UnitGetType(lv_heroUnit) != "SamuroMirrorImage"))) {
+            return false;
+        }
     }
 
     // Actions
@@ -19575,7 +20498,7 @@ bool MimicGameLib_gt_PlayerHomeShieldProtectionOff_Func (bool testConds, bool ru
 //--------------------------------------------------------------------------------------------------
 void MimicGameLib_gt_PlayerHomeShieldProtectionOff_Init () {
     MimicGameLib_gt_PlayerHomeShieldProtectionOff = TriggerCreate("MimicGameLib_gt_PlayerHomeShieldProtectionOff_Func");
-    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_PlayerHomeShieldProtectionOff, null, "HomeShieldProtection", c_unitBehaviorChangeDeactivate);
+    TriggerAddEventUnitBehaviorChange(MimicGameLib_gt_PlayerHomeShieldProtectionOff, null, "HallOfStormsProtectionBuff", c_unitBehaviorChangeDeactivate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19679,6 +20602,34 @@ bool MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet_Func (bool testConds, bool 
 void MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet_Init () {
     MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet = TriggerCreate("MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet_Func");
     TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet, c_playerAny, "RegenGlobeNeutralDummySet");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Player - Regen Globe Impact Score Tracking
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_globePickupUnit;
+    int lv_globePickupPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_globePickupUnit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    lv_globePickupPlayer = UnitGetOwner(lv_globePickupUnit);
+    MimicGameLib_gv_scoreValues[lv_globePickupPlayer].lv_regenGlobes = (MimicGameLib_gv_scoreValues[lv_globePickupPlayer].lv_regenGlobes + 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking_Init () {
+    MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking = TriggerCreate("MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking, c_playerAny, "RegenGlobeImpactSet");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19940,6 +20891,76 @@ void MimicGameLib_gt_ScoreTrackingTimeCCdEnemyHeroes_Init () {
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameLib_gt_ScoreTrackingTimeCCdEnemyHeroes, null, c_behaviorCategoryStun, c_unitBehaviorChangeRefresh);
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameLib_gt_ScoreTrackingTimeCCdEnemyHeroes, null, c_behaviorCategoryDebuffStasis, c_unitBehaviorChangeActivate);
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameLib_gt_ScoreTrackingTimeCCdEnemyHeroes, null, c_behaviorCategoryDebuffStasis, c_unitBehaviorChangeRefresh);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Score Tracking Physical Damage
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ScoreTrackingPhysicalDamage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_damage;
+    int lv_damagingPlayer;
+    unit lv_damagingUnit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_damagingPlayer = UnitGetOwner(EventUnitDamageSourceUnit());
+    lv_damagingUnit = EventUnitDamageSourceUnit();
+    lv_damage = FixedToInt(EventUnitDamageAmount());
+    if (((lv_damagingPlayer <= 0) || (lv_damagingPlayer > libCore_gv_bALMaxPlayers))) {
+        return true;
+    }
+    else {
+        MimicGameLib_gv_scoreValues[lv_damagingPlayer].lv_physicalDamage += lv_damage;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ScoreTrackingPhysicalDamage_Init () {
+    MimicGameLib_gt_ScoreTrackingPhysicalDamage = TriggerCreate("MimicGameLib_gt_ScoreTrackingPhysicalDamage_Func");
+    TriggerAddEventUnitDamaged(MimicGameLib_gt_ScoreTrackingPhysicalDamage, null, c_unitDamageTypeBasic, c_unitDamageEither, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Score Tracking Spell Damage
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_ScoreTrackingSpellDamage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_damage;
+    int lv_damagingPlayer;
+    unit lv_damagingUnit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_damagingPlayer = UnitGetOwner(EventUnitDamageSourceUnit());
+    lv_damagingUnit = EventUnitDamageSourceUnit();
+    lv_damage = FixedToInt(EventUnitDamageAmount());
+    if (((lv_damagingPlayer <= 0) || (lv_damagingPlayer > libCore_gv_bALMaxPlayers))) {
+        return true;
+    }
+    else {
+        MimicGameLib_gv_scoreValues[lv_damagingPlayer].lv_spellDamage += lv_damage;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_ScoreTrackingSpellDamage_Init () {
+    MimicGameLib_gt_ScoreTrackingSpellDamage = TriggerCreate("MimicGameLib_gt_ScoreTrackingSpellDamage_Func");
+    TriggerAddEventUnitDamaged(MimicGameLib_gt_ScoreTrackingSpellDamage, null, c_unitDamageTypeAbility, c_unitDamageEither, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -20335,7 +21356,7 @@ bool MimicGameLib_gt_TownMidLateGamePowerTransitionOn_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -20391,9 +21412,9 @@ void MimicGameLib_gt_TownMidLateGamePowerTransitionOn_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Base - Repulser Field - Launch Missile
+// Trigger: Hall Of Storms - Knockback Launch Missile
 //--------------------------------------------------------------------------------------------------
-bool MimicGameLib_gt_BaseRepulserFieldLaunchMissile_Func (bool testConds, bool runActions) {
+bool MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_base;
     unit lv_targetUnit;
@@ -20414,90 +21435,128 @@ bool MimicGameLib_gt_BaseRepulserFieldLaunchMissile_Func (bool testConds, bool r
 
     lv_base = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     lv_targetUnit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
-    lv_abilityRange = MimicGameLib_gv_baseRepulserFieldLaunchDistance;
-    lv_targetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_base), MimicGameLib_gv_baseRepulserFieldLaunchDistance, UnitGetPosition(lv_targetUnit));
+    lv_abilityRange = MimicGameLib_gv_hallOfStormsKnockbackLaunchDistance;
+    lv_targetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_base), MimicGameLib_gv_hallOfStormsKnockbackLaunchDistance, UnitGetPosition(lv_targetUnit));
     lv_actualTargetPoint = lv_targetPoint;
     if ((PointPathingPassable(lv_actualTargetPoint) == false)) {
         lv_actualTargetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(MimicGameLib_gv_teams[MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_base))].lv_core), 7.5, UnitGetPosition(lv_base));
     }
 
-    UnitCreateEffectPoint(lv_targetUnit, "RepulserFieldLaunchUnit", lv_actualTargetPoint);
+    UnitCreateEffectPoint(lv_targetUnit, "HallOfStormsKnockbackLaunchMissile", lv_actualTargetPoint);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameLib_gt_BaseRepulserFieldLaunchMissile_Init () {
-    MimicGameLib_gt_BaseRepulserFieldLaunchMissile = TriggerCreate("MimicGameLib_gt_BaseRepulserFieldLaunchMissile_Func");
-    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_BaseRepulserFieldLaunchMissile, c_playerAny, "BaseRepulserFieldPuntDummySet");
+void MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile_Init () {
+    MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile = TriggerCreate("MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile, c_playerAny, "HallOfStormsKnockbackDummySet");
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Base - Safe Zone Punt
+// Trigger: Hall Of Storms - Knockback Unit Enters Region
 //--------------------------------------------------------------------------------------------------
-bool MimicGameLib_gt_BaseSafeZonePunt_Func (bool testConds, bool runActions) {
+bool MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((UnitHasBehavior2(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit(), "KillUnitOnRepulserFieldImpact") == true)) {
+    if ((UnitHasBehavior2(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit(), "HallOfStormsKnockbackKillable") == true)) {
         UnitKill(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit());
     }
     else {
-        UnitCreateEffectPoint(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit(), "RepulserFieldLaunchUnit", MimicGameLib_gf_UnitEntersSafeZonePuntRegionPuntPoint());
-        PlayerCreateEffectUnit(UnitGetOwner(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit()), "BaseRepulserFieldSet", MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit());
+        UnitCreateEffectPoint(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit(), "HallOfStormsKnockbackLaunchMissile", MimicGameLib_gf_UnitEntersSafeZonePuntRegionPuntPoint());
+        PlayerCreateEffectUnit(UnitGetOwner(MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit()), "HallOfStormsKnockbackImpactSet", MimicGameLib_gf_UnitEntersSafeZonePuntRegionUnit());
     }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameLib_gt_BaseSafeZonePunt_Init () {
-    MimicGameLib_gt_BaseSafeZonePunt = TriggerCreate("MimicGameLib_gt_BaseSafeZonePunt_Func");
-    TriggerEnable(MimicGameLib_gt_BaseSafeZonePunt, false);
-    MimicGameLib_gf_UnitEntersSafeZonePuntRegion(MimicGameLib_gt_BaseSafeZonePunt);
+void MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion_Init () {
+    MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion = TriggerCreate("MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion_Func");
+    TriggerEnable(MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion, false);
+    MimicGameLib_gf_UnitEntersSafeZonePuntRegion(MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Base - Unit Enters Safe Zone
+// Trigger: Hall Of Storms - Unit Enters Region
 //--------------------------------------------------------------------------------------------------
-bool MimicGameLib_gt_BaseUnitEntersSafeZone_Func (bool testConds, bool runActions) {
+bool MimicGameLib_gt_HallOfStormsUnitEntersRegion_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
         return true;
     }
 
-    UnitCreateEffectUnit(MimicGameLib_gf_UnitEntersSafeZoneRegionUnit(), "HealingPadSet", MimicGameLib_gf_UnitEntersSafeZoneRegionUnit());
+    UnitCreateEffectUnit(MimicGameLib_gf_UnitEntersSafeZoneRegionUnit(), "HallOfStormsAllyApplySet", MimicGameLib_gf_UnitEntersSafeZoneRegionUnit());
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameLib_gt_BaseUnitEntersSafeZone_Init () {
-    MimicGameLib_gt_BaseUnitEntersSafeZone = TriggerCreate("MimicGameLib_gt_BaseUnitEntersSafeZone_Func");
-    TriggerEnable(MimicGameLib_gt_BaseUnitEntersSafeZone, false);
-    MimicGameLib_gf_UnitEntersSafeZoneRegion(MimicGameLib_gt_BaseUnitEntersSafeZone);
+void MimicGameLib_gt_HallOfStormsUnitEntersRegion_Init () {
+    MimicGameLib_gt_HallOfStormsUnitEntersRegion = TriggerCreate("MimicGameLib_gt_HallOfStormsUnitEntersRegion_Func");
+    TriggerEnable(MimicGameLib_gt_HallOfStormsUnitEntersRegion, false);
+    MimicGameLib_gf_UnitEntersSafeZoneRegion(MimicGameLib_gt_HallOfStormsUnitEntersRegion);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Base - Unit Exits Safe Zone
+// Trigger: Hall Of Storms - Unit Exits Region
 //--------------------------------------------------------------------------------------------------
-bool MimicGameLib_gt_BaseUnitExitsSafeZone_Func (bool testConds, bool runActions) {
+bool MimicGameLib_gt_HallOfStormsUnitExitsRegion_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
         return true;
     }
 
-    UnitBehaviorRemove(MimicGameLib_gf_UnitExitsSafeZoneRegionUnit(), "HomeShieldProtection", 1);
+    UnitBehaviorRemove(MimicGameLib_gf_UnitExitsSafeZoneRegionUnit(), "HallOfStormsProtectionBuff", 1);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameLib_gt_BaseUnitExitsSafeZone_Init () {
-    MimicGameLib_gt_BaseUnitExitsSafeZone = TriggerCreate("MimicGameLib_gt_BaseUnitExitsSafeZone_Func");
-    TriggerEnable(MimicGameLib_gt_BaseUnitExitsSafeZone, false);
-    MimicGameLib_gf_UnitExitsSafeZoneRegion(MimicGameLib_gt_BaseUnitExitsSafeZone);
+void MimicGameLib_gt_HallOfStormsUnitExitsRegion_Init () {
+    MimicGameLib_gt_HallOfStormsUnitExitsRegion = TriggerCreate("MimicGameLib_gt_HallOfStormsUnitExitsRegion_Func");
+    TriggerEnable(MimicGameLib_gt_HallOfStormsUnitExitsRegion, false);
+    MimicGameLib_gf_UnitExitsSafeZoneRegion(MimicGameLib_gt_HallOfStormsUnitExitsRegion);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Vehicle Reconnection Monitor
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_VehicleReconnectionMonitor_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle != null))) {
+            return false;
+        }
+
+        if (!((UnitIsValid(MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle) == true))) {
+            return false;
+        }
+
+        if (!((MimicGameLib_gv_gameOver == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUIUI_gf_UIHeroConsoleSetUpForPlayer(MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle, EventPlayer());
+    libUIUI_gf_InitPathingLines(MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle, EventPlayer());
+    libUIUI_gf_HeroConsoleUnitStatusBarsSetUnitForBars(MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle, EventPlayer());
+    MimicGameLib_gf_UnitSelectionEnterVehicle(MimicGameLib_gv_players[EventPlayer()].lv_activeVehicle, MimicGameLib_gv_players[EventPlayer()].lv_heroUnit, EventPlayer());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_VehicleReconnectionMonitor_Init () {
+    MimicGameLib_gt_VehicleReconnectionMonitor = TriggerCreate("MimicGameLib_gt_VehicleReconnectionMonitor_Func");
+    TriggerAddEventPlayerJoin(MimicGameLib_gt_VehicleReconnectionMonitor, c_playerAny);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -21205,6 +22264,11 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_ClutchHealerIncrement_Init();
     MimicGameLib_gt_HatTrickAwardCounter_Init();
     MimicGameLib_gt_InitializeSecondaryAwardList_Init();
+    MimicGameLib_gt_OldXPEnableDisable_Init();
+    MimicGameLib_gt_ExperienceGlobeScaling_Init();
+    MimicGameLib_gt_ExperienceGlobeSpawn_Init();
+    MimicGameLib_gt_ExperienceGlobeGrantXP_Init();
+    MimicGameLib_gt_OldXPEnabledMinionVeterency_Init();
     MimicGameLib_gt_StartGame_Init();
     MimicGameLib_gt_PickingHeroesNormalMode_Init();
     MimicGameLib_gt_StartGameShowTowerRadius_Init();
@@ -21222,6 +22286,7 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_HeroDeathDiabloParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathSeasonedMarksmanParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Init();
+    MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathHeroDies_Init();
     MimicGameLib_gt_HeroDeathHeroDeathToastTimerExpires_Init();
     MimicGameLib_gt_HeroDeathHeroRespawnSoundCueTimerExpires_Init();
@@ -21238,6 +22303,7 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_HeroDeathGallDies_Init();
     MimicGameLib_gt_InitializeCodeLaneSystem_Init();
     MimicGameLib_gt_PlayerLeavesGame_Init();
+    MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Init();
     MimicGameLib_gt_PlayerRejoinsGame_Init();
     MimicGameLib_gt_TeamAbandonedTheGameTimerExpires_Init();
     MimicGameLib_gt_PlayerLeftAnnouncementTimerExpires_Init();
@@ -21254,6 +22320,12 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_HeroMount_Init();
     MimicGameLib_gt_HeroDismount_Init();
     MimicGameLib_gt_HeroDismountOnCheerDanceTauntUsed_Init();
+    MimicGameLib_gt_ApplyEngineInteractionBehaviors_Init();
+    MimicGameLib_gt_RemoveEngineInteractionBehaviors_Init();
+    MimicGameLib_gt_MountCaboose_Init();
+    MimicGameLib_gt_DismountCaboose_Init();
+    MimicGameLib_gt_CabooseFollowLogic_Init();
+    MimicGameLib_gt_UnitLosesToyTrainFollowBehavior_Init();
     MimicGameLib_gt_GameGeneralNPCProcListener_Init();
     MimicGameLib_gt_NPCUnitDies_Init();
     MimicGameLib_gt_TownStructureDies_Init();
@@ -21277,12 +22349,15 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_PlayerHeroDisplacementBehaviors_Init();
     MimicGameLib_gt_PlayerRegenGlobeDummyImpact_Init();
     MimicGameLib_gt_PlayerRegenGlobeNeutralDummySet_Init();
+    MimicGameLib_gt_PlayerRegenGlobeImpactScoreTracking_Init();
     MimicGameLib_gt_NeutralRegenGlobeCreatedChangeOwner_Init();
     MimicGameLib_gt_ScalingTimerExpiration_Init();
     MimicGameLib_gt_JungleScalingTimerExpires_Init();
     MimicGameLib_gt_CoreScalingTimerExpires_Init();
     MimicGameLib_gt_TownScalingTimerExpires_Init();
     MimicGameLib_gt_ScoreTrackingTimeCCdEnemyHeroes_Init();
+    MimicGameLib_gt_ScoreTrackingPhysicalDamage_Init();
+    MimicGameLib_gt_ScoreTrackingSpellDamage_Init();
     MimicGameLib_gt_ScoreTrackingRavenTributeCollected_Init();
     MimicGameLib_gt_ScoreTrackingDragonActivated_Init();
     MimicGameLib_gt_ScoreTrackingDragonShrineCaptured_Init();
@@ -21294,10 +22369,11 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_InitializeTownSystem_Init();
     MimicGameLib_gt_InitializeMoonwellIconsonTowns_Init();
     MimicGameLib_gt_TownMidLateGamePowerTransitionOn_Init();
-    MimicGameLib_gt_BaseRepulserFieldLaunchMissile_Init();
-    MimicGameLib_gt_BaseSafeZonePunt_Init();
-    MimicGameLib_gt_BaseUnitEntersSafeZone_Init();
-    MimicGameLib_gt_BaseUnitExitsSafeZone_Init();
+    MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile_Init();
+    MimicGameLib_gt_HallOfStormsKnockbackUnitEntersRegion_Init();
+    MimicGameLib_gt_HallOfStormsUnitEntersRegion_Init();
+    MimicGameLib_gt_HallOfStormsUnitExitsRegion_Init();
+    MimicGameLib_gt_VehicleReconnectionMonitor_Init();
     MimicGameLib_gt_KaelthasEntersVehicle_Init();
     MimicGameLib_gt_KaelthasStopsOccupyingVehicle_Init();
     MimicGameLib_gt_UnitSelectionVehicleEntered_Init();
@@ -21329,7 +22405,6 @@ void MimicGameLib_InitLib () {
     MimicGameLib_InitLibraries();
     MimicGameLib_InitVariables();
     MimicGameLib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("GameLib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

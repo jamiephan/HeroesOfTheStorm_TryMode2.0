@@ -55,14 +55,14 @@ struct MimicSupportLib_gs_QACheatsControlsPanel {
     int lv_killStructuresButton;
 };
 
-struct MimicSupportLib_gs_MMFieldOfSlaughterTown2 {
+struct MimicSupportLib_gs_RS_Structure {
     point lv_buildingPosition;
     string lv_buildingType;
     fixed lv_buildingFacing;
 };
 
 struct MimicSupportLib_gs_RS_Town {
-    MimicSupportLib_gs_MMFieldOfSlaughterTown2[libGame_gv_townMaxStructureCount + 1] lv_structureArray;
+    MimicSupportLib_gs_RS_Structure[libGame_gv_townMaxStructureCount + 1] lv_structureArray;
 };
 
 // Variable Declarations
@@ -74,6 +74,7 @@ fixed MimicSupportLib_gv_dataMiningTimeStampofLastPeriodicTransmit;
 timer MimicSupportLib_gv_dataMiningPeriodicTimer;
 string[MimicSupportLib_gv_dataMiningMaxNumberOfDifferentManaRegenSources + 1] MimicSupportLib_gv_dataMiningManaRegenSourceNames;
 MimicSupportLib_gs_DataMiningPlayerData[libCore_gv_bALMaxPlayers + 1] MimicSupportLib_gv_dataMining_PlayerData;
+int MimicSupportLib_gv_heroMasteryRingsMaxRank;
 unit MimicSupportLib_gv_qACheatsSelectedUnit;
 bool MimicSupportLib_gv_qACheatsSeekingApplyTarget;
 bool MimicSupportLib_gv_qACheatsSeekingRemoveTarget;
@@ -127,6 +128,9 @@ fixed MimicSupportLib_gv_dEBUGDPSTrackerTotalDamage;
 fixed MimicSupportLib_gv_dEBUGDPSTrackerTrackingInterval;
 timer MimicSupportLib_gv_dEBUGDPSTrackerTimer;
 fixed MimicSupportLib_gv_dEBUGDPSTrackerTime;
+bool MimicSupportLib_gv_dEBUGSapperMinionsEnabled;
+fixed MimicSupportLib_gv_dEBUGBaselineArmorValue;
+fixed MimicSupportLib_gv_dEBUGBaselineSpellPowerValue;
 
 // Function Declarations
 void MimicSupportLib_gf_PerformanceTestStartPerformanceTest (string lp_name);
@@ -153,7 +157,9 @@ void MimicSupportLib_gf_DataMiningPeriodicDataSend ();
 void MimicSupportLib_gf_DataMiningLogManaRegenForPlayer (int lp_player, string lp_regenSourceName, fixed lp_amount);
 void MimicSupportLib_gf_DataMiningTurnDataMiningTriggersOnOff (bool lp_onOff);
 void MimicSupportLib_gf_DataMiningSendStartGameEvents ();
-void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_WinningTeam);
+void MimicSupportLib_gf_DataMiningSendEndOfGameDigests (int lp_team);
+void MimicSupportLib_gf_SetHeroMasteryRingLevel (int lp_player);
+void MimicSupportLib_gf_ChoGallHeroMasteryRing (int lp_player);
 void MimicSupportLib_gf_QACheatsUIInit ();
 void MimicSupportLib_gf_QACheatsPopulateBehaviorPulldown ();
 void MimicSupportLib_gf_QACheatsAddBehaviorButtons ();
@@ -171,7 +177,7 @@ void MimicSupportLib_gf_QACheatsCompileBehaviors ();
 void MimicSupportLib_gf_QACheatsCompileSpawnUnits ();
 void MimicSupportLib_gf_QACheatsCompileSpawnItems ();
 void MimicSupportLib_gf_QACheatsCleanseAllEffects ();
-void MimicSupportLib_gf_SoundRepeatRepeatSound ();
+void MimicSupportLib_gf_DEBUGSoundRepeatRepeatSound ();
 void MimicSupportLib_gf_DEBUGStartGame ();
 void MimicSupportLib_gf_DEBUGSpawnCreepCamps ();
 void MimicSupportLib_gf_DEBUGToggleSelection ();
@@ -198,16 +204,21 @@ trigger MimicSupportLib_gt_PerformanceTestSetHeroChoices;
 trigger MimicSupportLib_gt_PerformanceTestGetFPS;
 trigger MimicSupportLib_gt_PerformanceTestOutputFPSToFile;
 trigger MimicSupportLib_gt_PerformanceTestMaintainHeroHealth;
-trigger MimicSupportLib_gt_StatTrackingStartforPlayer;
-trigger MimicSupportLib_gt_StatTrackingLogBreak;
-trigger MimicSupportLib_gt_StatTrackingStop;
-trigger MimicSupportLib_gt_StatTrackingStartTrackingforAllPlayers;
-trigger MimicSupportLib_gt_StatTrackingStopTrackingforAllPlayers;
+trigger MimicSupportLib_gt_DEBUGStatTrackingStartforPlayer;
+trigger MimicSupportLib_gt_DEBUGStatTrackingLogBreak;
+trigger MimicSupportLib_gt_DEBUGStatTrackingStop;
+trigger MimicSupportLib_gt_DEBUGStatTrackingStartTrackingforAllPlayers;
+trigger MimicSupportLib_gt_DEBUGStatTrackingStopTrackingforAllPlayers;
 trigger MimicSupportLib_gt_StatTrackingDamageTracking;
 trigger MimicSupportLib_gt_StatTrackingHealingTracking;
 trigger MimicSupportLib_gt_StatTrackingGameOver;
 trigger MimicSupportLib_gt_DataMiningListenForRegenGlobes;
 trigger MimicSupportLib_gt_DataMiningPeriodicDataSendPeriodicEventTrigger;
+trigger MimicSupportLib_gt_DEBUGForceHeroMasteryRing0;
+trigger MimicSupportLib_gt_DEBUGForceHeroMasteryRing1;
+trigger MimicSupportLib_gt_DEBUGForceHeroMasteryRing2;
+trigger MimicSupportLib_gt_DEBUGForceHeroMasteryRing3;
+trigger MimicSupportLib_gt_DEBUGForceHeroMasteryRingRando;
 trigger MimicSupportLib_gt_QACheatsInit;
 trigger MimicSupportLib_gt_ToggleCheatsDialog;
 trigger MimicSupportLib_gt_QACheatsCloseButtonClicked;
@@ -247,13 +258,15 @@ trigger MimicSupportLib_gt_DEBUGInspectTheBalanceProbebalanceprobe;
 trigger MimicSupportLib_gt_DEBUGResetTheBalanceProbebalancereset;
 trigger MimicSupportLib_gt_DEBUGTimedBalanceProbebalancetimer;
 trigger MimicSupportLib_gt_DEBUGBalanceProbeTimerExpires;
-trigger MimicSupportLib_gt_EnableSoundRepeat;
-trigger MimicSupportLib_gt_SoundRepeatAdjustDelay;
-trigger MimicSupportLib_gt_SoundRepeatAbilityUsed;
+trigger MimicSupportLib_gt_DEBUGEnableSoundRepeat;
+trigger MimicSupportLib_gt_DEBUGSoundRepeatAdjustDelay;
+trigger MimicSupportLib_gt_DEBUGSoundRepeatAbilityUsed;
 trigger MimicSupportLib_gt_DEBUGPassiveExpBalancerpassivebalance;
+trigger MimicSupportLib_gt_DEBUGWhichplayersareAIwhoisai;
 trigger MimicSupportLib_gt_DEBUGEqualizeExperienceeqxp;
 trigger MimicSupportLib_gt_DEBUGBoostExperienceeqexpboost;
 trigger MimicSupportLib_gt_DEBUGXPTrickleOnlyxptrickleonly;
+trigger MimicSupportLib_gt_DEBUGSuppressDebugMessages;
 trigger MimicSupportLib_gt_DEBUGXPHeroxphero;
 trigger MimicSupportLib_gt_DEBUGXPMinionxpminion;
 trigger MimicSupportLib_gt_DEBUGXPStructurexpstructure;
@@ -267,7 +280,6 @@ trigger MimicSupportLib_gt_DEBUGDisablePingLimitfreepings;
 trigger MimicSupportLib_gt_DEBUGPauseGameStartTimerpausestart;
 trigger MimicSupportLib_gt_DEBUGTurnOnNormalCreepCampscreepcamp;
 trigger MimicSupportLib_gt_DEBUGRespawnCreepCampsrespawncamps;
-trigger MimicSupportLib_gt_DEBUGDestroyInventoryItemsdeleteitems;
 trigger MimicSupportLib_gt_DEBUGSpawnHerospawnhero;
 trigger MimicSupportLib_gt_DEBUGRespawnHerodebugrespawn;
 trigger MimicSupportLib_gt_DEBUGSelectHerodebugselect;
@@ -338,10 +350,18 @@ trigger MimicSupportLib_gt_DEBUGDPSTracker;
 trigger MimicSupportLib_gt_DEBUGClearDPSTrackerStats;
 trigger MimicSupportLib_gt_DEBUGDPSTrackerTimerExpires;
 trigger MimicSupportLib_gt_DEBUGTemp;
+trigger MimicSupportLib_gt_DEBUGDontStart;
 trigger MimicSupportLib_gt_DEBUGEnableBuildingScaling;
 trigger MimicSupportLib_gt_DEBUGEnabletownhalldetection;
 trigger MimicSupportLib_gt_DEBUGToggleEUPTLogging;
 trigger MimicSupportLib_gt_DEBUGGetBaseUnitStats;
+trigger MimicSupportLib_gt_DEBUGWizardtoSappers;
+trigger MimicSupportLib_gt_DEBUGSapperHealthGlobes;
+trigger MimicSupportLib_gt_DEBUGSapperSuicideDamage;
+trigger MimicSupportLib_gt_DEBUGSapperAttackDamage;
+trigger MimicSupportLib_gt_DEBUGSapperHealth;
+trigger MimicSupportLib_gt_DEBUGApplyArmorValueChange;
+trigger MimicSupportLib_gt_DEBUGApplySpellPowerValueChange;
 
 // Library Initialization
 void MimicSupportLib_InitVariables ();

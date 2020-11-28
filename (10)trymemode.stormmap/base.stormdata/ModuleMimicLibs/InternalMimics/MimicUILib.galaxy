@@ -8,7 +8,7 @@ include "TriggerLibs/SoundLib_h"
 include "TriggerLibs/GameDataHelperLib_h"
 include "TriggerLibs/SupportLib_h"
 
-include "ModuleMimicLibs/MimicUILib_h"
+include "ModuleMimicLibs/InternalMimics/MimicUILib_h"
 
 //--------------------------------------------------------------------------------------------------
 // Library: UI
@@ -70,7 +70,27 @@ void MimicUILib_InitVariables () {
         for (init_i1 = 0; init_i1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_i1 += 1) {
             MimicUILib_gv_lostVikingsDebuggingLabels[init_i].lv_unstoppableImage[init_i1] = c_invalidDialogControlId;
         }
+        for (init_i1 = 0; init_i1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_i1 += 1) {
+            MimicUILib_gv_lostVikingsDebuggingLabels[init_i].lv_onFireCutscene[init_i1] = c_invalidDialogControlId;
+        }
     }
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        for (init_j1 = 0; init_j1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_j1 += 1) {
+            MimicUILib_gv_uIBoosts.lv_boostFXAnchor[init_i1][init_j1] = c_invalidDialogId;
+        }
+    }
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        for (init_j1 = 0; init_j1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_j1 += 1) {
+            MimicUILib_gv_uIBoosts.lv_boostFXAnchorFrame[init_i1][init_j1] = c_invalidDialogControlId;
+        }
+    }
+    MimicUILib_gv_uIBoosts.lv_boostPanel = c_invalidDialogControlId;
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        for (init_j1 = 0; init_j1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_j1 += 1) {
+            MimicUILib_gv_uIBoosts.lv_boostFXPanel[init_i1][init_j1] = c_invalidDialogControlId;
+        }
+    }
+    MimicUILib_gv_uI_BoostFXVisibilityTime = 7;
     MimicUILib_gv_uIDamageFlashUI.lv_mainDialog = c_invalidDialogControlId;
     MimicUILib_gv_uIDamageFlashUI.lv_lightSplashImage = c_invalidDialogControlId;
     MimicUILib_gv_uIDamageFlashUI.lv_intenseSplashImage = c_invalidDialogControlId;
@@ -335,6 +355,7 @@ void MimicUILib_InitVariables () {
     MimicUILib_gv_EndofGameAwardsPanel.lv_secondaryContainer = c_invalidDialogControlId;
     MimicUILib_gv_EndofGameAwardsPanel.lv_secondaryCutscenesContainer = c_invalidDialogControlId;
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerName = c_invalidDialogControlId;
+    MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerBoostIcon = c_invalidDialogControlId;
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryHeroName = c_invalidDialogControlId;
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryHeading = c_invalidDialogControlId;
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondarySeparatorImage_Blue = c_invalidDialogControlId;
@@ -368,6 +389,7 @@ void MimicUILib_InitVariables () {
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_awardIcon = c_invalidDialogControlId;
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_heroNameLabel = c_invalidDialogControlId;
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_playerNameLabel = c_invalidDialogControlId;
+        MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_playerBoostIcon = c_invalidDialogControlId;
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_heroCutscene = c_invalidDialogControlId;
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_BannerCutscne = c_invalidDialogControlId;
         MimicUILib_gv_uIMVPSecondaryPanels[init_i].lv_voterButton = c_invalidDialogControlId;
@@ -405,6 +427,7 @@ void MimicUILib_InitVariables () {
     MimicUILib_gv_uIGameUIHandles.lv_fullscreenUpperContainer = c_invalidDialogControlId;
     MimicUILib_gv_uIGameUIHandles.lv_consoleUIContainer = c_invalidDialogControlId;
     MimicUILib_gv_uIGameUIHandles.lv_consolePanel = c_invalidDialogControlId;
+    MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton = c_invalidDialogControlId;
     MimicUILib_gv_uIGameUIHandles.lv_talentsButton = c_invalidDialogControlId;
     MimicUILib_gv_uIGameUIHandles.lv_gameMenuButton = c_invalidDialogControlId;
     MimicUILib_gv_uIGameUIHandles.lv_minimapPanel = c_invalidDialogControlId;
@@ -433,13 +456,13 @@ void MimicUILib_InitVariables () {
     MimicUILib_gv_uIHeroConsole.lv_heroStatsManaBar = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsFuryStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame = c_invalidDialogControlId;
+    MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsEnergyStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsNoEnergyStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsNoEnergyNoShieldStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_heroStatsBlinkingEnergyStatFrame = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_gameUIPortrait = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_gameUICommandCardPanelFrame = c_invalidDialogControlId;
-    MimicUILib_gv_uIHeroConsole.lv_gameUIInventoryPanel = c_invalidDialogControlId;
     MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire = c_invalidDialogControlId;
     MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarParentFrame = c_invalidDialogControlId;
     MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarLeftBar = c_invalidDialogControlId;
@@ -486,6 +509,9 @@ void MimicUILib_InitVariables () {
         }
         for (init_i1 = 0; init_i1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_i1 += 1) {
             MimicUILib_gv_uIHeroStatusFrames[init_i].lv_unstoppableImage[init_i1] = c_invalidDialogControlId;
+        }
+        for (init_i1 = 0; init_i1 <= MimicUILib_gv_uI_MaxHeroGroupStatusFrames; init_i1 += 1) {
+            MimicUILib_gv_uIHeroStatusFrames[init_i].lv_onFireCutscene[init_i1] = c_invalidDialogControlId;
         }
     }
     MimicUILib_gv_uIHeroTrackerArrows.lv_mainPanel = c_invalidDialogControlId;
@@ -717,6 +743,9 @@ void MimicUILib_InitVariables () {
         MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsOrange[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
         MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsYellow[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
@@ -724,6 +753,9 @@ void MimicUILib_InitVariables () {
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
         MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
         MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsSeparateShields[init_i1] = c_invalidDialogControlId;
@@ -767,6 +799,9 @@ void MimicUILib_InitVariables () {
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
         MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[init_i1] = c_invalidDialogControlId;
+    }
+    for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
+        MimicUILib_gv_uIPartyFrame.lv_playerBoostEffect[init_i1] = c_invalidDialogControlId;
     }
     for (init_i1 = 0; init_i1 <= libCore_gv_bALMaxPlayers; init_i1 += 1) {
         MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[init_i1] = c_invalidDialogControlId;
@@ -1009,6 +1044,178 @@ fixed MimicUILib_gf_HeroesGameTime () {
     }
 }
 
+void MimicUILib_gf_UIDEBUGBoostsInitializeBoostFXforPlayers (int lp_player) {
+    // Variable Declarations
+    unit lv_itHero;
+    int lv_heroCount;
+
+    // Automatic Variable Declarations
+    unitgroup auto76F73EF9_g;
+    int auto76F73EF9_u;
+
+    // Variable Initialization
+
+    // Implementation
+    if (((lp_player > libCore_gv_bALMaxPlayers) || (lp_player < 1))) {
+        return ;
+    }
+
+    auto76F73EF9_g = libGame_gv_players[lp_player].lv_heroUnitGroup;
+    auto76F73EF9_u = UnitGroupCount(auto76F73EF9_g, c_unitCountAll);
+    for (;; auto76F73EF9_u -= 1) {
+        lv_itHero = UnitGroupUnitFromEnd(auto76F73EF9_g, auto76F73EF9_u);
+        if (lv_itHero == null) { break; }
+        MimicUILib_gf_UIBoostsInitializeBoostFX(lp_player, lv_itHero);
+    }
+}
+
+void MimicUILib_gf_UIBoostsInitializeBoostFXforPlayers (int lp_player) {
+    // Variable Declarations
+    unit lv_itHero;
+    int lv_heroCount;
+
+    // Automatic Variable Declarations
+    unitgroup autoBB30E191_g;
+    int autoBB30E191_u;
+
+    // Variable Initialization
+
+    // Implementation
+    if (((lp_player > libCore_gv_bALMaxPlayers) || (lp_player < 1) || (PlayerHasActiveBoost(lp_player) == false))) {
+        return ;
+    }
+
+    autoBB30E191_g = libGame_gv_players[lp_player].lv_heroUnitGroup;
+    autoBB30E191_u = UnitGroupCount(autoBB30E191_g, c_unitCountAll);
+    for (;; autoBB30E191_u -= 1) {
+        lv_itHero = UnitGroupUnitFromEnd(autoBB30E191_g, autoBB30E191_u);
+        if (lv_itHero == null) { break; }
+        MimicUILib_gf_UIBoostsInitializeBoostFX(lp_player, lv_itHero);
+    }
+}
+
+void MimicUILib_gf_UIBoostsInitializeBoostFX (int lp_player, unit lp_heroUnit) {
+    // Variable Declarations
+    int lv_heroIndex;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if (((MimicUILib_gv_uIBoosts.lv_frameCount[lp_player] == MimicUILib_gv_uI_MaxBoostFrames) || (UnitTypeTestAttribute(UnitGetType(lp_heroUnit), c_unitAttributeHeroic) == false) || (UnitGetType(lp_heroUnit) == "HeroLostVikingsController") || (UnitGetType(lp_heroUnit) == "HeroDVaPilot") || (UnitGetType(lp_heroUnit) == "RexxarMisha"))) {
+        return ;
+    }
+
+    if (((UnitGetType(lp_heroUnit) == "HeroCho") || (UnitGetType(lp_heroUnit) == "HeroGall"))) {
+        MimicUILib_gf_UIBoostsInitializeBoostFXforChoGallPlayers(lp_player);
+    }
+    else {
+        MimicUILib_gv_uIBoosts.lv_frameCount[lp_player] += 1;
+        lv_heroIndex = MimicUILib_gv_uIBoosts.lv_frameCount[lp_player];
+        DialogCreate(1, 1, c_anchorTop, 0, 0, true);
+        MimicUILib_gv_uIBoosts.lv_boostFXAnchor[lp_player][lv_heroIndex] = DialogLastCreated();
+        DialogSetPositionRelativeToUnitWithAnchor(DialogLastCreated(), lp_heroUnit, "Ref_Overhead", c_anchorBottom, 0, 0);
+        DialogControlCreate(DialogLastCreated(), c_triggerControlTypePanel);
+        MimicUILib_gv_uIBoosts.lv_boostFXAnchorFrame[lp_player][lv_heroIndex] = DialogControlLastCreated();
+        DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenLowerContainer/BoostPanel");
+        MimicUILib_gv_uIBoosts.lv_boostPanel = DialogControlLastCreated();
+        DialogControlCreateInPanelFromTemplate(MimicUILib_gv_uIBoosts.lv_boostPanel, c_triggerControlTypePanel, "InGameBoostCutsceneFrame/InGameBoostCutsceneFrame");
+        MimicUILib_gv_uIBoosts.lv_boostFXPanel[lp_player][lv_heroIndex] = DialogControlLastCreated();
+        DialogControlSetPositionRelative(DialogControlLastCreated(), PlayerGroupAll(), c_anchorBottom, MimicUILib_gv_uIBoosts.lv_boostFXAnchorFrame[lp_player][lv_heroIndex], c_anchorTop, 0, 50);
+    }
+}
+
+void MimicUILib_gf_UIBoostsInitializeBoostFXforChoGallPlayers (int lp_player) {
+    // Variable Declarations
+    int lv_choPlayer;
+    int lv_gallPlayer;
+    int lv_heroIndex;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_choPlayer = libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_choPlayer;
+    lv_gallPlayer = libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_player)].lv_gallPlayer;
+    if (((PlayerHasActiveBoost(lv_choPlayer) == true) || (PlayerHasActiveBoost(lv_gallPlayer) == true))) {
+        MimicUILib_gv_uIBoosts.lv_frameCount[lp_player] += 1;
+        lv_heroIndex = MimicUILib_gv_uIBoosts.lv_frameCount[lp_player];
+        DialogCreate(1, 1, c_anchorTop, 0, 0, true);
+        MimicUILib_gv_uIBoosts.lv_boostFXAnchor[lp_player][lv_heroIndex] = DialogLastCreated();
+        DialogSetPositionRelativeToUnitWithAnchor(DialogLastCreated(), libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lv_choPlayer)].lv_choUnit, "Ref_Overhead", c_anchorBottom, 0, 0);
+        DialogControlCreate(DialogLastCreated(), c_triggerControlTypePanel);
+        MimicUILib_gv_uIBoosts.lv_boostFXAnchorFrame[lp_player][lv_heroIndex] = DialogControlLastCreated();
+        DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenLowerContainer/BoostPanel");
+        MimicUILib_gv_uIBoosts.lv_boostPanel = DialogControlLastCreated();
+        DialogControlCreateInPanelFromTemplate(MimicUILib_gv_uIBoosts.lv_boostPanel, c_triggerControlTypePanel, "InGameBoostCutsceneFrame/InGameBoostCutsceneFrame");
+        MimicUILib_gv_uIBoosts.lv_boostFXPanel[lp_player][lv_heroIndex] = DialogControlLastCreated();
+        DialogControlSetPositionRelative(DialogControlLastCreated(), PlayerGroupAll(), c_anchorBottom, MimicUILib_gv_uIBoosts.lv_boostFXAnchorFrame[lp_player][lv_heroIndex], c_anchorTop, 0, 50);
+    }
+
+}
+
+void MimicUILib_gf_UIBoostsShowBoostFXFrames () {
+    // Variable Declarations
+    int lv_itPlayer;
+    int lv_itFrame;
+
+    // Automatic Variable Declarations
+    const int auto1E27DA6D_ae = libCore_gv_bALMaxPlayers;
+    const int auto1E27DA6D_ai = 1;
+    int autoD5EA90E3_ae;
+    const int autoD5EA90E3_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_itPlayer = 1;
+    for ( ; ( (auto1E27DA6D_ai >= 0 && lv_itPlayer <= auto1E27DA6D_ae) || (auto1E27DA6D_ai < 0 && lv_itPlayer >= auto1E27DA6D_ae) ) ; lv_itPlayer += auto1E27DA6D_ai ) {
+        if ((MimicUILib_gv_uIBoosts.lv_frameCount[lv_itPlayer] > 0)) {
+            autoD5EA90E3_ae = MimicUILib_gv_uIBoosts.lv_frameCount[lv_itPlayer];
+            lv_itFrame = 1;
+            for ( ; ( (autoD5EA90E3_ai >= 0 && lv_itFrame <= autoD5EA90E3_ae) || (autoD5EA90E3_ai < 0 && lv_itFrame >= autoD5EA90E3_ae) ) ; lv_itFrame += autoD5EA90E3_ai ) {
+                DialogControlSendAnimationEvent(MimicUILib_gv_uIBoosts.lv_boostFXPanel[lv_itPlayer][lv_itFrame], libGame_gf_AlliedPlayerGroupOfPlayer(lv_itPlayer), "PlayBoostFX");
+            }
+        }
+
+        if ((PlayerHasActiveBoost(lv_itPlayer) == true)) {
+            DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_playerBoostEffect[lv_itPlayer], libGame_gf_AlliedPlayerGroupOfPlayer(lv_itPlayer), "ShowBoostEffect");
+        }
+
+    }
+    Wait(MimicUILib_gv_uI_BoostFXVisibilityTime, c_timeGame);
+    MimicUILib_gf_UIBoostsDestroyBoostFXFrames();
+}
+
+void MimicUILib_gf_UIBoostsDestroyBoostFXFrames () {
+    // Variable Declarations
+    int lv_itPlayer;
+    int lv_itFrame;
+
+    // Automatic Variable Declarations
+    const int auto747CC781_ae = libCore_gv_bALMaxPlayers;
+    const int auto747CC781_ai = 1;
+    int auto2375E146_ae;
+    const int auto2375E146_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_itPlayer = 1;
+    for ( ; ( (auto747CC781_ai >= 0 && lv_itPlayer <= auto747CC781_ae) || (auto747CC781_ai < 0 && lv_itPlayer >= auto747CC781_ae) ) ; lv_itPlayer += auto747CC781_ai ) {
+        if ((MimicUILib_gv_uIBoosts.lv_frameCount[lv_itPlayer] > 0)) {
+            auto2375E146_ae = MimicUILib_gv_uIBoosts.lv_frameCount[lv_itPlayer];
+            lv_itFrame = 1;
+            for ( ; ( (auto2375E146_ai >= 0 && lv_itFrame <= auto2375E146_ae) || (auto2375E146_ai < 0 && lv_itFrame >= auto2375E146_ae) ) ; lv_itFrame += auto2375E146_ai ) {
+                DialogControlDestroy(MimicUILib_gv_uIBoosts.lv_boostFXPanel[lv_itPlayer][lv_itFrame]);
+                DialogDestroy(MimicUILib_gv_uIBoosts.lv_boostFXAnchor[lv_itPlayer][lv_itFrame]);
+            }
+            MimicUILib_gv_uIBoosts.lv_frameCount[lv_itPlayer] = 0;
+        }
+
+    }
+}
+
 void MimicUILib_gf_InitPathingLines (unit lp_unit, int lp_player) {
     // Automatic Variable Declarations
     // Implementation
@@ -1021,7 +1228,6 @@ void MimicUILib_gf_InitPathingLines (unit lp_unit, int lp_player) {
     PathSetAbilClassFilter(PathLastCreated(), c_classIdCAbilEffectInstant, c_abilClassFilterExcluded);
     PathSetAbilClassFilter(PathLastCreated(), c_classIdCAbilEffectTarget, c_abilClassFilterExcluded);
     PathSetAbilClassFilter(PathLastCreated(), c_classIdCAbilArmMagazine, c_abilClassFilterExcluded);
-    PathSetAbilClassFilter(PathLastCreated(), c_classIdCAbilInventory, c_abilClassFilterExcluded);
     PathSetLineTexture(PathLastCreated(), c_pathLocationMinimap, "Assets\\Textures\\storm_waypointline.dds");
     PathSetMinimumStepCount(PathLastCreated(), 0);
     PathSetMinimumTravelDistance(PathLastCreated(), 3.0);
@@ -1688,7 +1894,7 @@ void MimicUILib_gf_UIDebugPanelShowHideDebugPanelForPlayer (bool lp_showHide, in
     // Variable Initialization
 
     // Implementation
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return ;
     }
 
@@ -2261,6 +2467,7 @@ void MimicUILib_gf_UIDebugPanelCleanUpHeroForPlayer (int lp_player) {
         }
     }
     libGame_gv_players[lp_player].lv_heroUnit = null;
+    PlayerSetHeroUnit(lp_player, null);
     UnitGroupClear(libGame_gv_players[lp_player].lv_heroUnitGroup);
     UISetCommandAllowed(PlayerGroupSingle(lp_player), c_uiCommandAllowQueue, true);
     libCore_gf_DataClearHeroDataAtIndex(lp_player);
@@ -2309,10 +2516,13 @@ bool auto_MimicUILib_gf_UIDebugPanelSpawnOrSwapHeroForPlayer_TriggerFunc (bool t
     int lv_isManualSpawnIndex;
     int lv_index;
     int lv_itTier;
+    unit lv_sconceUnit;
 
     // Automatic Variable Declarations
     const int autoD550C213_ae = libCore_gv_dataHeroesManualSpawnHeroesCount;
     const int autoD550C213_ai = 1;
+    int auto5EA094CA_ae;
+    int auto5EA094CA_var;
     const int autoDB72DD1B_ae = libGame_gv_moonwellMaxMoonwellCount;
     int autoDB72DD1B_var;
     const int auto9208DEE2_ae = libCore_gv_dataHeroesManualSpawnHeroesCount;
@@ -2382,11 +2592,25 @@ bool auto_MimicUILib_gf_UIDebugPanelSpawnOrSwapHeroForPlayer_TriggerFunc (bool t
         return true;
     }
 
+    if ((libGame_gv_players[lp_player].lv_isDead == true)) {
+        libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove, libGame_gv_players[lp_player].lv_aIHeroDelegateTokenValue, libGame_gf_TeamNumberOfPlayer(lp_player), libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroDead);
+    }
+    else {
+        libAIAI_gf_AITeamDelegateModifyHeroStatusTokensforTeam(libAIAI_ge_AITeamDelegateAddRemoveLaneValue_Remove, libGame_gv_players[lp_player].lv_aIHeroDelegateTokenValue, libGame_gf_TeamNumberOfPlayer(lp_player), libAIAI_ge_AITeamDelegateLivingDeadHeroStatusUpdates_HeroAlive);
+    }
     if ((libAIAI_gf_HeroAIIsAIEnabledForPlayer(lp_player) == true)) {
         lv_wasAI = true;
     }
 
     MimicUILib_gf_UIDebugPanelCleanUpHeroForPlayer(lp_player);
+    auto5EA094CA_ae = libMapM_gv_jungleNumberOfCreepCamps;
+    auto5EA094CA_var = 1;
+    for ( ; auto5EA094CA_var <= auto5EA094CA_ae; auto5EA094CA_var += 1 ) {
+        if ((libMapM_gv_jungleCreepCamps[auto5EA094CA_var].lv_capturingPlayer == lp_player)) {
+            libMapM_gf_JungleDebugResetCamp(lp_player, auto5EA094CA_var);
+        }
+
+    }
     UIFlyerHelperOverride(PlayerGroupSingle(lp_player), libNtve_ge_FlyerHelperDisplay_c_flyerDisplayAll);
     autoDB72DD1B_var = 1;
     for ( ; autoDB72DD1B_var <= autoDB72DD1B_ae; autoDB72DD1B_var += 1 ) {
@@ -2590,6 +2814,7 @@ void MimicUILib_gf_AssignMVPStattoNextUISlot (text lp_statLabel, text lp_statAmo
     }
     if ((lp_bestLabel != null)) {
         DialogControlHookup(lv_bestInGameFrame, c_triggerControlTypeLabel, "Label");
+        libNtve_gf_SetDialogItemPlayerId(DialogControlLastCreated(), 0, PlayerGroupAll());
         lv_bestInGameLabel = DialogControlLastCreated();
         DialogControlSetVisible(lv_bestInGameFrame, PlayerGroupAll(), true);
         libNtve_gf_SetDialogItemText(lv_bestInGameLabel, lp_bestLabel, PlayerGroupAll());
@@ -2689,6 +2914,7 @@ void MimicUILib_gf_UIEndofMatchAwardsMVPReveal () {
     int lv_itPlayer;
     int lv_iterator;
     int lv_winnerPlayerId;
+    bool lv_hasBoost;
 
     // Automatic Variable Declarations
     playergroup auto288FD252_g;
@@ -2718,6 +2944,12 @@ void MimicUILib_gf_UIEndofMatchAwardsMVPReveal () {
     libNtve_gf_SetDialogItemText(MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryHeroName, libGame_gv_mVPStats[libGame_gv_mVPPlayer].lv_heroName, PlayerGroupAll());
     libNtve_gf_SetDialogItemText(MimicUILib_gv_uIMVPWinnerPanel.lv_playerNameLabel, libGame_gv_players[libGame_gv_mVPPlayer].lv_name, PlayerGroupAll());
     libNtve_gf_SetDialogItemText(MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerName, libGame_gv_players[libGame_gv_mVPPlayer].lv_name, PlayerGroupAll());
+    if ((PlayerHasActiveBoost(libGame_gv_mVPPlayer) == true)) {
+        DialogControlSetVisible(MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerBoostIcon, PlayerGroupAll(), true);
+    }
+    else {
+        DialogControlSetVisible(MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerBoostIcon, PlayerGroupAll(), false);
+    }
     libNtve_gf_SetDialogItemPlayerId(MimicUILib_gv_uIMVPSecondaryPanels[0].lv_heroCutscene, libGame_gv_mVPPlayer, PlayerGroupAll());
     libNtve_gf_SetDialogItemBannerLink(MimicUILib_gv_uIMVPSecondaryPanels[0].lv_BannerCutscne, PlayerBanner(libGame_gv_mVPPlayer), PlayerGroupAll());
     libNtve_gf_SetDialogItemText(MimicUILib_gv_uIMVPWinnerPanel.lv_killsValueLabel, FixedToText(libGame_gv_mVPStats[libGame_gv_mVPPlayer].lv_kills, c_fixedPrecisionAny), PlayerGroupAll());
@@ -2746,6 +2978,12 @@ void MimicUILib_gf_UIEndofMatchAwardsMVPReveal () {
             libNtve_gf_SetDialogItemText(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_awardStatLabel, libGame_gf_GetFinalAwardValueInfo(lv_winnerPlayerId, lv_iterator), PlayerGroupAll());
             libNtve_gf_SetDialogItemText(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_heroNameLabel, UnitTypeGetName(UnitGetType(libGame_gv_players[lv_winnerPlayerId].lv_heroUnit)), PlayerGroupAll());
             libNtve_gf_SetDialogItemText(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_playerNameLabel, libGame_gv_players[lv_winnerPlayerId].lv_name, PlayerGroupAll());
+            if ((PlayerHasActiveBoost(lv_winnerPlayerId) == true)) {
+                DialogControlSetVisible(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_playerBoostIcon, PlayerGroupAll(), true);
+            }
+            else {
+                DialogControlSetVisible(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_playerBoostIcon, PlayerGroupAll(), false);
+            }
             MimicUILib_gf_UIEndofMatchAwardsSetSecondaryAwardColor(lv_iterator, libGame_gf_EnemyTeamNumberOfPlayer(lv_winnerPlayerId));
             MimicUILib_gf_UIEndofMatchAwardsSetSecondaryAwardBadge(lv_iterator);
             libNtve_gf_SetDialogItemTooltip(MimicUILib_gv_uIMVPSecondaryPanels[lv_iterator].lv_awardTooltipHitbox, libGame_gf_GetAwardTooltipInfo(lv_winnerPlayerId, (libGame_gv_finalSecondaryAwardsList[lv_iterator].lv_awardIndex)), PlayerGroupAll());
@@ -2852,7 +3090,11 @@ void MimicUILib_gf_UIFloatingCombatTextCreateTextTag (int lp_displayPlayer, fixe
     // Variable Initialization
 
     // Implementation
-    if (((MimicUILib_gv_uIDebugPanelShowAllCombatText == true) && (libCore_gv_dEBUGDebuggingEnabled == true))) {
+    if ((UnitIsValid(lp_targetUnit) == false)) {
+        return ;
+    }
+
+    if (((MimicUILib_gv_uIDebugPanelShowAllCombatText == true) && (true == true))) {
         lv_itPlayer = 1;
         for ( ; ( (autoFFE582C5_ai >= 0 && lv_itPlayer <= autoFFE582C5_ae) || (autoFFE582C5_ai < 0 && lv_itPlayer >= autoFFE582C5_ae) ) ; lv_itPlayer += autoFFE582C5_ai ) {
             MimicUILib_gf_UIFloatingCombatTextCreateTextTagAtPosition(lv_itPlayer, lp_duration, lp_text, UnitGetPosition(lp_targetUnit), lp_heightOffset, lp_horizontalOffset, lp_numberType, lp_obeyFogRules);
@@ -3143,7 +3385,7 @@ void MimicUILib_gf_UIFloatingCombatTextLeashing (unit lp_Unit) {
     // Variable Initialization
 
     // Implementation
-    if ((MimicUILib_gv_floatingCombatText_SuppressLeashingText == false)) {
+    if (((UnitIsValid(lp_Unit) == true) && (MimicUILib_gv_floatingCombatText_SuppressLeashingText == false))) {
         FloatingCombatElementCreateTextAtUnit(PlayerGroupAll(), "FloatingCombatElements/FloatingCombatElementTemplate", "", lp_Unit, StringExternal("Param/Value/lib_UIUI_3BE6264C"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
     }
 
@@ -3172,8 +3414,23 @@ void MimicUILib_gf_UIFloatingCombatTextH16MidXP (int lp_displayPlayer, unit lp_t
     else if (autoA62876A2_val == libCore_ge_FloatingTextType_XPLarge) {
         FloatingCombatElementCreateNumberTextAtPoint(PlayerGroupSingle(lp_displayPlayer), "FloatingCombatElements/FloatingCombatGreaterAmountReceived", "XPState", UnitGetPosition(lp_target), lp_Unit, lv_xPText, libNtve_gv_FloatingCombatTextAutoRandomSeed);
     }
+    else if (autoA62876A2_val == libCore_ge_FloatingTextType_XPSelf) {
+        FloatingCombatElementCreateNumberTextAtPoint(PlayerGroupSingle(lp_displayPlayer), "FloatingCombatElements/FloatingCombatSelfAmountReceived", "XPState", UnitGetPosition(lp_target), lp_Unit, lv_xPText, libNtve_gv_FloatingCombatTextAutoRandomSeed);
+    }
     else {
     }
+}
+
+void MimicUILib_gf_UIFloatingCombatTextPeriodicCatapults (text lp_displayText, point lp_position) {
+    // Automatic Variable Declarations
+    // Implementation
+    TextExpressionSetToken("Param/Expression/lib_UIUI_4ABD003C", "A", StringExternal("Param/Value/lib_UIUI_43616147"));
+    TextExpressionSetToken("Param/Expression/lib_UIUI_4ABD003C", "B", lp_displayText);
+    TextTagCreate(TextExpressionAssemble("Param/Expression/lib_UIUI_4ABD003C"), 20, lp_position, 1.5, true, false, PlayerGroupAll());
+    TextTagSetVelocity(TextTagLastCreated(), 1.0, 90.0);
+    TextTagSetTime(TextTagLastCreated(), c_textTagTimeFadeOut, 0.25);
+    TextTagSetTime(TextTagLastCreated(), c_textTagTimeDuration, 3.0);
+    TextTagSetFogVisibility(TextTagLastCreated(), c_visTypeFog);
 }
 
 void MimicUILib_gf_VignetteOverlayPlayForPlayer (int lp_player, string lp_cutscene) {
@@ -3737,7 +3994,6 @@ void MimicUILib_gf_UIHeroConsoleShowHideForPlayer (bool lp_showHide, int lp_play
     // Implementation
     DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_mainPanel, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
     DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_buffDebuffPanel, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
-    DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_gameUIInventoryPanel, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
     DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_gameUIPortrait, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
     UISetFrameVisible(libCore_gv_playerGroupFromPlayer[lp_player], c_syncFrameTypeCommandPanel, lp_showHide);
 }
@@ -3756,6 +4012,7 @@ void MimicUILib_gf_UIHeroConsoleShowHideUnitStatusFrameForPlayer (bool lp_showHi
         DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsNoEnergyNoShieldStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], false);
         DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsEnergyStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], false);
         DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsUnitStatusFrame, libCore_gv_playerGroupFromPlayer[lp_player], false);
+        DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], false);
     }
 
     if ((UnitGetType(libGame_gv_players[lp_player].lv_activeVehicle) != "VolskayaVehicle") && (UnitGetType(libGame_gv_players[lp_player].lv_activeVehicle) != "VolskayaVehicleGunner") && ((libGame_gv_players[lp_player].lv_activeVehicle == null) || (UnitGetType(libGame_gv_players[lp_player].lv_heroUnit) != "HeroAbathur"))) {
@@ -3777,6 +4034,9 @@ void MimicUILib_gf_UIHeroConsoleShowHideUnitStatusFrameForPlayer (bool lp_showHi
         }
         else if (autoA5817BAB_val == MimicUILib_ge_UIHeroResourceType_Blinking) {
             DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsBlinkingEnergyStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
+        }
+        else if (autoA5817BAB_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
         }
         else {
             DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsUnitStatusFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
@@ -3801,6 +4061,9 @@ void MimicUILib_gf_UIHeroConsoleShowHideUnitStatusFrameForPlayer (bool lp_showHi
         }
         else if (auto15575334_val == MimicUILib_ge_UIHeroResourceType_Blinking) {
             DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsBlinkingEnergyStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
+        }
+        else if (auto15575334_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
         }
         else {
             DialogControlSetVisible(MimicUILib_gv_uIHeroConsole.lv_heroStatsUnitStatusFrame, libCore_gv_playerGroupFromPlayer[lp_player], lp_showHide);
@@ -3842,6 +4105,11 @@ void MimicUILib_gf_UIHeroConsoleSetUpForPlayer (unit lp_unit, int lp_player) {
         else if (auto4832C7DC_val == MimicUILib_ge_UIHeroResourceType_Yellow) {
             libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame, lp_unit, libCore_gv_playerGroupFromPlayer[lp_player]);
             DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame, c_triggerControlTypeUnitStatusBar, "HealthBar");
+            libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), lv_healthText, libCore_gv_playerGroupFromPlayer[lp_player]);
+        }
+        else if (auto4832C7DC_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, lp_unit, libCore_gv_playerGroupFromPlayer[lp_player]);
+            DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, c_triggerControlTypeUnitStatusBar, "HealthBar");
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), lv_healthText, libCore_gv_playerGroupFromPlayer[lp_player]);
         }
         else if (auto4832C7DC_val == MimicUILib_ge_UIHeroResourceType_Pink) {
@@ -3894,6 +4162,11 @@ void MimicUILib_gf_UIHeroConsoleSetUpForPlayer (unit lp_unit, int lp_player) {
             DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBlinkingEnergyStatFrame, c_triggerControlTypeUnitStatusBar, "HealthBar");
             libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), lv_healthText, libCore_gv_playerGroupFromPlayer[lp_player]);
         }
+        else if (auto4296FE76_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, lp_unit, libCore_gv_playerGroupFromPlayer[lp_player]);
+            DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, c_triggerControlTypeUnitStatusBar, "HealthBar");
+            libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), lv_healthText, libCore_gv_playerGroupFromPlayer[lp_player]);
+        }
         else {
             libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIHeroConsole.lv_heroStatsUnitStatusFrame, lp_unit, libCore_gv_playerGroupFromPlayer[lp_player]);
             libNtve_gf_SetDialogItemTooltip(MimicUILib_gv_uIHeroConsole.lv_heroStatsHealthBar, lv_healthText, libCore_gv_playerGroupFromPlayer[lp_player]);
@@ -3901,7 +4174,11 @@ void MimicUILib_gf_UIHeroConsoleSetUpForPlayer (unit lp_unit, int lp_player) {
         }
     }
     autoAFEECCF3_val = UnitGetType(libGame_gv_players[lp_player].lv_heroUnit);
-    if (autoAFEECCF3_val == "HeroValeera") {
+    if (autoAFEECCF3_val == "HeroTinker") {
+        DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame, c_triggerControlTypeUnitStatusBar, "EnergyBar");
+        libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText(""), libCore_gv_playerGroupFromPlayer[lp_player]);
+    }
+    else if (autoAFEECCF3_val == "HeroValeera") {
         DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame, c_triggerControlTypeUnitStatusBar, "EnergyBar");
         libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringToText(""), libCore_gv_playerGroupFromPlayer[lp_player]);
     }
@@ -3920,6 +4197,10 @@ void MimicUILib_gf_UIHeroConsoleSetUpForPlayer (unit lp_unit, int lp_player) {
     else if (autoAFEECCF3_val == "HeroZarya") {
         DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsEnergyStatFrame, c_triggerControlTypeUnitStatusBar, "EnergyBar");
         libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringExternal("Param/Value/lib_UIUI_64406079"), libCore_gv_playerGroupFromPlayer[lp_player]);
+    }
+    else if (autoAFEECCF3_val == "HeroDeathwing") {
+        DialogControlHookup(MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame, c_triggerControlTypeUnitStatusBar, "EnergyBar");
+        libNtve_gf_SetDialogItemTooltip(DialogControlLastCreated(), StringExternal("Param/Value/lib_UIUI_0E6A1519"), libCore_gv_playerGroupFromPlayer[lp_player]);
     }
     else {
     }
@@ -3943,6 +4224,7 @@ void MimicUILib_gf_HeroConsoleUnitStatusBarsUpdateStunDeathBar (string lp_newBeh
     }
 
     if ((lp_newBehavior == "Dead")) {
+        DialogControlSetAnimationState(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarParentFrame, libCore_gv_playerGroupFromPlayer[lv_player], "DeadOrStunned", "Dead");
         MimicUILib_gv_heroConsoleUnitStatusBars_StunDeathBarCurrentBehaviorForPlayer[lv_player] = lp_newBehavior;
         libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarLeftBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
         libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarRightBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
@@ -3951,6 +4233,7 @@ void MimicUILib_gf_HeroConsoleUnitStatusBarsUpdateStunDeathBar (string lp_newBeh
     }
     else {
         if ((lp_newBehavior == "GuldanDarkBargainDuration")) {
+            DialogControlSetAnimationState(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarParentFrame, libCore_gv_playerGroupFromPlayer[lv_player], "DeadOrStunned", "Dead");
             MimicUILib_gv_heroConsoleUnitStatusBars_StunDeathBarCurrentBehaviorForPlayer[lv_player] = lp_newBehavior;
             libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarLeftBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
             libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarRightBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
@@ -3959,6 +4242,7 @@ void MimicUILib_gf_HeroConsoleUnitStatusBarsUpdateStunDeathBar (string lp_newBeh
         }
         else {
             if ((UnitBehaviorDuration(libGame_gv_players[lv_player].lv_unitStatusBarsMonitorUnit_StunDeath, lp_newBehavior) >= UnitBehaviorDuration(libGame_gv_players[lv_player].lv_unitStatusBarsMonitorUnit_StunDeath, MimicUILib_gv_heroConsoleUnitStatusBars_StunDeathBarCurrentBehaviorForPlayer[lv_player]))) {
+                DialogControlSetAnimationState(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarParentFrame, libCore_gv_playerGroupFromPlayer[lv_player], "DeadOrStunned", "Stunned");
                 MimicUILib_gv_heroConsoleUnitStatusBars_StunDeathBarCurrentBehaviorForPlayer[lv_player] = lp_newBehavior;
                 libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarLeftBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
                 libNtve_gf_SetDialogItemBehavior(MimicUILib_gv_heroConsoleUnitStatusBars.lv_stunDeathBarRightBar, lp_newBehavior, libCore_gv_playerGroupFromPlayer[lv_player]);
@@ -4169,6 +4453,9 @@ void MimicUILib_gf_UIUnitStatusFramesUpdateUnitStatusFramesForUnit (int lp_playe
     DialogControlHookupUnitStatus(c_triggerControlTypeImage, "HeroUnitStatusParentFrame/HeroResistantFrameBackground", lp_unit);
     DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
     MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_resistantImage[lv_index] = DialogControlLastCreated();
+    DialogControlHookupUnitStatus(c_triggerControlTypeCutscene, "HeroUnitStatusParentFrame/OnFireCutsceneFrame", lp_unit);
+    DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
+    MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_index] = DialogControlLastCreated();
 }
 
 void MimicUILib_gf_UIUnitStatusFramesRemoveUnitfromUnitStatusFrameHookup (int lp_player, unit lp_unit) {
@@ -4343,6 +4630,33 @@ void MimicUILib_gf_UIHeroTrackerArrowHookupTrackerArrowsForPlayer (int lp_player
         libNtve_gf_SetDialogItemImage(MimicUILib_gv_uIHeroTrackerArrows.lv_portraitImage[lv_index], (CatalogFieldValueGet(c_gameCatalogActor, UnitGetType(lv_itHero), "HeroIcon", lp_player)), libCore_gv_playerGroupFromPlayer[lp_player]);
     }
     MimicUILib_gf_UIHeroTrackerArrowShowHideForPlayer(true, lp_player);
+}
+
+void MimicUILib_gf_UIEnableMapMechanicButtonForPlayer (int lp_PlayerID, bool lp_playIntroAnims) {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogControlSetSize(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupSingle(lp_PlayerID), MimicUILib_gv_defaultButtonSize_C, MimicUILib_gv_defaultButtonSize_C);
+    if ((lp_playIntroAnims == true)) {
+        DialogControlSetAnimationState(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupSingle(lp_PlayerID), "PlayOnceAnimationState", "IntroOn");
+    }
+
+}
+
+void MimicUILib_gf_UIDisableMapMechanicButtonForPlayer (int lp_PlayerID) {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogControlSetSize(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupSingle(lp_PlayerID), -1, -1);
+    DialogControlSetAnimationState(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupSingle(lp_PlayerID), "PlayOnceAnimationState", "IntroOff");
+}
+
+void MimicUILib_gf_UIEnableMapMechanicButtonAllPlayers (bool lp_playIntroAnims) {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogControlSetSize(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupAll(), MimicUILib_gv_defaultButtonSize_C, MimicUILib_gv_defaultButtonSize_C);
+    if ((lp_playIntroAnims == true)) {
+        DialogControlSetAnimationState(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupAll(), "PlayOnceAnimationState", "IntroOn");
+    }
+
 }
 
 void MimicUILib_gf_MapMechanicsRavenCourtShowHidePanel (bool lp_showHide) {
@@ -5316,8 +5630,12 @@ void MimicUILib_gf_KillLogAnnounceKill (int lp_sourcePlayer, unit lp_target) {
     }
     else {
         lv_itemFrame = MimicUILib_gf_KillLogAddNewItem(lp_sourcePlayer, MimicUILib_ge_KillLogItemType_Kill);
+        if ((lv_itemFrame == c_invalidDialogControlId)) {
+            return ;
+        }
+
         DialogControlSendAnimationEvent(lv_itemFrame, PlayerGroupAll(), "FadeIn");
-        if ((libGame_gf_TeamNumberOfPlayer(UnitGetOwner(lp_target)) == libGame_gv_teamChaosIndex_C)) {
+        if (((libGame_gf_TeamNumberOfPlayer(UnitGetOwner(lp_target)) == libGame_gv_teamChaosIndex_C) && (lv_itemFrame != c_invalidDialogControlId))) {
             DialogControlSetAnimationState(lv_itemFrame, libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, false), "TgtColor", "Red");
             DialogControlSetAnimationState(lv_itemFrame, libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, false), "TgtColor", "Blue");
             DialogControlSetAnimationState(lv_itemFrame, PlayerGroupSingle(libCore_gv_oBSERVER_ObserverUIPlayer), "TgtColor", "Red");
@@ -5653,7 +5971,8 @@ void MimicUILib_gf_UIOnFireSetOnFireType (int lp_onFireType, int lp_player) {
     int lv_heroGroupStatusFramesIndex;
 
     // Automatic Variable Declarations
-    int auto5E90F633_val;
+    int autoA795863C_ae;
+    const int autoA795863C_ai = 1;
 
     // Variable Initialization
 
@@ -5662,20 +5981,12 @@ void MimicUILib_gf_UIOnFireSetOnFireType (int lp_onFireType, int lp_player) {
         return ;
     }
 
-    auto5E90F633_val = lp_onFireType;
-    if (auto5E90F633_val == libGame_ge_OnFireType_Defense) {
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireDefense");
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireDefense");
-    }
-    else if (auto5E90F633_val == libGame_ge_OnFireType_Offense) {
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireOffense");
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireOffense");
-    }
-    else if (auto5E90F633_val == libGame_ge_OnFireType_Utility) {
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireUtility");
-        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireUtility");
-    }
-    else {
+    autoA795863C_ae = MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_unitCount;
+    lv_heroGroupStatusFramesIndex = 1;
+    for ( ; ( (autoA795863C_ai >= 0 && lv_heroGroupStatusFramesIndex <= autoA795863C_ae) || (autoA795863C_ai < 0 && lv_heroGroupStatusFramesIndex >= autoA795863C_ae) ) ; lv_heroGroupStatusFramesIndex += autoA795863C_ai ) {
+        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAlliance(c_playerGroupAlly, lp_player), "OnFireDefense");
+        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupSingle(lp_player), "OnFireDefense");
+        DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAlliance(c_playerGroupEnemy, lp_player), "OnFireOffense");
     }
     DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], libGame_gf_AlliedPlayerGroupOfPlayer(lp_player), "OnFireAlly");
     DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], libGame_gf_EnemyPlayerGroupOfPlayer(lp_player), "OnFireEnemy");
@@ -5689,11 +6000,20 @@ void MimicUILib_gf_UIOnFireSetOnFireType (int lp_onFireType, int lp_player) {
 
 void MimicUILib_gf_UIOnFireSetOnFireLevel (int lp_onFireLevel, int lp_player) {
     // Variable Declarations
+    bool lv_noStatusFrameFire;
     int lv_iterator;
     int lv_heroGroupStatusFramesIndex;
 
     // Automatic Variable Declarations
     int autoE935F3FA_val;
+    int autoC450851C_ae;
+    const int autoC450851C_ai = 1;
+    int auto659BAA03_ae;
+    const int auto659BAA03_ai = 1;
+    int autoC584046E_ae;
+    const int autoC584046E_ai = 1;
+    int auto004A449C_ae;
+    const int auto004A449C_ai = 1;
 
     // Variable Initialization
 
@@ -5702,27 +6022,61 @@ void MimicUILib_gf_UIOnFireSetOnFireLevel (int lp_onFireLevel, int lp_player) {
         return ;
     }
 
+    if (((UnitGetType(libGame_gv_players[lp_player].lv_heroUnit) == "HeroSamuro") || (UnitGetType(libGame_gv_players[lp_player].lv_heroUnit) == "HeroNova"))) {
+        lv_noStatusFrameFire = true;
+    }
+
     autoE935F3FA_val = lp_onFireLevel;
     if (autoE935F3FA_val == libGame_ge_OnFireLevel_Extinguished) {
+        autoC450851C_ae = MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_unitCount;
+        lv_heroGroupStatusFramesIndex = 1;
+        for ( ; ( (autoC450851C_ai >= 0 && lv_heroGroupStatusFramesIndex <= autoC450851C_ae) || (autoC450851C_ai < 0 && lv_heroGroupStatusFramesIndex >= autoC450851C_ae) ) ; lv_heroGroupStatusFramesIndex += autoC450851C_ai ) {
+            if ((lv_noStatusFrameFire == false)) {
+                DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAll(), "OnFireEnd");
+            }
+
+        }
         DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireEnd");
         DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireEnd");
     }
     else if (autoE935F3FA_val == libGame_ge_OnFireLevel_Embers) {
+        auto659BAA03_ae = MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_unitCount;
+        lv_heroGroupStatusFramesIndex = 1;
+        for ( ; ( (auto659BAA03_ai >= 0 && lv_heroGroupStatusFramesIndex <= auto659BAA03_ae) || (auto659BAA03_ai < 0 && lv_heroGroupStatusFramesIndex >= auto659BAA03_ae) ) ; lv_heroGroupStatusFramesIndex += auto659BAA03_ai ) {
+            if ((lv_noStatusFrameFire == false)) {
+                DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAll(), "OnFireEmbers");
+            }
+
+        }
         DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireEmbers");
         DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireEmbers");
     }
     else if (autoE935F3FA_val == libGame_ge_OnFireLevel_UNUSED) {
+        autoC584046E_ae = MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_unitCount;
+        lv_heroGroupStatusFramesIndex = 1;
+        for ( ; ( (autoC584046E_ai >= 0 && lv_heroGroupStatusFramesIndex <= autoC584046E_ae) || (autoC584046E_ai < 0 && lv_heroGroupStatusFramesIndex >= autoC584046E_ae) ) ; lv_heroGroupStatusFramesIndex += autoC584046E_ai ) {
+            if ((lv_noStatusFrameFire == false)) {
+                DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAll(), "OnFireSmoldering");
+            }
+
+        }
         DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireSmoldering");
         DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireSmoldering");
     }
     else if (autoE935F3FA_val == libGame_ge_OnFireLevel_Inferno) {
+        auto004A449C_ae = MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_unitCount;
+        lv_heroGroupStatusFramesIndex = 1;
+        for ( ; ( (auto004A449C_ai >= 0 && lv_heroGroupStatusFramesIndex <= auto004A449C_ae) || (auto004A449C_ai < 0 && lv_heroGroupStatusFramesIndex >= auto004A449C_ae) ) ; lv_heroGroupStatusFramesIndex += auto004A449C_ai ) {
+            if ((lv_noStatusFrameFire == false)) {
+                DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroStatusFrames[lp_player].lv_onFireCutscene[lv_heroGroupStatusFramesIndex], PlayerGroupAll(), "OnFireInferno");
+            }
+
+        }
         DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], PlayerGroupAll(), "OnFireInferno");
         DialogControlSendAnimationEvent(MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire, PlayerGroupSingle(lp_player), "OnFireInferno");
     }
     else {
     }
-    DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], libGame_gf_AlliedPlayerGroupOfPlayer(lp_player), "OnFireAlly");
-    DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[libGame_gv_players[lp_player].lv_rosterSlot], libGame_gf_EnemyPlayerGroupOfPlayer(lp_player), "OnFireEnemy");
 }
 
 void MimicUILib_gf_UIOnFireSetOnFireScoreValueHighlights () {
@@ -5745,7 +6099,7 @@ void MimicUILib_gf_UIOnFireSetOnFireScoreValueHighlights () {
         else {
             PlayerScoreValueSetFromInt(lv_playerIterator, "OnFireHighlightHeroDamageBoolean", 0);
         }
-        if (((PlayerGroupHasPlayer(libGame_gv_players[lv_playerIterator].lv_heroData.lv_heroScoreOverride, c_heroRoleSupport) == true) || (PlayerGroupHasPlayer(libGame_gv_players[lv_playerIterator].lv_heroData.lv_heroRoles, c_heroRoleSupport) == true)) && (libGame_gv_onFireHighlightforHealing[lv_playerIterator] == true) && (((libGame_gv_onFireScores[1].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[1].lv_fireLevel > 0)) || ((libGame_gv_onFireScores[2].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[2].lv_fireLevel > 0)) || ((libGame_gv_onFireScores[3].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[3].lv_fireLevel > 0)))) {
+        if ((libGame_gv_onFireHighlightforHealing[lv_playerIterator] == true) && (((libGame_gv_onFireScores[1].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[1].lv_fireLevel > 0)) || ((libGame_gv_onFireScores[2].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[2].lv_fireLevel > 0)) || ((libGame_gv_onFireScores[3].lv_player == lv_playerIterator) && (libGame_gv_onFireScores[3].lv_fireLevel > 0)))) {
             PlayerScoreValueSetFromInt(lv_playerIterator, "OnFireHighlightHealingBoolean", 1);
         }
         else {
@@ -5825,6 +6179,9 @@ void MimicUILib_gf_UIPartyFrameAddPlayerToPartyFrame (int lp_player) {
         else if (auto99686152_val == MimicUILib_ge_UIHeroResourceType_Orange) {
             libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsOrange[lv_rosterSlot], libGame_gv_players[lp_player].lv_heroUnit, PlayerGroupAll());
         }
+        else if (auto99686152_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[lv_rosterSlot], libGame_gv_players[lp_player].lv_heroUnit, PlayerGroupAll());
+        }
         else if (auto99686152_val == MimicUILib_ge_UIHeroResourceType_Yellow) {
             libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsYellow[lv_rosterSlot], libGame_gv_players[lp_player].lv_heroUnit, PlayerGroupAll());
         }
@@ -5838,10 +6195,10 @@ void MimicUILib_gf_UIPartyFrameAddPlayerToPartyFrame (int lp_player) {
             MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_UIUI_C01D02F0"), true);
         }
         if ((UnitGetType(lv_heroUnit) == "HeroLeoric")) {
-            libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], libGame_gv_players[lp_player].lv_heroUnit, PlayerGroupAll());
-            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, false);
+            libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[lv_rosterSlot], lv_heroUnit, PlayerGroupAll());
         }
 
+        DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, false);
     }
     else if (auto79366A55_val == MimicUILib_ge_UIPartyFrameHeroType_PetHero) {
         MimicUILib_gv_uIPartyFrame.lv_heroUnits[lv_rosterSlot][MimicUILib_gv_uIPartyFrameHeroSlot_C] = libGame_gv_players[lp_player].lv_heroUnit;
@@ -5934,6 +6291,7 @@ void MimicUILib_gf_UIPartyFrameShowHideUnitStatusFrameofPlayerforPlayerGroup (bo
         DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsSeparateShields[lv_rosterSlot], lp_playerGroup, false);
         DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusFrameHeroWithPet[lv_rosterSlot], lp_playerGroup, false);
         DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusFrameLostVikings[lv_rosterSlot], lp_playerGroup, false);
+        DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[lv_rosterSlot], lp_playerGroup, false);
     }
 
     auto903465C9_val = MimicUILib_gf_UIPartyFrameHeroTypeofHero(libGame_gv_players[lp_player].lv_heroUnit);
@@ -5953,6 +6311,9 @@ void MimicUILib_gf_UIPartyFrameShowHideUnitStatusFrameofPlayerforPlayerGroup (bo
         }
         else if (auto48A6BE0D_val == MimicUILib_ge_UIHeroResourceType_Pink) {
             DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsPink[lv_rosterSlot], lp_playerGroup, lp_showHide);
+        }
+        else if (auto48A6BE0D_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[lv_rosterSlot], lp_playerGroup, lp_showHide);
         }
         else if (auto48A6BE0D_val == MimicUILib_ge_UIHeroResourceType_None) {
             DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], lp_playerGroup, lp_showHide);
@@ -6078,9 +6439,7 @@ void MimicUILib_gf_UIPartyFrameHeroDies (int lp_killedPlayer, unit lp_killedUnit
         }
 
         if ((UnitGetType(lp_killedUnit) == "HeroLeoric")) {
-            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, true);
-            DialogControlSetAnimationState(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], PlayerGroupAll(), "LeoricDeathRecycle", "LeoricDead");
-            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroDeathTimeLabel[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, false);
+            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, true);
         }
 
     }
@@ -6262,7 +6621,7 @@ void MimicUILib_gf_UIPartyFrameVikingDies (int lp_player, unit lp_viking, timer 
     MimicUILib_gv_uIPartyFrame.lv_heroVikingsDeathTimers[lv_rosterSlot][lv_vikingIndex] = lp_deathTimer;
 }
 
-void MimicUILib_gf_UIPartyFrameHeroPortBackToBaseStart (int lp_player, unit lp_unit) {
+void MimicUILib_gf_UIPartyFrameHeroHearthstoneStart (int lp_player, unit lp_unit) {
     // Variable Declarations
     int lv_rosterSlot;
 
@@ -6279,7 +6638,7 @@ void MimicUILib_gf_UIPartyFrameHeroPortBackToBaseStart (int lp_player, unit lp_u
     }
 }
 
-void MimicUILib_gf_UIPartyFrameHeroPortBackToBaseFizzle (int lp_player, unit lp_unit) {
+void MimicUILib_gf_UIPartyFrameHeroHearthstoneFizzle (int lp_player, unit lp_unit) {
     // Variable Declarations
     int lv_rosterSlot;
 
@@ -6453,8 +6812,8 @@ void MimicUILib_gf_UIPartyFrameHeroicTalentUpdate (int lp_player, int lp_talentT
 
     lv_rosterSlot = libGame_gv_players[lp_player].lv_rosterSlot;
     lv_buttonEntry = CatalogFieldValueGet(c_gameCatalogTalent, libGame_gv_talents_TalentChoices[lp_player][lp_talentTierIndex].lv_talentData[libGame_gv_talents_TalentChoices[lp_player][lp_talentTierIndex].lv_selection].lv_talentCatalogLink, "Face", c_playerAny);
-    MimicUILib_gf_UIPartyFrameHeroicTalentIconSet(((CatalogFieldValueGet(c_gameCatalogButton, lv_buttonEntry, "Icon", c_playerAny))), lp_player);
     if ((MimicUILib_gf_UIPartyFrameSpecialCaseHeroHasHeroicatStart(UnitGetType(MimicUILib_gv_uIPartyFrame.lv_heroUnits[lv_rosterSlot][MimicUILib_gv_uIPartyFrameHeroSlot_C])) == false)) {
+        MimicUILib_gf_UIPartyFrameHeroicTalentIconSet(((CatalogFieldValueGet(c_gameCatalogButton, lv_buttonEntry, "Icon", c_playerAny))), lp_player);
         MimicUILib_gf_UIPartyFrameHeroicAbilitySet((CatalogFieldValueGet(c_gameCatalogTalent, libGame_gv_talents_TalentChoices[lp_player][libGame_gv_players[lp_player].lv_talent_HeroicTalentTier].lv_talentData[libGame_gv_talents_TalentChoices[lp_player][libGame_gv_players[lp_player].lv_talent_HeroicTalentTier].lv_selection].lv_talentCatalogLink, "Abil", c_playerAny)), lp_player);
     }
 
@@ -6668,6 +7027,12 @@ bool MimicUILib_gf_UIPartyFrameSpecialCaseHeroHasHeroicatStart (string lp_hero) 
     if (auto4AC3BCDB_val == "HeroTracer") {
         return true;
     }
+    else if (auto4AC3BCDB_val == "HeroDeathwing") {
+        return true;
+    }
+    else if (auto4AC3BCDB_val == "DeathwingDragonflightUnit") {
+        return true;
+    }
     else {
         return false;
     }
@@ -6680,6 +7045,12 @@ bool MimicUILib_gf_UIPartyFrameSpecialCaseHeroHasHeroicCoolup (string lp_hero) {
     // Implementation
     auto4D6381D4_val = lp_hero;
     if (auto4D6381D4_val == "HeroTracer") {
+        return true;
+    }
+    else if (auto4D6381D4_val == "HeroDeathwing") {
+        return true;
+    }
+    else if (auto4D6381D4_val == "DeathwingDragonflightUnit") {
         return true;
     }
     else {
@@ -8369,8 +8740,11 @@ int MimicUILib_gf_UIGetHeroResourceType (string lp_heroUnitType) {
     if (((lp_heroUnitType == "HeroChen") || (lp_heroUnitType == "HeroAuriel") || (lp_heroUnitType == "HeroValeera") || (lp_heroUnitType == "HeroMedic"))) {
         return MimicUILib_ge_UIHeroResourceType_Yellow;
     }
-    else if (((lp_heroUnitType == "HeroBarbarian"))) {
+    else if (((lp_heroUnitType == "HeroBarbarian") || (lp_heroUnitType == "HeroTinker"))) {
         return MimicUILib_ge_UIHeroResourceType_Orange;
+    }
+    else if (((lp_heroUnitType == "HeroDeathwing"))) {
+        return MimicUILib_ge_UIHeroResourceType_Breath;
     }
     else if (((lp_heroUnitType == "HeroZarya") || (lp_heroUnitType == "VolskayaVehicleGunner"))) {
         return MimicUILib_ge_UIHeroResourceType_Pink;
@@ -8393,7 +8767,7 @@ int MimicUILib_gf_UIGetHeroResourceTypeForPartyFrame (string lp_heroUnitType) {
     if (((lp_heroUnitType == "HeroChen") || (lp_heroUnitType == "HeroAuriel") || (lp_heroUnitType == "HeroValeera") || (lp_heroUnitType == "HeroMedic"))) {
         return MimicUILib_ge_UIHeroResourceType_Yellow;
     }
-    else if (((lp_heroUnitType == "HeroBarbarian"))) {
+    else if (((lp_heroUnitType == "HeroBarbarian") || (lp_heroUnitType == "HeroTinker"))) {
         return MimicUILib_ge_UIHeroResourceType_Orange;
     }
     else if (((lp_heroUnitType == "HeroDVaPilot") || (lp_heroUnitType == "HeroDVaMech") || (lp_heroUnitType == "HeroZarya"))) {
@@ -8401,6 +8775,9 @@ int MimicUILib_gf_UIGetHeroResourceTypeForPartyFrame (string lp_heroUnitType) {
     }
     else if (((lp_heroUnitType == "HeroProbius"))) {
         return MimicUILib_ge_UIHeroResourceType_Blinking;
+    }
+    else if (((lp_heroUnitType == "HeroDeathwing"))) {
+        return MimicUILib_ge_UIHeroResourceType_Breath;
     }
     else if (((lp_heroUnitType == "HeroTracer") || (lp_heroUnitType == "HeroIllidan") || (lp_heroUnitType == "HeroJunkrat") || (lp_heroUnitType == "HeroMurky") || (lp_heroUnitType == "HeroCho") || (lp_heroUnitType == "HeroGall") || (lp_heroUnitType == "HeroSamuro") || (lp_heroUnitType == "HeroAbathur"))) {
         return MimicUILib_ge_UIHeroResourceType_None;
@@ -8579,6 +8956,78 @@ bool MimicUILib_gt_UIDebugInitandHideErrorWarning_Func (bool testConds, bool run
 //--------------------------------------------------------------------------------------------------
 void MimicUILib_gt_UIDebugInitandHideErrorWarning_Init () {
     MimicUILib_gt_UIDebugInitandHideErrorWarning = TriggerCreate("MimicUILib_gt_UIDebugInitandHideErrorWarning_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UI - DEBUG - Show Boost FX
+//--------------------------------------------------------------------------------------------------
+bool MimicUILib_gt_UIDEBUGShowBoostFX_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_itPlayer;
+
+    // Automatic Variable Declarations
+    int autoF880E1CE_ae;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoF880E1CE_ae = libCore_gv_bALMaxPlayers;
+    lv_itPlayer = 1;
+    for ( ; lv_itPlayer <= autoF880E1CE_ae ; lv_itPlayer += 1 ) {
+        MimicUILib_gf_UIDEBUGBoostsInitializeBoostFXforPlayers(lv_itPlayer);
+    }
+    MimicUILib_gf_UIBoostsShowBoostFXFrames();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicUILib_gt_UIDEBUGShowBoostFX_Init () {
+    MimicUILib_gt_UIDEBUGShowBoostFX = TriggerCreate("MimicUILib_gt_UIDEBUGShowBoostFX_Func");
+    TriggerAddEventChatMessage(MimicUILib_gt_UIDEBUGShowBoostFX, c_playerAny, "mDebugBoostFX", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UI - Boosts - Show Boost FX
+//--------------------------------------------------------------------------------------------------
+bool MimicUILib_gt_UIBoostsShowBoostFX_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_itPlayer;
+
+    // Automatic Variable Declarations
+    const int auto424D09CF_ae = libCore_gv_bALMaxPlayers;
+    const int auto424D09CF_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(4.0, c_timeGame);
+    lv_itPlayer = 1;
+    for ( ; ( (auto424D09CF_ai >= 0 && lv_itPlayer <= auto424D09CF_ae) || (auto424D09CF_ai < 0 && lv_itPlayer >= auto424D09CF_ae) ) ; lv_itPlayer += auto424D09CF_ai ) {
+        MimicUILib_gf_UIBoostsInitializeBoostFXforPlayers(lv_itPlayer);
+    }
+    MimicUILib_gf_UIBoostsShowBoostFXFrames();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicUILib_gt_UIBoostsShowBoostFX_Init () {
+    MimicUILib_gt_UIBoostsShowBoostFX = TriggerCreate("MimicUILib_gt_UIBoostsShowBoostFX_Func");
+    libGame_gf_GameOpenTimerStarted(MimicUILib_gt_UIBoostsShowBoostFX);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8931,9 +9380,9 @@ void MimicUILib_gt_DeathRecapOpenButtonClicked_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Effect History Test
+// Trigger: DEBUG - Effect History Test
 //--------------------------------------------------------------------------------------------------
-bool MimicUILib_gt_EffectHistoryTest_Func (bool testConds, bool runActions) {
+bool MimicUILib_gt_DEBUGEffectHistoryTest_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_itEntry;
     unit lv_unit;
@@ -8961,7 +9410,7 @@ bool MimicUILib_gt_EffectHistoryTest_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -9007,15 +9456,15 @@ bool MimicUILib_gt_EffectHistoryTest_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicUILib_gt_EffectHistoryTest_Init () {
-    MimicUILib_gt_EffectHistoryTest = TriggerCreate("MimicUILib_gt_EffectHistoryTest_Func");
-    TriggerAddEventChatMessage(MimicUILib_gt_EffectHistoryTest, c_playerAny, "mtest", true);
+void MimicUILib_gt_DEBUGEffectHistoryTest_Init () {
+    MimicUILib_gt_DEBUGEffectHistoryTest = TriggerCreate("MimicUILib_gt_DEBUGEffectHistoryTest_Func");
+    TriggerAddEventChatMessage(MimicUILib_gt_DEBUGEffectHistoryTest, c_playerAny, "mtest", true);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Death Recap Populate Test
+// Trigger: DEBUG - Death Recap Populate Test
 //--------------------------------------------------------------------------------------------------
-bool MimicUILib_gt_DeathRecapPopulateTest_Func (bool testConds, bool runActions) {
+bool MimicUILib_gt_DEBUGDeathRecapPopulateTest_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_populatePlayer;
     int lv_populateUnitOwner;
@@ -9027,7 +9476,7 @@ bool MimicUILib_gt_DeathRecapPopulateTest_Func (bool testConds, bool runActions)
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -9050,9 +9499,9 @@ bool MimicUILib_gt_DeathRecapPopulateTest_Func (bool testConds, bool runActions)
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicUILib_gt_DeathRecapPopulateTest_Init () {
-    MimicUILib_gt_DeathRecapPopulateTest = TriggerCreate("MimicUILib_gt_DeathRecapPopulateTest_Func");
-    TriggerAddEventChatMessage(MimicUILib_gt_DeathRecapPopulateTest, c_playerAny, "mrecapnow", true);
+void MimicUILib_gt_DEBUGDeathRecapPopulateTest_Init () {
+    MimicUILib_gt_DEBUGDeathRecapPopulateTest = TriggerCreate("MimicUILib_gt_DEBUGDeathRecapPopulateTest_Func");
+    TriggerAddEventChatMessage(MimicUILib_gt_DEBUGDeathRecapPopulateTest, c_playerAny, "mrecapnow", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9237,7 +9686,7 @@ bool MimicUILib_gt_UIInitializeDebugPanel_Func (bool testConds, bool runActions)
     MimicUILib_gv_uIDebugPanel.lv_page2Button = DialogControlLastCreated();
     DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeButton, "KillLogPanelButton");
     MimicUILib_gv_uIDebugPanel.lv_kIllDebugButton = DialogControlLastCreated();
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         return true;
     }
 
@@ -9423,7 +9872,7 @@ bool MimicUILib_gt_UIDebugPanelRefreshCooldownsButtonClicked_Func (bool testCond
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9454,7 +9903,7 @@ bool MimicUILib_gt_UIDebugPanelSelectionEnabledCheckboxClicked_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9485,7 +9934,7 @@ bool MimicUILib_gt_UIDebugPanelStartGameButtonClicked_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9520,7 +9969,7 @@ bool MimicUILib_gt_UIDebugPanelSpawnCreepCampsButtonClicked_Func (bool testConds
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9555,7 +10004,7 @@ bool MimicUILib_gt_UIDebugPanelDisableMinionSpawningCheckboxClicked_Func (bool t
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9586,7 +10035,7 @@ bool MimicUILib_gt_UIDebugPanelDisableTrickleXPCheckboxClicked_Func (bool testCo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9617,7 +10066,7 @@ bool MimicUILib_gt_UIDebugPanelCombatTextCheckboxClicked_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9648,7 +10097,7 @@ bool MimicUILib_gt_UIDebugPanelEnableAllCombatTextCheckboxClicked_Func (bool tes
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9679,7 +10128,7 @@ bool MimicUILib_gt_UIDebugPanelSavedHeroCheckboxClicked_Func (bool testConds, bo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9716,7 +10165,7 @@ bool MimicUILib_gt_UIDebugPanelPage1ButtonClicked_Func (bool testConds, bool run
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9757,7 +10206,7 @@ bool MimicUILib_gt_UIDebugPanelPage2ButtonClicked_Func (bool testConds, bool run
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9792,7 +10241,7 @@ bool MimicUILib_gt_UIDebugPanelKillLogButtonClicked_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9824,7 +10273,7 @@ bool MimicUILib_gt_UIDebugPanelRespecButtonClicked_Func (bool testConds, bool ru
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9855,7 +10304,7 @@ bool MimicUILib_gt_UIDebugPanelPlayerSliderValueChange_Func (bool testConds, boo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9887,7 +10336,7 @@ bool MimicUILib_gt_UIDebugPanelLevelSliderValueChange_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9919,7 +10368,7 @@ bool MimicUILib_gt_UIDebugPanelUseCurrentXPCheckboxClicked_Func (bool testConds,
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9956,7 +10405,7 @@ bool MimicUILib_gt_UIDebugPanelAllHeroesCheckboxClicked_Func (bool testConds, bo
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -9987,7 +10436,7 @@ bool MimicUILib_gt_UIDebugPanelSpawnAtBaseCheckboxClicked_Func (bool testConds, 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10025,7 +10474,7 @@ bool MimicUILib_gt_UIDebugPanelHeroDropdownSelectionChange_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10065,7 +10514,7 @@ bool MimicUILib_gt_UIDebugPanelSkinDropdownSelectionChange_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10105,7 +10554,7 @@ bool MimicUILib_gt_UIDebugPanelMountTypeDropdownSelectionChange_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10145,7 +10594,7 @@ bool MimicUILib_gt_UIDebugPanelMountBaseDropdownSelectionChange_Func (bool testC
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10186,7 +10635,7 @@ bool MimicUILib_gt_UIDebugPanelAnnouncerRaidoButtonClicked_Func (bool testConds,
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10238,7 +10687,7 @@ bool MimicUILib_gt_UIDebugPanelAnnouncerRaidoButtonClicked2_Func (bool testConds
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10288,7 +10737,7 @@ bool MimicUILib_gt_UIDebugPanelAnnouncerRadioDropdownSelectionChange_Func (bool 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10331,7 +10780,7 @@ bool MimicUILib_gt_UIDebugPanelVoiceLineRadioDropdownSelectionChange_Func (bool 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10387,7 +10836,7 @@ bool MimicUILib_gt_UIDebugPanelSoundVOPlayButtonClicked_Func (bool testConds, bo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10476,7 +10925,7 @@ bool MimicUILib_gt_UIDebugPanelSoundVOAddButtonClicked_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10522,7 +10971,7 @@ bool MimicUILib_gt_UIDebugPanelSoundVOClearButtonClicked_Func (bool testConds, b
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10554,7 +11003,7 @@ bool MimicUILib_gt_UIDebugPanelSoundVODelayBoxClicked_Func (bool testConds, bool
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10600,7 +11049,7 @@ bool MimicUILib_gt_UIDebugPanelSpawnHeroButtonClicked_Func (bool testConds, bool
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10648,7 +11097,7 @@ bool MimicUILib_gt_UIDebugPanelMetaXPEditBoxClicked_Func (bool testConds, bool r
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10684,7 +11133,7 @@ bool MimicUILib_gt_UIDebugPanelSendMetaXPButtonClicked_Func (bool testConds, boo
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10740,7 +11189,7 @@ bool MimicUILib_gt_UIDebugPanelSetLootContentsButtonClicked_Func (bool testConds
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -10783,7 +11232,7 @@ bool MimicUILib_gt_UIDebugPanelUpdate_Func (bool testConds, bool runActions) {
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -10821,7 +11270,7 @@ bool MimicUILib_gt_UIDebugPanelSpawnButton_Func (bool testConds, bool runActions
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -10856,7 +11305,7 @@ bool MimicUILib_gt_UIDebugPanelPlayerNumber_Func (bool testConds, bool runAction
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -10914,8 +11363,10 @@ bool MimicUILib_gt_UIEndofMatchAwardsPanelInitialize_Func (bool testConds, bool 
     DialogControlHookup(MimicUILib_gv_EndofGameAwardsPanel.lv_mainPanel, c_triggerControlTypePanel, "AwardWinnerContainerMVP");
     MimicUILib_gv_uIMVPSecondaryPanels[0].lv_panelContainer = DialogControlLastCreated();
     lv_currAwardPanel = DialogControlLastCreated();
-    DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "PlayerNameLabel");
+    DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "PlayerNameFrame/PlayerNameLabel");
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerName = DialogControlLastCreated();
+    DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeImage, "PlayerNameFrame/BoostIcon");
+    MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryPlayerBoostIcon = DialogControlLastCreated();
     DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "HeroNameLabel");
     MimicUILib_gv_EndofGameAwardsPanel.lv_mVPSecondaryHeroName = DialogControlLastCreated();
     DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "MVPTitleLabel");
@@ -10978,8 +11429,10 @@ bool MimicUILib_gt_UIEndofMatchAwardsPanelInitialize_Func (bool testConds, bool 
         MimicUILib_gv_uIMVPSecondaryPanels[lv_itAwardWinners].lv_awardTitleLabel = DialogControlLastCreated();
         DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "HeroNameLabel");
         MimicUILib_gv_uIMVPSecondaryPanels[lv_itAwardWinners].lv_heroNameLabel = DialogControlLastCreated();
-        DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "PlayerNameLabel");
+        DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "PlayerNameFrame/PlayerNameLabel");
         MimicUILib_gv_uIMVPSecondaryPanels[lv_itAwardWinners].lv_playerNameLabel = DialogControlLastCreated();
+        DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeImage, "PlayerNameFrame/BoostIcon");
+        MimicUILib_gv_uIMVPSecondaryPanels[lv_itAwardWinners].lv_playerBoostIcon = DialogControlLastCreated();
         DialogControlHookup(lv_currAwardPanel, c_triggerControlTypeLabel, "AwardStatValueLabel");
         MimicUILib_gv_uIMVPSecondaryPanels[lv_itAwardWinners].lv_awardStatLabel = DialogControlLastCreated();
         DialogControlHookup(lv_currAwardPanel, c_triggerControlTypePanel, "AwardTooltipHitBox");
@@ -11107,7 +11560,7 @@ bool MimicUILib_gt_UIEndofMatchAwardsUpVoteButtonClicked_Func (bool testConds, b
         return true;
     }
 
-    if ((libCore_gv_dEBUGDebuggingEnabled == false)) {
+    if ((true == false)) {
         MimicUILib_gv_uIEndOfMatchAwardsPlayerHasVoted[EventPlayer()] = true;
         DialogControlSetAnimationState(MimicUILib_gv_EndofGameAwardsPanel.lv_mainPanel, libCore_gv_playerGroupFromPlayer[EventPlayer()], "VotingState", "Disabled");
     }
@@ -11134,7 +11587,7 @@ bool MimicUILib_gt_UIEndofMatchAwardsUpVoteButtonClicked_Func (bool testConds, b
         lv_receivingPlayerID = libGame_gv_finalSecondaryAwardsList[4].lv_winner;
     }
     else {
-        if ((libCore_gv_dEBUGDebuggingEnabled == true)) {
+        if ((true == true)) {
             lv_idButtonUsed = 0;
             lv_receivingPlayerID = libGame_gv_mVPPlayer;
         }
@@ -11387,14 +11840,24 @@ bool MimicUILib_gt_UIFloatingCombatTextMissed_Func (bool testConds, bool runActi
 
     if (((UnitTypeTestAttribute(UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitSource)), c_unitAttributeHeroic) == true) || (UnitTypeTestAttribute(UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitTarget)), c_unitAttributeHeroic) == true))) {
         if (((EventPlayerEffectUsed() == "BlindMissedDummy"))) {
-            PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster));
-            PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerSource));
-            FloatingCombatElementCreateTextAtUnit(lv_players, "FloatingCombatElements/FloatingCombatElementTemplate", "", EventPlayerEffectUsedUnit(c_effectUnitTarget), StringExternal("Param/Value/lib_UIUI_23A2E25C"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
+            if ((UnitIsValid(EventPlayerEffectUsedUnit(c_effectUnitTarget)) == false)) {
+                return true;
+            }
+            else {
+                PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster));
+                PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerSource));
+                FloatingCombatElementCreateTextAtUnit(lv_players, "FloatingCombatElements/FloatingCombatElementTemplate", "", EventPlayerEffectUsedUnit(c_effectUnitTarget), StringExternal("Param/Value/lib_UIUI_23A2E25C"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
+            }
         }
         else {
-            PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerTarget));
-            PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster));
-            FloatingCombatElementCreateTextAtUnit(lv_players, "FloatingCombatElements/FloatingCombatElementTemplate", "", EventPlayerEffectUsedUnit(c_effectUnitSource), StringExternal("Param/Value/lib_UIUI_525777A6"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
+            if ((UnitIsValid(EventPlayerEffectUsedUnit(c_effectUnitSource)) == false)) {
+                return true;
+            }
+            else {
+                PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerTarget));
+                PlayerGroupAdd(lv_players, EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster));
+                FloatingCombatElementCreateTextAtUnit(lv_players, "FloatingCombatElements/FloatingCombatElementTemplate", "", EventPlayerEffectUsedUnit(c_effectUnitSource), StringExternal("Param/Value/lib_UIUI_525777A6"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
+            }
         }
     }
 
@@ -11937,6 +12400,9 @@ bool MimicUILib_gt_UIInitializeGameUIHandles_Func (bool testConds, bool runActio
     MimicUILib_gv_uIGameUIHandles.lv_consoleUIContainer = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsolePanel");
     MimicUILib_gv_uIGameUIHandles.lv_consolePanel = DialogControlLastCreated();
+    DialogControlHookupStandard(c_triggerControlTypeButton, "UIContainer/ConsoleUIContainer/CommandPanel/CommandButton15");
+    MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton = DialogControlLastCreated();
+    DialogControlSetSize(MimicUILib_gv_uIGameUIHandles.lv_mapMechanicButton, PlayerGroupAll(), 0, 0);
     DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsoleUIContainer/MinimapPanel");
     MimicUILib_gv_uIGameUIHandles.lv_minimapPanel = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullScreenUpperContainer/TargetInfoFrame/TargetInfoPanel");
@@ -11970,6 +12436,7 @@ bool MimicUILib_gt_UIInitializeHealingFountainsHelpText_Func (bool testConds, bo
 
     if ((MimicUILib_gv_uIHealingFountainsHelpTextEnabled == true)) {
         MimicUILib_gf_UIHealingFountainsHelpTextCreateTextTagsForTeam(libGame_gv_teamOrderIndex_C);
+        MimicUILib_gf_UIHealingFountainsHelpTextCreateTextTagsForTeam(libGame_gv_teamChaosIndex_C);
     }
 
     TriggerEnable(MimicUILib_gt_UIHealingFountainsHelpTextPlayerUsesHealingFountain, true);
@@ -12165,7 +12632,7 @@ bool MimicUILib_gt_HelpButtonDebugPosition_Func (bool testConds, bool runActions
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -12224,6 +12691,8 @@ bool MimicUILib_gt_UIInitializeHeroConsole_Func (bool testConds, bool runActions
     MimicUILib_gv_uIHeroConsole.lv_heroStatsBrewStatFrame = DialogControlLastCreated();
     DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFramePink");
     MimicUILib_gv_uIHeroConsole.lv_heroStatsEnergyStatFrame = DialogControlLastCreated();
+    DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFrameBreath");
+    MimicUILib_gv_uIHeroConsole.lv_heroStatsBreathStatFrame = DialogControlLastCreated();
     DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFrameNoEnergy");
     MimicUILib_gv_uIHeroConsole.lv_heroStatsNoEnergyStatFrame = DialogControlLastCreated();
     DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFrameNoEnergyNoShield");
@@ -12242,8 +12711,6 @@ bool MimicUILib_gt_UIInitializeHeroConsole_Func (bool testConds, bool runActions
     MimicUILib_gv_uIHeroConsole.lv_gameUIOnFire = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsoleUIContainer/HeroCommandCardPanelFrame");
     MimicUILib_gv_uIHeroConsole.lv_gameUICommandCardPanelFrame = DialogControlLastCreated();
-    DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsoleUIContainer/InventoryPanel");
-    MimicUILib_gv_uIHeroConsole.lv_gameUIInventoryPanel = DialogControlLastCreated();
     DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsoleUIContainer/HeroBuffDebuffPanel");
     MimicUILib_gv_uIHeroConsole.lv_buffDebuffPanel = DialogControlLastCreated();
     lv_currentPanelLayer += 1;
@@ -13777,7 +14244,7 @@ bool MimicUILib_gt_DEBUGNotificationDisplayAnimCheat_Func (bool testConds, bool 
 
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -14001,7 +14468,7 @@ bool MimicUILib_gt_KillLogDebugShowPanel_Func (bool testConds, bool runActions) 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -14381,11 +14848,11 @@ bool MimicUILib_gt_UIOnFireDEBUGEnableDisableOnFireDebug_Func (bool testConds, b
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
-        if (!((libCore_gv_dEBUGDebuggingEnabled == true))) {
+        if (!((true == true))) {
             return false;
         }
     }
@@ -14427,7 +14894,7 @@ bool MimicUILib_gt_UIOnFireDEBUGCycleDefenseOnFire_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -14493,7 +14960,7 @@ bool MimicUILib_gt_UIOnFireDEBUGCycleOffenseOnFire_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -14559,7 +15026,7 @@ bool MimicUILib_gt_UIOnFireDEBUGCycleUtilityOnFire_Func (bool testConds, bool ru
 
     // Conditions
     if (testConds) {
-        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))) {
+        if (!((true == true))) {
             return false;
         }
 
@@ -14763,6 +15230,10 @@ bool MimicUILib_gt_UIInitializePartyFrameUI_Func (bool testConds, bool runAction
             MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsOrange[lv_heroRosterIndex] = DialogControlLastCreated();
             DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFramePinkEnergy");
             MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsPink[lv_heroRosterIndex] = DialogControlLastCreated();
+            DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFrameBreathEnergy");
+            MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[lv_heroRosterIndex] = DialogControlLastCreated();
+            DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeUnitStatus, "HeroUnitStatusFrameRespawn");
+            MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[lv_heroRosterIndex] = DialogControlLastCreated();
             DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypePanel, "HeroWithPetStatusFrame");
             MimicUILib_gv_uIPartyFrame.lv_heroStatusFrameHeroWithPet[lv_heroRosterIndex] = DialogControlLastCreated();
             DialogControlHookup(MimicUILib_gv_uIPartyFrame.lv_heroStatusFrameHeroWithPet[lv_heroRosterIndex], c_triggerControlTypeUnitStatus, "HeroUnitStatusPetMaster");
@@ -14795,6 +15266,9 @@ bool MimicUILib_gt_UIInitializePartyFrameUI_Func (bool testConds, bool runAction
             DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeCutscene, "OnFireCutsceneFrame");
             DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
             MimicUILib_gv_uIPartyFrame.lv_heroOnFireCutscene[lv_heroRosterIndex] = DialogControlLastCreated();
+            DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeImage, "BoostGlowEffect");
+            MimicUILib_gv_uIPartyFrame.lv_playerBoostEffect[lv_heroRosterIndex] = DialogControlLastCreated();
+            DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), false);
             lv_currentPanelLayer -= 1;
         }
         lv_currentPanelLayer -= 1;
@@ -14844,7 +15318,10 @@ bool MimicUILib_gt_UIPartyFrameDeathUpdateTimerExpires_Func (bool testConds, boo
         else {
             if (((libGame_gv_players[lv_playerIndex].lv_isDead == true) || (MimicUILib_gv_uIPartyFrame.lv_heroDeathInSpecialDeathState[lv_rosterSlot] == true))) {
                 lv_deathTimer = MimicUILib_gf_UIPartyFrameDeathTimer(lv_playerIndex, lv_playerHeroUnit);
-                libNtve_gf_SetDialogItemText(MimicUILib_gv_uIPartyFrame.lv_heroDeathTimeLabel[lv_rosterSlot], FixedToText(TimerGetRemaining(lv_deathTimer), 0), PlayerGroupAll());
+                if ((TimerGetRemaining(lv_deathTimer) >= 0.0)) {
+                    libNtve_gf_SetDialogItemText(MimicUILib_gv_uIPartyFrame.lv_heroDeathTimeLabel[lv_rosterSlot], FixedToText(TimerGetRemaining(lv_deathTimer), 0), PlayerGroupAll());
+                }
+
                 if ((TimerGetRemaining(lv_deathTimer) <= MimicUILib_gv_data_XPPercentage_UpdatePeriod_C3) && (MimicUILib_gv_uIPartyFrame.lv_heroDeathRespawnReminderSent[lv_rosterSlot][MimicUILib_gf_UIPartyFrameUIIndexofHeroUnit(lv_playerHeroUnit, lv_playerIndex)] == false)) {
                     MimicUILib_gv_uIPartyFrame.lv_heroDeathRespawnReminderSent[lv_rosterSlot][MimicUILib_gf_UIPartyFrameUIIndexofHeroUnit(lv_playerHeroUnit, lv_playerIndex)] = true;
                     DialogControlSendAnimationEvent(MimicUILib_gv_uIPartyFrame.lv_heroPanels[lv_rosterSlot], PlayerGroupAll(), "HeroAlmostRespawned");
@@ -14916,7 +15393,7 @@ bool MimicUILib_gt_UIPartyFrameHeroRespawn_Func (bool testConds, bool runActions
             MimicUILib_gf_UIPartyFrameShowHideHeroicAbility(true, libGame_gf_HeroRespawnPlayer());
         }
         if ((UnitGetType(libGame_gf_HeroRespawnUnit()) == "HeroLeoric")) {
-            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, false);
+            DialogControlSetVisible(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsRespawn[lv_rosterSlot], libCore_gv_allHeroPlayersPlusObserver, false);
         }
 
     }
@@ -14930,9 +15407,9 @@ void MimicUILib_gt_UIPartyFrameHeroRespawn_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: UI - Party Frame - Hero Port Back To Base Complete
+// Trigger: UI - Party Frame - Hero Hearthstone Complete
 //--------------------------------------------------------------------------------------------------
-bool MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete_Func (bool testConds, bool runActions) {
+bool MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_heroIndex;
     int lv_rosterSlot;
@@ -14958,9 +15435,9 @@ bool MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete_Func (bool testConds, 
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete_Init () {
-    MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete = TriggerCreate("MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete_Func");
-    libGame_gf_HeroPortedBackToTown(MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete);
+void MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete_Init () {
+    MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete = TriggerCreate("MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete_Func");
+    libGame_gf_HeroPortedBackToTown(MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15165,6 +15642,9 @@ bool MimicUILib_gt_UIPartyFramePlayerRejoins_Func (bool testConds, bool runActio
             }
             else if (auto6F1CBD07_val == MimicUILib_ge_UIHeroResourceType_Pink) {
                 libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsPink[lv_rosterSlot], libGame_gv_players[lv_i_Player].lv_heroUnit, lv_reconnectingPlayer);
+            }
+            else if (auto6F1CBD07_val == MimicUILib_ge_UIHeroResourceType_Breath) {
+                libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsBreath[lv_rosterSlot], libGame_gv_players[lv_i_Player].lv_heroUnit, lv_reconnectingPlayer);
             }
             else if (auto6F1CBD07_val == MimicUILib_ge_UIHeroResourceType_None) {
                 libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIPartyFrame.lv_heroStatusBarsNoResource[lv_rosterSlot], libGame_gv_players[lv_i_Player].lv_heroUnit, lv_reconnectingPlayer);
@@ -16160,13 +16640,15 @@ void MimicUILib_InitTriggers () {
     MimicUILib_gt_InitializeUI_Init();
     MimicUILib_gt_UIUpdateTimeLabelsTimerExpires_Init();
     MimicUILib_gt_UIDebugInitandHideErrorWarning_Init();
+    MimicUILib_gt_UIDEBUGShowBoostFX_Init();
+    MimicUILib_gt_UIBoostsShowBoostFX_Init();
     MimicUILib_gt_UIInitializeDamageFlashUI_Init();
     MimicUILib_gt_UIDamageFlashTriggerDamageFlash_Init();
     MimicUILib_gt_UIDamageFlashLowHPSoundsLooper_Init();
     MimicUILib_gt_DeathRecapPanelInitialize_Init();
     MimicUILib_gt_DeathRecapOpenButtonClicked_Init();
-    MimicUILib_gt_EffectHistoryTest_Init();
-    MimicUILib_gt_DeathRecapPopulateTest_Init();
+    MimicUILib_gt_DEBUGEffectHistoryTest_Init();
+    MimicUILib_gt_DEBUGDeathRecapPopulateTest_Init();
     MimicUILib_gt_DeathTimerPanelInitialize_Init();
     MimicUILib_gt_DeathAnnouncementPanelVisibleTimerExpires_Init();
     MimicUILib_gt_DeathTimerPanelDeathTimerFrameMouseEnter_Init();
@@ -16287,7 +16769,7 @@ void MimicUILib_InitTriggers () {
     MimicUILib_gt_UIInitializePartyFrameUI_Init();
     MimicUILib_gt_UIPartyFrameDeathUpdateTimerExpires_Init();
     MimicUILib_gt_UIPartyFrameHeroRespawn_Init();
-    MimicUILib_gt_UIPartyFrameHeroPortBackToBaseComplete_Init();
+    MimicUILib_gt_UIPartyFrameHeroHearthstoneComplete_Init();
     MimicUILib_gt_UIPartyFrameXPContributionPercentage_Init();
     MimicUILib_gt_UIPartyFrameHeroEntersSpecialDeathState_Init();
     MimicUILib_gt_UIPartyFramePlayerRejoins_Init();
@@ -16324,7 +16806,6 @@ void MimicUILib_InitLib () {
     MimicUILib_InitLibraries();
     MimicUILib_InitVariables();
     MimicUILib_InitTriggers();
-	UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("UILib Mimic Lib Initialized"));
 }
 
 include "TriggerLibs/HeroesLib"

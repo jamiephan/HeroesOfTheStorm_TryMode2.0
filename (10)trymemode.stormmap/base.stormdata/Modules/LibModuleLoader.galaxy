@@ -74,5 +74,6 @@ void libMODL_InitLib () {
     
     // Need to change to debug mode before MapInit Event is called
     libCore_gv_dEBUGDebuggingEnabled = true;
+    libSprt_gv_dEBUGDebugMessagesEnabled = true;
 }
 

@@ -7,7 +7,7 @@ include "TriggerLibs/HeroesLib_h"
 const int MimicSoundLib_gv_heroVO_TalentChoicePercentChance_C = 20;
 const fixed MimicSoundLib_gv_heroVO_PissedWindow = 4.5;
 const int MimicSoundLib_gv_heroVO_PissedClickThreshold = 2;
-const int MimicSoundLib_gv_heroVO_SpecialKillLinePercentChance_C = 15;
+const int MimicSoundLib_gv_heroVO_SpecialKillLinePercentChance_C = 100;
 const int MimicSoundLib_gv_heroVO_ComebackLevelGapThreshold_C = 3;
 const fixed MimicSoundLib_gv_heroVO_CelebrateTimerDuration_C = 2.0;
 const fixed MimicSoundLib_gv_heroVO_HeroIntroLineGateCheckRadius_C = 6.5;
