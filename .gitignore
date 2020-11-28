@@ -75,5 +75,6 @@ typings/
 #Generated Files ignore
 HeroesSwitcher_x64.exe.lnk
 s2ma/
+s2ma1/
 (10)trymemode.stormmap.bak/
 .env

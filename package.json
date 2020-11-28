@@ -5,10 +5,9 @@
     "main": "index.js",
     "scripts": {
         "buildxml": "bash -c -i \"node ./scripts/buildxml.js\"",
-        "buildmimic": "bash -c -i \"node ./scripts/buildmimic.js\"",
+        "buildmimiclib": "bash -c -i \"node ./scripts/buildmimiclib.js\"",
         "buildmimicabilities": "bash -c -i \"node ./scripts/buildmimicabilities.js\"",
         "s2ma": "bash -c -i \"node ./scripts/s2ma.js\"",
-        "triggergenerator": "node ./scripts/triggerGenerator.js",
         "symlink": "node ./scripts/symlink.js",
         "generateusagedoc": "node ./scripts/generateUsageDoc.js"
     },
