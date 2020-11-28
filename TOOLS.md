@@ -110,15 +110,12 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 ## Mimic Lib Generator
 
-**BREAKING: THIS TOOL CURRENTLY DOES NOT WORK, PLEASE DO NOT USE IT.**
+**Command**: `npm run buildmimiclib`
 
-**Command**: `npm run buildmimic '/path/to/heroesofthestorm/'`
 
-This tool will automatically generates the mimics libs to `./(10)trymemode.stormmap/base.stormdata/ModuleMimicLibs`.
+The Mimic Libs will be taken from `heroesdata.stormmod/base.stormmod/TriggerLibs`.
 
-The Mimic Libs will be taked from `heroesdata.stormmod/base.stormmod/TriggerLibs`.
-
-Currently will mimic:
+Currently will mimic (AI and Native Libs is excluded):
 
 - `GameDataHelperLib.galaxy`
 - `GameDataHelperLib_h.galaxy`
@@ -141,18 +138,13 @@ Currently will mimic:
 
 Mimic Libraries are identical to internal trigger libs (Created by Blizzard). However, due to some restrictions, some functionalities cannot be easily used (for example it will detect whether it is a development build or production build, to prevent normal users accessing the commands.)
 
-The Mimic Libs are from `heroesdata.stormmod/base.stormdata/TriggerLibs` and they are stored in `base.stormdata/ModuleMimicLibs`.
-
 >TODO: Found out what cause LibAIAI.galaxy to crash the map when mimic-ed. Currently exclude that lib from mimicking. 
 
->Note: To generate your own Mimic Lib, see [Tools Section](#Tools).
-
-Hence, I have create a mimic lib that is identical to internal libs, but modified a few things.
-
+Hence, I have create a mimic lib that is identical to internal libs, but modified a few things automatically.
 
 #### Renamed all triggers, variables, function etc.
 
-Well, common sense. To prevent conflict with the original library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
+To prevent conflict with the original library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
 
 #### Changed Game Cheat Detection (Dev/Prod build detect)
 
@@ -172,7 +164,7 @@ However, another checking method on some triggers can not bypass:
 
 Because this `c_gameCheatCategoryDevelopment` is a **constant** that was pre-defined (which cannot be changed and will crash if you "forcefully" do so).
 
-Hence, all the mimic internal libs will change `if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == true))` to `if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == false))` validation check (but not `libCore_gv_dEBUGDebuggingEnabled`).
+Hence, all the mimic internal libs that checks for `GameCheatsEnabled(c_gameCheatCategoryDevelopment)` and `libCore_gv_dEBUGDebuggingEnabled` will be replaced to `true`.
 
 #### Override `TriggerDebugOutput()` with a custom command `MimicTriggerDebugOutput()`
 
@@ -182,9 +174,7 @@ Since those code are for debug purpose only, if you have played around SC2 Maps,
 
 However, I cannot find a way to get the debug window up despite manually calling the debug window out. This tool is extremely useful for debugging if Heroes can call it out. Well, unfortunately.
 
-Those messages still carry out important information about the current state of the trigger call, therefore, I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageTitleDebug` instead, like how all the chat commands output.
-
-The Lib that countian this command is also generated via the mimic [tool](#Tools), which is `ModulesMimicLibs/MimicTriggerDebugOutput.galaxy`.
+Those messages still carry out important information about the current state of the trigger call so I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageTitleDebug` instead, like how all the chat commands output.
 
 #### Prefixing Chat Commands
 
@@ -197,15 +187,3 @@ Internal Command | Mimicked Command
 `invulnerablestructures` | `minvulnerablestructures`
 `BUILDINGSCALING` | `mBUILDINGSCALING`
 `-AI All` | `m-AI All`
-
-
-
-## Trigger code generator
-
-**DEPRECATED: THIS TOOL WILL BE REMOVED SOON**
-
-**Command**: `npm run triggergenerator`
-
-This tool will help you to generate the codes to create a simple trigger function. Just follow the instructions and you can build a basic trigger code.
-
-You can also get trigger functions from either Starcraft 2 editor (Modules->Triggers->[Add some Events with the UI]->Data->View Script.)

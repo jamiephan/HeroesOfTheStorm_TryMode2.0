@@ -32,7 +32,7 @@ Here is a quick look of the QA cheat menu:
 - [ ] Tools or scripts to automatically associate *.stormmap in win32
 - [ ] Tools to generate shortcut for win32 to link to the current (10)trymode.stormmap
 - [x] Tools to generate XML for mimic abilities with `<CBehaviorAbility>`
-- [ ] Fix the MimicTriggerLib Tool
+- [x] Fix the MimicTriggerLib Tool
 
 
 ## How to install:
