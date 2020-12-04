@@ -24,7 +24,6 @@ void libMICL_InitLibraries() {
     MimicStartingExperienceLib_InitLib();
     MimicSupportLib_InitLib();
     MimicUILib_InitLib();
-    libTrac_gv_tracerRecallDebugMode = true;
 }
 
 //--------------------------------------------------------------------------------------------------
