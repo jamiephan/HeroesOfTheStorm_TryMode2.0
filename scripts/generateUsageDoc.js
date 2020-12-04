@@ -1,10 +1,12 @@
 /* eslint-disable max-len */
-/* eslint-disable no-useless-catch */
 /* eslint-disable no-underscore-dangle */
 const fs = require('fs');
 const MarkDowner = require('./helper/Markdowner');
 
 const jsonFile = './(10)trymemode.stormmap/base.stormdata/Modules/doc.json';
+
+const sortCommands = true;
+const showExtraTOC = false;
 
 if (!fs.existsSync(jsonFile)) {
   console.log(`Unable to find JSON file ${jsonFile}`);
@@ -12,12 +14,21 @@ if (!fs.existsSync(jsonFile)) {
 }
 
 const jsonRawData = fs.readFileSync(jsonFile, { encoding: 'utf8' });
-let jsonData;
 
-try {
-  jsonData = JSON.parse(jsonRawData);
-} catch (e) {
-  throw e;
+const jsonData = JSON.parse(jsonRawData);
+
+// Sort the commands
+if (sortCommands) {
+  jsonData.libraries.forEach((l) => {
+    if (!l._metadata.overrideMarkdown) {
+      // eslint-disable-next-line no-param-reassign
+      l.commands = l.commands.sort((a, b) => {
+        if (a.command < b.command) return -1;
+        if (a.command > b.command) return 1;
+        return 0;
+      });
+    }
+  });
 }
 
 const markdowner = new MarkDowner();
@@ -26,10 +37,10 @@ const markdowner = new MarkDowner();
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
 markdowner.addRaw = jsonData._metadata.MDDescription;
-markdowner.addRaw = 'The commands documentation sits on each library. Please see below:';
 
 markdowner.addH1 = 'Libraries';
-// Generate Table
+
+// Table Generation
 markdowner.addTable = {
   headers: ['Library Name', 'File Name', 'Library ID', 'Library Description'],
   data: jsonData.libraries.map((l) => [
@@ -40,25 +51,48 @@ markdowner.addTable = {
   ]),
 };
 
-// Each of them
+// TOC
+markdowner.addH1 = 'Table of Contents';
 jsonData.libraries.forEach((library) => {
+  markdowner.addRaw = `- [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
+  if (!library._metadata.overrideMarkdown) {
+    library.commands.forEach((command) => {
+      markdowner.addRaw = `  - [Command: \`${command.command}\`](#cmd-${command.command})`;
+      if (showExtraTOC) {
+        markdowner.addRaw = `    - [Description](#cmd-${command.command}-description)`;
+        markdowner.addRaw = `    - [Parameters](#cmd-${command.command}-parameters)`;
+        markdowner.addRaw = `    - [Examples](#cmd-${command.command}-examples)`;
+      }
+    });
+  } else if (showExtraTOC) {
+    markdowner.addRaw = `  - [Description](#lib-${library._metadata.libraryId}-description)`;
+  }
+});
+
+// Each of the Library
+jsonData.libraries.forEach((library) => {
+  markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}"/>`;
   markdowner.addH1 = `${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
 
   markdowner.addRaw = library._metadata.libraryDescription;
   if (library._metadata.overrideMarkdown) {
+    markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}-description"/>`;
     markdowner.addRaw = library._metadata.overrideMarkdownContent;
   } else {
     // Commands Generate
-    // markdowner.addH2 = 'Commands';
     library.commands.forEach((command) => {
+      markdowner.addRaw = `<a name="cmd-${command.command}" />`;
+      // Description Section
       const title = `(\`${command.command}\` | \`${command.shortCommand}\`)`;
       const titleparam = ` ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(' ')}`;
       markdowner.addH2 = title + titleparam;
+      markdowner.addRaw = `<a name="cmd-${command.command}-description" />`;
       markdowner.addH4 = 'Description: ';
       markdowner.addRaw = command.description;
 
       //   Param section
       if (Object.prototype.hasOwnProperty.call(command, 'parameters') && command.parameters instanceof Array) {
+        markdowner.addRaw = `<a name="cmd-${command.command}-parameters" />`;
         markdowner.addH4 = 'Parameters:';
         if (command.parameters.length === 0) {
           markdowner.addCode = 'None';
@@ -76,6 +110,7 @@ jsonData.libraries.forEach((library) => {
       }
       //   Example section
       if (Object.prototype.hasOwnProperty.call(command, 'examples') && command.examples instanceof Array) {
+        markdowner.addRaw = `<a name="cmd-${command.command}-examples" />`;
         markdowner.addH4 = 'Examples:';
         command.examples.forEach((e) => {
           markdowner.addCode = `> ${e.command}`;
