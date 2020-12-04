@@ -167,6 +167,45 @@
                             "description": "Win the game for Team 2"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "sco",
+                    "command": "setcameraobject",
+                    "description": "Manually set the camera object. The parameter is the id of `<CCamera id=\"xxx\">`.\n>**WARNING**: Set a non existing camera will actually **crash** the game!",
+                    "parameters": [
+                        {
+                            "name": "camera",
+                            "required": true,
+                            "description": "Defines the camera object.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "sco BlizzardAllStars",
+                            "description": "Set the camera object to BlizzardAllStars (default game camera)"
+                        },
+                        {
+                            "command": "sco Dflt",
+                            "description": "Set the camera object to Dlft (default SC2 camera)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rco",
+                    "command": "resetcameraobject",
+                    "description": "Reset the game camera to BlizzardAllStars (default game camera)",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "rco",
+                            "description": "Reset the game camera to BlizzardAllStars"
+                        },
+                        {
+                            "command": "resetcameraobject",
+                            "description": "Reset the game camera to BlizzardAllStars"
+                        }
+                    ]
                 }
             ]
         },

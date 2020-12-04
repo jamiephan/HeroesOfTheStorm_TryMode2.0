@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 04 Dec 2020 09:15:37 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 04 Dec 2020 09:58:13 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -127,6 +127,32 @@ Generally left team is **Team 1** and right team is **Team 2**.
     	(Win the game for Team 1)
     > wingame 2
     	(Win the game for Team 2)
+## (`setcameraobject` | `sco`) `<camera>`
+#### Description: 
+Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
+>**WARNING**: Set a non existing camera will actually **crash** the game!
+
+#### Parameters:
+    <camera>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the camera object.
+#### Examples:
+    > sco BlizzardAllStars
+    	(Set the camera object to BlizzardAllStars (default game camera))
+    > sco Dflt
+    	(Set the camera object to Dlft (default SC2 camera))
+## (`resetcameraobject` | `rco`) 
+#### Description: 
+Reset the game camera to BlizzardAllStars (default game camera)
+
+#### Parameters:
+    None
+#### Examples:
+    > rco
+    	(Reset the game camera to BlizzardAllStars)
+    > resetcameraobject
+    	(Reset the game camera to BlizzardAllStars)
 ---
 # Units Library (`LibUnits.galaxy`):
 A library with commands related to selected units, such as kill, spawn, etc.
