@@ -24,6 +24,8 @@ trigger libUTIL_gt_WinGame;
 trigger libUTIL_gt_StartGame;
 trigger libUTIL_gt_EndGame;
 trigger libUTIL_gt_RestartGame;
+trigger libUTIL_gt_SetCameraObject;
+trigger libUTIL_gt_ResetCameraObject;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -375,6 +377,70 @@ void libUTIL_gt_RestartGame_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_RestartGame, c_playerAny, "restartgame", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Set Camera Object
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_SetCameraObject_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    camerainfo lv_camera;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "sco") || (StringWord(EventChatMessage(false), 1) == "setcameraobject")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        CameraSetData(PlayerGroupSingle(EventPlayer()), (StringWord(EventChatMessage(false), 2)));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set Camera Data to " + StringWord(EventChatMessage(false), 2))));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_SetCameraObject_Init () {
+    libUTIL_gt_SetCameraObject = TriggerCreate("libUTIL_gt_SetCameraObject_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_SetCameraObject, c_playerAny, "sco", false);
+    TriggerAddEventChatMessage(libUTIL_gt_SetCameraObject, c_playerAny, "setcameraobject", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Reset Camera Object
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ResetCameraObject_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const string lv_defaultCamera = "BlizzardAllStars";
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CameraSetData(PlayerGroupSingle(EventPlayer()), (lv_defaultCamera));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Camera Data to " + lv_defaultCamera)));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ResetCameraObject_Init () {
+    libUTIL_gt_ResetCameraObject = TriggerCreate("libUTIL_gt_ResetCameraObject_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ResetCameraObject, c_playerAny, "rco", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ResetCameraObject, c_playerAny, "resetcameraobject", true);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -387,6 +453,8 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_StartGame_Init();
     libUTIL_gt_EndGame_Init();
     libUTIL_gt_RestartGame_Init();
+    libUTIL_gt_SetCameraObject_Init();
+    libUTIL_gt_ResetCameraObject_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
