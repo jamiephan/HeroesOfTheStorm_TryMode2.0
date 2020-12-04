@@ -29,12 +29,15 @@ The current values required are:
 
 | Key                                          | Type   | Description                                                                                                                                                                                                                  |
 |----------------------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `HEROES_OF_THE_STORM_INSTALL_LOCATION`       | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`.)                                                               |
-| `TOOLS_XML_MAIN_XML_PATH`                    | String | The location of `base.stormdata/gamedata.xml` file. Default: `./(10)trymemode.stormmap/base.stormdata/GameData.xml`                                                                                                          |
-| `TOOLS_GAMEDATA_DIR`                         | String | The location of `base.stormdata` directory. Default: `./(10)trymemode.stormmap/base.stormdata`                                                                                                                               |
-| `TOOLS_XML_MODS_DIR`                         | String | The location where the XML mods are stored. Default: `./(10)trymemode.stormmap/base.stormdata/Mods`                                                                                                                          |
-| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMods/AbilityMimic.xml` |
-| `TOOLS_S2MA_SAVE_LOCATION`                   | String | The location directory where the found s2ma files will be saved. Default: `./s2ma`                                                                                                                                           |
+| `HEROES_OF_THE_STORM_INSTALL_LOCATION` | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`. |
+| `TOOLS_XML_MAIN_XML_PATH` | String | The location of `base.stormdata/gamedata.xml` file. Default: `./(10)trymemode.stormmap/base.stormdata/GameData.xml` |
+| `TOOLS_XML_MODS_DIR` | String | Default: The location where the XML mods are stored. `./(10)trymemode.stormmap/base.stormdata/Mods` |
+| `TOOLS_GAMEDATA_DIR` | String | The location of `base.stormdata` directory. Default: `./(10)trymemode.stormmap/base.stormdata` |
+| `TOOLS_S2MA_SAVE_LOCATION` | String | The save location for `*.s2ma` files. Default: `./s2ma` |
+| `TOOLS_MIMIC_LIBRARY_SAVE_LOCATION` | String | The location to save the mimic libraries. Default: `./(10)trymemode.stormmap/base.stormdata/ModuleMimicLibs/InternalMimics` |
+| `TOOLS_MIMIC_LIBRARY_IMPORT_PREFIX` | String | The prefix of the import mimic library, relative to `TOOLS_GAMEDATA_DIR`. Default: `ModuleMimicLibs/InternalMimics/` |
+| `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules. Default: `./(10)trymemode.stormmap/base.stormdata/Modules` |
+| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml` |
 
 
 >Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
