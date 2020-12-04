@@ -6,6 +6,7 @@ include "TriggerLibs/NativeLib"
 // Validating: templates
 
 // Variable Declarations
+int libPLYR_gv_massQuestStacks;
 bool libPLYR_gv_isRunningMassQuest;
 bool libPLYR_gv_isPauseGameWhenShowingTalentPanel;
 bool libPLYR_gv_isEnableTalentTree;
@@ -48,6 +49,7 @@ void libPLYR_InitVariables () {
 
     libPLYR_InitVariables_completed = true;
 
+    libPLYR_gv_massQuestStacks = 1;
     libPLYR_gv_isEnableTalentTree = true;
 }
 
@@ -82,7 +84,7 @@ bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    libSprt_gf_DEBUGIncrementAllQuests(1, 100);
+    libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
     return true;
 }
 
@@ -97,14 +99,34 @@ void libPLYR_gt_RunMassQuest_Init () {
 // Trigger: Toggle Run Mass Quest
 //--------------------------------------------------------------------------------------------------
 bool libPLYR_gt_ToggleRunMassQuest_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const int lv_defaultStacks = 1;
+    int lv_stacks;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "tmq") || (StringWord(EventChatMessage(false), 1) == "togglemassquest")))) {
+            return false;
+        }
+    }
+
     // Actions
     if (!runActions) {
         return true;
     }
 
     libPLYR_gv_isRunningMassQuest = !(libPLYR_gv_isRunningMassQuest);
+    lv_stacks = StringToInt(StringWord(EventChatMessage(false), 2));
+    if (((libPLYR_gv_isRunningMassQuest == true) && (lv_stacks <= 0))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Unable to set quest stacks. Using default: " + IntToString(lv_defaultStacks))));
+        lv_stacks = lv_defaultStacks;
+    }
+
     if ((libPLYR_gv_isRunningMassQuest == true)) {
+        libPLYR_gv_massQuestStacks = lv_stacks;
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Mass Quest Completion"));
         TriggerEnable(libPLYR_gt_RunMassQuest, true);
     }
@@ -118,8 +140,8 @@ bool libPLYR_gt_ToggleRunMassQuest_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libPLYR_gt_ToggleRunMassQuest_Init () {
     libPLYR_gt_ToggleRunMassQuest = TriggerCreate("libPLYR_gt_ToggleRunMassQuest_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "tmq", true);
-    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "togglemassquest", true);
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "tmq", false);
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleRunMassQuest, c_playerAny, "togglemassquest", false);
 }
 
 //--------------------------------------------------------------------------------------------------

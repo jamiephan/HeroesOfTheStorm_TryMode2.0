@@ -621,16 +621,24 @@
                 {
                     "shortCommand": "tmq",
                     "command": "togglemassquest",
-                    "description": "Toggle mass quest completion mode. This can gives player 1600 quest stacks per second.\n>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent",
-                    "parameters": [],
+                    "description": "Toggle mass quest completion mode to give stack every game tick (0.0625s).\n>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent",
+                    "parameters": [
+                        {
+                            "name": "stacks",
+                            "required": false,
+                            "description": "The amount of stack to be added every game tick (0.0626s)",
+                            "type": "integer",
+                            "defaultValue": 1
+                        }
+                    ],
                     "examples": [
                         {
-                            "command": "tmq",
-                            "description": "Toggle mass quest completion mode."
+                            "command": "tmq 10",
+                            "description": "Enable mass quest completion mode and give 10 stacks every game tick if not enabled"
                         },
                         {
                             "command": "togglemassquest",
-                            "description": "Toggle mass quest completion mode."
+                            "description": "Disable mass quest completion mode if enabled"
                         }
                     ]
                 },
@@ -643,7 +651,7 @@
                             "name": "MasteryRingLevel",
                             "required": true,
                             "description": "The level of the mastery ring to be set.",
-                            "type": "integer "
+                            "type": "integer"
                         }
                     ],
                     "examples": [
@@ -775,7 +783,7 @@
                 {
                     "shortCommand": "score",
                     "command": "setscore",
-                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
+                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integerand some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
                     "parameters": [
                         {
                             "name": "Field",

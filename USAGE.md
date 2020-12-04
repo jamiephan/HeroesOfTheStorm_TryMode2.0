@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 01 Nov 2020 10:23:19 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 04 Dec 2020 09:12:12 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -444,18 +444,22 @@ Constantly resetting the weapons (auto attack) cooldown, effectively increasing 
 # Players Library (`LibPlayers.galaxy`):
 Commands that are related to Players, eg, scoreboard, respawn timer, etc
 
-## (`togglemassquest` | `tmq`) 
+## (`togglemassquest` | `tmq`) `[stacks]`
 #### Description: 
-Toggle mass quest completion mode. This can gives player 1600 quest stacks per second.
->Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent
+Toggle mass quest completion mode to give stack every game tick (0.0625s).
+>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent
 
 #### Parameters:
-    None
+    [stacks]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The amount of stack to be added every game tick (0.0626s)
+    	Default:	1
 #### Examples:
-    > tmq
-    	(Toggle mass quest completion mode.)
+    > tmq 10
+    	(Enable mass quest completion mode and give 10 stacks every game tick if not enabled)
     > togglemassquest
-    	(Toggle mass quest completion mode.)
+    	(Disable mass quest completion mode if enabled)
 ## (`setmasteryring` | `smr`) `<MasteryRingLevel>`
 #### Description: 
 Set the Mastery Ring level. The ring below the hero will be automatically updated.
@@ -464,7 +468,7 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 #### Parameters:
     <MasteryRingLevel>
     	Required:	true
-    	Type:		integer 
+    	Type:		integer
     	Usage:		The level of the mastery ring to be set.
 #### Examples:
     > setmasteryring 0
@@ -555,7 +559,7 @@ Set the score for the scoreboard (some of them will shows in tab screen). This i
 
 You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
->Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.
+>Note: Some fields uses Integerand some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.
 
 #### Parameters:
     <Field>
