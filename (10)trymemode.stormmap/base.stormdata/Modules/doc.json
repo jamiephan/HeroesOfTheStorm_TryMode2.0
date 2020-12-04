@@ -783,7 +783,7 @@
                 {
                     "shortCommand": "score",
                     "command": "setscore",
-                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integerand some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
+                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
                     "parameters": [
                         {
                             "name": "Field",
