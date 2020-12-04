@@ -21907,6 +21907,9 @@ bool MimicGameDataHelperLib_gt_HeroStitchesGorgeActivate_Func (bool testConds, b
         else if ((PlayerSkin(lv_stitchesPlayer) == "StitchesToys18Var5")) {
             libUIUI_gf_FullscreenOverlayAddItemForPlayer(UnitGetOwner(lv_eatenUnit), libUIUI_ge_FullscreenOverlayPriorities_Stasis, "Cutscenes\\GameUI_GorgeToys18Var5Overlay.StormCutscene", EventUnitBehavior());
         }
+        else if (((PlayerSkin(lv_stitchesPlayer) == "StitchesOWC20") || (PlayerSkin(lv_stitchesPlayer) == "StitchesOWC20Var1") || (PlayerSkin(lv_stitchesPlayer) == "StitchesOWC20Var2"))) {
+            libUIUI_gf_FullscreenOverlayAddItemForPlayer(UnitGetOwner(lv_eatenUnit), libUIUI_ge_FullscreenOverlayPriorities_Stasis, "Cutscenes\\GameUI_GorgeOverlayOWC20.StormCutscene", EventUnitBehavior());
+        }
         else if ((PlayerSkin(lv_stitchesPlayer) != "StitchesToys18Var1") && (PlayerSkin(lv_stitchesPlayer) != "StitchesToys18") && (PlayerSkin(lv_stitchesPlayer) != "StitchesToys18Var2") && (PlayerSkin(lv_stitchesPlayer) != "StitchesToys18Var3") && (PlayerSkin(lv_stitchesPlayer) != "StitchesToys18Var4") && (PlayerSkin(lv_stitchesPlayer) != "StitchesToys18Var5")) {
             libUIUI_gf_FullscreenOverlayAddItemForPlayer(UnitGetOwner(lv_eatenUnit), libUIUI_ge_FullscreenOverlayPriorities_Stasis, "Cutscenes\\GameUI_GorgeOverlay.StormCutscene", EventUnitBehavior());
         }
@@ -21963,6 +21966,7 @@ bool MimicGameDataHelperLib_gt_HeroStitchesGorgeOff_Func (bool testConds, bool r
         libUIUI_gf_FullscreenOverlayRemoveItemFromQueueForPlayer(UnitGetOwner(EventUnit()), "Cutscenes\\GameUI_GorgeToys18Var3Overlay.StormCutscene", EventUnitBehavior());
         libUIUI_gf_FullscreenOverlayRemoveItemFromQueueForPlayer(UnitGetOwner(EventUnit()), "Cutscenes\\GameUI_GorgeToys18Var4Overlay.StormCutscene", EventUnitBehavior());
         libUIUI_gf_FullscreenOverlayRemoveItemFromQueueForPlayer(UnitGetOwner(EventUnit()), "Cutscenes\\GameUI_GorgeToys18Var5Overlay.StormCutscene", EventUnitBehavior());
+        libUIUI_gf_FullscreenOverlayRemoveItemFromQueueForPlayer(UnitGetOwner(EventUnit()), "Cutscenes\\GameUI_GorgeOverlayOWC20.StormCutscene", EventUnitBehavior());
     }
 
     if ((UnitGetType(EventUnit()) != "HeroFalstad") && (UnitGetType(EventUnit()) != "HeroFaerieDragon")) {

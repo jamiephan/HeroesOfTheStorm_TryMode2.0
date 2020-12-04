@@ -50,7 +50,8 @@ const int MimicUILib_ge_UIHeroResourceType_Pink = 5;
 const int MimicUILib_ge_UIHeroResourceType_Grey = 6;
 const int MimicUILib_ge_UIHeroResourceType_Purple = 7;
 const int MimicUILib_ge_UIHeroResourceType_Breath = 8;
-const int MimicUILib_ge_UIHeroResourceType_None = 9;
+const int MimicUILib_ge_UIHeroResourceType_Rage = 9;
+const int MimicUILib_ge_UIHeroResourceType_None = 10;
 
 // Constants
 const int MimicUILib_gv_defaultRenderPriority_C = 512;
@@ -391,6 +392,7 @@ struct MimicUILib_gs_UIHeroConsole {
     int lv_heroStatsFuryStatFrame;
     int lv_heroStatsBrewStatFrame;
     int lv_heroStatsBreathStatFrame;
+    int lv_heroStatsRageStatFrame;
     int lv_heroStatsEnergyStatFrame;
     int lv_heroStatsNoEnergyStatFrame;
     int lv_heroStatsNoEnergyNoShieldStatFrame;
@@ -609,6 +611,7 @@ struct MimicUILib_gs_UIPartyFrame {
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsDefault;
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsOrange;
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsBreath;
+    int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsRage;
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsYellow;
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsPink;
     int[libCore_gv_bALMaxPlayers + 1] lv_heroStatusBarsNoResource;

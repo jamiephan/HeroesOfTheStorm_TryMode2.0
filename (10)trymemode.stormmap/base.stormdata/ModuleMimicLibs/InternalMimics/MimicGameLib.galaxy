@@ -11365,6 +11365,11 @@ void MimicGameLib_gf_ScoreValuesReportForPlayer (int lp_player) {
     }
     else if (autoE4DEA447_val == c_heroUniverseOverwatch) {
         MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysOverwatch", 1);
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysOverwatchOrNexus", 1);
+    }
+    else if (autoE4DEA447_val == c_heroUniverseRetro) {
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysNexus", 1);
+        MimicGameLib_gf_ScoreValuesReportIntegerValueAndLog(lp_player, "PlaysOverwatchOrNexus", 1);
     }
     else {
     }
