@@ -2,7 +2,6 @@ const fs = require('fs');
 
 require('./helper/envValidator').check();
 
-
 const mapDirName = '(10)trymemode.stormmap';
 // eslint-disable-next-line max-len
 const targetPathParent = `${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}/maps/heroes/singleplayermaps`;

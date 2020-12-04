@@ -9,7 +9,6 @@ const XMLFiles = HeroesFiles.ReadEach(HeroesFiles.AllXMLs);
 
 const idPrefix = 'M';
 
-
 let finalXML = '<?xml version="1.0" encoding="us-ascii"?>\n\n';
 finalXML += '<!-- ======================================================== -->\n';
 finalXML += '<!-- This file is generated via "npm run buildmimicabilities" -->\n';

@@ -6,7 +6,6 @@ const MarkDowner = require('./helper/Markdowner');
 
 const jsonFile = './(10)trymemode.stormmap/base.stormdata/Modules/doc.json';
 
-
 if (!fs.existsSync(jsonFile)) {
   console.log(`Unable to find JSON file ${jsonFile}`);
   process.exit(1);
@@ -20,7 +19,6 @@ try {
 } catch (e) {
   throw e;
 }
-
 
 const markdowner = new MarkDowner();
 
