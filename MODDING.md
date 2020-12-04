@@ -38,17 +38,18 @@ Generally, You can override the XML Keys that the game has. The game will use yo
 
 All XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories, file name, amount are not limited.
 
-I also recommend using the tool `generatexml` to build the XML file, for more, see [TOOLS.md](TOOLS.md).
+I also recommend using the tool `buildxml` to build the XML file, for more, see [TOOLS.md](TOOLS.md#tools-buildxml).
 
 ## Editing the Galaxy Script Files
 
 Modifications of Galaxy files in (`./(10)trymemode.stormmap/base.stormdata`), same as where the custom command library located at.
 
-I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/base.stormdata/Modules/` that you can open it in SC2 Editor, However this is how you should us it, or at least how I do it:
+I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/base.stormdata/Modules/` that you can open it in SC2 Editor, However due to some issues between SC2 Editor and Heroes (some functions and variables does not exist is both sides or even have incompatible function signature)
 
-**IMPORTANT: DO NOT do this to `LibModuleLoader.galaxy` and `Module Loader` in SC2Editor or the whole mods will fail.**
+**IMPORTANT: DO NOT do this to `LibModuleLoader.galaxy` and `Module Loader` in SC2Editor or the whole modding will fail.**
 
-## Modifying Current Mod Files:
+
+### Modifying Current Library Files:
 
 1. Change The Viewing mode to Triggers, or Pressing F6:
 ![](https://i.imgur.com/tjWy1BG.png)
@@ -56,25 +57,9 @@ I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/bas
 2. Change Whatever you like in here, with some exceptions, see below:
 ![](https://i.imgur.com/owiyGwk.png)
 
-3. When Save, Use the Export Functionality by going view script or Ctrl + F11:
-![](https://i.imgur.com/w7gk6Ym.png)
-![](https://i.imgur.com/J5klmRW.png)
+3. Please see the [save and modify section](#save-and-modify) below:
 
-4. After see this screen, Do a Find -> Replace or Ctrl + H:
-![](https://i.imgur.com/ZzyUrT6.png)
-
-5. Type in `//lib` for text and `lib` to replace and spam the `Replace` Button (Not `Replace All`) until it can no longer replace anymore:
-![](https://i.imgur.com/KOqlwyN.png)
-
-6. Close the Replace Dialog and export the file:
-![](https://i.imgur.com/UY4nOq0.png)
-
-7. Select the coresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
-![](https://i.imgur.com/ztgHF1n.png)
-
-11. Reload the try mode and test it out!
-
-### Adding New Galaxy Lib:
+### Adding New Galaxy Library:
 
 Adding a New lib is also pretty simple:
 
@@ -106,10 +91,9 @@ Adding a New lib is also pretty simple:
 9. Copy the code (function name) into the `LibModuleLoader.galaxy` in this section:
 ![](https://i.imgur.com/RyTaUEQ.png)
 
-10. Remove the space and add a semicolon at the end (*important) and save the file:
+10. Remove the space and add a semicolon at the end (*important) and save the file: 
 ![](https://i.imgur.com/9M77FKV.png)
 
-11. Reload the try mode and test it out!
 
 ### Dealing with Heroes Of the Storm Specific Functions:
 
@@ -129,12 +113,49 @@ And Type in the Heroes Code you want, Please also do check the parameter type an
 If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the galaxy file), it most likely complain and won't let you save:
 ![](https://i.imgur.com/8mMezMF.png)
 
-To able to save the SC2Mod file, append `//` before the custom script:
-![](https://i.imgur.com/yCPzG0X.png)
+To able to save the SC2Mod file, Please add `//_heroes_replace//` before the custom script:
+![](https://i.imgur.com/faiq3Qt.png)
 
-Which you can now save it. But you will need to manually modify the galaxy file when exporting, unless the custom function starts with `lib`, which was done by step 3 above in Modifying the Mod files.
 
-## Error and Debugging:
+<a name="save-and-modify" />
+
+### Saving and Modifying for Heroes compatibility
+
+#### Using the `patchlibrary` tool (Recommanded)
+
+1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
+![](https://i.imgur.com/w7gk6Ym.png)
+![](https://i.imgur.com/J5klmRW.png)
+
+2. Click On File -> Export
+![](https://i.imgur.com/UY4nOq0.png)
+
+3. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+![](https://i.imgur.com/ztgHF1n.png)
+
+4. Please see [TOOLS.md](Tools.md#tools-patchlibraries) for more details.
+
+#### Manually modifying for heroes compatibility
+
+This sections demonstrates how to remove the `//_heroes_replace_//` in SC2 Editor when exporting, allows for custom heroes functionalities.
+
+1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
+![](https://i.imgur.com/w7gk6Ym.png)
+![](https://i.imgur.com/J5klmRW.png)
+
+2. After see this screen, Do a Find -> Replace or Ctrl + H:
+![](https://i.imgur.com/ZzyUrT6.png)
+
+3. Type in `//_heroes_replace_//` for text and empty text box for `Replace With` and spam the `Replace` Button (Not `Replace All`) until it can no longer replace anymore:
+![](https://i.imgur.com/v9EePbP.png)
+
+4. Close the Replace Dialog and export the file:
+![](https://i.imgur.com/UY4nOq0.png)
+
+5. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+![](https://i.imgur.com/ztgHF1n.png)
+
+### Error and Debugging:
 
 If you encounter stuff like this, mostly likely you have error on your galaxy files:
 
