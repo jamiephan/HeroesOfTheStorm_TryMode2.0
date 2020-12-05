@@ -477,7 +477,7 @@
                 },
                 {
                     "shortCommand": "rme",
-                    "command": "addeffect",
+                    "command": "removeeffect",
                     "description": "Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
                     "parameters": [
                         {
@@ -642,6 +642,52 @@
                         {
                             "command": "togglenoweaponcd",
                             "description": "Constantly resetting the weapons (auto attack) cooldown"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "adw",
+                    "command": "addweapon",
+                    "description": "Add a weapon to selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "parameters": [
+                        {
+                            "name": "WeaponID",
+                            "required": true,
+                            "description": "The ID of the weapon",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "adw AlexstraszaDragonConeWeapon",
+                            "description": "Add Alexstrasza's Dragon Form weapon to selected unit(s)"
+                        },
+                        {
+                            "command": "addweapon FirebatHeroWeapon",
+                            "description": "Add Blaze's weapon to selected unit(s)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmw",
+                    "command": "removeweapon",
+                    "description": "Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "parameters": [
+                        {
+                            "name": "WeaponID",
+                            "required": true,
+                            "description": "The ID of the weapon",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "rmw AnaHeroWeapon",
+                            "description": "Remove Ana's weapon from selected unit(s)"
+                        },
+                        {
+                            "command": "removeweapon DVaMechWeapon",
+                            "description": "Remove D.va mech mode's weapon from selected unit(s)"
                         }
                     ]
                 }

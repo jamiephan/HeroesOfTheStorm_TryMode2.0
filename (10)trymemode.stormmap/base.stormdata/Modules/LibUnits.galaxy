@@ -17,6 +17,8 @@ trigger libUNIT_gt_AddEffectstoCamera;
 trigger libUNIT_gt_RemoveEffectsfromCamera;
 trigger libUNIT_gt_AddEffects;
 trigger libUNIT_gt_RemoveEffect;
+trigger libUNIT_gt_AddWeapon;
+trigger libUNIT_gt_RemoveWeapon;
 trigger libUNIT_gt_ToggleNoWeaponCD;
 trigger libUNIT_gt_RunNoWeaponCD;
 trigger libUNIT_gt_ChangeUnitOwnership;
@@ -261,6 +263,106 @@ void libUNIT_gt_RemoveEffect_Init () {
     libUNIT_gt_RemoveEffect = TriggerCreate("libUNIT_gt_RemoveEffect_Func");
     TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "rme", false);
     TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "removeeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Weapon
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddWeapon_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto5A99CB48_g;
+    int auto5A99CB48_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "adw") || (StringWord(EventChatMessage(false), 1) == "addweapon")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adw|addweapon> <WeaponName>"));
+    }
+    else {
+        auto5A99CB48_g = UnitGroupSelected(EventPlayer());
+        auto5A99CB48_u = UnitGroupCount(auto5A99CB48_g, c_unitCountAll);
+        for (;; auto5A99CB48_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto5A99CB48_g, auto5A99CB48_u);
+            if (lv_currentUnit == null) { break; }
+            UnitWeaponAdd(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), null);
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Weapon \"" + (StringWord(EventChatMessage(false), 2) + ("\" to " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddWeapon_Init () {
+    libUNIT_gt_AddWeapon = TriggerCreate("libUNIT_gt_AddWeapon_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddWeapon, c_playerAny, "adw", false);
+    TriggerAddEventChatMessage(libUNIT_gt_AddWeapon, c_playerAny, "addweapon", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Weapon
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveWeapon_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto34C1F59F_g;
+    int auto34C1F59F_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmw") || (StringWord(EventChatMessage(false), 1) == "removeweapon")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmw|removeweapon> <WeaponName>"));
+    }
+    else {
+        auto34C1F59F_g = UnitGroupSelected(EventPlayer());
+        auto34C1F59F_u = UnitGroupCount(auto34C1F59F_g, c_unitCountAll);
+        for (;; auto34C1F59F_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto34C1F59F_g, auto34C1F59F_u);
+            if (lv_currentUnit == null) { break; }
+            UnitWeaponRemove(lv_currentUnit, (StringWord(EventChatMessage(false), 2)));
+            lv_unittype = UnitGetType(lv_currentUnit);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Weapon \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveWeapon_Init () {
+    libUNIT_gt_RemoveWeapon = TriggerCreate("libUNIT_gt_RemoveWeapon_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveWeapon, c_playerAny, "rmw", false);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveWeapon, c_playerAny, "removeweapon", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1036,6 +1138,8 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_RemoveEffectsfromCamera_Init();
     libUNIT_gt_AddEffects_Init();
     libUNIT_gt_RemoveEffect_Init();
+    libUNIT_gt_AddWeapon_Init();
+    libUNIT_gt_RemoveWeapon_Init();
     libUNIT_gt_ToggleNoWeaponCD_Init();
     libUNIT_gt_RunNoWeaponCD_Init();
     libUNIT_gt_ChangeUnitOwnership_Init();

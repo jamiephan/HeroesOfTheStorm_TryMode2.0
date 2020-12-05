@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 04 Dec 2020 10:57:11 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 05 Dec 2020 21:02:23 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -48,9 +48,9 @@ Most commands have a short alias command, they both have identical functionality
 
   - [Command: `addeffect`](#cmd-addeffect)
 
-  - [Command: `addeffect`](#cmd-addeffect)
-
   - [Command: `addeffectcamera`](#cmd-addeffectcamera)
+
+  - [Command: `addweapon`](#cmd-addweapon)
 
   - [Command: `changeunitownership`](#cmd-changeunitownership)
 
@@ -68,7 +68,11 @@ Most commands have a short alias command, they both have identical functionality
 
   - [Command: `removebehavior`](#cmd-removebehavior)
 
+  - [Command: `removeeffect`](#cmd-removeeffect)
+
   - [Command: `removeeffectcamera`](#cmd-removeeffectcamera)
+
+  - [Command: `removeweapon`](#cmd-removeweapon)
 
   - [Command: `sendactormessage`](#cmd-sendactormessage)
 
@@ -380,28 +384,6 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
     	(Make the unit "suicide" a.k.a kill the unit)
     > ade MedivhPolyBombPersistent
     	(Make all selected units affect by Medivh's Polybomb)
-<a name="cmd-addeffect" />
-
-## (`addeffect` | `rme`) `<EffectId>`
-<a name="cmd-addeffect-description" />
-
-#### Description: 
-Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
-
-<a name="cmd-addeffect-parameters" />
-
-#### Parameters:
-    <EffectId>
-    	Required:	true
-    	Type:		string
-    	Usage:		Defines the effect id to be removed from selected unit(s).
-<a name="cmd-addeffect-examples" />
-
-#### Examples:
-    > removeeffect MedivhPolyBombPersistent
-    	(No longer make selected unit(s) affect by Medivh's Polybomb)
-    > rme MedivhPolyBombPersistent
-    	(No longer make selected unit(s) affect by Medivh's Polybomb)
 <a name="cmd-addeffectcamera" />
 
 ## (`addeffectcamera` | `adec`) `<EffectId>`
@@ -424,6 +406,28 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
     	(Add some Haunted Mines Skulls to camera location)
     > adec UnderworldBossRootsCreatePersistent
     	(Add Haunted Mines's boss root animation to camera location)
+<a name="cmd-addweapon" />
+
+## (`addweapon` | `adw`) `<WeaponID>`
+<a name="cmd-addweapon-description" />
+
+#### Description: 
+Add a weapon to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+
+<a name="cmd-addweapon-parameters" />
+
+#### Parameters:
+    <WeaponID>
+    	Required:	true
+    	Type:		string
+    	Usage:		The ID of the weapon
+<a name="cmd-addweapon-examples" />
+
+#### Examples:
+    > adw AlexstraszaDragonConeWeapon
+    	(Add Alexstrasza's Dragon Form weapon to selected unit(s))
+    > addweapon FirebatHeroWeapon
+    	(Add Blaze's weapon to selected unit(s))
 <a name="cmd-changeunitownership" />
 
 ## (`changeunitownership` | `cuo`) `<PlayerId>`
@@ -598,6 +602,28 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
     	(Remove Medivh's Arcane Brilliance Ability from selected units)
     > rmb PermaInvulnerable
     	(No longer makes all selected units permanent Invulnerable)
+<a name="cmd-removeeffect" />
+
+## (`removeeffect` | `rme`) `<EffectId>`
+<a name="cmd-removeeffect-description" />
+
+#### Description: 
+Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
+
+<a name="cmd-removeeffect-parameters" />
+
+#### Parameters:
+    <EffectId>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the effect id to be removed from selected unit(s).
+<a name="cmd-removeeffect-examples" />
+
+#### Examples:
+    > removeeffect MedivhPolyBombPersistent
+    	(No longer make selected unit(s) affect by Medivh's Polybomb)
+    > rme MedivhPolyBombPersistent
+    	(No longer make selected unit(s) affect by Medivh's Polybomb)
 <a name="cmd-removeeffectcamera" />
 
 ## (`removeeffectcamera` | `rmec`) `<EffectId>`
@@ -620,6 +646,28 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
     	(Remove Haunted Mines Skulls from camera location)
     > rmec UnderworldBossRootsCreatePersistent
     	(Remove Haunted Mines's boss root animation from camera location)
+<a name="cmd-removeweapon" />
+
+## (`removeweapon` | `rmw`) `<WeaponID>`
+<a name="cmd-removeweapon-description" />
+
+#### Description: 
+Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+
+<a name="cmd-removeweapon-parameters" />
+
+#### Parameters:
+    <WeaponID>
+    	Required:	true
+    	Type:		string
+    	Usage:		The ID of the weapon
+<a name="cmd-removeweapon-examples" />
+
+#### Examples:
+    > rmw AnaHeroWeapon
+    	(Remove Ana's weapon from selected unit(s))
+    > removeweapon DVaMechWeapon
+    	(Remove D.va mech mode's weapon from selected unit(s))
 <a name="cmd-sendactormessage" />
 
 ## (`sendactormessage` | `sam`) `<ActorMessage>`
