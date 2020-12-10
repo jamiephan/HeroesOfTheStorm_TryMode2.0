@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Includes>
+  <Catalog path="Mods/HeroesMod/AbilityMimic.xml"/>
+  <Catalog path="Mods/HeroesMod/IconGlowing.xml"/>
   <Catalog path="Mods/HeroesMod/TestHero.xml"/>
   <Catalog path="Mods/SystemMod/TestSystem.xml"/>
 </Includes>
