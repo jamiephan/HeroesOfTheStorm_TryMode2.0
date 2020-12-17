@@ -25,6 +25,8 @@ trigger libPLYR_gt_OverrideRespawnPoint;
 trigger libPLYR_gt_OverrideScoreBoard;
 trigger libPLYR_gt_SetMasteryRing;
 trigger libPLYR_gt_OverrideRespawnTime;
+trigger libPLYR_gt_SetOverlay;
+trigger libPLYR_gt_ResetOverlay;
 
 // Library Initialization
 void libPLYR_InitVariables ();
@@ -603,6 +605,75 @@ void libPLYR_gt_OverrideRespawnTime_Init () {
     TriggerAddEventChatMessage(libPLYR_gt_OverrideRespawnTime, c_playerAny, "rst", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Set Overlay
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_SetOverlay_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    string lv_overlayPath;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_overlayPath = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "sol") || (StringWord(EventChatMessage(false), 1) == "setoverlay")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <sol|setoverlay> <OverlayPath>"));
+    }
+    else {
+        lv_overlayPath = StringWord(EventChatMessage(false), 2);
+        libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, lv_overlayPath);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_SetOverlay_Init () {
+    libPLYR_gt_SetOverlay = TriggerCreate("libPLYR_gt_SetOverlay_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_SetOverlay, c_playerAny, "sol", false);
+    TriggerAddEventChatMessage(libPLYR_gt_SetOverlay, c_playerAny, "setoverlay", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Reset Overlay
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_ResetOverlay_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, libUIUI_gv_fullscreenOverlayQueue[lv_player].lv_cutscene[1]);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_ResetOverlay_Init () {
+    libPLYR_gt_ResetOverlay = TriggerCreate("libPLYR_gt_ResetOverlay_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ResetOverlay, c_playerAny, "rol", true);
+    TriggerAddEventChatMessage(libPLYR_gt_ResetOverlay, c_playerAny, "resetoverlay", true);
+}
+
 void libPLYR_InitTriggers () {
     libPLYR_gt_MapInit_Init();
     libPLYR_gt_RunMassQuest_Init();
@@ -616,6 +687,8 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_OverrideScoreBoard_Init();
     libPLYR_gt_SetMasteryRing_Init();
     libPLYR_gt_OverrideRespawnTime_Init();
+    libPLYR_gt_SetOverlay_Init();
+    libPLYR_gt_ResetOverlay_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

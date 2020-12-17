@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 05 Dec 2020 21:02:23 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 02:47:32 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -92,11 +92,15 @@ Most commands have a short alias command, they both have identical functionality
 
   - [Command: `remvetalent`](#cmd-remvetalent)
 
+  - [Command: `resetoverlay`](#cmd-resetoverlay)
+
   - [Command: `respawnpoint`](#cmd-respawnpoint)
 
   - [Command: `respawntime`](#cmd-respawntime)
 
   - [Command: `setmasteryring`](#cmd-setmasteryring)
+
+  - [Command: `setoverlay`](#cmd-setoverlay)
 
   - [Command: `setscore`](#cmd-setscore)
 
@@ -907,6 +911,25 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
     	(Removed Medivh's Arcane Explosion Talent from Player 1)
     > rmt MalfurionCelestialAlignment 2
     	(Removed Malfurion's Celest>ial Alignment Talent from Player 2)
+<a name="cmd-resetoverlay" />
+
+## (`resetoverlay` | `rol`) 
+<a name="cmd-resetoverlay-description" />
+
+#### Description: 
+Remove all the overlays with the default one.
+
+<a name="cmd-resetoverlay-parameters" />
+
+#### Parameters:
+    None
+<a name="cmd-resetoverlay-examples" />
+
+#### Examples:
+    > rol
+    	(Remove all the overlays with the default one.)
+    > resetoverlay
+    	(Remove all the overlays with the default one.)
 <a name="cmd-respawnpoint" />
 
 ## (`respawnpoint` | `rsp`) `<Action>` `[PlayerId/all]`
@@ -986,6 +1009,29 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
     	(Remove the mastery ring from the player)
     > smr 3
     	(Set the mastery ring to Level 3.)
+<a name="cmd-setoverlay" />
+
+## (`setoverlay` | `sol`) `<OverlayPath>`
+<a name="cmd-setoverlay-description" />
+
+#### Description: 
+Set the in-game overlay (e.g golden overlay for Uther's Divine Shield). 
+>Note: The path is relative to `*.storm*/base.gamedata/`, usually with the extension of `*.stormcutscene`.
+
+<a name="cmd-setoverlay-parameters" />
+
+#### Parameters:
+    <OverlayPath>
+    	Required:	true
+    	Type:		string
+    	Usage:		The path of the overlay file, relative to base.stormdata.
+<a name="cmd-setoverlay-examples" />
+
+#### Examples:
+    > sol Cutscenes/GameUI_InvulnerableOverlay.StormCutscene
+    	(Set the overlay to "Invulnerable", e.g Divine Shield / Sanctification.)
+    > setoverlay cutscenes\gameui_gorgeoverlay.stormcutscene
+    	(Set the overlay to Stitches Gorge.)
 <a name="cmd-setscore" />
 
 ## (`setscore` | `score`) `<Field>` `<Value>` `[PlayerId]`

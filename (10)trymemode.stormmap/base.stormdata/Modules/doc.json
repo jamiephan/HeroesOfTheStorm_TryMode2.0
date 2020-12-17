@@ -946,6 +946,45 @@
                             "description": "reset all player's respawn point to its default respawn location (hall of storms)."
                         }
                     ]
+                },
+                {
+                    "shortCommand": "sol",
+                    "command": "setoverlay",
+                    "description": "Set the in-game overlay (e.g golden overlay for Uther's Divine Shield). \n>Note: The path is relative to `*.storm*/base.gamedata/`, usually with the extension of `*.stormcutscene`.",
+                    "parameters": [
+                        {
+                            "name": "OverlayPath",
+                            "required": true,
+                            "description": "The path of the overlay file, relative to base.stormdata.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "sol Cutscenes/GameUI_InvulnerableOverlay.StormCutscene",
+                            "description": "Set the overlay to \"Invulnerable\", e.g Divine Shield / Sanctification."
+                        },
+                        {
+                            "command": "setoverlay cutscenes\\gameui_gorgeoverlay.stormcutscene",
+                            "description": "Set the overlay to Stitches Gorge."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rol",
+                    "command": "resetoverlay",
+                    "description": "Remove all the overlays with the default one.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "rol",
+                            "description": "Remove all the overlays with the default one."
+                        },
+                        {
+                            "command": "resetoverlay",
+                            "description": "Remove all the overlays with the default one."
+                        }
+                    ]
                 }
             ]
         },
