@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 03:11:40 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 18:27:12 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -25,6 +25,8 @@ Most commands have a short alias command, they both have identical functionality
   - [Command: `clear`](#cmd-clear)
 
   - [Command: `endgame`](#cmd-endgame)
+
+  - [Command: `forceruntrigger`](#cmd-forceruntrigger)
 
   - [Command: `resetcameraobject`](#cmd-resetcameraobject)
 
@@ -175,6 +177,30 @@ End the game instantly and kick all players from the game.
     	(End the game instantly)
     > endgame
     	(End the game instantly)
+<a name="cmd-forceruntrigger" />
+
+## (`forceruntrigger` | `frt`) `<TriggerName>`
+<a name="cmd-forceruntrigger-description" />
+
+#### Description: 
+Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. 
+
+>Note: This command is mainly for debugging, most of the time it won't be useful.
+
+<a name="cmd-forceruntrigger-parameters" />
+
+#### Parameters:
+    <TriggerName>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the trigger to be run
+<a name="cmd-forceruntrigger-examples" />
+
+#### Examples:
+    > frt libUIUI_gt_InputBackslashKeyDown_Func
+    	(Force to run the trigger "libUIUI_gt_InputBackslashKeyDown_Func", which will show up the debug menu.)
+    > forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func
+    	(Force to run the trigger "libSprt_gt_DEBUGHaveAITakeOverAI_Func", which will have an AI take over your unit.)
 <a name="cmd-resetcameraobject" />
 
 ## (`resetcameraobject` | `rco`) 

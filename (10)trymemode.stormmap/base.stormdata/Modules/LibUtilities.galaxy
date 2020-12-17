@@ -26,6 +26,7 @@ trigger libUTIL_gt_EndGame;
 trigger libUTIL_gt_RestartGame;
 trigger libUTIL_gt_SetCameraObject;
 trigger libUTIL_gt_ResetCameraObject;
+trigger libUTIL_gt_ForceRunTrigger;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -441,6 +442,51 @@ void libUTIL_gt_ResetCameraObject_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ResetCameraObject, c_playerAny, "resetcameraobject", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Force Run Trigger
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ForceRunTrigger_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_triggerName;
+    trigger lv_trigger;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_triggerName = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "frt") || (StringWord(EventChatMessage(false), 1) == "forceruntrigger")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <frt|forceruntrigger> <TriggerID>"));
+    }
+    else {
+        lv_triggerName = StringWord(EventChatMessage(false), 2);
+        lv_trigger = TriggerCreate(lv_triggerName);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Started Trigger: " + StringWord(EventChatMessage(false), 2))));
+        TriggerExecute(lv_trigger, false, true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Stopped Trigger: " + StringWord(EventChatMessage(false), 2))));
+        TriggerDestroy(lv_trigger);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ForceRunTrigger_Init () {
+    libUTIL_gt_ForceRunTrigger = TriggerCreate("libUTIL_gt_ForceRunTrigger_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ForceRunTrigger, c_playerAny, "frt", false);
+    TriggerAddEventChatMessage(libUTIL_gt_ForceRunTrigger, c_playerAny, "forceruntrigger", false);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -455,6 +501,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_RestartGame_Init();
     libUTIL_gt_SetCameraObject_Init();
     libUTIL_gt_ResetCameraObject_Init();
+    libUTIL_gt_ForceRunTrigger_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

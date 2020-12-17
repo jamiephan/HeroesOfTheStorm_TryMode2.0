@@ -206,6 +206,29 @@
                             "description": "Reset the game camera to BlizzardAllStars"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "frt",
+                    "command": "forceruntrigger",
+                    "description": "Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. \n\n>Note: This command is mainly for debugging, most of the time it won't be useful.",
+                    "parameters": [
+                        {
+                            "name": "TriggerName",
+                            "required": true,
+                            "description": "Defines the trigger to be run",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "frt libUIUI_gt_InputBackslashKeyDown_Func",
+                            "description": "Force to run the trigger \"libUIUI_gt_InputBackslashKeyDown_Func\", which will show up the debug menu."
+                        },
+                        {
+                            "command": "forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func",
+                            "description": "Force to run the trigger \"libSprt_gt_DEBUGHaveAITakeOverAI_Func\", which will have an AI take over your unit."
+                        }
+                    ]
                 }
             ]
         },
