@@ -10,9 +10,9 @@
                 "libraryName": "Module Loader",
                 "libraryFile": "LibModuleLoader.galaxy",
                 "libraryId": "LibMODL",
-                "libraryDescription": "A unified Module Loader Lib that allows you to choose which module to load",
+                "libraryDescription": "A unified Module Loader Lib that allows you to choose which module to load.",
                 "overrideMarkdown": true,
-                "overrideMarkdownContent": "This module is for loading other modules. Do not modify this file in SC2Editor."
+                "overrideMarkdownContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor."
             }
         },
         {
@@ -20,7 +20,7 @@
                 "libraryName": "Utilities",
                 "libraryFile": "LibUtilities.galaxy",
                 "libraryId": "LibUTIL",
-                "libraryDescription": "A Library that have utilities tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
+                "libraryDescription": "A Library with multiple utilities tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
                 "overrideMarkdown": false,
                 "overrideMarkdownContent": null
             },
@@ -28,7 +28,7 @@
                 {
                     "shortCommand": "tdb",
                     "command": "toggledebugmode",
-                    "description": "Toggle Debug Mode (the `libCore_gv_dEBUGDebuggingEnabled` variable)",
+                    "description": "Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)",
                     "parameters": [],
                     "examples": [
                         {
@@ -60,7 +60,7 @@
                 {
                     "shortCommand": "tui",
                     "command": "toggleui",
-                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If UI is off, all abilities will be disabled.",
+                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If the UI is off, all abilities will be disabled.",
                     "parameters": [],
                     "examples": [
                         {
@@ -76,13 +76,13 @@
                 {
                     "shortCommand": "cls",
                     "command": "clear",
-                    "description": "Allow to clear all text messages, including chat and debug messages.",
+                    "description": "Clear all text messages, including chat and debug messages with an optional delay.",
                     "parameters": [
                         {
                             "name": "seconds",
                             "required": false,
                             "description": "Defines the delay to clear text messages in seconds.",
-                            "defaultValue": 0.0,
+                            "defaultValue": 0,
                             "type": "float"
                         }
                     ],
@@ -92,7 +92,7 @@
                             "description": "Clear all texts instantly"
                         },
                         {
-                            "command": "clear",
+                            "command": "clear 5.4",
                             "description": "Clear all texts after 5.4 seconds"
                         }
                     ]
@@ -100,7 +100,7 @@
                 {
                     "shortCommand": "re",
                     "command": "restartgame",
-                    "description": "Allow to restart and reload the map, without exit and re-enter it. This is extremely useful when you want to try the new modified XML files or scripts. \n >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to actually exit the map and re-enter if you need to do so.",
+                    "description": "Restart the map without needed to re-enter. This is extremely useful when you want to try the new modified XML files or galaxy scripts. \n >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to manually re-enter for mods to be added.",
                     "parameters": [],
                     "examples": [
                         {
@@ -116,7 +116,7 @@
                 {
                     "shortCommand": "sg",
                     "command": "startgame",
-                    "description": "Allow to start the game instantly (timer start, gate open, etc).",
+                    "description": "Start the game instantly (timer start, gate open, etc).",
                     "parameters": [],
                     "examples": [
                         {
@@ -171,7 +171,7 @@
                 {
                     "shortCommand": "sco",
                     "command": "setcameraobject",
-                    "description": "Manually set the camera object. The parameter is the id of `<CCamera id=\"xxx\">`.\n>**WARNING**: Set a non existing camera will actually **crash** the game!",
+                    "description": "Manually set the camera object. The parameter is the id of `<CCamera id=\"xxx\">`.\n>**WARNING**: Set a non existing camera will actually **crash** the game.",
                     "parameters": [
                         {
                             "name": "camera",
@@ -194,7 +194,7 @@
                 {
                     "shortCommand": "rco",
                     "command": "resetcameraobject",
-                    "description": "Reset the game camera to BlizzardAllStars (default game camera)",
+                    "description": "Reset the game camera to `BlizzardAllStars` (default game camera)",
                     "parameters": [],
                     "examples": [
                         {
@@ -1020,7 +1020,7 @@
         },
         {
             "_metadata": {
-                "libraryName": "Funny Module",
+                "libraryName": "Funny Stuff",
                 "libraryFile": "LibFunny.galaxy",
                 "libraryId": "libFUNY",
                 "libraryDescription": "Random useless stuff just for the lolz.",

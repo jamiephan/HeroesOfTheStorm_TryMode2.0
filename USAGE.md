@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 02:47:32 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 03:11:40 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -9,14 +9,14 @@ Most commands have a short alias command, they both have identical functionality
 # Libraries
 |Library Name|File Name|Library ID|Library Description|
 |-|-|-|-|
-|Module Loader|LibModuleLoader.galaxy|LibMODL|A unified Module Loader Lib that allows you to choose which module to load|
-|Utilities|LibUtilities.galaxy|LibUTIL|A Library that have utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.|
+|Module Loader|LibModuleLoader.galaxy|LibMODL|A unified Module Loader Lib that allows you to choose which module to load.|
+|Utilities|LibUtilities.galaxy|LibUTIL|A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.|
 |Units|LibUnits.galaxy|LibUNIT|A library with commands related to selected units, such as kill, spawn, etc.|
 |Players|LibPlayers.galaxy|LibPLYR|Commands that are related to Players, eg, scoreboard, respawn timer, etc|
 |Builder Mode|LibBuilderMode.galaxy|libBULM|A Builder Library that allows you to place objects anywhere in the map.|
 |FPS Mode|LibFPSMode.galaxy|libFPSM|A First Person Shooter like Library that allows you to see the map in first person camera.|
 |Free Camera Mode|LibFreeCameraMode.galaxy|libFRCM|Free Camera Mode allows you to change the angle of the camera easily.|
-|Funny Module|LibFunny.galaxy|libFUNY|Random useless stuff just for the lolz.|
+|Funny Stuff|LibFunny.galaxy|libFUNY|Random useless stuff just for the lolz.|
 # Table of Contents
 - [Module Loader](#lib-LibMODL)
 
@@ -116,22 +116,22 @@ Most commands have a short alias command, they both have identical functionality
 
 - [Free Camera Mode](#lib-libFRCM)
 
-- [Funny Module](#lib-libFUNY)
+- [Funny Stuff](#lib-libFUNY)
 
 <a name="lib-LibMODL"/>
 
 # Module Loader Library (`LibModuleLoader.galaxy`):
-A unified Module Loader Lib that allows you to choose which module to load
+A unified Module Loader Lib that allows you to choose which module to load.
 
 <a name="lib-LibMODL-description"/>
 
-This module is for loading other modules. Do not modify this file in SC2Editor.
+This module is for loading other modules. **DO NOT** modify this file in SC2Editor.
 
 ---
 <a name="lib-LibUTIL"/>
 
 # Utilities Library (`LibUtilities.galaxy`):
-A Library that have utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
+A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
 <a name="cmd-clear" />
 
@@ -139,7 +139,7 @@ A Library that have utilities tools such as "Toggle Fog Of War", "Toggle UI", et
 <a name="cmd-clear-description" />
 
 #### Description: 
-Allow to clear all text messages, including chat and debug messages.
+Clear all text messages, including chat and debug messages with an optional delay.
 
 <a name="cmd-clear-parameters" />
 
@@ -154,7 +154,7 @@ Allow to clear all text messages, including chat and debug messages.
 #### Examples:
     > cls
     	(Clear all texts instantly)
-    > clear
+    > clear 5.4
     	(Clear all texts after 5.4 seconds)
 <a name="cmd-endgame" />
 
@@ -181,7 +181,7 @@ End the game instantly and kick all players from the game.
 <a name="cmd-resetcameraobject-description" />
 
 #### Description: 
-Reset the game camera to BlizzardAllStars (default game camera)
+Reset the game camera to `BlizzardAllStars` (default game camera)
 
 <a name="cmd-resetcameraobject-parameters" />
 
@@ -200,8 +200,8 @@ Reset the game camera to BlizzardAllStars (default game camera)
 <a name="cmd-restartgame-description" />
 
 #### Description: 
-Allow to restart and reload the map, without exit and re-enter it. This is extremely useful when you want to try the new modified XML files or scripts. 
- >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to actually exit the map and re-enter if you need to do so.
+Restart the map without needed to re-enter. This is extremely useful when you want to try the new modified XML files or galaxy scripts. 
+ >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to manually re-enter for mods to be added.
 
 <a name="cmd-restartgame-parameters" />
 
@@ -221,7 +221,7 @@ Allow to restart and reload the map, without exit and re-enter it. This is extre
 
 #### Description: 
 Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
->**WARNING**: Set a non existing camera will actually **crash** the game!
+>**WARNING**: Set a non existing camera will actually **crash** the game.
 
 <a name="cmd-setcameraobject-parameters" />
 
@@ -243,7 +243,7 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 <a name="cmd-startgame-description" />
 
 #### Description: 
-Allow to start the game instantly (timer start, gate open, etc).
+Start the game instantly (timer start, gate open, etc).
 
 <a name="cmd-startgame-parameters" />
 
@@ -262,7 +262,7 @@ Allow to start the game instantly (timer start, gate open, etc).
 <a name="cmd-toggledebugmode-description" />
 
 #### Description: 
-Toggle Debug Mode (the `libCore_gv_dEBUGDebuggingEnabled` variable)
+Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)
 
 <a name="cmd-toggledebugmode-parameters" />
 
@@ -302,7 +302,7 @@ Toggle Fog Of War. This can enable or disable full map vision.
 #### Description: 
 Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.
 
->Note: If UI is off, all abilities will be disabled.
+>Note: If the UI is off, all abilities will be disabled.
 
 <a name="cmd-toggleui-parameters" />
 
@@ -1212,7 +1212,7 @@ To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!
 ---
 <a name="lib-libFUNY"/>
 
-# Funny Module Library (`LibFunny.galaxy`):
+# Funny Stuff Library (`LibFunny.galaxy`):
 Random useless stuff just for the lolz.
 
 <a name="lib-libFUNY-description"/>
