@@ -30,6 +30,7 @@ trigger libUNIT_gt_AddBehavior;
 trigger libUNIT_gt_RemoveBehavior;
 trigger libUNIT_gt_CountBehavior;
 trigger libUNIT_gt_GetBehaviors;
+trigger libUNIT_gt_ClearBehaviors;
 trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
@@ -892,6 +893,52 @@ void libUNIT_gt_GetBehaviors_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Clear Behaviors
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ClearBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_currentUnitBehavior;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoE4CE23AD_g;
+    int autoE4CE23AD_u;
+    unit auto16DB2D15_u;
+    int auto16DB2D15_i;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoE4CE23AD_g = UnitGroupSelected(EventPlayer());
+    autoE4CE23AD_u = UnitGroupCount(autoE4CE23AD_g, c_unitCountAll);
+    for (;; autoE4CE23AD_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoE4CE23AD_g, autoE4CE23AD_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        auto16DB2D15_u = lv_currentUnit;
+        auto16DB2D15_i = 1;
+        for ( ; auto16DB2D15_i <= UnitBehaviorCountAll(auto16DB2D15_u) ; auto16DB2D15_i += BoolToInt(lv_currentUnitBehavior == UnitBehaviorGet(auto16DB2D15_u, auto16DB2D15_i)) ) {
+            lv_currentUnitBehavior = UnitBehaviorGet(auto16DB2D15_u, auto16DB2D15_i);
+            UnitBehaviorRemove(lv_currentUnit, lv_currentUnitBehavior, 65535);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed behavior \"" + ((lv_currentUnitBehavior) + ("\" from unit \"" + ((lv_unittype) + "\"."))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ClearBehaviors_Init () {
+    libUNIT_gt_ClearBehaviors = TriggerCreate("libUNIT_gt_ClearBehaviors_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ClearBehaviors, c_playerAny, "clb", true);
+    TriggerAddEventChatMessage(libUNIT_gt_ClearBehaviors, c_playerAny, "clearbehavior", true);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Modify Unit Property
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
@@ -1151,6 +1198,7 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_RemoveBehavior_Init();
     libUNIT_gt_CountBehavior_Init();
     libUNIT_gt_GetBehaviors_Init();
+    libUNIT_gt_ClearBehaviors_Init();
     libUNIT_gt_ModifyUnitProperty_Init();
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();

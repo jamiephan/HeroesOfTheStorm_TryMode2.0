@@ -384,6 +384,22 @@
                     ]
                 },
                 {
+                    "shortCommand": "clb",
+                    "command": "clearbehavior",
+                    "description": "Clear all active behaviors for selected units.",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "clb",
+                            "description": "Clear all active behaviors for selected units"
+                        },
+                        {
+                            "command": "clearbehavior",
+                            "description": "Clear all active behaviors for selected units"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "adb",
                     "command": "addbehavior",
                     "description": "Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",

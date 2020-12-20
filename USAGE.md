@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 17 Dec 2020 18:27:12 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 03:14:10 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -55,6 +55,8 @@ Most commands have a short alias command, they both have identical functionality
   - [Command: `addweapon`](#cmd-addweapon)
 
   - [Command: `changeunitownership`](#cmd-changeunitownership)
+
+  - [Command: `clearbehavior`](#cmd-clearbehavior)
 
   - [Command: `countbehavior`](#cmd-countbehavior)
 
@@ -481,6 +483,25 @@ Changes ownership of the selected unit(s).
     	(Change all selected units's ownership to Player 1)
     > cuo6
     	(Change all selected units's ownership to Player 6)
+<a name="cmd-clearbehavior" />
+
+## (`clearbehavior` | `clb`) 
+<a name="cmd-clearbehavior-description" />
+
+#### Description: 
+Clear all active behaviors for selected units.
+
+<a name="cmd-clearbehavior-parameters" />
+
+#### Parameters:
+    None
+<a name="cmd-clearbehavior-examples" />
+
+#### Examples:
+    > clb
+    	(Clear all active behaviors for selected units)
+    > clearbehavior
+    	(Clear all active behaviors for selected units)
 <a name="cmd-countbehavior" />
 
 ## (`countbehavior` | `ctb`) `<BehaviorId>`
