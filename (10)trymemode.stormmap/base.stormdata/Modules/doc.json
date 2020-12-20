@@ -229,6 +229,21 @@
                             "description": "Force to run the trigger \"libSprt_gt_DEBUGHaveAITakeOverAI_Func\", which will have an AI take over your unit."
                         }
                     ]
+                },{
+                    "shortCommand": "acts",
+                    "command": "alliancecontrolteamselection",
+                    "description": "Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.\n\nThis will enable/disable \"Alliance Control\" (control units from other players, including Enemy) and \"Multi-Selection\" (selecting multiple units like Vikings and Samuro).",
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "acts",
+                            "description": "Toggle Alliance Control + Multi-Selection"
+                        },
+                        {
+                            "command": "alliancecontrolteamselection",
+                            "description": "Toggle Alliance Control + Multi-Selection"
+                        }
+                    ]
                 }
             ]
         },

@@ -11,6 +11,7 @@ revealer libUTIL_gv_revealer;
 bool libUTIL_gv_isFOWEnabled;
 bool libUTIL_gv_isMassCDREnabled;
 int libUTIL_gv_massCDRPlayer;
+bool libUTIL_gv_isACTSEnabled;
 
 // Trigger Declarations
 trigger libUTIL_gt_MapInit;
@@ -27,6 +28,7 @@ trigger libUTIL_gt_RestartGame;
 trigger libUTIL_gt_SetCameraObject;
 trigger libUTIL_gt_ResetCameraObject;
 trigger libUTIL_gt_ForceRunTrigger;
+trigger libUTIL_gt_ToggleACTS;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -487,6 +489,61 @@ void libUTIL_gt_ForceRunTrigger_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ForceRunTrigger, c_playerAny, "forceruntrigger", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle ACTS
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleACTS_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    bool lv_isTSEnabled;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    const int auto742BDE96_ae = 15;
+    const int auto742BDE96_ai = 1;
+    const int autoDCF572B4_ae = 15;
+    const int autoDCF572B4_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isACTSEnabled = !(libUTIL_gv_isACTSEnabled);
+    lv_isTSEnabled = libSprt_gv_dEBUGSelectionEnabled;
+    if ((libUTIL_gv_isACTSEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned ON Alliance Control and Team Selection (/ac, ts)"));
+        lv_i = 1;
+        for ( ; ( (autoDCF572B4_ai >= 0 && lv_i <= autoDCF572B4_ae) || (autoDCF572B4_ai < 0 && lv_i >= autoDCF572B4_ae) ) ; lv_i += autoDCF572B4_ai ) {
+            PlayerSetAlliance(lv_i, c_allianceIdControl, EventPlayer(), true);
+        }
+        if ((lv_isTSEnabled != true)) {
+            libSprt_gf_DEBUGToggleSelection();
+        }
+
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned OFF Alliance Control and Team Selection (/ac, ts)"));
+        lv_i = 1;
+        for ( ; ( (auto742BDE96_ai >= 0 && lv_i <= auto742BDE96_ae) || (auto742BDE96_ai < 0 && lv_i >= auto742BDE96_ae) ) ; lv_i += auto742BDE96_ai ) {
+            PlayerSetAlliance(lv_i, c_allianceIdControl, EventPlayer(), true);
+        }
+        if ((lv_isTSEnabled != false)) {
+            libSprt_gf_DEBUGToggleSelection();
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleACTS_Init () {
+    libUTIL_gt_ToggleACTS = TriggerCreate("libUTIL_gt_ToggleACTS_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleACTS, c_playerAny, "acts", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleACTS, c_playerAny, "alliancecontrolteamselection", true);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -502,6 +559,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_SetCameraObject_Init();
     libUTIL_gt_ResetCameraObject_Init();
     libUTIL_gt_ForceRunTrigger_Init();
+    libUTIL_gt_ToggleACTS_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 04:46:31 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 05:17:33 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -21,6 +21,8 @@ Most commands have a short alias command, they both have identical functionality
 - [Module Loader](#lib-LibMODL)
 
 - [Utilities](#lib-LibUTIL)
+
+  - [Command: `alliancecontrolteamselection`](#cmd-alliancecontrolteamselection)
 
   - [Command: `clear`](#cmd-clear)
 
@@ -137,6 +139,27 @@ This module is for loading other modules. **DO NOT** modify this file in SC2Edit
 # Utilities Library (`LibUtilities.galaxy`):
 A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
+<a name="cmd-alliancecontrolteamselection" />
+
+## (`alliancecontrolteamselection` | `acts`) 
+<a name="cmd-alliancecontrolteamselection-description" />
+
+#### Description: 
+Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.
+
+This will enable/disable "Alliance Control" (control units from other players, including Enemy) and "Multi-Selection" (selecting multiple units like Vikings and Samuro).
+
+<a name="cmd-alliancecontrolteamselection-parameters" />
+
+#### Parameters:
+    None
+<a name="cmd-alliancecontrolteamselection-examples" />
+
+#### Examples:
+    > acts
+    	(Toggle Alliance Control + Multi-Selection)
+    > alliancecontrolteamselection
+    	(Toggle Alliance Control + Multi-Selection)
 <a name="cmd-clear" />
 
 ## (`clear` | `cls`) `[seconds]`
