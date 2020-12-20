@@ -216,6 +216,6 @@ This does not need to do a manual search/replace in Galaxy Editor.
 <a name="tools-generateusagedoc" />
 
 ## Generate Usage Doc ([USAGE.md](USAGE.md))
-**Command**: `npm run patchlibraries`
+**Command**: `npm run generateusagedoc`
 
 A Command to generate [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`
