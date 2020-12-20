@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 05:17:33 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 05:21:50 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -796,7 +796,7 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 
 #### Description: 
 Spawn unit(s) at the centre of your camera location.
->Note: To control the summoned units, you will need to enable multi-selection in Debug Menu (`Selection Enabled`) or QA Cheat Menu (`ts`. also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. 
+>Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. 
 
 >Note: If your hero is Samuro, it will have some weird behavior for multi selection due to Blizzard's implementation of Samuro.
 
