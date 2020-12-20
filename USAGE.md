@@ -1,10 +1,12 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 05:21:50 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 23:37:53 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
 
-Most commands have a short alias command, they both have identical functionality which let you to type less.
+All commands have a short alias, which they both have identical functionality that allows for less typing.
+
+Some of the commands have an UI counterpart implemented, which will display a menu of options and features corresponding to the commands' functionality.
 
 # Libraries
 |Library Name|File Name|Library ID|Library Description|
@@ -160,6 +162,11 @@ This will enable/disable "Alliance Control" (control units from other players, i
     	(Toggle Alliance Control + Multi-Selection)
     > alliancecontrolteamselection
     	(Toggle Alliance Control + Multi-Selection)
+<a name="cmd-alliancecontrolteamselection-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-clear" />
 
 ## (`clear` | `cls`) `[seconds]`
@@ -183,6 +190,11 @@ Clear all text messages, including chat and debug messages with an optional dela
     	(Clear all texts instantly)
     > clear 5.4
     	(Clear all texts after 5.4 seconds)
+<a name="cmd-clear-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-endgame" />
 
 ## (`endgame` | `eg`) 
@@ -202,6 +214,11 @@ End the game instantly and kick all players from the game.
     	(End the game instantly)
     > endgame
     	(End the game instantly)
+<a name="cmd-endgame-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-forceruntrigger" />
 
 ## (`forceruntrigger` | `frt`) `<TriggerName>`
@@ -226,6 +243,11 @@ Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and
     	(Force to run the trigger "libUIUI_gt_InputBackslashKeyDown_Func", which will show up the debug menu.)
     > forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func
     	(Force to run the trigger "libSprt_gt_DEBUGHaveAITakeOverAI_Func", which will have an AI take over your unit.)
+<a name="cmd-forceruntrigger-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-resetcameraobject" />
 
 ## (`resetcameraobject` | `rco`) 
@@ -245,6 +267,11 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
     	(Reset the game camera to BlizzardAllStars)
     > resetcameraobject
     	(Reset the game camera to BlizzardAllStars)
+<a name="cmd-resetcameraobject-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-restartgame" />
 
 ## (`restartgame` | `re`) 
@@ -265,6 +292,11 @@ Restart the map without needed to re-enter. This is extremely useful when you wa
     	(Restart the game instantly)
     > restartgame
     	(Restart the game instantly)
+<a name="cmd-restartgame-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-setcameraobject" />
 
 ## (`setcameraobject` | `sco`) `<camera>`
@@ -288,6 +320,11 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
     	(Set the camera object to BlizzardAllStars (default game camera))
     > sco Dflt
     	(Set the camera object to Dlft (default SC2 camera))
+<a name="cmd-setcameraobject-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-startgame" />
 
 ## (`startgame` | `sg`) 
@@ -307,6 +344,11 @@ Start the game instantly (timer start, gate open, etc).
     	(Start the game instantly)
     > startgame
     	(Start the game instantly)
+<a name="cmd-startgame-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-toggledebugmode" />
 
 ## (`toggledebugmode` | `tdb`) 
@@ -326,6 +368,11 @@ Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)
     	(Toggle Debug Mode)
     > toggledebugmode
     	(Toggle Debug Mode)
+<a name="cmd-toggledebugmode-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-togglefogofwar" />
 
 ## (`togglefogofwar` | `tfow`) 
@@ -345,6 +392,11 @@ Toggle Fog Of War. This can enable or disable full map vision.
     	(Toggle Full Map Vision)
     > togglefogofwar
     	(Toggle Full Map Vision)
+<a name="cmd-togglefogofwar-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-toggleui" />
 
 ## (`toggleui` | `tui`) 
@@ -366,6 +418,11 @@ Toggle User Interface. This can hide or show all the UIs including HP bar, talen
     	(Toggle In game UI)
     > toggleui
     	(Toggle In game UI)
+<a name="cmd-toggleui-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-wingame" />
 
 ## (`wingame` | `wg`) `<TeamID>`
@@ -389,6 +446,11 @@ Generally left team is **Team 1** and right team is **Team 2**.
     	(Win the game for Team 1)
     > wingame 2
     	(Win the game for Team 2)
+<a name="cmd-wingame-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 ---
 <a name="lib-LibUNIT"/>
 
@@ -417,6 +479,11 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
     	(Add Medivh's Arcane Brilliance Ability to selected units)
     > adb PermaInvulnerable
     	(Make all selected units permanent Invulnerable)
+<a name="cmd-addbehavior-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-addeffect" />
 
 ## (`addeffect` | `ade`) `<EffectId>`
@@ -439,6 +506,11 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
     	(Make the unit "suicide" a.k.a kill the unit)
     > ade MedivhPolyBombPersistent
     	(Make all selected units affect by Medivh's Polybomb)
+<a name="cmd-addeffect-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-addeffectcamera" />
 
 ## (`addeffectcamera` | `adec`) `<EffectId>`
@@ -461,6 +533,11 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
     	(Add some Haunted Mines Skulls to camera location)
     > adec UnderworldBossRootsCreatePersistent
     	(Add Haunted Mines's boss root animation to camera location)
+<a name="cmd-addeffectcamera-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-addweapon" />
 
 ## (`addweapon` | `adw`) `<WeaponID>`
@@ -483,6 +560,11 @@ Add a weapon to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
     	(Add Alexstrasza's Dragon Form weapon to selected unit(s))
     > addweapon FirebatHeroWeapon
     	(Add Blaze's weapon to selected unit(s))
+<a name="cmd-addweapon-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-changeunitownership" />
 
 ## (`changeunitownership` | `cuo`) `<PlayerId>`
@@ -506,6 +588,11 @@ Changes ownership of the selected unit(s).
     	(Change all selected units's ownership to Player 1)
     > cuo6
     	(Change all selected units's ownership to Player 6)
+<a name="cmd-changeunitownership-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-clearbehavior" />
 
 ## (`clearbehavior` | `clb`) 
@@ -525,6 +612,11 @@ Clear all active behaviors for selected units.
     	(Clear all active behaviors for selected units)
     > clearbehavior
     	(Clear all active behaviors for selected units)
+<a name="cmd-clearbehavior-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-countbehavior" />
 
 ## (`countbehavior` | `ctb`) `<BehaviorId>`
@@ -549,6 +641,11 @@ Count the number of a specific behavior from selected unit(s). Which are general
     	(Count Medivh's Arcane Brilliance Ability from selected units)
     > ctb PermaInvulnerable
     	(Count selected unit's permanent Invulnerable behavior)
+<a name="cmd-countbehavior-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-getbehavior" />
 
 ## (`getbehavior` | `getb`) 
@@ -568,6 +665,11 @@ List all active behaviors for selected units.
     	(List all active behaviors for selected units)
     > getbehavior
     	(List all active behaviors for selected units)
+<a name="cmd-getbehavior-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-getunitownership" />
 
 ## (`getunitownership` | `guo`) 
@@ -587,6 +689,11 @@ Gets the Ownership (Player ID) of selected unit(s).
     	(Gets the Ownership (Player ID) of selected unit(s).)
     > getunitownership
     	(Gets the Ownership (Player ID) of selected unit(s).)
+<a name="cmd-getunitownership-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-killunits" />
 
 ## (`killunits` | `ku`) 
@@ -606,6 +713,11 @@ Instantly kill all selected unit(s).
     	(Instantly kill all selected unit(s).)
     > killunits
     	(Instantly kill all selected unit(s).)
+<a name="cmd-killunits-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-playanimation" />
 
 ## (`playanimation` | `pa`) `<AnimationId>`
@@ -629,6 +741,11 @@ Play an Animation for selected unit(s).
     	(Play the Attack Animation for selected unit(s))
     > pa Walk
     	(Play the Walk animation for selected unit(s))
+<a name="cmd-playanimation-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-removeanimation" />
 
 ## (`removeanimation` | `rma`) `<AnimationId>`
@@ -652,6 +769,11 @@ Remove an Animation from selected unit(s).
     	(Stop the Attack Animation for selected unit(s))
     > rma Walk
     	(Stop the Walk animation for selected unit(s))
+<a name="cmd-removeanimation-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-removebehavior" />
 
 ## (`removebehavior` | `rmb`) `<BehaviorId>`
@@ -676,6 +798,11 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
     	(Remove Medivh's Arcane Brilliance Ability from selected units)
     > rmb PermaInvulnerable
     	(No longer makes all selected units permanent Invulnerable)
+<a name="cmd-removebehavior-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-removeeffect" />
 
 ## (`removeeffect` | `rme`) `<EffectId>`
@@ -698,6 +825,11 @@ Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, s
     	(No longer make selected unit(s) affect by Medivh's Polybomb)
     > rme MedivhPolyBombPersistent
     	(No longer make selected unit(s) affect by Medivh's Polybomb)
+<a name="cmd-removeeffect-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-removeeffectcamera" />
 
 ## (`removeeffectcamera` | `rmec`) `<EffectId>`
@@ -720,6 +852,11 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
     	(Remove Haunted Mines Skulls from camera location)
     > rmec UnderworldBossRootsCreatePersistent
     	(Remove Haunted Mines's boss root animation from camera location)
+<a name="cmd-removeeffectcamera-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-removeweapon" />
 
 ## (`removeweapon` | `rmw`) `<WeaponID>`
@@ -742,6 +879,11 @@ Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
     	(Remove Ana's weapon from selected unit(s))
     > removeweapon DVaMechWeapon
     	(Remove D.va mech mode's weapon from selected unit(s))
+<a name="cmd-removeweapon-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-replaceunit" />
 
 ## (`replaceunit` | `rpu`) `<TargetUnitId>`
@@ -766,6 +908,11 @@ Replace all selected units to the Target Unit.
     	(Replace all selected unit(s) to Raynor Hero.)
     > replaceunit CatapultMinion
     	(Replace all selected unit(s) to Catapult Minion.)
+<a name="cmd-replaceunit-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-sendactormessage" />
 
 ## (`sendactormessage` | `sam`) `<ActorMessage>`
@@ -789,6 +936,11 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
     	(Play the A Spell animation, different on each hero)
     > sam StatusIncrement StatusBarHide
     	(Hide the status bar, HP bar)
+<a name="cmd-sendactormessage-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-summon" />
 
 ## (`summon` | `sum`) `<UnitId>` `[Amount]` `[PlayerId]` `[Scale]`
@@ -835,6 +987,11 @@ Spawn unit(s) at the centre of your camera location.
     	(Summon 2 boss golems for player 1 with the unit scale to 0.5 (half the size))
     > sum CatapultMinion 10 5 2
     	(Summon 10 Catapult Minions for player 5 with the unit scale to 2 (double the size))
+<a name="cmd-summon-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-togglenoweaponcd" />
 
 ## (`togglenoweaponcd` | `tnwcd`) 
@@ -854,6 +1011,11 @@ Constantly resetting the weapons (auto attack) cooldown, effectively increasing 
     	(Constantly resetting the weapons (auto attack) cooldown)
     > togglenoweaponcd
     	(Constantly resetting the weapons (auto attack) cooldown)
+<a name="cmd-togglenoweaponcd-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-toggleoutputid" />
 
 ## (`toggleoutputid` | `toi`) 
@@ -873,6 +1035,11 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
     	(Toggle displaying units' id mode.)
     > toggleoutputid
     	(Toggle displaying units' id mode.)
+<a name="cmd-toggleoutputid-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-unitproperty" />
 
 ## (`unitproperty` | `up`) `<type>` `<value>`
@@ -926,6 +1093,11 @@ Allow to modify a selected units' property, such as max health, regen, movement 
     	(Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO)
     > unitproperty 6 10000
     	(Set the selected unit's Max Energy for 10000 (usually means resource bar, such as mana, Tracer bullet, Chen's brew etc.))
+<a name="cmd-unitproperty-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 ---
 <a name="lib-LibPLYR"/>
 
@@ -960,6 +1132,11 @@ Enable / Disable a talent for all player. Generally found in `<CTalent id="xxxx"
     	(Enable Rag's Lava Wave talent, which was disabled in ARAM.)
     > ent MaievUmbralBindPursuitOfVengeance 0
     	(Disable Maiev's Pursuit Of Vengeance talent)
+<a name="cmd-enabletalent-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-remvetalent" />
 
 ## (`remvetalent` | `rmt`) `<TalentId>` `[PlayerId]`
@@ -988,6 +1165,11 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
     	(Removed Medivh's Arcane Explosion Talent from Player 1)
     > rmt MalfurionCelestialAlignment 2
     	(Removed Malfurion's Celest>ial Alignment Talent from Player 2)
+<a name="cmd-remvetalent-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-resetoverlay" />
 
 ## (`resetoverlay` | `rol`) 
@@ -1007,6 +1189,11 @@ Remove all the overlays with the default one.
     	(Remove all the overlays with the default one.)
     > resetoverlay
     	(Remove all the overlays with the default one.)
+<a name="cmd-resetoverlay-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-respawnpoint" />
 
 ## (`respawnpoint` | `rsp`) `<Action>` `[PlayerId/all]`
@@ -1040,6 +1227,11 @@ Modify the respawn point for a player. Either at the current camera location or 
     	(reset player 2's respawn point to default location)
     > rsp reset all
     	(reset all player's respawn point to its default respawn location (hall of storms).)
+<a name="cmd-respawnpoint-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-respawntime" />
 
 ## (`respawntime` | `rst`) `<seconds>`
@@ -1063,6 +1255,11 @@ Override the current respawn timer for all players.
     	(set the respawn timer to 99 seconds)
     > rst 0
     	(set the respawn timer to 0.0625 second)
+<a name="cmd-respawntime-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-setmasteryring" />
 
 ## (`setmasteryring` | `smr`) `<MasteryRingLevel>`
@@ -1086,6 +1283,11 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
     	(Remove the mastery ring from the player)
     > smr 3
     	(Set the mastery ring to Level 3.)
+<a name="cmd-setmasteryring-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-setoverlay" />
 
 ## (`setoverlay` | `sol`) `<OverlayPath>`
@@ -1109,6 +1311,11 @@ Set the in-game overlay (e.g golden overlay for Uther's Divine Shield).
     	(Set the overlay to "Invulnerable", e.g Divine Shield / Sanctification.)
     > setoverlay cutscenes\gameui_gorgeoverlay.stormcutscene
     	(Set the overlay to Stitches Gorge.)
+<a name="cmd-setoverlay-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-setscore" />
 
 ## (`setscore` | `score`) `<Field>` `<Value>` `[PlayerId]`
@@ -1147,6 +1354,11 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
     	(Set the field "Kils" to 5242873 for the player who use this command)
     > score Healing 1000 2
     	(Set the field "Healing" to 1000 for the player 2)
+<a name="cmd-setscore-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-togglemassquest" />
 
 ## (`togglemassquest` | `tmq`) `[stacks]`
@@ -1171,6 +1383,11 @@ Toggle mass quest completion mode to give stack every game tick (0.0625s).
     	(Enable mass quest completion mode and give 10 stacks every game tick if not enabled)
     > togglemassquest
     	(Disable mass quest completion mode if enabled)
+<a name="cmd-togglemassquest-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-togglepausegametalent" />
 
 ## (`togglepausegametalent` | `tpgt`) 
@@ -1190,6 +1407,11 @@ Toggle whether to pause the game when viewing talents, similar to heores tutoria
     	(Toggle whether to pause the game when viewing talents)
     > togglepausegametalent
     	(Toggle whether to pause the game when viewing talents)
+<a name="cmd-togglepausegametalent-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-toggletalenttree" />
 
 ## (`toggletalenttree` | `ttt`) 
@@ -1209,6 +1431,11 @@ Toggle the display of the talents selection tree.
     	(Toggle the display of the talents selection tree.)
     > toggletalenttree
     	(Toggle the display of the talents selection tree.)
+<a name="cmd-toggletalenttree-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 ---
 <a name="lib-libBULM"/>
 

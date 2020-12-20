@@ -57,7 +57,7 @@ jsonData.libraries.forEach((library) => {
   markdowner.addRaw = `- [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
   if (!library._metadata.overrideMarkdown) {
     library.commands.forEach((command) => {
-      markdowner.addRaw = `  - [Command: \`${command.command}\`](#cmd-${command.command})`;
+      markdowner.addRaw = `  - [Command: \`${command.command}\`](#cmd-${command.command})${command.uiAvailable ? ' (✔ UI)' : ''}`;
       if (showExtraTOC) {
         markdowner.addRaw = `    - [Description](#cmd-${command.command}-description)`;
         markdowner.addRaw = `    - [Parameters](#cmd-${command.command}-parameters)`;
@@ -117,6 +117,18 @@ jsonData.libraries.forEach((library) => {
           markdowner.addCode = `\t(${e.description})`;
         });
       }
+
+      // UI Availability Section
+      if (Object.prototype.hasOwnProperty.call(command, 'uiAvailable') && typeof command.uiAvailable === 'boolean') {
+        markdowner.addRaw = `<a name="cmd-${command.command}-uiAvailability" />`;
+        markdowner.addH4 = 'UI Availability:';
+        if (command.uiAvailable) {
+          markdowner.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
+        } else {
+          markdowner.addRaw = '- ❌ **Not Implemented**';
+        }
+      }
+      // =====
     });
   }
   markdowner.addLine = 1;
