@@ -1182,8 +1182,6 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
         libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
         UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
     }
-    UISetDragSelectEnabled(PlayerGroupAll(), true);
-    UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
     return true;
 }
 
