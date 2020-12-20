@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 03:59:26 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 04:36:32 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -77,6 +77,8 @@ Most commands have a short alias command, they both have identical functionality
   - [Command: `removeeffectcamera`](#cmd-removeeffectcamera)
 
   - [Command: `removeweapon`](#cmd-removeweapon)
+
+  - [Command: `replaceunit`](#cmd-replaceunit)
 
   - [Command: `sendactormessage`](#cmd-sendactormessage)
 
@@ -717,6 +719,30 @@ Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
     	(Remove Ana's weapon from selected unit(s))
     > removeweapon DVaMechWeapon
     	(Remove D.va mech mode's weapon from selected unit(s))
+<a name="cmd-replaceunit" />
+
+## (`replaceunit` | `rpu`) `<TargetUnitId>`
+<a name="cmd-replaceunit-description" />
+
+#### Description: 
+Replace all selected units to the Target Unit.
+
+>Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting.
+
+<a name="cmd-replaceunit-parameters" />
+
+#### Parameters:
+    <TargetUnitId>
+    	Required:	true
+    	Type:		string
+    	Usage:		Define the selected units to be replaced with. You can get the id from <CUnit id="xxx"> in the game XML files.
+<a name="cmd-replaceunit-examples" />
+
+#### Examples:
+    > rpu HeroRaynor
+    	(Replace all selected unit(s) to Raynor Hero.)
+    > replaceunit CatapultMinion
+    	(Replace all selected unit(s) to Catapult Minion.)
 <a name="cmd-sendactormessage" />
 
 ## (`sendactormessage` | `sam`) `<ActorMessage>`

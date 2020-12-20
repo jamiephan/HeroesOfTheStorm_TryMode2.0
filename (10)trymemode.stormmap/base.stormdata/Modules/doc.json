@@ -331,6 +331,29 @@
                     ]
                 },
                 {
+                    "shortCommand": "rpu",
+                    "command": "replaceunit",
+                    "description": "Replace all selected units to the Target Unit.\n\n>Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting.",
+                    "parameters": [
+                        {
+                            "name": "TargetUnitId",
+                            "required": true,
+                            "description": "Define the selected units to be replaced with. You can get the id from <CUnit id=\"xxx\"> in the game XML files.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "rpu HeroRaynor",
+                            "description": "Replace all selected unit(s) to Raynor Hero."
+                        },
+                        {
+                            "command": "replaceunit CatapultMinion",
+                            "description": "Replace all selected unit(s) to Catapult Minion."
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "up",
                     "command": "unitproperty",
                     "description": "Allow to modify a selected units' property, such as max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",

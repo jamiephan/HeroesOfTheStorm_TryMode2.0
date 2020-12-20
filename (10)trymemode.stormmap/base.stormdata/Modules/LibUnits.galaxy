@@ -34,6 +34,7 @@ trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
 trigger libUNIT_gt_KillUnits;
+trigger libUNIT_gt_ReplaceUnits;
 trigger libUNIT_gt_SummonUnit;
 
 // Library Initialization
@@ -1076,6 +1077,56 @@ void libUNIT_gt_KillUnits_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Replace Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ReplaceUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto45A293B1_g;
+    int auto45A293B1_u;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rpu") || (StringWord(EventChatMessage(false), 1) == "replaceunit")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rpu|replaceunit> <TargetUnitId>"));
+    }
+    else {
+        auto45A293B1_g = UnitGroupSelected(EventPlayer());
+        auto45A293B1_u = UnitGroupCount(auto45A293B1_g, c_unitCountAll);
+        for (;; auto45A293B1_u -= 1) {
+            lv_currentUnit = UnitGroupUnitFromEnd(auto45A293B1_g, auto45A293B1_u);
+            if (lv_currentUnit == null) { break; }
+            lv_unittype = UnitGetType(lv_currentUnit);
+            libNtve_gf_ReplaceUnit(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Tried Replace \"" + ((lv_unittype) + ("\" to " + StringWord(EventChatMessage(false), 2))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ReplaceUnits_Init () {
+    libUNIT_gt_ReplaceUnits = TriggerCreate("libUNIT_gt_ReplaceUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ReplaceUnits, c_playerAny, "rpu", false);
+    TriggerAddEventChatMessage(libUNIT_gt_ReplaceUnits, c_playerAny, "replaceunit", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Summon Unit
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
@@ -1167,6 +1218,7 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();
     libUNIT_gt_KillUnits_Init();
+    libUNIT_gt_ReplaceUnits_Init();
     libUNIT_gt_SummonUnit_Init();
 }
 
