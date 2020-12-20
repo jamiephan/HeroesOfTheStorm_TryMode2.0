@@ -286,6 +286,13 @@
                             "type": "string"
                         },
                         {
+                            "name": "Amount",
+                            "required": false,
+                            "description": "Define the amount of unit(s) to be spawned",
+                            "type": "string",
+                            "defaultValue": 1
+                        },
+                        {
                             "name": "PlayerId",
                             "required": false,
                             "description": "Define which player to own the unit that spawned.",
@@ -293,11 +300,11 @@
                             "defaultValue": "The player id of whoever used this command."
                         },
                         {
-                            "name": "Amount",
+                            "name": "Scale",
                             "required": false,
-                            "description": "Define the amount of unit(s) to be spawned",
-                            "type": "string",
-                            "defaultValue": 1
+                            "description": "Define scale of the unit(s) to be spawned. default size is 1.0",
+                            "type": "float",
+                            "defaultValue": 1.0
                         }
                     ],
                     "examples": [
@@ -306,35 +313,20 @@
                             "description": "Summon a tower structure to the player who used the command"
                         },
                         {
-                            "command": "summon HeroRaynor 1 5",
-                            "description": "Summon 5 Raynor Hero units for player 1"
+                            "command": "summon HeroRaynor 3",
+                            "description": "Summon 3 Raynor Hero units for the player who used the command"
                         },
                         {
-                            "command": "sum JungleGraveGolemDefender 6",
-                            "description": "Summon A boss golem for player 6"
-                        }
-                    ]
-                },
-                {
-                    "shortCommand": "ss",
-                    "command": "setscale",
-                    "description": "Set the scale of the summon units for the command `summon`.\n\n>Note: 1.0 is default scale for all of the units.\n\n>Note: This is UI change only, the relative attack range, movement speed, etc will not change.",
-                    "parameters": [
-                        {
-                            "name": "ScaleAmount",
-                            "required": true,
-                            "description": "Set the scale for the summon unit afterwards.",
-                            "type": "float"
-                        }
-                    ],
-                    "examples": [
-                        {
-                            "command": "setscale 0.1",
-                            "description": "Set the scale of the summon unit to 0.1 (1/10, or 10% of the normal size)"
+                            "command": "summon HeroMalGanis 2 4",
+                            "description": "Summon 2 Mal'Ganis Hero units for player 4"
                         },
                         {
-                            "command": "ss 1.5",
-                            "description": "Set the scale of the summon unit to 1.5 (50% bigger than normal size)"
+                            "command": "sum JungleGraveGolemDefender 2 1 0.5",
+                            "description": "Summon 2 boss golems for player 1 with the unit scale to 0.5 (half the size)"
+                        },
+                        {
+                            "command": "sum CatapultMinion 10 5 2",
+                            "description": "Summon 10 Catapult Minions for player 5 with the unit scale to 2 (double the size)"
                         }
                     ]
                 },

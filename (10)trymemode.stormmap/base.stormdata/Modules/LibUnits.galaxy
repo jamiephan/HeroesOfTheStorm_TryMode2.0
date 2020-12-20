@@ -9,7 +9,6 @@ include "TriggerLibs/NativeLib"
 int libUNIT_gv_noWeaponCDPlayer;
 bool libUNIT_gv_isNoWeaponCDEnabled;
 bool libUNIT_gv_toggleOutputIDEnabled;
-fixed libUNIT_gv_unitScale;
 
 // Trigger Declarations
 trigger libUNIT_gt_MapInit;
@@ -35,7 +34,6 @@ trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
 trigger libUNIT_gt_KillUnits;
-trigger libUNIT_gt_SetUnitScale;
 trigger libUNIT_gt_SummonUnit;
 
 // Library Initialization
@@ -61,7 +59,6 @@ void libUNIT_InitVariables () {
 
     libUNIT_InitVariables_completed = true;
 
-    libUNIT_gv_unitScale = 1.0;
 }
 
 // Triggers
@@ -1079,56 +1076,24 @@ void libUNIT_gt_KillUnits_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Set Unit Scale
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_SetUnitScale_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "ss") || (StringWord(EventChatMessage(false), 1) == "setscale")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringToFixed(StringWord(EventChatMessage(false), 2)) == 0.0)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid scale number or scale is 0."));
-    }
-    else {
-        libUNIT_gv_unitScale = StringToFixed(StringWord(EventChatMessage(false), 2));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Changed summon unit with scale " + FixedToString(libUNIT_gv_unitScale, c_fixedPrecisionAny))));
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_SetUnitScale_Init () {
-    libUNIT_gt_SetUnitScale = TriggerCreate("libUNIT_gt_SetUnitScale_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_SetUnitScale, c_playerAny, "ss", false);
-    TriggerAddEventChatMessage(libUNIT_gt_SetUnitScale, c_playerAny, "setscale", false);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Summon Unit
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    int lv_i;
     int lv_amount;
-    string lv_unittype;
-    string lv_unitname;
+    fixed lv_scale;
     int lv_player;
+    int lv_i;
+    string lv_unittype;
 
     // Automatic Variable Declarations
     int autoE55C84B8_ae;
     const int autoE55C84B8_ai = 1;
 
     // Variable Initialization
-    lv_unitname = "";
+    lv_amount = 1;
+    lv_scale = 1.0;
+    lv_player = EventPlayer();
 
     // Conditions
     if (testConds) {
@@ -1146,26 +1111,25 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if ((StringWord(EventChatMessage(false), 3) == null)) {
-        lv_player = EventPlayer();
+    if ((StringToInt(StringWord(EventChatMessage(false), 3)) > 0)) {
+        lv_amount = StringToInt(StringWord(EventChatMessage(false), 3));
     }
-    else {
-        lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+
+    if ((StringWord(EventChatMessage(false), 4) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
     }
-    if ((StringToInt(StringWord(EventChatMessage(false), 4)) == 0)) {
-        lv_amount = 1;
+
+    if ((StringToFixed(StringWord(EventChatMessage(false), 5)) > 0.0)) {
+        lv_scale = StringToFixed(StringWord(EventChatMessage(false), 5));
     }
-    else {
-        lv_amount = StringToInt(StringWord(EventChatMessage(false), 4));
-    }
-    lv_unitname = StringWord(EventChatMessage(false), 2);
-    lv_unittype = (lv_unitname);
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Trying to spawn " + lv_unitname) + (", for Player " + IntToString(lv_player)))));
+
+    lv_unittype = (StringWord(EventChatMessage(false), 2));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((("Trying to spawn " + (IntToString(lv_amount) + " ")) + ((lv_unittype) + (" with scale of " + FixedToString(lv_scale, c_fixedPrecisionAny)))) + (" for Player " + IntToString(lv_player)))));
     autoE55C84B8_ae = lv_amount;
     lv_i = 1;
     for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
         libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
-        UnitSetScale(UnitLastCreated(), (libUNIT_gv_unitScale * 100.0), (libUNIT_gv_unitScale * 100.0), (libUNIT_gv_unitScale * 100.0));
+        UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
     }
     UISetDragSelectEnabled(PlayerGroupAll(), true);
     UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeUnknown, true);
@@ -1203,7 +1167,6 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();
     libUNIT_gt_KillUnits_Init();
-    libUNIT_gt_SetUnitScale_Init();
     libUNIT_gt_SummonUnit_Init();
 }
 

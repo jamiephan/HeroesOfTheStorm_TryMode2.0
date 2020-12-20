@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 03:14:10 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 20 Dec 2020 03:59:26 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -79,8 +79,6 @@ Most commands have a short alias command, they both have identical functionality
   - [Command: `removeweapon`](#cmd-removeweapon)
 
   - [Command: `sendactormessage`](#cmd-sendactormessage)
-
-  - [Command: `setscale`](#cmd-setscale)
 
   - [Command: `summon`](#cmd-summon)
 
@@ -742,35 +740,9 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
     	(Play the A Spell animation, different on each hero)
     > sam StatusIncrement StatusBarHide
     	(Hide the status bar, HP bar)
-<a name="cmd-setscale" />
-
-## (`setscale` | `ss`) `<ScaleAmount>`
-<a name="cmd-setscale-description" />
-
-#### Description: 
-Set the scale of the summon units for the command `summon`.
-
->Note: 1.0 is default scale for all of the units.
-
->Note: This is UI change only, the relative attack range, movement speed, etc will not change.
-
-<a name="cmd-setscale-parameters" />
-
-#### Parameters:
-    <ScaleAmount>
-    	Required:	true
-    	Type:		float
-    	Usage:		Set the scale for the summon unit afterwards.
-<a name="cmd-setscale-examples" />
-
-#### Examples:
-    > setscale 0.1
-    	(Set the scale of the summon unit to 0.1 (1/10, or 10% of the normal size))
-    > ss 1.5
-    	(Set the scale of the summon unit to 1.5 (50% bigger than normal size))
 <a name="cmd-summon" />
 
-## (`summon` | `sum`) `<UnitId>` `[PlayerId]` `[Amount]`
+## (`summon` | `sum`) `<UnitId>` `[Amount]` `[PlayerId]` `[Scale]`
 <a name="cmd-summon-description" />
 
 #### Description: 
@@ -786,25 +758,34 @@ Spawn unit(s) at the centre of your camera location.
     	Required:	true
     	Type:		string
     	Usage:		Define the unit to be spawned. You can get the id from <CUnit id="xxx"> in the game XML files.
+    [Amount]
+    	Required:	false
+    	Type:		string
+    	Usage:		Define the amount of unit(s) to be spawned
+    	Default:	1
     [PlayerId]
     	Required:	false
     	Type:		string
     	Usage:		Define which player to own the unit that spawned.
     	Default:	The player id of whoever used this command.
-    [Amount]
+    [Scale]
     	Required:	false
-    	Type:		string
-    	Usage:		Define the amount of unit(s) to be spawned
+    	Type:		float
+    	Usage:		Define scale of the unit(s) to be spawned. default size is 1.0
     	Default:	1
 <a name="cmd-summon-examples" />
 
 #### Examples:
     > summon TownTownHallL2
     	(Summon a tower structure to the player who used the command)
-    > summon HeroRaynor 1 5
-    	(Summon 5 Raynor Hero units for player 1)
-    > sum JungleGraveGolemDefender 6
-    	(Summon A boss golem for player 6)
+    > summon HeroRaynor 3
+    	(Summon 3 Raynor Hero units for the player who used the command)
+    > summon HeroMalGanis 2 4
+    	(Summon 2 Mal'Ganis Hero units for player 4)
+    > sum JungleGraveGolemDefender 2 1 0.5
+    	(Summon 2 boss golems for player 1 with the unit scale to 0.5 (half the size))
+    > sum CatapultMinion 10 5 2
+    	(Summon 10 Catapult Minions for player 5 with the unit scale to 2 (double the size))
 <a name="cmd-togglenoweaponcd" />
 
 ## (`togglenoweaponcd` | `tnwcd`) 
