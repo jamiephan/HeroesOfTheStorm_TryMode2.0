@@ -5,10 +5,27 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Structures
+struct libUNIT_gs_SummonUnitPanel {
+    int lv_mainDialog;
+    int lv_unitListDropdown;
+    string lv_unitListDropdownSelected;
+    int lv_playerListDropdown;
+    int lv_playerListSelectedPlayer;
+    int lv_amountInputBox;
+    int lv_amountSelected;
+    int lv_scaleInputBox;
+    fixed lv_scaleSelected;
+    int lv_unitSummonButton;
+    int lv_closeButton;
+};
+
 // Variable Declarations
 int libUNIT_gv_noWeaponCDPlayer;
 bool libUNIT_gv_isNoWeaponCDEnabled;
 bool libUNIT_gv_toggleOutputIDEnabled;
+libUNIT_gs_SummonUnitPanel libUNIT_gv_summonUnitPanel;
+bool libUNIT_gv_summonUnitPanel_IsShowingDialog;
 
 // Trigger Declarations
 trigger libUNIT_gt_MapInit;
@@ -35,6 +52,16 @@ trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
 trigger libUNIT_gt_KillUnits;
 trigger libUNIT_gt_ReplaceUnits;
+trigger libUNIT_gt_SummonUnitPanelSetupPanel;
+trigger libUNIT_gt_SummonUnitPanelToggleShowDialog;
+trigger libUNIT_gt_SummonUnitPanelunitDropdownChanged;
+trigger libUNIT_gt_SummonUnitPanelplayerDropdownChanged;
+trigger libUNIT_gt_SummonUnitPanelscaleInputBoxChanged;
+trigger libUNIT_gt_SummonUnitPanelamountInputBoxChanged;
+trigger libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus;
+trigger libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus;
+trigger libUNIT_gt_SummonUnitPanelSummonButtonClicked;
+trigger libUNIT_gt_SummonUnitPanelCloseButtonClicked;
 trigger libUNIT_gt_SummonUnit;
 
 // Library Initialization
@@ -60,6 +87,17 @@ void libUNIT_InitVariables () {
 
     libUNIT_InitVariables_completed = true;
 
+    libUNIT_gv_summonUnitPanel.lv_mainDialog = c_invalidDialogId;
+    libUNIT_gv_summonUnitPanel.lv_unitListDropdown = c_invalidDialogControlId;
+    libUNIT_gv_summonUnitPanel.lv_unitListDropdownSelected = ("HeroRaynor");
+    libUNIT_gv_summonUnitPanel.lv_playerListDropdown = c_invalidDialogControlId;
+    libUNIT_gv_summonUnitPanel.lv_playerListSelectedPlayer = 1;
+    libUNIT_gv_summonUnitPanel.lv_amountInputBox = c_invalidDialogControlId;
+    libUNIT_gv_summonUnitPanel.lv_amountSelected = 1;
+    libUNIT_gv_summonUnitPanel.lv_scaleInputBox = c_invalidDialogControlId;
+    libUNIT_gv_summonUnitPanel.lv_scaleSelected = 1.0;
+    libUNIT_gv_summonUnitPanel.lv_unitSummonButton = c_invalidDialogControlId;
+    libUNIT_gv_summonUnitPanel.lv_closeButton = c_invalidDialogControlId;
 }
 
 // Triggers
@@ -1127,6 +1165,401 @@ void libUNIT_gt_ReplaceUnits_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - Setup Panel
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelSetupPanel_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_playerid_loop;
+    string lv_unittype;
+
+    // Automatic Variable Declarations
+    int auto8AC4826E_catalog;
+    int auto8AC4826E_i;
+    const int auto0680E977_ae = 15;
+    const int auto0680E977_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    DialogCreate(500, 350, c_anchorTopRight, 10, 10, true);
+    DialogSetImage(DialogLastCreated(), ("Assets\\Textures\\storm_ui_store_gradientbackground_new.dds"));
+    DialogSetTransparency(DialogLastCreated(), 20.0);
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTop, 50, 15, StringToText("Summon Units"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libUNIT_gv_summonUnitPanel.lv_mainDialog = DialogLastCreated();
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypePulldown);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 50);
+    auto8AC4826E_catalog = c_gameCatalogUnit;
+    auto8AC4826E_i = 1;
+    for ( ; auto8AC4826E_i <= CatalogEntryCount(c_gameCatalogUnit) ; auto8AC4826E_i += 1 ) {
+        lv_unittype = CatalogEntryGet(auto8AC4826E_catalog, auto8AC4826E_i);
+        DialogControlAddItem(DialogControlLastCreated(), PlayerGroupAll(), StringToText((lv_unittype)));
+    }
+    DialogControlSelectItem(DialogControlLastCreated(), PlayerGroupAll(), 1);
+    libUNIT_gv_summonUnitPanel.lv_unitListDropdown = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 100, 50, c_anchorTopLeft, 100, 63, StringToText("Unit ID:"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypePulldown);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 100);
+    lv_playerid_loop = 1;
+    for ( ; ( (auto0680E977_ai >= 0 && lv_playerid_loop <= auto0680E977_ae) || (auto0680E977_ai < 0 && lv_playerid_loop >= auto0680E977_ae) ) ; lv_playerid_loop += auto0680E977_ai ) {
+        DialogControlAddItem(DialogControlLastCreated(), PlayerGroupAll(), IntToText(lv_playerid_loop));
+    }
+    DialogControlSelectItem(DialogControlLastCreated(), PlayerGroupAll(), 1);
+    libUNIT_gv_summonUnitPanel.lv_playerListDropdown = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTopLeft, 100, 113, StringToText("Player ID:"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypeEditBox);
+    DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 258, 55);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 150);
+    libNtve_gf_SetDialogItemEditorValue(DialogControlLastCreated(), IntToString(libUNIT_gv_summonUnitPanel.lv_amountSelected), PlayerGroupAll());
+    libUNIT_gv_summonUnitPanel.lv_amountInputBox = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTopLeft, 100, 163, StringToText("Amount:"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypeEditBox);
+    DialogControlSetSize(DialogControlLastCreated(), PlayerGroupAll(), 258, 55);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 200);
+    libNtve_gf_SetDialogItemEditorValue(DialogControlLastCreated(), FixedToString(libUNIT_gv_summonUnitPanel.lv_scaleSelected, c_fixedPrecisionAny), PlayerGroupAll());
+    libUNIT_gv_summonUnitPanel.lv_scaleInputBox = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTopLeft, 100, 213, StringToText("Scale:"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libNtve_gf_CreateDialogItemButton(libUNIT_gv_summonUnitPanel.lv_mainDialog, 350, 50, c_anchorTop, 25, 263, StringToText("Click to summon the selected units!"), StringToText("Summon Units"), "");
+    libUNIT_gv_summonUnitPanel.lv_unitSummonButton = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemButton(libUNIT_gv_summonUnitPanel.lv_mainDialog, 35, 35, c_anchorTopRight, 15, 15, StringToText("Close this dialog"), StringToText("x"), "");
+    libUNIT_gv_summonUnitPanel.lv_closeButton = DialogControlLastCreated();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelSetupPanel_Init () {
+    libUNIT_gt_SummonUnitPanelSetupPanel = TriggerCreate("libUNIT_gt_SummonUnitPanelSetupPanel_Func");
+    TriggerAddEventMapInit(libUNIT_gt_SummonUnitPanelSetupPanel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - Toggle Show Dialog
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelToggleShowDialog_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_summonUnitPanel_IsShowingDialog = !(libUNIT_gv_summonUnitPanel_IsShowingDialog);
+    if ((libUNIT_gv_summonUnitPanel_IsShowingDialog == true)) {
+        DialogSetVisible(libUNIT_gv_summonUnitPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), true);
+    }
+    else {
+        DialogSetVisible(libUNIT_gv_summonUnitPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelToggleShowDialog_Init () {
+    libUNIT_gt_SummonUnitPanelToggleShowDialog = TriggerCreate("libUNIT_gt_SummonUnitPanelToggleShowDialog_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_SummonUnitPanelToggleShowDialog, c_playerAny, "summonui", true);
+    TriggerAddEventChatMessage(libUNIT_gt_SummonUnitPanelToggleShowDialog, c_playerAny, "sumui", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - unitDropdownChanged
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelunitDropdownChanged_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    int lv_i;
+    int lv_itemIndex;
+
+    // Automatic Variable Declarations
+    int auto18FDDE17_catalog;
+    int auto18FDDE17_i;
+
+    // Variable Initialization
+    lv_i = 1;
+    lv_itemIndex = 1;
+
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_unitListDropdown == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_itemIndex = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    auto18FDDE17_catalog = c_gameCatalogUnit;
+    auto18FDDE17_i = 1;
+    for ( ; auto18FDDE17_i <= CatalogEntryCount(c_gameCatalogUnit) ; auto18FDDE17_i += 1 ) {
+        lv_unittype = CatalogEntryGet(auto18FDDE17_catalog, auto18FDDE17_i);
+        if ((lv_i >= lv_itemIndex)) {
+            break;
+        }
+
+        lv_i = (lv_i + 1);
+    }
+    libUNIT_gv_summonUnitPanel.lv_unitListDropdownSelected = lv_unittype;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelunitDropdownChanged_Init () {
+    libUNIT_gt_SummonUnitPanelunitDropdownChanged = TriggerCreate("libUNIT_gt_SummonUnitPanelunitDropdownChanged_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelunitDropdownChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeSelectionChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - playerDropdownChanged
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelplayerDropdownChanged_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_playerListDropdown == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_summonUnitPanel.lv_playerListSelectedPlayer = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelplayerDropdownChanged_Init () {
+    libUNIT_gt_SummonUnitPanelplayerDropdownChanged = TriggerCreate("libUNIT_gt_SummonUnitPanelplayerDropdownChanged_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelplayerDropdownChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeSelectionChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - scaleInputBoxChanged
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelscaleInputBoxChanged_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_scaleInputBox == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_summonUnitPanel.lv_scaleSelected = StringToFixed(libNtve_gf_DialogItemEditValue(EventDialogControl(), EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelscaleInputBoxChanged_Init () {
+    libUNIT_gt_SummonUnitPanelscaleInputBoxChanged = TriggerCreate("libUNIT_gt_SummonUnitPanelscaleInputBoxChanged_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelscaleInputBoxChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeTextChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - amountInputBoxChanged
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelamountInputBoxChanged_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_amountInputBox == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_summonUnitPanel.lv_amountSelected = StringToInt(libNtve_gf_DialogItemEditValue(EventDialogControl(), EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelamountInputBoxChanged_Init () {
+    libUNIT_gt_SummonUnitPanelamountInputBoxChanged = TriggerCreate("libUNIT_gt_SummonUnitPanelamountInputBoxChanged_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelamountInputBoxChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeTextChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - scaleInputBoxUnfocus
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_scaleInputBox == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libUNIT_gv_summonUnitPanel.lv_scaleSelected <= 0.0)) {
+        libUNIT_gv_summonUnitPanel.lv_scaleSelected = 1.0;
+        libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_scaleInputBox, FixedToString(libUNIT_gv_summonUnitPanel.lv_scaleSelected, c_fixedPrecisionAny), PlayerGroupAll());
+        UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Invalid Scale. Resetting to 1.0"));
+    }
+    else {
+        libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_scaleInputBox, FixedToString(libUNIT_gv_summonUnitPanel.lv_scaleSelected, c_fixedPrecisionAny), PlayerGroupAll());
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus_Init () {
+    libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus = TriggerCreate("libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeMouseExit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - amountInputBoxUnfocus
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_amountInputBox == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libUNIT_gv_summonUnitPanel.lv_amountSelected <= 0)) {
+        libUNIT_gv_summonUnitPanel.lv_amountSelected = 1;
+        libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_amountInputBox, IntToString(libUNIT_gv_summonUnitPanel.lv_amountSelected), PlayerGroupAll());
+        UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Invalid Amount. Resetting to 1."));
+    }
+    else {
+        libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_amountInputBox, IntToString(libUNIT_gv_summonUnitPanel.lv_amountSelected), PlayerGroupAll());
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus_Init () {
+    libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus = TriggerCreate("libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeMouseExit);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - Summon Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_player;
+    int lv_amount;
+    fixed lv_scale;
+    string lv_unittype;
+
+    // Automatic Variable Declarations
+    int auto779A4170_ae;
+    const int auto779A4170_ai = 1;
+
+    // Variable Initialization
+    lv_player = libUNIT_gv_summonUnitPanel.lv_playerListSelectedPlayer;
+    lv_amount = libUNIT_gv_summonUnitPanel.lv_amountSelected;
+    lv_scale = libUNIT_gv_summonUnitPanel.lv_scaleSelected;
+    lv_unittype = libUNIT_gv_summonUnitPanel.lv_unitListDropdownSelected;
+
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_unitSummonButton == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lv_scale > 0.0)) {
+        if ((lv_amount > 0)) {
+            libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_amountInputBox, IntToString(libUNIT_gv_summonUnitPanel.lv_amountSelected), PlayerGroupAll());
+            libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_scaleInputBox, FixedToString(libUNIT_gv_summonUnitPanel.lv_scaleSelected, c_fixedPrecisionAny), PlayerGroupAll());
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((("Trying to spawn " + (IntToString(lv_amount) + " ")) + ((lv_unittype) + (" with scale of " + FixedToString(lv_scale, c_fixedPrecisionAny)))) + (" for Player " + IntToString(lv_player)))));
+            auto779A4170_ae = lv_amount;
+            lv_i = 1;
+            for ( ; ( (auto779A4170_ai >= 0 && lv_i <= auto779A4170_ae) || (auto779A4170_ai < 0 && lv_i >= auto779A4170_ae) ) ; lv_i += auto779A4170_ai ) {
+                libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+                UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
+            }
+        }
+        else {
+            libUNIT_gv_summonUnitPanel.lv_amountSelected = 0;
+            libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_amountInputBox, IntToString(libUNIT_gv_summonUnitPanel.lv_amountSelected), PlayerGroupAll());
+            UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Invalid Amount. Number must be greater than 0"));
+        }
+    }
+    else {
+        libUNIT_gv_summonUnitPanel.lv_scaleSelected = 0.0;
+        libNtve_gf_SetDialogItemEditorValue(libUNIT_gv_summonUnitPanel.lv_scaleInputBox, FixedToString(libUNIT_gv_summonUnitPanel.lv_scaleSelected, c_fixedPrecisionAny), PlayerGroupAll());
+        UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaDebug, StringToText("Invalid Scale. Number must be greater than 0.0"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelSummonButtonClicked_Init () {
+    libUNIT_gt_SummonUnitPanelSummonButtonClicked = TriggerCreate("libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelSummonButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SummonUnitPanel - Close Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_SummonUnitPanelCloseButtonClicked_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_summonUnitPanel.lv_closeButton == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_summonUnitPanel_IsShowingDialog = !(libUNIT_gv_summonUnitPanel_IsShowingDialog);
+    if ((libUNIT_gv_summonUnitPanel_IsShowingDialog == true)) {
+        DialogSetVisible(libUNIT_gv_summonUnitPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), true);
+    }
+    else {
+        DialogSetVisible(libUNIT_gv_summonUnitPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_SummonUnitPanelCloseButtonClicked_Init () {
+    libUNIT_gt_SummonUnitPanelCloseButtonClicked = TriggerCreate("libUNIT_gt_SummonUnitPanelCloseButtonClicked_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_SummonUnitPanelCloseButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Summon Unit
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
@@ -1217,6 +1650,16 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_ToggleOutputID_Init();
     libUNIT_gt_KillUnits_Init();
     libUNIT_gt_ReplaceUnits_Init();
+    libUNIT_gt_SummonUnitPanelSetupPanel_Init();
+    libUNIT_gt_SummonUnitPanelToggleShowDialog_Init();
+    libUNIT_gt_SummonUnitPanelunitDropdownChanged_Init();
+    libUNIT_gt_SummonUnitPanelplayerDropdownChanged_Init();
+    libUNIT_gt_SummonUnitPanelscaleInputBoxChanged_Init();
+    libUNIT_gt_SummonUnitPanelamountInputBoxChanged_Init();
+    libUNIT_gt_SummonUnitPanelscaleInputBoxUnfocus_Init();
+    libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus_Init();
+    libUNIT_gt_SummonUnitPanelSummonButtonClicked_Init();
+    libUNIT_gt_SummonUnitPanelCloseButtonClicked_Init();
     libUNIT_gt_SummonUnit_Init();
 }
 
