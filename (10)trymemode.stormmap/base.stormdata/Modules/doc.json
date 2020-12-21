@@ -307,7 +307,7 @@
                     "shortCommand": "sum",
                     "command": "summon",
                     "description": "Spawn unit(s) at the centre of your camera location.\n>Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. \n\n>Note: If your hero is Samuro, it will have some weird behavior for multi selection due to Blizzard's implementation of Samuro.",
-                    "uiAvailable": false,
+                    "uiAvailable": true,
                     "parameters": [
                         {
                             "name": "UnitId",
