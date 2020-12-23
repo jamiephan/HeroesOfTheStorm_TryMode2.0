@@ -1,11 +1,9 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 02:42:05 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 22:47:36 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
-
 All commands have a short alias, which they both have identical functionality that allows for less typing.
-
 Some of the commands have an UI counterpart implemented, which will display a menu of options and features corresponding to the commands' functionality.
 
 # Libraries
@@ -148,7 +146,6 @@ A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI"
 
 #### Description: 
 Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.
-
 This will enable/disable "Alliance Control" (control units from other players, including Enemy) and "Multi-Selection" (selecting multiple units like Vikings and Samuro).
 
 <a name="cmd-alliancecontrolteamselection-parameters" />
@@ -226,7 +223,6 @@ End the game instantly and kick all players from the game.
 
 #### Description: 
 Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. 
-
 >Note: This command is mainly for debugging, most of the time it won't be useful.
 
 <a name="cmd-forceruntrigger-parameters" />
@@ -404,7 +400,6 @@ Toggle Fog Of War. This can enable or disable full map vision.
 
 #### Description: 
 Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.
-
 >Note: If the UI is off, all abilities will be disabled.
 
 <a name="cmd-toggleui-parameters" />
@@ -624,7 +619,6 @@ Clear all active behaviors for selected units.
 
 #### Description: 
 Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
-
 > Tips: You can get active behaviors with the `getbehavior` command above.
 
 <a name="cmd-countbehavior-parameters" />
@@ -781,7 +775,6 @@ Remove an Animation from selected unit(s).
 
 #### Description: 
 Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
-
 > Tips: You can get active behaviors with the `getbehavior` command above.
 
 <a name="cmd-removebehavior-parameters" />
@@ -891,7 +884,6 @@ Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 #### Description: 
 Replace all selected units to the Target Unit.
-
 >Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting.
 
 <a name="cmd-replaceunit-parameters" />
@@ -949,7 +941,6 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 #### Description: 
 Spawn unit(s) at the centre of your camera location.
 >Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. 
-
 >Note: If your hero is Samuro, it will have some weird behavior for multi selection due to Blizzard's implementation of Samuro.
 
 <a name="cmd-summon-parameters" />
@@ -1047,8 +1038,6 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
 
 #### Description: 
 Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.
-
-
 |Type|Galaxy file constant|
 |-|-|
 |0|c_unitPropLife|
@@ -1333,9 +1322,7 @@ Set the in-game overlay (e.g golden overlay for Uther's Divine Shield).
 #### Description: 
 Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.
 >Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.
-
 You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
-
 >Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.
 
 <a name="cmd-setscore-parameters" />
@@ -1454,20 +1441,9 @@ A Builder Library that allows you to place objects anywhere in the map.
 <a name="lib-libBULM-description"/>
 
 **This system is still in a early development.**
-
-
-
 Builder mode allows you to place objects to anywhere in the map. The units will constantly teleport to your cursor (follow your cursor). Remember to select `/ac` and `ts` in QA menu (this will added automatically in future development).
-
-
-
 To use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.
-
-
-
 To place the unit(s), press `backspace` again to deactivate builder mode.
-
-
 
 ---
 <a name="lib-libFPSM"/>
@@ -1478,32 +1454,14 @@ A First Person Shooter like Library that allows you to see the map in first pers
 <a name="lib-libFPSM-description"/>
 
 **This system is still in a early development.**
-
-
-
 FPS Mode allows you to look at the map by using a first person camera on your unit. The camera will constantly look forward and turn as well as long as the mode is activated.
-
-
-
 To toggle FPS mode, simply use the `fps` chat command.
-
-
-
 ### Controls:
-
-
-
  - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)
-
  - `← (arrow key)` : Turn your unit and camera to left.
-
  - `→ (arrow key)` : Turn your unit and camera to right.
-
  - `↑ (arrow key)` : Turn your camera upwards.
-
  - `↓ (arrow key)` : Turn your camera downwards.
-
-
 
 ---
 <a name="lib-libFRCM"/>
@@ -1514,13 +1472,9 @@ Free Camera Mode allows you to change the angle of the camera easily.
 <a name="lib-libFRCM-description"/>
 
 **This system is still in a early development.**
-
 Free Camera Mode allows you to use `Middle Mouse Wheel` to freely change your camera angel and direction.
-
 To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!
-
 >Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active
-
 
 ---
 <a name="lib-libFUNY"/>

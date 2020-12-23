@@ -2,7 +2,12 @@
     "_metadata": {
         "tagetMarkdownFile": "./USAGE.md",
         "MDTitle": "Usage",
-        "MDDescription": "Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).\n>Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.\n\nAll commands have a short alias, which they both have identical functionality that allows for less typing.\n\nSome of the commands have an UI counterpart implemented, which will display a menu of options and features corresponding to the commands' functionality."
+        "MDDescription": [
+            "Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).",
+            ">Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.",
+            "All commands have a short alias, which they both have identical functionality that allows for less typing.",
+            "Some of the commands have an UI counterpart implemented, which will display a menu of options and features corresponding to the commands' functionality."
+        ]
     },
     "libraries": [
         {
@@ -62,7 +67,10 @@
                 {
                     "shortCommand": "tui",
                     "command": "toggleui",
-                    "description": "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.\n\n>Note: If the UI is off, all abilities will be disabled.",
+                    "description": [
+                        "Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.",
+                        ">Note: If the UI is off, all abilities will be disabled."
+                    ],
                     "uiAvailable": false,
                     "parameters": [],
                     "examples": [
@@ -104,7 +112,10 @@
                 {
                     "shortCommand": "re",
                     "command": "restartgame",
-                    "description": "Restart the map without needed to re-enter. This is extremely useful when you want to try the new modified XML files or galaxy scripts. \n >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to manually re-enter for mods to be added.",
+                    "description": [
+                        "Restart the map without needed to re-enter. This is extremely useful when you want to try the new modified XML files or galaxy scripts. ",
+                        " >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to manually re-enter for mods to be added."
+                    ],
                     "uiAvailable": false,
                     "parameters": [],
                     "examples": [
@@ -155,7 +166,10 @@
                 {
                     "shortCommand": "wg",
                     "command": "wingame",
-                    "description": "Instantly declare a win for a team and end the game.\nGenerally left team is **Team 1** and right team is **Team 2**.",
+                    "description": [
+                        "Instantly declare a win for a team and end the game.",
+                        "Generally left team is **Team 1** and right team is **Team 2**."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -179,7 +193,10 @@
                 {
                     "shortCommand": "sco",
                     "command": "setcameraobject",
-                    "description": "Manually set the camera object. The parameter is the id of `<CCamera id=\"xxx\">`.\n>**WARNING**: Set a non existing camera will actually **crash** the game.",
+                    "description": [
+                        "Manually set the camera object. The parameter is the id of `<CCamera id=\"xxx\">`.",
+                        ">**WARNING**: Set a non existing camera will actually **crash** the game."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -220,7 +237,10 @@
                 {
                     "shortCommand": "frt",
                     "command": "forceruntrigger",
-                    "description": "Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. \n\n>Note: This command is mainly for debugging, most of the time it won't be useful.",
+                    "description": [
+                        "Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. ",
+                        ">Note: This command is mainly for debugging, most of the time it won't be useful."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -244,7 +264,10 @@
                 {
                     "shortCommand": "acts",
                     "command": "alliancecontrolteamselection",
-                    "description": "Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.\n\nThis will enable/disable \"Alliance Control\" (control units from other players, including Enemy) and \"Multi-Selection\" (selecting multiple units like Vikings and Samuro).",
+                    "description": [
+                        "Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.",
+                        "This will enable/disable \"Alliance Control\" (control units from other players, including Enemy) and \"Multi-Selection\" (selecting multiple units like Vikings and Samuro)."
+                    ],
                     "uiAvailable": false,
                     "parameters": [],
                     "examples": [
@@ -307,7 +330,11 @@
                 {
                     "shortCommand": "sum",
                     "command": "summon",
-                    "description": "Spawn unit(s) at the centre of your camera location.\n>Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. \n\n>Note: If your hero is Samuro, it will have some weird behavior for multi selection due to Blizzard's implementation of Samuro.",
+                    "description": [
+                        "Spawn unit(s) at the centre of your camera location.",
+                        ">Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. ",
+                        ">Note: If your hero is Samuro, it will have some weird behavior for multi selection due to Blizzard's implementation of Samuro."
+                    ],
                     "uiAvailable": true,
                     "parameters": [
                         {
@@ -364,7 +391,10 @@
                 {
                     "shortCommand": "rpu",
                     "command": "replaceunit",
-                    "description": "Replace all selected units to the Target Unit.\n\n>Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting.",
+                    "description": [
+                        "Replace all selected units to the Target Unit.",
+                        ">Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -388,7 +418,34 @@
                 {
                     "shortCommand": "up",
                     "command": "unitproperty",
-                    "description": "Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
+                    "description": [
+                        "Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.",
+                        "|Type|Galaxy file constant|",
+                        "|-|-|",
+                        "|0|c_unitPropLife|",
+                        "|1|c_unitPropLifePercent|",
+                        "|2|c_unitPropLifeMax|",
+                        "|3|c_unitPropLifeRegen|",
+                        "|4|c_unitPropEnergy|",
+                        "|5|c_unitPropEnergyPercent|",
+                        "|6|c_unitPropEnergyMax|",
+                        "|7|c_unitPropEnergyRegen|",
+                        "|8|c_unitPropShields|",
+                        "|9|c_unitPropShieldsPercent|",
+                        "|10|c_unitPropShieldsMax|",
+                        "|11|c_unitPropShieldsRegen|",
+                        "|12|c_unitPropKills|",
+                        "|17|c_unitPropHeight|",
+                        "|18|c_unitPropMovementSpeed|",
+                        "|20|c_unitPropResources|",
+                        "|21|c_unitPropRadius|",
+                        "|22|c_unitPropXP|",
+                        "|23|c_unitPropLevel|",
+                        "|24|c_unitPropKillXP|",
+                        "|28|c_unitPropBaseMovementSpeed|",
+                        "|29|c_unitPropMovementSpeedCurrent|",
+                        "|30|c_unitPropLifeExpectedPercent|"
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -493,7 +550,10 @@
                 {
                     "shortCommand": "rmb",
                     "command": "removebehavior",
-                    "description": "Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.\n\n> Tips: You can get active behaviors with the `getbehavior` command above.",
+                    "description": [
+                        "Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
+                        "> Tips: You can get active behaviors with the `getbehavior` command above."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -517,7 +577,10 @@
                 {
                     "shortCommand": "ctb",
                     "command": "countbehavior",
-                    "description": "Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.\n\n> Tips: You can get active behaviors with the `getbehavior` command above.",
+                    "description": [
+                        "Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
+                        "> Tips: You can get active behaviors with the `getbehavior` command above."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -637,7 +700,10 @@
                 {
                     "shortCommand": "pa",
                     "command": "playanimation",
-                    "description": "Play an Animation for selected unit(s).\n>Note: There are Walk, Attack, A to Z animations etc",
+                    "description": [
+                        "Play an Animation for selected unit(s).",
+                        ">Note: There are Walk, Attack, A to Z animations etc"
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -661,7 +727,10 @@
                 {
                     "shortCommand": "rma",
                     "command": "removeanimation",
-                    "description": "Remove an Animation from selected unit(s).\n>Note: There are Walk, Attack, A to Z animations etc",
+                    "description": [
+                        "Remove an Animation from selected unit(s).",
+                        ">Note: There are Walk, Attack, A to Z animations etc"
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -685,7 +754,10 @@
                 {
                     "shortCommand": "sam",
                     "command": "sendactormessage",
-                    "description": "Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on send=\"xxx\">`.\n>Note: The command allows spaces for the parameter, since most actor messages have spaces.",
+                    "description": [
+                        "Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on send=\"xxx\">`.",
+                        ">Note: The command allows spaces for the parameter, since most actor messages have spaces."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -726,7 +798,10 @@
                 {
                     "shortCommand": "cuo",
                     "command": "changeunitownership",
-                    "description": "Changes ownership of the selected unit(s).\n>Note: 0 is neutral, which cannot be selected once ownership have changed.",
+                    "description": [
+                        "Changes ownership of the selected unit(s).",
+                        ">Note: 0 is neutral, which cannot be selected once ownership have changed."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -827,7 +902,10 @@
                 {
                     "shortCommand": "tmq",
                     "command": "togglemassquest",
-                    "description": "Toggle mass quest completion mode to give stack every game tick (0.0625s).\n>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent",
+                    "description": [
+                        "Toggle mass quest completion mode to give stack every game tick (0.0625s).",
+                        ">Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent"
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -852,7 +930,10 @@
                 {
                     "shortCommand": "smr",
                     "command": "setmasteryring",
-                    "description": "Set the Mastery Ring level. The ring below the hero will be automatically updated.\n>Note: If the new Level is lower than the current one, you may need to respawn(e.g suicide) the selected units.",
+                    "description": [
+                        "Set the Mastery Ring level. The ring below the hero will be automatically updated.",
+                        ">Note: If the new Level is lower than the current one, you may need to respawn(e.g suicide) the selected units."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -910,7 +991,10 @@
                 {
                     "shortCommand": "rmt",
                     "command": "remvetalent",
-                    "description": "Remove a talent from a player, generally found in `<CTalent id=\"xxxx\">`.\n>Note: Some of the talents won't work, so you might want to experiment a bit.",
+                    "description": [
+                        "Remove a talent from a player, generally found in `<CTalent id=\"xxxx\">`.",
+                        ">Note: Some of the talents won't work, so you might want to experiment a bit."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -941,7 +1025,10 @@
                 {
                     "shortCommand": "ent",
                     "command": "enabletalent",
-                    "description": "Enable / Disable a talent for all player. Generally found in `<CTalent id=\"xxxx\">`.\n>Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player.",
+                    "description": [
+                        "Enable / Disable a talent for all player. Generally found in `<CTalent id=\"xxxx\">`.",
+                        ">Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -972,7 +1059,10 @@
                 {
                     "shortCommand": "rst",
                     "command": "respawntime",
-                    "description": "Override the current respawn timer for all players.\n>Notice: Due to the system limitation, if you set to 0, it will change it to 0.0625 automatically (1 game tick).",
+                    "description": [
+                        "Override the current respawn timer for all players.",
+                        ">Notice: Due to the system limitation, if you set to 0, it will change it to 0.0625 automatically (1 game tick)."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -996,7 +1086,12 @@
                 {
                     "shortCommand": "score",
                     "command": "setscore",
-                    "description": "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.\n>Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.\n\nYou can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`\n\n>Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.",
+                    "description": [
+                        "Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.",
+                        ">Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.",
+                        "You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`",
+                        ">Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -1080,7 +1175,10 @@
                 {
                     "shortCommand": "sol",
                     "command": "setoverlay",
-                    "description": "Set the in-game overlay (e.g golden overlay for Uther's Divine Shield). \n>Note: The path is relative to `*.storm*/base.gamedata/`, usually with the extension of `*.stormcutscene`.",
+                    "description": [
+                        "Set the in-game overlay (e.g golden overlay for Uther's Divine Shield). ",
+                        ">Note: The path is relative to `*.storm*/base.gamedata/`, usually with the extension of `*.stormcutscene`."
+                    ],
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -1127,7 +1225,12 @@
                 "libraryId": "libBULM",
                 "libraryDescription": "A Builder Library that allows you to place objects anywhere in the map.",
                 "overrideMarkdown": true,
-                "overrideMarkdownContent": "**This system is still in a early development.**\n\n\n\nBuilder mode allows you to place objects to anywhere in the map. The units will constantly teleport to your cursor (follow your cursor). Remember to select `/ac` and `ts` in QA menu (this will added automatically in future development).\n\n\n\nTo use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.\n\n\n\nTo place the unit(s), press `backspace` again to deactivate builder mode.\n\n"
+                "overrideMarkdownContent": [
+                    "**This system is still in a early development.**",
+                    "Builder mode allows you to place objects to anywhere in the map. The units will constantly teleport to your cursor (follow your cursor). Remember to select `/ac` and `ts` in QA menu (this will added automatically in future development).",
+                    "To use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.",
+                    "To place the unit(s), press `backspace` again to deactivate builder mode."
+                ]
             }
         },
         {
@@ -1137,7 +1240,17 @@
                 "libraryId": "libFPSM",
                 "libraryDescription": "A First Person Shooter like Library that allows you to see the map in first person camera.",
                 "overrideMarkdown": true,
-                "overrideMarkdownContent": "**This system is still in a early development.**\n\n\n\nFPS Mode allows you to look at the map by using a first person camera on your unit. The camera will constantly look forward and turn as well as long as the mode is activated.\n\n\n\nTo toggle FPS mode, simply use the `fps` chat command.\n\n\n\n### Controls:\n\n\n\n - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)\n\n - `← (arrow key)` : Turn your unit and camera to left.\n\n - `→ (arrow key)` : Turn your unit and camera to right.\n\n - `↑ (arrow key)` : Turn your camera upwards.\n\n - `↓ (arrow key)` : Turn your camera downwards.\n\n"
+                "overrideMarkdownContent": [
+                    "**This system is still in a early development.**",
+                    "FPS Mode allows you to look at the map by using a first person camera on your unit. The camera will constantly look forward and turn as well as long as the mode is activated.",
+                    "To toggle FPS mode, simply use the `fps` chat command.",
+                    "### Controls:",
+                    " - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)",
+                    " - `← (arrow key)` : Turn your unit and camera to left.",
+                    " - `→ (arrow key)` : Turn your unit and camera to right.",
+                    " - `↑ (arrow key)` : Turn your camera upwards.",
+                    " - `↓ (arrow key)` : Turn your camera downwards."
+                ]
             }
         },
         {
@@ -1147,7 +1260,12 @@
                 "libraryId": "libFRCM",
                 "libraryDescription": "Free Camera Mode allows you to change the angle of the camera easily.",
                 "overrideMarkdown": true,
-                "overrideMarkdownContent": "**This system is still in a early development.**\n\nFree Camera Mode allows you to use `Middle Mouse Wheel` to freely change your camera angel and direction.\n\nTo enable or disable, simply use the chat command `tfc` or `togglefreecamera`!\n\n>Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active\n"
+                "overrideMarkdownContent": [
+                    "**This system is still in a early development.**",
+                    "Free Camera Mode allows you to use `Middle Mouse Wheel` to freely change your camera angel and direction.",
+                    "To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!",
+                    ">Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active"
+                ]
             }
         },
         {

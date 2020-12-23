@@ -36,7 +36,11 @@ const markdowner = new MarkDowner();
 // Header
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
-markdowner.addRaw = jsonData._metadata.MDDescription;
+if (Array.isArray(jsonData._metadata.MDDescription)) {
+  markdowner.addRaw = jsonData._metadata.MDDescription.join('\n');
+} else {
+  markdowner.addRaw = jsonData._metadata.MDDescription;
+}
 
 markdowner.addH1 = 'Libraries';
 
@@ -77,7 +81,12 @@ jsonData.libraries.forEach((library) => {
   markdowner.addRaw = library._metadata.libraryDescription;
   if (library._metadata.overrideMarkdown) {
     markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}-description"/>`;
-    markdowner.addRaw = library._metadata.overrideMarkdownContent;
+    if (Array.isArray(library._metadata.overrideMarkdownContent)) {
+      // Multi-line support
+      markdowner.addRaw = library._metadata.overrideMarkdownContent.join('\n');
+    } else {
+      markdowner.addRaw = library._metadata.overrideMarkdownContent;
+    }
   } else {
     // Commands Generate
     library.commands.forEach((command) => {
@@ -88,7 +97,11 @@ jsonData.libraries.forEach((library) => {
       markdowner.addH2 = title + titleparam;
       markdowner.addRaw = `<a name="cmd-${command.command}-description" />`;
       markdowner.addH4 = 'Description: ';
-      markdowner.addRaw = command.description;
+      if (Array.isArray(command.description)) {
+        markdowner.addRaw = command.description.join('\n');
+      } else {
+        markdowner.addRaw = command.description;
+      }
 
       //   Param section
       if (Object.prototype.hasOwnProperty.call(command, 'parameters') && command.parameters instanceof Array) {
