@@ -6,6 +6,14 @@ include "TriggerLibs/NativeLib"
 // Validating: templates
 
 // Structures
+struct libUNIT_gs_AddBehaviorPanel {
+    int lv_mainDialog;
+    int lv_behaviorListDropdown;
+    string lv_unitListDropdownSelected;
+    int lv_addBehaviorButton;
+    int lv_closeButton;
+};
+
 struct libUNIT_gs_SummonUnitPanel {
     int lv_mainDialog;
     int lv_unitListDropdown;
@@ -23,6 +31,8 @@ struct libUNIT_gs_SummonUnitPanel {
 // Variable Declarations
 int libUNIT_gv_noWeaponCDPlayer;
 bool libUNIT_gv_isNoWeaponCDEnabled;
+libUNIT_gs_AddBehaviorPanel libUNIT_gv_addBehaviorPanel;
+bool libUNIT_gv_addBehaviorPanel_IsShowingDialog;
 bool libUNIT_gv_toggleOutputIDEnabled;
 libUNIT_gs_SummonUnitPanel libUNIT_gv_summonUnitPanel;
 bool libUNIT_gv_summonUnitPanel_IsShowingDialog;
@@ -42,6 +52,11 @@ trigger libUNIT_gt_GetUnitOwnership;
 trigger libUNIT_gt_SendActorMessage;
 trigger libUNIT_gt_PlayAnimation;
 trigger libUNIT_gt_RemoveAnimation;
+trigger libUNIT_gt_AddBehaviorPanelSetupPanel;
+trigger libUNIT_gt_AddBehaviorPanelToggleShowDialog;
+trigger libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged;
+trigger libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked;
+trigger libUNIT_gt_AddBehaviorPanelCloseButtonClicked;
 trigger libUNIT_gt_AddBehavior;
 trigger libUNIT_gt_RemoveBehavior;
 trigger libUNIT_gt_CountBehavior;
@@ -87,6 +102,11 @@ void libUNIT_InitVariables () {
 
     libUNIT_InitVariables_completed = true;
 
+    libUNIT_gv_addBehaviorPanel.lv_mainDialog = c_invalidDialogId;
+    libUNIT_gv_addBehaviorPanel.lv_behaviorListDropdown = c_invalidDialogControlId;
+    libUNIT_gv_addBehaviorPanel.lv_unitListDropdownSelected = ("Ultimate2Unlocked");
+    libUNIT_gv_addBehaviorPanel.lv_addBehaviorButton = c_invalidDialogControlId;
+    libUNIT_gv_addBehaviorPanel.lv_closeButton = c_invalidDialogControlId;
     libUNIT_gv_summonUnitPanel.lv_mainDialog = c_invalidDialogId;
     libUNIT_gv_summonUnitPanel.lv_unitListDropdown = c_invalidDialogControlId;
     libUNIT_gv_summonUnitPanel.lv_unitListDropdownSelected = ("HeroRaynor");
@@ -730,6 +750,209 @@ void libUNIT_gt_RemoveAnimation_Init () {
     libUNIT_gt_RemoveAnimation = TriggerCreate("libUNIT_gt_RemoveAnimation_Func");
     TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "rma", false);
     TriggerAddEventChatMessage(libUNIT_gt_RemoveAnimation, c_playerAny, "removeanimation", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AddBehaviorPanel - Setup Panel
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehaviorPanelSetupPanel_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_behavior;
+
+    // Automatic Variable Declarations
+    int auto62774B87_catalog;
+    int auto62774B87_i;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    DialogCreate(500, 200, c_anchorTopRight, 10, 10, true);
+    DialogSetImage(DialogLastCreated(), ("Assets\\Textures\\storm_ui_store_gradientbackground_new.dds"));
+    DialogSetTransparency(DialogLastCreated(), 20.0);
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTop, 50, 15, StringToText("Add Behavior"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libUNIT_gv_addBehaviorPanel.lv_mainDialog = DialogLastCreated();
+    DialogControlCreate(DialogLastCreated(), c_triggerControlTypePulldown);
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 50);
+    auto62774B87_catalog = c_gameCatalogBehavior;
+    auto62774B87_i = 1;
+    for ( ; auto62774B87_i <= CatalogEntryCount(c_gameCatalogBehavior) ; auto62774B87_i += 1 ) {
+        lv_behavior = CatalogEntryGet(auto62774B87_catalog, auto62774B87_i);
+        DialogControlAddItem(DialogControlLastCreated(), PlayerGroupAll(), StringToText((lv_behavior)));
+    }
+    DialogControlSelectItem(DialogControlLastCreated(), PlayerGroupAll(), 1);
+    libUNIT_gv_addBehaviorPanel.lv_behaviorListDropdown = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 100, 50, c_anchorTopLeft, 100, 63, StringToText("Behavior: "), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libNtve_gf_CreateDialogItemButton(libUNIT_gv_addBehaviorPanel.lv_mainDialog, 350, 50, c_anchorTop, 25, 113, StringToText("Click to add the behavior to selected units!"), StringToText("Add To Units"), "");
+    libUNIT_gv_addBehaviorPanel.lv_addBehaviorButton = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemButton(libUNIT_gv_addBehaviorPanel.lv_mainDialog, 35, 35, c_anchorTopRight, 15, 15, StringToText("Close this dialog"), StringToText("x"), "");
+    libUNIT_gv_addBehaviorPanel.lv_closeButton = DialogControlLastCreated();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehaviorPanelSetupPanel_Init () {
+    libUNIT_gt_AddBehaviorPanelSetupPanel = TriggerCreate("libUNIT_gt_AddBehaviorPanelSetupPanel_Func");
+    TriggerAddEventMapInit(libUNIT_gt_AddBehaviorPanelSetupPanel);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AddBehaviorPanel - Toggle Show Dialog
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehaviorPanelToggleShowDialog_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_addBehaviorPanel_IsShowingDialog = !(libUNIT_gv_addBehaviorPanel_IsShowingDialog);
+    if ((libUNIT_gv_addBehaviorPanel_IsShowingDialog == true)) {
+        DialogSetVisible(libUNIT_gv_addBehaviorPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), true);
+    }
+    else {
+        DialogSetVisible(libUNIT_gv_addBehaviorPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehaviorPanelToggleShowDialog_Init () {
+    libUNIT_gt_AddBehaviorPanelToggleShowDialog = TriggerCreate("libUNIT_gt_AddBehaviorPanelToggleShowDialog_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_AddBehaviorPanelToggleShowDialog, c_playerAny, "addbehaviorui", true);
+    TriggerAddEventChatMessage(libUNIT_gt_AddBehaviorPanelToggleShowDialog, c_playerAny, "adbui", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AddBehaviorPanel - BehaviorDropdownChanged
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_behavior;
+    int lv_i;
+    int lv_itemIndex;
+
+    // Automatic Variable Declarations
+    int autoE13F161F_catalog;
+    int autoE13F161F_i;
+
+    // Variable Initialization
+    lv_i = 1;
+    lv_itemIndex = 1;
+
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_addBehaviorPanel.lv_behaviorListDropdown == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_itemIndex = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    autoE13F161F_catalog = c_gameCatalogBehavior;
+    autoE13F161F_i = 1;
+    for ( ; autoE13F161F_i <= CatalogEntryCount(c_gameCatalogBehavior) ; autoE13F161F_i += 1 ) {
+        lv_behavior = CatalogEntryGet(autoE13F161F_catalog, autoE13F161F_i);
+        if ((lv_i >= lv_itemIndex)) {
+            break;
+        }
+
+        lv_i = (lv_i + 1);
+    }
+    libUNIT_gv_addBehaviorPanel.lv_unitListDropdownSelected = lv_behavior;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged_Init () {
+    libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged = TriggerCreate("libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeSelectionChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AddBehaviorPanel - Add Behavior Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_behavior;
+    string lv_unittype;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    unitgroup autoAC4CC50F_g;
+    int autoAC4CC50F_u;
+
+    // Variable Initialization
+    lv_behavior = libUNIT_gv_addBehaviorPanel.lv_unitListDropdownSelected;
+
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_addBehaviorPanel.lv_addBehaviorButton == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoAC4CC50F_g = UnitGroupSelected(EventPlayer());
+    autoAC4CC50F_u = UnitGroupCount(autoAC4CC50F_g, c_unitCountAll);
+    for (;; autoAC4CC50F_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(autoAC4CC50F_g, autoAC4CC50F_u);
+        if (lv_unit == null) { break; }
+        lv_unittype = UnitGetType(lv_unit);
+        UnitBehaviorAdd(lv_unit, ((lv_behavior)), lv_unit, 1);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Behavior \"" + ((lv_behavior) + ("\" to " + (lv_unittype))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked_Init () {
+    libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked = TriggerCreate("libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AddBehaviorPanel - Close Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AddBehaviorPanelCloseButtonClicked_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libUNIT_gv_addBehaviorPanel.lv_closeButton == EventDialogControl()))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_addBehaviorPanel_IsShowingDialog = !(libUNIT_gv_addBehaviorPanel_IsShowingDialog);
+    if ((libUNIT_gv_addBehaviorPanel_IsShowingDialog == true)) {
+        DialogSetVisible(libUNIT_gv_addBehaviorPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), true);
+    }
+    else {
+        DialogSetVisible(libUNIT_gv_addBehaviorPanel.lv_mainDialog, PlayerGroupSingle(EventPlayer()), false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AddBehaviorPanelCloseButtonClicked_Init () {
+    libUNIT_gt_AddBehaviorPanelCloseButtonClicked = TriggerCreate("libUNIT_gt_AddBehaviorPanelCloseButtonClicked_Func");
+    TriggerAddEventDialogControl(libUNIT_gt_AddBehaviorPanelCloseButtonClicked, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1652,6 +1875,11 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_SendActorMessage_Init();
     libUNIT_gt_PlayAnimation_Init();
     libUNIT_gt_RemoveAnimation_Init();
+    libUNIT_gt_AddBehaviorPanelSetupPanel_Init();
+    libUNIT_gt_AddBehaviorPanelToggleShowDialog_Init();
+    libUNIT_gt_AddBehaviorPanelBehaviorDropdownChanged_Init();
+    libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked_Init();
+    libUNIT_gt_AddBehaviorPanelCloseButtonClicked_Init();
     libUNIT_gt_AddBehavior_Init();
     libUNIT_gt_RemoveBehavior_Init();
     libUNIT_gt_CountBehavior_Init();

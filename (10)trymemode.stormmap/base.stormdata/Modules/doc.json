@@ -470,7 +470,7 @@
                     "shortCommand": "adb",
                     "command": "addbehavior",
                     "description": "Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
-                    "uiAvailable": false,
+                    "uiAvailable": true,
                     "parameters": [
                         {
                             "name": "BehaviorId",

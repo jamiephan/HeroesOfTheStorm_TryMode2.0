@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 02:39:17 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 02:42:05 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -50,7 +50,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 - [Units](#lib-LibUNIT)
 
-  - [Command: `addbehavior`](#cmd-addbehavior)
+  - [Command: `addbehavior`](#cmd-addbehavior) (✔ UI)
 
   - [Command: `addeffect`](#cmd-addeffect)
 
@@ -482,7 +482,7 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
 <a name="cmd-addbehavior-uiAvailability" />
 
 #### UI Availability:
-- ❌ **Not Implemented**
+- ✔ **Yes.** Use the command `addbehaviorui` or `adbui` to toggle the UI counterpart of this command.
 
 <a name="cmd-addeffect" />
 
