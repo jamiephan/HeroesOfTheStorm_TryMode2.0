@@ -1025,8 +1025,32 @@
                 {
                     "shortCommand": "ent",
                     "command": "enabletalent",
+                    "description": "Enable a disabled talent for all players. Generally found in `<CTalent id=\"xxxx\">`.",
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "TalentId",
+                            "required": true,
+                            "description": "The talent id to be enabled/disabled.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "enabletalent RagnarosLavaWave",
+                            "description": "Enable Rag's Lava Wave talent, which was disabled in ARAM."
+                        },
+                        {
+                            "command": "ent MaievUmbralBindPursuitOfVengeance",
+                            "description": "Enable Maiev's Pursuit Of Vengeance talent"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "dist",
+                    "command": "disabletalent",
                     "description": [
-                        "Enable / Disable a talent for all player. Generally found in `<CTalent id=\"xxxx\">`.",
+                        "Disable a for all players. Generally found in `<CTalent id=\"xxxx\">`.",
                         ">Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player."
                     ],
                     "uiAvailable": false,
@@ -1036,22 +1060,15 @@
                             "required": true,
                             "description": "The talent id to be enabled/disabled.",
                             "type": "string"
-                        },
-                        {
-                            "name": "isEnable",
-                            "required": false,
-                            "description": "Set whether the talent should be enabled or disabled. (0 = disable, 1 = enable)",
-                            "type": "integer",
-                            "defaultValue": 1
                         }
                     ],
                     "examples": [
                         {
-                            "command": "enabletalent RagnarosLavaWave 1",
-                            "description": "Enable Rag's Lava Wave talent, which was disabled in ARAM."
+                            "command": "disabletalent RagnarosLavaWave",
+                            "description": "Disable Rag's Lava Wave talent, similar to ARAM."
                         },
                         {
-                            "command": "ent MaievUmbralBindPursuitOfVengeance 0",
+                            "command": "dist MaievUmbralBindPursuitOfVengeance 0",
                             "description": "Disable Maiev's Pursuit Of Vengeance talent"
                         }
                     ]

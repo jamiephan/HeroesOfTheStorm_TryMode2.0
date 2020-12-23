@@ -20,7 +20,8 @@ trigger libPLYR_gt_TogglePause;
 trigger libPLYR_gt_TogglePause2;
 trigger libPLYR_gt_AddTalent;
 trigger libPLYR_gt_RemoveTalent;
-trigger libPLYR_gt_EnableOrDisableTalent;
+trigger libPLYR_gt_EnableTalent;
+trigger libPLYR_gt_DisableTalent;
 trigger libPLYR_gt_OverrideRespawnPoint;
 trigger libPLYR_gt_OverrideScoreBoard;
 trigger libPLYR_gt_SetMasteryRing;
@@ -293,12 +294,52 @@ void libPLYR_gt_RemoveTalent_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Enable/Disable Talent
+// Trigger: Enable Talent
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_EnableOrDisableTalent_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_EnableTalent_Func (bool testConds, bool runActions) {
     // Variable Declarations
     string lv_talentName;
-    int lv_isEnable;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_talentName = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "dist") || (StringWord(EventChatMessage(false), 1) == "disabletalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <dist|disabletalent> <TalentName>"));
+    }
+    else {
+        lv_talentName = StringWord(EventChatMessage(false), 2);
+        SetTalentEnabled((lv_talentName), false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_EnableTalent_Init () {
+    libPLYR_gt_EnableTalent = TriggerCreate("libPLYR_gt_EnableTalent_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_EnableTalent, c_playerAny, "dist", false);
+    TriggerAddEventChatMessage(libPLYR_gt_EnableTalent, c_playerAny, "disabletalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable Talent
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_DisableTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_talentName;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -317,36 +358,21 @@ bool libPLYR_gt_EnableOrDisableTalent_Func (bool testConds, bool runActions) {
     }
 
     if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ent|enabletalent> <TalentName> [enable=1*, disable=0]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ent|enabletalent> <TalentName>"));
     }
     else {
         lv_talentName = StringWord(EventChatMessage(false), 2);
-        if ((StringWord(EventChatMessage(false), 3) != null)) {
-            lv_isEnable = StringToInt(StringWord(EventChatMessage(false), 3));
-            if ((lv_isEnable > 1)) {
-                lv_isEnable = 1;
-            }
-
-        }
-
-        if ((lv_isEnable == 1)) {
-            SetTalentEnabled((lv_talentName), true);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
-        }
-        else {
-            SetTalentsEnabled(true);
-            SetTalentEnabled((lv_talentName), false);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
-        }
+        SetTalentEnabled((lv_talentName), true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
     }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_EnableOrDisableTalent_Init () {
-    libPLYR_gt_EnableOrDisableTalent = TriggerCreate("libPLYR_gt_EnableOrDisableTalent_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_EnableOrDisableTalent, c_playerAny, "ent", false);
-    TriggerAddEventChatMessage(libPLYR_gt_EnableOrDisableTalent, c_playerAny, "enabletalent", false);
+void libPLYR_gt_DisableTalent_Init () {
+    libPLYR_gt_DisableTalent = TriggerCreate("libPLYR_gt_DisableTalent_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_DisableTalent, c_playerAny, "ent", false);
+    TriggerAddEventChatMessage(libPLYR_gt_DisableTalent, c_playerAny, "enabletalent", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -682,7 +708,8 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_TogglePause2_Init();
     libPLYR_gt_AddTalent_Init();
     libPLYR_gt_RemoveTalent_Init();
-    libPLYR_gt_EnableOrDisableTalent_Init();
+    libPLYR_gt_EnableTalent_Init();
+    libPLYR_gt_DisableTalent_Init();
     libPLYR_gt_OverrideRespawnPoint_Init();
     libPLYR_gt_OverrideScoreBoard_Init();
     libPLYR_gt_SetMasteryRing_Init();

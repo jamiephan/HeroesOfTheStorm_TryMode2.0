@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 22:47:36 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 22:58:09 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -93,6 +93,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - [Command: `unitproperty`](#cmd-unitproperty)
 
 - [Players](#lib-LibPLYR)
+
+  - [Command: `disabletalent`](#cmd-disabletalent)
 
   - [Command: `enabletalent`](#cmd-enabletalent)
 
@@ -1102,14 +1104,41 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
 # Players Library (`LibPlayers.galaxy`):
 Commands that are related to Players, eg, scoreboard, respawn timer, etc
 
+<a name="cmd-disabletalent" />
+
+## (`disabletalent` | `dist`) `<TalentId>`
+<a name="cmd-disabletalent-description" />
+
+#### Description: 
+Disable a for all players. Generally found in `<CTalent id="xxxx">`.
+>Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player.
+
+<a name="cmd-disabletalent-parameters" />
+
+#### Parameters:
+    <TalentId>
+    	Required:	true
+    	Type:		string
+    	Usage:		The talent id to be enabled/disabled.
+<a name="cmd-disabletalent-examples" />
+
+#### Examples:
+    > disabletalent RagnarosLavaWave
+    	(Disable Rag's Lava Wave talent, similar to ARAM.)
+    > dist MaievUmbralBindPursuitOfVengeance 0
+    	(Disable Maiev's Pursuit Of Vengeance talent)
+<a name="cmd-disabletalent-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
 <a name="cmd-enabletalent" />
 
-## (`enabletalent` | `ent`) `<TalentId>` `[isEnable]`
+## (`enabletalent` | `ent`) `<TalentId>`
 <a name="cmd-enabletalent-description" />
 
 #### Description: 
-Enable / Disable a talent for all player. Generally found in `<CTalent id="xxxx">`.
->Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player.
+Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-enabletalent-parameters" />
 
@@ -1118,18 +1147,13 @@ Enable / Disable a talent for all player. Generally found in `<CTalent id="xxxx"
     	Required:	true
     	Type:		string
     	Usage:		The talent id to be enabled/disabled.
-    [isEnable]
-    	Required:	false
-    	Type:		integer
-    	Usage:		Set whether the talent should be enabled or disabled. (0 = disable, 1 = enable)
-    	Default:	1
 <a name="cmd-enabletalent-examples" />
 
 #### Examples:
-    > enabletalent RagnarosLavaWave 1
+    > enabletalent RagnarosLavaWave
     	(Enable Rag's Lava Wave talent, which was disabled in ARAM.)
-    > ent MaievUmbralBindPursuitOfVengeance 0
-    	(Disable Maiev's Pursuit Of Vengeance talent)
+    > ent MaievUmbralBindPursuitOfVengeance
+    	(Enable Maiev's Pursuit Of Vengeance talent)
 <a name="cmd-enabletalent-uiAvailability" />
 
 #### UI Availability:
