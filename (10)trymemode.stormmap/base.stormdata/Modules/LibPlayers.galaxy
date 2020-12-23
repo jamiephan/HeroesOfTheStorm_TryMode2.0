@@ -17,7 +17,7 @@ trigger libPLYR_gt_MapInit;
 trigger libPLYR_gt_RunMassQuest;
 trigger libPLYR_gt_ToggleRunMassQuest;
 trigger libPLYR_gt_TogglePause;
-trigger libPLYR_gt_TogglePause2;
+trigger libPLYR_gt_ToggleTalentTree;
 trigger libPLYR_gt_AddTalent;
 trigger libPLYR_gt_RemoveTalent;
 trigger libPLYR_gt_EnableTalent;
@@ -87,7 +87,7 @@ bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
+    //_heroes_replace_//libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
     return true;
 }
 
@@ -179,7 +179,7 @@ void libPLYR_gt_TogglePause_Init () {
 //--------------------------------------------------------------------------------------------------
 // Trigger: Toggle Talent Tree
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_TogglePause2_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_ToggleTalentTree_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
@@ -199,10 +199,10 @@ bool libPLYR_gt_TogglePause2_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_TogglePause2_Init () {
-    libPLYR_gt_TogglePause2 = TriggerCreate("libPLYR_gt_TogglePause2_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_TogglePause2, c_playerAny, "ttt", true);
-    TriggerAddEventChatMessage(libPLYR_gt_TogglePause2, c_playerAny, "toggletalenttree", true);
+void libPLYR_gt_ToggleTalentTree_Init () {
+    libPLYR_gt_ToggleTalentTree = TriggerCreate("libPLYR_gt_ToggleTalentTree_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleTalentTree, c_playerAny, "ttt", true);
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleTalentTree, c_playerAny, "toggletalenttree", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ bool libPLYR_gt_EnableTalent_Func (bool testConds, bool runActions) {
     }
     else {
         lv_talentName = StringWord(EventChatMessage(false), 2);
-        SetTalentEnabled((lv_talentName), false);
+        //_heroes_replace_//SetTalentEnabled((lv_talentName), false);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
     }
     return true;
@@ -362,7 +362,7 @@ bool libPLYR_gt_DisableTalent_Func (bool testConds, bool runActions) {
     }
     else {
         lv_talentName = StringWord(EventChatMessage(false), 2);
-        SetTalentEnabled((lv_talentName), true);
+        //_heroes_replace_//SetTalentEnabled((lv_talentName), true);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
     }
     return true;
@@ -420,7 +420,7 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
             while (true) {
                 lv_player = PlayerGroupNextPlayer(auto61B0F10C_g, lv_player);
                 if (lv_player < 0) { break; }
-                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
             }
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set All Players Respawn point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation))));
             return true;
@@ -428,13 +428,13 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
         else {
             if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
                 lv_player = EventPlayer();
-                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
                 return true;
             }
             else {
                 lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
-                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
                 return true;
             }
@@ -449,7 +449,7 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
             while (true) {
                 lv_player = PlayerGroupNextPlayer(auto9EDB3770_g, lv_player);
                 if (lv_player < 0) { break; }
-                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
             }
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn Point to their default spawn point."));
             return true;
@@ -457,13 +457,13 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
         else {
             if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
                 lv_player = EventPlayer();
-                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
                 return true;
             }
             else {
                 lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
-                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
                 return true;
             }
@@ -619,7 +619,7 @@ bool libPLYR_gt_OverrideRespawnTime_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Warning: Respawn time cannot be set lower than 0.0625."));
     }
 
-    libCore_gv_bALDeathTimeOverride = lv_respawntime;
+    //_heroes_replace_//libCore_gv_bALDeathTimeOverride = lv_respawntime;
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Override Respawn Timer to " + FixedToString(lv_respawntime, c_fixedPrecisionAny))));
     return true;
 }
@@ -661,7 +661,7 @@ bool libPLYR_gt_SetOverlay_Func (bool testConds, bool runActions) {
     }
     else {
         lv_overlayPath = StringWord(EventChatMessage(false), 2);
-        libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, lv_overlayPath);
+        //_heroes_replace_//libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, lv_overlayPath);
     }
     return true;
 }
@@ -689,7 +689,7 @@ bool libPLYR_gt_ResetOverlay_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, libUIUI_gv_fullscreenOverlayQueue[lv_player].lv_cutscene[1]);
+    //_heroes_replace_//libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, libUIUI_gv_fullscreenOverlayQueue[lv_player].lv_cutscene[1]);
     return true;
 }
 
@@ -705,7 +705,7 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_RunMassQuest_Init();
     libPLYR_gt_ToggleRunMassQuest_Init();
     libPLYR_gt_TogglePause_Init();
-    libPLYR_gt_TogglePause2_Init();
+    libPLYR_gt_ToggleTalentTree_Init();
     libPLYR_gt_AddTalent_Init();
     libPLYR_gt_RemoveTalent_Init();
     libPLYR_gt_EnableTalent_Init();
