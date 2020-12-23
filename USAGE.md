@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 21 Dec 2020 02:19:32 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 02:39:17 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -1042,11 +1042,11 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
 
 <a name="cmd-unitproperty" />
 
-## (`unitproperty` | `up`) `<type>` `<value>`
+## (`unitproperty` | `up`) `<type>` `[value]`
 <a name="cmd-unitproperty-description" />
 
 #### Description: 
-Allow to modify a selected units' property, such as max health, regen, movement speed etc.
+Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.
 
 
 |Type|Galaxy file constant|
@@ -1082,17 +1082,26 @@ Allow to modify a selected units' property, such as max health, regen, movement 
     	Required:	true
     	Type:		integer
     	Usage:		Set the type of the property to be modified. Please refer to the table above.
-    <value>
-    	Required:	true
+    [value]
+    	Required:	false
     	Type:		float
     	Usage:		The value to be set for the property type
+    	Default:	undefined
 <a name="cmd-unitproperty-examples" />
 
 #### Examples:
+    > up 0
+    	(Shows the unit's current HP)
     > up 0 1
     	(Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO)
+    > unitproperty 6
+    	(Show the selected unit's Max Energy, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc.)
     > unitproperty 6 10000
-    	(Set the selected unit's Max Energy for 10000 (usually means resource bar, such as mana, Tracer bullet, Chen's brew etc.))
+    	(Set the selected unit's Max Energy for 10000, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc.)
+    > unitproperty 28
+    	(Shows the base movement speed of selected units.)
+    > unitproperty 28 10
+    	(Set the base movement speed of selected units to 10. Note that base speed for heroes is 4.8398)
 <a name="cmd-unitproperty-uiAvailability" />
 
 #### UI Availability:

@@ -975,7 +975,7 @@ void libUNIT_gt_ClearBehaviors_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Modify Unit Property
+// Trigger: Get/Modify Unit Property
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
     // Variable Declarations
@@ -985,6 +985,8 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
     int lv_i;
 
     // Automatic Variable Declarations
+    int auto4B2220AA_ae;
+    const int auto4B2220AA_ai = 1;
     int auto5C02B8F9_ae;
     const int auto5C02B8F9_ai = 1;
 
@@ -996,7 +998,7 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
             return false;
         }
 
-        if (!(((StringWord(EventChatMessage(false), 2) != null) && (StringWord(EventChatMessage(false), 3) != null)))) {
+        if (!(((StringWord(EventChatMessage(false), 2) != null)))) {
             return false;
         }
     }
@@ -1006,14 +1008,24 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
     lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
-    auto5C02B8F9_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
-    lv_i = 1;
-    for ( ; ( (auto5C02B8F9_ai >= 0 && lv_i <= auto5C02B8F9_ae) || (auto5C02B8F9_ai < 0 && lv_i >= auto5C02B8F9_ae) ) ; lv_i += auto5C02B8F9_ai ) {
-        lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
-        UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
+    if ((StringWord(EventChatMessage(false), 3) != null)) {
+        lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
+        auto5C02B8F9_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+        lv_i = 1;
+        for ( ; ( (auto5C02B8F9_ai >= 0 && lv_i <= auto5C02B8F9_ae) || (auto5C02B8F9_ai < 0 && lv_i >= auto5C02B8F9_ae) ) ; lv_i += auto5C02B8F9_ai ) {
+            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
+            UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
+        }
+    }
+    else {
+        auto4B2220AA_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
+        lv_i = 1;
+        for ( ; ( (auto4B2220AA_ai >= 0 && lv_i <= auto4B2220AA_ae) || (auto4B2220AA_ai < 0 && lv_i >= auto4B2220AA_ae) ) ; lv_i += auto4B2220AA_ai ) {
+            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText(((lv_unittype) + "'s property value: ")) + StringToText(FixedToString(UnitGetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, c_unitPropCurrent), c_fixedPrecisionAny))));
+        }
     }
     return true;
 }

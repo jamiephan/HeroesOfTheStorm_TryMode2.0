@@ -240,7 +240,8 @@
                             "description": "Force to run the trigger \"libSprt_gt_DEBUGHaveAITakeOverAI_Func\", which will have an AI take over your unit."
                         }
                     ]
-                },{
+                },
+                {
                     "shortCommand": "acts",
                     "command": "alliancecontrolteamselection",
                     "description": "Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.\n\nThis will enable/disable \"Alliance Control\" (control units from other players, including Enemy) and \"Multi-Selection\" (selecting multiple units like Vikings and Samuro).",
@@ -387,7 +388,7 @@
                 {
                     "shortCommand": "up",
                     "command": "unitproperty",
-                    "description": "Allow to modify a selected units' property, such as max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
+                    "description": "Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.\n\n\n|Type|Galaxy file constant|\n|-|-|\n|0|c_unitPropLife|\n|1|c_unitPropLifePercent|\n|2|c_unitPropLifeMax|\n|3|c_unitPropLifeRegen|\n|4|c_unitPropEnergy|\n|5|c_unitPropEnergyPercent|\n|6|c_unitPropEnergyMax|\n|7|c_unitPropEnergyRegen|\n|8|c_unitPropShields|\n|9|c_unitPropShieldsPercent|\n|10|c_unitPropShieldsMax|\n|11|c_unitPropShieldsRegen|\n|12|c_unitPropKills|\n|17|c_unitPropHeight|\n|18|c_unitPropMovementSpeed|\n|20|c_unitPropResources|\n|21|c_unitPropRadius|\n|22|c_unitPropXP|\n|23|c_unitPropLevel|\n|24|c_unitPropKillXP|\n|28|c_unitPropBaseMovementSpeed|\n|29|c_unitPropMovementSpeedCurrent|\n|30|c_unitPropLifeExpectedPercent|",
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -398,19 +399,36 @@
                         },
                         {
                             "name": "value",
-                            "required": true,
+                            "required": false,
                             "description": "The value to be set for the property type",
-                            "type": "float"
+                            "type": "float",
+                            "default": null
                         }
                     ],
                     "examples": [
+                        {
+                            "command": "up 0",
+                            "description": "Shows the unit's current HP"
+                        },
                         {
                             "command": "up 0 1",
                             "description": "Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO"
                         },
                         {
+                            "command": "unitproperty 6",
+                            "description": "Show the selected unit's Max Energy, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
+                        },
+                        {
                             "command": "unitproperty 6 10000",
-                            "description": "Set the selected unit's Max Energy for 10000 (usually means resource bar, such as mana, Tracer bullet, Chen's brew etc.)"
+                            "description": "Set the selected unit's Max Energy for 10000, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
+                        },
+                        {
+                            "command": "unitproperty 28",
+                            "description": "Shows the base movement speed of selected units."
+                        },
+                        {
+                            "command": "unitproperty 28 10",
+                            "description": "Set the base movement speed of selected units to 10. Note that base speed for heroes is 4.8398"
                         }
                     ]
                 },
