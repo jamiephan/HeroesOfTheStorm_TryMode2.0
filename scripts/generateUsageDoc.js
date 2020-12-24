@@ -34,6 +34,7 @@ if (sortCommands) {
 const markdowner = new MarkDowner();
 
 // Header
+markdowner.addRaw = '<a name="meta-top"/>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
 if (Array.isArray(jsonData._metadata.MDDescription)) {
@@ -42,7 +43,8 @@ if (Array.isArray(jsonData._metadata.MDDescription)) {
   markdowner.addRaw = jsonData._metadata.MDDescription;
 }
 
-markdowner.addH1 = 'Libraries';
+markdowner.addRaw = '<a name="meta-libraries"/>';
+markdowner.addH1 = '📚 Libraries';
 
 // Table Generation
 markdowner.addTable = {
@@ -56,16 +58,18 @@ markdowner.addTable = {
 };
 
 // TOC
-markdowner.addH1 = 'Table of Contents';
+markdowner.addRaw = '<a name="meta-toc"/>';
+markdowner.addH1 = '🧾 Table of Contents';
 jsonData.libraries.forEach((library) => {
-  markdowner.addRaw = `- [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
+  markdowner.addRaw = `- 📙 [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
   if (!library._metadata.overrideMarkdown) {
     library.commands.forEach((command) => {
-      markdowner.addRaw = `  - [Command: \`${command.command}\`](#cmd-${command.command})${command.uiAvailable ? ' (✔ UI)' : ''}`;
+      markdowner.addRaw = `  - 💭 [Command: \`${command.command}\`](#cmd-${command.command})${command.uiAvailable ? ' (✔ UI)' : ''}`;
       if (showExtraTOC) {
-        markdowner.addRaw = `    - [Description](#cmd-${command.command}-description)`;
-        markdowner.addRaw = `    - [Parameters](#cmd-${command.command}-parameters)`;
-        markdowner.addRaw = `    - [Examples](#cmd-${command.command}-examples)`;
+        markdowner.addRaw = `    - [✏ Description](#cmd-${command.command}-description)`;
+        markdowner.addRaw = `    - [⚙ Parameters](#cmd-${command.command}-parameters)`;
+        markdowner.addRaw = `    - [🔧 Examples](#cmd-${command.command}-examples)`;
+        markdowner.addRaw = `    - [🖼 UI Availability](#cmd-${command.command}-uiAvailability)`;
       }
     });
   } else if (showExtraTOC) {
@@ -76,7 +80,7 @@ jsonData.libraries.forEach((library) => {
 // Each of the Library
 jsonData.libraries.forEach((library) => {
   markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}"/>`;
-  markdowner.addH1 = `${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
+  markdowner.addH1 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
 
   markdowner.addRaw = library._metadata.libraryDescription;
   if (library._metadata.overrideMarkdown) {
@@ -87,6 +91,9 @@ jsonData.libraries.forEach((library) => {
     } else {
       markdowner.addRaw = library._metadata.overrideMarkdownContent;
     }
+    markdowner.addRaw = '';
+    markdowner.addRaw = '[\\[Return to Table of Contents 🧾\\]](#meta-toc)';
+    markdowner.addRaw = '[\\[Return to Top ⬆\\]](#meta-top)';
   } else {
     // Commands Generate
     library.commands.forEach((command) => {
@@ -96,7 +103,7 @@ jsonData.libraries.forEach((library) => {
       const titleparam = ` ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(' ')}`;
       markdowner.addH2 = title + titleparam;
       markdowner.addRaw = `<a name="cmd-${command.command}-description" />`;
-      markdowner.addH4 = 'Description: ';
+      markdowner.addH4 = '✏ Description: ';
       if (Array.isArray(command.description)) {
         markdowner.addRaw = command.description.join('\n');
       } else {
@@ -106,7 +113,7 @@ jsonData.libraries.forEach((library) => {
       //   Param section
       if (Object.prototype.hasOwnProperty.call(command, 'parameters') && command.parameters instanceof Array) {
         markdowner.addRaw = `<a name="cmd-${command.command}-parameters" />`;
-        markdowner.addH4 = 'Parameters:';
+        markdowner.addH4 = '⚙ Parameters:';
         if (command.parameters.length === 0) {
           markdowner.addCode = 'None';
         } else {
@@ -121,10 +128,11 @@ jsonData.libraries.forEach((library) => {
           });
         }
       }
+
       //   Example section
       if (Object.prototype.hasOwnProperty.call(command, 'examples') && command.examples instanceof Array) {
         markdowner.addRaw = `<a name="cmd-${command.command}-examples" />`;
-        markdowner.addH4 = 'Examples:';
+        markdowner.addH4 = '🔧 Examples:';
         command.examples.forEach((e) => {
           markdowner.addCode = `> ${e.command}`;
           markdowner.addCode = `\t(${e.description})`;
@@ -134,13 +142,17 @@ jsonData.libraries.forEach((library) => {
       // UI Availability Section
       if (Object.prototype.hasOwnProperty.call(command, 'uiAvailable') && typeof command.uiAvailable === 'boolean') {
         markdowner.addRaw = `<a name="cmd-${command.command}-uiAvailability" />`;
-        markdowner.addH4 = 'UI Availability:';
+        markdowner.addH4 = '🖼 UI Availability:';
         if (command.uiAvailable) {
           markdowner.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
         } else {
           markdowner.addRaw = '- ❌ **Not Implemented**';
         }
       }
+
+      markdowner.addRaw = '';
+      markdowner.addRaw = '[\\[Return to Table of Contents 🧾\\]](#meta-toc)';
+      markdowner.addRaw = '[\\[Return to Top ⬆\\]](#meta-top)';
       // =====
     });
   }
