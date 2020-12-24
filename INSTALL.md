@@ -4,7 +4,7 @@
 
 In the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page, download the latest `trymode20.stormmap`. Afterwards, you can run the map with the command:
 
-`"G:\Heroes of the Storm\Support64\HeroesSwitcher_x64.exe" -run "path/to/downloaded/trymode20.stormmap"`
+`"path/to/Heroes of the Storm/Support64/HeroesSwitcher_x64.exe" -run "path/to/downloaded/trymode20.stormmap"`
 
 >Note: `path/to/downloaded/trymode20.stormmap` **must* * be an absolute path, or the map will not be loaded.
 
