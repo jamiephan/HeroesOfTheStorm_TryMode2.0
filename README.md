@@ -6,7 +6,7 @@ A modified Try Mode Map for Heroes of the Storm to create a better experience fo
 
 ## TODOs:
 
-- [ ] Package and Release a .stormmap to run directly
+- [x] Package and Release a .stormmap to run directly
 - [x] Tools to automatically symlink/copy to install the map
 - [ ] Tools or scripts to automatically associate *.stormmap in win32
 - [ ] Tools to generate shortcut for win32 to link to the current (10)trymode.stormmap
