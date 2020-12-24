@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 24 Dec 2020 02:58:45 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 24 Dec 2020 03:00:59 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -108,7 +108,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `modifycatalog`](#cmd-modifycatalog)
 
-  - 💭 [Command: `remvetalent`](#cmd-remvetalent)
+  - 💭 [Command: `removetalent`](#cmd-removetalent)
 
   - 💭 [Command: `resetoverlay`](#cmd-resetoverlay)
 
@@ -1577,16 +1577,16 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 [\[Return to Top ⬆\]](#meta-top)
 
-<a name="cmd-remvetalent"></a>
+<a name="cmd-removetalent"></a>
 
-## (`remvetalent` | `rmt`) `<TalentId>` `[PlayerId]`
-<a name="cmd-remvetalent-description"></a>
+## (`removetalent` | `rmt`) `<TalentId>` `[PlayerId]`
+<a name="cmd-removetalent-description"></a>
 
 #### ✏ Description: 
 Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
-<a name="cmd-remvetalent-parameters"></a>
+<a name="cmd-removetalent-parameters"></a>
 
 #### ⚙ Parameters:
     <TalentId>
@@ -1598,14 +1598,14 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
     	Type:		string
     	Usage:		The target player id to have the talent being removed.
     	Default:	The player id of whoever used this command.
-<a name="cmd-remvetalent-examples"></a>
+<a name="cmd-removetalent-examples"></a>
 
 #### 🔧 Examples:
     > removetalent MedivhForceOfWillArcaneExplosion
     	(Removed Medivh's Arcane Explosion Talent from Player 1)
     > rmt MalfurionCelestialAlignment 2
     	(Removed Malfurion's Celest>ial Alignment Talent from Player 2)
-<a name="cmd-remvetalent-uiAvailability"></a>
+<a name="cmd-removetalent-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

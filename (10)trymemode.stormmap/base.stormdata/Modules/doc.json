@@ -990,7 +990,7 @@
                 },
                 {
                     "shortCommand": "rmt",
-                    "command": "remvetalent",
+                    "command": "removetalent",
                     "description": [
                         "Remove a talent from a player, generally found in `<CTalent id=\"xxxx\">`.",
                         ">Note: Some of the talents won't work, so you might want to experiment a bit."
