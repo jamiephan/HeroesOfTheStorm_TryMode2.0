@@ -1,0 +1,60 @@
+name: create-release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Release:
+    name: Creating a Release on Github
+    runs-on: windows-latest
+    steps:
+      - name: Download and Extract MPQEditor
+        run: |
+          Invoke-WebRequest -Uri "http://www.zezula.net/download/mpqeditor_en.zip" -OutFile "./mpqeditor_en.zip"
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::ExtractToDirectory("./mpqeditor_en.zip", "./mpqeditor")
+          Copy-Item "./mpqeditor/x64/MPQEditor.exe" -Destination "C:"
+
+      - name: Clone the Repo
+        run: |
+          & git clone "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0.git" "C:/repo"
+
+      - name: Build the trymode20.stormmap
+        run: |
+          # & "C:/MPQEditor.exe" "new" "C:/trymode20.stormmap" 
+          # & "C:/MPQEditor.exe" "add" "C:/trymode20.stormmap" "C:/repo/" /r
+          # & "C:/MPQEditor.exe" "close" "C:/trymode20.stormmap"
+          & echo "new C:/trymode20.stormmap" >> C:/script.mpqscript
+          & echo "add C:/trymode20.stormmap C:/repo/(10)trymemode.stormmap /r" >> C:/script.mpqscript
+          & echo close >> C:/script.mpqscript
+          & echo x >> C:/script.mpqscript
+          & "C:/MPQEditor.exe" /console "C:/script.mpqscript" 
+
+      - name: Create Github Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release-${{ github.event.head_commit.id }}
+          release_name: ${{ github.event.head_commit.message }}
+          body: |
+            ${{ github.event.head_commit.message }}
+
+            Built timestamp: `${{ github.event.head_commit.timestamp }}`
+
+            For instructions on to use the run the map, Please refer to [INSTALL.MD](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/INSTALL.md).
+          draft: false 
+          prerelease: false
+
+      - name: Upload trymode20.stormmap to Github Release
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: "C:/trymode20.stormmap"
+          asset_name: trymode20.stormmap
+          asset_content_type: application/octet-stream
+      
