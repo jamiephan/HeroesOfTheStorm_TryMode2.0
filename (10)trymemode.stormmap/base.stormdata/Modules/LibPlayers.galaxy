@@ -89,7 +89,7 @@ bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    //_heroes_replace_//libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
+    libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
     return true;
 }
 
@@ -323,7 +323,7 @@ bool libPLYR_gt_EnableTalent_Func (bool testConds, bool runActions) {
     }
     else {
         lv_talentName = StringWord(EventChatMessage(false), 2);
-        //_heroes_replace_//SetTalentEnabled((lv_talentName), false);
+        SetTalentEnabled((lv_talentName), false);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
     }
     return true;
@@ -364,7 +364,7 @@ bool libPLYR_gt_DisableTalent_Func (bool testConds, bool runActions) {
     }
     else {
         lv_talentName = StringWord(EventChatMessage(false), 2);
-        //_heroes_replace_//SetTalentEnabled((lv_talentName), true);
+        SetTalentEnabled((lv_talentName), true);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
     }
     return true;
@@ -422,7 +422,7 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
             while (true) {
                 lv_player = PlayerGroupNextPlayer(auto61B0F10C_g, lv_player);
                 if (lv_player < 0) { break; }
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
             }
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Set All Players Respawn point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation))));
             return true;
@@ -430,13 +430,13 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
         else {
             if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
                 lv_player = EventPlayer();
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
                 return true;
             }
             else {
                 lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
+                libGame_gv_players[lv_player].lv_spawnPoint = lv_cameralocation;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Player " + IntToString(lv_player)) + ("'s Respawn Point to Camera Location: " + libNtve_gf_ConvertPointToString(lv_cameralocation)))));
                 return true;
             }
@@ -451,7 +451,7 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
             while (true) {
                 lv_player = PlayerGroupNextPlayer(auto9EDB3770_g, lv_player);
                 if (lv_player < 0) { break; }
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
             }
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Reset all Players Respawn Point to their default spawn point."));
             return true;
@@ -459,13 +459,13 @@ bool libPLYR_gt_OverrideRespawnPoint_Func (bool testConds, bool runActions) {
         else {
             if ((StringToInt(StringWord(EventChatMessage(false), 3)) == 0)) {
                 lv_player = EventPlayer();
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
                 return true;
             }
             else {
                 lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
-                //_heroes_replace_//libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
+                libGame_gv_players[lv_player].lv_spawnPoint = PlayerStartLocation(lv_player);
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Reset Player " + (IntToString(lv_player) + "'s Spawn Point to its default location."))));
                 return true;
             }
@@ -621,7 +621,7 @@ bool libPLYR_gt_OverrideRespawnTime_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Warning: Respawn time cannot be set lower than 0.0625."));
     }
 
-    //_heroes_replace_//libCore_gv_bALDeathTimeOverride = lv_respawntime;
+    libCore_gv_bALDeathTimeOverride = lv_respawntime;
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Override Respawn Timer to " + FixedToString(lv_respawntime, c_fixedPrecisionAny))));
     return true;
 }
@@ -663,7 +663,7 @@ bool libPLYR_gt_SetOverlay_Func (bool testConds, bool runActions) {
     }
     else {
         lv_overlayPath = StringWord(EventChatMessage(false), 2);
-        //_heroes_replace_//libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, lv_overlayPath);
+        libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, lv_overlayPath);
     }
     return true;
 }
@@ -691,7 +691,7 @@ bool libPLYR_gt_ResetOverlay_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    //_heroes_replace_//libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, libUIUI_gv_fullscreenOverlayQueue[lv_player].lv_cutscene[1]);
+    libUIUI_gf_FullscreenOverlayPlayCutscene(lv_player, libUIUI_gv_fullscreenOverlayQueue[lv_player].lv_cutscene[1]);
     return true;
 }
 
