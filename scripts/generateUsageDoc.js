@@ -34,7 +34,7 @@ if (sortCommands) {
 const markdowner = new MarkDowner();
 
 // Header
-markdowner.addRaw = '<a name="meta-top"/>';
+markdowner.addRaw = '<a name="meta-top"></a>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
 if (Array.isArray(jsonData._metadata.MDDescription)) {
@@ -43,7 +43,7 @@ if (Array.isArray(jsonData._metadata.MDDescription)) {
   markdowner.addRaw = jsonData._metadata.MDDescription;
 }
 
-markdowner.addRaw = '<a name="meta-libraries"/>';
+markdowner.addRaw = '<a name="meta-libraries"></a>';
 markdowner.addH1 = '📚 Libraries';
 
 // Table Generation
@@ -58,7 +58,7 @@ markdowner.addTable = {
 };
 
 // TOC
-markdowner.addRaw = '<a name="meta-toc"/>';
+markdowner.addRaw = '<a name="meta-toc"></a>';
 markdowner.addH1 = '🧾 Table of Contents';
 jsonData.libraries.forEach((library) => {
   markdowner.addRaw = `- 📙 [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
@@ -79,12 +79,12 @@ jsonData.libraries.forEach((library) => {
 
 // Each of the Library
 jsonData.libraries.forEach((library) => {
-  markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}"/>`;
+  markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}"></a>`;
   markdowner.addH1 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
 
   markdowner.addRaw = library._metadata.libraryDescription;
   if (library._metadata.overrideMarkdown) {
-    markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}-description"/>`;
+    markdowner.addRaw = `<a name="lib-${library._metadata.libraryId}-description"></a>`;
     if (Array.isArray(library._metadata.overrideMarkdownContent)) {
       // Multi-line support
       markdowner.addRaw = library._metadata.overrideMarkdownContent.join('\n');
@@ -97,12 +97,12 @@ jsonData.libraries.forEach((library) => {
   } else {
     // Commands Generate
     library.commands.forEach((command) => {
-      markdowner.addRaw = `<a name="cmd-${command.command}" />`;
+      markdowner.addRaw = `<a name="cmd-${command.command}"></a>`;
       // Description Section
       const title = `(\`${command.command}\` | \`${command.shortCommand}\`)`;
       const titleparam = ` ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(' ')}`;
       markdowner.addH2 = title + titleparam;
-      markdowner.addRaw = `<a name="cmd-${command.command}-description" />`;
+      markdowner.addRaw = `<a name="cmd-${command.command}-description"></a>`;
       markdowner.addH4 = '✏ Description: ';
       if (Array.isArray(command.description)) {
         markdowner.addRaw = command.description.join('\n');
@@ -112,7 +112,7 @@ jsonData.libraries.forEach((library) => {
 
       //   Param section
       if (Object.prototype.hasOwnProperty.call(command, 'parameters') && command.parameters instanceof Array) {
-        markdowner.addRaw = `<a name="cmd-${command.command}-parameters" />`;
+        markdowner.addRaw = `<a name="cmd-${command.command}-parameters"></a>`;
         markdowner.addH4 = '⚙ Parameters:';
         if (command.parameters.length === 0) {
           markdowner.addCode = 'None';
@@ -131,7 +131,7 @@ jsonData.libraries.forEach((library) => {
 
       //   Example section
       if (Object.prototype.hasOwnProperty.call(command, 'examples') && command.examples instanceof Array) {
-        markdowner.addRaw = `<a name="cmd-${command.command}-examples" />`;
+        markdowner.addRaw = `<a name="cmd-${command.command}-examples"></a>`;
         markdowner.addH4 = '🔧 Examples:';
         command.examples.forEach((e) => {
           markdowner.addCode = `> ${e.command}`;
@@ -141,7 +141,7 @@ jsonData.libraries.forEach((library) => {
 
       // UI Availability Section
       if (Object.prototype.hasOwnProperty.call(command, 'uiAvailable') && typeof command.uiAvailable === 'boolean') {
-        markdowner.addRaw = `<a name="cmd-${command.command}-uiAvailability" />`;
+        markdowner.addRaw = `<a name="cmd-${command.command}-uiAvailability"></a>`;
         markdowner.addH4 = '🖼 UI Availability:';
         if (command.uiAvailable) {
           markdowner.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
