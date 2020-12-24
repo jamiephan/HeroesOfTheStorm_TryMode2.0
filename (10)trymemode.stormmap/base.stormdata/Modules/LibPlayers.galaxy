@@ -28,6 +28,8 @@ trigger libPLYR_gt_SetMasteryRing;
 trigger libPLYR_gt_OverrideRespawnTime;
 trigger libPLYR_gt_SetOverlay;
 trigger libPLYR_gt_ResetOverlay;
+trigger libPLYR_gt_GetCatalog;
+trigger libPLYR_gt_SetCatalog;
 
 // Library Initialization
 void libPLYR_InitVariables ();
@@ -700,6 +702,105 @@ void libPLYR_gt_ResetOverlay_Init () {
     TriggerAddEventChatMessage(libPLYR_gt_ResetOverlay, c_playerAny, "resetoverlay", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Catalog
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_GetCatalog_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    string lv_value;
+    string lv_catalogentry;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_value = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "gcl") || (StringWord(EventChatMessage(false), 1) == "getcatalog")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <gcl|getcatalog> <CatalogReference> [PlayerID]"));
+    }
+    else {
+        if (((StringWord(EventChatMessage(false), 3) != null) && (StringToInt(StringWord(EventChatMessage(false), 3)) > 0))) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+        }
+
+        lv_value = StringWord(EventChatMessage(false), 3);
+        lv_catalogentry = (StringWord(EventChatMessage(false), 2));
+        lv_value = CatalogReferenceGet(lv_catalogentry, lv_player);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Catalog value for Player " + (IntToString(lv_player) + (": " + ((lv_catalogentry) + (" = " + lv_value)))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_GetCatalog_Init () {
+    libPLYR_gt_GetCatalog = TriggerCreate("libPLYR_gt_GetCatalog_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_GetCatalog, c_playerAny, "gcl", false);
+    TriggerAddEventChatMessage(libPLYR_gt_GetCatalog, c_playerAny, "getcatalog", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Set Catalog
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_SetCatalog_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    string lv_value;
+    string lv_catalogentry;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_value = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "scl") || (StringWord(EventChatMessage(false), 1) == "setcatalog")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((StringWord(EventChatMessage(false), 2) == null) || (StringWord(EventChatMessage(false), 3) == null))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <scl|setcatalog> <CatalogReference> <Value> [PlayerID]"));
+    }
+    else {
+        if (((StringWord(EventChatMessage(false), 4) != null) && (StringToInt(StringWord(EventChatMessage(false), 4)) > 0))) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+        }
+
+        lv_value = StringWord(EventChatMessage(false), 3);
+        lv_catalogentry = (StringWord(EventChatMessage(false), 2));
+        lv_catalogentry = "Abil,Taunt,CmdButtonArray[Execute].AutoQueueId";
+        CatalogReferenceModify((lv_catalogentry), lv_player, lv_value, c_upgradeOperationSet);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Catalog value " + (lv_catalogentry)) + (" to " + (lv_value + (" for Player " + IntToString(lv_player)))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_SetCatalog_Init () {
+    libPLYR_gt_SetCatalog = TriggerCreate("libPLYR_gt_SetCatalog_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_SetCatalog, c_playerAny, "scl", false);
+    TriggerAddEventChatMessage(libPLYR_gt_SetCatalog, c_playerAny, "setcatalog", false);
+}
+
 void libPLYR_InitTriggers () {
     libPLYR_gt_MapInit_Init();
     libPLYR_gt_RunMassQuest_Init();
@@ -716,6 +817,8 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_OverrideRespawnTime_Init();
     libPLYR_gt_SetOverlay_Init();
     libPLYR_gt_ResetOverlay_Init();
+    libPLYR_gt_GetCatalog_Init();
+    libPLYR_gt_SetCatalog_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

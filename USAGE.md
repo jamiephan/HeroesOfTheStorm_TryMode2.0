@@ -1,5 +1,5 @@
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 23 Dec 2020 22:58:09 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 24 Dec 2020 01:21:48 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -97,6 +97,10 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - [Command: `disabletalent`](#cmd-disabletalent)
 
   - [Command: `enabletalent`](#cmd-enabletalent)
+
+  - [Command: `getcatalog`](#cmd-getcatalog)
+
+  - [Command: `modifycatalog`](#cmd-modifycatalog)
 
   - [Command: `remvetalent`](#cmd-remvetalent)
 
@@ -1077,7 +1081,7 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
     	Required:	false
     	Type:		float
     	Usage:		The value to be set for the property type
-    	Default:	undefined
+    	Default:	null
 <a name="cmd-unitproperty-examples" />
 
 #### Examples:
@@ -1155,6 +1159,180 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
     > ent MaievUmbralBindPursuitOfVengeance
     	(Enable Maiev's Pursuit Of Vengeance talent)
 <a name="cmd-enabletalent-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
+<a name="cmd-getcatalog" />
+
+## (`getcatalog` | `gcl`) `<CatalogReference>` `[PlayerID]`
+<a name="cmd-getcatalog-description" />
+
+#### Description: 
+Directly get a Catalog value (a.k.a XMLs) from a player.
+
+The `CatalogReference` string consist of three parts: `<Catagory Group>,<Catagory Id>,<Field>`, whereas:
+- `<Catagory Group>`: The entry group of the catagories, which usually is the "seconds word" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: 
+  - `C` (Catalog)
+  - `Behavior` (Entry Group) `<-- This One`
+  - `Buff` (Type of the catagory)
+  - The value is the second "Capitialised Word": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.
+- `<Catagory ID>`: The ID of the target catagory. (`id="xxx"`)
+- `<Field>`: The field of the catagory.
+  - Nested level uses `.` to prepresent. If the target field is not `value="xxx", it need to be nested here as well.`
+  - Arrays uses `[n]` to specify the numeric order
+  - If an entry can exist multiple times with different index such as `<Flags>`, use `[Index]`, such as `Flags[AllowSelfCast]`
+
+Therefore, consider the following XML (extracted from `wizarddata.xml`, Li ming's data file):
+```xml
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+  <!-- Data trimmed -->
+  <CWeaponLegacy id="HeroWizardWeapon" parent="StormHeroFastWeapon">
+    <Icon value="Assets\Textures\storm_temp_btn-upgrade-zerg-meleeattacks-level3.dds" />
+    <DisplayEffect value="WizardHeroWeaponDamage" />
+    <MinScanRange value="5.5" />
+    <Range value="5.5" />
+    <Period value="1" />
+    <PreswingBeforeAttack value="0.25" />
+    <PreswingBetweenAttacks value="0.25" />
+    <Effect value="WizardWeaponLaunchSwitch" />
+  </CWeaponLegacy>
+</Catalog>
+```
+In order to get the reference to her Basic attack range, the `CatalogReference` string will be `Weapon,HeroWizardWeapon,Range`
+
+Another Example: (Extracted from `firebat.xml`, Blaze's Data file)
+```xml
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+  <!-- Data trimmed -->
+  <CAbilEffectTarget id="FirebatJetPropulsion" parent="StormSkillshotDashParent">
+    <Effect value="FirebatJetPropulsionOffsetPersistent" />
+    <Cost>
+      <Vital index="Energy" value="45" />
+      <Cooldown TimeUse="10" />
+    </Cost>
+    <MoveLocation ProjectionDistanceScale="14" />
+    <CursorEffect value="FirebatJetPropulsionSquareSearchArea" />
+    <CmdButtonArray index="Execute" DefaultButtonFace="FirebatJetPropulsion">
+      <Flags index="AllowSelfCast" value="0" />
+    </CmdButtonArray>
+    <Activity value="Jet Propulsion" />
+    <CastIntroTime value="0.375" />
+    <ShowProgressArray index="Cast" value="1" />
+  </CAbilEffectTarget>
+</Catalog>
+```
+In order to get his Jet Propulsion (E) Cooldown Reference, the `CatalogReference` will be `Abil,FirebatJetPropulsion,Cost.Cooldown.TimeUse`
+
+Another Example: (Extracted from `stukovdata.xml`, Stukov's Data file: Stukov's Talent `Biotic Armor`, gains 15 Armor to ally affect by healing pathogen)
+```xml
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+  <!-- Data trimmed -->
+  <CBehaviorBuff id="StukovHealingPathogenBioticArmorPhysicalArmorBehavior" parent="StormArmor">
+    <BehaviorCategories index="BuffResistant" value="1" />
+    <RemoveValidatorArray value="StukovTargetHasHealingPathogen" />
+    <ArmorModification>
+      <ArmorSet index="Hero">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+      <ArmorSet index="Merc">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+      <ArmorSet index="Monster">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+      <ArmorSet index="Summon">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+      <ArmorSet index="Structure">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+      <ArmorSet index="Minion">
+        <ArmorMitigationTable index="Basic" value="15" />
+      </ArmorSet>
+    </ArmorModification>
+  </CBehaviorBuff>
+</Catalog>
+```
+In order to reference the armor value against Structure, the `CatalogReference` will be `Behavior,StukovHealingPathogenBioticArmorPhysicalArmorBehavior,ArmorModification.ArmorSet[Structure].ArmorMitigationTable[Basic]`.
+
+<a name="cmd-getcatalog-parameters" />
+
+#### Parameters:
+    <CatalogReference>
+    	Required:	true
+    	Type:		string
+    	Usage:		The Reference to the catalog field
+    [PlayerID]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Player ID for the catalog modification
+    	Default:	The player id of whoever used this command.
+<a name="cmd-getcatalog-examples" />
+
+#### Examples:
+    > getcatalog Effect,WizardTeleportCalamityDamage,Amount
+    	(Get Li-Ming's Calamity damage from whoever uses this command)
+    > gcl Abil,VarianCharge,Cost.Vital[Energy]
+    	(Get Varian's Charge mana cost from whoever uses this command)
+    > gcl Behavior,Mounted,Modification.UnifiedMoveSpeedFactor 2
+    	(Get the mount speed for all Heroes from Player 2)
+    > gcl Weapon,StukovHeroWeapon,Period
+    	(Getl Stukov's Basic Attack speed from whoever uses this command)
+    > gcl Weapon,ChromieHeroWeapon,Effect
+    	(Get Chromie's Basic Attack Effect from whoever uses this command)
+    > gcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 2
+    	(Get Dehaka's Dark Swarm Ability Supress Collision flag value when active from Player 2)
+<a name="cmd-getcatalog-uiAvailability" />
+
+#### UI Availability:
+- ❌ **Not Implemented**
+
+<a name="cmd-modifycatalog" />
+
+## (`modifycatalog` | `mcl`) `<CatalogReference>` `<value>` `[PlayerID]`
+<a name="cmd-modifycatalog-description" />
+
+#### Description: 
+Directly modify a Catalog value (a.k.a XMLs) for a player.
+
+For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
+
+<a name="cmd-modifycatalog-parameters" />
+
+#### Parameters:
+    <CatalogReference>
+    	Required:	true
+    	Type:		string
+    	Usage:		The Reference to the catalog field to be modified
+    <value>
+    	Required:	true
+    	Type:		float
+    	Usage:		The value to be set for the specified catalog field
+    [PlayerID]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Player ID for the catalog modification
+    	Default:	The player id of whoever used this command.
+<a name="cmd-modifycatalog-examples" />
+
+#### Examples:
+    > modifycatalog Effect,WizardTeleportCalamityDamage,Amount 9999
+    	(Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command)
+    > mcl Abil,VarianCharge,Cost.Vital[Energy] 5
+    	(Modify Varian's Charge mana cost to 5 for whoever uses this command)
+    > mcl Behavior,Mounted,Modification.UnifiedMoveSpeedFactor -0.3 2
+    	(Modify the mount speed for all Heroes to -30% (30% slower instead of faster) for Player 2)
+    > mcl Weapon,StukovHeroWeapon,Period 0.0625
+    	(Modify Stukov's Basic Attack speed to 16 (1 second performs 16 attacks = 0.0625 period per AA) for whoever uses this command)
+    > mcl Weapon,ChromieHeroWeapon,Effect WizardWeaponLaunchSwitch
+    	(Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missle) for whoever uses this command)
+    > mcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2
+    	(Modify Dehaka's Dark Swarm Ability to no longer Supress Collision When active (No longer pass though units) for Player 2)
+<a name="cmd-modifycatalog-uiAvailability" />
 
 #### UI Availability:
 - ❌ **Not Implemented**
