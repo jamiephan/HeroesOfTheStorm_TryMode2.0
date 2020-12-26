@@ -7,6 +7,7 @@
         "buildxml": "bash -c -i \"node ./scripts/buildxml.js\"",
         "buildmimiclib": "bash -c -i \"node ./scripts/buildmimiclib.js\"",
         "buildmimicabilities": "bash -c -i \"node ./scripts/buildmimicabilities.js\"",
+        "buildmimicbehaviors": "bash -c -i \"node ./scripts/buildmimicbehaviors.js\"",
         "patchlibraries": "bash -c -i \"node ./scripts/patchLibraries.js\"",
         "s2ma": "bash -c -i \"node ./scripts/s2ma.js\"",
         "symlink": "node ./scripts/symlink.js",

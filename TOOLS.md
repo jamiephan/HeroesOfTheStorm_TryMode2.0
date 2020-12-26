@@ -103,6 +103,26 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 
 ---
+<a name="tools-buildmimicbehaviors" />
+
+## `<CBehaviorBuff>` Mimic Generator
+
+**Command**: `npm run buildmimicbehaviors`
+
+This tool will search though all the `<CBehaviorBuff>` and map it to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
+
+This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](USAGE.MD#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+
+>Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
+
+>Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
+
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
+
+Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
+
+
+---
 <a name="tools-buildxml" />
 
 ## Automatically generate `GameData.XML`
