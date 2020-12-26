@@ -29,7 +29,7 @@ trigger libPLYR_gt_OverrideRespawnTime;
 trigger libPLYR_gt_SetOverlay;
 trigger libPLYR_gt_ResetOverlay;
 trigger libPLYR_gt_GetCatalog;
-trigger libPLYR_gt_SetCatalog;
+trigger libPLYR_gt_ModifyCatalog;
 
 // Library Initialization
 void libPLYR_InitVariables ();
@@ -739,7 +739,12 @@ bool libPLYR_gt_GetCatalog_Func (bool testConds, bool runActions) {
         lv_value = StringWord(EventChatMessage(false), 3);
         lv_catalogentry = (StringWord(EventChatMessage(false), 2));
         lv_value = CatalogReferenceGet(lv_catalogentry, lv_player);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Catalog value for Player " + (IntToString(lv_player) + (": " + ((lv_catalogentry) + (" = " + lv_value)))))));
+        if ((lv_value == "")) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Catalog Reference \"" + (lv_catalogentry)) + "\" do not exist.")));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Catalog value for Player " + (IntToString(lv_player) + (": " + ((lv_catalogentry) + (" = " + lv_value)))))));
+        }
     }
     return true;
 }
@@ -752,22 +757,26 @@ void libPLYR_gt_GetCatalog_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Set Catalog
+// Trigger: Modify Catalog
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_SetCatalog_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_ModifyCatalog_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_player;
-    string lv_value;
+    string lv_originalValue;
+    string lv_newValue;
+    string lv_inputValue;
     string lv_catalogentry;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_player = EventPlayer();
-    lv_value = "";
+    lv_originalValue = "";
+    lv_newValue = "";
+    lv_inputValue = "";
 
     // Conditions
     if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "scl") || (StringWord(EventChatMessage(false), 1) == "setcatalog")))) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "mcl") || (StringWord(EventChatMessage(false), 1) == "modifycatalog")))) {
             return false;
         }
     }
@@ -778,27 +787,43 @@ bool libPLYR_gt_SetCatalog_Func (bool testConds, bool runActions) {
     }
 
     if (((StringWord(EventChatMessage(false), 2) == null) || (StringWord(EventChatMessage(false), 3) == null))) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <scl|setcatalog> <CatalogReference> <Value> [PlayerID]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <mcl|mosifycatalog> <CatalogReference> <Value> [PlayerID]"));
     }
     else {
         if (((StringWord(EventChatMessage(false), 4) != null) && (StringToInt(StringWord(EventChatMessage(false), 4)) > 0))) {
             lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
         }
 
-        lv_value = StringWord(EventChatMessage(false), 3);
+        lv_inputValue = StringWord(EventChatMessage(false), 3);
         lv_catalogentry = (StringWord(EventChatMessage(false), 2));
-        lv_catalogentry = "Abil,Taunt,CmdButtonArray[Execute].AutoQueueId";
-        CatalogReferenceModify((lv_catalogentry), lv_player, lv_value, c_upgradeOperationSet);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Set Catalog value " + (lv_catalogentry)) + (" to " + (lv_value + (" for Player " + IntToString(lv_player)))))));
+        lv_originalValue = CatalogReferenceGet(lv_catalogentry, lv_player);
+        CatalogReferenceModify((lv_catalogentry), lv_player, lv_inputValue, c_upgradeOperationSet);
+        lv_newValue = CatalogReferenceGet(lv_catalogentry, lv_player);
+        if ((lv_newValue == "")) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Catalog Reference \"" + (lv_catalogentry)) + "\" do not exist.")));
+        }
+        else {
+            if ((lv_newValue != lv_inputValue)) {
+                if ((lv_originalValue == lv_newValue)) {
+                    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Catalog Reference \"" + (lv_catalogentry)) + "\" is READ-ONLY.")));
+                }
+                else {
+                    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Warning: Modified Catalog " + (lv_catalogentry)) + (" to " + (lv_newValue + (" instead, for Player " + IntToString(lv_player)))))));
+                }
+            }
+            else {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Modified Catalog " + (lv_catalogentry)) + (" to " + (lv_newValue + (" for Player " + IntToString(lv_player)))))));
+            }
+        }
     }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_SetCatalog_Init () {
-    libPLYR_gt_SetCatalog = TriggerCreate("libPLYR_gt_SetCatalog_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_SetCatalog, c_playerAny, "scl", false);
-    TriggerAddEventChatMessage(libPLYR_gt_SetCatalog, c_playerAny, "setcatalog", false);
+void libPLYR_gt_ModifyCatalog_Init () {
+    libPLYR_gt_ModifyCatalog = TriggerCreate("libPLYR_gt_ModifyCatalog_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalog, c_playerAny, "mcl", false);
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalog, c_playerAny, "modifycatalog", false);
 }
 
 void libPLYR_InitTriggers () {
@@ -818,7 +843,7 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_SetOverlay_Init();
     libPLYR_gt_ResetOverlay_Init();
     libPLYR_gt_GetCatalog_Init();
-    libPLYR_gt_SetCatalog_Init();
+    libPLYR_gt_ModifyCatalog_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
