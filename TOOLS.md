@@ -38,6 +38,7 @@ The current values required are:
 | `TOOLS_MIMIC_LIBRARY_IMPORT_PREFIX` | String | The prefix of the import mimic library, relative to `TOOLS_GAMEDATA_DIR`. Default: `ModuleMimicLibs/InternalMimics/` |
 | `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules. Default: `./(10)trymemode.stormmap/base.stormdata/Modules` |
 | `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml` |
+| `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/BehaviorMimic.xml` |
 
 
 >Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
@@ -111,7 +112,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 This tool will search though all the `<CBehaviorBuff>` and map it to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
-This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](USAGE.MD#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](USAGE.md#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
 
 >Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
 
