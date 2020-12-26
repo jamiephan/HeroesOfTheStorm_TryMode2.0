@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 24 Dec 2020 03:00:59 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 26 Dec 2020 01:59:03 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -1399,14 +1399,14 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 #### ✏ Description: 
 Directly get a Catalog value (a.k.a XMLs) from a player.
 
-The `CatalogReference` string consist of three parts: `<Catagory Group>,<Catagory Id>,<Field>`, whereas:
-- `<Catagory Group>`: The entry group of the catagories, which usually is the "seconds word" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: 
+The `CatalogReference` string consist of three parts: `<Catagory Type>,<Catagory Entry>,<Catalog Field Path>` seperated by comma, whereas:
+- `<Catagory Type>`: The type of the catalog, which usually is the "seconds word" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: 
   - `C` (Catalog)
-  - `Behavior` (Entry Group) `<-- This One`
-  - `Buff` (Type of the catagory)
+  - `Behavior` (Type) `<-- This One`
+  - `Buff` (Sub-Type)
   - The value is the second "Capitialised Word": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.
-- `<Catagory ID>`: The ID of the target catagory. (`id="xxx"`)
-- `<Field>`: The field of the catagory.
+- `<Catagory Entry>`: The ID of the target catagory. (`id="xxx"`)
+- `<Catalog Field Path>`: The field path of the targeted `<Catagory Entry>`.
   - Nested level uses `.` to prepresent. If the target field is not `value="xxx", it need to be nested here as well.`
   - Arrays uses `[n]` to specify the numeric order
   - If an entry can exist multiple times with different index such as `<Flags>`, use `[Index]`, such as `Flags[AllowSelfCast]`
@@ -1493,7 +1493,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
     <CatalogReference>
     	Required:	true
     	Type:		string
-    	Usage:		The Reference to the catalog field
+    	Usage:		The Reference to the specific catalog field
     [PlayerID]
     	Required:	false
     	Type:		string
@@ -1531,9 +1531,14 @@ In order to reference the armor value against Structure, the `CatalogReference` 
 <a name="cmd-modifycatalog-description"></a>
 
 #### ✏ Description: 
-Directly modify a Catalog value (a.k.a XMLs) for a player.
+Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 
 For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
+
+**Caveats:**
+ - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [MODDING.md](MODDING.md)).
+ - The catalog modification is applied after parental inheritance, meaning that it is not possible to modify a parent (`parent="xxx"`) for its effect to apply to all child catalogs. You must need to do it on each of the child catalogs.
+ - It is not possible "create" a value that does not exist after the map loaded. Meaning it can only modify value based on existed ones (after inherit attributes from parent)
 
 <a name="cmd-modifycatalog-parameters"></a>
 
