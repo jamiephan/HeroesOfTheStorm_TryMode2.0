@@ -254,7 +254,7 @@ bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
             lv_currentUnit = UnitGroupUnitFromEnd(auto25375630_g, auto25375630_u);
             if (lv_currentUnit == null) { break; }
             auto82B5A334_ae = lv_count;
-            lv_i = 0;
+            lv_i = 1;
             for ( ; ( (auto82B5A334_ai >= 0 && lv_i <= auto82B5A334_ae) || (auto82B5A334_ai < 0 && lv_i >= auto82B5A334_ae) ) ; lv_i += auto82B5A334_ai ) {
                 lv_unittype = UnitGetType(lv_currentUnit);
                 UnitCreateEffectUnit(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), lv_currentUnit);
