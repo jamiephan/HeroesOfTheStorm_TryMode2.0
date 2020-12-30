@@ -39,11 +39,11 @@ jobs:
           tag_name: release-${{ github.event.head_commit.id }}
           release_name: ${{ github.event.head_commit.message }}
           body: |
-            ${{ github.event.head_commit.message }}
+            Commit Meesage: `${{ github.event.head_commit.message }}`
 
-            Built timestamp: `${{ github.event.head_commit.timestamp }}`
+            Built time: `${{ github.event.head_commit.timestamp }}`
 
-            For instructions on to use the run the map, Please refer to [INSTALL.MD](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/INSTALL.md).
+            For instructions on how to run the map, Please refer to [INSTALL.md](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/INSTALL.md).
           draft: false 
           prerelease: false
 
