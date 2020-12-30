@@ -44,6 +44,7 @@ This allows you to double click on the `*.stormmap` file and run the map directl
     ![Locate HeroesSwitcher_64.exe](https://i.imgur.com/AZTp2Kw.png)
 
 6. Double Click on the file and load the map:
+
     ![Verify](https://i.imgur.com/vmPneQE.png)
     
 
