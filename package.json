@@ -4,14 +4,14 @@
     "description": "Enhanced Try mode",
     "main": "index.js",
     "scripts": {
-        "buildxml": "bash -c -i \"node ./scripts/main/buildxml.js\"",
-        "buildmimiclib": "bash -c -i \"node ./scripts/main/buildmimiclib.js\"",
-        "buildmimicabilities": "bash -c -i \"node ./scripts/main/buildmimicabilities.js\"",
-        "buildmimicbehaviors": "bash -c -i \"node ./scripts/main/buildmimicbehaviors.js\"",
-        "patchlibraries": "bash -c -i \"node ./scripts/main/patchLibraries.js\"",
-        "s2ma": "bash -c -i \"node ./scripts/main/s2ma.js\"",
-        "symlink": "node ./scripts/main/symlink.js",
-        "generateusagedoc": "node ./scripts/main/generateUsageDoc.js"
+        "build:xml": "bash -c -i \"node ./scripts/main/buildxml.js\"",
+        "build:mimiclib": "bash -c -i \"node ./scripts/main/buildmimiclib.js\"",
+        "build:mimicabilities": "bash -c -i \"node ./scripts/main/buildmimicabilities.js\"",
+        "build:mimicbehaviors": "bash -c -i \"node ./scripts/main/buildmimicbehaviors.js\"",
+        "build:usagedoc": "node ./scripts/main/buildusagedoc.js",
+        "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",
+        "extract:s2ma": "bash -c -i \"node ./scripts/main/extracts2ma.js\"",
+        "util:symlink": "node ./scripts/main/utilsymlink.js"
     },
     "repository": {
         "type": "git",

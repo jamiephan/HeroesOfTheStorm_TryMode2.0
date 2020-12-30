@@ -52,7 +52,7 @@ The current values required are:
 
 ## Symbolic Linker Tool
 
-**Command**: `npm run symlink`
+**Command**: `npm run util:symlink`
 
 This tool will create a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, which will "mirror" the directory, such that you can continue to edit the files in the directory but will also take effect in the Heroes actual try mode map.
 
@@ -65,7 +65,7 @@ This command should not need to use more than once if it completed successfully.
 
 ## Finder Tool for `*.s2ma`
 
-**Command**: `npm run s2ma`
+**Command**: `npm run extract:s2ma`
 
 
 `*.s2ma` files are the generated libs for Heroes of the Storm. But most importantly it will also contain actual map files as well.
@@ -79,7 +79,7 @@ To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mp
 
 ## Ability Mimic Generator
 
-**Command**: `npm run buildmimicabilities`
+**Command**: `npm run build:mimicabilities`
 
 This tools will search through most the abilities (Q, W, E, R, which are `<CAbil*>`) and map them to a a corresponding `<CBehaviorAbility>`. With the id having prefixed `"M"`.
 
@@ -108,7 +108,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 ## `<CBehaviorBuff>` Mimic Generator
 
-**Command**: `npm run buildmimicbehaviors`
+**Command**: `npm run build:mimicbehaviors`
 
 This tool will search though all the `<CBehaviorBuff>` and map it to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
@@ -128,7 +128,7 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 ## Automatically generate `GameData.XML`
 
-**Command**: `npm run buildxml`
+**Command**: `npm run build:xml`
 
 This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, that will include all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods`, which will scan through all its subdirectories. 
 
@@ -140,7 +140,7 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 ## Mimic Lib Generator
 
-**Command**: `npm run buildmimiclib`
+**Command**: `npm run build:mimiclib`
 
 
 The Mimic Libs will be taken from `heroesdata.stormmod/base.stormmod/TriggerLibs`.
@@ -224,7 +224,7 @@ Internal Command | Mimicked Command
 
 ## Patching Libraries
 
-**Command**: `npm run patchlibraries`
+**Command**: `npm run patch:libraries`
 
 A command to automatically remove all `//_heroes_replace_//` string in the Modules folder. This allows for less human errors.
 
@@ -234,9 +234,9 @@ This does not need to do a manual search/replace in Galaxy Editor.
 
 --
 
-<a name="tools-generateusagedoc" />
+<a name="tools-buildusagedoc" />
 
-## Generate Usage Doc ([USAGE.md](USAGE.md))
-**Command**: `npm run generateusagedoc`
+## Build Usage Doc ([USAGE.md](USAGE.md))
+**Command**: `npm run build:usagedoc`
 
-A Command to generate [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`
+A Command to build [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`
