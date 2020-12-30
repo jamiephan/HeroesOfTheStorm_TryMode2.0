@@ -1738,6 +1738,7 @@ bool libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func (bool testConds, bool ru
             lv_i = 1;
             for ( ; ( (auto779A4170_ai >= 0 && lv_i <= auto779A4170_ae) || (auto779A4170_ai < 0 && lv_i >= auto779A4170_ae) ) ; lv_i += auto779A4170_ai ) {
                 libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+                AIAddPlayerUnit(UnitLastCreated());
                 UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
             }
         }
@@ -1848,6 +1849,7 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
     lv_i = 1;
     for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
         libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+        AIAddPlayerUnit(UnitLastCreated());
         UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
     }
     return true;
