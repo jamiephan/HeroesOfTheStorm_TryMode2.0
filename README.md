@@ -8,13 +8,11 @@ A modified Try Mode Map for Heroes of the Storm to create a better experience fo
 
 - [x] Package and Release a .stormmap to run directly
 - [x] Tools to automatically symlink/copy to install the map
-- [ ] Tools or scripts to automatically associate *.stormmap in win32
-- [ ] Tools to generate shortcut for win32 to link to the current (10)trymode.stormmap
 - [x] Tools to generate XML for mimic abilities with `<CBehaviorAbility>`
 - [x] Fix the MimicTriggerLib Tool
 - [ ] Create a Custom Camera Object
-- [ ] Tools to generate a toggleable `<CBehaviorbuff>`
-- [ ] Tools to path the actual Try mode with live game data automatically
+- [x] Tools to generate a toggleable `<CBehaviorbuff>`
+- [ ] Tools to patch the actual Try mode with live game data automatically
 
 
 ## How to install:
