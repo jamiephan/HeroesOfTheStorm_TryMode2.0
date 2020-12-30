@@ -38,11 +38,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "tdb",
+                            "command": "{shortCommand}",
                             "description": "Toggle Debug Mode"
                         },
                         {
-                            "command": "toggledebugmode",
+                            "command": "{command}",
                             "description": "Toggle Debug Mode"
                         }
                     ]
@@ -55,11 +55,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "tfow",
+                            "command": "{shortCommand}",
                             "description": "Toggle Full Map Vision"
                         },
                         {
-                            "command": "togglefogofwar",
+                            "command": "{command}",
                             "description": "Toggle Full Map Vision"
                         }
                     ]
@@ -75,11 +75,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "tui",
+                            "command": "{shortCommand}",
                             "description": "Toggle In game UI"
                         },
                         {
-                            "command": "toggleui",
+                            "command": "{command}",
                             "description": "Toggle In game UI"
                         }
                     ]
@@ -100,11 +100,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "cls",
+                            "command": "{shortCommand}",
                             "description": "Clear all texts instantly"
                         },
                         {
-                            "command": "clear 5.4",
+                            "command": "{command} 5.4",
                             "description": "Clear all texts after 5.4 seconds"
                         }
                     ]
@@ -120,11 +120,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "re",
+                            "command": "{shortCommand}",
                             "description": "Restart the game instantly"
                         },
                         {
-                            "command": "restartgame",
+                            "command": "{command}",
                             "description": "Restart the game instantly"
                         }
                     ]
@@ -137,11 +137,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "sg",
+                            "command": "{shortCommand}",
                             "description": "Start the game instantly"
                         },
                         {
-                            "command": "startgame",
+                            "command": "{command}",
                             "description": "Start the game instantly"
                         }
                     ]
@@ -154,11 +154,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "eg",
+                            "command": "{shortCommand}",
                             "description": "End the game instantly"
                         },
                         {
-                            "command": "endgame",
+                            "command": "{command}",
                             "description": "End the game instantly"
                         }
                     ]
@@ -181,11 +181,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "wg 1",
+                            "command": "{shortCommand} 1",
                             "description": "Win the game for Team 1"
                         },
                         {
-                            "command": "wingame 2",
+                            "command": "{command} 2",
                             "description": "Win the game for Team 2"
                         }
                     ]
@@ -208,11 +208,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "sco BlizzardAllStars",
+                            "command": "{shortCommand} BlizzardAllStars",
                             "description": "Set the camera object to BlizzardAllStars (default game camera)"
                         },
                         {
-                            "command": "sco Dflt",
+                            "command": "{command} Dflt",
                             "description": "Set the camera object to Dlft (default SC2 camera)"
                         }
                     ]
@@ -225,11 +225,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "rco",
+                            "command": "{shortCommand}",
                             "description": "Reset the game camera to BlizzardAllStars"
                         },
                         {
-                            "command": "resetcameraobject",
+                            "command": "{command}",
                             "description": "Reset the game camera to BlizzardAllStars"
                         }
                     ]
@@ -252,11 +252,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "frt libUIUI_gt_InputBackslashKeyDown_Func",
+                            "command": "{shortCommand} libUIUI_gt_InputBackslashKeyDown_Func",
                             "description": "Force to run the trigger \"libUIUI_gt_InputBackslashKeyDown_Func\", which will show up the debug menu."
                         },
                         {
-                            "command": "forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func",
+                            "command": "{command} libSprt_gt_DEBUGHaveAITakeOverAI_Func",
                             "description": "Force to run the trigger \"libSprt_gt_DEBUGHaveAITakeOverAI_Func\", which will have an AI take over your unit."
                         }
                     ]
@@ -272,11 +272,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "acts",
+                            "command": "{shortCommand}",
                             "description": "Toggle Alliance Control + Multi-Selection"
                         },
                         {
-                            "command": "alliancecontrolteamselection",
+                            "command": "{command}",
                             "description": "Toggle Alliance Control + Multi-Selection"
                         }
                     ]
@@ -299,19 +299,19 @@
                     ],
                     "examples": [
                         {
-                            "command": "mwi",
+                            "command": "{shortCommand}",
                             "description": "Get the minion wave interval"
                         },
                         {
-                            "command": "minionwaveinterval",
+                            "command": "{command}",
                             "description": "Get the minion wave interval"
                         },
                         {
-                            "command": "mwi 0.0625",
+                            "command": "{shortCommand} 0.0625",
                             "description": "Set the minion wave to spawn every 0.0625 seconds (each game loop)"
                         },
                         {
-                            "command": "mwi 100",
+                            "command": "{shortCommand} 100",
                             "description": "Set the minion wave to spawn every 100 seconds."
                         }
                     ]
@@ -336,11 +336,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "ku",
+                            "command": "{shortCommand}",
                             "description": "Instantly kill all selected unit(s)."
                         },
                         {
-                            "command": "killunits",
+                            "command": "{command}",
                             "description": "Instantly kill all selected unit(s)."
                         }
                     ]
@@ -353,11 +353,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "toi",
+                            "command": "{shortCommand}",
                             "description": "Toggle displaying units' id mode."
                         },
                         {
-                            "command": "toggleoutputid",
+                            "command": "{command}",
                             "description": "Toggle displaying units' id mode."
                         }
                     ]
@@ -402,23 +402,23 @@
                     ],
                     "examples": [
                         {
-                            "command": "summon TownTownHallL2",
+                            "command": "{command} TownTownHallL2",
                             "description": "Summon a tower structure to the player who used the command"
                         },
                         {
-                            "command": "summon HeroRaynor 3",
+                            "command": "{command} HeroRaynor 3",
                             "description": "Summon 3 Raynor Hero units for the player who used the command"
                         },
                         {
-                            "command": "summon HeroMalGanis 2 4",
+                            "command": "{command} HeroMalGanis 2 4",
                             "description": "Summon 2 Mal'Ganis Hero units for player 4"
                         },
                         {
-                            "command": "sum JungleGraveGolemDefender 2 1 0.5",
+                            "command": "{shortCommand} JungleGraveGolemDefender 2 1 0.5",
                             "description": "Summon 2 boss golems for player 1 with the unit scale to 0.5 (half the size)"
                         },
                         {
-                            "command": "sum CatapultMinion 10 5 2",
+                            "command": "{shortCommand} CatapultMinion 10 5 2",
                             "description": "Summon 10 Catapult Minions for player 5 with the unit scale to 2 (double the size)"
                         }
                     ]
@@ -443,11 +443,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "clu",
+                            "command": "{shortCommand}",
                             "description": "Clear summoned unit(s) from player who used the command"
                         },
                         {
-                            "command": "clearunits 6",
+                            "command": "{command} 6",
                             "description": "Clear summoned unit(s) from Player 6"
                         }
                     ]
@@ -470,11 +470,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "rpu HeroRaynor",
+                            "command": "{shortCommand} HeroRaynor",
                             "description": "Replace all selected unit(s) to Raynor Hero."
                         },
                         {
-                            "command": "replaceunit CatapultMinion",
+                            "command": "{command} CatapultMinion",
                             "description": "Replace all selected unit(s) to Catapult Minion."
                         }
                     ]
@@ -528,27 +528,27 @@
                     ],
                     "examples": [
                         {
-                            "command": "up 0",
+                            "command": "{shortCommand} 0",
                             "description": "Shows the unit's current HP"
                         },
                         {
-                            "command": "up 0 1",
+                            "command": "{shortCommand} 0 1",
                             "description": "Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO"
                         },
                         {
-                            "command": "unitproperty 6",
+                            "command": "{command} 6",
                             "description": "Show the selected unit's Max Energy, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
                         },
                         {
-                            "command": "unitproperty 6 10000",
+                            "command": "{command} 6 10000",
                             "description": "Set the selected unit's Max Energy for 10000, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
                         },
                         {
-                            "command": "unitproperty 28",
+                            "command": "{command} 28",
                             "description": "Shows the base movement speed of selected units."
                         },
                         {
-                            "command": "unitproperty 28 10",
+                            "command": "{command} 28 10",
                             "description": "Set the base movement speed of selected units to 10. Note that base speed for heroes is 4.8398"
                         }
                     ]
@@ -561,11 +561,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "getb",
+                            "command": "{shortCommand}",
                             "description": "List all active behaviors for selected units"
                         },
                         {
-                            "command": "getbehavior",
+                            "command": "{command}",
                             "description": "List all active behaviors for selected units"
                         }
                     ]
@@ -578,11 +578,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "clb",
+                            "command": "{shortCommand}",
                             "description": "Clear all active behaviors for selected units"
                         },
                         {
-                            "command": "clearbehavior",
+                            "command": "{command}",
                             "description": "Clear all active behaviors for selected units"
                         }
                     ]
@@ -602,11 +602,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "addbehavior MedivhArcaneBrillianceItem",
+                            "command": "{command} MedivhArcaneBrillianceItem",
                             "description": "Add Medivh's Arcane Brilliance Ability to selected units"
                         },
                         {
-                            "command": "adb PermaInvulnerable",
+                            "command": "{shortCommand} PermaInvulnerable",
                             "description": "Make all selected units permanent Invulnerable"
                         }
                     ]
@@ -629,11 +629,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "removebehavior MedivhArcaneBrillianceItem",
+                            "command": "{command} MedivhArcaneBrillianceItem",
                             "description": "Remove Medivh's Arcane Brilliance Ability from selected units"
                         },
                         {
-                            "command": "rmb PermaInvulnerable",
+                            "command": "{shortCommand} PermaInvulnerable",
                             "description": "No longer makes all selected units permanent Invulnerable"
                         }
                     ]
@@ -656,11 +656,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "countbehavior MedivhArcaneBrillianceItem",
+                            "command": "{command} MedivhArcaneBrillianceItem",
                             "description": "Count Medivh's Arcane Brilliance Ability from selected units"
                         },
                         {
-                            "command": "ctb PermaInvulnerable",
+                            "command": "{shortCommand} PermaInvulnerable",
                             "description": "Count selected unit's permanent Invulnerable behavior"
                         }
                     ]
@@ -680,11 +680,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "addeffect StormSuicide",
+                            "command": "{command} StormSuicide",
                             "description": "Make the unit \"suicide\" a.k.a kill the unit"
                         },
                         {
-                            "command": "ade MedivhPolyBombPersistent",
+                            "command": "{shortCommand} MedivhPolyBombPersistent",
                             "description": "Make all selected units affect by Medivh's Polybomb"
                         }
                     ]
@@ -704,11 +704,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "addeffectcamera DropUnderworldPowerupPersistent",
+                            "command": "{command} DropUnderworldPowerupPersistent",
                             "description": "Add some Haunted Mines Skulls to camera location"
                         },
                         {
-                            "command": "adec UnderworldBossRootsCreatePersistent",
+                            "command": "{shortCommand} UnderworldBossRootsCreatePersistent",
                             "description": "Add Haunted Mines's boss root animation to camera location"
                         }
                     ]
@@ -728,11 +728,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "removeeffect MedivhPolyBombPersistent",
+                            "command": "{command} MedivhPolyBombPersistent",
                             "description": "No longer make selected unit(s) affect by Medivh's Polybomb"
                         },
                         {
-                            "command": "rme MedivhPolyBombPersistent",
+                            "command": "{shortCommand} MedivhPolyBombPersistent",
                             "description": "No longer make selected unit(s) affect by Medivh's Polybomb"
                         }
                     ]
@@ -752,11 +752,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "removeeffectcamera DropUnderworldPowerupPersistent",
+                            "command": "{command} DropUnderworldPowerupPersistent",
                             "description": "Remove Haunted Mines Skulls from camera location"
                         },
                         {
-                            "command": "rmec UnderworldBossRootsCreatePersistent",
+                            "command": "{shortCommand} UnderworldBossRootsCreatePersistent",
                             "description": "Remove Haunted Mines's boss root animation from camera location"
                         }
                     ]
@@ -779,11 +779,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "playanimation Attack",
+                            "command": "{command} Attack",
                             "description": "Play the Attack Animation for selected unit(s)"
                         },
                         {
-                            "command": "pa Walk",
+                            "command": "{shortCommand} Walk",
                             "description": "Play the Walk animation for selected unit(s)"
                         }
                     ]
@@ -806,11 +806,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "removeanimation Attack",
+                            "command": "{command} Attack",
                             "description": "Stop the Attack Animation for selected unit(s)"
                         },
                         {
-                            "command": "rma Walk",
+                            "command": "{shortCommand} Walk",
                             "description": "Stop the Walk animation for selected unit(s)"
                         }
                     ]
@@ -833,11 +833,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "sendactormessage AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale",
+                            "command": "{command} AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale",
                             "description": "Play the A Spell animation, different on each hero"
                         },
                         {
-                            "command": "sam StatusIncrement StatusBarHide",
+                            "command": "{shortCommand} StatusIncrement StatusBarHide",
                             "description": "Hide the status bar, HP bar"
                         }
                     ]
@@ -850,11 +850,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "guo",
+                            "command": "{shortCommand}",
                             "description": "Gets the Ownership (Player ID) of selected unit(s)."
                         },
                         {
-                            "command": "getunitownership",
+                            "command": "{command}",
                             "description": "Gets the Ownership (Player ID) of selected unit(s)."
                         }
                     ]
@@ -877,11 +877,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "changeunitownership 1",
+                            "command": "{command} 1",
                             "description": "Change all selected units's ownership to Player 1"
                         },
                         {
-                            "command": "cuo6",
+                            "command": "{shortCommand}",
                             "description": "Change all selected units's ownership to Player 6"
                         }
                     ]
@@ -894,11 +894,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "tnwcd",
+                            "command": "{shortCommand}",
                             "description": "Constantly resetting the weapons (auto attack) cooldown"
                         },
                         {
-                            "command": "togglenoweaponcd",
+                            "command": "{command}",
                             "description": "Constantly resetting the weapons (auto attack) cooldown"
                         }
                     ]
@@ -918,11 +918,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "adw AlexstraszaDragonConeWeapon",
+                            "command": "{shortCommand} AlexstraszaDragonConeWeapon",
                             "description": "Add Alexstrasza's Dragon Form weapon to selected unit(s)"
                         },
                         {
-                            "command": "addweapon FirebatHeroWeapon",
+                            "command": "{command} FirebatHeroWeapon",
                             "description": "Add Blaze's weapon to selected unit(s)"
                         }
                     ]
@@ -942,11 +942,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "rmw AnaHeroWeapon",
+                            "command": "{shortCommand} AnaHeroWeapon",
                             "description": "Remove Ana's weapon from selected unit(s)"
                         },
                         {
-                            "command": "removeweapon DVaMechWeapon",
+                            "command": "{command} DVaMechWeapon",
                             "description": "Remove D.va mech mode's weapon from selected unit(s)"
                         }
                     ]
@@ -982,11 +982,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "tmq 10",
+                            "command": "{shortCommand} 10",
                             "description": "Enable mass quest completion mode and give 10 stacks every game tick if not enabled"
                         },
                         {
-                            "command": "togglemassquest",
+                            "command": "{command}",
                             "description": "Disable mass quest completion mode if enabled"
                         }
                     ]
@@ -1009,11 +1009,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "setmasteryring 0",
+                            "command": "{command} 0",
                             "description": "Remove the mastery ring from the player"
                         },
                         {
-                            "command": "smr 3",
+                            "command": "{shortCommand} 3",
                             "description": "Set the mastery ring to Level 3."
                         }
                     ]
@@ -1026,11 +1026,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "ttt",
+                            "command": "{shortCommand}",
                             "description": "Toggle the display of the talents selection tree."
                         },
                         {
-                            "command": "toggletalenttree",
+                            "command": "{command}",
                             "description": "Toggle the display of the talents selection tree."
                         }
                     ]
@@ -1043,11 +1043,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "tpgt",
+                            "command": "{shortCommand}",
                             "description": "Toggle whether to pause the game when viewing talents"
                         },
                         {
-                            "command": "togglepausegametalent",
+                            "command": "{command}",
                             "description": "Toggle whether to pause the game when viewing talents"
                         }
                     ]
@@ -1077,11 +1077,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "removetalent MedivhForceOfWillArcaneExplosion",
+                            "command": "{command} MedivhForceOfWillArcaneExplosion",
                             "description": "Removed Medivh's Arcane Explosion Talent from Player 1"
                         },
                         {
-                            "command": "rmt MalfurionCelestialAlignment 2",
+                            "command": "{shortCommand} MalfurionCelestialAlignment 2",
                             "description": "Removed Malfurion's Celest>ial Alignment Talent from Player 2"
                         }
                     ]
@@ -1101,11 +1101,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "enabletalent RagnarosLavaWave",
+                            "command": "{command} RagnarosLavaWave",
                             "description": "Enable Rag's Lava Wave talent, which was disabled in ARAM."
                         },
                         {
-                            "command": "ent MaievUmbralBindPursuitOfVengeance",
+                            "command": "{shortCommand} MaievUmbralBindPursuitOfVengeance",
                             "description": "Enable Maiev's Pursuit Of Vengeance talent"
                         }
                     ]
@@ -1128,11 +1128,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "disabletalent RagnarosLavaWave",
+                            "command": "{command} RagnarosLavaWave",
                             "description": "Disable Rag's Lava Wave talent, similar to ARAM."
                         },
                         {
-                            "command": "dist MaievUmbralBindPursuitOfVengeance 0",
+                            "command": "{shortCommand} MaievUmbralBindPursuitOfVengeance 0",
                             "description": "Disable Maiev's Pursuit Of Vengeance talent"
                         }
                     ]
@@ -1155,11 +1155,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "respawntime 99",
+                            "command": "{command} 99",
                             "description": "set the respawn timer to 99 seconds"
                         },
                         {
-                            "command": "rst 0",
+                            "command": "{shortCommand} 0",
                             "description": "set the respawn timer to 0.0625 second"
                         }
                     ]
@@ -1197,15 +1197,15 @@
                     ],
                     "examples": [
                         {
-                            "command": "setscore HeroDamage 0",
+                            "command": "{command} HeroDamage 0",
                             "description": "Set the field \"Hero Damage\" to 0 for the player who use this command."
                         },
                         {
-                            "command": "score SoloKill 524287",
+                            "command": "{shortCommand} SoloKill 524287",
                             "description": "Set the field \"Kils\" to 5242873 for the player who use this command"
                         },
                         {
-                            "command": "score Healing 1000 2",
+                            "command": "{shortCommand} Healing 1000 2",
                             "description": "Set the field \"Healing\" to 1000 for the player 2"
                         }
                     ]
@@ -1232,23 +1232,23 @@
                     ],
                     "examples": [
                         {
-                            "command": "respawnpoint set all",
+                            "command": "{command} set all",
                             "description": "set the respawn point for all players at the current camera location"
                         },
                         {
-                            "command": "rsp set",
+                            "command": "{shortCommand} set",
                             "description": "set the respawn point to player who uses the command at the current camera location"
                         },
                         {
-                            "command": "respawnpoint set 6",
+                            "command": "{command} set 6",
                             "description": "set the respawn point for player 6 at camera location"
                         },
                         {
-                            "command": "rsp reset 2",
+                            "command": "{shortCommand} reset 2",
                             "description": "reset player 2's respawn point to default location"
                         },
                         {
-                            "command": "rsp reset all",
+                            "command": "{shortCommand} reset all",
                             "description": "reset all player's respawn point to its default respawn location (hall of storms)."
                         }
                     ]
@@ -1271,11 +1271,11 @@
                     ],
                     "examples": [
                         {
-                            "command": "sol Cutscenes/GameUI_InvulnerableOverlay.StormCutscene",
+                            "command": "{shortCommand} Cutscenes/GameUI_InvulnerableOverlay.StormCutscene",
                             "description": "Set the overlay to \"Invulnerable\", e.g Divine Shield / Sanctification."
                         },
                         {
-                            "command": "setoverlay cutscenes\\gameui_gorgeoverlay.stormcutscene",
+                            "command": "{command} cutscenes\\gameui_gorgeoverlay.stormcutscene",
                             "description": "Set the overlay to Stitches Gorge."
                         }
                     ]
@@ -1288,11 +1288,11 @@
                     "parameters": [],
                     "examples": [
                         {
-                            "command": "rol",
+                            "command": "{shortCommand}",
                             "description": "Remove all the overlays with the default one."
                         },
                         {
-                            "command": "resetoverlay",
+                            "command": "{command}",
                             "description": "Remove all the overlays with the default one."
                         }
                     ]
@@ -1409,27 +1409,27 @@
                     ],
                     "examples": [
                         {
-                            "command": "getcatalog Effect,WizardTeleportCalamityDamage,Amount",
+                            "command": "{command} Effect,WizardTeleportCalamityDamage,Amount",
                             "description": "Get Li-Ming's Calamity damage from whoever uses this command"
                         },
                         {
-                            "command": "gcl Abil,VarianCharge,Cost.Vital[Energy]",
+                            "command": "{shortCommand} Abil,VarianCharge,Cost.Vital[Energy]",
                             "description": "Get Varian's Charge mana cost from whoever uses this command"
                         },
                         {
-                            "command": "gcl Behavior,Mounted,Modification.UnifiedMoveSpeedFactor 2",
+                            "command": "{shortCommand} Behavior,Mounted,Modification.UnifiedMoveSpeedFactor 2",
                             "description": "Get the mount speed for all Heroes from Player 2"
                         },
                         {
-                            "command": "gcl Weapon,StukovHeroWeapon,Period",
+                            "command": "{shortCommand} Weapon,StukovHeroWeapon,Period",
                             "description": "Getl Stukov's Basic Attack speed from whoever uses this command"
                         },
                         {
-                            "command": "gcl Weapon,ChromieHeroWeapon,Effect",
+                            "command": "{shortCommand} Weapon,ChromieHeroWeapon,Effect",
                             "description": "Get Chromie's Basic Attack Effect from whoever uses this command"
                         },
                         {
-                            "command": "gcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 2",
+                            "command": "{shortCommand} Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 2",
                             "description": "Get Dehaka's Dark Swarm Ability Supress Collision flag value when active from Player 2"
                         }
                     ]
@@ -1471,27 +1471,27 @@
                     ],
                     "examples": [
                         {
-                            "command": "modifycatalog Effect,WizardTeleportCalamityDamage,Amount 9999",
+                            "command": "{command} Effect,WizardTeleportCalamityDamage,Amount 9999",
                             "description": "Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command"
                         },
                         {
-                            "command": "mcl Abil,VarianCharge,Cost.Vital[Energy] 5",
+                            "command": "{shortCommand} Abil,VarianCharge,Cost.Vital[Energy] 5",
                             "description": "Modify Varian's Charge mana cost to 5 for whoever uses this command"
                         },
                         {
-                            "command": "mcl Behavior,Mounted,Modification.UnifiedMoveSpeedFactor -0.3 2",
+                            "command": "{shortCommand} Behavior,Mounted,Modification.UnifiedMoveSpeedFactor -0.3 2",
                             "description": "Modify the mount speed for all Heroes to -30% (30% slower instead of faster) for Player 2"
                         },
                         {
-                            "command": "mcl Weapon,StukovHeroWeapon,Period 0.0625",
+                            "command": "{shortCommand} Weapon,StukovHeroWeapon,Period 0.0625",
                             "description": "Modify Stukov's Basic Attack speed to 16 (1 second performs 16 attacks = 0.0625 period per AA) for whoever uses this command"
                         },
                         {
-                            "command": "mcl Weapon,ChromieHeroWeapon,Effect WizardWeaponLaunchSwitch",
+                            "command": "{shortCommand} Weapon,ChromieHeroWeapon,Effect WizardWeaponLaunchSwitch",
                             "description": "Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missle) for whoever uses this command"
                         },
                         {
-                            "command": "mcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2",
+                            "command": "{shortCommand} Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2",
                             "description": "Modify Dehaka's Dark Swarm Ability to no longer Supress Collision When active (No longer pass though units) for Player 2"
                         }
                     ]

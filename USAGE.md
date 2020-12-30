@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 10:56:58 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 12:50:09 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -410,7 +410,7 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 #### 🔧 Examples:
     > sco BlizzardAllStars
     	(Set the camera object to BlizzardAllStars (default game camera))
-    > sco Dflt
+    > setcameraobject Dflt
     	(Set the camera object to Dlft (default SC2 camera))
 <a name="cmd-setcameraobject-uiAvailability"></a>
 
@@ -737,7 +737,7 @@ Changes ownership of the selected unit(s).
 #### 🔧 Examples:
     > changeunitownership 1
     	(Change all selected units's ownership to Player 1)
-    > cuo6
+    > cuo
     	(Change all selected units's ownership to Player 6)
 <a name="cmd-changeunitownership-uiAvailability"></a>
 

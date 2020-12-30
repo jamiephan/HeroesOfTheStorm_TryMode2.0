@@ -110,7 +110,7 @@ jsonData.libraries.forEach((library) => {
         markdowner.addRaw = command.description;
       }
 
-      //   Param section
+      // Param section
       if (Object.prototype.hasOwnProperty.call(command, 'parameters') && command.parameters instanceof Array) {
         markdowner.addRaw = `<a name="cmd-${command.command}-parameters"></a>`;
         markdowner.addH4 = '⚙ Parameters:';
@@ -129,12 +129,12 @@ jsonData.libraries.forEach((library) => {
         }
       }
 
-      //   Example section
+      // Example section
       if (Object.prototype.hasOwnProperty.call(command, 'examples') && command.examples instanceof Array) {
         markdowner.addRaw = `<a name="cmd-${command.command}-examples"></a>`;
         markdowner.addH4 = '🔧 Examples:';
         command.examples.forEach((e) => {
-          markdowner.addCode = `> ${e.command}`;
+          markdowner.addCode = `> ${e.command.replace('{shortCommand}', command.shortCommand).replace('{command}', command.command)}`;
           markdowner.addCode = `\t(${e.description})`;
         });
       }
