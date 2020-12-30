@@ -39,7 +39,7 @@ jobs:
           tag_name: release-${{ github.event.head_commit.id }}
           release_name: ${{ github.event.head_commit.message }}
           body: |
-            Commit Meesage: `${{ github.event.head_commit.message }}`
+            Commit Message: `${{ github.event.head_commit.message }}`
 
             Built time: `${{ github.event.head_commit.timestamp }}`
 
