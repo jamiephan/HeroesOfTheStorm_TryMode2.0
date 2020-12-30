@@ -1438,11 +1438,11 @@ bool libUNIT_gt_SummonUnitPanelSetupPanel_Func (bool testConds, bool runActions)
     libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 100, 50, c_anchorTopLeft, 100, 63, StringToText("Unit ID:"), ColorWithAlpha(0,0,0,0), false, 2.0);
     DialogControlCreate(DialogLastCreated(), c_triggerControlTypePulldown);
     DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorTopRight, 50, 100);
-    lv_playerid_loop = 1;
+    lv_playerid_loop = 0;
     for ( ; ( (auto0680E977_ai >= 0 && lv_playerid_loop <= auto0680E977_ae) || (auto0680E977_ai < 0 && lv_playerid_loop >= auto0680E977_ae) ) ; lv_playerid_loop += auto0680E977_ai ) {
         DialogControlAddItem(DialogControlLastCreated(), PlayerGroupAll(), IntToText(lv_playerid_loop));
     }
-    DialogControlSelectItem(DialogControlLastCreated(), PlayerGroupAll(), 1);
+    DialogControlSelectItem(DialogControlLastCreated(), PlayerGroupAll(), 2);
     libUNIT_gv_summonUnitPanel.lv_playerListDropdown = DialogControlLastCreated();
     libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 50, c_anchorTopLeft, 100, 113, StringToText("Player ID:"), ColorWithAlpha(0,0,0,0), false, 2.0);
     DialogControlCreate(DialogLastCreated(), c_triggerControlTypeEditBox);
@@ -1564,7 +1564,7 @@ bool libUNIT_gt_SummonUnitPanelplayerDropdownChanged_Func (bool testConds, bool 
         return true;
     }
 
-    libUNIT_gv_summonUnitPanel.lv_playerListSelectedPlayer = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    libUNIT_gv_summonUnitPanel.lv_playerListSelectedPlayer = (DialogControlGetSelectedItem(EventDialogControl(), EventPlayer()) - 1);
     return true;
 }
 
