@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 26 Dec 2020 01:59:03 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 02:59:36 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -35,6 +35,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `endgame`](#cmd-endgame)
 
   - 💭 [Command: `forceruntrigger`](#cmd-forceruntrigger)
+
+  - 💭 [Command: `minionwaveinterval`](#cmd-minionwaveinterval)
 
   - 💭 [Command: `resetcameraobject`](#cmd-resetcameraobject)
 
@@ -276,6 +278,44 @@ Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and
     > forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func
     	(Force to run the trigger "libSprt_gt_DEBUGHaveAITakeOverAI_Func", which will have an AI take over your unit.)
 <a name="cmd-forceruntrigger-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-minionwaveinterval"></a>
+
+## (`minionwaveinterval` | `mwi`) `[seconds]`
+<a name="cmd-minionwaveinterval-description"></a>
+
+#### ✏ Description: 
+Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but for 15s in ARAM.)
+
+<a name="cmd-minionwaveinterval-parameters"></a>
+
+#### ⚙ Parameters:
+    [seconds]
+    	Required:	false
+    	Type:		float
+    	Usage:		Defines interval for minion wave to spawn
+    	Default:	(The map's original interval, usually 30 but 15 for ARAMs)
+<a name="cmd-minionwaveinterval-examples"></a>
+
+#### 🔧 Examples:
+    > mwi
+    	(Get the minion wave interval)
+    > minionwaveinterval
+    	(Get the minion wave interval)
+    > mwi 0.0625
+    	(Set the minion wave to spawn every 0.0625 seconds (each game loop))
+    > mwi 100
+    	(Set the minion wave to spawn every 100 seconds.)
+<a name="cmd-minionwaveinterval-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

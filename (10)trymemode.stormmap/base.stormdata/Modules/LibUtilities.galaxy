@@ -29,6 +29,7 @@ trigger libUTIL_gt_SetCameraObject;
 trigger libUTIL_gt_ResetCameraObject;
 trigger libUTIL_gt_ForceRunTrigger;
 trigger libUTIL_gt_ToggleACTS;
+trigger libUTIL_gt_MinionWaveInterval;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -544,6 +545,56 @@ void libUTIL_gt_ToggleACTS_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ToggleACTS, c_playerAny, "alliancecontrolteamselection", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Minion Wave Interval
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_MinionWaveInterval_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    trigger lv_minionSpawnTrigger;
+    fixed lv_seconds;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_seconds = 30.0;
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "mwi") || (StringWord(EventChatMessage(false), 1) == "minonwaveinterval")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        lv_seconds = libCore_gv_bALMinionWaveInterval;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Minion Wave Interval is: " + FixedToString(lv_seconds, c_fixedPrecisionAny))));
+    }
+    else {
+        lv_seconds = StringToFixed(StringWord(EventChatMessage(false), 2));
+        if ((lv_seconds > 0.0)) {
+            libCore_gv_bALMinionWaveInterval = lv_seconds;
+            libGame_gf_MinionStartStopMinionSpawnCycle(false);
+            libGame_gf_MinionStartStopMinionSpawnCycle(true);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Minion Wave Interval set to: " + FixedToString(lv_seconds, c_fixedPrecisionAny))));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Invalid Interval Value: " + StringWord(EventChatMessage(false), 2))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_MinionWaveInterval_Init () {
+    libUTIL_gt_MinionWaveInterval = TriggerCreate("libUTIL_gt_MinionWaveInterval_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_MinionWaveInterval, c_playerAny, "mwi", false);
+    TriggerAddEventChatMessage(libUTIL_gt_MinionWaveInterval, c_playerAny, "minionwaveinterval", false);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -560,6 +611,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ResetCameraObject_Init();
     libUTIL_gt_ForceRunTrigger_Init();
     libUTIL_gt_ToggleACTS_Init();
+    libUTIL_gt_MinionWaveInterval_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

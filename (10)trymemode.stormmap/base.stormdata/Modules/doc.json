@@ -280,6 +280,41 @@
                             "description": "Toggle Alliance Control + Multi-Selection"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "mwi",
+                    "command": "minionwaveinterval",
+                    "description": [
+                        "Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but for 15s in ARAM.)"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "seconds",
+                            "required": false,
+                            "description": "Defines interval for minion wave to spawn",
+                            "defaultValue": "(The map's original interval, usually 30 but 15 for ARAMs)",
+                            "type": "float"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "mwi",
+                            "description": "Get the minion wave interval"
+                        },
+                        {
+                            "command": "minionwaveinterval",
+                            "description": "Get the minion wave interval"
+                        },
+                        {
+                            "command": "mwi 0.0625",
+                            "description": "Set the minion wave to spawn every 0.0625 seconds (each game loop)"
+                        },
+                        {
+                            "command": "mwi 100",
+                            "description": "Set the minion wave to spawn every 100 seconds."
+                        }
+                    ]
                 }
             ]
         },
@@ -1382,7 +1417,6 @@
                         " - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [MODDING.md](MODDING.md)).",
                         " - The catalog modification is applied after parental inheritance, meaning that it is not possible to modify a parent (`parent=\"xxx\"`) for its effect to apply to all child catalogs. You must need to do it on each of the child catalogs.",
                         " - It is not possible \"create\" a value that does not exist after the map loaded. Meaning it can only modify value based on existed ones (after inherit attributes from parent)"
-
                     ],
                     "uiAvailable": false,
                     "parameters": [
