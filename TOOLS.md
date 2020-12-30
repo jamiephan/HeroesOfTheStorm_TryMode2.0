@@ -130,6 +130,8 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 **Command**: `npm run build:xml`
 
+>Use `npm run watch:xml` for automatically run the command above when required files were changed
+
 This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, that will include all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods`, which will scan through all its subdirectories. 
 
 >Note: It **will ignore** any files that does not end with `.xml` (case insensitive) and **does not** validate whether the XML file is valid (syntax error, etc). TODO: Also validate XML syntax.
@@ -226,6 +228,8 @@ Internal Command | Mimicked Command
 
 **Command**: `npm run patch:libraries`
 
+>Use `npm run watch:libraries` for automatically run the command above when required files were changed.
+
 A command to automatically remove all `//_heroes_replace_//` string in the Modules folder. This allows for less human errors.
 
 After exported and saved the galaxy file, run this command and enter Try mode to test it out.
@@ -239,4 +243,6 @@ This does not need to do a manual search/replace in Galaxy Editor.
 ## Build Usage Doc ([USAGE.md](USAGE.md))
 **Command**: `npm run build:usagedoc`
 
-A Command to build [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`
+>Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
+
+A Command to build [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`.

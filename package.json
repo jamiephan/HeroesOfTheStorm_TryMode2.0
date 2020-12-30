@@ -5,11 +5,14 @@
     "main": "index.js",
     "scripts": {
         "build:xml": "bash -c -i \"node ./scripts/main/buildxml.js\"",
+        "watch:xml": "bash -c -i \"node ./scripts/watch/xml.js\"",
         "build:mimiclib": "bash -c -i \"node ./scripts/main/buildmimiclib.js\"",
         "build:mimicabilities": "bash -c -i \"node ./scripts/main/buildmimicabilities.js\"",
         "build:mimicbehaviors": "bash -c -i \"node ./scripts/main/buildmimicbehaviors.js\"",
-        "build:usagedoc": "node ./scripts/main/buildusagedoc.js",
+        "build:usagedoc": "bash -c -i \"node ./scripts/main/buildusagedoc.js\"",
+        "watch:usagedoc": "bash -c -i \"node ./scripts/watch/usagedoc.js\"",
         "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",
+        "watch:libraries": "bash -c -i \"node ./scripts/watch/libraries.js\"",
         "extract:s2ma": "bash -c -i \"node ./scripts/main/extracts2ma.js\"",
         "util:symlink": "node ./scripts/main/utilsymlink.js"
     },
@@ -26,7 +29,7 @@
     "dependencies": {
         "app-root-path": "^3.0.0",
         "dotenv": "^8.2.0",
-        "prompt": "^1.0.0",
+        "nodemon": "^2.0.6",
         "rimraf": "^3.0.2",
         "storm-extract": "^1.0.3",
         "tmp": "^0.2.1",
