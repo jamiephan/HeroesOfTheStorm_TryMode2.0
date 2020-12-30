@@ -5,6 +5,10 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Constants
+const int libUNIT_gv_summonedUnits_MaxPlayer = 16;
+const int libUNIT_gv_summonedUnits_MaxLength = 927;
+
 // Structures
 struct libUNIT_gs_AddBehaviorPanel {
     int lv_mainDialog;
@@ -36,6 +40,9 @@ bool libUNIT_gv_addBehaviorPanel_IsShowingDialog;
 bool libUNIT_gv_toggleOutputIDEnabled;
 libUNIT_gs_SummonUnitPanel libUNIT_gv_summonUnitPanel;
 bool libUNIT_gv_summonUnitPanel_IsShowingDialog;
+unit[libUNIT_gv_summonedUnits_MaxPlayer + 1][libUNIT_gv_summonedUnits_MaxLength + 1] libUNIT_gv_summonedUnits_database;
+int[libUNIT_gv_summonedUnits_MaxPlayer + 1] libUNIT_gv_summonedUnits_index;
+bool[libUNIT_gv_summonedUnits_MaxPlayer + 1] libUNIT_gv_summonedUnits_resetted;
 
 // Trigger Declarations
 trigger libUNIT_gt_MapInit;
@@ -78,6 +85,7 @@ trigger libUNIT_gt_SummonUnitPanelamountInputBoxUnfocus;
 trigger libUNIT_gt_SummonUnitPanelSummonButtonClicked;
 trigger libUNIT_gt_SummonUnitPanelCloseButtonClicked;
 trigger libUNIT_gt_SummonUnit;
+trigger libUNIT_gt_ClearSummonedUnits;
 
 // Library Initialization
 void libUNIT_InitVariables ();
@@ -1740,6 +1748,16 @@ bool libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func (bool testConds, bool ru
                 libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
                 AIAddPlayerUnit(UnitLastCreated());
                 UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
+                if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
+                    libUNIT_gv_summonedUnits_index[lv_player] = 0;
+                    libUNIT_gv_summonedUnits_resetted[lv_player] = true;
+                    libUNIT_gv_summonedUnits_database[lv_player][libUNIT_gv_summonedUnits_index[lv_player]] = UnitLastCreated();
+                    libUNIT_gv_summonedUnits_index[lv_player] = (libUNIT_gv_summonedUnits_index[lv_player] + 1);
+                }
+                else {
+                    libUNIT_gv_summonedUnits_database[lv_player][libUNIT_gv_summonedUnits_index[lv_player]] = UnitLastCreated();
+                    libUNIT_gv_summonedUnits_index[lv_player] = (libUNIT_gv_summonedUnits_index[lv_player] + 1);
+                }
             }
         }
         else {
@@ -1851,6 +1869,16 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
         libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
         AIAddPlayerUnit(UnitLastCreated());
         UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
+        if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
+            libUNIT_gv_summonedUnits_index[lv_player] = 0;
+            libUNIT_gv_summonedUnits_resetted[lv_player] = true;
+            libUNIT_gv_summonedUnits_database[lv_player][libUNIT_gv_summonedUnits_index[lv_player]] = UnitLastCreated();
+            libUNIT_gv_summonedUnits_index[lv_player] = (libUNIT_gv_summonedUnits_index[lv_player] + 1);
+        }
+        else {
+            libUNIT_gv_summonedUnits_database[lv_player][libUNIT_gv_summonedUnits_index[lv_player]] = UnitLastCreated();
+            libUNIT_gv_summonedUnits_index[lv_player] = (libUNIT_gv_summonedUnits_index[lv_player] + 1);
+        }
     }
     return true;
 }
@@ -1860,6 +1888,75 @@ void libUNIT_gt_SummonUnit_Init () {
     libUNIT_gt_SummonUnit = TriggerCreate("libUNIT_gt_SummonUnit_Func");
     TriggerAddEventChatMessage(libUNIT_gt_SummonUnit, c_playerAny, "summon", false);
     TriggerAddEventChatMessage(libUNIT_gt_SummonUnit, c_playerAny, "sum", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Clear Summoned Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ClearSummonedUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_currentUnit;
+    int lv_i;
+    int lv_player;
+    int lv_unitCount;
+
+    // Automatic Variable Declarations
+    int auto7D8A0510_ae;
+    const int auto7D8A0510_ai = 1;
+    int auto0E93C612_ae;
+    const int auto0E93C612_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_unitCount = libUNIT_gv_summonedUnits_index[lv_player];
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "clu") || (StringWord(EventChatMessage(false), 1) == "clearunits")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+        lv_unitCount = libUNIT_gv_summonedUnits_index[lv_player];
+    }
+
+    if ((libUNIT_gv_summonedUnits_resetted[lv_player] == true)) {
+        auto0E93C612_ae = (libUNIT_gv_summonedUnits_MaxLength - 1);
+        lv_i = 0;
+        for ( ; ( (auto0E93C612_ai >= 0 && lv_i <= auto0E93C612_ae) || (auto0E93C612_ai < 0 && lv_i >= auto0E93C612_ae) ) ; lv_i += auto0E93C612_ai ) {
+            lv_currentUnit = libUNIT_gv_summonedUnits_database[lv_player][lv_i];
+            UnitKill(lv_currentUnit);
+            libUNIT_gv_summonedUnits_database[lv_player][lv_i] = null;
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Cleared " + IntToString(libUNIT_gv_summonedUnits_MaxLength)) + (" Units for Player " + (IntToString(lv_player) + ".")))));
+    }
+    else {
+        auto7D8A0510_ae = (lv_unitCount - 1);
+        lv_i = 0;
+        for ( ; ( (auto7D8A0510_ai >= 0 && lv_i <= auto7D8A0510_ae) || (auto7D8A0510_ai < 0 && lv_i >= auto7D8A0510_ae) ) ; lv_i += auto7D8A0510_ai ) {
+            lv_currentUnit = libUNIT_gv_summonedUnits_database[lv_player][lv_i];
+            UnitKill(lv_currentUnit);
+            libUNIT_gv_summonedUnits_database[lv_player][lv_i] = null;
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Cleared " + IntToString(lv_unitCount)) + (" Units for Player " + (IntToString(lv_player) + ".")))));
+    }
+    libUNIT_gv_summonedUnits_index[lv_player] = 0;
+    libUNIT_gv_summonedUnits_resetted[lv_player] = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ClearSummonedUnits_Init () {
+    libUNIT_gt_ClearSummonedUnits = TriggerCreate("libUNIT_gt_ClearSummonedUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ClearSummonedUnits, c_playerAny, "clu", false);
+    TriggerAddEventChatMessage(libUNIT_gt_ClearSummonedUnits, c_playerAny, "clearunits", false);
 }
 
 void libUNIT_InitTriggers () {
@@ -1903,6 +2000,7 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_SummonUnitPanelSummonButtonClicked_Init();
     libUNIT_gt_SummonUnitPanelCloseButtonClicked_Init();
     libUNIT_gt_SummonUnit_Init();
+    libUNIT_gt_ClearSummonedUnits_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

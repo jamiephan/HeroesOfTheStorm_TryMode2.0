@@ -424,6 +424,35 @@
                     ]
                 },
                 {
+                    "shortCommand": "clu",
+                    "command": "clearunits",
+                    "description": [
+                        "Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a Player. This is useful for remove large numbers of summoned units, or when summoned untargetable/unselectable units that are not able to use the [killunits](#cmd-killunits) command.",
+                        "",
+                        ">Note: Due to the memory limitation, only the **last 927 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "Define to clear which player's summoned unit(s).",
+                            "type": "string",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "clu",
+                            "description": "Clear summoned unit(s) from player who used the command"
+                        },
+                        {
+                            "command": "clearunits 6",
+                            "description": "Clear summoned unit(s) from Player 6"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "rpu",
                     "command": "replaceunit",
                     "description": [

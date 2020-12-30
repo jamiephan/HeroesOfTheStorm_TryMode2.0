@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 02:59:36 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 09:36:04 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -67,6 +67,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `changeunitownership`](#cmd-changeunitownership)
 
   - 💭 [Command: `clearbehavior`](#cmd-clearbehavior)
+
+  - 💭 [Command: `clearunits`](#cmd-clearunits)
 
   - 💭 [Command: `countbehavior`](#cmd-countbehavior)
 
@@ -768,6 +770,42 @@ Clear all active behaviors for selected units.
     > clearbehavior
     	(Clear all active behaviors for selected units)
 <a name="cmd-clearbehavior-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-clearunits"></a>
+
+## (`clearunits` | `clu`) `[PlayerId]`
+<a name="cmd-clearunits-description"></a>
+
+#### ✏ Description: 
+Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a Player. This is useful for remove large numbers of summoned units, or when summoned untargetable/unselectable units that are not able to use the [killunits](#cmd-killunits) command.
+
+>Note: Due to the memory limitation, only the **last 927 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game.
+
+<a name="cmd-clearunits-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerId]
+    	Required:	false
+    	Type:		string
+    	Usage:		Define to clear which player's summoned unit(s).
+    	Default:	The player id of whoever used this command.
+<a name="cmd-clearunits-examples"></a>
+
+#### 🔧 Examples:
+    > clu
+    	(Clear summoned unit(s) from player who used the command)
+    > clearunits 6
+    	(Clear summoned unit(s) from Player 6)
+<a name="cmd-clearunits-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
