@@ -315,6 +315,43 @@
                             "description": "Set the minion wave to spawn every 100 seconds."
                         }
                     ]
+                },
+                {
+                    "shortCommand": "lm",
+                    "command": "loadmap",
+                    "description": [
+                        "End the game and load a .stormmap file instantly.",
+                        "The `MapPath` is relative to:",
+                        " - `*.stormmods/base.stormmap/` for CASC / MPQ storage",
+                        " - `HEROES_INSTALL_LOCATION/maps/` for file system",
+                        "",
+                        "There are currently 4 built-in `.stormmaps` from CASC in Heroes, which the `MapPath` is:",
+                        " - heroes/singleplayermaps/(10)trymemode.stormmap",
+                        " - `heroes/singleplayermaps/startingexperience/tutorial01.stormmap`",
+                        " - `heroes/singleplayermaps/startingexperience/tutorialmapmechanics.stormmap`",
+                        " - `heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap`",
+                        "",
+                        "You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `HEROES_INSTALL_LOCATION/maps/cool.stormmap`, which the `MapPath` will be `cool.stormmap`"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MapPath",
+                            "required": true,
+                            "description": "Defines the path to the stormmap",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} heroes/singleplayermaps/startingexperience/tutorial01.stormmap",
+                            "description": "Exit and Load the tutorial 1 map"
+                        },
+                        {
+                            "command": "{command} heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap",
+                            "description": "Exit and Load the veteran tutorial map."
+                        }
+                    ]
                 }
             ]
         },

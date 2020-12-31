@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 31 Dec 2020 01:22:23 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 31 Dec 2020 18:30:23 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -35,6 +35,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `endgame`](#cmd-endgame)
 
   - 💭 [Command: `forceruntrigger`](#cmd-forceruntrigger)
+
+  - 💭 [Command: `loadmap`](#cmd-loadmap)
 
   - 💭 [Command: `minionwaveinterval`](#cmd-minionwaveinterval)
 
@@ -280,6 +282,50 @@ Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and
     > forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func
     	(Force to run the trigger "libSprt_gt_DEBUGHaveAITakeOverAI_Func", which will have an AI take over your unit.)
 <a name="cmd-forceruntrigger-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-loadmap"></a>
+
+## (`loadmap` | `lm`) `<MapPath>`
+<a name="cmd-loadmap-description"></a>
+
+#### ✏ Description: 
+End the game and load a .stormmap file instantly.
+The `MapPath` is relative to:
+ - `*.stormmods/base.stormmap/` for CASC / MPQ storage
+ - `HEROES_INSTALL_LOCATION/maps/` for file system
+
+There are currently 4 built-in `.stormmaps` from CASC in Heroes, which the `MapPath` is:
+ - heroes/singleplayermaps/(10)trymemode.stormmap
+ - `heroes/singleplayermaps/startingexperience/tutorial01.stormmap`
+ - `heroes/singleplayermaps/startingexperience/tutorialmapmechanics.stormmap`
+ - `heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap`
+
+You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `HEROES_INSTALL_LOCATION/maps/cool.stormmap`, which the `MapPath` will be `cool.stormmap`
+
+<a name="cmd-loadmap-parameters"></a>
+
+#### ⚙ Parameters:
+    <MapPath>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the path to the stormmap
+<a name="cmd-loadmap-examples"></a>
+
+#### 🔧 Examples:
+    > lm heroes/singleplayermaps/startingexperience/tutorial01.stormmap
+    	(Exit and Load the tutorial 1 map)
+    > loadmap heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap
+    	(Exit and Load the veteran tutorial map.)
+<a name="cmd-loadmap-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

@@ -25,6 +25,7 @@ trigger libUTIL_gt_WinGame;
 trigger libUTIL_gt_StartGame;
 trigger libUTIL_gt_EndGame;
 trigger libUTIL_gt_RestartGame;
+trigger libUTIL_gt_LoadMap;
 trigger libUTIL_gt_SetCameraObject;
 trigger libUTIL_gt_ResetCameraObject;
 trigger libUTIL_gt_ForceRunTrigger;
@@ -382,6 +383,48 @@ void libUTIL_gt_RestartGame_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: LoadMap
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_LoadMap_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_map;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_map = "CURRENT";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "lm") || (StringWord(EventChatMessage(false), 1) == "loadmap")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <lm|loadmap> <MapPath>"));
+    }
+    else {
+        lv_map = StringWord(EventChatMessage(false), 2);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Loading Map: " + lv_map)));
+        GameSetNextMap(lv_map);
+        KickFromGame(PlayerGroupAll());
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_LoadMap_Init () {
+    libUTIL_gt_LoadMap = TriggerCreate("libUTIL_gt_LoadMap_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_LoadMap, c_playerAny, "lm", false);
+    TriggerAddEventChatMessage(libUTIL_gt_LoadMap, c_playerAny, "loadmap", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Set Camera Object
 //--------------------------------------------------------------------------------------------------
 bool libUTIL_gt_SetCameraObject_Func (bool testConds, bool runActions) {
@@ -607,6 +650,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_StartGame_Init();
     libUTIL_gt_EndGame_Init();
     libUTIL_gt_RestartGame_Init();
+    libUTIL_gt_LoadMap_Init();
     libUTIL_gt_SetCameraObject_Init();
     libUTIL_gt_ResetCameraObject_Init();
     libUTIL_gt_ForceRunTrigger_Init();
