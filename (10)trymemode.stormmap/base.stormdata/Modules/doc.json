@@ -429,7 +429,9 @@
                     "description": [
                         "Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a Player. This is useful for remove large numbers of summoned units, or when summoned untargetable/unselectable units that are not able to use the [killunits](#cmd-killunits) command.",
                         "",
-                        ">Note: Due to the memory limitation, only the **last 927 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game."
+                        ">Note: Due to the memory limitation, only the **last 500 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game.",
+                        "",
+                        ">Self note: For each `MaxPlayer[16][100]`, is equivalent to around 30 `EventChatMessage` triggers. So more memory assigned to this, the less trigger can be used."
                     ],
                     "uiAvailable": false,
                     "parameters": [

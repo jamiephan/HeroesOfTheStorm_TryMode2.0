@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 30 Dec 2020 12:50:09 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 31 Dec 2020 01:22:23 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -788,7 +788,9 @@ Clear all active behaviors for selected units.
 #### ✏ Description: 
 Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a Player. This is useful for remove large numbers of summoned units, or when summoned untargetable/unselectable units that are not able to use the [killunits](#cmd-killunits) command.
 
->Note: Due to the memory limitation, only the **last 927 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game.
+>Note: Due to the memory limitation, only the **last 500 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game.
+
+>Self note: For each `MaxPlayer[16][100]`, is equivalent to around 30 `EventChatMessage` triggers. So more memory assigned to this, the less trigger can be used.
 
 <a name="cmd-clearunits-parameters"></a>
 

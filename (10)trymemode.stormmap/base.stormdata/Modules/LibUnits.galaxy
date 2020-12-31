@@ -7,7 +7,7 @@ include "TriggerLibs/NativeLib"
 
 // Constants
 const int libUNIT_gv_summonedUnits_MaxPlayer = 16;
-const int libUNIT_gv_summonedUnits_MaxLength = 927;
+const int libUNIT_gv_summonedUnits_MaxLength = 500;
 
 // Structures
 struct libUNIT_gs_AddBehaviorPanel {
