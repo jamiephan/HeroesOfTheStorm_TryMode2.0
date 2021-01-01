@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 01 Jan 2021 10:54:51 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 01 Jan 2021 13:16:33 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -33,6 +33,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `clear`](#cmd-clear)
 
   - 💭 [Command: `endgame`](#cmd-endgame)
+
+  - 💭 [Command: `floatingcombattext`](#cmd-floatingcombattext)
 
   - 💭 [Command: `forceruntrigger`](#cmd-forceruntrigger)
 
@@ -250,6 +252,75 @@ End the game instantly and kick all players from the game.
     > endgame
     	(End the game instantly)
 <a name="cmd-endgame-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-floatingcombattext"></a>
+
+## (`floatingcombattext` | `fct`) `<message>` `[state]` `[type]`
+<a name="cmd-floatingcombattext-description"></a>
+
+#### ✏ Description: 
+Show a custom floating combat text with different built-in templates.
+
+The table is the available combineations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):
+
+| `type` \ `state` | `Ability` | `Basic` | `Heal` | `Mana` | `Shield` | `XP` | `Quest` | `Reduced` |
+|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| `LesserAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |
+| `LesserAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ✔ | ❌ |
+| `NormalAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |
+| `NormalAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |
+| `MediumAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |
+| `MediumAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |
+| `GreaterAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |
+| `GreaterAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |
+| `CritAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |
+| `CritAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |
+| `AmountReadable` | ❌ | ❌ | ✔ | ❌ | ✔ | ❌ | ❌ | ✔ |
+| `CritAmountReadable` | ❌ | ✔ | ❌ | ❌ | ✔ | ❌ | ❌ | ❌ |
+| `SelfAmountReceived` | ❌ | ❌ | ❌ | ❌ | ❌ | ✔ | ❌ | ❌ |
+| `HealPrevented` | ✔ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| `QuestProgress` | ❌ | ✔ | ❌ | ❌ | ❌ | ❌ | ✔ | ❌ |
+
+>Note: The capitalizations of `type` is required to be followed.
+
+<a name="cmd-floatingcombattext-parameters"></a>
+
+#### ⚙ Parameters:
+    <message>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the message to be shown in Floating Combat Text
+    [state]
+    	Required:	false
+    	Type:		string
+    	Usage:		Defines the state of the Floating Combat Text
+    	Default:	Basic
+    [type]
+    	Required:	false
+    	Type:		string
+    	Usage:		Defines the type of the Floating Combat Text
+    	Default:	NormalAmountGiven
+<a name="cmd-floatingcombattext-examples"></a>
+
+#### 🔧 Examples:
+    > fct 100
+    	(Shows the FCT "100" with the style of basic attack (orange))
+    > fct 50 XP SelfAmountReceived
+    	(Shows the FCT "50" with the style of xp gathered (small purple text))
+    > floatingcombattext nice Quest QuestProgress
+    	(Shows the FCT "nice" with the style of quest progressing (gold circle with "!"))
+    > floatingcombattext 999 Shield CritAmountGiven
+    	(Shows the FCT "999" with the style of critical shield (white with explosion style))
+<a name="cmd-floatingcombattext-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

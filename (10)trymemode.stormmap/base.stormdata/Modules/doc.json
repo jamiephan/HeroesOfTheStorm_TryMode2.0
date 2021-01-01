@@ -352,6 +352,76 @@
                             "description": "Exit and Load the veteran tutorial map."
                         }
                     ]
+                },
+                {
+                    "shortCommand": "fct",
+                    "command": "floatingcombattext",
+                    "description": [
+                        "Show a custom floating combat text with different built-in templates.",
+                        "",
+                        "The table is the available combineations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):",
+                        "",
+                        "| `type` \\ `state` | `Ability` | `Basic` | `Heal` | `Mana` | `Shield` | `XP` | `Quest` | `Reduced` |",
+                        "|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|",
+                        "| `LesserAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |",
+                        "| `LesserAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ✔ | ❌ |",
+                        "| `NormalAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |",
+                        "| `NormalAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |",
+                        "| `MediumAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |",
+                        "| `MediumAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |",
+                        "| `GreaterAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |",
+                        "| `GreaterAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |",
+                        "| `CritAmountReceived` | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ |",
+                        "| `CritAmountGiven` | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ | ❌ | ❌ |",
+                        "| `AmountReadable` | ❌ | ❌ | ✔ | ❌ | ✔ | ❌ | ❌ | ✔ |",
+                        "| `CritAmountReadable` | ❌ | ✔ | ❌ | ❌ | ✔ | ❌ | ❌ | ❌ |",
+                        "| `SelfAmountReceived` | ❌ | ❌ | ❌ | ❌ | ❌ | ✔ | ❌ | ❌ |",
+                        "| `HealPrevented` | ✔ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |",
+                        "| `QuestProgress` | ❌ | ✔ | ❌ | ❌ | ❌ | ❌ | ✔ | ❌ |",
+                        "",
+                        ">Note: The capitalizations of `type` is required to be followed."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "message",
+                            "required": true,
+                            "description": "Defines the message to be shown in Floating Combat Text",
+                            "type": "string"
+                        },
+                        {
+                            "name": "state",
+                            "required": false,
+                            "description": "Defines the state of the Floating Combat Text",
+                            "type": "string",
+                            "defaultValue": "Basic"
+                        },
+                        {
+                            "name": "type",
+                            "required": false,
+                            "description": "Defines the type of the Floating Combat Text",
+                            "type": "string",
+                            "defaultValue": "NormalAmountGiven"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 100",
+                            "description": "Shows the FCT \"100\" with the style of basic attack (orange)"
+                        },
+                        {
+                            "command": "{shortCommand} 50 XP SelfAmountReceived",
+                            "description": "Shows the FCT \"50\" with the style of xp gathered (small purple text)"
+                        },
+                        {
+                            "command": "{command} nice Quest QuestProgress",
+                            "description": "Shows the FCT \"nice\" with the style of quest progressing (gold circle with \"!\")"
+                        },
+                        {
+                            "command": "{command} 999 Shield CritAmountGiven",
+                            "description": "Shows the FCT \"999\" with the style of critical shield (white with explosion style)"
+                        }
+                    ]
                 }
             ]
         },

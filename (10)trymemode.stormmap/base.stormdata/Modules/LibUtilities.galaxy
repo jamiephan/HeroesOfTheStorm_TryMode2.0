@@ -31,6 +31,7 @@ trigger libUTIL_gt_ResetCameraObject;
 trigger libUTIL_gt_ForceRunTrigger;
 trigger libUTIL_gt_ToggleACTS;
 trigger libUTIL_gt_MinionWaveInterval;
+trigger libUTIL_gt_FloatingCombatText;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -638,6 +639,76 @@ void libUTIL_gt_MinionWaveInterval_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_MinionWaveInterval, c_playerAny, "minionwaveinterval", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Floating Combat Text
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_FloatingCombatText_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const string lv_type_prefix = "FloatingCombatElements/FloatingCombat";
+    const string lv_type_default = "NormalAmountGiven";
+    const string lv_state_default = "Basic";
+    const string lv_state_suffix = "State";
+    text lv_message;
+    string lv_type;
+    string lv_state;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    unitgroup autoF3A382EE_g;
+    int autoF3A382EE_u;
+
+    // Variable Initialization
+    lv_type = (("" + lv_type_prefix) + lv_type_default);
+    lv_state = (("" + lv_state_default) + lv_state_suffix);
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "fct") || (StringWord(EventChatMessage(false), 1) == "floatingcombattext")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <fct|floatingcombattext> <message> [state] [type]"));
+    }
+    else {
+        lv_message = StringToText(StringWord(EventChatMessage(false), 2));
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_state = (StringWord(EventChatMessage(false), 3) + lv_state_suffix);
+        }
+
+        if ((StringWord(EventChatMessage(false), 4) != null)) {
+            lv_type = (lv_type_prefix + StringWord(EventChatMessage(false), 4));
+        }
+
+        if (((lv_type == (lv_type_prefix + "LesserAmountReceived")) || (lv_type == (lv_type_prefix + "LesserAmountGiven")) || (lv_type == (lv_type_prefix + "NormalAmountReceived")) || (lv_type == (lv_type_prefix + "NormalAmountGiven")) || (lv_type == (lv_type_prefix + "MediumAmountReceived")) || (lv_type == (lv_type_prefix + "MediumAmountGiven")) || (lv_type == (lv_type_prefix + "GreaterAmountReceived")) || (lv_type == (lv_type_prefix + "GreaterAmountGiven")) || (lv_type == (lv_type_prefix + "CritAmountReceived")) || (lv_type == (lv_type_prefix + "CritAmountGiven")) || (lv_type == (lv_type_prefix + "AmountReadable")) || (lv_type == (lv_type_prefix + "CritAmountReadable")) || (lv_type == (lv_type_prefix + "SelfAmountReceived")) || (lv_type == (lv_type_prefix + "HealPrevented")) || (lv_type == (lv_type_prefix + "QuestProgress")))) {
+            autoF3A382EE_g = UnitGroupSelected(EventPlayer());
+            autoF3A382EE_u = UnitGroupCount(autoF3A382EE_g, c_unitCountAll);
+            for (;; autoF3A382EE_u -= 1) {
+                lv_unit = UnitGroupUnitFromEnd(autoF3A382EE_g, autoF3A382EE_u);
+                if (lv_unit == null) { break; }
+                FloatingCombatElementCreateTextAtUnit(PlayerGroupAll(), lv_type, lv_state, lv_unit, lv_message, libNtve_gv_FloatingCombatTextAutoRandomSeed);
+            }
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid Floating Combat Text Type. Please see doc for acceptable types."));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_FloatingCombatText_Init () {
+    libUTIL_gt_FloatingCombatText = TriggerCreate("libUTIL_gt_FloatingCombatText_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_FloatingCombatText, c_playerAny, "fct", false);
+    TriggerAddEventChatMessage(libUTIL_gt_FloatingCombatText, c_playerAny, "floatingcombattext", false);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -656,6 +727,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ForceRunTrigger_Init();
     libUTIL_gt_ToggleACTS_Init();
     libUTIL_gt_MinionWaveInterval_Init();
+    libUTIL_gt_FloatingCombatText_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
