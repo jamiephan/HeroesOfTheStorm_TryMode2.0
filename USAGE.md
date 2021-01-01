@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 31 Dec 2020 18:30:23 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 01 Jan 2021 10:54:51 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -109,6 +109,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `disabletalent`](#cmd-disabletalent)
 
   - 💭 [Command: `enabletalent`](#cmd-enabletalent)
+
+  - 💭 [Command: `experience`](#cmd-experience)
 
   - 💭 [Command: `getcatalog`](#cmd-getcatalog)
 
@@ -1507,6 +1509,62 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
     > ent MaievUmbralBindPursuitOfVengeance
     	(Enable Maiev's Pursuit Of Vengeance talent)
 <a name="cmd-enabletalent-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-experience"></a>
+
+## (`experience` | `xp`) `<Amount>` `[PlayerId]` `[SourceId]`
+<a name="cmd-experience-description"></a>
+
+#### ✏ Description: 
+Gives Experience to a Specific Player.
+
+The `SourceId` can be represent as an Integer with the source value of:
+|`SourceId`|Galaxy file constant|
+|-|-|
+|0|`libGame_ge_XPSources_Debug`|
+|1|`libGame_ge_XPSources_Trickle`|
+|2|`libGame_ge_XPSources_Minion`|
+|3|`libGame_ge_XPSources_Creep`|
+|4|`libGame_ge_XPSources_Hero`|
+|5|`libGame_ge_XPSources_Structure`|
+|6|`libGame_ge_XPSources_RegenGlobe`|
+
+<a name="cmd-experience-parameters"></a>
+
+#### ⚙ Parameters:
+    <Amount>
+    	Required:	true
+    	Type:		integer
+    	Usage:		The amount of xp to be given
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the XP to be given to
+    	Default:	The player id of whoever used this command.
+    [SourceId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The integer value of the xp source
+    	Default:	0
+<a name="cmd-experience-examples"></a>
+
+#### 🔧 Examples:
+    > xp 10
+    	(Grant 10 xp to whoever use this command)
+    > experience 100 6
+    	(Grant 100 xp to Player 6)
+    > experience 100 1 2
+    	(Grant 100 xp to Player 1 with its source set to minons)
+<a name="cmd-experience-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

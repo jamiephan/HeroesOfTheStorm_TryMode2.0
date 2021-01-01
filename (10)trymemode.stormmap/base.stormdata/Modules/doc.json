@@ -1534,6 +1534,61 @@
                             "description": "Modify Dehaka's Dark Swarm Ability to no longer Supress Collision When active (No longer pass though units) for Player 2"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "xp",
+                    "command": "experience",
+                    "description": [
+                        "Gives Experience to a Specific Player.",
+                        "",
+                        "The `SourceId` can be represent as an Integer with the source value of:",
+                        "|`SourceId`|Galaxy file constant|",
+                        "|-|-|",
+                        "|0|`libGame_ge_XPSources_Debug`|",
+                        "|1|`libGame_ge_XPSources_Trickle`|",
+                        "|2|`libGame_ge_XPSources_Minion`|",
+                        "|3|`libGame_ge_XPSources_Creep`|",
+                        "|4|`libGame_ge_XPSources_Hero`|",
+                        "|5|`libGame_ge_XPSources_Structure`|",
+                        "|6|`libGame_ge_XPSources_RegenGlobe`|"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "Amount",
+                            "required": true,
+                            "description": "The amount of xp to be given",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The Player ID for the XP to be given to",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        },
+                        {
+                            "name": "SourceId",
+                            "required": false,
+                            "description": "The integer value of the xp source",
+                            "type": "integer",
+                            "defaultValue": 0
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Grant 10 xp to whoever use this command"
+                        },
+                        {
+                            "command": "{command} 100 6",
+                            "description": "Grant 100 xp to Player 6"
+                        },
+                        {
+                            "command": "{command} 100 1 2",
+                            "description": "Grant 100 xp to Player 1 with its source set to minons"
+                        }
+                    ]
                 }
             ]
         },
