@@ -422,6 +422,40 @@
                             "description": "Shows the FCT \"999\" with the style of critical shield (white with explosion style)"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "str",
+                    "command": "string",
+                    "description": [
+                        "Display a string with the value of `TextExpressionAssemble` or `StringExternal`",
+                        "This is pretty useful to quickly shows the string from the functions internally.",
+                        "`mode` must be either `TextExpressionAssemble` or `StringExternal`"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "mode",
+                            "required": true,
+                            "description": "Defines the mode of the string to be displayed.",
+                            "type": "string"
+                        },
+                        {
+                            "name": "value",
+                            "required": true,
+                            "description": "Defines the value of the string to be displayed",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} TextExpressionAssemble Param/Expression/lib_Sprt_B1FD42AF",
+                            "description": "Shows the string \"Set Mastery Ring...\" from supportlib"
+                        },
+                        {
+                            "command": "{command} StringExternal Param/Value/lib_Sprt_F697F4C7",
+                            "description": "Shows the string \"Game Speed should not exceed 8.0....\" from supportlib"
+                        }
+                    ]
                 }
             ]
         },

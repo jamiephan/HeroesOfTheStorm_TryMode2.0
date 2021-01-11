@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 01 Jan 2021 13:16:33 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 19:36:43 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -49,6 +49,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `setcameraobject`](#cmd-setcameraobject)
 
   - 💭 [Command: `startgame`](#cmd-startgame)
+
+  - 💭 [Command: `string`](#cmd-string)
 
   - 💭 [Command: `toggledebugmode`](#cmd-toggledebugmode)
 
@@ -562,6 +564,45 @@ Start the game instantly (timer start, gate open, etc).
     > startgame
     	(Start the game instantly)
 <a name="cmd-startgame-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-string"></a>
+
+## (`string` | `str`) `<mode>` `<value>`
+<a name="cmd-string-description"></a>
+
+#### ✏ Description: 
+Display a string with the value of `TextExpressionAssemble` or `StringExternal`
+This is pretty useful to quickly shows the string from the functions internally.
+`mode` must be either `TextExpressionAssemble` or `StringExternal`
+
+<a name="cmd-string-parameters"></a>
+
+#### ⚙ Parameters:
+    <mode>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the mode of the string to be displayed.
+    <value>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the value of the string to be displayed
+<a name="cmd-string-examples"></a>
+
+#### 🔧 Examples:
+    > str TextExpressionAssemble Param/Expression/lib_Sprt_B1FD42AF
+    	(Shows the string "Set Mastery Ring..." from supportlib)
+    > string StringExternal Param/Value/lib_Sprt_F697F4C7
+    	(Shows the string "Game Speed should not exceed 8.0...." from supportlib)
+<a name="cmd-string-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
