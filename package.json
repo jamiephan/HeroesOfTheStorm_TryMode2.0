@@ -9,6 +9,7 @@
         "build:mimiclib": "bash -c -i \"node ./scripts/main/buildmimiclib.js\"",
         "build:mimicabilities": "bash -c -i \"node ./scripts/main/buildmimicabilities.js\"",
         "build:mimicbehaviors": "bash -c -i \"node ./scripts/main/buildmimicbehaviors.js\"",
+        "build:mimicmodels": "bash -c -i \"node ./scripts/main/buildmimicmodels.js\"",
         "build:usagedoc": "bash -c -i \"node ./scripts/main/buildusagedoc.js\"",
         "watch:usagedoc": "bash -c -i \"node ./scripts/watch/usagedoc.js\"",
         "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",

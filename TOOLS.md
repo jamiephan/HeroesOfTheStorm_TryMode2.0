@@ -39,6 +39,7 @@ The current values required are:
 | `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules. Default: `./(10)trymemode.stormmap/base.stormdata/Modules` |
 | `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml` |
 | `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/BehaviorMimic.xml` |
+| `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/ModelMimic.xml` |
 
 
 >Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
@@ -121,6 +122,24 @@ This will generate an ability with the prefixed `MB`. For instance, the behavior
 Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
 
 Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
+
+
+---
+<a name="tools-buildmimicmodels" />
+
+## `<CModel>` Mimic Generator
+
+**Command**: `npm run build:mimicmodels`
+
+This tool will search though all the `<CModel>` and map it to a `<CUnit>`, which allows to be controlled on the map.
+
+This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, which you can summon this unit using tools such as [summon](USAGE.md#cmd-summon), with the command of `summon UNRetreatPing`.
+
+>Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
+
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/ModelMimic.xml`
+
+Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 
 
 ---
