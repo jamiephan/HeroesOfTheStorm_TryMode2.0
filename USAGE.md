@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 20:41:07 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 20:57:20 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -110,6 +110,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 - 📙 [Players](#lib-LibPLYR)
 
+  - 💭 [Command: `addalltalent`](#cmd-addalltalent)
+
   - 💭 [Command: `addtalent`](#cmd-addtalent)
 
   - 💭 [Command: `disabletalent`](#cmd-disabletalent)
@@ -121,6 +123,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `getcatalog`](#cmd-getcatalog)
 
   - 💭 [Command: `modifycatalog`](#cmd-modifycatalog)
+
+  - 💭 [Command: `removealltalent`](#cmd-removealltalent)
 
   - 💭 [Command: `removetalent`](#cmd-removetalent)
 
@@ -1566,6 +1570,50 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
 # 📙 Players Library (`LibPlayers.galaxy`):
 Commands that are related to Players, eg, scoreboard, respawn timer, etc
 
+<a name="cmd-addalltalent"></a>
+
+## (`addalltalent` | `aat`) `<HeroId>` `[PlayerId]`
+<a name="cmd-addalltalent-description"></a>
+
+#### ✏ Description: 
+Add all talents to a player.
+The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.
+>Note: Some of the talents won't work, so you might want to experiment a bit.
+
+<a name="cmd-addalltalent-parameters"></a>
+
+#### ⚙ Parameters:
+    <HeroId>
+    	Required:	true
+    	Type:		string
+    	Usage:		The talents from the Hero / all the talents in the game to be added from a player
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The target player id to have the talent being added.
+    	Default:	The player id of whoever used this command.
+<a name="cmd-addalltalent-examples"></a>
+
+#### 🔧 Examples:
+    > aat Tyrande
+    	(Add all the talents from Tyrande to the player whoever uses the command)
+    > addalltalent Firebat 2
+    	(Add all the talents from Blaze to Player 2)
+    > aat ALL
+    	(Add ALL the talents from the game to the player whoever uses the command)
+    > addalltalent ALL 10
+    	(Add ALL the talents from the game to the player 10)
+<a name="cmd-addalltalent-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-addtalent"></a>
 
 ## (`addtalent` | `adt`) `<TalentId>` `[PlayerId]`
@@ -1591,7 +1639,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 #### 🔧 Examples:
     > addtalent MedivhForceOfWillArcaneExplosion
-    	(Add Medivh's Arcane Explosion Talent to Player 1)
+    	(Add Medivh's Arcane Explosion Talent to whoever uses this command)
     > adt MalfurionCelestialAlignment 2
     	(add Malfurion's Celest>ial Alignment Talent to Player 2)
 <a name="cmd-addtalent-uiAvailability"></a>
@@ -1919,6 +1967,50 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-removealltalent"></a>
+
+## (`removealltalent` | `rmat`) `<HeroId>` `[PlayerId]`
+<a name="cmd-removealltalent-description"></a>
+
+#### ✏ Description: 
+Remove all talents from a player.
+The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all of the talents from that hero from the player, or it can be `ALL`, which will remove ALL the talents in the game from the player.
+>Note: Some of the talents won't work, so you might want to experiment a bit.
+
+<a name="cmd-removealltalent-parameters"></a>
+
+#### ⚙ Parameters:
+    <HeroId>
+    	Required:	true
+    	Type:		string
+    	Usage:		The talents from the Hero / all the talents in the game to be removed from a player
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The target player id to have the talent being added.
+    	Default:	The player id of whoever used this command.
+<a name="cmd-removealltalent-examples"></a>
+
+#### 🔧 Examples:
+    > rmat Tyrande
+    	(Remove all the talents from Tyrande from the player whoever uses the command)
+    > removealltalent Firebat 2
+    	(Remove all the talents from Blaze from Player 2)
+    > rmat ALL
+    	(Remove ALL the talents from the game from the player whoever uses the command)
+    > removealltalent ALL 10
+    	(Remove ALL the talents from the game from the player 10)
+<a name="cmd-removealltalent-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-removetalent"></a>
 
 ## (`removetalent` | `rmt`) `<TalentId>` `[PlayerId]`
@@ -1944,7 +2036,7 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 
 #### 🔧 Examples:
     > removetalent MedivhForceOfWillArcaneExplosion
-    	(Removed Medivh's Arcane Explosion Talent from Player 1)
+    	(Removed Medivh's Arcane Explosion Talent from whoever uses this command)
     > rmt MalfurionCelestialAlignment 2
     	(Removed Malfurion's Celest>ial Alignment Talent from Player 2)
 <a name="cmd-removetalent-uiAvailability"></a>

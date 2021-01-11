@@ -1221,11 +1221,54 @@
                     "examples": [
                         {
                             "command": "{command} MedivhForceOfWillArcaneExplosion",
-                            "description": "Add Medivh's Arcane Explosion Talent to Player 1"
+                            "description": "Add Medivh's Arcane Explosion Talent to whoever uses this command"
                         },
                         {
                             "command": "{shortCommand} MalfurionCelestialAlignment 2",
                             "description": "add Malfurion's Celest>ial Alignment Talent to Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "aat",
+                    "command": "addalltalent",
+                    "description": [
+                        "Add all talents to a player.",
+                        "The `HeroId` can be either the ID of `<CHero id=\"xxx\">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.",
+                        ">Note: Some of the talents won't work, so you might want to experiment a bit."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "HeroId",
+                            "required": true,
+                            "description": "The talents from the Hero / all the talents in the game to be added from a player",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The target player id to have the talent being added.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} Tyrande",
+                            "description": "Add all the talents from Tyrande to the player whoever uses the command"
+                        },
+                        {
+                            "command": "{command} Firebat 2",
+                            "description": "Add all the talents from Blaze to Player 2"
+                        },
+                        {
+                            "command": "{shortCommand} ALL",
+                            "description": "Add ALL the talents from the game to the player whoever uses the command"
+                        },
+                        {
+                            "command": "{command} ALL 10",
+                            "description": "Add ALL the talents from the game to the player 10"
                         }
                     ]
                 },
@@ -1255,11 +1298,54 @@
                     "examples": [
                         {
                             "command": "{command} MedivhForceOfWillArcaneExplosion",
-                            "description": "Removed Medivh's Arcane Explosion Talent from Player 1"
+                            "description": "Removed Medivh's Arcane Explosion Talent from whoever uses this command"
                         },
                         {
                             "command": "{shortCommand} MalfurionCelestialAlignment 2",
                             "description": "Removed Malfurion's Celest>ial Alignment Talent from Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmat",
+                    "command": "removealltalent",
+                    "description": [
+                        "Remove all talents from a player.",
+                        "The `HeroId` can be either the ID of `<CHero id=\"xxx\">`, which will remove all of the talents from that hero from the player, or it can be `ALL`, which will remove ALL the talents in the game from the player.",
+                        ">Note: Some of the talents won't work, so you might want to experiment a bit."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "HeroId",
+                            "required": true,
+                            "description": "The talents from the Hero / all the talents in the game to be removed from a player",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The target player id to have the talent being added.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} Tyrande",
+                            "description": "Remove all the talents from Tyrande from the player whoever uses the command"
+                        },
+                        {
+                            "command": "{command} Firebat 2",
+                            "description": "Remove all the talents from Blaze from Player 2"
+                        },
+                        {
+                            "command": "{shortCommand} ALL",
+                            "description": "Remove ALL the talents from the game from the player whoever uses the command"
+                        },
+                        {
+                            "command": "{command} ALL 10",
+                            "description": "Remove ALL the talents from the game from the player 10"
                         }
                     ]
                 },

@@ -19,7 +19,9 @@ trigger libPLYR_gt_ToggleRunMassQuest;
 trigger libPLYR_gt_TogglePause;
 trigger libPLYR_gt_ToggleTalentTree;
 trigger libPLYR_gt_AddTalent;
+trigger libPLYR_gt_AddAllTalents;
 trigger libPLYR_gt_RemoveTalent;
+trigger libPLYR_gt_RemoveAllTalents;
 trigger libPLYR_gt_EnableTalent;
 trigger libPLYR_gt_DisableTalent;
 trigger libPLYR_gt_OverrideRespawnPoint;
@@ -253,6 +255,86 @@ void libPLYR_gt_AddTalent_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Add All Talents
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_AddAllTalents_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_alltalent;
+    int lv_talentArrayIndex;
+    string lv_talent;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    int auto2FA5D79C_catalog;
+    int auto2FA5D79C_i;
+    int auto52BD2C3F_catalog;
+    string auto52BD2C3F_entry;
+    string auto52BD2C3F_fieldPath;
+    int auto52BD2C3F_player;
+    int auto52BD2C3F_i;
+
+    // Variable Initialization
+    lv_talent = "";
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "aat") || (StringWord(EventChatMessage(false), 1) == "addalltalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <aat|addalltalent> <HeroId|ALL> [Player=EventPlayer]"));
+    }
+    else {
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        if ((StringWord(EventChatMessage(false), 2) == "ALL")) {
+            auto2FA5D79C_catalog = c_gameCatalogTalent;
+            auto2FA5D79C_i = 1;
+            for ( ; auto2FA5D79C_i <= CatalogEntryCount(c_gameCatalogTalent) ; auto2FA5D79C_i += 1 ) {
+                lv_alltalent = CatalogEntryGet(auto2FA5D79C_catalog, auto2FA5D79C_i);
+                lv_talent = (lv_alltalent);
+                PlayerAddTalent(lv_player, (lv_talent));
+                lv_talentArrayIndex = (lv_talentArrayIndex + 1);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) to Player " + IntToString(lv_player)))));
+        }
+        else {
+            auto52BD2C3F_catalog = c_gameCatalogHero;
+            auto52BD2C3F_entry = StringWord(EventChatMessage(false), 2);
+            auto52BD2C3F_fieldPath = "TalentTreeArray";
+            auto52BD2C3F_player = lv_player;
+            auto52BD2C3F_i = 0;
+            for ( ; auto52BD2C3F_i <= CatalogFieldValueCount(c_gameCatalogHero,auto52BD2C3F_entry,auto52BD2C3F_fieldPath,auto52BD2C3F_player)-1 ; auto52BD2C3F_i += 1 ) {
+                lv_talent = CatalogFieldValueGet(c_gameCatalogHero,auto52BD2C3F_entry,auto52BD2C3F_fieldPath+"["+IntToString(auto52BD2C3F_i)+"]",auto52BD2C3F_player);
+                lv_talent = CatalogFieldValueGet(c_gameCatalogHero, StringWord(EventChatMessage(false), 2), "TalentTreeArray[" + IntToString(lv_talentArrayIndex) + "].Talent", lv_player);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added Talent \"" + lv_talent) + ("\" to Player " + IntToString(lv_player)))));
+                PlayerAddTalent(lv_player, (lv_talent));
+                lv_talentArrayIndex = (lv_talentArrayIndex + 1);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) to Player " + IntToString(lv_player)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_AddAllTalents_Init () {
+    libPLYR_gt_AddAllTalents = TriggerCreate("libPLYR_gt_AddAllTalents_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_AddAllTalents, c_playerAny, "aat", false);
+    TriggerAddEventChatMessage(libPLYR_gt_AddAllTalents, c_playerAny, "addalltalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Remove Talent
 //--------------------------------------------------------------------------------------------------
 bool libPLYR_gt_RemoveTalent_Func (bool testConds, bool runActions) {
@@ -294,6 +376,86 @@ void libPLYR_gt_RemoveTalent_Init () {
     libPLYR_gt_RemoveTalent = TriggerCreate("libPLYR_gt_RemoveTalent_Func");
     TriggerAddEventChatMessage(libPLYR_gt_RemoveTalent, c_playerAny, "rmt", false);
     TriggerAddEventChatMessage(libPLYR_gt_RemoveTalent, c_playerAny, "removetalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove All Talents
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_RemoveAllTalents_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_alltalent;
+    int lv_talentArrayIndex;
+    string lv_talent;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    int auto76DA21D2_catalog;
+    int auto76DA21D2_i;
+    int autoEFCB7159_catalog;
+    string autoEFCB7159_entry;
+    string autoEFCB7159_fieldPath;
+    int autoEFCB7159_player;
+    int autoEFCB7159_i;
+
+    // Variable Initialization
+    lv_talent = "";
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmat") || (StringWord(EventChatMessage(false), 1) == "removealltalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmat|removealltalent> <HeroId|ALL> [Player=EventPlayer]"));
+    }
+    else {
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        if ((StringWord(EventChatMessage(false), 2) == "ALL")) {
+            auto76DA21D2_catalog = c_gameCatalogTalent;
+            auto76DA21D2_i = 1;
+            for ( ; auto76DA21D2_i <= CatalogEntryCount(c_gameCatalogTalent) ; auto76DA21D2_i += 1 ) {
+                lv_alltalent = CatalogEntryGet(auto76DA21D2_catalog, auto76DA21D2_i);
+                lv_talent = (lv_alltalent);
+                PlayerRemoveTalent(lv_player, (lv_talent));
+                lv_talentArrayIndex = (lv_talentArrayIndex + 1);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) from Player " + IntToString(lv_player)))));
+        }
+        else {
+            autoEFCB7159_catalog = c_gameCatalogHero;
+            autoEFCB7159_entry = StringWord(EventChatMessage(false), 2);
+            autoEFCB7159_fieldPath = "TalentTreeArray";
+            autoEFCB7159_player = lv_player;
+            autoEFCB7159_i = 0;
+            for ( ; autoEFCB7159_i <= CatalogFieldValueCount(c_gameCatalogHero,autoEFCB7159_entry,autoEFCB7159_fieldPath,autoEFCB7159_player)-1 ; autoEFCB7159_i += 1 ) {
+                lv_talent = CatalogFieldValueGet(c_gameCatalogHero,autoEFCB7159_entry,autoEFCB7159_fieldPath+"["+IntToString(autoEFCB7159_i)+"]",autoEFCB7159_player);
+                lv_talent = CatalogFieldValueGet(c_gameCatalogHero, StringWord(EventChatMessage(false), 2), "TalentTreeArray[" + IntToString(lv_talentArrayIndex) + "].Talent", lv_player);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed Talent \"" + lv_talent) + ("\" from Player " + IntToString(lv_player)))));
+                PlayerRemoveTalent(lv_player, (lv_talent));
+                lv_talentArrayIndex = (lv_talentArrayIndex + 1);
+            }
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) from Player " + IntToString(lv_player)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_RemoveAllTalents_Init () {
+    libPLYR_gt_RemoveAllTalents = TriggerCreate("libPLYR_gt_RemoveAllTalents_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveAllTalents, c_playerAny, "rmat", false);
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveAllTalents, c_playerAny, "removealltalent", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -899,7 +1061,9 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_TogglePause_Init();
     libPLYR_gt_ToggleTalentTree_Init();
     libPLYR_gt_AddTalent_Init();
+    libPLYR_gt_AddAllTalents_Init();
     libPLYR_gt_RemoveTalent_Init();
+    libPLYR_gt_RemoveAllTalents_Init();
     libPLYR_gt_EnableTalent_Init();
     libPLYR_gt_DisableTalent_Init();
     libPLYR_gt_OverrideRespawnPoint_Init();
