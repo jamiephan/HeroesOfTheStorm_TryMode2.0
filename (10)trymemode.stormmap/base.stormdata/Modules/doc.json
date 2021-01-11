@@ -530,7 +530,7 @@
                             "name": "PlayerId",
                             "required": false,
                             "description": "Define which player to own the unit that spawned.",
-                            "type": "string",
+                            "type": "integer",
                             "defaultValue": "The player id of whoever used this command."
                         },
                         {
@@ -580,7 +580,7 @@
                             "name": "PlayerId",
                             "required": false,
                             "description": "Define to clear which player's summoned unit(s).",
-                            "type": "string",
+                            "type": "integer",
                             "defaultValue": "The player id of whoever used this command."
                         }
                     ],
@@ -1196,6 +1196,40 @@
                     ]
                 },
                 {
+                    "shortCommand": "adt",
+                    "command": "addtalent",
+                    "description": [
+                        "Add a talent to a player, generally found in `<CTalent id=\"xxxx\">`.",
+                        ">Note: Some of the talents won't work, so you might want to experiment a bit."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "TalentId",
+                            "required": true,
+                            "description": "The talent id to be added",
+                            "type": "string"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The target player id to have the talent being added.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{command} MedivhForceOfWillArcaneExplosion",
+                            "description": "Add Medivh's Arcane Explosion Talent to Player 1"
+                        },
+                        {
+                            "command": "{shortCommand} MalfurionCelestialAlignment 2",
+                            "description": "add Malfurion's Celest>ial Alignment Talent to Player 2"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "rmt",
                     "command": "removetalent",
                     "description": [
@@ -1214,7 +1248,7 @@
                             "name": "PlayerId",
                             "required": false,
                             "description": "The target player id to have the talent being removed.",
-                            "type": "string",
+                            "type": "integer",
                             "defaultValue": "The player id of whoever used this command."
                         }
                     ],
@@ -1546,7 +1580,7 @@
                             "name": "PlayerID",
                             "required": false,
                             "description": "The Player ID for the catalog modification",
-                            "type": "string",
+                            "type": "integer",
                             "defaultValue": "The player id of whoever used this command."
                         }
                     ],
@@ -1608,7 +1642,7 @@
                             "name": "PlayerID",
                             "required": false,
                             "description": "The Player ID for the catalog modification",
-                            "type": "string",
+                            "type": "integer",
                             "defaultValue": "The player id of whoever used this command."
                         }
                     ],

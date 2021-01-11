@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 19:36:43 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 20:41:07 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -109,6 +109,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `unitproperty`](#cmd-unitproperty)
 
 - 📙 [Players](#lib-LibPLYR)
+
+  - 💭 [Command: `addtalent`](#cmd-addtalent)
 
   - 💭 [Command: `disabletalent`](#cmd-disabletalent)
 
@@ -957,7 +959,7 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 #### ⚙ Parameters:
     [PlayerId]
     	Required:	false
-    	Type:		string
+    	Type:		integer
     	Usage:		Define to clear which player's summoned unit(s).
     	Default:	The player id of whoever used this command.
 <a name="cmd-clearunits-examples"></a>
@@ -1395,7 +1397,7 @@ Spawn unit(s) at the centre of your camera location.
     	Default:	1
     [PlayerId]
     	Required:	false
-    	Type:		string
+    	Type:		integer
     	Usage:		Define which player to own the unit that spawned.
     	Default:	The player id of whoever used this command.
     [Scale]
@@ -1563,6 +1565,45 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
 
 # 📙 Players Library (`LibPlayers.galaxy`):
 Commands that are related to Players, eg, scoreboard, respawn timer, etc
+
+<a name="cmd-addtalent"></a>
+
+## (`addtalent` | `adt`) `<TalentId>` `[PlayerId]`
+<a name="cmd-addtalent-description"></a>
+
+#### ✏ Description: 
+Add a talent to a player, generally found in `<CTalent id="xxxx">`.
+>Note: Some of the talents won't work, so you might want to experiment a bit.
+
+<a name="cmd-addtalent-parameters"></a>
+
+#### ⚙ Parameters:
+    <TalentId>
+    	Required:	true
+    	Type:		string
+    	Usage:		The talent id to be added
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The target player id to have the talent being added.
+    	Default:	The player id of whoever used this command.
+<a name="cmd-addtalent-examples"></a>
+
+#### 🔧 Examples:
+    > addtalent MedivhForceOfWillArcaneExplosion
+    	(Add Medivh's Arcane Explosion Talent to Player 1)
+    > adt MalfurionCelestialAlignment 2
+    	(add Malfurion's Celest>ial Alignment Talent to Player 2)
+<a name="cmd-addtalent-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
 
 <a name="cmd-disabletalent"></a>
 
@@ -1792,7 +1833,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
     	Usage:		The Reference to the specific catalog field
     [PlayerID]
     	Required:	false
-    	Type:		string
+    	Type:		integer
     	Usage:		The Player ID for the catalog modification
     	Default:	The player id of whoever used this command.
 <a name="cmd-getcatalog-examples"></a>
@@ -1849,7 +1890,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
     	Usage:		The value to be set for the specified catalog field
     [PlayerID]
     	Required:	false
-    	Type:		string
+    	Type:		integer
     	Usage:		The Player ID for the catalog modification
     	Default:	The player id of whoever used this command.
 <a name="cmd-modifycatalog-examples"></a>
@@ -1896,7 +1937,7 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
     	Usage:		The talent id to be removed
     [PlayerId]
     	Required:	false
-    	Type:		string
+    	Type:		integer
     	Usage:		The target player id to have the talent being removed.
     	Default:	The player id of whoever used this command.
 <a name="cmd-removetalent-examples"></a>
