@@ -21,15 +21,12 @@ jobs:
 
       - name: Build the trymode20.stormmap
         run: |
-          # & "C:/MPQEditor.exe" "new" "C:/trymode20.stormmap" 
-          # & "C:/MPQEditor.exe" "add" "C:/trymode20.stormmap" "C:/repo/" /r
-          # & "C:/MPQEditor.exe" "close" "C:/trymode20.stormmap"
           & echo "new C:/trymode20.stormmap" >> C:/script.mpqscript
           & echo "add C:/trymode20.stormmap C:/repo/(10)trymemode.stormmap /r" >> C:/script.mpqscript
           & echo close >> C:/script.mpqscript
           & echo x >> C:/script.mpqscript
           & "C:/MPQEditor.exe" /console "C:/script.mpqscript" 
-
+          
       - name: Create Github Release
         id: create_release
         uses: actions/create-release@v1
