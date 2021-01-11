@@ -75,3 +75,8 @@ typings/
 # Generated Files ignore
 s2ma*/
 (10)trymemode.stormmap.*/
+
+# Custom XML Files ignore
+(10)trymemode.stormmap/base.stormdata/GameData.xml
+(10)trymemode.stormmap/base.stormdata/Includes.xml
+(10)trymemode.stormmap/base.stormdata/Mods/**/*
