@@ -36,7 +36,8 @@ buildMimicXML({
     ],
     main: (type, xmlData) => {
       const { id } = xmlData.$;
-      // console.log(`Mapped Model ${id} to Unit ${prefix}${id}.`);
+      console.log(`Mapped Model ${id} to Unit ${prefix}${id}.`);
+
       return [
         {
           CUnit: {
