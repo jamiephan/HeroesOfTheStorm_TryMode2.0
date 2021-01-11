@@ -15,7 +15,7 @@ module.exports = (configParam) => {
         generatedCommand: 'npm run xxxx',
         description: 'Completely devoid of any description whatsoever.',
       },
-      pre: [],
+      pre: null,
       main: (type, xmlData) => ({ [type]: xmlData }),
     },
     ...configParam,
@@ -35,12 +35,19 @@ module.exports = (configParam) => {
 
   const mainObj = {};
 
-  if (config.generation.pre !== null) {
+  if (!(config.generation.pre === null || typeof config.generation.pre === 'undefined')) {
     config.generation.pre.forEach((o) => {
-      // Check if key exist
       const key = Object.keys(o);
-      if (mainObj[key] === undefined) mainObj[key] = [];
-      mainObj[key].push(o[key]);
+      if (Array.isArray(o[key])) {
+        // Entry is an array
+        o[key].forEach((o1) => {
+          if (mainObj[key] === undefined) mainObj[key] = [];
+          mainObj[key].push(o1);
+        });
+      } else {
+        if (mainObj[key] === undefined) mainObj[key] = [];
+        mainObj[key].push(o[key]);
+      }
     });
   }
 
@@ -72,10 +79,17 @@ module.exports = (configParam) => {
               if (obj === undefined || obj === null || !Array.isArray(obj)) return;
 
               obj.forEach((o) => {
-                // Check if key exist
                 const key = Object.keys(o);
-                if (mainObj[key] === undefined) mainObj[key] = [];
-                mainObj[key].push(o[key]);
+                if (Array.isArray(o[key])) {
+                  // Entry is an array
+                  o[key].forEach((o1) => {
+                    if (mainObj[key] === undefined) mainObj[key] = [];
+                    mainObj[key].push(o1);
+                  });
+                } else {
+                  if (mainObj[key] === undefined) mainObj[key] = [];
+                  mainObj[key].push(o[key]);
+                }
               });
             });
           });
