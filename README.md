@@ -6,14 +6,12 @@ A modified Try Mode Map for Heroes of the Storm to create a better experience fo
 
 ## TODOs:
 
-- [x] Package and Release a .stormmap to run directly
-- [x] Tools to automatically symlink/copy to install the map
-- [x] Tools to generate XML for mimic abilities with `<CBehaviorAbility>`
-- [x] Fix the MimicTriggerLib Tool
-- [ ] Create a Custom Camera Object
-- [x] Tools to generate a toggleable `<CBehaviorbuff>`
+- [ ] Create a Tool to generate a custom camera Object
 - [ ] Tools to patch the actual Try mode with live game data automatically
+- [ ] Actually modify the map / Create a new map in SC2 Editor (Working in Progress)
+- [ ] GitHub Release more `stormmaps` which patch the live maps such as Cursed Hollow or Infernal Shrines (Working in [Progress](https://github.com/jamiephan/HeroesOfTheStorm_S2MA))
 
+ 
 
 ## How to install:
 
