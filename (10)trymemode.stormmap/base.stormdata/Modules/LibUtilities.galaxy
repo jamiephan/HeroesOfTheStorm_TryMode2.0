@@ -735,14 +735,12 @@ bool libUTIL_gt_DisplayString_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    GameSetSpeedValue(8);
     if (((StringWord(EventChatMessage(false), 2) == null) && (StringWord(EventChatMessage(false), 3) == null))) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <str|string> <TextExpressionAssemble|StringExternal> <value>"));
     }
     else {
         lv_mode = StringWord(EventChatMessage(false), 2);
         lv_value = StringWord(EventChatMessage(false), 3);
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((lv_mode + lv_value)));
         if ((lv_mode == "TextExpressionAssemble")) {
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble(lv_value));
             return true;
@@ -753,7 +751,6 @@ bool libUTIL_gt_DisplayString_Func (bool testConds, bool runActions) {
             return true;
         }
 
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <str|string> <TextExpressionAssemble|StringExternal> <value>"));
     }
     return true;
 }
