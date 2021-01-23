@@ -237,6 +237,11 @@ bool libPLYR_gt_AddTalent_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adt|addtalent> <TalentName> [Player=EventPlayer]"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogTalent, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Talent \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         if ((StringWord(EventChatMessage(false), 3) != null)) {
             lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
         }
@@ -309,6 +314,11 @@ bool libPLYR_gt_AddAllTalents_Func (bool testConds, bool runActions) {
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) to Player " + IntToString(lv_player)))));
         }
         else {
+            if ((CatalogEntryIsValid(c_gameCatalogHero, (StringWord(EventChatMessage(false), 2))) == false)) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Hero \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+                return true;
+            }
+
             auto52BD2C3F_catalog = c_gameCatalogHero;
             auto52BD2C3F_entry = StringWord(EventChatMessage(false), 2);
             auto52BD2C3F_fieldPath = "TalentTreeArray";
@@ -361,6 +371,11 @@ bool libPLYR_gt_RemoveTalent_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmt|removetalent> <TalentName> [Player=EventPlayer]"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogTalent, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Talent \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         if ((StringWord(EventChatMessage(false), 3) != null)) {
             lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
         }
@@ -433,6 +448,11 @@ bool libPLYR_gt_RemoveAllTalents_Func (bool testConds, bool runActions) {
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed a total of " + IntToString(lv_talentArrayIndex)) + (" talent(s) from Player " + IntToString(lv_player)))));
         }
         else {
+            if ((CatalogEntryIsValid(c_gameCatalogHero, (StringWord(EventChatMessage(false), 2))) == false)) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Hero \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+                return true;
+            }
+
             autoEFCB7159_catalog = c_gameCatalogHero;
             autoEFCB7159_entry = StringWord(EventChatMessage(false), 2);
             autoEFCB7159_fieldPath = "TalentTreeArray";
@@ -485,6 +505,11 @@ bool libPLYR_gt_EnableTalent_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <dist|disabletalent> <TalentName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogTalent, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Talent \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         lv_talentName = StringWord(EventChatMessage(false), 2);
         SetTalentEnabled((lv_talentName), false);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Disabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
@@ -526,6 +551,11 @@ bool libPLYR_gt_DisableTalent_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ent|enabletalent> <TalentName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogTalent, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Talent \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         lv_talentName = StringWord(EventChatMessage(false), 2);
         SetTalentEnabled((lv_talentName), true);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Talent \"" + StringWord(EventChatMessage(false), 2)) + "")));
@@ -671,6 +701,11 @@ bool libPLYR_gt_OverrideScoreBoard_Func (bool testConds, bool runActions) {
 
     // Actions
     if (!runActions) {
+        return true;
+    }
+
+    if ((CatalogEntryIsValid(c_gameCatalogScoreValue, (StringWord(EventChatMessage(false), 2))) == false)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Score Entry \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
         return true;
     }
 

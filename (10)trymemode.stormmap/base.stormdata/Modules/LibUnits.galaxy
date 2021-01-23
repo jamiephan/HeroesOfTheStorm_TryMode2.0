@@ -171,6 +171,11 @@ bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogEffect, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Effect \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         PlayerCreateEffectPoint(EventPlayer(), (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" on camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
     }
@@ -205,6 +210,11 @@ bool libUNIT_gt_RemoveEffectsfromCamera_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmec|removeeffectcamera> <EffectName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogEffect, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Effect \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         GameDestroyEffects(CameraGetTarget(EventPlayer()), 1.0, 0, null);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" from camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
     }
@@ -252,6 +262,11 @@ bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ade|addeffect> <EffectName> [amount]"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogEffect, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Effect \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
         if ((lv_count == 0)) {
             lv_count = 1;
@@ -311,6 +326,11 @@ bool libUNIT_gt_RemoveEffect_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rme|removeeffect> <EffectName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogEffect, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Effect \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         autoCC1E0A15_g = UnitGroupSelected(EventPlayer());
         autoCC1E0A15_u = UnitGroupCount(autoCC1E0A15_g, c_unitCountAll);
         for (;; autoCC1E0A15_u -= 1) {
@@ -456,6 +476,11 @@ bool libUNIT_gt_AddWeapon_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adw|addweapon> <WeaponName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogWeapon, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Weapon \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         auto5A99CB48_g = UnitGroupSelected(EventPlayer());
         auto5A99CB48_u = UnitGroupCount(auto5A99CB48_g, c_unitCountAll);
         for (;; auto5A99CB48_u -= 1) {
@@ -506,6 +531,11 @@ bool libUNIT_gt_RemoveWeapon_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmw|removeweapon> <WeaponName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogWeapon, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Weapon \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         auto34C1F59F_g = UnitGroupSelected(EventPlayer());
         auto34C1F59F_u = UnitGroupCount(auto34C1F59F_g, c_unitCountAll);
         for (;; auto34C1F59F_u -= 1) {
@@ -1447,6 +1477,11 @@ bool libUNIT_gt_ReplaceUnits_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rpu|replaceunit> <TargetUnitId>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogUnit, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Unit \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         auto45A293B1_g = UnitGroupSelected(EventPlayer());
         auto45A293B1_u = UnitGroupCount(auto45A293B1_g, c_unitCountAll);
         for (;; auto45A293B1_u -= 1) {
@@ -1923,7 +1958,12 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
     }
 
     lv_unittype = (StringWord(EventChatMessage(false), 2));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((("Trying to spawn " + (IntToString(lv_amount) + " ")) + ((lv_unittype) + (" with scale of " + FixedToString(lv_scale, c_fixedPrecisionAny)))) + (" for Player " + IntToString(lv_player)))));
+    if ((CatalogEntryIsValid(c_gameCatalogUnit, (StringWord(EventChatMessage(false), 2))) == false)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Unit \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((("Spawned " + (IntToString(lv_amount) + " ")) + ((lv_unittype) + (" with scale of " + FixedToString(lv_scale, c_fixedPrecisionAny)))) + (" for Player " + IntToString(lv_player)))));
     autoE55C84B8_ae = lv_amount;
     lv_i = 1;
     for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
