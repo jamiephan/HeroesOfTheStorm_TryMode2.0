@@ -68,7 +68,6 @@ trigger libUNIT_gt_AddBehaviorPanelAddBehaviorButtonClicked;
 trigger libUNIT_gt_AddBehaviorPanelCloseButtonClicked;
 trigger libUNIT_gt_AddBehavior;
 trigger libUNIT_gt_RemoveBehavior;
-trigger libUNIT_gt_CountBehavior;
 trigger libUNIT_gt_GetBehaviors;
 trigger libUNIT_gt_ClearBehaviors;
 trigger libUNIT_gt_ModifyUnitProperty;
@@ -1090,6 +1089,11 @@ bool libUNIT_gt_AddBehavior_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adb|addbehavior> <BehaviorName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogBehavior, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Behavior \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         auto8FFBEB1E_g = UnitGroupSelected(EventPlayer());
         auto8FFBEB1E_u = UnitGroupCount(auto8FFBEB1E_g, c_unitCountAll);
         for (;; auto8FFBEB1E_u -= 1) {
@@ -1140,14 +1144,24 @@ bool libUNIT_gt_RemoveBehavior_Func (bool testConds, bool runActions) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmb|removebehavior> <BehaviorName>"));
     }
     else {
+        if ((CatalogEntryIsValid(c_gameCatalogBehavior, (StringWord(EventChatMessage(false), 2))) == false)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Behavior \"" + StringWord(EventChatMessage(false), 2)) + "\" does not exist.")));
+            return true;
+        }
+
         autoA22B81BF_g = UnitGroupSelected(EventPlayer());
         autoA22B81BF_u = UnitGroupCount(autoA22B81BF_g, c_unitCountAll);
         for (;; autoA22B81BF_u -= 1) {
             lv_currentUnit = UnitGroupUnitFromEnd(autoA22B81BF_g, autoA22B81BF_u);
             if (lv_currentUnit == null) { break; }
             lv_unittype = UnitGetType(lv_currentUnit);
-            UnitBehaviorRemove(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), 1);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Behavior \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+            if ((UnitHasBehavior(lv_currentUnit, (StringWord(EventChatMessage(false), 2))) == true)) {
+                UnitBehaviorRemove(lv_currentUnit, (StringWord(EventChatMessage(false), 2)), 1);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Behavior \"" + (StringWord(EventChatMessage(false), 2) + ("\" from " + (lv_unittype))))));
+            }
+            else {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Warning: Unit " + ((lv_unittype) + (" does not behavior " + StringWord(EventChatMessage(false), 2))))));
+            }
         }
     }
     return true;
@@ -1158,57 +1172,6 @@ void libUNIT_gt_RemoveBehavior_Init () {
     libUNIT_gt_RemoveBehavior = TriggerCreate("libUNIT_gt_RemoveBehavior_Func");
     TriggerAddEventChatMessage(libUNIT_gt_RemoveBehavior, c_playerAny, "rmb", false);
     TriggerAddEventChatMessage(libUNIT_gt_RemoveBehavior, c_playerAny, "removebehavior", false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Count Behavior
-//--------------------------------------------------------------------------------------------------
-bool libUNIT_gt_CountBehavior_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_behaviorCounter;
-    string lv_unittype;
-    unit lv_currentUnit;
-
-    // Automatic Variable Declarations
-    unitgroup auto08F3678D_g;
-    int auto08F3678D_u;
-
-    // Variable Initialization
-
-    // Conditions
-    if (testConds) {
-        if (!(((StringWord(EventChatMessage(false), 1) == "ctb") || (StringWord(EventChatMessage(false), 1) == "countbehavior")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <ctb|countbehavior> <BehaviorName>"));
-    }
-    else {
-        auto08F3678D_g = UnitGroupSelected(EventPlayer());
-        auto08F3678D_u = UnitGroupCount(auto08F3678D_g, c_unitCountAll);
-        for (;; auto08F3678D_u -= 1) {
-            lv_currentUnit = UnitGroupUnitFromEnd(auto08F3678D_g, auto08F3678D_u);
-            if (lv_currentUnit == null) { break; }
-            lv_behaviorCounter = UnitBehaviorCount(lv_currentUnit, (StringWord(EventChatMessage(false), 2)));
-            lv_unittype = UnitGetType(lv_currentUnit);
-            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(((lv_unittype) + (": " + (StringWord(EventChatMessage(false), 2) + (" -> " + IntToString(lv_behaviorCounter)))))));
-        }
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libUNIT_gt_CountBehavior_Init () {
-    libUNIT_gt_CountBehavior = TriggerCreate("libUNIT_gt_CountBehavior_Func");
-    TriggerAddEventChatMessage(libUNIT_gt_CountBehavior, c_playerAny, "ctb", false);
-    TriggerAddEventChatMessage(libUNIT_gt_CountBehavior, c_playerAny, "countbehavior", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2082,7 +2045,6 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_AddBehaviorPanelCloseButtonClicked_Init();
     libUNIT_gt_AddBehavior_Init();
     libUNIT_gt_RemoveBehavior_Init();
-    libUNIT_gt_CountBehavior_Init();
     libUNIT_gt_GetBehaviors_Init();
     libUNIT_gt_ClearBehaviors_Init();
     libUNIT_gt_ModifyUnitProperty_Init();

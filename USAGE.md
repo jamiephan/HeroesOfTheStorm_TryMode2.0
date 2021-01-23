@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 23 Jan 2021 03:12:53 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 23 Jan 2021 03:49:13 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -77,8 +77,6 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `clearunits`](#cmd-clearunits)
 
   - 💭 [Command: `clearweapon`](#cmd-clearweapon)
-
-  - 💭 [Command: `countbehavior`](#cmd-countbehavior)
 
   - 💭 [Command: `getbehavior`](#cmd-getbehavior)
 
@@ -1008,40 +1006,6 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
     > clearweapon
     	(Remove all weapons from selected units)
 <a name="cmd-clearweapon-uiAvailability"></a>
-
-#### 🖼 UI Availability:
-- ❌ **Not Implemented**
-
-
-
-[\[Return to Table of Contents 🧾\]](#meta-toc)
-
-[\[Return to Top ⬆\]](#meta-top)
-
-<a name="cmd-countbehavior"></a>
-
-## (`countbehavior` | `ctb`) `<BehaviorId>`
-<a name="cmd-countbehavior-description"></a>
-
-#### ✏ Description: 
-Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
-> Tips: You can get active behaviors with the `getbehavior` command above.
-
-<a name="cmd-countbehavior-parameters"></a>
-
-#### ⚙ Parameters:
-    <BehaviorId>
-    	Required:	true
-    	Type:		string
-    	Usage:		Defines the behavior id to be counted from selected units
-<a name="cmd-countbehavior-examples"></a>
-
-#### 🔧 Examples:
-    > countbehavior MedivhArcaneBrillianceItem
-    	(Count Medivh's Arcane Brilliance Ability from selected units)
-    > ctb PermaInvulnerable
-    	(Count selected unit's permanent Invulnerable behavior)
-<a name="cmd-countbehavior-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

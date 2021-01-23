@@ -783,33 +783,6 @@
                     ]
                 },
                 {
-                    "shortCommand": "ctb",
-                    "command": "countbehavior",
-                    "description": [
-                        "Count the number of a specific behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
-                        "> Tips: You can get active behaviors with the `getbehavior` command above."
-                    ],
-                    "uiAvailable": false,
-                    "parameters": [
-                        {
-                            "name": "BehaviorId",
-                            "required": true,
-                            "description": "Defines the behavior id to be counted from selected units",
-                            "type": "string"
-                        }
-                    ],
-                    "examples": [
-                        {
-                            "command": "{command} MedivhArcaneBrillianceItem",
-                            "description": "Count Medivh's Arcane Brilliance Ability from selected units"
-                        },
-                        {
-                            "command": "{shortCommand} PermaInvulnerable",
-                            "description": "Count selected unit's permanent Invulnerable behavior"
-                        }
-                    ]
-                },
-                {
                     "shortCommand": "ade",
                     "command": "addeffect",
                     "description": "Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id=\"xxxx\">` or `<CEffectCreatePersistent id=\"xxx\">`.",
