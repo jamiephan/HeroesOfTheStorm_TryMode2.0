@@ -50,6 +50,8 @@ trigger libUNIT_gt_AddEffectstoCamera;
 trigger libUNIT_gt_RemoveEffectsfromCamera;
 trigger libUNIT_gt_AddEffects;
 trigger libUNIT_gt_RemoveEffect;
+trigger libUNIT_gt_GetWeapons;
+trigger libUNIT_gt_ClearWeapons;
 trigger libUNIT_gt_AddWeapon;
 trigger libUNIT_gt_RemoveWeapon;
 trigger libUNIT_gt_ToggleNoWeaponCD;
@@ -328,6 +330,101 @@ void libUNIT_gt_RemoveEffect_Init () {
     libUNIT_gt_RemoveEffect = TriggerCreate("libUNIT_gt_RemoveEffect_Func");
     TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "rme", false);
     TriggerAddEventChatMessage(libUNIT_gt_RemoveEffect, c_playerAny, "removeeffect", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Weapons
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_GetWeapons_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    string lv_weapon;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoEB77DABE_g;
+    int autoEB77DABE_u;
+    int auto36ED1F5F_ae;
+    const int auto36ED1F5F_ai = 1;
+
+    // Variable Initialization
+    lv_i = 1;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoEB77DABE_g = UnitGroupSelected(EventPlayer());
+    autoEB77DABE_u = UnitGroupCount(autoEB77DABE_g, c_unitCountAll);
+    for (;; autoEB77DABE_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoEB77DABE_g, autoEB77DABE_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        auto36ED1F5F_ae = UnitWeaponCount(lv_currentUnit);
+        lv_i = 1;
+        for ( ; ( (auto36ED1F5F_ai >= 0 && lv_i <= auto36ED1F5F_ae) || (auto36ED1F5F_ai < 0 && lv_i >= auto36ED1F5F_ae) ) ; lv_i += auto36ED1F5F_ai ) {
+            lv_weapon = UnitWeaponGet(lv_currentUnit, lv_i);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText((((lv_unittype) + "'s Weapon ") + (IntToString(lv_i) + (": " + (lv_weapon))))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_GetWeapons_Init () {
+    libUNIT_gt_GetWeapons = TriggerCreate("libUNIT_gt_GetWeapons_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_GetWeapons, c_playerAny, "getw", true);
+    TriggerAddEventChatMessage(libUNIT_gt_GetWeapons, c_playerAny, "getweapon", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Clear Weapons
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ClearWeapons_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    string lv_weapon;
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup auto0C1D2C19_g;
+    int auto0C1D2C19_u;
+    int autoC501F182_ae;
+    const int autoC501F182_ai = 1;
+
+    // Variable Initialization
+    lv_i = 1;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto0C1D2C19_g = UnitGroupSelected(EventPlayer());
+    auto0C1D2C19_u = UnitGroupCount(auto0C1D2C19_g, c_unitCountAll);
+    for (;; auto0C1D2C19_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(auto0C1D2C19_g, auto0C1D2C19_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        autoC501F182_ae = UnitWeaponCount(lv_currentUnit);
+        lv_i = 1;
+        for ( ; ( (autoC501F182_ai >= 0 && lv_i <= autoC501F182_ae) || (autoC501F182_ai < 0 && lv_i >= autoC501F182_ae) ) ; lv_i += autoC501F182_ai ) {
+            lv_weapon = UnitWeaponGet(lv_currentUnit, lv_i);
+            UnitWeaponRemove(lv_currentUnit, lv_weapon);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed Weapon \"" + (lv_weapon)) + ("\" From " + (lv_unittype)))));
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ClearWeapons_Init () {
+    libUNIT_gt_ClearWeapons = TriggerCreate("libUNIT_gt_ClearWeapons_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ClearWeapons, c_playerAny, "clw", true);
+    TriggerAddEventChatMessage(libUNIT_gt_ClearWeapons, c_playerAny, "clearweapon", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1967,6 +2064,8 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_RemoveEffectsfromCamera_Init();
     libUNIT_gt_AddEffects_Init();
     libUNIT_gt_RemoveEffect_Init();
+    libUNIT_gt_GetWeapons_Init();
+    libUNIT_gt_ClearWeapons_Init();
     libUNIT_gt_AddWeapon_Init();
     libUNIT_gt_RemoveWeapon_Init();
     libUNIT_gt_ToggleNoWeaponCD_Init();

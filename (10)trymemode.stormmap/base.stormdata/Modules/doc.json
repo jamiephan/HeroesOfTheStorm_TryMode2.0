@@ -1050,7 +1050,7 @@
                 {
                     "shortCommand": "adw",
                     "command": "addweapon",
-                    "description": "Add a weapon to selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "description": "Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -1074,7 +1074,7 @@
                 {
                     "shortCommand": "rmw",
                     "command": "removeweapon",
-                    "description": "Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "description": "Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
                     "uiAvailable": false,
                     "parameters": [
                         {
@@ -1092,6 +1092,40 @@
                         {
                             "command": "{command} DVaMechWeapon",
                             "description": "Remove D.va mech mode's weapon from selected unit(s)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "getw",
+                    "command": "getweapon",
+                    "description": "Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Get all weapons from selected units"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Get all weapons from selected units"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "clw",
+                    "command": "clearweapon",
+                    "description": "Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`",
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Remove all weapons from selected units"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Remove all weapons from selected units"
                         }
                     ]
                 }

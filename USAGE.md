@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 11 Jan 2021 22:39:02 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 23 Jan 2021 03:12:53 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -76,11 +76,15 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `clearunits`](#cmd-clearunits)
 
+  - 💭 [Command: `clearweapon`](#cmd-clearweapon)
+
   - 💭 [Command: `countbehavior`](#cmd-countbehavior)
 
   - 💭 [Command: `getbehavior`](#cmd-getbehavior)
 
   - 💭 [Command: `getunitownership`](#cmd-getunitownership)
+
+  - 💭 [Command: `getweapon`](#cmd-getweapon)
 
   - 💭 [Command: `killunits`](#cmd-killunits)
 
@@ -855,7 +859,7 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
 <a name="cmd-addweapon-description"></a>
 
 #### ✏ Description: 
-Add a weapon to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 <a name="cmd-addweapon-parameters"></a>
 
@@ -984,6 +988,36 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-clearweapon"></a>
+
+## (`clearweapon` | `clw`) 
+<a name="cmd-clearweapon-description"></a>
+
+#### ✏ Description: 
+Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+
+<a name="cmd-clearweapon-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+<a name="cmd-clearweapon-examples"></a>
+
+#### 🔧 Examples:
+    > clw
+    	(Remove all weapons from selected units)
+    > clearweapon
+    	(Remove all weapons from selected units)
+<a name="cmd-clearweapon-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-countbehavior"></a>
 
 ## (`countbehavior` | `ctb`) `<BehaviorId>`
@@ -1068,6 +1102,36 @@ Gets the Ownership (Player ID) of selected unit(s).
     > getunitownership
     	(Gets the Ownership (Player ID) of selected unit(s).)
 <a name="cmd-getunitownership-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-getweapon"></a>
+
+## (`getweapon` | `getw`) 
+<a name="cmd-getweapon-description"></a>
+
+#### ✏ Description: 
+Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+
+<a name="cmd-getweapon-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+<a name="cmd-getweapon-examples"></a>
+
+#### 🔧 Examples:
+    > getw
+    	(Get all weapons from selected units)
+    > getweapon
+    	(Get all weapons from selected units)
+<a name="cmd-getweapon-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
@@ -1282,7 +1346,7 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
 <a name="cmd-removeweapon-description"></a>
 
 #### ✏ Description: 
-Remove a weapon from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
+Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 <a name="cmd-removeweapon-parameters"></a>
 
