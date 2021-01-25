@@ -1402,7 +1402,7 @@
                         {
                             "name": "TalentId",
                             "required": true,
-                            "description": "The talent id to be enabled/disabled.",
+                            "description": "The talent id to be enabled.",
                             "type": "string"
                         }
                     ],
@@ -1429,7 +1429,7 @@
                         {
                             "name": "TalentId",
                             "required": true,
-                            "description": "The talent id to be enabled/disabled.",
+                            "description": "The talent id to be disabled.",
                             "type": "string"
                         }
                     ],

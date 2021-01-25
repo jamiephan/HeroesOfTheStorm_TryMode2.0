@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 02:13:04 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 03:49:18 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -1721,7 +1721,7 @@ Disable a for all players. Generally found in `<CTalent id="xxxx">`.
     <TalentId>
     	Required:	true
     	Type:		string
-    	Usage:		The talent id to be enabled/disabled.
+    	Usage:		The talent id to be disabled.
 <a name="cmd-disabletalent-examples"></a>
 
 #### 🔧 Examples:
@@ -1754,7 +1754,7 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
     <TalentId>
     	Required:	true
     	Type:		string
-    	Usage:		The talent id to be enabled/disabled.
+    	Usage:		The talent id to be enabled.
 <a name="cmd-enabletalent-examples"></a>
 
 #### 🔧 Examples:
