@@ -628,39 +628,42 @@
                     "command": "unitproperty",
                     "description": [
                         "Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.",
-                        "|Type|Galaxy file constant|",
-                        "|-|-|",
-                        "|0|c_unitPropLife|",
-                        "|1|c_unitPropLifePercent|",
-                        "|2|c_unitPropLifeMax|",
-                        "|3|c_unitPropLifeRegen|",
-                        "|4|c_unitPropEnergy|",
-                        "|5|c_unitPropEnergyPercent|",
-                        "|6|c_unitPropEnergyMax|",
-                        "|7|c_unitPropEnergyRegen|",
-                        "|8|c_unitPropShields|",
-                        "|9|c_unitPropShieldsPercent|",
-                        "|10|c_unitPropShieldsMax|",
-                        "|11|c_unitPropShieldsRegen|",
-                        "|12|c_unitPropKills|",
-                        "|17|c_unitPropHeight|",
-                        "|18|c_unitPropMovementSpeed|",
-                        "|20|c_unitPropResources|",
-                        "|21|c_unitPropRadius|",
-                        "|22|c_unitPropXP|",
-                        "|23|c_unitPropLevel|",
-                        "|24|c_unitPropKillXP|",
-                        "|28|c_unitPropBaseMovementSpeed|",
-                        "|29|c_unitPropMovementSpeedCurrent|",
-                        "|30|c_unitPropLifeExpectedPercent|"
+                        "If the `type` parameter is not supplied, it will return the value of the property. If the `type` parameter was set, it will modify the selected unit's property.",
+                        "",
+                        "The `type` parameters accept either the `Type (int)` or `Type (string)` below.",
+                        "| Type (int) | Type (string) | Galaxy file constant |",
+                        "|-|-|-|",
+                        "| 0 | life | c_unitLife |",
+                        "| 1 | lifepercent | c_unitPropLifePercent |",
+                        "| 2 | lifemax | c_unitPropLifeMax |",
+                        "| 3 | liferegen | c_unitPropLifeRegen |",
+                        "| 4 | energy | c_unitPropEnergy |",
+                        "| 5 | energypercent | c_unitPropEnergyPercent |",
+                        "| 6 | energymax | c_unitPropEnergyMax |",
+                        "| 7 | energyregen | c_unitPropEnergyRegen |",
+                        "| 8 | shields | c_unitPropShields |",
+                        "| 9 | shieldspercent | c_unitPropShieldsPercent |",
+                        "| 10 | shieldsmax | c_unitPropShieldsMax |",
+                        "| 11 | shieldsregen | c_unitPropShieldsRegen |",
+                        "| 12 | kills | c_unitPropKills |",
+                        "| 17 | height | c_unitPropHeight |",
+                        "| 18 | movementspeed | c_unitPropMovementSpeed |",
+                        "| 20 | resources | c_unitPropResources |",
+                        "| 21 | radius | c_unitPropRadius |",
+                        "| 22 | xp | c_unitPropXP |",
+                        "| 23 | level | c_unitPropLevel |",
+                        "| 24 | killxp | c_unitPropKillXP |",
+                        "| 28 | basemovementspeed | c_unitPropBaseMovementSpeed |",
+                        "| 29 | movementspeedcurrent | c_unitPropMovementSpeedCurrent |",
+                        "| 30 | lifeexpectedpercent | c_unitPropLifeExpectedPercent |"
                     ],
                     "uiAvailable": false,
                     "parameters": [
                         {
                             "name": "type",
                             "required": true,
-                            "description": "Set the type of the property to be modified. Please refer to the table above.",
-                            "type": "integer"
+                            "description": "Set the type of the property to be get / modified. Please refer to the table above.",
+                            "type": "integer/string"
                         },
                         {
                             "name": "value",
@@ -672,7 +675,7 @@
                     ],
                     "examples": [
                         {
-                            "command": "{shortCommand} 0",
+                            "command": "{shortCommand} life",
                             "description": "Shows the unit's current HP"
                         },
                         {
@@ -684,7 +687,7 @@
                             "description": "Show the selected unit's Max Energy, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
                         },
                         {
-                            "command": "{command} 6 10000",
+                            "command": "{command} energymax 10000",
                             "description": "Set the selected unit's Max Energy for 10000, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc."
                         },
                         {
@@ -692,7 +695,7 @@
                             "description": "Shows the base movement speed of selected units."
                         },
                         {
-                            "command": "{command} 28 10",
+                            "command": "{command} basemovementspeed 10",
                             "description": "Set the base movement speed of selected units to 10. Note that base speed for heroes is 4.8398"
                         }
                     ]

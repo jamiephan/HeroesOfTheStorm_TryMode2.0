@@ -1339,6 +1339,7 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
     int lv_i;
 
     // Automatic Variable Declarations
+    string autoA4188EC6_val;
     int auto4B2220AA_ae;
     const int auto4B2220AA_ai = 1;
     int auto5C02B8F9_ae;
@@ -1362,13 +1363,85 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+    autoA4188EC6_val = StringCase(StringWord(EventChatMessage(false), 2), false);
+    if (autoA4188EC6_val == "life") {
+        lv_type = c_unitPropLife;
+    }
+    else if (autoA4188EC6_val == "lifepercent") {
+        lv_type = c_unitPropLifePercent;
+    }
+    else if (autoA4188EC6_val == "lifemax") {
+        lv_type = c_unitPropLifeMax;
+    }
+    else if (autoA4188EC6_val == "liferegen") {
+        lv_type = c_unitPropLifeRegen;
+    }
+    else if (autoA4188EC6_val == "energy") {
+        lv_type = c_unitPropEnergy;
+    }
+    else if (autoA4188EC6_val == "energypercent") {
+        lv_type = c_unitPropEnergyPercent;
+    }
+    else if (autoA4188EC6_val == "energymax") {
+        lv_type = c_unitPropEnergyMax;
+    }
+    else if (autoA4188EC6_val == "energyregen") {
+        lv_type = c_unitPropEnergyRegen;
+    }
+    else if (autoA4188EC6_val == "shields") {
+        lv_type = c_unitPropShields;
+    }
+    else if (autoA4188EC6_val == "shieldspercent") {
+        lv_type = c_unitPropShieldsPercent;
+    }
+    else if (autoA4188EC6_val == "shieldsmax") {
+        lv_type = c_unitPropShieldsMax;
+    }
+    else if (autoA4188EC6_val == "shieldsregen") {
+        lv_type = c_unitPropShieldsRegen;
+    }
+    else if (autoA4188EC6_val == "kills") {
+        lv_type = c_unitPropKills;
+    }
+    else if (autoA4188EC6_val == "height") {
+        lv_type = c_unitPropHeight;
+    }
+    else if (autoA4188EC6_val == "movementspeed") {
+        lv_type = c_unitPropMovementSpeed;
+    }
+    else if (autoA4188EC6_val == "resources") {
+        lv_type = c_unitPropResources;
+    }
+    else if (autoA4188EC6_val == "radius") {
+        lv_type = c_unitPropRadius;
+    }
+    else if (autoA4188EC6_val == "xp") {
+        lv_type = c_unitPropXP;
+    }
+    else if (autoA4188EC6_val == "level") {
+        lv_type = c_unitPropLevel;
+    }
+    else if (autoA4188EC6_val == "killxp") {
+        lv_type = c_unitPropKillXP;
+    }
+    else if (autoA4188EC6_val == "basemovementspeed") {
+        lv_type = c_unitPropBaseMovementSpeed;
+    }
+    else if (autoA4188EC6_val == "movementspeedcurrent") {
+        lv_type = c_unitPropMovementSpeedCurrent;
+    }
+    else if (autoA4188EC6_val == "lifeexpectedpercent") {
+        lv_type = c_unitPropLifeExpectedPercent;
+    }
+    else {
+        lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+    }
     if ((StringWord(EventChatMessage(false), 3) != null)) {
         lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
         auto5C02B8F9_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
         lv_i = 1;
         for ( ; ( (auto5C02B8F9_ai >= 0 && lv_i <= auto5C02B8F9_ae) || (auto5C02B8F9_ai < 0 && lv_i >= auto5C02B8F9_ae) ) ; lv_i += auto5C02B8F9_ai ) {
-            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText((lv_unittype)) + StringToText(": Changed Property")));
             UnitSetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, lv_value);
         }
@@ -1377,7 +1450,7 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
         auto4B2220AA_ae = UnitGroupCount(UnitGroupSelected(EventPlayer()), c_unitCountAlive);
         lv_i = 1;
         for ( ; ( (auto4B2220AA_ai >= 0 && lv_i <= auto4B2220AA_ae) || (auto4B2220AA_ai < 0 && lv_i >= auto4B2220AA_ae) ) ; lv_i += auto4B2220AA_ai ) {
-            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(1), lv_i));
+            lv_unittype = UnitGetType(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i));
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText(((lv_unittype) + "'s property value: ")) + StringToText(FixedToString(UnitGetPropertyFixed(UnitGroupUnit(UnitGroupSelected(EventPlayer()), lv_i), lv_type, c_unitPropCurrent), c_fixedPrecisionAny))));
         }
     }

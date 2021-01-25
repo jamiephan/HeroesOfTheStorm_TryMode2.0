@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 01:25:32 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 02:13:04 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -1550,39 +1550,42 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
 
 #### ✏ Description: 
 Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.
-|Type|Galaxy file constant|
-|-|-|
-|0|c_unitPropLife|
-|1|c_unitPropLifePercent|
-|2|c_unitPropLifeMax|
-|3|c_unitPropLifeRegen|
-|4|c_unitPropEnergy|
-|5|c_unitPropEnergyPercent|
-|6|c_unitPropEnergyMax|
-|7|c_unitPropEnergyRegen|
-|8|c_unitPropShields|
-|9|c_unitPropShieldsPercent|
-|10|c_unitPropShieldsMax|
-|11|c_unitPropShieldsRegen|
-|12|c_unitPropKills|
-|17|c_unitPropHeight|
-|18|c_unitPropMovementSpeed|
-|20|c_unitPropResources|
-|21|c_unitPropRadius|
-|22|c_unitPropXP|
-|23|c_unitPropLevel|
-|24|c_unitPropKillXP|
-|28|c_unitPropBaseMovementSpeed|
-|29|c_unitPropMovementSpeedCurrent|
-|30|c_unitPropLifeExpectedPercent|
+If the `type` parameter is not supplied, it will return the value of the property. If the `type` parameter was set, it will modify the selected unit's property.
+
+The `type` parameters accept either the `Type (int)` or `Type (string)` below.
+| Type (int) | Type (string) | Galaxy file constant |
+|-|-|-|
+| 0 | life | c_unitLife |
+| 1 | lifepercent | c_unitPropLifePercent |
+| 2 | lifemax | c_unitPropLifeMax |
+| 3 | liferegen | c_unitPropLifeRegen |
+| 4 | energy | c_unitPropEnergy |
+| 5 | energypercent | c_unitPropEnergyPercent |
+| 6 | energymax | c_unitPropEnergyMax |
+| 7 | energyregen | c_unitPropEnergyRegen |
+| 8 | shields | c_unitPropShields |
+| 9 | shieldspercent | c_unitPropShieldsPercent |
+| 10 | shieldsmax | c_unitPropShieldsMax |
+| 11 | shieldsregen | c_unitPropShieldsRegen |
+| 12 | kills | c_unitPropKills |
+| 17 | height | c_unitPropHeight |
+| 18 | movementspeed | c_unitPropMovementSpeed |
+| 20 | resources | c_unitPropResources |
+| 21 | radius | c_unitPropRadius |
+| 22 | xp | c_unitPropXP |
+| 23 | level | c_unitPropLevel |
+| 24 | killxp | c_unitPropKillXP |
+| 28 | basemovementspeed | c_unitPropBaseMovementSpeed |
+| 29 | movementspeedcurrent | c_unitPropMovementSpeedCurrent |
+| 30 | lifeexpectedpercent | c_unitPropLifeExpectedPercent |
 
 <a name="cmd-unitproperty-parameters"></a>
 
 #### ⚙ Parameters:
     <type>
     	Required:	true
-    	Type:		integer
-    	Usage:		Set the type of the property to be modified. Please refer to the table above.
+    	Type:		integer/string
+    	Usage:		Set the type of the property to be get / modified. Please refer to the table above.
     [value]
     	Required:	false
     	Type:		float
@@ -1591,17 +1594,17 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
 <a name="cmd-unitproperty-examples"></a>
 
 #### 🔧 Examples:
-    > up 0
+    > up life
     	(Shows the unit's current HP)
     > up 0 1
     	(Set the selected units's Current HP to 1; MAX SPEEDZ TAZZZZDINGO)
     > unitproperty 6
     	(Show the selected unit's Max Energy, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc.)
-    > unitproperty 6 10000
+    > unitproperty energymax 10000
     	(Set the selected unit's Max Energy for 10000, usually refers as resource bar, such as mana, Tracer bullet, Chen's brew etc.)
     > unitproperty 28
     	(Shows the base movement speed of selected units.)
-    > unitproperty 28 10
+    > unitproperty basemovementspeed 10
     	(Set the base movement speed of selected units to 10. Note that base speed for heroes is 4.8398)
 <a name="cmd-unitproperty-uiAvailability"></a>
 
