@@ -154,7 +154,19 @@ void libUNIT_gt_MapInit_Init () {
 // Trigger: Add Effects to Camera
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_i;
+    int lv_count;
+
     // Automatic Variable Declarations
+    int auto64624EFA_ae;
+    const int auto64624EFA_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_count = 1;
+
     // Conditions
     if (testConds) {
         if (!(((StringWord(EventChatMessage(false), 1) == "adec") || (StringWord(EventChatMessage(false), 1) == "addeffectcamera")))) {
@@ -168,7 +180,7 @@ bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
     }
 
     if ((StringWord(EventChatMessage(false), 2) == null)) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName>"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <adec|addeffectcamera> <EffectName> [amount] [playerId]"));
     }
     else {
         if ((CatalogEntryIsValid(c_gameCatalogEffect, (StringWord(EventChatMessage(false), 2))) == false)) {
@@ -176,8 +188,28 @@ bool libUNIT_gt_AddEffectstoCamera_Func (bool testConds, bool runActions) {
             return true;
         }
 
-        PlayerCreateEffectPoint(EventPlayer(), (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Added Effect \"" + (StringWord(EventChatMessage(false), 2) + ("\" on camera location  " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
+        lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
+        if ((lv_count <= 0)) {
+            lv_count = 1;
+        }
+
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+        if ((StringWord(EventChatMessage(false), 4) == "")) {
+            lv_player = EventPlayer();
+        }
+        else {
+            if ((lv_player < 0)) {
+                lv_player = EventPlayer();
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Warn: Invalid Player ID \"" + (StringWord(EventChatMessage(false), 4) + ("\". Player Id set to Player " + IntToString(EventPlayer()))))));
+            }
+
+        }
+        auto64624EFA_ae = lv_count;
+        lv_i = 1;
+        for ( ; ( (auto64624EFA_ai >= 0 && lv_i <= auto64624EFA_ae) || (auto64624EFA_ai < 0 && lv_i >= auto64624EFA_ae) ) ; lv_i += auto64624EFA_ai ) {
+            PlayerCreateEffectPoint(lv_player, (StringWord(EventChatMessage(false), 2)), CameraGetTarget(EventPlayer()));
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(((("Added " + IntToString(lv_count)) + " Effects \"") + (StringWord(EventChatMessage(false), 2) + ((("\" with the effect owner of Player " + IntToString(lv_player)) + " on camera location  ") + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer())))))));
     }
     return true;
 }
@@ -245,6 +277,7 @@ bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
     const int auto82B5A334_ai = 1;
 
     // Variable Initialization
+    lv_count = 1;
 
     // Conditions
     if (testConds) {
@@ -268,7 +301,7 @@ bool libUNIT_gt_AddEffects_Func (bool testConds, bool runActions) {
         }
 
         lv_count = StringToInt(StringWord(EventChatMessage(false), 3));
-        if ((lv_count == 0)) {
+        if ((lv_count <= 0)) {
             lv_count = 1;
         }
 

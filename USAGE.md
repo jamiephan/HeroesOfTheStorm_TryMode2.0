@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 23 Jan 2021 03:49:13 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 01:25:32 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -787,7 +787,7 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
 
 <a name="cmd-addeffect"></a>
 
-## (`addeffect` | `ade`) `<EffectId>`
+## (`addeffect` | `ade`) `<EffectId>` `[amount]`
 <a name="cmd-addeffect-description"></a>
 
 #### ✏ Description: 
@@ -800,13 +800,20 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
     	Required:	true
     	Type:		string
     	Usage:		Defines the effect id to be added to selected unit(s).
+    [amount]
+    	Required:	false
+    	Type:		integer
+    	Usage:		Defines the amount of effects to be added to the units
+    	Default:	1
 <a name="cmd-addeffect-examples"></a>
 
 #### 🔧 Examples:
     > addeffect StormSuicide
-    	(Make the unit "suicide" a.k.a kill the unit)
+    	(Make all selected units "suicide" a.k.a kill the unit)
     > ade MedivhPolyBombPersistent
     	(Make all selected units affect by Medivh's Polybomb)
+    > ade GreymaneCursedBulletDamagePercentDamage 5
+    	(Make all selected units hit by Greymane's Cursed Bullet (damage) 5 times in a row.)
 <a name="cmd-addeffect-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -820,7 +827,7 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
 
 <a name="cmd-addeffectcamera"></a>
 
-## (`addeffectcamera` | `adec`) `<EffectId>`
+## (`addeffectcamera` | `adec`) `<EffectId>` `[amount]` `[PlayerID]`
 <a name="cmd-addeffectcamera-description"></a>
 
 #### ✏ Description: 
@@ -833,6 +840,16 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
     	Required:	true
     	Type:		string
     	Usage:		Defines the effect id to be added to the center of the camera.
+    [amount]
+    	Required:	false
+    	Type:		integer
+    	Usage:		Defines the amount of effects to be added to the center of the camera.
+    	Default:	1
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the effect owner
+    	Default:	The player id of whoever used this command.
 <a name="cmd-addeffectcamera-examples"></a>
 
 #### 🔧 Examples:
@@ -840,6 +857,10 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
     	(Add some Haunted Mines Skulls to camera location)
     > adec UnderworldBossRootsCreatePersistent
     	(Add Haunted Mines's boss root animation to camera location)
+    > addeffectcamera NecromancerRaiseSkeletonCreationPersistent 10
+    	(Spawn 10 Xul's Sekelton to camera location)
+    > adec NecromancerRaiseSkeletonCreationPersistent 10 6
+    	(Spawn 10 Xul's Sekelton to camera location with the effect owner of Player 6)
 <a name="cmd-addeffectcamera-uiAvailability"></a>
 
 #### 🖼 UI Availability:

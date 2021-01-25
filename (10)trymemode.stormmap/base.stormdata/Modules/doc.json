@@ -793,16 +793,27 @@
                             "required": true,
                             "description": "Defines the effect id to be added to selected unit(s).",
                             "type": "string"
+                        },
+                        {
+                            "name": "amount",
+                            "required": false,
+                            "description": "Defines the amount of effects to be added to the units",
+                            "type": "integer",
+                            "defaultValue": "1"
                         }
                     ],
                     "examples": [
                         {
                             "command": "{command} StormSuicide",
-                            "description": "Make the unit \"suicide\" a.k.a kill the unit"
+                            "description": "Make all selected units \"suicide\" a.k.a kill the unit"
                         },
                         {
                             "command": "{shortCommand} MedivhPolyBombPersistent",
                             "description": "Make all selected units affect by Medivh's Polybomb"
+                        },
+                        {
+                            "command": "{shortCommand} GreymaneCursedBulletDamagePercentDamage 5",
+                            "description": "Make all selected units hit by Greymane's Cursed Bullet (damage) 5 times in a row."
                         }
                     ]
                 },
@@ -817,6 +828,20 @@
                             "required": true,
                             "description": "Defines the effect id to be added to the center of the camera.",
                             "type": "string"
+                        },
+                        {
+                            "name": "amount",
+                            "required": false,
+                            "description": "Defines the amount of effects to be added to the center of the camera.",
+                            "type": "integer",
+                            "defaultValue": "1"
+                        },
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the effect owner",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
                         }
                     ],
                     "examples": [
@@ -827,6 +852,14 @@
                         {
                             "command": "{shortCommand} UnderworldBossRootsCreatePersistent",
                             "description": "Add Haunted Mines's boss root animation to camera location"
+                        },
+                        {
+                            "command": "{command} NecromancerRaiseSkeletonCreationPersistent 10",
+                            "description": "Spawn 10 Xul's Sekelton to camera location"
+                        },
+                        {
+                            "command": "{shortCommand} NecromancerRaiseSkeletonCreationPersistent 10 6",
+                            "description": "Spawn 10 Xul's Sekelton to camera location with the effect owner of Player 6"
                         }
                     ]
                 },
