@@ -813,6 +813,7 @@ bool libUTIL_gt_ToggleCrosshair_Func (bool testConds, bool runActions) {
     }
 
     libUTIL_gv_isCrosshairEnabled = !(libUTIL_gv_isCrosshairEnabled);
+    TextTagDestroy(libUTIL_gv_crosshair_marker);
     if ((libUTIL_gv_isCrosshairEnabled == true)) {
         TriggerEnable(libUTIL_gt_RunCrossHair, true);
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned on Crosshair"));
