@@ -263,7 +263,6 @@ bool libUTIL_gt_ToggleDebugMode_Func (bool testConds, bool runActions) {
     libCore_gv_dEBUGDebuggingEnabled = !(libCore_gv_dEBUGDebuggingEnabled);
     lv_debugModeProxyVariable = libCore_gv_dEBUGDebuggingEnabled;
     if ((lv_debugModeProxyVariable == true)) {
-        libUTIL_gv_massCDRPlayer = EventPlayer();
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Debug Mode Enabled"));
     }
     else {
