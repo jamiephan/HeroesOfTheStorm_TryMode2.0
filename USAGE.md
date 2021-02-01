@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 25 Jan 2021 03:49:18 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 01 Feb 2021 18:50:28 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -51,6 +51,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `startgame`](#cmd-startgame)
 
   - 💭 [Command: `string`](#cmd-string)
+
+  - 💭 [Command: `togglecrosshair`](#cmd-togglecrosshair)
 
   - 💭 [Command: `toggledebugmode`](#cmd-toggledebugmode)
 
@@ -611,6 +613,36 @@ This is pretty useful to quickly shows the string from the functions internally.
     > string StringExternal Param/Value/lib_Sprt_F697F4C7
     	(Shows the string "Game Speed should not exceed 8.0...." from supportlib)
 <a name="cmd-string-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-togglecrosshair"></a>
+
+## (`togglecrosshair` | `tch`) 
+<a name="cmd-togglecrosshair-description"></a>
+
+#### ✏ Description: 
+Toggle to show a crosshair on the center of the camera. This allows for e.g more precise placement of [summon units](#cmd-summon) and [adding effects](#cmd-addeffectcamera).
+
+<a name="cmd-togglecrosshair-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+<a name="cmd-togglecrosshair-examples"></a>
+
+#### 🔧 Examples:
+    > tch
+    	(Toggle showing crosshair)
+    > togglecrosshair
+    	(Toggle showing crosshair)
+<a name="cmd-togglecrosshair-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

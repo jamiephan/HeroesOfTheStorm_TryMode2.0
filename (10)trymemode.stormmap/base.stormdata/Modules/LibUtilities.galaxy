@@ -12,6 +12,8 @@ bool libUTIL_gv_isFOWEnabled;
 bool libUTIL_gv_isMassCDREnabled;
 int libUTIL_gv_massCDRPlayer;
 bool libUTIL_gv_isACTSEnabled;
+int libUTIL_gv_crosshair_marker;
+bool libUTIL_gv_isCrosshairEnabled;
 
 // Trigger Declarations
 trigger libUTIL_gt_MapInit;
@@ -33,6 +35,8 @@ trigger libUTIL_gt_ToggleACTS;
 trigger libUTIL_gt_MinionWaveInterval;
 trigger libUTIL_gt_FloatingCombatText;
 trigger libUTIL_gt_DisplayString;
+trigger libUTIL_gt_RunCrossHair;
+trigger libUTIL_gt_ToggleCrosshair;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -59,6 +63,7 @@ void libUTIL_InitVariables () {
 
     libUTIL_gv_isUIEnabled = true;
     libUTIL_gv_isFOWEnabled = true;
+    libUTIL_gv_crosshair_marker = c_textTagNone;
 }
 
 // Triggers
@@ -761,6 +766,71 @@ void libUTIL_gt_DisplayString_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_DisplayString, c_playerAny, "string", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: RunCrossHair
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RunCrossHair_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const string lv_crosshair = "+";
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libUTIL_gv_isCrosshairEnabled == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TextTagDestroy(libUTIL_gv_crosshair_marker);
+    TextTagCreate(StringToText(lv_crosshair), 24, CameraGetTarget(1), 0.0, true, false, PlayerGroupSingle(1));
+    libUTIL_gv_crosshair_marker = TextTagLastCreated();
+    TextTagShow(libUTIL_gv_crosshair_marker, PlayerGroupSingle(1), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RunCrossHair_Init () {
+    libUTIL_gt_RunCrossHair = TriggerCreate("libUTIL_gt_RunCrossHair_Func");
+    TriggerEnable(libUTIL_gt_RunCrossHair, false);
+    TriggerAddEventCameraMove(libUTIL_gt_RunCrossHair, 1, c_cameraMoveReasonAny);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Crosshair
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleCrosshair_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isCrosshairEnabled = !(libUTIL_gv_isCrosshairEnabled);
+    if ((libUTIL_gv_isCrosshairEnabled == true)) {
+        TriggerEnable(libUTIL_gt_RunCrossHair, true);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned on Crosshair"));
+    }
+    else {
+        TriggerEnable(libUTIL_gt_RunCrossHair, false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Turned off Crosshair"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleCrosshair_Init () {
+    libUTIL_gt_ToggleCrosshair = TriggerCreate("libUTIL_gt_ToggleCrosshair_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleCrosshair, c_playerAny, "tch", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleCrosshair, c_playerAny, "togglecrosshair", true);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -781,6 +851,8 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_MinionWaveInterval_Init();
     libUTIL_gt_FloatingCombatText_Init();
     libUTIL_gt_DisplayString_Init();
+    libUTIL_gt_RunCrossHair_Init();
+    libUTIL_gt_ToggleCrosshair_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

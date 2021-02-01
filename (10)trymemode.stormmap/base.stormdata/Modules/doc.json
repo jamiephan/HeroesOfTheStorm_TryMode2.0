@@ -31,6 +31,23 @@
             },
             "commands": [
                 {
+                    "shortCommand": "tch",
+                    "command": "togglecrosshair",
+                    "description": "Toggle to show a crosshair on the center of the camera. This allows for e.g more precise placement of [summon units](#cmd-summon) and [adding effects](#cmd-addeffectcamera).",
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Toggle showing crosshair"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Toggle showing crosshair"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "tdb",
                     "command": "toggledebugmode",
                     "description": "Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)",
