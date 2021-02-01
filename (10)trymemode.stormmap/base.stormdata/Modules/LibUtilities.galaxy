@@ -5,6 +5,9 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Constants
+const int libUTIL_gv_markerlength = 20;
+
 // Variable Declarations
 bool libUTIL_gv_isUIEnabled;
 revealer libUTIL_gv_revealer;
@@ -14,6 +17,13 @@ int libUTIL_gv_massCDRPlayer;
 bool libUTIL_gv_isACTSEnabled;
 int libUTIL_gv_crosshair_marker;
 bool libUTIL_gv_isCrosshairEnabled;
+int[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_tag;
+color[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_color;
+point[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_location;
+
+// Function Declarations
+void libUTIL_gf_ShowMarker (int lp_markerid, point lp_location);
+void libUTIL_gf_RemoveMarker (int lp_markerid);
 
 // Trigger Declarations
 trigger libUTIL_gt_MapInit;
@@ -37,6 +47,12 @@ trigger libUTIL_gt_FloatingCombatText;
 trigger libUTIL_gt_DisplayString;
 trigger libUTIL_gt_RunCrossHair;
 trigger libUTIL_gt_ToggleCrosshair;
+trigger libUTIL_gt_AddMarkerUnit;
+trigger libUTIL_gt_AddMarkerCamera;
+trigger libUTIL_gt_GetMarkerPosition;
+trigger libUTIL_gt_ChangeMarkerColor;
+trigger libUTIL_gt_RemoveMarker;
+trigger libUTIL_gt_ClearMarkers;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -55,6 +71,8 @@ void libUTIL_InitLibraries () {
 bool libUTIL_InitVariables_completed = false;
 
 void libUTIL_InitVariables () {
+    int init_i;
+
     if (libUTIL_InitVariables_completed) {
         return;
     }
@@ -64,6 +82,31 @@ void libUTIL_InitVariables () {
     libUTIL_gv_isUIEnabled = true;
     libUTIL_gv_isFOWEnabled = true;
     libUTIL_gv_crosshair_marker = c_textTagNone;
+    for (init_i = 0; init_i <= libUTIL_gv_markerlength; init_i += 1) {
+        libUTIL_gv_markers_tag[init_i] = c_textTagNone;
+    }
+    for (init_i = 0; init_i <= libUTIL_gv_markerlength; init_i += 1) {
+        libUTIL_gv_markers_color[init_i] = Color(RandomFixed(0.0, 255.0), RandomFixed(0.0, 255.0), RandomFixed(0.0, 255.0));
+    }
+}
+
+// Functions
+void libUTIL_gf_ShowMarker (int lp_markerid, point lp_location) {
+    // Automatic Variable Declarations
+    // Implementation
+    TextTagDestroy(libUTIL_gv_markers_tag[lp_markerid]);
+    TextTagCreate(StringToText("X"), 24, lp_location, 0.0, true, false, PlayerGroupAll());
+    TextTagSetColor(TextTagLastCreated(), c_textTagColorText, libUTIL_gv_markers_color[lp_markerid]);
+    libUTIL_gv_markers_tag[lp_markerid] = TextTagLastCreated();
+    libUTIL_gv_markers_location[lp_markerid] = lp_location;
+}
+
+void libUTIL_gf_RemoveMarker (int lp_markerid) {
+    // Automatic Variable Declarations
+    // Implementation
+    TextTagDestroy(libUTIL_gv_markers_tag[lp_markerid]);
+    libUTIL_gv_markers_tag[lp_markerid] = c_textTagNone;
+    libUTIL_gv_markers_location[lp_markerid] = null;
 }
 
 // Triggers
@@ -832,6 +875,277 @@ void libUTIL_gt_ToggleCrosshair_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ToggleCrosshair, c_playerAny, "togglecrosshair", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Marker (Unit)
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_AddMarkerUnit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_markerId;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "marker") || (StringWord(EventChatMessage(false), 1) == "addmarker")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <marker|addmarker> <MarkerId>"));
+    }
+    else {
+        lv_markerId = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_markerId > libUTIL_gv_markerlength) || (lv_markerId < 1))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: Marker ID must between 1 - " + IntToString(libUTIL_gv_markerlength))));
+            return false;
+        }
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added Marker " + IntToString(lv_markerId)) + (" at unit location: " + libNtve_gf_ConvertPointToString(UnitGetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1)))))));
+        lv_markerId = (lv_markerId - 1);
+        libUTIL_gf_ShowMarker(lv_markerId, UnitGetPosition(UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1)));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_AddMarkerUnit_Init () {
+    libUTIL_gt_AddMarkerUnit = TriggerCreate("libUTIL_gt_AddMarkerUnit_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_AddMarkerUnit, c_playerAny, "marker", false);
+    TriggerAddEventChatMessage(libUTIL_gt_AddMarkerUnit, c_playerAny, "addmarker", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Add Marker (Camera)
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_AddMarkerCamera_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_markerId;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "markerc") || (StringWord(EventChatMessage(false), 1) == "addmarkercamera")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <markerc|addmarkercamera> <MarkerId>"));
+    }
+    else {
+        lv_markerId = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_markerId > libUTIL_gv_markerlength) || (lv_markerId < 1))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: Marker ID must between 1 - " + IntToString(libUTIL_gv_markerlength))));
+            return false;
+        }
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added Marker " + IntToString(lv_markerId)) + (" at camera location: " + libNtve_gf_ConvertPointToString(CameraGetTarget(EventPlayer()))))));
+        lv_markerId = (lv_markerId - 1);
+        libUTIL_gf_ShowMarker(lv_markerId, CameraGetTarget(EventPlayer()));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_AddMarkerCamera_Init () {
+    libUTIL_gt_AddMarkerCamera = TriggerCreate("libUTIL_gt_AddMarkerCamera_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_AddMarkerCamera, c_playerAny, "markerc", false);
+    TriggerAddEventChatMessage(libUTIL_gt_AddMarkerCamera, c_playerAny, "addmarkercamera", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Marker Position
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_GetMarkerPosition_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_markerId;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "gmarker") || (StringWord(EventChatMessage(false), 1) == "getmarker")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <gmarker|getmarker> <MarkerId>"));
+    }
+    else {
+        lv_markerId = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_markerId > libUTIL_gv_markerlength) || (lv_markerId < 1))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: Marker ID must between 1 - " + IntToString(libUTIL_gv_markerlength))));
+            return false;
+        }
+
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText((("Marker " + IntToString(lv_markerId)) + (" location: " + libNtve_gf_ConvertPointToString(libUTIL_gv_markers_location[(lv_markerId - 1)])))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_GetMarkerPosition_Init () {
+    libUTIL_gt_GetMarkerPosition = TriggerCreate("libUTIL_gt_GetMarkerPosition_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_GetMarkerPosition, c_playerAny, "gmarker", false);
+    TriggerAddEventChatMessage(libUTIL_gt_GetMarkerPosition, c_playerAny, "getmarker", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Change Marker Color
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ChangeMarkerColor_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_markerId;
+    int lv_red;
+    int lv_green;
+    int lv_blue;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "colmarker") || (StringWord(EventChatMessage(false), 1) == "colormarker")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((StringWord(EventChatMessage(false), 2) == null) || (StringWord(EventChatMessage(false), 3) == null) || (StringWord(EventChatMessage(false), 4) == null) || (StringWord(EventChatMessage(false), 5) == null))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <colmarker|colormarker> <MarkerId> <Red> <Green> <Blue>"));
+    }
+    else {
+        lv_markerId = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_markerId > libUTIL_gv_markerlength) || (lv_markerId < 1))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: Marker ID must between 1 - " + IntToString(libUTIL_gv_markerlength))));
+            return false;
+        }
+
+        lv_red = StringToInt(StringWord(EventChatMessage(false), 3));
+        lv_green = StringToInt(StringWord(EventChatMessage(false), 4));
+        lv_blue = StringToInt(StringWord(EventChatMessage(false), 5));
+        if ((((lv_red > 255) || (lv_red < 0)) || ((lv_green > 255) || (lv_green < 0)) || ((lv_blue > 255) || (lv_blue < 0)))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Red, Green and Blue value must between 0 - 255"));
+            return false;
+        }
+
+        libUTIL_gv_markers_color[(lv_markerId - 1)] = Color(lv_red, lv_green, lv_blue);
+        TextTagSetColor(libUTIL_gv_markers_tag[(lv_markerId - 1)], c_textTagColorText, libUTIL_gv_markers_color[(lv_markerId - 1)]);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Changed Marker " + IntToString(lv_markerId)) + (" color to: " + libNtve_gf_ConvertColorToString(Color(lv_red, lv_green, lv_blue))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ChangeMarkerColor_Init () {
+    libUTIL_gt_ChangeMarkerColor = TriggerCreate("libUTIL_gt_ChangeMarkerColor_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ChangeMarkerColor, c_playerAny, "colmarker", false);
+    TriggerAddEventChatMessage(libUTIL_gt_ChangeMarkerColor, c_playerAny, "colormarker", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Marker
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RemoveMarker_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_markerId;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rmmarker") || (StringWord(EventChatMessage(false), 1) == "removemarker")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <rmmarker|removemarker> <MarkerId>"));
+    }
+    else {
+        lv_markerId = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_markerId > libUTIL_gv_markerlength) || (lv_markerId < 1))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: Marker ID must between 1 - " + IntToString(libUTIL_gv_markerlength))));
+            return false;
+        }
+
+    }
+    libUTIL_gf_RemoveMarker((lv_markerId - 1));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Removed Marker " + IntToString(lv_markerId))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RemoveMarker_Init () {
+    libUTIL_gt_RemoveMarker = TriggerCreate("libUTIL_gt_RemoveMarker_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_RemoveMarker, c_playerAny, "rmmarker", false);
+    TriggerAddEventChatMessage(libUTIL_gt_RemoveMarker, c_playerAny, "removemarker", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Clear Markers
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ClearMarkers_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+
+    // Automatic Variable Declarations
+    const int autoA86BF384_ae = libUTIL_gv_markerlength;
+    const int autoA86BF384_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_i = 0;
+    for ( ; ( (autoA86BF384_ai >= 0 && lv_i <= autoA86BF384_ae) || (autoA86BF384_ai < 0 && lv_i >= autoA86BF384_ae) ) ; lv_i += autoA86BF384_ai ) {
+        libUTIL_gf_RemoveMarker(lv_i);
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Removed All Markers"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ClearMarkers_Init () {
+    libUTIL_gt_ClearMarkers = TriggerCreate("libUTIL_gt_ClearMarkers_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ClearMarkers, c_playerAny, "clmarker", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ClearMarkers, c_playerAny, "clearmarker", true);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -854,6 +1168,12 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_DisplayString_Init();
     libUTIL_gt_RunCrossHair_Init();
     libUTIL_gt_ToggleCrosshair_Init();
+    libUTIL_gt_AddMarkerUnit_Init();
+    libUTIL_gt_AddMarkerCamera_Init();
+    libUTIL_gt_GetMarkerPosition_Init();
+    libUTIL_gt_ChangeMarkerColor_Init();
+    libUTIL_gt_RemoveMarker_Init();
+    libUTIL_gt_ClearMarkers_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

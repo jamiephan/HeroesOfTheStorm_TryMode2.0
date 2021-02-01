@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 01 Feb 2021 18:50:28 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 01 Feb 2021 19:19:07 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -28,9 +28,17 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 - 📙 [Utilities](#lib-LibUTIL)
 
+  - 💭 [Command: `addmarker`](#cmd-addmarker)
+
+  - 💭 [Command: `addmarkercamera`](#cmd-addmarkercamera)
+
   - 💭 [Command: `alliancecontrolteamselection`](#cmd-alliancecontrolteamselection)
 
   - 💭 [Command: `clear`](#cmd-clear)
+
+  - 💭 [Command: `clearmarker`](#cmd-clearmarker)
+
+  - 💭 [Command: `colormarker`](#cmd-colormarker)
 
   - 💭 [Command: `endgame`](#cmd-endgame)
 
@@ -38,9 +46,13 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `forceruntrigger`](#cmd-forceruntrigger)
 
+  - 💭 [Command: `getmarker`](#cmd-getmarker)
+
   - 💭 [Command: `loadmap`](#cmd-loadmap)
 
   - 💭 [Command: `minionwaveinterval`](#cmd-minionwaveinterval)
+
+  - 💭 [Command: `removemarker`](#cmd-removemarker)
 
   - 💭 [Command: `resetcameraobject`](#cmd-resetcameraobject)
 
@@ -179,6 +191,73 @@ This module is for loading other modules. **DO NOT** modify this file in SC2Edit
 # 📙 Utilities Library (`LibUtilities.galaxy`):
 A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
+<a name="cmd-addmarker"></a>
+
+## (`addmarker` | `marker`) `<MarkerID>`
+<a name="cmd-addmarker-description"></a>
+
+#### ✏ Description: 
+Add a marker at the position of the first selected unit.
+
+<a name="cmd-addmarker-parameters"></a>
+
+#### ⚙ Parameters:
+    <MarkerID>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Marker ID to be added (up to 20).
+<a name="cmd-addmarker-examples"></a>
+
+#### 🔧 Examples:
+    > marker 1
+    	(Add marker 1 at the position of the first selected unit.)
+    > addmarker 10
+    	(Add marker 10 at the position of the first selected unit.)
+<a name="cmd-addmarker-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-addmarkercamera"></a>
+
+## (`addmarkercamera` | `markerc`) `<MarkerID>`
+<a name="cmd-addmarkercamera-description"></a>
+
+#### ✏ Description: 
+Add a marker at the center position of the camera.
+Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely.
+
+<a name="cmd-addmarkercamera-parameters"></a>
+
+#### ⚙ Parameters:
+    <MarkerID>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Marker ID to be added (up to 20).
+<a name="cmd-addmarkercamera-examples"></a>
+
+#### 🔧 Examples:
+    > markerc 1
+    	(Add marker 1 at the center position of the camera.)
+    > addmarkercamera 10
+    	(Add marker 10 at the center position of the camera.)
+<a name="cmd-addmarkercamera-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-alliancecontrolteamselection"></a>
 
 ## (`alliancecontrolteamselection` | `acts`) 
@@ -234,6 +313,84 @@ Clear all text messages, including chat and debug messages with an optional dela
     > clear 5.4
     	(Clear all texts after 5.4 seconds)
 <a name="cmd-clear-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-clearmarker"></a>
+
+## (`clearmarker` | `clmarker`) 
+<a name="cmd-clearmarker-description"></a>
+
+#### ✏ Description: 
+Clear all created markers.
+
+<a name="cmd-clearmarker-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+<a name="cmd-clearmarker-examples"></a>
+
+#### 🔧 Examples:
+    > clmarker
+    	(Clear all created markers.)
+    > clearmarker
+    	(Clear all created markers.)
+<a name="cmd-clearmarker-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-colormarker"></a>
+
+## (`colormarker` | `colmarker`) `<MarkerID>` `<Red>` `<Green>` `<Blue>`
+<a name="cmd-colormarker-description"></a>
+
+#### ✏ Description: 
+Change the color of the specific marker with RGB value. This also applies to future markers.
+> Note: The color of each marker will be generated randomly when the game started.
+
+<a name="cmd-colormarker-parameters"></a>
+
+#### ⚙ Parameters:
+    <MarkerID>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Marker ID to be added (up to 20).
+    <Red>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Red color of the marker's RGB color. (0 - 255)
+    <Green>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Green color of the marker's RGB color. (0 - 255)
+    <Blue>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Blue color of the marker's RGB color. (0 - 255)
+<a name="cmd-colormarker-examples"></a>
+
+#### 🔧 Examples:
+    > colmarker 1 255 0 0
+    	(Change Marker 1 color to 255, 0, 0  (Red))
+    > colormarker 10 0 0 0
+    	(Change Marker 10 color to 0, 0, 0  (Black))
+    > colormarker 10 0 0 0
+    	(Change Marker 10 color to 0, 255, 255  (Cyan))
+<a name="cmd-colormarker-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
@@ -377,6 +534,39 @@ Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-getmarker"></a>
+
+## (`getmarker` | `gmarker`) `<MarkerID>`
+<a name="cmd-getmarker-description"></a>
+
+#### ✏ Description: 
+Get a Markers position in (X, Y, Z).
+
+<a name="cmd-getmarker-parameters"></a>
+
+#### ⚙ Parameters:
+    <MarkerID>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Marker ID to be added (up to 20).
+<a name="cmd-getmarker-examples"></a>
+
+#### 🔧 Examples:
+    > gmarker 1
+    	(Get the position of Marker 1 in (X, Y, Z).)
+    > getmarker 10
+    	(Get the position of Marker 10 in (X, Y, Z).)
+<a name="cmd-getmarker-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-loadmap"></a>
 
 ## (`loadmap` | `lm`) `<MapPath>`
@@ -449,6 +639,39 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
     > mwi 100
     	(Set the minion wave to spawn every 100 seconds.)
 <a name="cmd-minionwaveinterval-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-removemarker"></a>
+
+## (`removemarker` | `rmmarker`) `<MarkerID>`
+<a name="cmd-removemarker-description"></a>
+
+#### ✏ Description: 
+Removes a specific marker.
+
+<a name="cmd-removemarker-parameters"></a>
+
+#### ⚙ Parameters:
+    <MarkerID>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the Marker ID to be added (up to 20).
+<a name="cmd-removemarker-examples"></a>
+
+#### 🔧 Examples:
+    > rmmarker 1
+    	(Removed Marker 1)
+    > removemarker 10
+    	(Removed Marker 10)
+<a name="cmd-removemarker-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

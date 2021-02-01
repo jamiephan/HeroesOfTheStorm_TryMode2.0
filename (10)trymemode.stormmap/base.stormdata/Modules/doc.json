@@ -31,6 +31,179 @@
             },
             "commands": [
                 {
+                    "shortCommand": "marker",
+                    "command": "addmarker",
+                    "description": [
+                        "Add a marker at the position of the first selected unit."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MarkerID",
+                            "required": true,
+                            "description": "Defines the Marker ID to be added (up to 20).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 1",
+                            "description": "Add marker 1 at the position of the first selected unit."
+                        },
+                        {
+                            "command": "{command} 10",
+                            "description": "Add marker 10 at the position of the first selected unit."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "markerc",
+                    "command": "addmarkercamera",
+                    "description": [
+                        "Add a marker at the center position of the camera.",
+                        "Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MarkerID",
+                            "required": true,
+                            "description": "Defines the Marker ID to be added (up to 20).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 1",
+                            "description": "Add marker 1 at the center position of the camera."
+                        },
+                        {
+                            "command": "{command} 10",
+                            "description": "Add marker 10 at the center position of the camera."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "gmarker",
+                    "command": "getmarker",
+                    "description": [
+                        "Get a Markers position in (X, Y, Z)."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MarkerID",
+                            "required": true,
+                            "description": "Defines the Marker ID to be added (up to 20).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 1",
+                            "description": "Get the position of Marker 1 in (X, Y, Z)."
+                        },
+                        {
+                            "command": "{command} 10",
+                            "description": "Get the position of Marker 10 in (X, Y, Z)."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "colmarker",
+                    "command": "colormarker",
+                    "description": [
+                        "Change the color of the specific marker with RGB value. This also applies to future markers.",
+                        "> Note: The color of each marker will be generated randomly when the game started."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MarkerID",
+                            "required": true,
+                            "description": "Defines the Marker ID to be added (up to 20).",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "Red",
+                            "required": true,
+                            "description": "Defines the Red color of the marker's RGB color. (0 - 255)",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "Green",
+                            "required": true,
+                            "description": "Defines the Green color of the marker's RGB color. (0 - 255)",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "Blue",
+                            "required": true,
+                            "description": "Defines the Blue color of the marker's RGB color. (0 - 255)",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 1 255 0 0",
+                            "description": "Change Marker 1 color to 255, 0, 0  (Red)"
+                        },
+                        {
+                            "command": "{command} 10 0 0 0",
+                            "description": "Change Marker 10 color to 0, 0, 0  (Black)"
+                        },
+                        {
+                            "command": "{command} 10 0 0 0",
+                            "description": "Change Marker 10 color to 0, 255, 255  (Cyan)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmmarker",
+                    "command": "removemarker",
+                    "description": [
+                        "Removes a specific marker."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "MarkerID",
+                            "required": true,
+                            "description": "Defines the Marker ID to be added (up to 20).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 1",
+                            "description": "Removed Marker 1"
+                        },
+                        {
+                            "command": "{command} 10",
+                            "description": "Removed Marker 10"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "clmarker",
+                    "command": "clearmarker",
+                    "description": [
+                        "Clear all created markers."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Clear all created markers."
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Clear all created markers."
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "tch",
                     "command": "togglecrosshair",
                     "description": "Toggle to show a crosshair on the center of the camera. This allows for e.g more precise placement of [summon units](#cmd-summon) and [adding effects](#cmd-addeffectcamera).",
