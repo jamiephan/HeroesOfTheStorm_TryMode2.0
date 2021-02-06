@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 06 Feb 2021 18:45:32 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 06 Feb 2021 18:52:02 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -233,7 +233,8 @@ Add a marker at the position of the first selected unit.
 
 #### ✏ Description: 
 Add a marker at the center position of the camera.
-Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely.
+
+>Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely.
 
 <a name="cmd-addmarkercamera-parameters"></a>
 
@@ -945,12 +946,17 @@ Toggle Fog Of War. This can enable or disable full map vision.
 
 #### ✏ Description: 
 ![trm screenshot](https://i.imgur.com/d4fg4Oj.png)
+
 Toggle random movement for selected units.
+
 This command will create a circle on the center of your camera. The selected units will start moving randomly in the circle.
 This allows to practice various stuff such as skill-shots.
 Run this command to turn off this functionality.
+
 >Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) to select desired units, then use [summon units](#cmd-summon) to let them move randomly.
+
 >Tip: Also use [`addbehavior`](#cmd-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable their auto attacks,
+
 >Note: You can still command the units that are moving randomly, but after all the commands are finished (e.g stopped), it will start moving randomly again to the circle
 
 <a name="cmd-togglerandommovement-parameters"></a>
