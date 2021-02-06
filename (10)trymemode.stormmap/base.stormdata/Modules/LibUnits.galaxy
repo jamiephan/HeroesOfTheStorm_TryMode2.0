@@ -1434,7 +1434,13 @@ bool libUNIT_gt_ModifyUnitProperty_Func (bool testConds, bool runActions) {
         lv_type = c_unitPropLifeExpectedPercent;
     }
     else {
-        lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+        if ((IntToString(StringToInt(StringWord(EventChatMessage(false), 2))) == StringWord(EventChatMessage(false), 2))) {
+            lv_type = StringToInt(StringWord(EventChatMessage(false), 2));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Invalid Unit Property: " + StringWord(EventChatMessage(false), 2))));
+            return true;
+        }
     }
     if ((StringWord(EventChatMessage(false), 3) != null)) {
         lv_value = StringToFixed(StringWord(EventChatMessage(false), 3));
