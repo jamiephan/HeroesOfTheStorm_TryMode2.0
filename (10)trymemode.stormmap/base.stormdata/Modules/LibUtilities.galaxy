@@ -7,6 +7,7 @@ include "TriggerLibs/NativeLib"
 
 // Constants
 const int libUTIL_gv_markerlength = 20;
+const int libUTIL_gv_randomMovementTextTagsLength = 360;
 
 // Variable Declarations
 bool libUTIL_gv_isUIEnabled;
@@ -20,6 +21,11 @@ bool libUTIL_gv_isCrosshairEnabled;
 int[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_tag;
 color[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_color;
 point[libUTIL_gv_markerlength + 1] libUTIL_gv_markers_location;
+int[libUTIL_gv_randomMovementTextTagsLength + 1] libUTIL_gv_radomMovementTextTags;
+int libUTIL_gv_radomMovementCenterMessageTextTag;
+unitgroup libUTIL_gv_randomMovementUnits;
+region libUTIL_gv_randomMovementRegion;
+bool libUTIL_gv_isRunningRandomMovement;
 
 // Function Declarations
 void libUTIL_gf_ShowMarker (int lp_markerid, point lp_location);
@@ -53,6 +59,8 @@ trigger libUTIL_gt_GetMarkerPosition;
 trigger libUTIL_gt_ChangeMarkerColor;
 trigger libUTIL_gt_RemoveMarker;
 trigger libUTIL_gt_ClearMarkers;
+trigger libUTIL_gt_RunRandomMovement;
+trigger libUTIL_gt_ToggleRandomMovement;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -88,6 +96,11 @@ void libUTIL_InitVariables () {
     for (init_i = 0; init_i <= libUTIL_gv_markerlength; init_i += 1) {
         libUTIL_gv_markers_color[init_i] = Color(RandomFixed(0.0, 255.0), RandomFixed(0.0, 255.0), RandomFixed(0.0, 255.0));
     }
+    for (init_i = 0; init_i <= libUTIL_gv_randomMovementTextTagsLength; init_i += 1) {
+        libUTIL_gv_radomMovementTextTags[init_i] = c_textTagNone;
+    }
+    libUTIL_gv_radomMovementCenterMessageTextTag = c_textTagNone;
+    libUTIL_gv_randomMovementUnits = UnitGroupEmpty();
 }
 
 // Functions
@@ -1146,6 +1159,130 @@ void libUTIL_gt_ClearMarkers_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ClearMarkers, c_playerAny, "clearmarker", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run Random Movement
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RunRandomMovement_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    point lv_randompoint;
+    unit lv_currentUnit;
+    string lv_unittype;
+
+    // Automatic Variable Declarations
+    unitgroup autoBF288A2B_g;
+    int autoBF288A2B_u;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoBF288A2B_g = libUTIL_gv_randomMovementUnits;
+    autoBF288A2B_u = UnitGroupCount(autoBF288A2B_g, c_unitCountAll);
+    for (;; autoBF288A2B_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoBF288A2B_g, autoBF288A2B_u);
+        if (lv_currentUnit == null) { break; }
+        lv_randompoint = RegionRandomPoint(libUTIL_gv_randomMovementRegion);
+        lv_unittype = UnitGetType(lv_currentUnit);
+        if ((UnitOrderCount(lv_currentUnit) == 0)) {
+            UnitIssueOrder(lv_currentUnit, OrderTargetingPoint(AbilityCommand("move", 0), lv_randompoint), c_orderQueueAddToEnd);
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RunRandomMovement_Init () {
+    libUTIL_gt_RunRandomMovement = TriggerCreate("libUTIL_gt_RunRandomMovement_Func");
+    TriggerEnable(libUTIL_gt_RunRandomMovement, false);
+    TriggerAddEventTimePeriodic(libUTIL_gt_RunRandomMovement, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Random Movement
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleRandomMovement_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_radius;
+    const int lv_texttagInterval = 1;
+    fixed lv_circle_x;
+    fixed lv_circle_y;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    const int auto04AA997A_ae = libUTIL_gv_randomMovementTextTagsLength;
+    const int auto04AA997A_ai = 1;
+    const int auto67597715_ae = 360;
+    const int auto67597715_ai = lv_texttagInterval;
+
+    // Variable Initialization
+    lv_radius = 7.0;
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "trm") || (StringWord(EventChatMessage(false), 1) == "togglerandommovement")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUTIL_gv_isRunningRandomMovement = !(libUTIL_gv_isRunningRandomMovement);
+    if ((libUTIL_gv_isRunningRandomMovement == true)) {
+        if (((StringWord(EventChatMessage(false), 2) != null) && (StringToInt(StringWord(EventChatMessage(false), 2)) > 0))) {
+            lv_radius = StringToFixed(StringWord(EventChatMessage(false), 2));
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Random Movment Radius Set to: " + FixedToString(lv_radius, c_fixedPrecisionAny))));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Random Movment Radius Set to: " + FixedToString(lv_radius, c_fixedPrecisionAny))));
+        }
+    }
+
+    if ((libUTIL_gv_isRunningRandomMovement == true)) {
+        libUTIL_gv_randomMovementRegion = RegionCircle(CameraGetTarget(EventPlayer()), lv_radius);
+        libUTIL_gv_randomMovementUnits = UnitGroupSelected(EventPlayer());
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Toggle Random Movement Enabled"));
+        lv_i = 0;
+        for ( ; ( (auto67597715_ai >= 0 && lv_i <= auto67597715_ae) || (auto67597715_ai < 0 && lv_i >= auto67597715_ae) ) ; lv_i += auto67597715_ai ) {
+            lv_circle_x = (PointGetX(CameraGetTarget(EventPlayer())) + (lv_radius * Cos(IntToFixed(lv_i))));
+            lv_circle_y = (PointGetY(CameraGetTarget(EventPlayer())) + (lv_radius * Sin(IntToFixed(lv_i))));
+            TextTagCreate(StringToText("."), 12, Point(lv_circle_x, lv_circle_y), 0.0, true, false, PlayerGroupAll());
+            libUTIL_gv_radomMovementTextTags[lv_i] = TextTagLastCreated();
+        }
+        TextTagCreate(StringToText(("Random Movement Area: Radius=" + FixedToString(lv_radius, c_fixedPrecisionAny))), 12, CameraGetTarget(EventPlayer()), 0.0, true, false, PlayerGroupAll());
+        TextTagSetColor(TextTagLastCreated(), c_textTagColorText, Color(28*100/255,167*100/255,234*100/255));
+        libUTIL_gv_radomMovementCenterMessageTextTag = TextTagLastCreated();
+        TriggerEnable(libUTIL_gt_RunRandomMovement, true);
+    }
+    else {
+        libUTIL_gv_randomMovementRegion = null;
+        libUTIL_gv_randomMovementUnits = null;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Toggle Random Movement Disabled"));
+        lv_i = 0;
+        for ( ; ( (auto04AA997A_ai >= 0 && lv_i <= auto04AA997A_ae) || (auto04AA997A_ai < 0 && lv_i >= auto04AA997A_ae) ) ; lv_i += auto04AA997A_ai ) {
+            TextTagDestroy(libUTIL_gv_radomMovementTextTags[lv_i]);
+            libUTIL_gv_radomMovementTextTags[lv_i] = c_textTagNone;
+        }
+        TextTagDestroy(libUTIL_gv_radomMovementCenterMessageTextTag);
+        libUTIL_gv_radomMovementCenterMessageTextTag = c_textTagNone;
+        TriggerEnable(libUTIL_gt_RunRandomMovement, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleRandomMovement_Init () {
+    libUTIL_gt_ToggleRandomMovement = TriggerCreate("libUTIL_gt_ToggleRandomMovement_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleRandomMovement, c_playerAny, "trm", false);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleRandomMovement, c_playerAny, "togglerandommovement", false);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -1174,6 +1311,8 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ChangeMarkerColor_Init();
     libUTIL_gt_RemoveMarker_Init();
     libUTIL_gt_ClearMarkers_Init();
+    libUTIL_gt_RunRandomMovement_Init();
+    libUTIL_gt_ToggleRandomMovement_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

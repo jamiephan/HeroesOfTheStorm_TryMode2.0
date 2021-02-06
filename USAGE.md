@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 01 Feb 2021 19:19:07 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 06 Feb 2021 18:45:32 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -69,6 +69,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `toggledebugmode`](#cmd-toggledebugmode)
 
   - 💭 [Command: `togglefogofwar`](#cmd-togglefogofwar)
+
+  - 💭 [Command: `togglerandommovement`](#cmd-togglerandommovement)
 
   - 💭 [Command: `toggleui`](#cmd-toggleui)
 
@@ -926,6 +928,47 @@ Toggle Fog Of War. This can enable or disable full map vision.
     > togglefogofwar
     	(Toggle Full Map Vision)
 <a name="cmd-togglefogofwar-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-togglerandommovement"></a>
+
+## (`togglerandommovement` | `trm`) `[radius]`
+<a name="cmd-togglerandommovement-description"></a>
+
+#### ✏ Description: 
+![trm screenshot](https://i.imgur.com/d4fg4Oj.png)
+Toggle random movement for selected units.
+This command will create a circle on the center of your camera. The selected units will start moving randomly in the circle.
+This allows to practice various stuff such as skill-shots.
+Run this command to turn off this functionality.
+>Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) to select desired units, then use [summon units](#cmd-summon) to let them move randomly.
+>Tip: Also use [`addbehavior`](#cmd-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable their auto attacks,
+>Note: You can still command the units that are moving randomly, but after all the commands are finished (e.g stopped), it will start moving randomly again to the circle
+
+<a name="cmd-togglerandommovement-parameters"></a>
+
+#### ⚙ Parameters:
+    [radius]
+    	Required:	false
+    	Type:		float
+    	Usage:		The radius of the circle that units will be moved randomly
+    	Default:	7
+<a name="cmd-togglerandommovement-examples"></a>
+
+#### 🔧 Examples:
+    > trm 10
+    	(Toggle Random Movement with circle radius of 10.)
+    > togglerandommovement
+    	(Toggle Random Movement with circle radius of default 7.)
+<a name="cmd-togglerandommovement-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
