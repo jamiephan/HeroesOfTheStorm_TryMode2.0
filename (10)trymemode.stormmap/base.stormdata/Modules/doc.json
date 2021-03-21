@@ -31,6 +31,26 @@
             },
             "commands": [
                 {
+                    "shortCommand": "tcdr",
+                    "command": "togglecdr",
+                    "description": [
+                        "Toggle Mass CDR. This will reset the cooldown on all abilities on every game loop (0.0625s)",
+                        "This is useful to bypass the limit of trymode's Toggle Cooldown, as it have a 1.5s cooldown between each reset."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Toggle Mass CDR"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Toggle Mass CDR"
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "trm",
                     "command": "togglerandommovement",
                     "description": [
