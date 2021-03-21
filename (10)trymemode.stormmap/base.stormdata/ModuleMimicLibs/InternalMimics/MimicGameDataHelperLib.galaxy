@@ -1287,9 +1287,11 @@ void MimicGameDataHelperLib_gf_HeroFalstadIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroFalstadTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroFalstadTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightPing, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown, true);
     }
 
 }
@@ -1303,9 +1305,11 @@ void MimicGameDataHelperLib_gf_HeroFalstadDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroFalstadTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightPing, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown, false);
     }
 
 }
@@ -10244,6 +10248,132 @@ void MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Falstad - Frequent Flyer - Hero Takedown
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_localPlayer;
+    unit lv_falstad;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_localPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(lv_localPlayer, "FalstadTailwindFrequentFlyer") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_falstad = libGame_gv_players[lv_localPlayer].lv_heroUnit;
+    UnitCreateEffectUnit(lv_falstad, "FalstadFrequentFlyerHeroKillIncreaseQuestToken", lv_falstad);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Init () {
+    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown = TriggerCreate("MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, false);
+    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Falstad - Frequent Flyer - NPC Kill
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_killingPlayer;
+    unit lv_killingHero;
+    unit lv_minion;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_killingPlayer = libGame_gf_HeroParticipatedInNPCTakedownKillingPlayer();
+    lv_killingHero = libGame_gv_players[lv_killingPlayer].lv_heroUnit;
+    lv_minion = libGame_gf_HeroParticipatedInNPCTakedownMinion();
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(lv_killingPlayer, "FalstadTailwindFrequentFlyer") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeSummoned) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeUser1) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMapBoss) == true))) {
+        return true;
+    }
+
+    if ((UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMinion) == true) && (UnitFilterMatch(lv_minion, lv_killingPlayer, UnitFilter(0, 0, (1 << c_targetFilterCreep) | (1 << c_targetFilterMerc), 0)) == true)) {
+        UnitCreateEffectUnit(lv_killingHero, "FalstadFrequentFlyerMinionKillIncreaseQuestToken", lv_killingHero);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Init () {
+    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill = TriggerCreate("MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, false);
+    libGame_gf_HeroParticipatedInNPCTakedown(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Falstad - Dishonorable Discharge Hero Kill Refresh Cooldown
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_localPlayer;
+    unit lv_Falstad;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_localPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(lv_localPlayer, "FalstadLightningRodDishonorableDischarge") == true))) {
+            return false;
+        }
+
+        if (!(((UnitGetType(libGame_gv_players[libGame_gf_HeroParticipatedInTakedownKillingPlayer()].lv_heroUnit) == "HeroFalstad") || (UnitGetType(libGame_gv_players[libGame_gf_HeroParticipatedInTakedownKillingPlayer()].lv_activeVehicle) == "HeroFalstad")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGetType(libGame_gv_players[libGame_gf_HeroParticipatedInTakedownKillingPlayer()].lv_heroUnit) == "HeroFalstad")) {
+        lv_Falstad = libGame_gv_players[libGame_gf_HeroParticipatedInTakedownKillingPlayer()].lv_heroUnit;
+    }
+    else {
+        lv_Falstad = libGame_gv_players[libGame_gf_HeroParticipatedInTakedownKillingPlayer()].lv_activeVehicle;
+    }
+    UnitCreateEffectUnit(lv_Falstad, "FalstadDishonorableDischargeHeroTakedownCooldownRefresh", lv_Falstad);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown_Init () {
+    MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown = TriggerCreate("MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown, false);
+    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Falstad - Wingman Variables
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables_Func (bool testConds, bool runActions) {
@@ -11764,7 +11894,18 @@ bool MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplif
     UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentMinionBehavior", lv_caster, 1);
     UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentBlessingsOfYulon", lv_caster, 1);
     UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentLightningSerpentBehavior", lv_caster, 1);
-    UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentSerpentSidekickOwnerBehavior", lv_caster, 1);
+    if ((PlayerHasTalent(lv_liLiPlayer, "LiLiMasteryCloudSerpentSerpentSidekick") == true) && (lv_liLiPlayer == UnitGetOwner(EventPlayerEffectUsedUnit(c_effectUnitTarget)))) {
+        UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentSerpentSidekickOwnerBehavior", lv_owningUnit, 1);
+    }
+
+    if ((PlayerHasTalent(lv_liLiPlayer, "LiLiWindSerpent") == true)) {
+        UnitBehaviorAdd(lv_owningUnit, "LiLiCloudSerpentWindSerpentTalentSpeedBuff", lv_cloudSerpent, 1);
+    }
+
+    if ((PlayerHasTalent(lv_liLiPlayer, "LiLiBlessingsOfYulon") == true)) {
+        UnitBehaviorAdd(lv_owningUnit, "LiLiCloudSerpentBlessingsOfYulonTalentBuff", lv_cloudSerpent, 1);
+    }
+
     UnitCreateEffectUnit(lv_owningUnit, "LiLiCloudSerpentApplyUnitLinkSerpent", lv_cloudSerpent);
     CatalogFieldValueSet(c_gameCatalogBehavior, "CloudSerpentMinionSpeedBoost", "Modification.UnifiedMoveSpeedFactor", lv_owningPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, "Mounted", "Modification.UnifiedMoveSpeedFactor", lv_owningPlayer));
     CatalogFieldValueSet(c_gameCatalogEffect, "CloudSerpentWeaponDamage", "Amount", lv_owningPlayer, CatalogFieldValueGet(c_gameCatalogEffect, "CloudSerpentWeaponDamage", "Amount", lv_liLiPlayer));
@@ -11921,6 +12062,10 @@ bool MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentSummonandSimplifiedAI_Func (b
     UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentMinionBehavior", lv_caster, 1);
     if ((PlayerHasTalent(EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster), "LiLiMasteryCloudSerpentLightningSerpent") == true)) {
         UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentLightningSerpentBehavior", lv_cloudSerpent, 1);
+    }
+
+    if ((PlayerHasTalent(EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster), "LiLiWindSerpent") == true)) {
+        UnitBehaviorAdd(lv_owningUnit, "LiLiCloudSerpentWindSerpentTalentSpeedBuff", lv_cloudSerpent, 1);
     }
 
     CatalogFieldValueSet(c_gameCatalogBehavior, "CloudSerpentMinionSpeedBoost", "Modification.UnifiedMoveSpeedFactor", lv_owningPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, "Mounted", "Modification.UnifiedMoveSpeedFactor", lv_owningPlayer));
@@ -23018,6 +23163,7 @@ void MimicGameDataHelperLib_gt_HeroThrallAncestralWrathChargeCountProc_Init () {
 bool MimicGameDataHelperLib_gt_HeroThrallEarthquakeEarthenShieldMasteryShieldApplication_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_unit;
+    unit lv_thrall;
     fixed lv_maxHealth;
     fixed lv_shieldHealthMod;
     fixed lv_totalShield;
@@ -23025,6 +23171,7 @@ bool MimicGameDataHelperLib_gt_HeroThrallEarthquakeEarthenShieldMasteryShieldApp
     // Automatic Variable Declarations
     // Variable Initialization
     lv_unit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    lv_thrall = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     lv_shieldHealthMod = 0.15;
 
     // Actions
@@ -23034,8 +23181,8 @@ bool MimicGameDataHelperLib_gt_HeroThrallEarthquakeEarthenShieldMasteryShieldApp
 
     lv_maxHealth = UnitGetPropertyFixed(lv_unit, c_unitPropLifeMax, c_unitPropCurrent);
     lv_totalShield = (lv_maxHealth * lv_shieldHealthMod);
-    CatalogFieldValueSetFixed(c_gameCatalogBehavior, "ThrallEarthenShield", "DamageResponse.ModifyLimit", UnitGetOwner(lv_unit), lv_totalShield);
-    UnitCreateEffectUnit(EventPlayerEffectUsedUnit(c_effectUnitCaster), "ThrallEarthquakeApplyEarthenShieldsMasteryBuff", lv_unit);
+    CatalogFieldValueSetFixed(c_gameCatalogBehavior, "ThrallEarthenShield", "DamageResponse.ModifyLimit", UnitGetOwner(lv_thrall), lv_totalShield);
+    UnitCreateEffectUnit(lv_thrall, "ThrallEarthquakeApplyEarthenShieldsMasteryBuff", lv_unit);
     return true;
 }
 
@@ -26090,6 +26237,9 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroFaerieDragonPixieCharmChargeCountProc_Init();
     MimicGameDataHelperLib_gt_HeroFalstadFlightPing_Init();
     MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore_Init();
+    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Init();
+    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Init();
+    MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown_Init();
     MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables_Init();
     MimicGameDataHelperLib_gt_HeroIllidanApplyFotBCooldownonInventoryUse_Init();
     MimicGameDataHelperLib_gt_HeroIllidanMetamorphosisAvatarApplyHealthBuff_Init();

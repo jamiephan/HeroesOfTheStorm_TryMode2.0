@@ -1356,7 +1356,6 @@
         <Buttons Face="LiLiMistweaver" Type="AbilCmd" AbilCmd="LiLiMistweaver,Execute" Behavior="LiLiMistweaver" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MLiLiSafetySprint">
-        <!-- Requirement Behavior Detected. Please add the behavior: LiLiHasSafetySprintCarry -->
         <Buttons Face="LiLiFastFeet" Type="AbilCmd" AbilCmd="LiLiSafetySprint,Execute" Behavior="LiLiSafetySprint" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MLiLiWaterDragon">
@@ -2082,6 +2081,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/FalstadData/FalstadData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MFalstadFrequentFlyerActive">
+        <Buttons Face="FalstadTailwindFrequentFlyerActive" Type="AbilCmd" AbilCmd="FalstadFrequentFlyerActive,Execute" Behavior="FalstadFrequentFlyerActive" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MFalstadTailwindCooldownDisplay">
         <Buttons Face="FalstadTailwind" Type="AbilCmd" AbilCmd="FalstadTailwindCooldownDisplay,Execute" Behavior="FalstadTailwindCooldownDisplay" />
     </CBehaviorAbility>
@@ -5473,6 +5475,61 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MLucioBackInTheMix">
+        <Buttons Face="LucioBackInTheMix" Type="AbilCmd" AbilCmd="LucioBackInTheMix,Execute" Behavior="LucioBackInTheMix" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSummerAnthem">
+        <Buttons Face="LucioItemSummerAnthem" Type="AbilCmd" AbilCmd="LucioSummerAnthem,Execute" Behavior="LucioSummerAnthem" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioAmpItUpUpToEleven">
+        <Buttons Face="LucioAmpItUpUpToEleven" Type="AbilCmd" AbilCmd="LucioAmpItUpUpToEleven,Execute" Behavior="LucioAmpItUpUpToEleven" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioAmpItUp">
+        <Buttons Face="LucioAmpItUp" Type="AbilCmd" AbilCmd="LucioAmpItUp,Execute" Behavior="LucioAmpItUp" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioWallRide">
+        <Buttons Face="LucioWallRide" Type="AbilCmd" AbilCmd="LucioWallRide,Execute" Behavior="LucioWallRide" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSoundBarrier">
+        <!-- Requirement Behavior Detected. Please add the behavior: LucioHasUltimate1AndNoSoundBarrierDelay -->
+        <Buttons Face="LucioSoundBarrier" Type="AbilCmd" AbilCmd="LucioSoundBarrier,Execute" Behavior="LucioSoundBarrier" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioReverseAmp">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="LucioReverseAmp" Type="AbilCmd" AbilCmd="LucioReverseAmp,Execute" Behavior="LucioReverseAmp" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioPushOff">
+        <Buttons Face="LucioPushOff" Type="AbilCmd" AbilCmd="LucioPushOff,Execute" Behavior="LucioPushOff" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSoundwave">
+        <Buttons Face="LucioSoundwave" Type="AbilCmd" AbilCmd="LucioSoundwave,Execute" Behavior="LucioSoundwave" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioBoombox">
+        <Buttons Face="LucioBoomboxBoombox" Type="AbilCmd" AbilCmd="LucioBoombox,Execute" Behavior="LucioBoombox" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSmartTargetingRightClick">
+        <Buttons Face="LucioSmartTargetingRightClick" Type="AbilCmd" AbilCmd="LucioSmartTargetingRightClick,Execute" Behavior="LucioSmartTargetingRightClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioTargetingAttackClick">
+        <Buttons Face="LucioSmartTargeting" Type="AbilCmd" AbilCmd="LucioTargetingAttackClick,Execute" Behavior="LucioTargetingAttackClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioHighFive">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFive,Execute" Behavior="LucioHighFive" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioHighFiveApproach">
+        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFiveApproach,Execute" Behavior="LucioHighFiveApproach" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioCrossfade">
+        <Buttons Face="LucioCrossfadeActivateHealingBoost" Type="AbilCmd" AbilCmd="LucioCrossfade,On" Behavior="LucioCrossfade" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/junkrat.stormmod/base.stormdata/GameData/JunkratData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MJunkratFragLauncher">
@@ -5527,61 +5584,6 @@
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/junkrat.stormmod/base.stormdata/GameData/JunkratData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MLucioBackInTheMix">
-        <Buttons Face="LucioBackInTheMix" Type="AbilCmd" AbilCmd="LucioBackInTheMix,Execute" Behavior="LucioBackInTheMix" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSummerAnthem">
-        <Buttons Face="LucioItemSummerAnthem" Type="AbilCmd" AbilCmd="LucioSummerAnthem,Execute" Behavior="LucioSummerAnthem" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioAmpItUpUpToEleven">
-        <Buttons Face="LucioAmpItUpUpToEleven" Type="AbilCmd" AbilCmd="LucioAmpItUpUpToEleven,Execute" Behavior="LucioAmpItUpUpToEleven" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioAmpItUp">
-        <Buttons Face="LucioAmpItUp" Type="AbilCmd" AbilCmd="LucioAmpItUp,Execute" Behavior="LucioAmpItUp" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioWallRide">
-        <Buttons Face="LucioWallRide" Type="AbilCmd" AbilCmd="LucioWallRide,Execute" Behavior="LucioWallRide" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSoundBarrier">
-        <!-- Requirement Behavior Detected. Please add the behavior: LucioHasUltimate1AndNoSoundBarrierDelay -->
-        <Buttons Face="LucioSoundBarrier" Type="AbilCmd" AbilCmd="LucioSoundBarrier,Execute" Behavior="LucioSoundBarrier" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioReverseAmp">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="LucioReverseAmp" Type="AbilCmd" AbilCmd="LucioReverseAmp,Execute" Behavior="LucioReverseAmp" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioPushOff">
-        <Buttons Face="LucioPushOff" Type="AbilCmd" AbilCmd="LucioPushOff,Execute" Behavior="LucioPushOff" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSoundwave">
-        <Buttons Face="LucioSoundwave" Type="AbilCmd" AbilCmd="LucioSoundwave,Execute" Behavior="LucioSoundwave" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioBoombox">
-        <Buttons Face="LucioBoomboxBoombox" Type="AbilCmd" AbilCmd="LucioBoombox,Execute" Behavior="LucioBoombox" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSmartTargetingRightClick">
-        <Buttons Face="LucioSmartTargetingRightClick" Type="AbilCmd" AbilCmd="LucioSmartTargetingRightClick,Execute" Behavior="LucioSmartTargetingRightClick" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioTargetingAttackClick">
-        <Buttons Face="LucioSmartTargeting" Type="AbilCmd" AbilCmd="LucioTargetingAttackClick,Execute" Behavior="LucioTargetingAttackClick" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioHighFive">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFive,Execute" Behavior="LucioHighFive" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioHighFiveApproach">
-        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFiveApproach,Execute" Behavior="LucioHighFiveApproach" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioCrossfade">
-        <Buttons Face="LucioCrossfadeActivateHealingBoost" Type="AbilCmd" AbilCmd="LucioCrossfade,On" Behavior="LucioCrossfade" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
