@@ -61,6 +61,7 @@ trigger libUTIL_gt_RemoveMarker;
 trigger libUTIL_gt_ClearMarkers;
 trigger libUTIL_gt_RunRandomMovement;
 trigger libUTIL_gt_ToggleRandomMovement;
+trigger libUTIL_gt_PlayCutscene;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -1283,6 +1284,48 @@ void libUTIL_gt_ToggleRandomMovement_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_ToggleRandomMovement, c_playerAny, "togglerandommovement", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Play Cutscene
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_PlayCutscene_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    string lv_cutscenePath;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_cutscenePath = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "pcs") || (StringWord(EventChatMessage(false), 1) == "playcutscene")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <pcs|playcutscene> <CutscenePath>"));
+    }
+    else {
+        lv_cutscenePath = StringWord(EventChatMessage(false), 2);
+        libMapM_gf_PlayMapMechanicIntroForPlayer(lv_player, lv_cutscenePath, "");
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_PlayCutscene_Init () {
+    libUTIL_gt_PlayCutscene = TriggerCreate("libUTIL_gt_PlayCutscene_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_PlayCutscene, c_playerAny, "pcs", false);
+    TriggerAddEventChatMessage(libUTIL_gt_PlayCutscene, c_playerAny, "playcutscene", false);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -1313,6 +1356,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ClearMarkers_Init();
     libUTIL_gt_RunRandomMovement_Init();
     libUTIL_gt_ToggleRandomMovement_Init();
+    libUTIL_gt_PlayCutscene_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

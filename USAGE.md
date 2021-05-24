@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 21 Mar 2021 03:03:51 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 24 May 2021 20:25:27 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -52,6 +52,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `minionwaveinterval`](#cmd-minionwaveinterval)
 
+  - 💭 [Command: `playcutscene`](#cmd-playcutscene)
+
   - 💭 [Command: `removemarker`](#cmd-removemarker)
 
   - 💭 [Command: `resetcameraobject`](#cmd-resetcameraobject)
@@ -98,7 +100,11 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `getbehavior`](#cmd-getbehavior)
 
+  - 💭 [Command: `getselectedunits`](#cmd-getselectedunits)
+
   - 💭 [Command: `getunitownership`](#cmd-getunitownership)
+
+  - 💭 [Command: `getunits`](#cmd-getunits)
 
   - 💭 [Command: `getweapon`](#cmd-getweapon)
 
@@ -644,6 +650,41 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
     > mwi 100
     	(Set the minion wave to spawn every 100 seconds.)
 <a name="cmd-minionwaveinterval-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-playcutscene"></a>
+
+## (`playcutscene` | `pcs`) `<mode>`
+<a name="cmd-playcutscene-description"></a>
+
+#### ✏ Description: 
+Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.
+
+The file path is relative to `*.stormmod/base.stormata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)
+
+<a name="cmd-playcutscene-parameters"></a>
+
+#### ⚙ Parameters:
+    <mode>
+    	Required:	true
+    	Type:		string
+    	Usage:		Defines the path of the *.StormCutscene file.
+<a name="cmd-playcutscene-examples"></a>
+
+#### 🔧 Examples:
+    > pcs Cutscenes/Tutorial_CursedHollow.StormCutscene
+    	(Plays the Tutorial Cutscene for Cursed Hollow)
+    > playcutscene Cutscenes/StoreMuradin.StormCutscene
+    	(Plays the Muradin Cutscene in the Collection Page (wait for 2 second to show Muradin))
+<a name="cmd-playcutscene-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
@@ -1404,6 +1445,40 @@ List all active behaviors for selected units.
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-getselectedunits"></a>
+
+## (`getselectedunits` | `gsu`) `[PlayerId]`
+<a name="cmd-getselectedunits-description"></a>
+
+#### ✏ Description: 
+Get all selected units from a specific player
+
+<a name="cmd-getselectedunits-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		Define which player to get all the units.
+    	Default:	The player id of whoever used this command.
+<a name="cmd-getselectedunits-examples"></a>
+
+#### 🔧 Examples:
+    > gsu
+    	(Get all selected units from whoever uses this command)
+    > getselectedunits 6
+    	(Get all selected units from Player 6)
+<a name="cmd-getselectedunits-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-getunitownership"></a>
 
 ## (`getunitownership` | `guo`) 
@@ -1424,6 +1499,42 @@ Gets the Ownership (Player ID) of selected unit(s).
     > getunitownership
     	(Gets the Ownership (Player ID) of selected unit(s).)
 <a name="cmd-getunitownership-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-getunits"></a>
+
+## (`getunits` | `gu`) `[PlayerId]`
+<a name="cmd-getunits-description"></a>
+
+#### ✏ Description: 
+Get all units owned by a specific players
+
+<a name="cmd-getunits-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		Define which player to get all the units.
+    	Default:	The player id of whoever used this command.
+<a name="cmd-getunits-examples"></a>
+
+#### 🔧 Examples:
+    > gu
+    	(Get all units own by whoever uses this command.)
+    > getunits 7
+    	(Get all units owned by Player 7)
+    > getunits 15
+    	(Get all units owned by Player 15 (Player 15 usually are neutral mercenary camps.))
+<a name="cmd-getunits-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

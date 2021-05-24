@@ -706,6 +706,34 @@
                             "description": "Shows the string \"Game Speed should not exceed 8.0....\" from supportlib"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "pcs",
+                    "command": "playcutscene",
+                    "description": [
+                        "Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.",
+                        "",
+                        "The file path is relative to `*.stormmod/base.stormata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "mode",
+                            "required": true,
+                            "description": "Defines the path of the *.StormCutscene file.",
+                            "type": "string"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} Cutscenes/Tutorial_CursedHollow.StormCutscene",
+                            "description": "Plays the Tutorial Cutscene for Cursed Hollow"
+                        },
+                        {
+                            "command": "{command} Cutscenes/StoreMuradin.StormCutscene",
+                            "description": "Plays the Muradin Cutscene in the Collection Page (wait for 2 second to show Muradin)"
+                        }
+                    ]
                 }
             ]
         },
@@ -719,6 +747,60 @@
                 "overrideMarkdownContent": null
             },
             "commands": [
+                {
+                    "shortCommand": "gu",
+                    "command": "getunits",
+                    "description": "Get all units owned by a specific players",
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "Define which player to get all the units.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Get all units own by whoever uses this command."
+                        },
+                        {
+                            "command": "{command} 7",
+                            "description": "Get all units owned by Player 7"
+                        },
+                        {
+                            "command": "{command} 15",
+                            "description": "Get all units owned by Player 15 (Player 15 usually are neutral mercenary camps.)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "gsu",
+                    "command": "getselectedunits",
+                    "description": "Get all selected units from a specific player",
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "Define which player to get all the units.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Get all selected units from whoever uses this command"
+                        },
+                        {
+                            "command": "{command} 6",
+                            "description": "Get all selected units from Player 6"
+                        }
+                    ]
+                },
                 {
                     "shortCommand": "ku",
                     "command": "killunits",

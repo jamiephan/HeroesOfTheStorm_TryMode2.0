@@ -73,6 +73,8 @@ trigger libUNIT_gt_ClearBehaviors;
 trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
+trigger libUNIT_gt_GetUnits;
+trigger libUNIT_gt_GetSelectedUnits;
 trigger libUNIT_gt_KillUnits;
 trigger libUNIT_gt_ReplaceUnits;
 trigger libUNIT_gt_SummonUnitPanelSetupPanel;
@@ -1527,6 +1529,118 @@ void libUNIT_gt_ToggleOutputID_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Get Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_GetUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_i;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    int autoF4F6F138_ae;
+    const int autoF4F6F138_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "getunits") || (StringWord(EventChatMessage(false), 1) == "gu")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+    }
+
+    if (((lv_player > 15) || (lv_player <= 0))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+        return false;
+    }
+
+    autoF4F6F138_ae = UnitCount(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    lv_i = 1;
+    for ( ; ( (autoF4F6F138_ai >= 0 && lv_i <= autoF4F6F138_ae) || (autoF4F6F138_ai < 0 && lv_i >= autoF4F6F138_ae) ) ; lv_i += autoF4F6F138_ai ) {
+        lv_unit = UnitGroupUnit(UnitGroup(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), lv_i);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText((("Player " + IntToString(lv_player)) + (" units: " + (UnitGetType(lv_unit))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_GetUnits_Init () {
+    libUNIT_gt_GetUnits = TriggerCreate("libUNIT_gt_GetUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_GetUnits, c_playerAny, "getunits", false);
+    TriggerAddEventChatMessage(libUNIT_gt_GetUnits, c_playerAny, "gu", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Selected Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_GetSelectedUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_i;
+    bool lv_shown;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    int auto0EF9B2E2_ae;
+    const int auto0EF9B2E2_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "getselectedunits") || (StringWord(EventChatMessage(false), 1) == "gsu")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+    }
+
+    if (((lv_player > 15) || (lv_player <= 0))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+        return false;
+    }
+
+    auto0EF9B2E2_ae = UnitGroupCount(UnitGroupSelected(lv_player), c_unitCountAll);
+    lv_i = 1;
+    for ( ; ( (auto0EF9B2E2_ai >= 0 && lv_i <= auto0EF9B2E2_ae) || (auto0EF9B2E2_ai < 0 && lv_i >= auto0EF9B2E2_ae) ) ; lv_i += auto0EF9B2E2_ai ) {
+        lv_unit = UnitGroupUnit(UnitGroupSelected(lv_player), lv_i);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText((("Player " + IntToString(lv_player)) + (" selected unit: " + ((UnitGetType(lv_unit)) + (" (Owner: Player " + (IntToString(UnitGetOwner(lv_unit)) + ")")))))));
+        lv_shown = true;
+    }
+    if ((lv_shown == false)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Player " + IntToString(lv_player)) + " does not have any unit selected.")));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_GetSelectedUnits_Init () {
+    libUNIT_gt_GetSelectedUnits = TriggerCreate("libUNIT_gt_GetSelectedUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_GetSelectedUnits, c_playerAny, "getselectedunits", false);
+    TriggerAddEventChatMessage(libUNIT_gt_GetSelectedUnits, c_playerAny, "gsu", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Kill Units
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_KillUnits_Func (bool testConds, bool runActions) {
@@ -2202,6 +2316,8 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_ModifyUnitProperty_Init();
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();
+    libUNIT_gt_GetUnits_Init();
+    libUNIT_gt_GetSelectedUnits_Init();
     libUNIT_gt_KillUnits_Init();
     libUNIT_gt_ReplaceUnits_Init();
     libUNIT_gt_SummonUnitPanelSetupPanel_Init();
