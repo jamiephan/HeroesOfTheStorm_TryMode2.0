@@ -76,7 +76,13 @@ typings/
 s2ma*/
 (10)trymemode.stormmap.*/
 
-# Custom XML Files ignore
-(10)trymemode.stormmap/base.stormdata/GameData.xml
-(10)trymemode.stormmap/base.stormdata/Includes.xml
-(10)trymemode.stormmap/base.stormdata/Mods/**/*
+# Ignore XML files
+(10)trymemode.stormmap/base.stormdata/Mods/*
+
+# Custom XML Files not to be ignored
+!(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/TestHero.xml
+!(10)trymemode.stormmap/base.stormdata/Mods/SystemMod/TestSystem.xml
+!(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml
+!(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/BehaviorMimic.xml
+!(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/PermaArmor.xml
+
