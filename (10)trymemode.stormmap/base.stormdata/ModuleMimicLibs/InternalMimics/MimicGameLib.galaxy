@@ -7412,6 +7412,7 @@ bool MimicGameLib_gf_HeroSelectionIsSkinAlreadyInUsebyAnyPlayer (int lp_skinInde
 
 int MimicGameLib_gf_HeroSelectionRandomlyPickAnyUnusedHero (int lp_choosingPlayer, bool lp_allowAnyTier, bool lp_ignoreCheck) {
     // Variable Declarations
+    string lv_heroName;
     int lv_itHeroIndex;
     int lv_numGoodCandidates;
 
@@ -7420,11 +7421,17 @@ int MimicGameLib_gf_HeroSelectionRandomlyPickAnyUnusedHero (int lp_choosingPlaye
     const int autoDC75D56D_ai = 1;
 
     // Variable Initialization
+    lv_heroName = "";
 
     // Implementation
     autoDC75D56D_ae = libCore_gv_dataHeroesNumberOfHeroes;
     lv_itHeroIndex = 1;
     for ( ; ( (autoDC75D56D_ai >= 0 && lv_itHeroIndex <= autoDC75D56D_ae) || (autoDC75D56D_ai < 0 && lv_itHeroIndex >= autoDC75D56D_ae) ) ; lv_itHeroIndex += autoDC75D56D_ai ) {
+        lv_heroName = DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex)));
+        if ((GameIsHeroDisabled((lv_heroName)) == true)) {
+            continue;
+        }
+
         if ((MimicGameLib_gf_HeroSelectionIsHeroSelectedForAnyPlayer(lv_itHeroIndex) == true)) {
             continue;
         }
@@ -7495,6 +7502,7 @@ int MimicGameLib_gf_HeroSelectionRandomlyPickMetaUnusedHero (int lp_choosingPlay
 
 int MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole (int lp_choosingPlayer, bool lp_allowTank, bool lp_allowBruiser, bool lp_allowRangedAssassin, bool lp_allowMeleeAssassin, bool lp_allowHealer, bool lp_allowSupport) {
     // Variable Declarations
+    string lv_heroName;
     int lv_itHeroIndex;
     int lv_numGoodCandidates;
     int lv_heroRoleInt;
@@ -7505,14 +7513,20 @@ int MimicGameLib_gf_HeroSelectionRandomlyPickUnusedHeroWithRole (int lp_choosing
     const int auto8AB41EE4_ai = 1;
 
     // Variable Initialization
+    lv_heroName = "";
     lv_heroRole = c_expandedRoleTank;
 
     // Implementation
     auto8AB41EE4_ae = libCore_gv_dataHeroesNumberOfHeroes;
     lv_itHeroIndex = 1;
     for ( ; ( (auto8AB41EE4_ai >= 0 && lv_itHeroIndex <= auto8AB41EE4_ae) || (auto8AB41EE4_ai < 0 && lv_itHeroIndex >= auto8AB41EE4_ae) ) ; lv_itHeroIndex += auto8AB41EE4_ai ) {
-        lv_heroRoleInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex))), "ExpandedRole", c_playerAny);
+        lv_heroName = DataTableGetString(true, ("HeroIndex_" + IntToString(lv_itHeroIndex)));
+        lv_heroRoleInt = CatalogFieldValueGetAsInt(c_gameCatalogHero, lv_heroName, "ExpandedRole", c_playerAny);
         lv_heroRole = lv_heroRoleInt;
+        if ((GameIsHeroDisabled((lv_heroName)) == true)) {
+            continue;
+        }
+
         if ((lv_heroRole == c_expandedRoleTank) && (lp_allowTank == false)) {
             continue;
         }
@@ -9307,24 +9321,6 @@ void MimicGameLib_gf_LeoricMithrilMaceProc (int lp_killingPlayer, unit lp_minion
     // Implementation
     if ((UnitHasBehavior2(lv_unit, "LeoricMithrilMaceTokenCounter") == true) && (UnitBehaviorCount(MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit, "LeoricMithrilMaceTokenCounter") != 100)) {
         UnitCreateEffectUnit(lv_unit, "LeoricMithrilMaceAdd1TokenCount", lv_unit);
-    }
-
-}
-
-void MimicGameLib_gf_StitchesPatchworkCreationProc (int lp_killingPlayer, unit lp_minion) {
-    // Variable Declarations
-    unit lv_unit;
-    int lv_player;
-    int lv_stackCount;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_unit = MimicGameLib_gv_players[lp_killingPlayer].lv_heroUnit;
-    lv_player = UnitGetOwner(lv_unit);
-
-    // Implementation
-    if ((PlayerHasTalent(lp_killingPlayer, "StitchesPatchworkCreation") == true)) {
-        UnitCreateEffectUnit(lv_unit, "StitchesPatchworkCreationCreateMinionHealer", lv_unit);
     }
 
 }
@@ -15746,7 +15742,12 @@ bool MimicGameLib_gt_ExperienceGlobeGrantXP_Func (bool testConds, bool runAction
         return true;
     }
 
-    lv_xPAmount = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder);
+    if ((EventPlayerEffectUsed() == "ExperienceGlobeDummyImpactSetReducedXP")) {
+        lv_xPAmount = (CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder) * libSprt_gv_gPU2021ExtendedDurationXPGlobesXPMod);
+    }
+    else {
+        lv_xPAmount = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "ExperienceAcquiredMinions", "XP", libCore_gv_cOMPUTER_TeamOrder);
+    }
     lv_xPAwardGroup = PlayerGroupCopy(MimicGameLib_gf_AlliedPlayerGroupOfPlayer(lv_targetPlayer));
     auto4D2B2D44_g = lv_xPAwardGroup;
     lv_itPlayer = -1;
@@ -15770,6 +15771,7 @@ void MimicGameLib_gt_ExperienceGlobeGrantXP_Init () {
     MimicGameLib_gt_ExperienceGlobeGrantXP = TriggerCreate("MimicGameLib_gt_ExperienceGlobeGrantXP_Func");
     TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_ExperienceGlobeGrantXP, c_playerAny, "ExperienceGlobeDummyImpactSetMinion");
     TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_ExperienceGlobeGrantXP, c_playerAny, "ExperienceGlobeDummyImpactSetLastHit");
+    TriggerAddEventPlayerEffectUsed(MimicGameLib_gt_ExperienceGlobeGrantXP, c_playerAny, "ExperienceGlobeDummyImpactSetReducedXP");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -17041,42 +17043,6 @@ bool MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Func (boo
 void MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Init () {
     MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown = TriggerCreate("MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Func");
     MimicGameLib_gf_HeroParticipatedInTakedown(MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero Death - Stitches Patchwork Creation Talent Participated In Takedown
-//--------------------------------------------------------------------------------------------------
-bool MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_killingPlayer;
-    unit lv_unit;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_killingPlayer = MimicGameLib_gf_HeroParticipatedInTakedownKillingPlayer();
-    lv_unit = MimicGameLib_gv_players[lv_killingPlayer].lv_heroUnit;
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(MimicGameLib_gf_HeroParticipatedInTakedownKillingPlayer(), "StitchesPatchworkCreation") == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitCreateEffectUnit(lv_unit, "StitchesPatchworkCreationCreateTakedownHealer", lv_unit);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Init () {
-    MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown = TriggerCreate("MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Func");
-    MimicGameLib_gf_HeroParticipatedInTakedown(MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown);
-    TriggerAddEventUnitHealed(MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown, null, c_unitVitalAny, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19544,7 +19510,6 @@ bool MimicGameLib_gt_GameGeneralNPCProcListener_Func (bool testConds, bool runAc
         MimicGameLib_gf_GenericSeasonedMarksmanProc(lv_killingPlayer, lv_minion);
         MimicGameLib_gf_BrightwingHyperShiftProc(lv_killingPlayer, lv_minion);
         MimicGameLib_gf_BrightwingPixieCharmProc(lv_killingPlayer, lv_minion);
-        MimicGameLib_gf_StitchesPatchworkCreationProc(lv_killingPlayer, lv_minion);
     }
 
     return true;
@@ -22291,7 +22256,6 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_HeroDeathDiabloParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathSeasonedMarksmanParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathWrathOfTheBoneKingParticipatedInTakedown_Init();
-    MimicGameLib_gt_HeroDeathStitchesPatchworkCreationTalentParticipatedInTakedown_Init();
     MimicGameLib_gt_HeroDeathHeroDies_Init();
     MimicGameLib_gt_HeroDeathHeroDeathToastTimerExpires_Init();
     MimicGameLib_gt_HeroDeathHeroRespawnSoundCueTimerExpires_Init();

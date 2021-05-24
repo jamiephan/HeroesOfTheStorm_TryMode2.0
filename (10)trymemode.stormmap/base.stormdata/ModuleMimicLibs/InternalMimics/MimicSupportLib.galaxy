@@ -9575,6 +9575,35 @@ void MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Init () {
     TriggerAddEventChatMessage(MimicSupportLib_gt_DEBUGApplySpellPowerValueChange, c_playerAny, "m-sp", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: GPU2021 - Enable/Disable Extended Duration XP Globes
+//--------------------------------------------------------------------------------------------------
+bool MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    const int autoF9F37F48_ae = libStEx_gv_pLAYER_12_CHAOS;
+    int autoF9F37F48_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesEnabled = true;
+    autoF9F37F48_var = libStEx_gv_pLAYER_11_ORDER;
+    for ( ; autoF9F37F48_var <= autoF9F37F48_ae; autoF9F37F48_var += 1 ) {
+        CatalogFieldValueSet(c_gameCatalogBehavior, "ExperienceGlobeTimedLife", "Duration", autoF9F37F48_var, FixedToString(MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesDuration, c_fixedPrecisionAny));
+        CatalogFieldValueSet(c_gameCatalogBehavior, "ExperienceGlobeTimedLife", "Period", autoF9F37F48_var, FixedToString((MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesDuration - 2.0), c_fixedPrecisionAny));
+        CatalogFieldValueSet(c_gameCatalogEffect, "ExperienceGlobeApplyXPReductionCoolup", "Chance", autoF9F37F48_var, "1");
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes_Init () {
+    MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes = TriggerCreate("MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes_Func");
+    TriggerAddEventTimeElapsed(MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes, 0.5, c_timeGame);
+}
+
 void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_IncludeSupport_Init();
     MimicSupportLib_gt_AISpawningTest_Init();
@@ -9743,6 +9772,7 @@ void MimicSupportLib_InitTriggers () {
     MimicSupportLib_gt_DEBUGSapperHealth_Init();
     MimicSupportLib_gt_DEBUGApplyArmorValueChange_Init();
     MimicSupportLib_gt_DEBUGApplySpellPowerValueChange_Init();
+    MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

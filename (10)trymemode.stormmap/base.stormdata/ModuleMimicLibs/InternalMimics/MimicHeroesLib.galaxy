@@ -4310,6 +4310,12 @@ bool MimicHeroesLib_gt_DataHeroVOMapDataFields_Func (bool testConds, bool runAct
     MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_Goodbye, "Goodbye");
     MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_Cheer, "Cheer");
     MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_GlueTrial, "GlueTrial");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_AssistMe, "VOPing_AssistMe");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_Danger, "VOPing_Danger");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_Defend, "VOPing_Defend");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_EnemyMissing, "VOPing_EnemyMissing");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_OnMyWay, "VOPing_OnMyWay");
+    MimicHeroesLib_gf_DataHeroVOMapDataField(MimicHeroesLib_ge_HeroVOEvents_VOPing_Retreat, "VOPing_Retreat");
     return true;
 }
 

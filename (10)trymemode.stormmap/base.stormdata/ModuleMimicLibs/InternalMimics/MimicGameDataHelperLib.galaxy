@@ -1135,7 +1135,6 @@ void MimicGameDataHelperLib_gf_HeroDemonHunterIncrementHeroCountFunction () {
     MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable == 1)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, true);
     }
 
@@ -1151,7 +1150,6 @@ void MimicGameDataHelperLib_gf_HeroDemonHunterDecrementHeroCountFunction () {
 
     if ((MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable == 0)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, false);
     }
 
@@ -2907,11 +2905,10 @@ void MimicGameDataHelperLib_gf_HeroRaynorIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyIn, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyOut, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheesCommand, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorACardToPlayTalentGained, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod, true);
     }
 
 }
@@ -2928,12 +2925,11 @@ void MimicGameDataHelperLib_gf_HeroRaynorDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyIn, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyOut, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheesCommand, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorACardToPlayTalentGained, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorACardToPlayHeroTakedown, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod, false);
     }
 
 }
@@ -3647,6 +3643,7 @@ void MimicGameDataHelperLib_gf_HeroStitchesIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeDecreases, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeActivate, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeOff, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction, true);
     }
 
 }
@@ -3665,6 +3662,7 @@ void MimicGameDataHelperLib_gf_HeroStitchesDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeDecreases, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeActivate, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeOff, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction, false);
     }
 
 }
@@ -7639,14 +7637,14 @@ bool MimicGameDataHelperLib_gt_HeroBarbarianLeap_Func (bool testConds, bool runA
     }
 
     lv_barbarianRadius = CatalogFieldValueGetAsFixed(c_gameCatalogUnit, (UnitGetType(lv_unit)), "Radius", lv_player);
-    lv_abilityRange = (CatalogFieldValueGetAsFixed(c_gameCatalogActor, "BarbarianLeapRangeSplat", "Scale", lv_player) + lv_barbarianRadius);
+    lv_abilityRange = CatalogFieldValueGetAsFixed(c_gameCatalogActor, "BarbarianLeapRangeSplat", "Scale", lv_player);
     lv_playerTargetPoint = EventPlayerEffectUsedPoint(c_effectLocationTargetPoint);
     lv_distanceFromBarbarianToPlayerTargetPoint = DistanceBetweenPoints(UnitGetPosition(lv_unit), lv_playerTargetPoint);
     if ((lv_distanceFromBarbarianToPlayerTargetPoint > lv_abilityRange)) {
-        lv_actualTargetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_unit), (lv_barbarianRadius + lv_abilityRange), lv_playerTargetPoint);
+        lv_actualTargetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_unit), lv_abilityRange, lv_playerTargetPoint);
     }
     else {
-        lv_actualTargetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_unit), (lv_barbarianRadius + lv_distanceFromBarbarianToPlayerTargetPoint), lv_playerTargetPoint);
+        lv_actualTargetPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_unit), lv_distanceFromBarbarianToPlayerTargetPoint, lv_playerTargetPoint);
     }
     lv_modifiedDistance = lv_distanceFromBarbarianToPlayerTargetPoint;
     while ((PointPathingPassable(lv_actualTargetPoint) == false)) {
@@ -9411,49 +9409,6 @@ void MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Demon Hunter  - Punishment Initial Pick
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_unit;
-    int lv_stackCount;
-    int lv_i;
-
-    // Automatic Variable Declarations
-    int auto4A1AD441_ae;
-
-    // Variable Initialization
-    lv_unit = EventUnit();
-    lv_stackCount = UnitBehaviorCount(lv_unit, "NewHatredStack");
-
-    // Conditions
-    if (testConds) {
-        if (!((lv_stackCount > 0))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    auto4A1AD441_ae = lv_stackCount;
-    lv_i = 1;
-    for ( ; lv_i <= auto4A1AD441_ae ; lv_i += 1 ) {
-        UnitCreateEffectUnit(lv_unit, "DemonHunterMultishotPunishmentTalentIncrementTokenCount", lv_unit);
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick_Init () {
-    MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick = TriggerCreate("MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick, false);
-    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick, null, "DemonHunterMultishotTalentPunishmentTokenCounter", c_unitBehaviorChangeCreate);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Dryad - Leaping Strike - Set Target Variable
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeSetTargetVariable_Func (bool testConds, bool runActions) {
@@ -10339,10 +10294,15 @@ bool MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCo
     // Automatic Variable Declarations
     // Variable Initialization
     lv_localPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+    lv_Falstad = libGame_gv_players[lv_localPlayer].lv_heroUnit;
 
     // Conditions
     if (testConds) {
         if (!((PlayerHasTalent(lv_localPlayer, "FalstadLightningRodDishonorableDischarge") == true))) {
+            return false;
+        }
+
+        if (!((UnitHasBehavior2(lv_Falstad, "FalstadDishonorableDischargeQuestCompleteCarryBehavior") == true))) {
             return false;
         }
 
@@ -18648,57 +18608,6 @@ void MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Raynor - Relentless Leader Stun Proc
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_player;
-    unit lv_unit;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_player = EventPlayer();
-    lv_unit = EventUnit();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_player, "RaynorRelentlessLeader") == true))) {
-            return false;
-        }
-
-        if (!((UnitGetType(lv_unit) == "HeroRaynor"))) {
-            return false;
-        }
-
-        if (!((UnitHasBehavior2(lv_unit, "RaynorRelentlessLeaderCooldown") == false))) {
-            return false;
-        }
-
-        if (!((UnitHasBehaviorWithCategoryFlag(lv_unit, c_behaviorCategoryBuffUnstoppable) == false))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitCreateEffectUnit(lv_unit, "RaynorRelentlessLeaderProcSet", lv_unit);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc_Init () {
-    MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, false);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, null, c_behaviorCategoryStun, c_unitBehaviorChangeActivate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, null, c_behaviorCategoryStun, c_unitBehaviorChangeRefresh);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, null, c_behaviorCategoryDebuffRoot, c_unitBehaviorChangeActivate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc, null, c_behaviorCategoryDebuffRoot, c_unitBehaviorChangeRefresh);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Raynor - A Card To Play - Talent Gained
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroRaynorACardToPlayTalentGained_Func (bool testConds, bool runActions) {
@@ -18765,18 +18674,23 @@ void MimicGameDataHelperLib_gt_HeroRaynorACardToPlayHeroTakedown_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Raynor - Puttin' On A Clinic Special Death State Proc
+// Trigger: Hero - Raynor - Execute Order - Death Timer Mod
 //--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc_Func (bool testConds, bool runActions) {
+bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_raynor;
+    int lv_player;
 
     // Automatic Variable Declarations
+    fixed auto2762DC95_at;
+
     // Variable Initialization
+    lv_raynor = libGame_gf_HeroKilledUnit();
+    lv_player = libGame_gf_HeroKilledPlayer();
 
     // Conditions
     if (testConds) {
-        if (!((UnitBehaviorCount(libGame_gf_HeroEntersSpecialDeathStateHero(), "RaynorPuttinOnAClinicTarget") == 1))) {
+        if (!((PlayerHasTalent(lv_player, "RaynorHyperionExecuteOrders") == true))) {
             return false;
         }
     }
@@ -18786,16 +18700,20 @@ bool MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc_Fu
         return true;
     }
 
-    lv_raynor = UnitBehaviorEffectUnit(libGame_gf_HeroEntersSpecialDeathStateHero(), "RaynorPuttinOnAClinicTarget", c_effectUnitCaster, 0);
-    UnitCreateEffectUnit(lv_raynor, "RaynorPuttinOnAClinicModifyCooldown2", lv_raynor);
+    auto2762DC95_at = 0;
+    while (!((TimerGetDuration(libGame_gv_players[lv_player].lv_respawnTimer) > 1)) && auto2762DC95_at <= 10.0) {
+        Wait(0.125, c_timeGame);
+        auto2762DC95_at = auto2762DC95_at + 0.125;
+    }
+    libGame_gf_HeroDeathModifyRespawnTimer(lv_player, -35.0);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc_Init () {
-    MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc, false);
-    libGame_gf_HeroEntersSpecialDeathState(MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc);
+void MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Init () {
+    MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod = TriggerCreate("MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod, false);
+    libGame_gf_HeroKilled(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -21866,6 +21784,60 @@ void MimicGameDataHelperLib_gt_HeroSgtHammerHearthstoneUsed_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Stitches - Gift From The Embalmer Death Timer Reduction
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_stitches;
+    int lv_stitchesOwner;
+    fixed lv_deathTimerMod;
+    fixed lv_tokenMod;
+    fixed lv_finalMod;
+
+    // Automatic Variable Declarations
+    fixed autoF8D4DFFC_at;
+
+    // Variable Initialization
+    lv_stitches = libGame_gf_HeroKilledUnit();
+    lv_stitchesOwner = libGame_gf_HeroKilledPlayer();
+    lv_deathTimerMod = 0.02;
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(lv_stitchesOwner, "StitchesGiftFromTheEmbalmer") == true))) {
+            return false;
+        }
+
+        if (!((UnitGetTokenCount(lv_stitches, "StitchesPutridBileGiftFromTheEmbalmerTalentTokenCounter") > 0.0))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoF8D4DFFC_at = 0;
+    while (!((TimerGetDuration(libGame_gv_players[lv_stitchesOwner].lv_respawnTimer) > 1)) && autoF8D4DFFC_at <= 10.0) {
+        Wait(1.0, c_timeGame);
+        autoF8D4DFFC_at = autoF8D4DFFC_at + 1.0;
+    }
+    lv_tokenMod = (UnitGetTokenCount(lv_stitches, "StitchesPutridBileGiftFromTheEmbalmerTalentTokenCounter") * lv_deathTimerMod);
+    lv_finalMod = (TimerGetRemaining(libGame_gv_players[lv_stitchesOwner].lv_respawnTimer) * lv_tokenMod);
+    libGame_gf_HeroDeathModifyRespawnTimer(lv_stitchesOwner, (-1.0 * lv_finalMod));
+    UnitCreateEffectUnit(lv_stitches, "StitchesPutridBileGiftFromTheEmbalmerTalentResetToken", lv_stitches);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction_Init () {
+    MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction = TriggerCreate("MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction, false);
+    libGame_gf_HeroKilled(MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Stitches - Hook - Hook Vision
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Func (bool testConds, bool runActions) {
@@ -21903,7 +21875,7 @@ bool MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Func (bool testConds, 
 void MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Init () {
     MimicGameDataHelperLib_gt_HeroStitchesHookHookVision = TriggerCreate("MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesHookHookVision, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroStitchesHookHookVision, c_playerAny, "StitchesHookMissileScan");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroStitchesHookHookVision, c_playerAny, "StitchesHookMissileSearch");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -22138,6 +22110,113 @@ void MimicGameDataHelperLib_gt_HeroStitchesGorgeOff_Init () {
     TriggerEnable(MimicGameDataHelperLib_gt_HeroStitchesGorgeOff, false);
     TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroStitchesGorgeOff, null, "StitchesGorgeTarget", c_unitBehaviorChangeDeactivate);
     TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroStitchesGorgeOff, null, "StitchesGorgeTarget", c_unitBehaviorChangeDestroy);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Stitches - Free Fishing Hook Talent
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = libGame_gf_HeroLevelUpPlayer();
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((libGame_gf_HeroLevelUpLevel() >= 13))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroStitches"))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_player, "StitchesFishingHook") == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerAddTalent(lv_player, "StitchesFishingHook");
+    UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookSet", lv_unit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Init () {
+    MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent = TriggerCreate("MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Func");
+    libGame_gf_HeroLevelUp(MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Stitches - Reset Free Fishing Hook Talent
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = UnitGetOwner(EventUnit());
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroStitches"))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_player, "StitchesFishingHook") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerRemoveTalent(lv_player, "StitchesFishingHook");
+    UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookResetPlayer", lv_unit);
+    Wait(0.125, c_timeGame);
+    if ((UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy") >= 13)) {
+        PlayerAddTalent(lv_player, "StitchesFishingHook");
+        UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookSet", lv_unit);
+        MimicTriggerDebugOutput(1, IntToText(UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy")), true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Init () {
+    MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent = TriggerCreate("MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent, null, "StitchesHookExtendedHookTokenCounter", c_unitBehaviorChangeCreate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -26215,7 +26294,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked_Init();
     MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff_Init();
     MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Init();
-    MimicGameDataHelperLib_gt_HeroDemonHunterPunishmentInitialPick_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeSetTargetVariable_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeFindLandingLocation_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeCreateAttackPersistent_Init();
@@ -26398,10 +26476,9 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroRaynorBansheesCommand_Init();
     MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport_Init();
     MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle_Init();
-    MimicGameDataHelperLib_gt_HeroRaynorRelentlessLeaderStunProc_Init();
     MimicGameDataHelperLib_gt_HeroRaynorACardToPlayTalentGained_Init();
     MimicGameDataHelperLib_gt_HeroRaynorACardToPlayHeroTakedown_Init();
-    MimicGameDataHelperLib_gt_HeroRaynorPuttinOnAClinicSpecialDeathStateProc_Init();
+    MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Init();
     MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown_Init();
     MimicGameDataHelperLib_gt_HeroRehgarEarthlivingEnchantHotApply_Init();
     MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem_Init();
@@ -26463,11 +26540,14 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastForcedDestruction_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerMaelstromRoundsAddCharge_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerHearthstoneUsed_Init();
+    MimicGameDataHelperLib_gt_HeroStitchesGiftFromTheEmbalmerDeathTimerReduction_Init();
     MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Init();
     MimicGameDataHelperLib_gt_HeroStitchesHookLaunchTargetUsed_Init();
     MimicGameDataHelperLib_gt_HeroStitchesGorgeDecreases_Init();
     MimicGameDataHelperLib_gt_HeroStitchesGorgeActivate_Init();
     MimicGameDataHelperLib_gt_HeroStitchesGorgeOff_Init();
+    MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Init();
+    MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Init();
     MimicGameDataHelperLib_gt_HeroSylvanasMindControlTargetSelect_Init();
     MimicGameDataHelperLib_gt_HeroSylvanasMovementCommandForwarding_Init();
     MimicGameDataHelperLib_gt_HeroSylvanasDarkLadysCallTalentApplyAllyVisionSuppression_Init();

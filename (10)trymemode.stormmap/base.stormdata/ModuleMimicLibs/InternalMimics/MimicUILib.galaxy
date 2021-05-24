@@ -7301,7 +7301,7 @@ void MimicUILib_gf_PartyFrameEnemyPing (int lp_pingingPlayer, unit lp_targetUnit
             TextExpressionSetToken("Param/Expression/lib_UIUI_F54003A9", "B", lv_targetUnitName);
             lv_pingMessage = TextExpressionAssemble("Param/Expression/lib_UIUI_F54003A9");
             lv_pingSoundLink = SoundLink("UI_Game_Ping_Careful", -1);
-            libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_PingEnemyMissing, lp_pingingPlayer, lv_pingPlayerGroup);
+            libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_EnemyMissing, lp_pingingPlayer, lv_pingPlayerGroup);
             UIDisplayMessage(lv_pingPlayerGroup, c_messageAreaChat, lv_pingMessage);
         }
         MimicUILib_gf_PingIncrementPingCountAndManageTimersForPlayer(lp_pingingPlayer);
@@ -7830,6 +7830,7 @@ void MimicUILib_gf_PingPlayerUsesAssistMePing (int lp_player, unit lp_targetUnit
     libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, lv_pingModel, lp_location, Color(100.00, 100.00, 100.00), 3.0, 270.0, lv_pingType, lp_player);
     PingSetScale(PingLastCreated(), 0.6);
     SoundPlayForPlayer(lv_pingSound, lp_player, lv_pingPlayerGroup, 100.0, 0.0);
+    libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_AssistMe, lp_player, lv_pingPlayerGroup);
     UnitCreateEffectPoint(libGame_gv_players[lp_player].lv_heroUnit, "AssistMePing", lp_location);
     if (((lp_targetUnit == null) || (UnitFilterMatch(lp_targetUnit, UnitGetOwner(lv_pingingPlayerHero), UnitFilter((1 << c_targetFilterUser1), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)))) == true))) {
         TextExpressionSetToken("Param/Expression/lib_UIUI_289FB7DC", "A", UnitTypeGetName(UnitGetType(lv_pingingPlayerHero)));
@@ -7965,6 +7966,7 @@ void MimicUILib_gf_PingPlayerUsesDangerPing (int lp_player, point lp_location, u
     libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, lv_pingModel, lp_location, Color(100.00, 100.00, 100.00), 3.0, 270.0, lv_pingType, lp_player);
     PingSetScale(PingLastCreated(), 0.6);
     SoundPlayForPlayer(lv_pingSound, lp_player, lv_pingPlayerGroup, 100.0, 0.0);
+    libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_Danger, lp_player, lv_pingPlayerGroup);
     if (((lp_targetUnit == null) || (UnitFilterMatch(lp_targetUnit, UnitGetOwner(lv_pingingPlayerHero), UnitFilter((1 << c_targetFilterUser1), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)))) == true))) {
         UnitCreateEffectPoint(libGame_gv_players[lp_player].lv_heroUnit, "DangerPingPoint", lp_location);
         TextExpressionSetToken("Param/Expression/lib_UIUI_B79FD716", "A", UnitTypeGetName(UnitGetType(lv_pingingPlayerHero)));
@@ -8057,6 +8059,7 @@ void MimicUILib_gf_PingPlayerUsesOnMyWayPing (unit lp_pingedUnit, int lp_player,
     lv_targetType = MimicUILib_gf_PingDeterminePingTargetType(lp_pingedUnit);
     libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, lv_pingModel, lp_location, Color(100.00, 100.00, 100.00), 3.0, 270.0, lv_pingType, lp_player);
     PingSetScale(PingLastCreated(), 0.6);
+    libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_OnMyWay, lp_player, lv_pingPlayerGroup);
     SoundPlayForPlayer(lv_pingSound, lp_player, lv_pingPlayerGroup, 100.0, 0.0);
     if ((libGame_gv_players[lp_player].lv_activeVehicle != null)) {
         UnitCreateEffectPoint(libGame_gv_players[lp_player].lv_activeVehicle, "OnMyWayPing", lp_location);
@@ -8157,6 +8160,7 @@ void MimicUILib_gf_PingPlayerUsesDefendPing (unit lp_pingedUnit, int lp_player, 
     lv_targetType = MimicUILib_gf_PingDeterminePingTargetType(lp_pingedUnit);
     libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, lv_pingModel, lp_location, Color(100.00, 100.00, 100.00), 3.0, 270.0, lv_pingType, lp_player);
     PingSetScale(PingLastCreated(), 0.6);
+    libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_Defend, lp_player, lv_pingPlayerGroup);
     SoundPlayForPlayer(lv_pingSound, lp_player, lv_pingPlayerGroup, 100.0, 0.0);
     UnitCreateEffectPoint(libGame_gv_players[lp_player].lv_heroUnit, "DefendPing", lp_location);
     if (((lp_pingedUnit == null) || (UnitFilterMatch(lp_pingedUnit, UnitGetOwner(lv_pingingPlayerHero), UnitFilter((1 << c_targetFilterUser1), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)))) == true))) {
@@ -8260,6 +8264,7 @@ void MimicUILib_gf_PingPlayerUsesRetreatPing (int lp_player, point lp_location) 
     lv_pingModel = "RetreatPingMinimap";
     libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, lv_pingModel, lp_location, Color(100.00, 100.00, 100.00), 3.0, 270.0, lv_pingType, lp_player);
     PingSetScale(PingLastCreated(), 0.6);
+    libSond_gf_HeroVOPlayHeroLine(libCore_ge_HeroVOEvents_VOPing_Retreat, lp_player, lv_pingPlayerGroup);
     SoundPlayForPlayer(lv_pingSound, lp_player, lv_pingPlayerGroup, 100.0, 0.0);
     UnitCreateEffectPoint(libGame_gv_players[lp_player].lv_heroUnit, "RetreatPing", lp_location);
     TextExpressionSetToken("Param/Expression/lib_UIUI_4F67313D", "A", UnitTypeGetName(UnitGetType(lv_pingingPlayerHero)));

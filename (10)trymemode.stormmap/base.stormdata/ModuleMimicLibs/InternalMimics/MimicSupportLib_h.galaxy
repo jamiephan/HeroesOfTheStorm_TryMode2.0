@@ -9,6 +9,8 @@ const string MimicSupportLib_gv_performanceTestFPSLogFile = "FPS_Log";
 const int MimicSupportLib_gv_dataMiningNumberOfManaBuckets = 10;
 const int MimicSupportLib_gv_dataMiningMaxNumberOfDifferentManaRegenSources = 14;
 const fixed MimicSupportLib_gv_dataMiningPeriodicSendPeriod = 60.0;
+const fixed MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesDuration = 45.0;
+const fixed MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesXPMod = 0.25;
 
 // Structures
 struct MimicSupportLib_gs_DataMiningPlayerData {
@@ -131,6 +133,7 @@ fixed MimicSupportLib_gv_dEBUGDPSTrackerTime;
 bool MimicSupportLib_gv_dEBUGSapperMinionsEnabled;
 fixed MimicSupportLib_gv_dEBUGBaselineArmorValue;
 fixed MimicSupportLib_gv_dEBUGBaselineSpellPowerValue;
+bool MimicSupportLib_gv_gPU2021ExtendedDurationXPGlobesEnabled;
 
 // Function Declarations
 void MimicSupportLib_gf_PerformanceTestStartPerformanceTest (string lp_name);
@@ -362,6 +365,7 @@ trigger MimicSupportLib_gt_DEBUGSapperAttackDamage;
 trigger MimicSupportLib_gt_DEBUGSapperHealth;
 trigger MimicSupportLib_gt_DEBUGApplyArmorValueChange;
 trigger MimicSupportLib_gt_DEBUGApplySpellPowerValueChange;
+trigger MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes;
 
 // Library Initialization
 void MimicSupportLib_InitVariables ();
