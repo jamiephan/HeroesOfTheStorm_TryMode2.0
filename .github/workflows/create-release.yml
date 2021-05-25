@@ -137,7 +137,7 @@ jobs:
           New-Item -Confirm:$false -Force -ItemType Directory "C:/maps"  | Out-Null
           Copy-Item "C:/map_repo/maps/*" "C:/maps"
           Copy-Item "C:/trymode20.stormmap" "C:/maps"
-          Start-Sleep -s 10
+          Start-Sleep -s 5
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
