@@ -48,7 +48,9 @@ In order words, to use this map, copy the folder `(10)trymemode.stormmap` in thi
 
 This allows you to double click on the `*.stormmap` file and run the map directly.
 
-Each of the push request to Github will automatically generate a patched version of the all the maps in the game. Including main maps (e.g Cursed Hollow, Sky temple, etc) and Brawl Maps (e.g Lost Cavern, Lunar Rocket Racing and PVE Escape from Braxis). These maps will automatically include the additional functionalities provided in this repo (such as chat command, XML files, extra UIs).
+Each of the push request to Github will automatically generate a patched version of the all the maps in the game. Including main maps (e.g Cursed Hollow, Sky temple, etc) and Brawl Maps (e.g Lost Cavern, Lunar Rocket Racing and PVE Escape from Braxis).
+
+These maps will automatically include additional functionalities provided in this repo (such as using the debug menu with the `\` key, chat command, XML files, extra UIs).
 
 >Note: Please noted that some maps will not work properly, showing the "Map Error" Screen (As shown in [Post-Install check](#runStormmap-postInstall) section). This is due to some maps are not maintained by Blizzard anymore (surprisingly Haunted Mines still works), this problem mainly exists on Brawl maps.
 
