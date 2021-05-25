@@ -185,8 +185,7 @@ jobs:
             For instructions on how to run the map, Please refer to [INSTALL.md](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/INSTALL.md).
           draft: false 
           prerelease: false
-          files: |
-            "C:/maps/*"
-            "/maps/*"
+          input_fail_on_unmatched_files: true
+          files: "C:/maps/*"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
