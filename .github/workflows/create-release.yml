@@ -163,6 +163,6 @@ jobs:
       - name: Upload Multiple Maps to Github Release
         uses: alexellis/upload-assets@0.2.2
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           asset_paths: '["C:/map_repo/maps/*"]'
