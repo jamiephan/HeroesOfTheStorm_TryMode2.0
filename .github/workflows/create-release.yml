@@ -26,7 +26,112 @@ jobs:
           & echo close >> C:/script.mpqscript
           & echo x >> C:/script.mpqscript
           & "C:/MPQEditor.exe" /console "C:/script.mpqscript" 
-          
+      - name: Build Multiple Maps
+        run: |
+          git clone "https://github.com/jamiephan/HeroesOfTheStorm_S2MA.git" "C:/map_repo"
+          Push-Location "C:/map_repo"
+          function PrepareInsertIntoMPQ($path, $mpq) {
+            if (Test-Path "_add_.mpqscript") {
+              Add-Content "_add_.mpqscript" "add `"$mpq`" `"$path`""
+            }
+            else {
+              Write-Output "add `"$mpq`" `"$path`"" | Set-Content "_add_.mpqscript" | Out-Null
+            }
+          }
+          function ExecuteInsertIntoMPQ() {
+            # .\MPQEditor.exe /console "_add_.mpqscript" | Out-Null
+            Start-Process -WindowStyle Hidden ".\MPQEditor.exe" -Wait -ArgumentList "/console `"_add_.mpqscript`""
+            Remove-Item "_add_.mpqscript" -Force -Confirm:$false
+          }
+          function CheckMPQFileExist($path, $mpq) {
+            New-Item -Confirm:$false -Force -ItemType Directory "./_checktemp_"  | Out-Null
+            Start-Process -WindowStyle Hidden ".\MPQEditor.exe" -Wait -ArgumentList "extract `"$mpq`" `"$path`" `"./_checktemp_`""
+            # .\MPQEditor.exe extract "$mpq" "$path" "./_checktemp_" | Out-Null
+            $result = Test-Path "./_checktemp_/*"
+            Remove-Item -Confirm:$false -Force -Recurse "./_checktemp_"
+            return $result
+          }
+          function GetMPQFileContent($path, $mpq) {
+            New-Item -Confirm:$false -Force -ItemType Directory "./_gettemp_"  | Out-Null
+            Start-Process -WindowStyle Hidden ".\MPQEditor.exe" -Wait -ArgumentList "extract `"$mpq`" `"$path`" `"./_gettemp_`""
+            # .\MPQEditor.exe extract "$mpq" "$path" "./_checktemp_" | Out-Null
+            $result = Get-ChildItem "./_gettemp_" -Force -Recurse -File | Select-Object -First 1 | Get-Content
+            Remove-Item -Confirm:$false -Force -Recurse "./_gettemp_"
+            return $result
+          }
+          # Copy required files
+          Copy-Item "Z:\Others\HeroesOfTheStorm_TryMode2.0\(10)trymemode.stormmap\base.stormassets" . -Recurse -Force
+          Copy-Item "Z:\Others\HeroesOfTheStorm_TryMode2.0\(10)trymemode.stormmap\base.stormdata" . -Recurse -Force
+          # Remove extra files from try mode
+          Remove-Item "./base.stormdata/ai" -Recurse -Force -Confirm:$false
+          Remove-Item "./base.stormdata/cutscenes" -Recurse -Force -Confirm:$false
+          Remove-Item "./base.stormdata/gamedata" -Recurse -Force -Confirm:$false
+          Remove-Item "./base.stormdata/ui" -Recurse -Force -Confirm:$false
+          # Replacing the MapScript.galaxy File
+          Get-ChildItem "./maps" -Filter "*.stormmap" | Foreach-Object {
+            $mapName = "$($_.BaseName).stormmap"
+            $mapPath = "maps/$mapName"
+            Write-Output "Patching MapScript.galaxy in $mapName"
+            Start-Process -WindowStyle Hidden ".\MPQEditor.exe" -Wait -ArgumentList "extract `"$mapPath`" MapScript.galaxy"
+            (Get-Content .\MapScript.galaxy) -replace 'include "TriggerLibs/SupportLib"', "$&`ninclude `"LibTryMeMode`"" | Set-Content .\MapScript.galaxy
+            (Get-Content .\MapScript.galaxy) -replace "libSprt_InitLib\(\);$", "$&`n    libTRYM_InitLib();" | Set-Content .\MapScript.galaxy
+            PrepareInsertIntoMPQ "MapScript.galaxy" $mapPath
+            ExecuteInsertIntoMPQ
+            Remove-Item "./MapScript.galaxy" -Force -Confirm:$false 
+          }
+          # Generate Insert Script and apply to the maps
+          Write-Output "Generating Insert Script for MPQ"
+          Start-Sleep -s 5
+          Get-ChildItem "./base.storm*" -Recurse | Where-Object { ! $_.PSIsContainer } | ForEach-Object {
+            $filePathPS = $_ | Resolve-Path -Relative
+            $filePath = $filePathPS -replace '\.\\', ''
+            # Special Case 
+            if ($filePath -ieq "base.stormdata\includes.xml") {
+              return
+            }
+            if ($filePath -ieq "base.stormdata\gamedata.xml") {
+              return
+            }
+            Get-ChildItem "./maps" -Filter "*.stormmap" | Foreach-Object {
+              $mapName = "$($_.BaseName).stormmap"
+              $mapPath = "maps/$mapName"
+              PrepareInsertIntoMPQ $filePath $mapPath
+            }
+          }
+          ExecuteInsertIntoMPQ
+          Write-Output "Handing Special Case for Gamedata.xml and Includes.xml"
+          # Special case for GameData.xml and Include.xml
+          $originalIncludeXML = Get-Content "./base.stormdata/includes.xml"
+          $originalGamedataXML = Get-Content "./base.stormdata/gamedata.xml"
+          $IncludeXMLInnerXML = [regex]::Match($originalIncludeXML, '<Includes id="Mods/HeroesData.StormMod">(.*)</Includes>').Groups[1].Value
+          $GameDataXMLInnerXML = [regex]::Match($originalGamedataXML, '<Includes>(.*)</Includes>').Groups[1].Value
+          Get-ChildItem "./maps" -Filter "*.stormmap" | Foreach-Object {
+            $mapName = "$($_.BaseName).stormmap"
+            $mapPath = "maps/$mapName"
+            if(CheckMPQFileExist "base.stormdata\includes.xml" $mapPath ) {
+              Write-Output "$mapPath has includes"
+              $newIncludeXML = $(GetMPQFileContent "base.stormdata\includes.xml" $mapPath) -replace '</Includes>',"$IncludeXMLInnerXML</Includes>"
+              Set-Content -Path "./base.stormdata\includes.xml" -Value $newIncludeXML
+              PrepareInsertIntoMPQ "base.stormdata\includes.xml" $mapPath
+            } else {
+              Set-Content -Path "./base.stormdata\includes.xml" -Value $originalIncludeXML
+              PrepareInsertIntoMPQ "base.stormdata\includes.xml" $mapPath
+            }
+            if(CheckMPQFileExist "base.stormdata\gamedata.xml" $mapPath ) {
+              Write-Output "$mapPath has gamedata"
+              $newGameDataXML = $(GetMPQFileContent "base.stormdata\gamedata.xml" $mapPath) -replace '</Includes>',"$GameDataXMLInnerXML</Includes>"
+              Set-Content -Path "base.stormdata\gamedata.xml" -Value $newGameDataXML
+              PrepareInsertIntoMPQ "base.stormdata\gamedata.xml" $mapPath
+            } else {
+              Set-Content -Path "./base.stormdata\gamedata.xml" -Value $originalGamedataXML
+              PrepareInsertIntoMPQ "base.stormdata\gamedata.xml" $mapPath
+            }
+            ExecuteInsertIntoMPQ
+            Set-Content -Path "./base.stormdata\includes.xml" -Value $originalIncludeXML
+            Set-Content -Path "./base.stormdata\gamedata.xml" -Value $originalGamedataXML
+          }
+          Write-Output "All Maps Patching Completed"
+          Pop-Location
       - name: Create Github Release
         id: create_release
         uses: actions/create-release@v1
@@ -54,4 +159,10 @@ jobs:
           asset_path: "C:/trymode20.stormmap"
           asset_name: trymode20.stormmap
           asset_content_type: application/octet-stream
-      
+
+      - name: Upload Multiple Maps to Github Release
+        uses: alexellis/upload-assets@0.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["C:/map_repo/maps/*"]'
