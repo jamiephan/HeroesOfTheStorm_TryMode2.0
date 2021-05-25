@@ -167,8 +167,9 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 File: [`(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy)
 
-Modify the following line by removing the leading `//`:
+Modify the following lines by removing the leading `//`:
  
+ - Line `2` (at the top): Change `// include "ModuleMimicLibs/MimicLibsLoader"` to `include "ModuleMimicLibs/MimicLibsLoader"`
  - Line `23` (inside the `libTRYM_InitLibraries()` function): Change `// libMICL_InitLib();` to `libMICL_InitLib();`
 
 The Mimic Libs will be taken from `heroesdata.stormmod/base.stormmod/TriggerLibs`.
