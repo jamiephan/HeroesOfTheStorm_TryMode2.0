@@ -60,8 +60,8 @@ jobs:
             return $result
           }
           # Copy required files
-          Copy-Item "Z:\Others\HeroesOfTheStorm_TryMode2.0\(10)trymemode.stormmap\base.stormassets" . -Recurse -Force
-          Copy-Item "Z:\Others\HeroesOfTheStorm_TryMode2.0\(10)trymemode.stormmap\base.stormdata" . -Recurse -Force
+          Copy-Item "C:\repo\(10)trymemode.stormmap\base.stormassets" . -Recurse -Force
+          Copy-Item "C:\repo\(10)trymemode.stormmap\base.stormdata" . -Recurse -Force
           # Remove extra files from try mode
           Remove-Item "./base.stormdata/ai" -Recurse -Force -Confirm:$false
           Remove-Item "./base.stormdata/cutscenes" -Recurse -Force -Confirm:$false
