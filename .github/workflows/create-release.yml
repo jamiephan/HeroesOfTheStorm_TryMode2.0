@@ -134,6 +134,12 @@ jobs:
           }
           Write-Output "All Maps Patching Completed"
           Pop-Location
+          ls "C:"
+          ls "C:/repo"
+          ls "C:/map_repo"
+          ls "C:/map_repo/maps"
+          pwd
+          Start-Sleep -s 10
       # - name: Create Github Release
       #   id: create_release
       #   uses: actions/create-release@v1
