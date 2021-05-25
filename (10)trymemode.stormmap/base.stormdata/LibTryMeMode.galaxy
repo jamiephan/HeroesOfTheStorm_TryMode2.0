@@ -20,7 +20,7 @@ trigger libTRYM_gt_ForceBackslashKeySyncQACheat;
 // External Library Initialization
 void libTRYM_InitLibraries () {
     libNtve_InitVariables();
-    libMICL_InitLib();
+    // libMICL_InitLib();
     libMODL_InitLib();
 }
 

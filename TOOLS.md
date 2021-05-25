@@ -163,6 +163,13 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 **Command**: `npm run build:mimiclib`
 
+**Important**: Please note that this feature is disabled by default in the game (the tool can still generate the mimic libs). This is due to it is incompatible with some maps and the feature it provides does not have sufficient reason for it to enable by default (it cause more harm from what I can tell). Due to it was disabled via .galaxy modification, it is not possible to toggle this option with a chat command. If you would like to enable this feature, please manually edit the file:
+
+File: [`(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy)
+
+Modify the following line by removing the leading `//`:
+ 
+ - Line `23` (inside the `libTRYM_InitLibraries()` function): Change `// libMICL_InitLib();` to `libMICL_InitLib();`
 
 The Mimic Libs will be taken from `heroesdata.stormmod/base.stormmod/TriggerLibs`.
 
