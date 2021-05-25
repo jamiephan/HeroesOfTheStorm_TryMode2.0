@@ -184,5 +184,9 @@ jobs:
           files: |
             "C:/map_repo/maps/*"
             "C:/trymode20.stormmap"
+            "C:\map_repo\maps\*"
+            "C:\trymode20.stormmap"
+            "C:\\map_repo\\maps\\*"
+            "C:\\trymode20.stormmap"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
