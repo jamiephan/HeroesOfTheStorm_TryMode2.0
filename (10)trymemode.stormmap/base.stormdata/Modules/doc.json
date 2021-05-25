@@ -734,6 +734,61 @@
                             "description": "Plays the Muradin Cutscene in the Collection Page (wait for 2 second to show Muradin)"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "sgs",
+                    "command": "setgamespeed",
+                    "description": [
+                        "Set the game speed.",
+                        "",
+                        "The game speed can only between 0 - 4:",
+                        "",
+                        "| value | speed |",
+                        "|-|-|",
+                        "| 0 | Slower |",
+                        "| 1 | Slow |",
+                        "| 2 | Normal |",
+                        "| 3 | Fast |",
+                        "| 4 | Faster |"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "speed",
+                            "required": true,
+                            "description": "Defines the game speed to be set (between 0 - 4).",
+                            "type": "integer"
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 0",
+                            "description": "Set the game speed to 0 (Slower)"
+                        },
+                        {
+                            "command": "{command} 3",
+                            "description": "Set the game speed to 3 (Fast)"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rgs",
+                    "command": "resetgamespeed",
+                    "description": [
+                        "Reset the game speed 2 (Normal)."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Reset the game speed 2 (Normal)."
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Reset the game speed 2 (Normal)."
+                        }
+                    ]
                 }
             ]
         },

@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 24 May 2021 20:25:27 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 25 May 2021 18:57:40 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -58,9 +58,13 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `resetcameraobject`](#cmd-resetcameraobject)
 
+  - 💭 [Command: `resetgamespeed`](#cmd-resetgamespeed)
+
   - 💭 [Command: `restartgame`](#cmd-restartgame)
 
   - 💭 [Command: `setcameraobject`](#cmd-setcameraobject)
+
+  - 💭 [Command: `setgamespeed`](#cmd-setgamespeed)
 
   - 💭 [Command: `startgame`](#cmd-startgame)
 
@@ -758,6 +762,36 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-resetgamespeed"></a>
+
+## (`resetgamespeed` | `rgs`) 
+<a name="cmd-resetgamespeed-description"></a>
+
+#### ✏ Description: 
+Reset the game speed 2 (Normal).
+
+<a name="cmd-resetgamespeed-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+<a name="cmd-resetgamespeed-examples"></a>
+
+#### 🔧 Examples:
+    > rgs
+    	(Reset the game speed 2 (Normal).)
+    > resetgamespeed
+    	(Reset the game speed 2 (Normal).)
+<a name="cmd-resetgamespeed-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-restartgame"></a>
 
 ## (`restartgame` | `re`) 
@@ -813,6 +847,49 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
     > setcameraobject Dflt
     	(Set the camera object to Dlft (default SC2 camera))
 <a name="cmd-setcameraobject-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-setgamespeed"></a>
+
+## (`setgamespeed` | `sgs`) `<speed>`
+<a name="cmd-setgamespeed-description"></a>
+
+#### ✏ Description: 
+Set the game speed.
+
+The game speed can only between 0 - 4:
+
+| value | speed |
+|-|-|
+| 0 | Slower |
+| 1 | Slow |
+| 2 | Normal |
+| 3 | Fast |
+| 4 | Faster |
+
+<a name="cmd-setgamespeed-parameters"></a>
+
+#### ⚙ Parameters:
+    <speed>
+    	Required:	true
+    	Type:		integer
+    	Usage:		Defines the game speed to be set (between 0 - 4).
+<a name="cmd-setgamespeed-examples"></a>
+
+#### 🔧 Examples:
+    > sgs 0
+    	(Set the game speed to 0 (Slower))
+    > setgamespeed 3
+    	(Set the game speed to 3 (Fast))
+<a name="cmd-setgamespeed-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

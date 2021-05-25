@@ -62,6 +62,8 @@ trigger libUTIL_gt_ClearMarkers;
 trigger libUTIL_gt_RunRandomMovement;
 trigger libUTIL_gt_ToggleRandomMovement;
 trigger libUTIL_gt_PlayCutscene;
+trigger libUTIL_gt_SetGameSpeed;
+trigger libUTIL_gt_ResetGameSpeed;
 
 // Library Initialization
 void libUTIL_InitVariables ();
@@ -1326,6 +1328,100 @@ void libUTIL_gt_PlayCutscene_Init () {
     TriggerAddEventChatMessage(libUTIL_gt_PlayCutscene, c_playerAny, "playcutscene", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Set Game Speed
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_SetGameSpeed_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_speedString;
+    int lv_speed;
+
+    // Automatic Variable Declarations
+    int auto287D5FEB_val;
+
+    // Variable Initialization
+    lv_speedString = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "sgs") || (StringWord(EventChatMessage(false), 1) == "setgamespeed")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <sgs|setgamespeed> <speedValue>"));
+    }
+    else {
+        lv_speed = StringToInt(StringWord(EventChatMessage(false), 2));
+        if ((!(((lv_speed >= 0) && (lv_speed <= 4))))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Game speed must between 0 to 4."));
+            return false;
+        }
+
+        GameSetSpeedLocked(false);
+        GameSetSpeedValue(lv_speed);
+        auto287D5FEB_val = lv_speed;
+        if (auto287D5FEB_val == 0) {
+            lv_speedString = "Slower";
+        }
+        else if (auto287D5FEB_val == 1) {
+            lv_speedString = "Slow";
+        }
+        else if (auto287D5FEB_val == 2) {
+            lv_speedString = "Normal";
+        }
+        else if (auto287D5FEB_val == 3) {
+            lv_speedString = "Fast";
+        }
+        else if (auto287D5FEB_val == 4) {
+            lv_speedString = "Faster";
+        }
+        else {
+            lv_speedString = IntToString(lv_speed);
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Game Speed is set to: " + lv_speedString)));
+        GameSetSpeedLocked(true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_SetGameSpeed_Init () {
+    libUTIL_gt_SetGameSpeed = TriggerCreate("libUTIL_gt_SetGameSpeed_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_SetGameSpeed, c_playerAny, "sgs", false);
+    TriggerAddEventChatMessage(libUTIL_gt_SetGameSpeed, c_playerAny, "setgamespeed", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Reset Game Speed
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ResetGameSpeed_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetSpeedLocked(false);
+    GameSetSpeedValue(c_gameSpeedNormal);
+    GameSetSpeedLocked(true);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Game Speed is reset to: Normal"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ResetGameSpeed_Init () {
+    libUTIL_gt_ResetGameSpeed = TriggerCreate("libUTIL_gt_ResetGameSpeed_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ResetGameSpeed, c_playerAny, "rgs", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ResetGameSpeed, c_playerAny, "resetgamespeed", true);
+}
+
 void libUTIL_InitTriggers () {
     libUTIL_gt_MapInit_Init();
     libUTIL_gt_ClearTextMessage_Init();
@@ -1357,6 +1453,8 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_RunRandomMovement_Init();
     libUTIL_gt_ToggleRandomMovement_Init();
     libUTIL_gt_PlayCutscene_Init();
+    libUTIL_gt_SetGameSpeed_Init();
+    libUTIL_gt_ResetGameSpeed_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
