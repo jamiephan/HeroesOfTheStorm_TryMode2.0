@@ -138,6 +138,10 @@ jobs:
           ls "C:/repo"
           ls "C:/map_repo"
           ls "C:/map_repo/maps"
+          New-Item -Confirm:$false -Force -ItemType Directory "C:/maps"  | Out-Null
+          cp "C:/map_repo/maps/*" "C:/maps"
+          cp "C:/trymode20.stormmap" "C:/maps"
+          ls C:/maps
           pwd
           Start-Sleep -s 10
       # - name: Create Github Release
@@ -182,11 +186,7 @@ jobs:
           draft: false 
           prerelease: false
           files: |
-            "C:/map_repo/maps/*"
-            "C:/trymode20.stormmap"
-            "C:\map_repo\maps\*"
-            "C:\trymode20.stormmap"
-            "C:\\map_repo\\maps\\*"
-            "C:\\trymode20.stormmap"
+            "C:/maps/*"
+            "/maps/*"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
