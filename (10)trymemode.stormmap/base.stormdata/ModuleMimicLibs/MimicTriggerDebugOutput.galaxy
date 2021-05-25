@@ -5,8 +5,17 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Variable Declarations
+bool libMTDO_gv_isMTDOEnabled;
+
 // Function Declarations
 void MimicTriggerDebugOutput (int lp_uselessInt, text lp_outputText, bool lp_uselessBool);
+
+// Trigger Declarations
+trigger libMTDO_gt_ToggleMTDO;
+
+// Library Initialization
+void libMTDO_InitVariables ();
 
 //--------------------------------------------------------------------------------------------------
 // Library: Mimic TriggerDebugOutput
@@ -21,20 +30,56 @@ void libMTDO_InitLibraries () {
 // Variable Initialization
 bool libMTDO_InitVariables_completed = false;
 
-void libMTDO_InitVariables() {
+void libMTDO_InitVariables () {
     if (libMTDO_InitVariables_completed) {
         return;
     }
 
     libMTDO_InitVariables_completed = true;
-}
 
+    libMTDO_gv_isMTDOEnabled = true;
+}
 
 // Functions
 void MimicTriggerDebugOutput (int lp_uselessInt, text lp_outputText, bool lp_uselessBool) {
     // Automatic Variable Declarations
     // Implementation
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, lp_outputText);
+    if ((libMTDO_gv_isMTDOEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, lp_outputText);
+    }
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: ToggleMTDO
+//--------------------------------------------------------------------------------------------------
+bool libMTDO_gt_ToggleMTDO_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libMTDO_gv_isMTDOEnabled = !(libMTDO_gv_isMTDOEnabled);
+    if ((libMTDO_gv_isMTDOEnabled == true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Mimic Trigger Debug Output"));
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Mimic Trigger Debug Output"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libMTDO_gt_ToggleMTDO_Init () {
+    libMTDO_gt_ToggleMTDO = TriggerCreate("libMTDO_gt_ToggleMTDO_Func");
+    TriggerAddEventChatMessage(libMTDO_gt_ToggleMTDO, c_playerAny, "tmtdo", true);
+    TriggerAddEventChatMessage(libMTDO_gt_ToggleMTDO, c_playerAny, "togglemimictriggerdebugoutput", true);
+}
+
+void libMTDO_InitTriggers () {
+    libMTDO_gt_ToggleMTDO_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -51,5 +96,7 @@ void libMTDO_InitLib () {
 
     libMTDO_InitLibraries();
     libMTDO_InitVariables();
+    libMTDO_InitTriggers();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("MimicTriggerDebugOutput Lib Initialized"));
 }
+

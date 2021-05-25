@@ -225,7 +225,9 @@ Since those code are for debug purpose only, if you have played around SC2 Maps,
 
 However, I cannot find a way to get the debug window up despite manually calling the debug window out. This tool is extremely useful for debugging if Heroes can call it out. Well, unfortunately.
 
-Those messages still carry out important information about the current state of the trigger call so I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageTitleDebug` instead, like how all the chat commands output.
+Those messages still carry out important information about the current state of the trigger call so I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageAreaSubtitle` instead, like how all the chat commands outputs.
+
+**Note:** This feature is *disabled* by default. Meaning it will not showing any messages. This is to prevent the bombardment from `SupportLib`'s logging messages (like `00:00|Player 1|ExperienceContribution 1234`). If you would like to toggle this functionality, you can use the chat command `tmtdo` or `togglemimictriggerdebugoutput` to do so.
 
 #### Prefixing Chat Commands
 
