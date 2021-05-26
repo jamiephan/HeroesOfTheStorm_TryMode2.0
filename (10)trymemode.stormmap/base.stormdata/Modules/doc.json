@@ -2244,6 +2244,165 @@
                             "description": "Grant 100 xp to Player 1 with its source set to minons"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "togai",
+                    "command": "toggleai",
+                    "description": [
+                        "Toggle to enable/disable AI for a Player.",
+                        "",
+                        ">Note: This will also enable/disable AI for units summoned via `[summon units](#cmd-summon)` command."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the AI to be enabled/disabled",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Toggle AI for whoever use this command"
+                        },
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Toggle AI for Player 10"
+                        },
+                        {
+                            "command": "{command} 2",
+                            "description": "Toggle AI for Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "enai",
+                    "command": "enableai",
+                    "description": [
+                        "Enable AI for a Player.",
+                        "",
+                        ">Note: This will also enable AI for units summoned via `[summon units](#cmd-summon)` command."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the AI to be enabled",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Enable AI for whoever use this command"
+                        },
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Enable AI for Player 10"
+                        },
+                        {
+                            "command": "{command} 2",
+                            "description": "Enable AI for Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "disai",
+                    "command": "disableai",
+                    "description": [
+                        "Disable AI for a Player.",
+                        "",
+                        ">Note: This will also disbale AI for units summoned via `[summon units](#cmd-summon)` command."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the AI to be disabled",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Disable AI for whoever use this command"
+                        },
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Disable AI for Player 10"
+                        },
+                        {
+                            "command": "{command} 2",
+                            "description": "Disable AI for Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "diffai",
+                    "command": "difficultyai",
+                    "description": [
+                        "Get/Set the AI Difficulty for a Player.",
+                        "",
+                        "The difficulty settings are below:",
+                        "| DifficultyId | Friendly Name (`GameString.txt`) | Galaxy Constant (`AILib_h.galaxy`) |",
+                        "|-|-|-|",
+                        "| 0 | Unknown | `libAIAI_ge_HeroAIDifficulty_Null` |",
+                        "| 1 | Tuto1Enemy | `libAIAI_ge_HeroAIDifficulty_HeroAITutorial1Enemy` |",
+                        "| 2 | Tuto1Ally | `libAIAI_ge_HeroAIDifficulty_HeroAITutorial1Ally` |",
+                        "| 3 | TutoMMEnemy | `libAIAI_ge_HeroAIDifficulty_HeroAITutorialMapMechanicEnemy` |",
+                        "| 4 | TutoMMAlly | `libAIAI_ge_HeroAIDifficulty_HeroAITutorialMapMechanicAlly` |",
+                        "| 5 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAITryMeMode` |",
+                        "| 6 | Unknown | `libAIAI_ge_HeroAIDifficulty_HeroAITryMeModeAlly` |",
+                        "| 7 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryEasy` |",
+                        "| 8 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryEasyWithHumanAlly` |",
+                        "| 9 | Recruit | `libAIAI_ge_HeroAIDifficulty_HeroAIEasy` |",
+                        "| 10 | Recruit | `libAIAI_ge_HeroAIDifficulty_HeroAIEasyWithHumanAlly` |",
+                        "| 11 | Adept | `libAIAI_ge_HeroAIDifficulty_HeroAIMedium` |",
+                        "| 12 | Veteran | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryHard` |",
+                        "| 13 | Elite | `libAIAI_ge_HeroAIDifficulty_HeroAIElite` |"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the AI to be enable/disabled",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        },
+                        {
+                            "name": "DifficultyID",
+                            "required": false,
+                            "description": "The difficulty to be set",
+                            "type": "integer",
+                            "defaultValue": null
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Get the AI difficulty for whoever uses this command"
+                        },
+                        {
+                            "command": "{shortCommand} 2 11",
+                            "description": "Set the AI difficulty for Player 2 to HeroAIMedium"
+                        },
+                        {
+                            "command": "{command} 6",
+                            "description": "Get the AI difficulty for Player 6"
+                        },
+                        {
+                            "command": "{command} 7 9",
+                            "description": "Set the AI difficulty for Player 7 to HeroAIEasy"
+                        }
+                    ]
                 }
             ]
         },

@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 25 May 2021 18:57:40 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 26 May 2021 19:23:28 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -144,7 +144,13 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `addtalent`](#cmd-addtalent)
 
+  - 💭 [Command: `difficultyai`](#cmd-difficultyai)
+
+  - 💭 [Command: `disableai`](#cmd-disableai)
+
   - 💭 [Command: `disabletalent`](#cmd-disabletalent)
+
+  - 💭 [Command: `enableai`](#cmd-enableai)
 
   - 💭 [Command: `enabletalent`](#cmd-enabletalent)
 
@@ -169,6 +175,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `setoverlay`](#cmd-setoverlay)
 
   - 💭 [Command: `setscore`](#cmd-setscore)
+
+  - 💭 [Command: `toggleai`](#cmd-toggleai)
 
   - 💭 [Command: `togglemassquest`](#cmd-togglemassquest)
 
@@ -2231,6 +2239,105 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-difficultyai"></a>
+
+## (`difficultyai` | `diffai`) `[PlayerID]` `[DifficultyID]`
+<a name="cmd-difficultyai-description"></a>
+
+#### ✏ Description: 
+Get/Set the AI Difficulty for a Player.
+
+The difficulty settings are below:
+| DifficultyId | Friendly Name (`GameString.txt`) | Galaxy Constant (`AILib_h.galaxy`) |
+|-|-|-|
+| 0 | Unknown | `libAIAI_ge_HeroAIDifficulty_Null` |
+| 1 | Tuto1Enemy | `libAIAI_ge_HeroAIDifficulty_HeroAITutorial1Enemy` |
+| 2 | Tuto1Ally | `libAIAI_ge_HeroAIDifficulty_HeroAITutorial1Ally` |
+| 3 | TutoMMEnemy | `libAIAI_ge_HeroAIDifficulty_HeroAITutorialMapMechanicEnemy` |
+| 4 | TutoMMAlly | `libAIAI_ge_HeroAIDifficulty_HeroAITutorialMapMechanicAlly` |
+| 5 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAITryMeMode` |
+| 6 | Unknown | `libAIAI_ge_HeroAIDifficulty_HeroAITryMeModeAlly` |
+| 7 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryEasy` |
+| 8 | Beginner | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryEasyWithHumanAlly` |
+| 9 | Recruit | `libAIAI_ge_HeroAIDifficulty_HeroAIEasy` |
+| 10 | Recruit | `libAIAI_ge_HeroAIDifficulty_HeroAIEasyWithHumanAlly` |
+| 11 | Adept | `libAIAI_ge_HeroAIDifficulty_HeroAIMedium` |
+| 12 | Veteran | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryHard` |
+| 13 | Elite | `libAIAI_ge_HeroAIDifficulty_HeroAIElite` |
+
+<a name="cmd-difficultyai-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the AI to be enable/disabled
+    	Default:	The player id of whoever used this command.
+    [DifficultyID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The difficulty to be set
+    	Default:	null
+<a name="cmd-difficultyai-examples"></a>
+
+#### 🔧 Examples:
+    > diffai
+    	(Get the AI difficulty for whoever uses this command)
+    > diffai 2 11
+    	(Set the AI difficulty for Player 2 to HeroAIMedium)
+    > difficultyai 6
+    	(Get the AI difficulty for Player 6)
+    > difficultyai 7 9
+    	(Set the AI difficulty for Player 7 to HeroAIEasy)
+<a name="cmd-difficultyai-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-disableai"></a>
+
+## (`disableai` | `disai`) `[PlayerID]`
+<a name="cmd-disableai-description"></a>
+
+#### ✏ Description: 
+Disable AI for a Player.
+
+>Note: This will also disbale AI for units summoned via `[summon units](#cmd-summon)` command.
+
+<a name="cmd-disableai-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the AI to be disabled
+    	Default:	The player id of whoever used this command.
+<a name="cmd-disableai-examples"></a>
+
+#### 🔧 Examples:
+    > disai
+    	(Disable AI for whoever use this command)
+    > disai 10
+    	(Disable AI for Player 10)
+    > disableai 2
+    	(Disable AI for Player 2)
+<a name="cmd-disableai-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-disabletalent"></a>
 
 ## (`disabletalent` | `dist`) `<TalentId>`
@@ -2255,6 +2362,44 @@ Disable a for all players. Generally found in `<CTalent id="xxxx">`.
     > dist MaievUmbralBindPursuitOfVengeance 0
     	(Disable Maiev's Pursuit Of Vengeance talent)
 <a name="cmd-disabletalent-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-enableai"></a>
+
+## (`enableai` | `enai`) `[PlayerID]`
+<a name="cmd-enableai-description"></a>
+
+#### ✏ Description: 
+Enable AI for a Player.
+
+>Note: This will also enable AI for units summoned via `[summon units](#cmd-summon)` command.
+
+<a name="cmd-enableai-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the AI to be enabled
+    	Default:	The player id of whoever used this command.
+<a name="cmd-enableai-examples"></a>
+
+#### 🔧 Examples:
+    > enai
+    	(Enable AI for whoever use this command)
+    > enai 10
+    	(Enable AI for Player 10)
+    > enableai 2
+    	(Enable AI for Player 2)
+<a name="cmd-enableai-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
@@ -2841,6 +2986,44 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
     > score Healing 1000 2
     	(Set the field "Healing" to 1000 for the player 2)
 <a name="cmd-setscore-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+<a name="cmd-toggleai"></a>
+
+## (`toggleai` | `togai`) `[PlayerID]`
+<a name="cmd-toggleai-description"></a>
+
+#### ✏ Description: 
+Toggle to enable/disable AI for a Player.
+
+>Note: This will also enable/disable AI for units summoned via `[summon units](#cmd-summon)` command.
+
+<a name="cmd-toggleai-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the AI to be enabled/disabled
+    	Default:	The player id of whoever used this command.
+<a name="cmd-toggleai-examples"></a>
+
+#### 🔧 Examples:
+    > togai
+    	(Toggle AI for whoever use this command)
+    > togai 10
+    	(Toggle AI for Player 10)
+    > toggleai 2
+    	(Toggle AI for Player 2)
+<a name="cmd-toggleai-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

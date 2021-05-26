@@ -33,6 +33,10 @@ trigger libPLYR_gt_ResetOverlay;
 trigger libPLYR_gt_GetCatalog;
 trigger libPLYR_gt_ModifyCatalog;
 trigger libPLYR_gt_GrantXPtoPlayer;
+trigger libPLYR_gt_ToggleAI;
+trigger libPLYR_gt_EnableAI;
+trigger libPLYR_gt_DisableAI;
+trigger libPLYR_gt_GetSetAIDiffiiculty;
 
 // Library Initialization
 void libPLYR_InitVariables ();
@@ -1089,6 +1093,221 @@ void libPLYR_gt_GrantXPtoPlayer_Init () {
     TriggerAddEventChatMessage(libPLYR_gt_GrantXPtoPlayer, c_playerAny, "experience", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle AI
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_ToggleAI_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    bool lv_isAIEnabled;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "togai") || (StringWord(EventChatMessage(false), 1) == "toggleai")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != "")) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_player > 15) || (lv_player <= 0))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+            return false;
+        }
+
+    }
+
+    lv_isAIEnabled = libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player);
+    if ((lv_isAIEnabled == true)) {
+        libAIAI_gf_HeroAIDisableAIForPlayer(lv_player);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Disabled AI for Player " + IntToString(lv_player))));
+    }
+    else {
+        libAIAI_gf_HeroAIEnableAIForPlayer(lv_player);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Enabled AI for Player " + IntToString(lv_player))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_ToggleAI_Init () {
+    libPLYR_gt_ToggleAI = TriggerCreate("libPLYR_gt_ToggleAI_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleAI, c_playerAny, "togai", false);
+    TriggerAddEventChatMessage(libPLYR_gt_ToggleAI, c_playerAny, "toggleai", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Enable AI
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_EnableAI_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "enai") || (StringWord(EventChatMessage(false), 1) == "enableai")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != "")) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_player > 15) || (lv_player <= 0))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+            return false;
+        }
+
+    }
+
+    libAIAI_gf_HeroAIEnableAIForPlayer(lv_player);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Enabled AI for Player " + IntToString(lv_player))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_EnableAI_Init () {
+    libPLYR_gt_EnableAI = TriggerCreate("libPLYR_gt_EnableAI_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_EnableAI, c_playerAny, "enai", false);
+    TriggerAddEventChatMessage(libPLYR_gt_EnableAI, c_playerAny, "enableai", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable AI
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_DisableAI_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "disai") || (StringWord(EventChatMessage(false), 1) == "disableai")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != "")) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_player > 15) || (lv_player <= 0))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+            return false;
+        }
+
+    }
+
+    libAIAI_gf_HeroAIDisableAIForPlayer(lv_player);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Disabled AI for Player " + IntToString(lv_player))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_DisableAI_Init () {
+    libPLYR_gt_DisableAI = TriggerCreate("libPLYR_gt_DisableAI_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_DisableAI, c_playerAny, "disai", false);
+    TriggerAddEventChatMessage(libPLYR_gt_DisableAI, c_playerAny, "disableai", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get/Set AI Diffiiculty
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_GetSetAIDiffiiculty_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    bool lv_isAIEnabled;
+    int lv_difficulty;
+    string lv_difficultyString;
+    bool lv_isValidDifficulty;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "diffai") || (StringWord(EventChatMessage(false), 1) == "difficultyai")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != "")) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+        if (((lv_player > 15) || (lv_player <= 0))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+            return false;
+        }
+
+    }
+
+    lv_isAIEnabled = libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player);
+    if ((lv_isAIEnabled == true)) {
+        if ((StringWord(EventChatMessage(false), 3) != "")) {
+            lv_difficulty = StringToInt(StringWord(EventChatMessage(false), 3));
+            lv_difficultyString = libAIAI_ge_HeroAIDifficulty_Ident(lv_difficulty);
+            if ((lv_difficultyString == null)) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Invalid AI Difficulty Setting."));
+                return false;
+            }
+
+            libAIAI_gf_HeroAISetAIDifficultyLevel(lv_player, lv_difficulty);
+            libAIAI_gf_HeroAIDisableAIForPlayer(lv_player);
+            libAIAI_gf_HeroAIEnableAIForPlayer(lv_player);
+            libAIAI_gf_HeroAISetAIDifficultyLevel(lv_player, lv_difficulty);
+            lv_difficulty = libAIAI_gv_aIHeroes[lv_player].lv_difficulty;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Changed Player " + (IntToString(lv_player) + (" AI Difficulty to: " + (lv_difficultyString + (" (" + (IntToString(lv_difficulty) + ")"))))))));
+            return true;
+        }
+        else {
+            lv_difficultyString = libAIAI_ge_HeroAIDifficulty_Ident(libAIAI_gv_aIHeroes[lv_player].lv_difficulty);
+            lv_difficulty = libAIAI_gv_aIHeroes[lv_player].lv_difficulty;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("AI Difficulty for Player " + IntToString(lv_player)) + (" is: " + (lv_difficultyString + (" (" + (IntToString(lv_difficulty) + ")")))))));
+            return true;
+        }
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Error: AI is not enabled for Player " + IntToString(lv_player))));
+        return false;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_GetSetAIDiffiiculty_Init () {
+    libPLYR_gt_GetSetAIDiffiiculty = TriggerCreate("libPLYR_gt_GetSetAIDiffiiculty_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_GetSetAIDiffiiculty, c_playerAny, "diffai", false);
+    TriggerAddEventChatMessage(libPLYR_gt_GetSetAIDiffiiculty, c_playerAny, "difficultyai", false);
+}
+
 void libPLYR_InitTriggers () {
     libPLYR_gt_MapInit_Init();
     libPLYR_gt_RunMassQuest_Init();
@@ -1110,6 +1329,10 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_GetCatalog_Init();
     libPLYR_gt_ModifyCatalog_Init();
     libPLYR_gt_GrantXPtoPlayer_Init();
+    libPLYR_gt_ToggleAI_Init();
+    libPLYR_gt_EnableAI_Init();
+    libPLYR_gt_DisableAI_Init();
+    libPLYR_gt_GetSetAIDiffiiculty_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
