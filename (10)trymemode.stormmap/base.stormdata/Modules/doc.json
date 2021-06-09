@@ -463,7 +463,7 @@
                         },
                         {
                             "command": "{command} Dflt",
-                            "description": "Set the camera object to Dlft (default SC2 camera)"
+                            "description": "Set the camera object to Dflt (default SC2 camera)"
                         }
                     ]
                 },
@@ -1733,7 +1733,7 @@
                         },
                         {
                             "command": "{shortCommand} MalfurionCelestialAlignment 2",
-                            "description": "Removed Malfurion's Celest>ial Alignment Talent from Player 2"
+                            "description": "Removed Malfurion's Celestial Alignment Talent from Player 2"
                         }
                     ]
                 },

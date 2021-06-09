@@ -75,7 +75,7 @@ cuo
 cutscene
 cutscenes
 cweapon
-d.va
+dva
 dds
 deathwing
 deckard
@@ -92,7 +92,7 @@ disai
 dist
 dotenv
 dva
-e.t.c.
+etc
 eg
 enableai
 enabletalent
@@ -167,9 +167,9 @@ kt
 ktz
 ku
 leoric
-li li
-li ming
-li-ming
+li
+ming
+liming
 lifeexpectedpercent
 lifemax
 lifepercent
@@ -178,10 +178,11 @@ linux
 lm
 loadmap
 lolz
-lt. morales
+lt
+morales
 lucio
 lunara
-lúcio
+lucio
 maiev
 malfurion
 malganis
@@ -278,7 +279,8 @@ setoverlay
 setscore
 sg
 sgs
-sgt. hammer
+sgt
+hammer
 shieldsmax
 shieldspercent
 shieldsregen
@@ -315,8 +317,8 @@ tch
 tdb
 tfc
 tfow
-the butcher
-the lost vikings
+butcher
+vikings
 thrall
 tmq
 tmtdo
