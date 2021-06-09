@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 26 May 2021 19:23:28 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Wed, 09 Jun 2021 22:00:38 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -462,7 +462,7 @@ End the game instantly and kick all players from the game.
 #### ✏ Description: 
 Show a custom floating combat text with different built-in templates.
 
-The table is the available combineations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):
+The table is the available combinations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):
 
 | `type` \ `state` | `Ability` | `Basic` | `Heal` | `Mana` | `Shield` | `XP` | `Quest` | `Reduced` |
 |-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -680,7 +680,7 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
 #### ✏ Description: 
 Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.
 
-The file path is relative to `*.stormmod/base.stormata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)
+The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)
 
 <a name="cmd-playcutscene-parameters"></a>
 
@@ -984,7 +984,7 @@ This is pretty useful to quickly shows the string from the functions internally.
 
 #### ✏ Description: 
 Toggle Mass CDR. This will reset the cooldown on all abilities on every game loop (0.0625s)
-This is useful to bypass the limit of trymode's Toggle Cooldown, as it have a 1.5s cooldown between each reset.
+This is useful to bypass the limit of try mode's Toggle Cooldown, as it have a 1.5s cooldown between each reset.
 
 <a name="cmd-togglecdr-parameters"></a>
 
@@ -1321,9 +1321,9 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
     > adec UnderworldBossRootsCreatePersistent
     	(Add Haunted Mines's boss root animation to camera location)
     > addeffectcamera NecromancerRaiseSkeletonCreationPersistent 10
-    	(Spawn 10 Xul's Sekelton to camera location)
+    	(Spawn 10 Xul's skeleton to camera location)
     > adec NecromancerRaiseSkeletonCreationPersistent 10 6
-    	(Spawn 10 Xul's Sekelton to camera location with the effect owner of Player 6)
+    	(Spawn 10 Xul's skeleton to camera location with the effect owner of Player 6)
 <a name="cmd-addeffectcamera-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -2227,7 +2227,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
     > addtalent MedivhForceOfWillArcaneExplosion
     	(Add Medivh's Arcane Explosion Talent to whoever uses this command)
     > adt MalfurionCelestialAlignment 2
-    	(add Malfurion's Celest>ial Alignment Talent to Player 2)
+    	(add Malfurion's Celestial Alignment Talent to Player 2)
 <a name="cmd-addtalent-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -2308,7 +2308,7 @@ The difficulty settings are below:
 #### ✏ Description: 
 Disable AI for a Player.
 
->Note: This will also disbale AI for units summoned via `[summon units](#cmd-summon)` command.
+>Note: This will also disable AI for units summoned via `[summon units](#cmd-summon)` command.
 
 <a name="cmd-disableai-parameters"></a>
 
@@ -2487,7 +2487,7 @@ The `SourceId` can be represent as an Integer with the source value of:
     > experience 100 6
     	(Grant 100 xp to Player 6)
     > experience 100 1 2
-    	(Grant 100 xp to Player 1 with its source set to minons)
+    	(Grant 100 xp to Player 1 with its source set to minions)
 <a name="cmd-experience-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -2507,15 +2507,15 @@ The `SourceId` can be represent as an Integer with the source value of:
 #### ✏ Description: 
 Directly get a Catalog value (a.k.a XMLs) from a player.
 
-The `CatalogReference` string consist of three parts: `<Catagory Type>,<Catagory Entry>,<Catalog Field Path>` seperated by comma, whereas:
-- `<Catagory Type>`: The type of the catalog, which usually is the "seconds word" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: 
+The `CatalogReference` string consist of three parts: `<Category Type>,<Category Entry>,<Catalog Field Path>` separated by comma, whereas:
+- `<Category Type>`: The type of the catalog, which usually is the "seconds word" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: 
   - `C` (Catalog)
   - `Behavior` (Type) `<-- This One`
   - `Buff` (Sub-Type)
-  - The value is the second "Capitialised Word": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.
-- `<Catagory Entry>`: The ID of the target catagory. (`id="xxx"`)
-- `<Catalog Field Path>`: The field path of the targeted `<Catagory Entry>`.
-  - Nested level uses `.` to prepresent. If the target field is not `value="xxx", it need to be nested here as well.`
+  - The value is the second "Capitalised Word": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.
+- `<Category Entry>`: The ID of the target Category. (`id="xxx"`)
+- `<Catalog Field Path>`: The field path of the targeted `<Category Entry>`.
+  - Nested level uses `.` for representation. If the target field is not `value="xxx", it need to be nested here as well.`
   - Arrays uses `[n]` to specify the numeric order
   - If an entry can exist multiple times with different index such as `<Flags>`, use `[Index]`, such as `Flags[AllowSelfCast]`
 
@@ -2621,7 +2621,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
     > gcl Weapon,ChromieHeroWeapon,Effect
     	(Get Chromie's Basic Attack Effect from whoever uses this command)
     > gcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 2
-    	(Get Dehaka's Dark Swarm Ability Supress Collision flag value when active from Player 2)
+    	(Get Dehaka's Dark Swarm Ability Suppress Collision flag value when active from Player 2)
 <a name="cmd-getcatalog-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -2676,9 +2676,9 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
     > mcl Weapon,StukovHeroWeapon,Period 0.0625
     	(Modify Stukov's Basic Attack speed to 16 (1 second performs 16 attacks = 0.0625 period per AA) for whoever uses this command)
     > mcl Weapon,ChromieHeroWeapon,Effect WizardWeaponLaunchSwitch
-    	(Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missle) for whoever uses this command)
+    	(Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missile) for whoever uses this command)
     > mcl Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2
-    	(Modify Dehaka's Dark Swarm Ability to no longer Supress Collision When active (No longer pass though units) for Player 2)
+    	(Modify Dehaka's Dark Swarm Ability to no longer Suppress Collision When active (No longer pass though units) for Player 2)
 <a name="cmd-modifycatalog-uiAvailability"></a>
 
 #### 🖼 UI Availability:
@@ -2817,7 +2817,7 @@ Modify the respawn point for a player. Either at the current camera location or 
     <Action>
     	Required:	true
     	Type:		string
-    	Usage:		Choose the action of the comman. (set = set the respawn location at camera location, reset = reset all respawn location)
+    	Usage:		Choose the action of the command. (set = set the respawn location at camera location, reset = reset all respawn location)
     [PlayerId/all]
     	Required:	false
     	Type:		integer/string
@@ -2982,7 +2982,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
     > setscore HeroDamage 0
     	(Set the field "Hero Damage" to 0 for the player who use this command.)
     > score SoloKill 524287
-    	(Set the field "Kils" to 5242873 for the player who use this command)
+    	(Set the field "Kills" to 5242873 for the player who use this command)
     > score Healing 1000 2
     	(Set the field "Healing" to 1000 for the player 2)
 <a name="cmd-setscore-uiAvailability"></a>
@@ -3041,7 +3041,7 @@ Toggle to enable/disable AI for a Player.
 
 #### ✏ Description: 
 Toggle mass quest completion mode to give stack every game tick (0.0625s).
->Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent
+>Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer / Floating Point overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stack
 
 <a name="cmd-togglemassquest-parameters"></a>
 
@@ -3075,7 +3075,7 @@ Toggle mass quest completion mode to give stack every game tick (0.0625s).
 <a name="cmd-togglepausegametalent-description"></a>
 
 #### ✏ Description: 
-Toggle whether to pause the game when viewing talents, similar to heores tutorial.
+Toggle whether to pause the game when viewing talents, similar to heroes tutorial.
 
 <a name="cmd-togglepausegametalent-parameters"></a>
 
