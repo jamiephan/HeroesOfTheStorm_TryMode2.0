@@ -203,7 +203,7 @@ For even better, you can add `path/to/Heroes of the Storm/Support64/` into your 
 ## Post-Install check
 After you installed, Launch the try mode in game. During loading, it should have a *sexy jimmy-in-a-rabbit* 🔫🐰 background:
 
-![Map Loadeding](https://i.imgur.com/jDPNHxg.png)
+![Map Loading](https://i.imgur.com/jDPNHxg.png)
 
 
 When the game loaded, you should see the message on the left of the screen:

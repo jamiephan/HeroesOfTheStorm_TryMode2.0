@@ -121,7 +121,7 @@ To able to save the SC2Mod file, Please add `//_heroes_replace//` before the cus
 
 ### Saving and Modifying for Heroes compatibility
 
-#### Using the `patchlibrary` tool (Recommanded)
+#### Using the `patchlibrary` tool (Recommended)
 
 1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
 ![](https://i.imgur.com/w7gk6Ym.png)

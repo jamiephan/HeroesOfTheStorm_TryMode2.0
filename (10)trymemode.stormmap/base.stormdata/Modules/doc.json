@@ -35,7 +35,7 @@
                     "command": "togglecdr",
                     "description": [
                         "Toggle Mass CDR. This will reset the cooldown on all abilities on every game loop (0.0625s)",
-                        "This is useful to bypass the limit of trymode's Toggle Cooldown, as it have a 1.5s cooldown between each reset."
+                        "This is useful to bypass the limit of try mode's Toggle Cooldown, as it have a 1.5s cooldown between each reset."
                     ],
                     "uiAvailable": false,
                     "parameters": [],
@@ -609,7 +609,7 @@
                     "description": [
                         "Show a custom floating combat text with different built-in templates.",
                         "",
-                        "The table is the available combineations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):",
+                        "The table is the available combinations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):",
                         "",
                         "| `type` \\ `state` | `Ability` | `Basic` | `Heal` | `Mana` | `Shield` | `XP` | `Quest` | `Reduced` |",
                         "|-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|",
@@ -713,7 +713,7 @@
                     "description": [
                         "Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.",
                         "",
-                        "The file path is relative to `*.stormmod/base.stormata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)"
+                        "The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)"
                     ],
                     "uiAvailable": false,
                     "parameters": [
@@ -1245,11 +1245,11 @@
                         },
                         {
                             "command": "{command} NecromancerRaiseSkeletonCreationPersistent 10",
-                            "description": "Spawn 10 Xul's Sekelton to camera location"
+                            "description": "Spawn 10 Xul's skeleton to camera location"
                         },
                         {
                             "command": "{shortCommand} NecromancerRaiseSkeletonCreationPersistent 10 6",
-                            "description": "Spawn 10 Xul's Sekelton to camera location with the effect owner of Player 6"
+                            "description": "Spawn 10 Xul's skeleton to camera location with the effect owner of Player 6"
                         }
                     ]
                 },
@@ -1542,7 +1542,7 @@
                     "command": "togglemassquest",
                     "description": [
                         "Toggle mass quest completion mode to give stack every game tick (0.0625s).",
-                        ">Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integeroverflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stacltalent"
+                        ">Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer / Floating Point overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stack"
                     ],
                     "uiAvailable": false,
                     "parameters": [
@@ -1612,7 +1612,7 @@
                 {
                     "shortCommand": "tpgt",
                     "command": "togglepausegametalent",
-                    "description": "Toggle whether to pause the game when viewing talents, similar to heores tutorial.",
+                    "description": "Toggle whether to pause the game when viewing talents, similar to heroes tutorial.",
                     "uiAvailable": false,
                     "parameters": [],
                     "examples": [
@@ -1656,7 +1656,7 @@
                         },
                         {
                             "command": "{shortCommand} MalfurionCelestialAlignment 2",
-                            "description": "add Malfurion's Celest>ial Alignment Talent to Player 2"
+                            "description": "add Malfurion's Celestial Alignment Talent to Player 2"
                         }
                     ]
                 },
@@ -1896,7 +1896,7 @@
                         },
                         {
                             "command": "{shortCommand} SoloKill 524287",
-                            "description": "Set the field \"Kils\" to 5242873 for the player who use this command"
+                            "description": "Set the field \"Kills\" to 5242873 for the player who use this command"
                         },
                         {
                             "command": "{shortCommand} Healing 1000 2",
@@ -1913,7 +1913,7 @@
                         {
                             "name": "Action",
                             "required": true,
-                            "description": "Choose the action of the comman. (set = set the respawn location at camera location, reset = reset all respawn location)",
+                            "description": "Choose the action of the command. (set = set the respawn location at camera location, reset = reset all respawn location)",
                             "type": "string"
                         },
                         {
@@ -1997,15 +1997,15 @@
                     "description": [
                         "Directly get a Catalog value (a.k.a XMLs) from a player.",
                         "",
-                        "The `CatalogReference` string consist of three parts: `<Catagory Type>,<Catagory Entry>,<Catalog Field Path>` seperated by comma, whereas:",
-                        "- `<Catagory Type>`: The type of the catalog, which usually is the \"seconds word\" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: ",
+                        "The `CatalogReference` string consist of three parts: `<Category Type>,<Category Entry>,<Catalog Field Path>` separated by comma, whereas:",
+                        "- `<Category Type>`: The type of the catalog, which usually is the \"seconds word\" of the entry. Take `CBehaviorBuff` as example, it consist of three parts: ",
                         "  - `C` (Catalog)",
                         "  - `Behavior` (Type) `<-- This One`",
                         "  - `Buff` (Sub-Type)",
-                        "  - The value is the second \"Capitialised Word\": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.",
-                        "- `<Catagory Entry>`: The ID of the target catagory. (`id=\"xxx\"`)",
-                        "- `<Catalog Field Path>`: The field path of the targeted `<Catagory Entry>`.",
-                        "  - Nested level uses `.` to prepresent. If the target field is not `value=\"xxx\", it need to be nested here as well.`",
+                        "  - The value is the second \"Capitalised Word\": `Behavior`. Similarly, `CAbilEffectInstant`, the value will be `Abil`, `CValidatorPlayerTalent` will be `Validator`.",
+                        "- `<Category Entry>`: The ID of the target Category. (`id=\"xxx\"`)",
+                        "- `<Catalog Field Path>`: The field path of the targeted `<Category Entry>`.",
+                        "  - Nested level uses `.` for representation. If the target field is not `value=\"xxx\", it need to be nested here as well.`",
                         "  - Arrays uses `[n]` to specify the numeric order",
                         "  - If an entry can exist multiple times with different index such as `<Flags>`, use `[Index]`, such as `Flags[AllowSelfCast]`",
                         "",
@@ -2124,7 +2124,7 @@
                         },
                         {
                             "command": "{shortCommand} Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 2",
-                            "description": "Get Dehaka's Dark Swarm Ability Supress Collision flag value when active from Player 2"
+                            "description": "Get Dehaka's Dark Swarm Ability Suppress Collision flag value when active from Player 2"
                         }
                     ]
                 },
@@ -2182,11 +2182,11 @@
                         },
                         {
                             "command": "{shortCommand} Weapon,ChromieHeroWeapon,Effect WizardWeaponLaunchSwitch",
-                            "description": "Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missle) for whoever uses this command"
+                            "description": "Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missile) for whoever uses this command"
                         },
                         {
                             "command": "{shortCommand} Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2",
-                            "description": "Modify Dehaka's Dark Swarm Ability to no longer Supress Collision When active (No longer pass though units) for Player 2"
+                            "description": "Modify Dehaka's Dark Swarm Ability to no longer Suppress Collision When active (No longer pass though units) for Player 2"
                         }
                     ]
                 },
@@ -2241,7 +2241,7 @@
                         },
                         {
                             "command": "{command} 100 1 2",
-                            "description": "Grant 100 xp to Player 1 with its source set to minons"
+                            "description": "Grant 100 xp to Player 1 with its source set to minions"
                         }
                     ]
                 },
@@ -2317,7 +2317,7 @@
                     "description": [
                         "Disable AI for a Player.",
                         "",
-                        ">Note: This will also disbale AI for units summoned via `[summon units](#cmd-summon)` command."
+                        ">Note: This will also disable AI for units summoned via `[summon units](#cmd-summon)` command."
                     ],
                     "uiAvailable": false,
                     "parameters": [

@@ -59,7 +59,7 @@ This tool will create a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_l
 
 This command should not need to use more than once if it completed successfully.
 
->Note: For some reason symlink created in WSL Enviorment does not work, please change the `.env` `HEROES_OF_THE_STORM_INSTALL_LOCATION` to a windows path first (e.g `C:/games/Heroes of the Storm` instead of `/mnt/c/games/Heroes of the Storm`), run `npm run symlink` in CMD (not WSL), then change it back to linux path for other commands.
+>Note: For some reason symlink created in WSL Environment does not work, please change the `.env` `HEROES_OF_THE_STORM_INSTALL_LOCATION` to a windows path first (e.g `C:/games/Heroes of the Storm` instead of `/mnt/c/games/Heroes of the Storm`), run `npm run symlink` in CMD (not WSL), then change it back to linux path for other commands.
 
 
 <a name="tools-s2ma" />
@@ -92,7 +92,7 @@ To do so, just simply add the behavior to the selected units (e.g using the [cha
 
 Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
->Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod afterall.
+>Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
 
 Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
 
@@ -101,7 +101,7 @@ Altering `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
 
 Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret 
 
-![Alarak with extra abilites](https://i.imgur.com/11ogJyt.png)
+![Alarak with extra abilities](https://i.imgur.com/11ogJyt.png)
 
 
 ---
