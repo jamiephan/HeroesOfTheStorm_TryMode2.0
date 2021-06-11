@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 11 Jun 2021 08:34:15 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 11 Jun 2021 11:20:47 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -529,8 +529,45 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 <a name="cmd-forceruntrigger-description"></a>
 
 #### ✏ Description: 
-Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish. You can get these from the galaxy files. 
->Note: This command is mainly for debugging, most of the time it won't be useful.
+Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish.
+This can be used to run a trigger that bypass the `testConds`, such as `GameCheatsEnabled(c_gameCheatCategoryDevelopment)`.
+
+You can get the trigger name from the `TriggerCreate()` function in various galaxy files.
+
+For example, a debug chat trigger to start the Immortal objective in Battlefield of Eternity immediately:
+
+```c++
+//--------------------------------------------------------------------------------------------------
+// Trigger: MMBOE Debug - Start Immediately
+//--------------------------------------------------------------------------------------------------
+bool libMLBD_gt_MMBOEDebugStartImmediately_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((GameCheatsEnabled(c_gameCheatCategoryDevelopment) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libMLBD_gv_mMBOEDebugUsed = true;
+    libMLBD_gf_MMBOEDuelWarningStart();
+    TimerStart(libMLBD_gv_mMBOEEventWarningTimer, 0.5, false, c_timeGame);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libMLBD_gt_MMBOEDebugStartImmediately_Init () {
+    libMLBD_gt_MMBOEDebugStartImmediately = TriggerCreate("libMLBD_gt_MMBOEDebugStartImmediately_Func");
+    TriggerEnable(libMLBD_gt_MMBOEDebugStartImmediately, false);
+    TriggerAddEventChatMessage(libMLBD_gt_MMBOEDebugStartImmediately, c_playerAny, "-bd", true);
+}
+```
+The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using this command (`frt libMLBD_gt_MMBOEDebugStartImmediately_Func`), you can bypass the `GameCheatsEnabled(c_gameCheatCategoryDevelopment)` restriction, which was required when using the `-bd` command.
 
 <a name="cmd-forceruntrigger-parameters"></a>
 
