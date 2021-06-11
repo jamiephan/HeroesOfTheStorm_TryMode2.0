@@ -1733,7 +1733,7 @@
                         },
                         {
                             "command": "{shortCommand} MalfurionCelestialAlignment 2",
-                            "description": "Removed Malfurion's Celest>ial Alignment Talent from Player 2"
+                            "description": "Removed Malfurion's Celestial Alignment Talent from Player 2"
                         }
                     ]
                 },
