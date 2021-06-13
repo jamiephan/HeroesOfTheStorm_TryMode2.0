@@ -2,8 +2,11 @@
 <Includes id="Mods/HeroesData.StormMod">
   <!-- Include Mods here without Modify DocumentHeader Binary. Feels Good Man.-->
 
-  <!-- You can include your own mod. Once you created a .stormmod file / folder (e.g mymod.stormmod)-->
-  <!-- Place it in  Heroes of the Storm Install Directory/mods directory -->
+  <!-- You can include your own stormmod. -->
+  <!-- You can also obtain these mods from https://github.com/jamiephan/HeroesOfTheStorm_S2MA -->
+
+  <!-- Once you created a .stormmod file / folder (e.g mymod.stormmod)-->
+  <!-- Place it in Heroes of the Storm Install Directory/mods directory: -->
 
   <!-- Heroes of the Storm -->
   <!-- ├── HeroesData -->

@@ -1,6 +1,15 @@
 # Modding
 
-## Editing the XML files
+There are multiple ways to mod this map file:
+
+- [Edit the XML files](#mod-xml)
+- [Edit the Galaxy Script files](#mod-galaxy)
+- [Edit the Asset files](#mod-assets)
+- [Adding extra `*.stormmod` mods](#mod-stormmod)
+
+<a name="mod-xml" />
+
+## Edit the XML files
 
 Modifications of XML files are under `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`).
 
@@ -9,38 +18,25 @@ Generally, You can override the XML Keys that the game has. The game will use yo
     <?xml version="1.0" encoding="us-ascii"?>
     <Catalog>
         <CAbilEffectTarget id="MaievFanOfKnives">
-            <PrepEffect value="DismountDecloakCasterSet" />
-            <Effect value="MaievFanOfKnivesInitialPersistent" />
-            <Flags index="ClearLastAttackTargetOutOfRange" value="1" />
-            <Flags index="RequireTargetVision" value="0" />
             <Cost>
-            <Vital index="Energy" value="30" />
-            <Cooldown TimeUse="0" />
+                <Cooldown TimeUse="0" />
             </Cost>
-            <Range value="7.25" />
-            <Arc value="360" />
-            <CastIntroTime value="0.1" />
-            <UninterruptibleArray index="Cast" value="1" />
-            <UninterruptibleArray index="Channel" value="1" />
-            <UninterruptibleArray index="Finish" value="1" />
-            <CmdButtonArray index="Execute" DefaultButtonFace="MaievFanOfKnives" />
-            <CursorRangeFlags index="ClampMin" value="1" />
-            <CursorRangeFlags index="ClampMax" value="1" />
-            <CursorEffect value="MaievFanOfKnivesSearchArea" />
         </CAbilEffectTarget>
         <CEffectDamage id="MaievFanOfKnivesDamage" parent="StormSpell">
-            <MultiplicativeModifierArray index="MaievFanOfKnivesPinDown" Accumulator="MaievFanOfKnivesPinDownDamageAccumulator" />
-            <MultiplicativeModifierArray index="RuthlessSpirit" Validator="MaievSpiritOfVengeanceRuthlessSpiritCombine" Accumulator="MaievSpiritOfVengeanceRuthlessSpiritDamageAccumulator" Crit="1" />
             <Amount value="9999999" />
         </CEffectDamage>
     </Catalog>
 
 
-All XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories, file name, amount are not limited.
+All XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories or file name (provided its ending with `.xml`) are not limited.
 
-I also recommend using the tool `buildxml` to build the XML file, for more, see [TOOLS.md](TOOLS.md#tools-buildxml).
+It is recommend using the tool `npm run build:xml` to build the XML files, for more, see [TOOLS.md](TOOLS.md#tools-buildxml).
 
-## Editing the Galaxy Script Files
+---
+
+<a name="mod-galaxy" />
+
+## Edit the Galaxy Script files
 
 Modifications of Galaxy files in (`./(10)trymemode.stormmap/base.stormdata`), same as where the custom command library located at.
 
@@ -166,7 +162,16 @@ Currently it is **unable** to call the Heroes' specific debug menu like in SC2, 
 ![SC2 debug window](https://i.imgur.com/7IofkYI.png)
 
 
-## Editing Asset Files (.dds)
+<a name="mod-asset" />
+
+## Edit the Asset files
+
+Generally, you can replace any in game assets with your own. The game will priorities loading your own asset over the internal ones, provided they are have the same name. For instance, the Raynor-with-a-bunny-ear loading screen in this map, the file is under `(10)trymemode.stormmap/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`, which is to replace the default in-game file: heroes.`stormmod/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`. Note that the path in `base.stormassets` must be the same.
+
+You can use this to also replace assets such as but not limited to: `*.dds` (texture), `*.m3` (models) and `*.ogg` (sound/music files).
+
+
+### Editing Asset Files (.dds)
 
 If you loaded this map, you will noticed the loading screen have changed to our boy jimmy:
 
@@ -176,3 +181,47 @@ I recommend using a plugin [NVIDIA Texture Tools for Adobe Photoshop](https://de
 
 >Note: When saving, remember to choose `No MIP maps` inside the `MIP Map Generation` section. 
 *(Took me a long time to figure it out why the texture is not loading.....)*
+
+<a name="mod-stormmod" />
+
+## Adding extra `*.stormmod` mods
+
+If you would like to include a `*.stormmod` file into this map, you can copy the file into `HEROES_OF_THE_STORM/mods/yourmod.stormmod`:
+
+    Heroes of the Storm
+    ├── HeroesData
+    ├── mods
+    │   └── yourmod.stormmod   <-- Here
+    ├── Support
+    ├── Support64
+    ├── Versions
+    ├── .build.info
+    └── .Heroes of the Storm.exe
+
+Then, in [`Includes.xml`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Includes.xml), add an entry: 
+
+```xml
+<Path value="Mods/yourmod.StormMod" />
+```
+
+Afterwards, reload the Try Mode map (completely exit and re-enter the map), you should see your map loaded, provided the stormmod file is valid.
+
+You can also obtain the official Heroes of the Storm stormmod files from my `*.s2ma` hosting repo: https://github.com/jamiephan/HeroesOfTheStorm_S2MA
+
+**Examples:**
+
+Using the [AzmoDUNK Mutator](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/AzmoDUNK%20Mutator.stormmod) Mod:
+
+![AzmoDUNK Mutator](https://i.imgur.com/n6FKFe2.png)
+
+Using the [In Game Hero Selection](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/In%20Game%20Hero%20Selection.stormmod) Mod:
+
+![In Game Hero Selection](https://i.imgur.com/iIZlSJf.png)
+
+
+
+
+
+
+
+
