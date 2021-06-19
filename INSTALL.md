@@ -4,10 +4,10 @@ Install Methods:
 
 - [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap) (Recommended ✔)
 - [Replace in-game Try Mode with repo's folder for modding (All Platforms)](#runStormmap-custom)
-- [Run the `.stormmap` file directly (Windows-only)](#runStormmap)
-  - [Windows File Association (Double click the file to open)](#runStormmap-fileassoc)
-  - [Windows Command Line (Directly)](#runStormmap-cmdDirectly)
-  - [Windows Command Line (Relatively)](#runStormmap-cmdRelatively)
+- [Run the `.stormmap` file directly](#runStormmap)
+  - [Command Line (Directly)](#runStormmap-cmdDirectly)
+  - [Command Line (Relatively)](#runStormmap-cmdRelatively)
+  - [File Association (Windows-Only)](#runStormmap-fileassoc)
 
 Post Installation Check:
 
@@ -21,7 +21,11 @@ This method is **recommended** if you are not going to mod/change anything in th
 
 >Note that: `trymode20.stormmap` in the Release page is the same as the `(10)trymemode.stormmap` folder in this repo.
 
-After downloaded any `.stormmap` files from the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page, rename the file to `(10)trymemode.stormmap` and place it in the `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"` (also create necessary directories), which you should get the similar directory structure:
+1. Download any `.stormmap` file.
+2. Rename the file to `(10)trymemode.stormmap`.
+3. Place the file in `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"`(also create necessary directories)
+
+You should get the similar directory structure as below:
 
     Heroes of the Storm/
     ├── HeroesData/
@@ -37,11 +41,11 @@ After downloaded any `.stormmap` files from the [Release](https://github.com/jam
     ├── Heroes of the Storm.exe
     └── Launcher.db
 
-Then, you can launch try mode with your desired hero and the map should be launched.
+Then, you can launch try mode with any hero in-game and the modified map should be launched.
 
-If you would like to restore the original try mode, simply delete or rename the file.
+>Note: If you would like to restore the original try mode, simply delete or rename the file.
 
-If you would like to replace the in game tutorial instead (Setting cogwheel -> Tutorial), you can place it in the following folder (of course also rename the file correspondingly):
+If you would like to replace the in game tutorial instead (Setting -> Tutorial), you can place it in the following folder (of course also rename the file correspondingly):
 
 (This can be handy if you want multiple `.stormmap` at once.)
 
@@ -65,9 +69,13 @@ If you would like to replace the in game tutorial instead (Setting cogwheel -> T
 <a name="runStormmap-custom"></a>
 ## Replace in-game Try Mode with repo's folder for modding (All Platforms)
 
-This method is for users going to mod the try mode (such as assets, galaxy and xml).
+This method is for users going to mod the try mode.
 
-This method is similar to above but instead of copying the `.stormmap` file, you would like to copy the `(10)trymemode.stormmap` **folder** in this repo into `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"` (also create necessary directories), which you should get the similar directory:
+1. Clone this repo (or download as zip)
+2. Copy the `(10)trymemode.stormmap` folder in this repo
+3. Paste it in `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"` (also create necessary directories).
+
+You should get the similar directory:
 
     Heroes of the Storm/
     ├── HeroesData/
@@ -83,11 +91,12 @@ This method is similar to above but instead of copying the `.stormmap` file, you
     ├── Heroes of the Storm.exe
     └── Launcher.db
 
->Tip: You can make a symbolic link that allows you to use the tools as well.
+>Tip: You can make a symbolic link that allows you to use the tools as well. (e.g `mklink /D /J "path/to/heroes/maps/heroes/singleplayermaps/(10)trymemode.stormmap" "path/to/repo/(10)trymemode.stormmap"`)
 
-If you would like to replace the in game tutorial instead (Setting cogwheel -> Tutorial), you can place it in the following folder (of course also rename the folder correspondingly):
 
-(This can be handy if you want multiple `.stormmap` at once.)
+If you would like to replace the in game tutorial instead (Setting -> Tutorial), you can place it in the following folder (of course also rename the folder correspondingly):
+
+(This can be handy if you want multiple modded at once.)
 
     Heroes of the Storm/
     ├── HeroesData/
@@ -116,7 +125,7 @@ If you would like to replace the in game tutorial instead (Setting cogwheel -> T
 > TODO: Figuring out what talents are not loaded
 
 <a name="runStormmap-fileassoc"></a>
-### Windows File Association (double click to open)
+### Windows File Association
 
 This allows you to double click on the `*.stormmap` file and run the map directly.
 
@@ -152,6 +161,7 @@ In the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releas
 
     ![Verify](https://i.imgur.com/vmPneQE.png)
     
+
 
 <a name="runStormmap-cmdDirectly"></a>
 ### Windows Command Line (Directly)
