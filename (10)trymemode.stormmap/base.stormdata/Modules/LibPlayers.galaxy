@@ -5,8 +5,18 @@ include "TriggerLibs/NativeLib"
 //--------------------------------------------------------------------------------------------------
 // Validating: templates
 
+// Constants
+const int libPLYR_gv_playerRunningQuestSize = 16;
+
+// Structures
+struct libPLYR_gs_playerRunningQuestStat {
+    bool lv_isRunning;
+    int lv_stacks;
+};
+
 // Variable Declarations
-int libPLYR_gv_massQuestStacks;
+int libPLYR_gv_defaultStacksNumber;
+libPLYR_gs_playerRunningQuestStat[libPLYR_gv_playerRunningQuestSize + 1] libPLYR_gv_playersRunningQuestStat;
 bool libPLYR_gv_isRunningMassQuest;
 bool libPLYR_gv_isPauseGameWhenShowingTalentPanel;
 bool libPLYR_gv_isEnableTalentTree;
@@ -14,6 +24,8 @@ bool libPLYR_gv_haveUsedSetMasteryRingTrigger;
 
 // Trigger Declarations
 trigger libPLYR_gt_MapInit;
+trigger libPLYR_gt_AddQuestStacks;
+trigger libPLYR_gt_RemoveQuestStacks;
 trigger libPLYR_gt_RunMassQuest;
 trigger libPLYR_gt_ToggleRunMassQuest;
 trigger libPLYR_gt_TogglePause;
@@ -55,13 +67,18 @@ void libPLYR_InitLibraries () {
 bool libPLYR_InitVariables_completed = false;
 
 void libPLYR_InitVariables () {
+    int init_i;
+
     if (libPLYR_InitVariables_completed) {
         return;
     }
 
     libPLYR_InitVariables_completed = true;
 
-    libPLYR_gv_massQuestStacks = 1;
+    libPLYR_gv_defaultStacksNumber = 1;
+    for (init_i = 0; init_i <= libPLYR_gv_playerRunningQuestSize; init_i += 1) {
+        libPLYR_gv_playersRunningQuestStat[init_i].lv_stacks = libPLYR_gv_defaultStacksNumber;
+    }
     libPLYR_gv_isEnableTalentTree = true;
 }
 
@@ -87,23 +104,140 @@ void libPLYR_gt_MapInit_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Run Mass Quest
+// Trigger: Add Quest Stacks
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_AddQuestStacks_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_stacks;
+    int lv_player;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "aqs") || (StringWord(EventChatMessage(false), 1) == "addqueststack")))) {
+            return false;
+        }
+    }
+
     // Actions
     if (!runActions) {
         return true;
     }
 
-    libSprt_gf_DEBUGIncrementAllQuests(1, libPLYR_gv_massQuestStacks);
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <aqs|addqueststack> <QuestStacks> [Player=EventPlayer]"));
+    }
+    else {
+        lv_stacks = StringToInt(StringWord(EventChatMessage(false), 2));
+        if ((lv_stacks <= 0)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Stack number \"" + StringWord(EventChatMessage(false), 2)) + "\" is not valid.")));
+            return false;
+        }
+
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        libSprt_gf_DEBUGIncrementAllQuests(lv_player, lv_stacks);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Added \"" + StringWord(EventChatMessage(false), 2)) + ("\" quest stacks for Player " + IntToString(lv_player)))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_AddQuestStacks_Init () {
+    libPLYR_gt_AddQuestStacks = TriggerCreate("libPLYR_gt_AddQuestStacks_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_AddQuestStacks, c_playerAny, "aqs", false);
+    TriggerAddEventChatMessage(libPLYR_gt_AddQuestStacks, c_playerAny, "addqueststack", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Quest Stacks
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_RemoveQuestStacks_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_stacks;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "rqs") || (StringWord(EventChatMessage(false), 1) == "removequeststack")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) == null)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <aqs|addqueststack> <QuestStacks> [Player=EventPlayer]"));
+    }
+    else {
+        lv_stacks = StringToInt(StringWord(EventChatMessage(false), 2));
+        if ((lv_stacks <= 0)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Error: Stack number \"" + StringWord(EventChatMessage(false), 2)) + "\" is not valid.")));
+            return false;
+        }
+
+        if ((StringWord(EventChatMessage(false), 3) != null)) {
+            lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        }
+
+        libSprt_gf_DEBUGIncrementAllQuests(lv_player, (lv_stacks * -1));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Removed \"" + StringWord(EventChatMessage(false), 2)) + ("\" quest stacks for Player " + IntToString(lv_player)))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_RemoveQuestStacks_Init () {
+    libPLYR_gt_RemoveQuestStacks = TriggerCreate("libPLYR_gt_RemoveQuestStacks_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveQuestStacks, c_playerAny, "rqs", false);
+    TriggerAddEventChatMessage(libPLYR_gt_RemoveQuestStacks, c_playerAny, "removequeststack", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run Mass Quest
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_RunMassQuest_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_stacks;
+
+    // Automatic Variable Declarations
+    const int autoBC5B5D52_ae = libPLYR_gv_playerRunningQuestSize;
+    const int autoBC5B5D52_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_player = 0;
+    for ( ; ( (autoBC5B5D52_ai >= 0 && lv_player <= autoBC5B5D52_ae) || (autoBC5B5D52_ai < 0 && lv_player >= autoBC5B5D52_ae) ) ; lv_player += autoBC5B5D52_ai ) {
+        if ((libPLYR_gv_playersRunningQuestStat[lv_player].lv_isRunning == true)) {
+            lv_stacks = libPLYR_gv_playersRunningQuestStat[lv_player].lv_stacks;
+            libSprt_gf_DEBUGIncrementAllQuests(lv_player, lv_stacks);
+        }
+
+    }
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libPLYR_gt_RunMassQuest_Init () {
     libPLYR_gt_RunMassQuest = TriggerCreate("libPLYR_gt_RunMassQuest_Func");
-    TriggerEnable(libPLYR_gt_RunMassQuest, false);
     TriggerAddEventTimePeriodic(libPLYR_gt_RunMassQuest, 0.0625, c_timeGame);
 }
 
@@ -112,11 +246,12 @@ void libPLYR_gt_RunMassQuest_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libPLYR_gt_ToggleRunMassQuest_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    const int lv_defaultStacks = 1;
     int lv_stacks;
+    int lv_player;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_player = EventPlayer();
 
     // Conditions
     if (testConds) {
@@ -130,21 +265,23 @@ bool libPLYR_gt_ToggleRunMassQuest_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    libPLYR_gv_isRunningMassQuest = !(libPLYR_gv_isRunningMassQuest);
-    lv_stacks = StringToInt(StringWord(EventChatMessage(false), 2));
-    if (((libPLYR_gv_isRunningMassQuest == true) && (lv_stacks <= 0))) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Unable to set quest stacks. Using default: " + IntToString(lv_defaultStacks))));
-        lv_stacks = lv_defaultStacks;
+    if ((StringWord(EventChatMessage(false), 3) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 3));
+        if (((lv_player >= libPLYR_gv_playerRunningQuestSize) || (lv_player <= 0))) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 1 - 15."));
+            return false;
+        }
+
     }
 
-    if ((libPLYR_gv_isRunningMassQuest == true)) {
-        libPLYR_gv_massQuestStacks = lv_stacks;
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Enabled Mass Quest Completion"));
-        TriggerEnable(libPLYR_gt_RunMassQuest, true);
+    libPLYR_gv_playersRunningQuestStat[EventPlayer()].lv_isRunning = !(libPLYR_gv_playersRunningQuestStat[EventPlayer()].lv_isRunning);
+    lv_stacks = StringToInt(StringWord(EventChatMessage(false), 2));
+    if (((libPLYR_gv_playersRunningQuestStat[EventPlayer()].lv_isRunning == true) && (lv_stacks <= 0))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Unable to set quest stacks for Player " + (IntToString(EventPlayer()) + ". Using default: ")) + IntToString(libPLYR_gv_defaultStacksNumber))));
+        libPLYR_gv_playersRunningQuestStat[EventPlayer()].lv_stacks = libPLYR_gv_defaultStacksNumber;
     }
     else {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Mass Quest Completion"));
-        TriggerEnable(libPLYR_gt_RunMassQuest, false);
+        libPLYR_gv_playersRunningQuestStat[EventPlayer()].lv_stacks = lv_stacks;
     }
     return true;
 }
@@ -1310,6 +1447,8 @@ void libPLYR_gt_GetSetAIDiffiiculty_Init () {
 
 void libPLYR_InitTriggers () {
     libPLYR_gt_MapInit_Init();
+    libPLYR_gt_AddQuestStacks_Init();
+    libPLYR_gt_RemoveQuestStacks_Init();
     libPLYR_gt_RunMassQuest_Init();
     libPLYR_gt_ToggleRunMassQuest_Init();
     libPLYR_gt_TogglePause_Init();

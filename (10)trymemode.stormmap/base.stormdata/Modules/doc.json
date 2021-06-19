@@ -1575,10 +1575,76 @@
             },
             "commands": [
                 {
+                    "shortCommand": "aqs",
+                    "command": "addqueststack",
+                    "description": [
+                        "Add a specific amount of quest stacks to a player."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "stacks",
+                            "required": true,
+                            "description": "The amount of stack to be added for a player",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The Player ID for the quest stacks to be added",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Add 10 quest stacks to whoever uses this command"
+                        },
+                        {
+                            "command": "{command} 20 6",
+                            "description": "Add 10 quest stack to Player 6."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rqs",
+                    "command": "removequeststack",
+                    "description": [
+                        "Remove a specific amount of quest stacks from a player."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "stacks",
+                            "required": true,
+                            "description": "The amount of stack to be removed from a player",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The Player ID for the quest stacks to be removed",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand} 10",
+                            "description": "Remove 10 quest stacks to whoever uses this command"
+                        },
+                        {
+                            "command": "{command} 20 6",
+                            "description": "Remove 10 quest stack to Player 6."
+                        }
+                    ]
+                },
+                {
                     "shortCommand": "tmq",
                     "command": "togglemassquest",
                     "description": [
-                        "Toggle mass quest completion mode to give stack every game tick (0.0625s).",
+                        "Toggle mass quest completion mode to give stack every game tick (0.0625s) for whoever uses this command.",
                         ">Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer / Floating Point overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stack"
                     ],
                     "uiAvailable": false,

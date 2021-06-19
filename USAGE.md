@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 11 Jun 2021 11:20:47 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 19 Jun 2021 07:52:04 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -142,6 +142,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `addalltalent`](#cmd-addalltalent)
 
+  - 💭 [Command: `addqueststack`](#cmd-addqueststack)
+
   - 💭 [Command: `addtalent`](#cmd-addtalent)
 
   - 💭 [Command: `difficultyai`](#cmd-difficultyai)
@@ -161,6 +163,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `modifycatalog`](#cmd-modifycatalog)
 
   - 💭 [Command: `removealltalent`](#cmd-removealltalent)
+
+  - 💭 [Command: `removequeststack`](#cmd-removequeststack)
 
   - 💭 [Command: `removetalent`](#cmd-removetalent)
 
@@ -2237,6 +2241,44 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-addqueststack"></a>
+
+## (`addqueststack` | `aqs`) `<stacks>` `[PlayerId]`
+<a name="cmd-addqueststack-description"></a>
+
+#### ✏ Description: 
+Add a specific amount of quest stacks to a player.
+
+<a name="cmd-addqueststack-parameters"></a>
+
+#### ⚙ Parameters:
+    <stacks>
+    	Required:	true
+    	Type:		integer
+    	Usage:		The amount of stack to be added for a player
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the quest stacks to be added
+    	Default:	The player id of whoever used this command.
+<a name="cmd-addqueststack-examples"></a>
+
+#### 🔧 Examples:
+    > aqs 10
+    	(Add 10 quest stacks to whoever uses this command)
+    > addqueststack 20 6
+    	(Add 10 quest stack to Player 6.)
+<a name="cmd-addqueststack-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-addtalent"></a>
 
 ## (`addtalent` | `adt`) `<TalentId>` `[PlayerId]`
@@ -2771,6 +2813,44 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 [\[Return to Top ⬆\]](#meta-top)
 
+<a name="cmd-removequeststack"></a>
+
+## (`removequeststack` | `rqs`) `<stacks>` `[PlayerId]`
+<a name="cmd-removequeststack-description"></a>
+
+#### ✏ Description: 
+Remove a specific amount of quest stacks from a player.
+
+<a name="cmd-removequeststack-parameters"></a>
+
+#### ⚙ Parameters:
+    <stacks>
+    	Required:	true
+    	Type:		integer
+    	Usage:		The amount of stack to be removed from a player
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the quest stacks to be removed
+    	Default:	The player id of whoever used this command.
+<a name="cmd-removequeststack-examples"></a>
+
+#### 🔧 Examples:
+    > rqs 10
+    	(Remove 10 quest stacks to whoever uses this command)
+    > removequeststack 20 6
+    	(Remove 10 quest stack to Player 6.)
+<a name="cmd-removequeststack-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
 <a name="cmd-removetalent"></a>
 
 ## (`removetalent` | `rmt`) `<TalentId>` `[PlayerId]`
@@ -3077,7 +3157,7 @@ Toggle to enable/disable AI for a Player.
 <a name="cmd-togglemassquest-description"></a>
 
 #### ✏ Description: 
-Toggle mass quest completion mode to give stack every game tick (0.0625s).
+Toggle mass quest completion mode to give stack every game tick (0.0625s) for whoever uses this command.
 >Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer / Floating Point overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stack
 
 <a name="cmd-togglemassquest-parameters"></a>
