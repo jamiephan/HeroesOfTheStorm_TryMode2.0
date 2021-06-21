@@ -1,37 +1,55 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+# Heroes Of The Storm - TryMode 2.0
+A modified Try Mode Map for Heroes of the Storm to create a better experience for **Heroes of the Storm - Try mode**.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![I believe, I can fly. I believe, I can touch the sky.](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
-### Markdown
+## TODOs:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- [ ] Create a Tool to generate a custom camera Object
+- [ ] Tools to patch the actual Try mode with live game data automatically
+- [ ] Actually modify the map / Create a new map in SC2 Editor (Working in Progress)
+- [x] GitHub Release more `stormmaps` which patch the live maps such as Cursed Hollow or Infernal Shrines. (Completed. Check the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) Page.)
+ 
 
-```markdown
-Syntax highlighted code block
+## How to install:
 
-# Header 1
-## Header 2
-### Header 3
+Please see [INSTALL.md](INSTALL.md).
 
-- Bulleted
-- List
+## How to use the chat commands:
 
-1. Numbered
-2. List
+Please see [USAGE.md](USAGE.md).
 
-**Bold** and _Italic_ and `Code` text
+## How to modify this map:
 
-[Link](url) and ![Image](src)
-```
+Please see [MODDING.md](MODDING.md)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## How to use the tools:
 
-### Jekyll Themes
+Please see [TOOLS.md](TOOLS.md)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## How to include the mods in this map to your own Map or Mod:
 
-### Support or Contact
+Please see [CUSTOM.md](CUSTOM.md).
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+## Internal Debug Menus
+
+### Debug Menu
+
+Internally, there is a hidden debug menu. By forcing enable debug mode (`libCore_gv_dEBUGDebuggingEnabled`), you can now use it as well by pressing the hotkey `\`.
+
+It have various functionalities such as switch heroes, level, etc, which can save lots of time when get used to it. Here is a quick look:
+
+![debug menu](https://i.imgur.com/gPI9we8.png)
+
+### QA Cheat Menu
+
+Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only).
+
+>Note: In a recent commit, I have sync the `\` key with QA Cheat menu and Debug menu, which means the `\` key will open both debug and QA menu together. I am considering should I "desync" them.
+
+Here is a quick look of the QA cheat menu:
+
+![QA cheat menu](https://i.imgur.com/lrg8G3M.png)
+
