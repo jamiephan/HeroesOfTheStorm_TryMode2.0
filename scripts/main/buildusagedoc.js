@@ -34,7 +34,7 @@ if (sortCommands) {
 const markdowner = new MarkDowner();
 
 // Header
-markdowner.addRawMD = '[◁ Back to Home](INDEX.MD)';
+markdowner.addRawMD = '[◁ Back to Home](index.md)';
 markdowner.addEmptyLine = 1;
 markdowner.addRaw = '<a name="meta-top"></a>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
