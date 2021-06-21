@@ -22,6 +22,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 |FPS Mode|LibFPSMode.galaxy|libFPSM|A First Person Shooter like Library that allows you to see the map in first person camera.|
 |Free Camera Mode|LibFreeCameraMode.galaxy|libFRCM|Free Camera Mode allows you to change the angle of the camera easily.|
 |Funny Stuff|LibFunny.galaxy|libFUNY|Random useless stuff just for the lolz.|
+
 <a name="meta-toc"></a>
 
 # 🧾 Table of Contents
