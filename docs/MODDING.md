@@ -48,9 +48,11 @@ I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/bas
 ### Modifying Current Library Files:
 
 1. Change The Viewing mode to Triggers, or Pressing F6:
+
 ![](https://i.imgur.com/tjWy1BG.png)
 
 2. Change Whatever you like in here, with some exceptions, see below:
+
 ![](https://i.imgur.com/owiyGwk.png)
 
 3. Please see the [save and modify section](#save-and-modify) below:
@@ -60,34 +62,44 @@ I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/bas
 Adding a New lib is also pretty simple:
 
 1. Adding a new Lib by right click on empty space:
+
 ![](https://i.imgur.com/5rogkWe.png)
+
 ![](https://i.imgur.com/inOHIqD.png)
 
 2. However, I do suggest you change the library ID to a 4 character ID:
+
 ![](https://i.imgur.com/MwQr2NP.png)
 
 3. Change whatever you like on the first box and uncheck the "Auto Load":
+
 ![](https://i.imgur.com/s30zhnO.png)
 
 4. To Save, do the thing similar to above with Export and stuff but not replacing the file when saving. (Also place the new file on the same directory if possible)
 
 5. Modify the `LibModuleLoader.galaxy` file with a text editor (NOT the SC2 Editor):
+
 ![](https://i.imgur.com/P7iDABh.png)
 
 
 6. Append the new File without the `.galaxy` extension. For instance, if your file name is `LibNice.galaxy`, append the lane: `include "Modules/LibNice`
+
 ![](https://i.imgur.com/cN85UN8.png)
 
 7. Now we need to find the Lib init function by opening up the script file (Ctrl F11 or Data->View Script):
+
 ![](https://i.imgur.com/rDjPTAz.png)
 
 8. Find the section `// Library Initialization` (usually at bottom) and copy this section (generally is `libXXXXX_InitLib()` depends on the name you changed above):
+
 ![](https://i.imgur.com/AgC1DVC.png)
 
 9. Copy the code (function name) into the `LibModuleLoader.galaxy` in this section:
+
 ![](https://i.imgur.com/RyTaUEQ.png)
 
 10. Remove the space and add a semicolon at the end (*important) and save the file: 
+
 ![](https://i.imgur.com/9M77FKV.png)
 
 
@@ -100,19 +112,24 @@ Since Heroes is a modified SC2 Engine, it also have some functions that cannot b
 To add the Heroes Specific script:
 
 1. Create a new Action:
+
 ![](https://i.imgur.com/YbZavES.png)
 
 2. Select Custom Script:
+
 ![](https://i.imgur.com/CYPtAdg.png)
 
 3. Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable):
+
 ![](https://i.imgur.com/ZXAT6DT.png)
 
 4. Add `//_heroes_replace//` before the custom script:
+
 ![](https://i.imgur.com/faiq3Qt.png)
 
 
 Note that If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the galaxy file), it most likely complain and won't let you save:
+
 ![](https://i.imgur.com/8mMezMF.png)
 
 
@@ -124,13 +141,17 @@ Note that If you attempt to save the SC2Mod file (the one you currently opening 
 #### Using the [`patch:library`](TOOLS.md#tools-patchlibraries) tool (Recommended)
 
 1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
+
 ![](https://i.imgur.com/w7gk6Ym.png)
+
 ![](https://i.imgur.com/J5klmRW.png)
 
 2. Click On File -> Export
+
 ![](https://i.imgur.com/UY4nOq0.png)
 
 3. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+
 ![](https://i.imgur.com/ztgHF1n.png)
 
 4. Please see [TOOLS.md](Tools.md#tools-patchlibraries) for more details.
@@ -140,19 +161,25 @@ Note that If you attempt to save the SC2Mod file (the one you currently opening 
 This sections demonstrates how to remove the `//_heroes_replace_//` in SC2 Editor when exporting, allows for custom heroes functionalities.
 
 1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
+
 ![](https://i.imgur.com/w7gk6Ym.png)
+
 ![](https://i.imgur.com/J5klmRW.png)
 
 2. After see this screen, Do a Find -> Replace or Ctrl + H:
+
 ![](https://i.imgur.com/ZzyUrT6.png)
 
 3. Type in `//_heroes_replace_//` for text and empty text box for `Replace With` and spam the `Replace` Button (Not `Replace All`) until it can no longer replace anymore:
+
 ![](https://i.imgur.com/v9EePbP.png)
 
 4. Close the Replace Dialog and export the file:
+
 ![](https://i.imgur.com/UY4nOq0.png)
 
 5. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+
 ![](https://i.imgur.com/ztgHF1n.png)
 
 ### Error and Debugging:
@@ -181,7 +208,7 @@ If you loaded this map, you will noticed the loading screen have changed to our 
 
 ![Try mode 2.0 loading screen](https://i.imgur.com/dbggpQN.png)
 
-I recommend using a plugin [NVIDIA Texture Tools for Adobe Photoshop](https://developer.nvidia.com/nvidia-texture-tools-adobe-photoshop) to do edit the .dds files with Photoshop. 
+I recommend using a plugin [NVIDIA Texture Tools for Adobe PhotoShop](https://developer.nvidia.com/nvidia-texture-tools-adobe-photoshop) to do edit the .dds files with Photoshop. 
 
 >Note: When saving, remember to choose `No MIP maps` inside the `MIP Map Generation` section. 
 *(Took me a long time to figure it out why the texture is not loading.....)*
