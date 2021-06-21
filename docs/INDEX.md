@@ -1,15 +1,8 @@
-# Heroes of the Storm - TryMode 2.0
-A modified Try Mode Map for Heroes of the Storm to create a better experience for **Heroes of the Storm - Try mode**.
+# Heroes of the Storm - Try Mode 2.0
+A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/) to create a better experience with enhanced functionalities.
 
 ![I believe, I can fly. I believe, I can touch the sky.](https://thumbs.gfycat.com/AntiqueFrighteningComet-size_restricted.gif)
 
-## TODOs:
-
-- [ ]  Create a Tool to generate a custom camera Object
-- [ ]  Tools to patch the actual Try mode with live game data automatically
-- [ ]  Actually modify the map / Create a new map in SC2 Editor (Working in Progress)
-- [x]  GitHub Release more `stormmaps` which patch the live maps such as Cursed Hollow or Infernal Shrines. (Completed. Check the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) Page.)
- 
 
 ## How to install:
 
@@ -30,6 +23,15 @@ Please see [TOOLS.md](TOOLS.md)
 ## How to include the mods in this map to your own Map or Mod:
 
 Please see [CUSTOM.md](CUSTOM.md).
+
+---
+
+## TODOs:
+
+- [ ]  Create a Tool to generate a custom camera Object
+- [ ]  Tools to patch the actual Try mode with live game data automatically
+- [ ]  Actually modify the map / Create a new map in SC2 Editor (Working in Progress)
+- [x]  GitHub Release more `stormmaps` which patch the live maps such as Cursed Hollow or Infernal Shrines. (Completed. Check the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) Page.)
 
 ---
 
