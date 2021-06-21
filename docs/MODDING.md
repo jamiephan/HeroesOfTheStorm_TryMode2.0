@@ -91,33 +91,37 @@ Adding a New lib is also pretty simple:
 ![](https://i.imgur.com/9M77FKV.png)
 
 
-### Dealing with Heroes Of the Storm Specific Functions:
+### Dealing with Heroes of the Storm Specific Functions:
 
 Since Heroes is a modified SC2 Engine, it also have some functions that cannot be found on SC2 Editor such as `SetTalentEnabled()` which is a function to enable or disable a talent (Note: Don't be confused with `SetTalentsEnabled()` in SC2 Editor.)
 
 >Note: As well as some Functions from SC2 Editor is absent in Heroes, such as UnitItem, this will cause error in Heroes that the game cannot be loaded even though it is valid in SC2 editor.
 
-To add the Heroes Specific script, in the Actions:
+To add the Heroes Specific script:
+
+1. Create a new Action:
 ![](https://i.imgur.com/YbZavES.png)
 
-Select Custom Script:
+2. Select Custom Script:
 ![](https://i.imgur.com/CYPtAdg.png)
 
-And Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable):
+3. Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable):
 ![](https://i.imgur.com/ZXAT6DT.png)
 
-If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the galaxy file), it most likely complain and won't let you save:
+4. Add `//_heroes_replace//` before the custom script:
+![](https://i.imgur.com/faiq3Qt.png)
+
+
+Note that If you attempt to save the SC2Mod file (the one you currently opening in SC2Editor, not the galaxy file), it most likely complain and won't let you save:
 ![](https://i.imgur.com/8mMezMF.png)
 
-To able to save the SC2Mod file, Please add `//_heroes_replace//` before the custom script:
-![](https://i.imgur.com/faiq3Qt.png)
 
 
 <a name="save-and-modify" />
 
 ### Saving and Modifying for Heroes compatibility
 
-#### Using the `patchlibrary` tool (Recommended)
+#### Using the [`patch:library`](TOOLS.md#tools-patchlibraries) tool (Recommended)
 
 1. When Save, Use the Export Functionality by going view script or Ctrl + F11:
 ![](https://i.imgur.com/w7gk6Ym.png)
