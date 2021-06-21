@@ -1,4 +1,4 @@
-[◁ Back to Home](INDEX.MD)
+[◁ Back to Home](INDEX.md)
 # Adding the mods to your map
 
 ## Modules

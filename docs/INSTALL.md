@@ -1,4 +1,4 @@
-[◁ Back to Home](INDEX.MD)
+[◁ Back to Home](INDEX.md)
 # Installation and Running
 
 Install Methods:

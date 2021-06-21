@@ -1,4 +1,4 @@
-[◁ Back to Home](INDEX.MD)
+[◁ Back to Home](INDEX.md)
 # Modding
 
 There are multiple ways to mod this map file:
