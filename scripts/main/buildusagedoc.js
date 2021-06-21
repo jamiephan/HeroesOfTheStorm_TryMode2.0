@@ -34,6 +34,8 @@ if (sortCommands) {
 const markdowner = new MarkDowner();
 
 // Header
+markdowner.addRawMD = '[◁ Back to Home](INDEX.MD)';
+markdowner.addEmptyLine = 1;
 markdowner.addRaw = '<a name="meta-top"></a>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;

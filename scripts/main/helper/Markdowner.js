@@ -79,6 +79,10 @@ class MarkDowner {
     }
   }
 
+  set addRawMD(md) {
+    this.result += md;
+  }
+
   save(location) {
     fs.writeFileSync(location, this.result, { encoding: 'utf8' });
   }
