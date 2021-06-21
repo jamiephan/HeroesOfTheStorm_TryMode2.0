@@ -193,7 +193,7 @@ Currently it is **unable** to call the Heroes' specific debug menu like in SC2, 
 ![SC2 debug window](https://i.imgur.com/7IofkYI.png)
 
 
-<a name="mod-asset" />
+<a name="mod-assets" />
 
 ## Edit the Asset files
 
