@@ -12,7 +12,6 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 # 📚 Libraries
 
-
 |Library Name|File Name|Library ID|Library Description|
 |-|-|-|-|
 |Module Loader|LibModuleLoader.galaxy|LibMODL|A unified Module Loader Lib that allows you to choose which module to load.|
