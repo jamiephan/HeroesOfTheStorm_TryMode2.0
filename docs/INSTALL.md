@@ -6,9 +6,9 @@ Install Methods:
 - [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap) (Recommended ✔)
 - [Replace in-game Try Mode with repo's folder for modding (All Platforms)](#runStormmap-custom)
 - [Run the `.stormmap` file directly](#runStormmap)
+  - [File Association (Windows-Only)](#runStormmap-fileassoc)
   - [Command Line (Directly)](#runStormmap-cmdDirectly)
   - [Command Line (Relatively)](#runStormmap-cmdRelatively)
-  - [File Association (Windows-Only)](#runStormmap-fileassoc)
 
 Post Installation Check:
 
