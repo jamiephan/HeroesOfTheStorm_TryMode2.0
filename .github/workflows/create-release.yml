@@ -148,7 +148,7 @@ jobs:
 
             Built time: `${{ github.event.head_commit.timestamp }}`
 
-            For instructions on how to run the maps below, Please refer to [INSTALL.md](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/INSTALL.md).
+            For instructions on how to run the maps below, Please refer to [installation guide](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/install.html).
           draft: false 
           prerelease: false
           files: "C:/maps/*"
