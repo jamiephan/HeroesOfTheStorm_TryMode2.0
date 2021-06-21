@@ -1,6 +1,6 @@
 {
     "_metadata": {
-        "tagetMarkdownFile": "./USAGE.md",
+        "tagetMarkdownFile": "./docs/USAGE.md",
         "MDTitle": "Usage",
         "MDDescription": [
             "Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).",
