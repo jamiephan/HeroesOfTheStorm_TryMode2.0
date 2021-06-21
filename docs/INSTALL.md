@@ -22,7 +22,7 @@ This method is **recommended** if you are not going to mod/change anything in th
 
 >Note that: `trymode20.stormmap` in the Release page is the same as the `(10)trymemode.stormmap` folder in this repo.
 
-1. Download any `.stormmap` file.
+1. Download any `.stormmap` file from [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page
 2. Rename the file to `(10)trymemode.stormmap`.
 3. Place the file in `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"`(also create necessary directories)
 
@@ -72,7 +72,7 @@ If you would like to replace the in game tutorial instead (Setting -> Tutorial),
 
 This method is for users going to mod the try mode.
 
-1. Clone this repo (or download as zip)
+1. Clone this [repo](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0) (or download as zip)
 2. Copy the `(10)trymemode.stormmap` folder in this repo
 3. Paste it in `"Heroes_Of_The_Storm_Install_Location/maps/heroes/singleplayermaps"` (also create necessary directories).
 
@@ -137,8 +137,6 @@ These maps will automatically include additional functionalities provided in thi
 >Note: Please noted that some maps will not work properly, showing the "Map Error" Screen (As shown in [Post-Install check](#runStormmap-postInstall) section). This is due to some maps are not maintained by Blizzard anymore (surprisingly Haunted Mines still works), this problem mainly exists on Brawl maps.
 
 >Note: The map `trymode20.stormmap` is the packaged map file for this repo's `./(10)trymemode.stormmap`.
-
-In the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page, There are
 
 1. In the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page, download your desired map.
 
