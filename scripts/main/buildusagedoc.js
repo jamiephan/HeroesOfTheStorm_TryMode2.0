@@ -34,6 +34,8 @@ if (sortCommands) {
 const markdowner = new MarkDowner();
 
 // Header
+markdowner.addRawMD = '[◁ Back to Home](index.md)';
+markdowner.addEmptyLine = 1;
 markdowner.addRaw = '<a name="meta-top"></a>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
 markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
@@ -47,6 +49,7 @@ markdowner.addRaw = '<a name="meta-libraries"></a>';
 markdowner.addH1 = '📚 Libraries';
 
 // Table Generation
+markdowner.addEmptyLine = 1; // New line before table, required for GH page
 markdowner.addTable = {
   headers: ['Library Name', 'File Name', 'Library ID', 'Library Description'],
   data: jsonData.libraries.map((l) => [
@@ -56,6 +59,7 @@ markdowner.addTable = {
     l._metadata.libraryDescription,
   ]),
 };
+markdowner.addEmptyLine = 1; // New line after table, required for GH page
 
 // TOC
 markdowner.addRaw = '<a name="meta-toc"></a>';

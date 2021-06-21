@@ -1,6 +1,6 @@
 {
     "_metadata": {
-        "tagetMarkdownFile": "./USAGE.md",
+        "tagetMarkdownFile": "./docs/usage.md",
         "MDTitle": "Usage",
         "MDDescription": [
             "Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).",
@@ -2240,7 +2240,7 @@
                         "For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.",
                         "",
                         "**Caveats:**",
-                        " - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [MODDING.md](MODDING.md)).",
+                        " - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [modding.md](modding.md)).",
                         " - The catalog modification is applied after parental inheritance, meaning that it is not possible to modify a parent (`parent=\"xxx\"`) for its effect to apply to all child catalogs. You must need to do it on each of the child catalogs.",
                         " - It is not possible \"create\" a value that does not exist after the map loaded. Meaning it can only modify value based on existed ones (after inherit attributes from parent)"
                     ],

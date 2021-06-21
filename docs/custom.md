@@ -1,3 +1,4 @@
+[◁ Back to Home](index.md)
 # Adding the mods to your map
 
 ## Modules
@@ -54,9 +55,13 @@ If you are developing a map, you should have a `MapScript.galaxy` file in the ro
             libMODL_InitLib();
         }
 6. Save the file and open the map, you should see some modules loaded message appear: 
+
 ![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
+
 7. If there any errors, which will looks like this, then check your code again:
+
 ![Map script error](https://i.imgur.com/cjXbq07.jpg)
+
 
 ## How to use in your own Mod
 
@@ -93,7 +98,10 @@ If you are developing a mod, you should have a created a `.galaxy` file inside `
             ...
             libMODL_InitLib();
         }
-6. Save the file and open the map, you should see some modules loaded message appear: 
+6. Save the file and open the map, you should see some modules loaded message appear:
+
 ![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
+
 7. If there any errors, which will looks like this, then check your code again:
+
 ![Map script error](https://i.imgur.com/cjXbq07.jpg)

@@ -1,7 +1,8 @@
+[◁ Back to Home](INDEX.md)
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 19 Jun 2021 07:52:04 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 21 Jun 2021 12:34:42 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -11,6 +12,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 <a name="meta-libraries"></a>
 
 # 📚 Libraries
+
 |Library Name|File Name|Library ID|Library Description|
 |-|-|-|-|
 |Module Loader|LibModuleLoader.galaxy|LibMODL|A unified Module Loader Lib that allows you to choose which module to load.|
@@ -21,6 +23,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 |FPS Mode|LibFPSMode.galaxy|libFPSM|A First Person Shooter like Library that allows you to see the map in first person camera.|
 |Free Camera Mode|LibFreeCameraMode.galaxy|libFRCM|Free Camera Mode allows you to change the angle of the camera easily.|
 |Funny Stuff|LibFunny.galaxy|libFUNY|Random useless stuff just for the lolz.|
+
 <a name="meta-toc"></a>
 
 # 🧾 Table of Contents
@@ -2723,7 +2726,7 @@ Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
 
 **Caveats:**
- - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [MODDING.md](MODDING.md)).
+ - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [modding.md](modding.md)).
  - The catalog modification is applied after parental inheritance, meaning that it is not possible to modify a parent (`parent="xxx"`) for its effect to apply to all child catalogs. You must need to do it on each of the child catalogs.
  - It is not possible "create" a value that does not exist after the map loaded. Meaning it can only modify value based on existed ones (after inherit attributes from parent)
 

@@ -1,3 +1,4 @@
+[◁ Back to Home](index.md)
 # Tools
 
 ## Prerequisite
@@ -88,7 +89,7 @@ For example `<CAbilEffectInstant id="ZeratulCleave">` => `<CBehaviorAbility id="
 
 The reason for this is you can add any abilities to any heroes freely (which will appear on the items bar, the top bar where active buttons like ice block, cleanse placed)
 
-To do so, just simply add the behavior to the selected units (e.g using the [chat command](USAGE.md) `adb MZeratulCleave`)
+To do so, just simply add the behavior to the selected units (e.g using the [chat command](usage.md) `adb MZeratulCleave`)
 
 Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
@@ -113,7 +114,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 This tool will search though all the `<CBehaviorBuff>` and map it to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
-This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](USAGE.md#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](usage.md#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
 
 >Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
 
@@ -133,7 +134,7 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 This tool will search though all the `<CModel>` and map it to a `<CUnit>`, which allows to be controlled on the map.
 
-This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, which you can summon this unit using tools such as [summon](USAGE.md#cmd-summon), with the command of `summon UNRetreatPing`.
+This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, which you can summon this unit using tools such as [summon](usage.md#cmd-summon), with the command of `summon UNRetreatPing`.
 
 >Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
 
@@ -269,9 +270,9 @@ This does not need to do a manual search/replace in Galaxy Editor.
 
 <a name="tools-buildusagedoc" />
 
-## Build Usage Doc ([USAGE.md](USAGE.md))
+## Build Usage Doc ([usage.md](usage.md))
 **Command**: `npm run build:usagedoc`
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
 
-A Command to build [USAGE.md](USAGE.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`.
+A Command to build [usage.md](usage.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`.
