@@ -30,25 +30,25 @@ module.exports.check = () => {
   if (!fs.existsSync(`${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}/.build.info`)) {
     throw ErrorGenerator(
       'HEROES_OF_THE_STORM_INSTALL_LOCATION',
-      `Not a valid Heroes Of The Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+      `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
     );
   }
   if (!fs.existsSync(`${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}/HeroesData/`)) {
     throw ErrorGenerator(
       'HEROES_OF_THE_STORM_INSTALL_LOCATION',
-      `Not a valid Heroes Of The Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+      `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
     );
   }
   if (!fs.existsSync(`${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}/Support/`)) {
     throw ErrorGenerator(
       'HEROES_OF_THE_STORM_INSTALL_LOCATION',
-      `Not a valid Heroes Of The Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+      `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
     );
   }
   if (!fs.existsSync(`${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}/Versions/`)) {
     throw ErrorGenerator(
       'HEROES_OF_THE_STORM_INSTALL_LOCATION',
-      `Not a valid Heroes Of The Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+      `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
     );
   }
 

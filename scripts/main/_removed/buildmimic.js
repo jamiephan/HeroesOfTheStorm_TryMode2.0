@@ -5,7 +5,7 @@ const rimraf = require('rimraf');
 // const path = process.argv[2];
 const path = '/mnt/d/Program Files/Heroes of the Storm/';
 if (path == undefined) {
-  throw 'Please specify the path for Heroes Of The Storm installation folder: npm run buildmimic /path/to/hots';
+  throw 'Please specify the path for Heroes of the Storm installation folder: npm run buildmimic /path/to/hots';
 }
 const outputDirName = 'ModuleMimicLibs';
 
