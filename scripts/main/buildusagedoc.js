@@ -47,7 +47,7 @@ markdowner.addRaw = '<a name="meta-libraries"></a>';
 markdowner.addH1 = '📚 Libraries';
 
 // Table Generation
-markdowner.addRaw = ''; // New line before table, required for GH page
+markdowner.addEmptyLine = 1; // New line before table, required for GH page
 markdowner.addTable = {
   headers: ['Library Name', 'File Name', 'Library ID', 'Library Description'],
   data: jsonData.libraries.map((l) => [
@@ -57,6 +57,7 @@ markdowner.addTable = {
     l._metadata.libraryDescription,
   ]),
 };
+markdowner.addEmptyLine = 1; // New line after table, required for GH page
 
 // TOC
 markdowner.addRaw = '<a name="meta-toc"></a>';

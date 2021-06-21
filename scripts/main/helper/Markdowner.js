@@ -73,6 +73,11 @@ class MarkDowner {
     this.result += '\n';
   }
 
+  set addEmptyLine(line = 1) {
+    for (let i = 0; i < line; i++) {
+      this.result += '\n';
+    }
+  }
 
   save(location) {
     fs.writeFileSync(location, this.result, { encoding: 'utf8' });
