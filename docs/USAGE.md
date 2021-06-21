@@ -1,7 +1,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 19 Jun 2021 07:52:04 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 21 Jun 2021 11:33:37 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -11,6 +11,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
 <a name="meta-libraries"></a>
 
 # 📚 Libraries
+
+
 |Library Name|File Name|Library ID|Library Description|
 |-|-|-|-|
 |Module Loader|LibModuleLoader.galaxy|LibMODL|A unified Module Loader Lib that allows you to choose which module to load.|
