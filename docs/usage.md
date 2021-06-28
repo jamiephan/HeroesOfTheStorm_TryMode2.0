@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 28 Jun 2021 19:43:27 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 28 Jun 2021 19:44:40 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -2401,6 +2401,7 @@ Allow to show / modify a selected units' property, such as max health, regen, mo
 If the `type` parameter is not supplied, it will return the value of the property. If the `type` parameter was set, it will modify the selected unit's property.
 
 The `type` parameters accept either the `Type (int)` or `Type (string)` below.
+
 | Type (int) | Type (string) | Galaxy file constant |
 |-|-|-|
 | 0 | life | c_unitLife |
