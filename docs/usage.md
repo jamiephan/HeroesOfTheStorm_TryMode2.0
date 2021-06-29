@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Mon, 28 Jun 2021 19:44:40 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 29 Jun 2021 17:29:49 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -2623,6 +2623,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 Get/Set the AI Difficulty for a Player.
 
 The difficulty settings are below:
+
 | DifficultyId | Friendly Name (`GameString.txt`) | Galaxy Constant (`AILib_h.galaxy`) |
 |-|-|-|
 | 0 | Unknown | `libAIAI_ge_HeroAIDifficulty_Null` |
@@ -2852,6 +2853,7 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 Gives Experience to a Specific Player.
 
 The `SourceId` can be represent as an Integer with the source value of:
+
 |`SourceId`|Galaxy file constant|
 |-|-|
 |0|`libGame_ge_XPSources_Debug`|
