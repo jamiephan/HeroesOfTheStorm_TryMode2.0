@@ -5,6 +5,7 @@ Install Methods:
 
 - [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap) (Recommended ✔)
 - [Replace in-game Try Mode with repo's folder for modding (All Platforms)](#runStormmap-custom)
+- [Replace in-game Try Mode with Try-Mode Installer (Alpha)](#runStormmap-installer)
 - [Run the `.stormmap` file directly](#runStormmap)
   - [File Association (Windows-Only)](#runStormmap-fileassoc)
   - [Command Line (Directly)](#runStormmap-cmdDirectly)
@@ -115,6 +116,18 @@ If you would like to replace the in game tutorial instead (Setting -> Tutorial),
     ├── .product.db
     ├── Heroes of the Storm.exe
     └── Launcher.db
+
+<a name="runStormmap-installer"></a>
+## Replace in-game Try Mode with Try-Mode Installer (Alpha)
+
+Repo: https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer
+
+Recently, I have created a Installer for Try Mode 2.0 to eliminate the inconvenience of installing a custom try mode.
+
+This project is still in early development and the UI looks horrible.
+
+I wouldn't recommend you to use it, but you can try it out!
+
 
 <a name="runStormmap"></a>
 ## Run the `.stormmap` file directly (Windows-only)
