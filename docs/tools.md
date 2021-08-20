@@ -50,7 +50,7 @@ The current values required are:
 
 >Note: Tools that requires extraction from the Heroes of the Storm game file will take a while.
 
-<a name="tools-symlink" />
+<a name="tools-symlink"></a>
 
 ## Symbolic Linker Tool
 
@@ -63,7 +63,7 @@ This command should not need to use more than once if it completed successfully.
 >Note: For some reason symlink created in WSL Environment does not work, please change the `.env` `HEROES_OF_THE_STORM_INSTALL_LOCATION` to a windows path first (e.g `C:/games/Heroes of the Storm` instead of `/mnt/c/games/Heroes of the Storm`), run `npm run symlink` in CMD (not WSL), then change it back to linux path for other commands.
 
 
-<a name="tools-s2ma" />
+<a name="tools-s2ma"></a>
 
 ## Finder Tool for `*.s2ma`
 
@@ -77,7 +77,7 @@ The tool will find all of the `*.s2ma` files and output them to `s2ma/` director
 To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mpq/download.html).
 
 ---
-<a name="tools-buildmimicabilities" />
+<a name="tools-buildmimicabilities"></a>
 
 ## Ability Mimic Generator
 
@@ -106,7 +106,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 
 ---
-<a name="tools-buildmimicbehaviors" />
+<a name="tools-buildmimicbehaviors"></a>
 
 ## `<CBehaviorBuff>` Mimic Generator
 
@@ -126,7 +126,7 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 
 ---
-<a name="tools-buildmimicmodels" />
+<a name="tools-buildmimicmodels"></a>
 
 ## `<CModel>` Mimic Generator
 
@@ -144,7 +144,7 @@ Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 
 
 ---
-<a name="tools-buildxml" />
+<a name="tools-buildxml"></a>
 
 ## Automatically generate `GameData.XML`
 
@@ -157,8 +157,7 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 >Note: It **will ignore** any files that does not end with `.xml` (case insensitive) and **does not** validate whether the XML file is valid (syntax error, etc). TODO: Also validate XML syntax.
 
 ---
-
-<a name="tools-buildmimiclib" />
+<a name="tools-buildmimiclib"></a>
 
 ## Mimic Lib Generator
 
@@ -250,9 +249,8 @@ Internal Command | Mimicked Command
 `BUILDINGSCALING` | `mBUILDINGSCALING`
 `-AI All` | `m-AI All`
 
---
-
-<a name="tools-patchlibraries" />
+---
+<a name="tools-patchlibraries"></a>
 
 ## Patching Libraries
 
@@ -266,9 +264,8 @@ After exported and saved the galaxy file, run this command and enter Try mode to
 
 This does not need to do a manual search/replace in Galaxy Editor.
 
---
-
-<a name="tools-buildusagedoc" />
+---
+<a name="tools-buildusagedoc"></a>
 
 ## Build Usage Doc ([usage.md](usage.md))
 **Command**: `npm run build:usagedoc`
