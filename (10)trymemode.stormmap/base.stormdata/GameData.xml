@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Includes>
-  <Catalog path="Mods/HeroesMod/AbilityMimic.xml"/>
-  <Catalog path="Mods/HeroesMod/BehaviorMimic.xml"/>
-  <Catalog path="Mods/HeroesMod/IconGlowing.xml"/>
-  <Catalog path="Mods/HeroesMod/ModelMimic.xml"/>
-  <Catalog path="Mods/HeroesMod/PermaArmor.xml"/>
-  <Catalog path="Mods/HeroesMod/TestHero.xml"/>
-  <Catalog path="Mods/SystemMod/TestSystem.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/AbilityMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/BehaviorMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/IconGlowing.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/ModelMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaArmor.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/TestHero.xml"/>
+  <Catalog path="Mods/GameData/SystemMod/TestSystem.xml"/>
 </Includes>

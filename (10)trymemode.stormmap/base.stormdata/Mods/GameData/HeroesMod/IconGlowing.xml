@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+
+  <!-- This file enabled the glowing icons (e.g when Zuljin D active) on Q W E R D buttons -->
+  <!-- To have a button glowing, simply add the following behaviors (e.g using tools such as "adb" chat command): -->
+
+  <CBehaviorBuff id="EnableDDamageIconGlow" />
+  <CBehaviorBuff id="EnableDHealingIconGlow" />
+  <CBehaviorBuff id="EnableDManaIconGlow" />
+  <CBehaviorBuff id="EnableQDamageIconGlow" />
+  <CBehaviorBuff id="EnableQHealingIconGlow" />
+  <CBehaviorBuff id="EnableQManaIconGlow" />
+  <CBehaviorBuff id="EnableWDamageIconGlow" />
+  <CBehaviorBuff id="EnableWHealingIconGlow" />
+  <CBehaviorBuff id="EnableWManaIconGlow" />
+  <CBehaviorBuff id="EnableEDamageIconGlow" />
+  <CBehaviorBuff id="EnableEHealingIconGlow" />
+  <CBehaviorBuff id="EnableEManaIconGlow" />
+  <CBehaviorBuff id="EnableRDamageIconGlow" />
+  <CBehaviorBuff id="EnableRHealingIconGlow" />
+  <CBehaviorBuff id="EnableRManaIconGlow" />
+
+  <!-- //// -->
+
+  <CValidatorCombine id="AbilButtonAttentionDDamage">
+    <CombineArray value="PlayerHasEnabledDDamageIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledDDamageIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableDDamageIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionDHealing">
+    <CombineArray value="PlayerHasEnabledDHealingIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledDHealingIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableDHealingIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionDMana">
+    <CombineArray value="PlayerHasEnabledDManaIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledDManaIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableDManaIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionQDamage">
+    <CombineArray value="PlayerHasEnabledQDamageIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledQDamageIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableQDamageIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionQHealing">
+    <CombineArray value="PlayerHasEnabledQHealingIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledQHealingIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableQHealingIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionQMana">
+    <CombineArray value="PlayerHasEnabledQManaIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledQManaIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableQManaIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionWDamage">
+    <CombineArray value="PlayerHasEnabledWDamageIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledWDamageIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableWDamageIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionWHealing">
+    <CombineArray value="PlayerHasEnabledWHealingIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledWHealingIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableWHealingIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionWMana">
+    <CombineArray value="PlayerHasEnabledWManaIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledWManaIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableWManaIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionEDamage">
+    <CombineArray value="PlayerHasEnabledEDamageIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledEDamageIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableEDamageIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionEHealing">
+    <CombineArray value="PlayerHasEnabledEHealingIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledEHealingIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableEHealingIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionEMana">
+    <CombineArray value="PlayerHasEnabledEManaIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledEManaIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableEManaIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionRDamage">
+    <CombineArray value="PlayerHasEnabledRDamageIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledRDamageIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableRDamageIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionRHealing">
+    <CombineArray value="PlayerHasEnabledRHealingIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledRHealingIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableRHealingIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+  <CValidatorCombine id="AbilButtonAttentionRMana">
+    <CombineArray value="PlayerHasEnabledRManaIconGlow"/>
+  </CValidatorCombine>
+  <CValidatorUnitCompareBehaviorCount id="PlayerHasEnabledRManaIconGlow">
+    <WhichUnit Value="Caster"/>
+    <Behavior value="EnableRManaIconGlow"/>
+    <Value value="1"/>
+  </CValidatorUnitCompareBehaviorCount>
+</Catalog>
