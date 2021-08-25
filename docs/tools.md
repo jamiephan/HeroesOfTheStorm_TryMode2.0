@@ -38,9 +38,9 @@ The current values required are:
 | `TOOLS_MIMIC_LIBRARY_SAVE_LOCATION` | String | The location to save the mimic libraries. Default: `./(10)trymemode.stormmap/base.stormdata/ModuleMimicLibs/InternalMimics` |
 | `TOOLS_MIMIC_LIBRARY_IMPORT_PREFIX` | String | The prefix of the import mimic library, relative to `TOOLS_GAMEDATA_DIR`. Default: `ModuleMimicLibs/InternalMimics/` |
 | `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules. Default: `./(10)trymemode.stormmap/base.stormdata/Modules` |
-| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml` |
-| `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/BehaviorMimic.xml` |
-| `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/ModelMimic.xml` |
+| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml` |
+| `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/BehaviorMimic.xml` |
+| `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml` |
 
 
 >Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
@@ -95,7 +95,7 @@ Also note that some abilities have special requirements, such as ultimates requi
 
 >Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
 
 Altering `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
 
@@ -120,7 +120,7 @@ This will generate an ability with the prefixed `MB`. For instance, the behavior
 
 >Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/AbilityMimic.xml`
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
 
 Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
@@ -138,7 +138,7 @@ This will generate a unit with the prefixed `UN`. For instance, the model `Retre
 
 >Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/HeroesMod/ModelMimic.xml`
+Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml`
 
 Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 
