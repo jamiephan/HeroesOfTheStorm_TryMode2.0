@@ -3,48 +3,109 @@
 
 There are multiple ways to mod this map file:
 
+- [Adding extra `*.stormmod` mods](#mod-stormmod)
 - [Edit the XML files](#mod-xml)
 - [Edit the Galaxy Script files](#mod-galaxy)
 - [Edit the Asset files](#mod-assets)
-- [Adding extra `*.stormmod` mods](#mod-stormmod)
-
-<a name="mod-xml" />
-
-## Edit the XML files
-
-Modifications of XML files are under `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`).
-
-Generally, You can override the XML Keys that the game has. The game will use your own version instead. However, you must follow the XML level structure similar to the game has. For example, to make Maiev's Fan of Knives (Q) to have no cooldown and do insane damage, your XML should look something like this:
-
-    <?xml version="1.0" encoding="us-ascii"?>
-    <Catalog>
-        <CAbilEffectTarget id="MaievFanOfKnives">
-            <Cost>
-                <Cooldown TimeUse="0" />
-            </Cost>
-        </CAbilEffectTarget>
-        <CEffectDamage id="MaievFanOfKnivesDamage" parent="StormSpell">
-            <Amount value="9999999" />
-        </CEffectDamage>
-    </Catalog>
-
-
-All XML modifications must be inside the `Mods` folder (`./(10)trymemode.stormmap/base.stormdata/Mods`). Any subdirectories or file name (provided its ending with `.xml`) are not limited.
-
-It is recommend using the tool `npm run build:xml` to build the XML files, for more, see [tools.md](tools.md#tools-buildxml).
 
 ---
 
-<a name="mod-galaxy" />
+<a name="mod-stormmod"></a>
+
+## Adding extra `*.stormmod` mods
+
+If you would like to include a `*.stormmod` file into this map, you can copy the file into `HEROES_OF_THE_STORM/mods/yourmod.stormmod`:
+
+    Heroes of the Storm
+    ├── HeroesData
+    ├── mods
+    │   └── yourmod.stormmod   <-- Here
+    ├── Support
+    ├── Support64
+    ├── Versions
+    ├── .build.info
+    └── .Heroes of the Storm.exe
+
+Then, in [`Includes.xml`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Includes.xml), add an entry: 
+
+```xml
+<Path value="Mods/yourmod.StormMod" />
+```
+
+Afterwards, reload the Try Mode map (completely exit and re-enter the map), you should see your map loaded, provided the stormmod file is valid.
+
+> You can also obtain a list of official Heroes of the Storm stormmod files from my `*.s2ma` hosting repo: https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods (Files where extracted directly from the game files)
+
+**Examples:**
+
+Using the [AzmoDUNK Mutator](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/AzmoDUNK%20Mutator.stormmod) Mod:
+
+![AzmoDUNK Mutator](https://i.imgur.com/n6FKFe2.png)
+
+Using the [In Game Hero Selection](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/In%20Game%20Hero%20Selection.stormmod) Mod:
+
+![In Game Hero Selection](https://i.imgur.com/iIZlSJf.png)
+
+---
+
+<a name="mod-xml"></a>
+
+## Edit the XML files
+
+Generally, You can override the XMLs that the game has. The game will use your own version instead. However, you must follow the XML level structure similar to the game has. For example, to make Maiev's Fan of Knives (Q) to have no cooldown and do insane damage, your XML should look something like this:
+
+```xml
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CAbilEffectTarget id="MaievFanOfKnives">
+        <Cost>
+            <Cooldown TimeUse="0" />
+        </Cost>
+    </CAbilEffectTarget>
+    <CEffectDamage id="MaievFanOfKnivesDamage" parent="StormSpell">
+        <Amount value="9999" />
+    </CEffectDamage>
+</Catalog>
+```
+
+Now save this XML into a file, e.g `MaievQModify.xml` and place it in the `(10)trymemode.stormmap/base.stormdata` directory. Afterwards, update the [`GameData.xml`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/GameData.xml) file:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Includes>
+  <Catalog path="Mods/GameData/HeroesMod/AbilityMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/BehaviorMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/IconGlowing.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/ModelMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaArmor.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/TestHero.xml"/>
+  <Catalog path="Mods/GameData/SystemMod/TestSystem.xml"/>
+  <Catalog path="MaievQModify.xml"/> <!-- Add This line here-->
+</Includes>
+```
+
+Note that the `path` is relative to `base.stormdata`. Therefore if you place it in `(10)trymemode.stormmap/base.stormdata/MaievMod/QModify.xml`, the path will be `MaievMod/QModify.xml`.
+
+If you would like to automate this process, I recommend to use the [Build XML tool](tools.md#tools-buildxml)
+
+>Note: If you wish to use the tool `npm run build:xml` to build the XML files, **All XML modifications must be inside the `Mods/GameData` folder (`./(10)trymemode.stormmap/base.stormdata/Mods/GameData`)**. Any subdirectories or file name (provided its ending with `.xml`) are not limited.
+
+Now restart the try mode, by either exit and reenter, or using the [`restartgame`](usage.md#cmd-restartgame) command, you should see Maive's Q Damage is skyrocketed with no cooldown:
+
+![Maiev Q Damage](https://i.imgur.com/yHJjpeo.png)
+
+
+---
+
+<a name="mod-galaxy"></a>
 
 ## Edit the Galaxy Script files
 
-Modifications of Galaxy files in (`./(10)trymemode.stormmap/base.stormdata`), same as where the custom command library located at.
+Modifications of Galaxy files in (`./(10)trymemode.stormmap/base.stormdata/Modules/`), same as where the custom command library located at.
 
 I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/base.stormdata/Modules/` that you can open it in SC2 Editor, However due to some issues between SC2 Editor and Heroes (some functions and variables does not exist is both sides or even have incompatible function signature)
 
-**IMPORTANT: DO NOT do this to `LibModuleLoader.galaxy` and `Module Loader` in SC2Editor or the whole modding will fail.**
-
+**IMPORTANT: For the following instructions, DO NOT do it to `LibModuleLoader.galaxy` and `Module Loader` in SC2Editor or the whole modding will fail.**
 
 ### Modifying Current Library Files:
 
@@ -135,7 +196,7 @@ Note that If you attempt to save the SC2Mod file (the one you currently opening 
 
 
 
-<a name="save-and-modify" />
+<a name="save-and-modify"></a>
 
 ### Saving and Modifying for Heroes compatibility
 
@@ -193,15 +254,15 @@ Currently it is **unable** to call the Heroes' specific debug menu like in SC2, 
 
 ![SC2 debug window](https://i.imgur.com/7IofkYI.png)
 
+---
 
-<a name="mod-assets" />
+<a name="mod-assets"></a>
 
 ## Edit the Asset files
 
 Generally, you can replace any in game assets with your own. The game will priorities loading your own asset over the internal ones, provided they are have the same name. For instance, the Raynor-with-a-bunny-ear loading screen in this map, the file is under `(10)trymemode.stormmap/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`, which is to replace the default in-game file: heroes.`stormmod/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`. Note that the path in `base.stormassets` must be the same.
 
 You can use this to also replace assets such as but not limited to: `*.dds` (texture), `*.m3` (models) and `*.ogg` (sound/music files).
-
 
 ### Editing Asset Files (.dds)
 
@@ -213,47 +274,4 @@ I recommend using a plugin [NVIDIA Texture Tools for Adobe PhotoShop](https://de
 
 >Note: When saving, remember to choose `No MIP maps` inside the `MIP Map Generation` section. 
 *(Took me a long time to figure it out why the texture is not loading.....)*
-
-<a name="mod-stormmod" />
-
-## Adding extra `*.stormmod` mods
-
-If you would like to include a `*.stormmod` file into this map, you can copy the file into `HEROES_OF_THE_STORM/mods/yourmod.stormmod`:
-
-    Heroes of the Storm
-    ├── HeroesData
-    ├── mods
-    │   └── yourmod.stormmod   <-- Here
-    ├── Support
-    ├── Support64
-    ├── Versions
-    ├── .build.info
-    └── .Heroes of the Storm.exe
-
-Then, in [`Includes.xml`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Includes.xml), add an entry: 
-
-```xml
-<Path value="Mods/yourmod.StormMod" />
-```
-
-Afterwards, reload the Try Mode map (completely exit and re-enter the map), you should see your map loaded, provided the stormmod file is valid.
-
-You can also obtain the official Heroes of the Storm stormmod files from my `*.s2ma` hosting repo: https://github.com/jamiephan/HeroesOfTheStorm_S2MA
-
-**Examples:**
-
-Using the [AzmoDUNK Mutator](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/AzmoDUNK%20Mutator.stormmod) Mod:
-
-![AzmoDUNK Mutator](https://i.imgur.com/n6FKFe2.png)
-
-Using the [In Game Hero Selection](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/blob/main/mods/In%20Game%20Hero%20Selection.stormmod) Mod:
-
-![In Game Hero Selection](https://i.imgur.com/iIZlSJf.png)
-
-
-
-
-
-
-
 
