@@ -12,6 +12,7 @@
         "build:mimicmodels": "bash -c -i \"node ./scripts/main/buildmimicmodels.js\"",
         "build:allmimic": "npm run build:mimiclib && npm run build:mimicabilities && npm run build:mimicbehaviors && npm run build:mimicmodels",
         "build:usagedoc": "bash -c -i \"node ./scripts/main/buildusagedoc.js\"",
+        "build:maps": "node ./scripts/main/buildmaps.js",
         "watch:usagedoc": "bash -c -i \"node ./scripts/watch/usagedoc.js\"",
         "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",
         "watch:libraries": "bash -c -i \"node ./scripts/watch/libraries.js\"",
@@ -29,8 +30,10 @@
     },
     "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0#readme",
     "dependencies": {
+        "adm-zip": "^0.5.5",
         "app-root-path": "^3.0.0",
         "dotenv": "^8.2.0",
+        "fs-extra": "^10.0.0",
         "node-fetch": "^2.6.1",
         "nodemon": "^2.0.6",
         "rimraf": "^3.0.2",
