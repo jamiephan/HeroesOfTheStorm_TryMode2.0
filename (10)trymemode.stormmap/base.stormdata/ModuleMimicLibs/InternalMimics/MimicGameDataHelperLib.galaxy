@@ -158,6 +158,8 @@ void MimicGameDataHelperLib_InitVariables () {
     MimicGameDataHelperLib_gv_lostVikingsUI.lv_erikDeathStatusFrame = c_invalidDialogControlId;
     MimicGameDataHelperLib_gv_lostVikingsUI.lv_allDeathStatusFrame = c_invalidDialogControlId;
     MimicGameDataHelperLib_gv_bALHeroMalfurionDruidsGiftManaCostReduction = 0.1;
+    MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetDisplayName = c_invalidDialogControlId;
+    MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetPortrait = c_invalidDialogControlId;
     MimicGameDataHelperLib_gv_medicUI.lv_mainPanel = c_invalidDialogControlId;
     MimicGameDataHelperLib_gv_medicUI.lv_medivacAlert = c_invalidDialogControlId;
     MimicGameDataHelperLib_gv_medicUI.lv_medivacCountdownNumber = c_invalidDialogControlId;
@@ -2576,7 +2578,8 @@ void MimicGameDataHelperLib_gf_HeroMedicIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipOverlay, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipCountdownSound, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacBeingBoarded, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHearthCleanup, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamAllyRangeVisibility, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicSafeguardVanadiumPlatingTalentProc, true);
@@ -2605,7 +2608,8 @@ void MimicGameDataHelperLib_gf_HeroMedicDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipOverlay, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipCountdownSound, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicMedivacBeingBoarded, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHearthCleanup, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamAllyRangeVisibility, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicSafeguardVanadiumPlatingTalentProc, false);
@@ -2614,6 +2618,57 @@ void MimicGameDataHelperLib_gf_HeroMedicDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicStimDroneFullscreenOverlayOff, false);
     }
 
+}
+
+string MimicGameDataHelperLib_gf_HealingBeamGetPortraitPathforUnit (unit lp_unit) {
+    // Automatic Variable Declarations
+    string auto0CC21378_val;
+
+    // Implementation
+    auto0CC21378_val = UnitGetType(lp_unit);
+    if (auto0CC21378_val == "HeroChenStorm") {
+        return "Assets\\Textures\\storm_ui_ingame_targetinfopanel_unit_chen_storm.dds";
+    }
+    else if (auto0CC21378_val == "HeroChenEarth") {
+        return "Assets\\Textures\\storm_ui_ingame_targetinfopanel_unit_chen_earth.dds";
+    }
+    else if (auto0CC21378_val == "HeroChenFire") {
+        return "Assets\\Textures\\storm_ui_ingame_targetinfopanel_unit_chen_fire.dds";
+    }
+    else {
+        return libUIUI_gf_KillLogGetPortraitPathforUnit(lp_unit);
+    }
+}
+
+void MimicGameDataHelperLib_gf_MedicUIHealingBeam (bool lp_reset, int lp_medicPlayer, unit lp_healingBeamTarget) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lp_reset == true)) {
+        libNtve_gf_SetDialogItemImage(MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetPortrait, "Assets\\Textures\\storm_ui_icon_medic_healingbeam.dds", PlayerGroupSingle(lp_medicPlayer));
+        DialogControlSetVisible(MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetDisplayName, PlayerGroupSingle(lp_medicPlayer), false);
+    }
+    else {
+        DialogControlSetVisible(MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetDisplayName, PlayerGroupSingle(lp_medicPlayer), true);
+        libNtve_gf_SetDialogItemText(MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetDisplayName, MimicGameDataHelperLib_gf_MedicUIUnitDisplayName(lp_healingBeamTarget), PlayerGroupSingle(lp_medicPlayer));
+        libNtve_gf_SetDialogItemImage(MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetPortrait, MimicGameDataHelperLib_gf_HealingBeamGetPortraitPathforUnit(lp_healingBeamTarget), PlayerGroupSingle(lp_medicPlayer));
+    }
+}
+
+text MimicGameDataHelperLib_gf_MedicUIUnitDisplayName (unit lp_unit) {
+    // Variable Declarations
+    int lv_unitOwner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unitOwner = UnitGetOwner(lp_unit);
+
+    // Implementation
+    if ((UnitGetType(lp_unit) == "HeroCho")) {
+        return StringExternal("Param/Value/lib_GDHL_1F065CDD");
+    }
+    else {
+        return UnitGetName(lp_unit);
+    }
 }
 
 trigger auto_MimicGameDataHelperLib_gf_UIHeroSpecificStatusFrameShowHideMedivacUI_Trigger = null;
@@ -2695,6 +2750,8 @@ void MimicGameDataHelperLib_gf_HeroMuradinIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinAvatarApplyHealthBuff, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinHaymakerGrandSlamTalentProc, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt, true);
     }
 
 }
@@ -2712,6 +2769,8 @@ void MimicGameDataHelperLib_gf_HeroMuradinDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinAvatarApplyHealthBuff, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinHaymakerGrandSlamTalentProc, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt, false);
     }
 
 }
@@ -2870,8 +2929,8 @@ void MimicGameDataHelperLib_gf_HeroNovaIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaTripleTapMissiles, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaTripleTapMissileCleanup, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaHoloCloneSpawned, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaHoloCloneDamageDuplication, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController, true);
     }
 
 }
@@ -2891,8 +2950,8 @@ void MimicGameDataHelperLib_gf_HeroNovaDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaTripleTapMissiles, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaTripleTapMissileCleanup, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaHoloCloneSpawned, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaHoloCloneDamageDuplication, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController, false);
     }
 
 }
@@ -3947,6 +4006,7 @@ void MimicGameDataHelperLib_gf_HeroWitchDoctorIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanCreated, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanStompUsed, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorVileInfectionTaken, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc, true);
     }
 
 }
@@ -3968,6 +4028,7 @@ void MimicGameDataHelperLib_gf_HeroWitchDoctorDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanCreated, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanStompUsed, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorVileInfectionTaken, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc, false);
     }
 
 }
@@ -15959,6 +16020,43 @@ void MimicGameDataHelperLib_gt_HeroMalfurionTenaciousRootsProc_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Healing Beam UI Initialize
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HealingBeamUIInitialize_Func (bool testConds, bool runActions) {
+    int init_i;
+
+    // Variable Declarations
+    int[6] lv_panels;
+    int lv_currentPanelLayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    for (init_i = 0; init_i <= 5; init_i += 1) {
+        lv_panels[init_i] = c_invalidDialogControlId;
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    DialogControlHookup(libUIUI_gv_heroSpecificStatusContainer, c_triggerControlTypeImage, "MedicFrame/UnitStatusFrame0/MechanicTexture");
+    MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetPortrait = DialogControlLastCreated();
+    DialogControlHookup(libUIUI_gv_heroSpecificStatusContainer, c_triggerControlTypeLabel, "MedicFrame/UnitStatusFrame0/MedicHealingBeamName");
+    MimicGameDataHelperLib_gv_healingBeamUI.lv_healingBeamTargetDisplayName = DialogControlLastCreated();
+    lv_currentPanelLayer += 1;
+    lv_panels[lv_currentPanelLayer] = DialogControlLastCreated();
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HealingBeamUIInitialize_Init () {
+    MimicGameDataHelperLib_gt_HealingBeamUIInitialize = TriggerCreate("MimicGameDataHelperLib_gt_HealingBeamUIInitialize_Func");
+    libCore_gf_IncludeModInitialization(MimicGameDataHelperLib_gt_HealingBeamUIInitialize);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Medic UI Initialize
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_MedicUIInitialize_Func (bool testConds, bool runActions) {
@@ -16572,9 +16670,9 @@ void MimicGameDataHelperLib_gt_HeroMedicMedivacGameOverHide_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Medic - Healing Beam LookAt
+// Trigger: Hero - Medic - Healing Beam Target Actions
 //--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Func (bool testConds, bool runActions) {
+bool MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions_Func (bool testConds, bool runActions) {
     // Variable Declarations
     unit lv_medic;
     unit lv_target;
@@ -16589,6 +16687,12 @@ bool MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Func (bool testConds, 
         return true;
     }
 
+    if ((UnitFilterMatch(lv_target, UnitGetOwner(lv_target), UnitFilter((1 << c_targetFilterHeroic), 0, (1 << c_targetFilterEnemy) | (1 << c_targetFilterImmuneToFriendlyAbilities) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)))) == true)) {
+        MimicGameDataHelperLib_gf_MedicUIHealingBeam(false, UnitGetOwner(lv_medic), lv_target);
+    }
+    else {
+        MimicGameDataHelperLib_gf_MedicUIHealingBeam(true, UnitGetOwner(lv_medic), lv_target);
+    }
     Wait(0.125, c_timeGame);
     libNtve_gf_MakeUnitLookAtUnit(lv_medic, "RobotArmsOnly", lv_target, "Ref_Center");
     while (!((UnitBehaviorCount(lv_medic, "MedicCastingHealingBeamBuff") == 0))) {
@@ -16599,10 +16703,44 @@ bool MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Func (bool testConds, 
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Init () {
-    MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt = TriggerCreate("MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt, c_playerAny, "MedicHealingBeamCreatePersistent");
+void MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions_Init () {
+    MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions = TriggerCreate("MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions, c_playerAny, "MedicHealingBeamCreatePersistent");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Medic - Healing Beam UI Reset
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_medic;
+    unit lv_target;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_medic = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_target = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(0.0625, c_timeGame);
+    if ((UnitBehaviorCount(lv_medic, "MedicCastingHealingBeamBuff") == 1)) {
+    }
+    else {
+        MimicGameDataHelperLib_gf_MedicUIHealingBeam(true, UnitGetOwner(lv_medic), lv_target);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset_Init () {
+    MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset = TriggerCreate("MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset, c_playerAny, "MedicHealingBeamFinalSet");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -17149,7 +17287,7 @@ bool MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Func (bool te
             return false;
         }
 
-        if (!((UnitHasBehavior2(lv_killedUnit, "MuradinItsHammerTimeKillBonusBehavior") == true))) {
+        if (!((UnitHasBehavior2(lv_killedUnit, "MuradinStormBoltPerfectStormKillBonusBehavior") == true))) {
             return false;
         }
     }
@@ -17161,9 +17299,9 @@ bool MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Func (bool te
 
     lv_i = 0;
     for ( ; ( (auto534F8C5E_ai >= 0 && lv_i <= auto534F8C5E_ae) || (auto534F8C5E_ai < 0 && lv_i >= auto534F8C5E_ae) ) ; lv_i += auto534F8C5E_ai ) {
-        lv_unit[lv_i] = UnitBehaviorEffectUnit(lv_killedUnit, "MuradinItsHammerTimeKillBonusBehavior", c_effectUnitCaster, lv_i);
+        lv_unit[lv_i] = UnitBehaviorEffectUnit(lv_killedUnit, "MuradinStormBoltPerfectStormKillBonusBehavior", c_effectUnitCaster, lv_i);
         if ((UnitGetOwner(lv_unit[lv_i]) == lv_killingPlayer)) {
-            UnitCreateEffectUnit(lv_unit[lv_i], "MuradinStormboltItsHammerTimeHeroKillModifyTokenCount", lv_unit[lv_i]);
+            UnitCreateEffectUnit(lv_unit[lv_i], "MuradinStormboltPerfectStormHeroKillModifyTokenCount", lv_unit[lv_i]);
         }
 
     }
@@ -17175,6 +17313,112 @@ void MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Init () {
     MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc, false);
     libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Muradin - Free Piercing Stormbolt
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = libGame_gf_HeroLevelUpPlayer();
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((libGame_gf_HeroLevelUpLevel() >= 10))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroMuradin"))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_player, "MuradinStormBoltIt'sHammerTime") == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerAddTalent(lv_player, "MuradinStormBoltIt'sHammerTime");
+    UnitCreateEffectUnit(lv_unit, "MuradinStormboltItsHammerTimeInstantComplete", lv_unit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt_Init () {
+    MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt = TriggerCreate("MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt_Func");
+    libGame_gf_HeroLevelUp(MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Muradin - Reset Free Piercing Stormbolt
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = UnitGetOwner(EventUnit());
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroMuradin"))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_player, "MuradinStormBoltIt'sHammerTime") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerRemoveTalent(lv_player, "MuradinStormBoltIt'sHammerTime");
+    UnitCreateEffectUnit(lv_unit, "MuradinStormboltItsHammerTimeInstantReset", lv_unit);
+    Wait(0.125, c_timeGame);
+    if ((UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy") >= 10)) {
+        PlayerAddTalent(lv_player, "MuradinStormBoltIt'sHammerTime");
+        UnitCreateEffectUnit(lv_unit, "MuradinStormboltItsHammerTimeInstantComplete", lv_unit);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt_Init () {
+    MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt = TriggerCreate("MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt_Func");
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt, null, "MuradinItsHammerTimeTokenCounter", c_unitBehaviorChangeCreate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -18353,37 +18597,37 @@ void MimicGameDataHelperLib_gt_HeroNovaHoloCloneDamageDuplication_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Nova - Anti-Armor Shells Attack Cooldown
+// Trigger: Hero - Nova - Anti-Armor Shells Attack Cooldown Controller
 //--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown_Func (bool testConds, bool runActions) {
+bool MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    unit lv_unit;
+    unit lv_nova;
 
     // Automatic Variable Declarations
-    fixed auto5EA1B378_at;
+    fixed auto4121A5FF_at;
 
     // Variable Initialization
-    lv_unit = EventUnit();
+    lv_nova = EventUnit();
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    auto5EA1B378_at = 0;
-    while (!((UnitWeaponPeriodRemaining(lv_unit, 2) == 0.0)) && auto5EA1B378_at <= 3.0) {
+    auto4121A5FF_at = 0;
+    while (!((UnitWeaponPeriodRemaining(lv_nova, 2) == 0.0)) && auto4121A5FF_at <= 3.0) {
         Wait(0.0625, c_timeGame);
-        auto5EA1B378_at = auto5EA1B378_at + 0.0625;
+        auto4121A5FF_at = auto4121A5FF_at + 0.0625;
     }
-    UnitBehaviorRemove(lv_unit, "NovaAntiArmorShellsWeaponSuppression", 1);
+    UnitBehaviorRemove(lv_nova, "NovaAntiArmorShellsWeaponSuppression", 1);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown_Init () {
-    MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown = TriggerCreate("MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown, false);
-    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown, null, "NovaAntiArmorShellsWeaponSuppression", c_unitBehaviorChangeActivate);
+void MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController_Init () {
+    MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController = TriggerCreate("MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController, false);
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController, null, "NovaAntiArmorShellsWeaponSuppression", c_unitBehaviorChangeActivate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -22207,7 +22451,6 @@ bool MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Func (bool
     if ((UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy") >= 13)) {
         PlayerAddTalent(lv_player, "StitchesFishingHook");
         UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookSet", lv_unit);
-        MimicTriggerDebugOutput(1, IntToText(UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy")), true);
     }
 
     return true;
@@ -24293,6 +24536,50 @@ void MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget_Init () {
     TriggerAddEventUnitDamaged(MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget, null, c_unitDamageTypeBasic, c_unitDamageFatal, null);
     TriggerAddEventUnitDamaged(MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget, null, c_unitDamageTypeAbility, c_unitDamageFatal, null);
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget, null, c_behaviorCategorySpecialDeathState, c_unitBehaviorChangeActivate);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Witch Doctor - Blood Ritual - Hero Takedown Proc
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_wDPlayer;
+    unit lv_wD;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_wDPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+    lv_wD = libGame_gv_players[lv_wDPlayer].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_wDPlayer >= 1))) {
+            return false;
+        }
+
+        if (!((lv_wDPlayer <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_wDPlayer, "WitchDoctorBloodRitual") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(lv_wD, "WitchDoctorVoodooRitualBloodRitualTalentTakedownProcPersistent", lv_wD);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc_Init () {
+    MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc, false);
+    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -26416,6 +26703,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroMalfurionTwilightDreamSilenceEnd_Init();
     MimicGameDataHelperLib_gt_HeroMalfurionInnervateCDR_Init();
     MimicGameDataHelperLib_gt_HeroMalfurionTenaciousRootsProc_Init();
+    MimicGameDataHelperLib_gt_HealingBeamUIInitialize_Init();
     MimicGameDataHelperLib_gt_MedicUIInitialize_Init();
     MimicGameDataHelperLib_gt_HeroMedicStimDroneFullscreenOverlayOn_Init();
     MimicGameDataHelperLib_gt_HeroMedicStimDroneFullscreenOverlayOff_Init();
@@ -26429,7 +26717,8 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipCountdownSound_Init();
     MimicGameDataHelperLib_gt_HeroMedicMedivacBeingBoarded_Init();
     MimicGameDataHelperLib_gt_HeroMedicMedivacGameOverHide_Init();
-    MimicGameDataHelperLib_gt_HeroMedicHealingBeamLookAt_Init();
+    MimicGameDataHelperLib_gt_HeroMedicHealingBeamTargetActions_Init();
+    MimicGameDataHelperLib_gt_HeroMedicHealingBeamUIReset_Init();
     MimicGameDataHelperLib_gt_HeroMedicHearthCleanup_Init();
     MimicGameDataHelperLib_gt_HeroMedicHealingBeamAllyRangeVisibility_Init();
     MimicGameDataHelperLib_gt_HeroMedicSafeguardVanadiumPlatingTalentProc_Init();
@@ -26446,6 +26735,8 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroMuradinAvatarApplyHealthBuff_Init();
     MimicGameDataHelperLib_gt_HeroMuradinHaymakerGrandSlamTalentProc_Init();
     MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Init();
+    MimicGameDataHelperLib_gt_HeroMuradinFreePiercingStormbolt_Init();
+    MimicGameDataHelperLib_gt_HeroMuradinResetFreePiercingStormbolt_Init();
     MimicGameDataHelperLib_gt_MurkyUIInitialize_Init();
     MimicGameDataHelperLib_gt_HeroMurkyMurkyEggDies_Init();
     MimicGameDataHelperLib_gt_HeroMurkyMurkyDies_Init();
@@ -26470,7 +26761,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroNovaTripleTapMissileCleanup_Init();
     MimicGameDataHelperLib_gt_HeroNovaHoloCloneSpawned_Init();
     MimicGameDataHelperLib_gt_HeroNovaHoloCloneDamageDuplication_Init();
-    MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldown_Init();
+    MimicGameDataHelperLib_gt_HeroNovaAntiArmorShellsAttackCooldownController_Init();
     MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyIn_Init();
     MimicGameDataHelperLib_gt_HeroRaynorRaynorsBansheeFlyOut_Init();
     MimicGameDataHelperLib_gt_HeroRaynorBansheesCommand_Init();
@@ -26596,6 +26887,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritCast_Init();
     MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritExpires_Init();
     MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget_Init();
+    MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc_Init();
     MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanCreated_Init();
     MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanStompUsed_Init();
     MimicGameDataHelperLib_gt_HeroWitchDoctorVileInfectionTaken_Init();
