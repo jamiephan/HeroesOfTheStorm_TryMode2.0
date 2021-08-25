@@ -4,21 +4,7 @@
   <Catalog path="Mods/GameData/HeroesMod/BehaviorMimic.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/IconGlowing.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/ModelMimic.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/OldBackup.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/PermaArmor.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/StateToggle.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/TestHero.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/test.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zAoEConstantTest.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zDehakaGlobalBush.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zJaina.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zRehgarAoELightningShield.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zTyrandeSuperOwl.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zVallaAATP.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/zZagaraFuryOfTheSwarm.xml"/>
-  <Catalog path="Mods/GameData/HeroesMod/z_TestHero.xml"/>
   <Catalog path="Mods/GameData/SystemMod/TestSystem.xml"/>
-  <Catalog path="Mods/GameData/SystemMod/zCamera.xml"/>
-  <Catalog path="Mods/GameData/SystemMod/zLunaraMount.xml"/>
-  <Catalog path="Mods/GameData/SystemMod/zOverArmor.xml"/>
 </Includes>
