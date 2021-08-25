@@ -52,6 +52,45 @@ Using the [In Game Hero Selection](https://github.com/jamiephan/HeroesOfTheStorm
 
 ## Edit the XML files
 
+### Editor Setup
+
+>This section of setting up the editor is optional, but its highly recommended
+
+It is recommended using [Visual Studio Code](https://code.visualstudio.com/) with the extension [XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml) installed.
+
+This extension also allows to load a `.xsd` file for auto completion.
+
+In a regular XML file:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog>
+    <!-- Your stuff -->
+</Catalog>
+```
+
+Modify the `<Catalog>` to include the XSD (XML Schema Definition) file :
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
+    <!-- Your stuff -->
+</Catalog>
+```
+
+> Note: This will not affect how the game read the xml file nor it will change any outputs
+
+This enables you to auto complete the XML tags and attributes:
+
+![Autocomplete demo](https://i.imgur.com/UPqgdPe.gif)
+
+
+>Note the `.xsd` file loaded is from the repo [jamiephan/HeroesOfTheStorm_Gamedata](https://github.com/jamiephan/HeroesOfTheStorm_Gamedata), which host all the game data and generate a XSD file automatically
+
+
+
+### Modifying the XML files
+
 Generally, You can override the XMLs that the game has. The game will use your own version instead. However, you must follow the XML level structure similar to the game has. For example, to make Maiev's Fan of Knives (Q) to have no cooldown and do insane damage, your XML should look something like this:
 
 ```xml
