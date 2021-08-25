@@ -76,6 +76,10 @@ typings/
 s2ma*/
 (10)trymemode.stormmap.*/
 
+
+# Ignore main XML file
+(10)trymemode.stormmap/base.stormdata/GameData.xml
+
 # Ignore XML files
 (10)trymemode.stormmap/base.stormdata/Mods/GameData/*
 
