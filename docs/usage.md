@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 29 Jun 2021 17:29:49 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 26 Aug 2021 17:03:35 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -82,6 +82,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `togglefogofwar`](#cmd-togglefogofwar)
 
   - 💭 [Command: `togglerandommovement`](#cmd-togglerandommovement)
+
+  - 💭 [Command: `toggleterrainindicator`](#cmd-toggleterrainindicator)
 
   - 💭 [Command: `toggleui`](#cmd-toggleui)
 
@@ -1311,6 +1313,41 @@ Run this command to turn off this functionality.
     	(Toggle Random Movement with circle radius of default 7.)
 
 <a name="cmd-togglerandommovement-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
+<a name="cmd-toggleterrainindicator"></a>
+
+## (`toggleterrainindicator` | `tti`) 
+
+<a name="cmd-toggleterrainindicator-description"></a>
+
+#### ✏ Description: 
+Toggle Terrain Indicator (used by Diablo and Auriel, etc) for any units
+
+
+<a name="cmd-toggleterrainindicator-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+
+<a name="cmd-toggleterrainindicator-examples"></a>
+
+#### 🔧 Examples:
+    > tti
+    	(Toggle Terrain Indicator)
+    > toggleterrainindicator
+    	(Toggle Terrain Indicator)
+
+<a name="cmd-toggleterrainindicator-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

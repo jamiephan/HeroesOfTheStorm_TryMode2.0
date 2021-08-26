@@ -826,6 +826,25 @@
                             "description": "Reset the game speed 2 (Normal)."
                         }
                     ]
+                },
+                {
+                    "shortCommand": "tti",
+                    "command": "toggleterrainindicator",
+                    "description": [
+                        "Toggle Terrain Indicator (used by Diablo and Auriel, etc) for any units"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Toggle Terrain Indicator"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Toggle Terrain Indicator"
+                        }
+                    ]
                 }
             ]
         },

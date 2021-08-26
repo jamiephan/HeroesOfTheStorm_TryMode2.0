@@ -15,6 +15,7 @@ revealer libUTIL_gv_revealer;
 bool libUTIL_gv_isFOWEnabled;
 bool libUTIL_gv_isMassCDREnabled;
 int libUTIL_gv_massCDRPlayer;
+bool libUTIL_gv_terrainIndicatorEnabled;
 bool libUTIL_gv_isACTSEnabled;
 int libUTIL_gv_crosshair_marker;
 bool libUTIL_gv_isCrosshairEnabled;
@@ -39,6 +40,7 @@ trigger libUTIL_gt_ToggleFOW;
 trigger libUTIL_gt_ToggleMassCDR;
 trigger libUTIL_gt_RunMassCDR;
 trigger libUTIL_gt_ToggleDebugMode;
+trigger libUTIL_gt_ToggleTerrainIndicator;
 trigger libUTIL_gt_WinGame;
 trigger libUTIL_gt_StartGame;
 trigger libUTIL_gt_EndGame;
@@ -340,6 +342,76 @@ void libUTIL_gt_ToggleDebugMode_Init () {
     libUTIL_gt_ToggleDebugMode = TriggerCreate("libUTIL_gt_ToggleDebugMode_Func");
     TriggerAddEventChatMessage(libUTIL_gt_ToggleDebugMode, c_playerAny, "tdb", true);
     TriggerAddEventChatMessage(libUTIL_gt_ToggleDebugMode, c_playerAny, "toggledebugmode", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Terrain Indicator
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_ToggleTerrainIndicator_Func (bool testConds, bool runActions) {
+    int init_i;
+
+    // Variable Declarations
+    unit lv_unit;
+    string[8] lv_collisionEdges;
+    string[8] lv_unitsWithCollisionEdges;
+    int lv_i;
+
+    // Automatic Variable Declarations
+    const int auto675D3D77_ae = 6;
+    const int auto675D3D77_ai = 1;
+
+    // Variable Initialization
+    lv_unit = UnitGroupUnit(UnitGroupSelected(EventPlayer()), 1);
+    for (init_i = 0; init_i <= 7; init_i += 1) {
+        lv_collisionEdges[init_i] = "";
+    }
+    for (init_i = 0; init_i <= 7; init_i += 1) {
+        lv_unitsWithCollisionEdges[init_i] = "";
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_collisionEdges[0] = "AurielShowCollisionEdges";
+    lv_collisionEdges[1] = "HanzoShowCollisionEdges";
+    lv_collisionEdges[2] = "HoggerShowCollisionEdges";
+    lv_collisionEdges[3] = "JunkratShowCollisionEdges";
+    lv_collisionEdges[4] = "LucioShowCollisionEdges";
+    lv_collisionEdges[5] = "NexusHunterShowCollisionEdges";
+    lv_collisionEdges[6] = "DiabloShowCollisionEdges";
+    lv_unitsWithCollisionEdges[0] = "HeroAuriel";
+    lv_unitsWithCollisionEdges[1] = "HeroHanzo";
+    lv_unitsWithCollisionEdges[2] = "HeroHogger";
+    lv_unitsWithCollisionEdges[3] = "HeroJunkrat";
+    lv_unitsWithCollisionEdges[4] = "HeroLucio";
+    lv_unitsWithCollisionEdges[5] = "HeroNexusHunter";
+    lv_unitsWithCollisionEdges[6] = "HeroDiablo";
+    lv_i = 0;
+    for ( ; ( (auto675D3D77_ai >= 0 && lv_i <= auto675D3D77_ae) || (auto675D3D77_ai < 0 && lv_i >= auto675D3D77_ae) ) ; lv_i += auto675D3D77_ai ) {
+        if (((UnitGetType(lv_unit) == (lv_unitsWithCollisionEdges[lv_i])))) {
+            ActorSendTo(libNtve_gf_MainActorofUnit(lv_unit), lv_collisionEdges[lv_i], "Destroy Immediate");
+        }
+
+    }
+    libUTIL_gv_terrainIndicatorEnabled = !(libUTIL_gv_terrainIndicatorEnabled);
+    if ((libUTIL_gv_terrainIndicatorEnabled == true)) {
+        libNtve_gf_SendActorMessageToUnit(lv_unit, ("Create HanzoShowCollisionEdges"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Terrain Indicator Enabled"));
+    }
+    else {
+        ActorSendTo(libNtve_gf_MainActorofUnit(lv_unit), "HanzoShowCollisionEdges", "Destroy Immediate");
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Terrain Indicator Disabled"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_ToggleTerrainIndicator_Init () {
+    libUTIL_gt_ToggleTerrainIndicator = TriggerCreate("libUTIL_gt_ToggleTerrainIndicator_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleTerrainIndicator, c_playerAny, "tti", true);
+    TriggerAddEventChatMessage(libUTIL_gt_ToggleTerrainIndicator, c_playerAny, "toggleterrainindicator", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1430,6 +1502,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_ToggleMassCDR_Init();
     libUTIL_gt_RunMassCDR_Init();
     libUTIL_gt_ToggleDebugMode_Init();
+    libUTIL_gt_ToggleTerrainIndicator_Init();
     libUTIL_gt_WinGame_Init();
     libUTIL_gt_StartGame_Init();
     libUTIL_gt_EndGame_Init();
