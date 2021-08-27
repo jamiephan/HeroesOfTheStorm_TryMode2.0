@@ -38,7 +38,7 @@ markdowner.addRawMD = '[◁ Back to Home](index.md)';
 markdowner.addEmptyLine = 1;
 markdowner.addRaw = '<a name="meta-top"></a>';
 markdowner.addH1 = jsonData._metadata.MDTitle;
-markdowner.addRaw = `<sup>*(Generated from [doc.json](${jsonFile}) at ${new Date().toGMTString()})*</sup>`;
+markdowner.addRaw = `<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at ${new Date().toGMTString()})*</sup>`;
 if (Array.isArray(jsonData._metadata.MDDescription)) {
   markdowner.addRaw = jsonData._metadata.MDDescription.join('\n');
 } else {
