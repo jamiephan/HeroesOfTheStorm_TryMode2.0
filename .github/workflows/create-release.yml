@@ -34,6 +34,9 @@ jobs:
       - name: Build Multiple Maps
         run: |
           git clone "https://github.com/jamiephan/HeroesOfTheStorm_S2MA.git" "C:/map_repo"
+          git clone "https://github.com/jamiephan/HeroesOfTheStorm_AIMaps.git" "C:/map_AI_repo"
+          Get-ChildItem C:/map_AI_repo/maps/5v5/ | Copy-Item -Destination { "C:/map_repo/maps/" + $_.Name.Replace(".stormmap", " AI.stormmap") }
+
           Push-Location "C:/map_repo"
           function PrepareInsertIntoMPQ($path, $mpq) {
             if (Test-Path "_add_.mpqscript") {
@@ -150,6 +153,8 @@ jobs:
             Commit Message: `${{ github.event.head_commit.message }}`
 
             Built time: `${{ github.event.head_commit.timestamp }}`
+
+            Maps with the name `.AI` indicates the map will be filled with AI players.
 
             For instructions on how to run the maps below, Please refer to [installation guide](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/install.html).
           draft: false 
