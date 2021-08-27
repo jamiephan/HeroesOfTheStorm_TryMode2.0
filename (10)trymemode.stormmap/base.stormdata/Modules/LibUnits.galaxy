@@ -73,6 +73,7 @@ trigger libUNIT_gt_ClearBehaviors;
 trigger libUNIT_gt_ModifyUnitProperty;
 trigger libUNIT_gt_RunOutputUnitID;
 trigger libUNIT_gt_ToggleOutputID;
+trigger libUNIT_gt_KillAllUnits;
 trigger libUNIT_gt_GetUnits;
 trigger libUNIT_gt_GetSelectedUnits;
 trigger libUNIT_gt_KillUnits;
@@ -1529,6 +1530,60 @@ void libUNIT_gt_ToggleOutputID_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Kill All Units
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_KillAllUnits_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_i;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    int auto0AE49AEE_ae;
+    const int auto0AE49AEE_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "kau") || (StringWord(EventChatMessage(false), 1) == "killallunits")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+    }
+
+    if (((lv_player > 15) || (lv_player <= -1))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Error: Player ID must between 0 - 15."));
+        return false;
+    }
+
+    auto0AE49AEE_ae = UnitCount(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, 0, 0), 0);
+    lv_i = 1;
+    for ( ; ( (auto0AE49AEE_ai >= 0 && lv_i <= auto0AE49AEE_ae) || (auto0AE49AEE_ai < 0 && lv_i >= auto0AE49AEE_ae) ) ; lv_i += auto0AE49AEE_ai ) {
+        lv_unit = UnitGroupUnit(UnitGroup(null, lv_player, RegionEntireMap(), UnitFilter(0, 0, 0, 0), 0), lv_i);
+        UnitKill(lv_unit);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Killed Player " + IntToString(lv_player)) + ("'s unit: " + (UnitGetType(lv_unit))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_KillAllUnits_Init () {
+    libUNIT_gt_KillAllUnits = TriggerCreate("libUNIT_gt_KillAllUnits_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_KillAllUnits, c_playerAny, "killallunits", false);
+    TriggerAddEventChatMessage(libUNIT_gt_KillAllUnits, c_playerAny, "kau", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Get Units
 //--------------------------------------------------------------------------------------------------
 bool libUNIT_gt_GetUnits_Func (bool testConds, bool runActions) {
@@ -2316,6 +2371,7 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_ModifyUnitProperty_Init();
     libUNIT_gt_RunOutputUnitID_Init();
     libUNIT_gt_ToggleOutputID_Init();
+    libUNIT_gt_KillAllUnits_Init();
     libUNIT_gt_GetUnits_Init();
     libUNIT_gt_GetSelectedUnits_Init();
     libUNIT_gt_KillUnits_Init();

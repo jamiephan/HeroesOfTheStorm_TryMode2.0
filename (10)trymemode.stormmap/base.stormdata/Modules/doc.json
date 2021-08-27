@@ -1581,6 +1581,39 @@
                             "description": "Remove all weapons from selected units"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "kau",
+                    "command": "killallunits",
+                    "description": [
+                        "Kill all units owned by a specific players. ",
+                        "Unlike other commands with player ID param, this commands allow to specify Player 0 (Neutual).",
+                        "> Note that in most maps, the Core are owned by Player 11 and 12, where 11 is left team and 12 is right team, killing it will instantly kill the core thus ending the game."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "Define which player to get all the units.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Kill all units own by whoever uses this command."
+                        },
+                        {
+                            "command": "{command} 7",
+                            "description": "Kill all units owned by Player 7"
+                        },
+                        {
+                            "command": "{command} 15",
+                            "description": "Kill all units owned by Player 15 (Player 15 usually are neutral mercenary camps.)"
+                        }
+                    ]
                 }
             ]
         },

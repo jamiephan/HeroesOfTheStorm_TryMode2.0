@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Thu, 26 Aug 2021 17:03:35 GMT)*</sup>
+<sup>*(Generated from [doc.json](./(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 27 Aug 2021 18:02:07 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -116,6 +116,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `getunits`](#cmd-getunits)
 
   - 💭 [Command: `getweapon`](#cmd-getweapon)
+
+  - 💭 [Command: `killallunits`](#cmd-killallunits)
 
   - 💭 [Command: `killunits`](#cmd-killunits)
 
@@ -1940,6 +1942,49 @@ Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon
     	(Get all weapons from selected units)
 
 <a name="cmd-getweapon-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
+<a name="cmd-killallunits"></a>
+
+## (`killallunits` | `kau`) `[PlayerId]`
+
+<a name="cmd-killallunits-description"></a>
+
+#### ✏ Description: 
+Kill all units owned by a specific players. 
+Unlike other commands with player ID param, this commands allow to specify Player 0 (Neutual).
+> Note that in most maps, the Core are owned by Player 11 and 12, where 11 is left team and 12 is right team, killing it will instantly kill the core thus ending the game.
+
+
+<a name="cmd-killallunits-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		Define which player to get all the units.
+    	Default:	The player id of whoever used this command.
+
+<a name="cmd-killallunits-examples"></a>
+
+#### 🔧 Examples:
+    > kau
+    	(Kill all units own by whoever uses this command.)
+    > killallunits 7
+    	(Kill all units owned by Player 7)
+    > killallunits 15
+    	(Kill all units owned by Player 15 (Player 15 usually are neutral mercenary camps.))
+
+<a name="cmd-killallunits-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
