@@ -47,14 +47,25 @@ XMLFiles.forEach((obj) => {
       catalog[k].forEach((a) => {
         try {
           const name = a.$.id;
+          const parent = Object.prototype.hasOwnProperty.call(a.$, 'parent') ? a.$.parent : null;
           if (name === undefined) return;
-          const requirement = a.CmdButtonArray[0].$.Requirements;
-          const face = a.CmdButtonArray[0].$.DefaultButtonFace || name;
-          const verb = a.CmdButtonArray[0].$.index || 'Execute';
 
+          let requirement;
+          let face;
+          let verb;
+
+          if (Array.isArray(a.CmdButtonArray)) {
+            // Have CmdButtonArray
+            requirement = a.CmdButtonArray[0].$.Requirements;
+            face = a.CmdButtonArray[0].$.DefaultButtonFace || name;
+            verb = a.CmdButtonArray[0].$.index || 'Execute';
+          } else {
+            verb = 'Execute';
+            face = parent || name;
+          }
           finalXML += `    <CBehaviorAbility id="${idPrefix}${name}">\n`;
           if (!(requirement === undefined)) {
-            // eslint-disable-next-line max-len
+          // eslint-disable-next-line max-len
             finalXML += `        <!-- Requirement Behavior Detected. Please add the behavior: ${requirement} -->\n`;
           }
           // eslint-disable-next-line max-len
@@ -69,7 +80,7 @@ XMLFiles.forEach((obj) => {
             `\tPrefixed Id: ${idPrefix}${name}`,
           );
         } catch (e) {
-          console.log(`Error when adding ability from ${obj.fileName}`);
+          console.log(`Error when adding ability from ${obj.fileName}`, e.message);
         }
       });
     });
