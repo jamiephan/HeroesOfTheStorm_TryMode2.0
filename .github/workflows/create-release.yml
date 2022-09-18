@@ -83,6 +83,7 @@ jobs:
             Start-Process -WindowStyle Hidden ".\MPQEditor.exe" -Wait -ArgumentList "extract `"$mapPath`" MapScript.galaxy"
             (Get-Content .\MapScript.galaxy) -replace 'include "TriggerLibs/SupportLib"', "$&`ninclude `"LibTryMeMode`"" | Set-Content .\MapScript.galaxy
             (Get-Content .\MapScript.galaxy) -replace "libSprt_InitLib\(\);$", "$&`n    libTRYM_InitLib();" | Set-Content .\MapScript.galaxy
+            (Get-Content .\MapScript.galaxy) -replace "libStEx_InitLib\(\);$", "\/\/libStEx_InitLib\(\);" | Set-Content .\MapScript.galaxy
             PrepareInsertIntoMPQ "MapScript.galaxy" $mapPath
             ExecuteInsertIntoMPQ
             Remove-Item "./MapScript.galaxy" -Force -Confirm:$false 
