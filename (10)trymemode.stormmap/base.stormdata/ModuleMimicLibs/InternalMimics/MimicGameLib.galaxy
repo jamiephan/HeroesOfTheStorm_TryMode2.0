@@ -17486,6 +17486,7 @@ bool MimicGameLib_gt_HeroDeathDiabloDiabloDies_Func (bool testConds, bool runAct
     int lv_killingPlayer;
     int lv_respawnDuration;
     int lv_currentStackCountofSoulstone;
+    int lv_currentStackCountofPrimeEvil;
     int lv_removeAmount;
     point lv_deadUnitsOriginalLocation;
     fixed lv_respawnTime;
@@ -17496,6 +17497,7 @@ bool MimicGameLib_gt_HeroDeathDiabloDiabloDies_Func (bool testConds, bool runAct
     lv_deadPlayer = EventPlayer();
     lv_killingPlayer = libNtve_gf_KillingPlayer();
     lv_currentStackCountofSoulstone = UnitBehaviorCount(EventUnit(), "DiabloBlackSoulstoneTokenCounter");
+    lv_currentStackCountofPrimeEvil = UnitBehaviorCount(EventUnit(), "DiabloBlackSoulstoneEternalSoulstone");
     lv_deadUnitsOriginalLocation = UnitGetPosition(EventUnit());
 
     // Conditions
@@ -17548,6 +17550,10 @@ bool MimicGameLib_gt_HeroDeathDiabloDiabloDies_Func (bool testConds, bool runAct
         lv_soulstoneRes = true;
         PlayerCreateEffectPoint(lv_deadPlayer, "DiabloBlackSoulstoneResurrectDummyPersistent", libNtve_gf_PointWithZOffset(lv_deadUnitsOriginalLocation, 2.0));
         UnitCreateEffectUnit(lv_deadUnit, "DiabloBlackSoulstoneRemove100TokenSet", lv_deadUnit);
+        if ((lv_currentStackCountofPrimeEvil >= 1)) {
+            UnitCreateEffectUnit(lv_deadUnit, "DiabloBlackSoulstoneAdd25TokenSet", lv_deadUnit);
+        }
+
     }
 
     MimicGameLib_gf_SendEventHeroKilled(lv_killingPlayer, lv_deadUnit);
@@ -18584,6 +18590,7 @@ void MimicGameLib_gt_MinionSpawnCycle_Init () {
 //--------------------------------------------------------------------------------------------------
 bool MimicGameLib_gt_HeroMoonwellCooldownOnOff_Func (bool testConds, bool runActions) {
     // Variable Declarations
+    fixed lv_heightOffset;
     int lv_index;
     int lv_itPlayerIndex;
     bool lv_isHeroUnit;
@@ -18604,6 +18611,7 @@ bool MimicGameLib_gt_HeroMoonwellCooldownOnOff_Func (bool testConds, bool runAct
     unit auto82B7B41C_var;
 
     // Variable Initialization
+    lv_heightOffset = 4.1;
 
     // Actions
     if (!runActions) {
@@ -18639,13 +18647,25 @@ bool MimicGameLib_gt_HeroMoonwellCooldownOnOff_Func (bool testConds, bool runAct
             libNtve_gf_SendActorMessageToUnit(auto6F618D62_var, "Signal MoonwellDrink");
             UnitGroupAdd(MimicGameLib_gv_moonwellTextTagsUnitGroup[UnitGetOwner(EventUnit())], auto6F618D62_var);
         }
+        if (((libCore_gv_mAPMapStringID == "BattlefieldOfEternity") || (libCore_gv_mAPMapStringID == "Shrines")) && (MimicGameLib_gf_TeamNumberOfPlayer(lv_itPlayerIndex) == MimicGameLib_gv_teamChaosIndex_C)) {
+            lv_heightOffset = 2.5;
+        }
+        else if (((libCore_gv_mAPMapStringID == "BattlefieldOfEternity") || (libCore_gv_mAPMapStringID == "Shrines")) && (MimicGameLib_gf_TeamNumberOfPlayer(lv_itPlayerIndex) == MimicGameLib_gv_teamOrderIndex_C)) {
+            lv_heightOffset = 4.8;
+        }
+        else if (((libCore_gv_mAPMapStringID == "ControlPoints") || (libCore_gv_mAPMapStringID == "Crypts"))) {
+            lv_heightOffset = 3.0;
+        }
+        else if (((libCore_gv_mAPMapStringID == "Volskaya") || (libCore_gv_mAPMapStringID == "Warhead Junction") || (libCore_gv_mAPMapStringID == "TowersOfDoom") || (libCore_gv_mAPMapStringID == "DragonShire"))) {
+            lv_heightOffset = 4.0;
+        }
         auto82B7B41C_g = MimicGameLib_gv_moonwellTextTagsUnitGroup[UnitGetOwner(EventUnit())];
         auto82B7B41C_u = UnitGroupCount(auto82B7B41C_g, c_unitCountAll);
         for (;; auto82B7B41C_u -= 1) {
             auto82B7B41C_var = UnitGroupUnitFromEnd(auto82B7B41C_g, auto82B7B41C_u);
             if (auto82B7B41C_var == null) { break; }
             lv_index += 1;
-            TextTagCreate((StringExternal("Param/Value/lib_Game_3F1D7629") + FixedToText(UnitBehaviorDuration(auto82B7B41C_var, "HealingFountainCooldown"), 0)), 20, UnitGetPosition(auto82B7B41C_var), 4.2, false, false, PlayerGroupSingle(UnitGetOwner(EventUnit())));
+            TextTagCreate((StringExternal("Param/Value/lib_Game_3F1D7629") + FixedToText(UnitBehaviorDuration(auto82B7B41C_var, "HealingFountainCooldown"), 0)), 20, UnitGetPosition(auto82B7B41C_var), lv_heightOffset, false, false, PlayerGroupSingle(UnitGetOwner(EventUnit())));
             MimicGameLib_gv_moonwellTextTags[UnitGetOwner(EventUnit())][lv_index] = TextTagLastCreated();
             MimicGameLib_gv_moonwellTextTagsUnit[UnitGetOwner(EventUnit())][lv_index] = auto82B7B41C_var;
         }
@@ -18739,6 +18759,74 @@ bool MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates_Func (bool testConds, bo
 void MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates_Init () {
     MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates = TriggerCreate("MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates_Func");
     TriggerAddEventTimePeriodic(MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates, 1.0, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Town - Town Hall Killed Moonwell Search
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_TownTownHallKilledMoonwellSearch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_i;
+    int lv_moonwells;
+    unit lv_dyingStructureUnit;
+    int lv_structureType;
+    int lv_townIndex;
+    int lv_structureIndex;
+    unit lv_structure;
+
+    // Automatic Variable Declarations
+    int autoF80B0BD0_ae;
+    const int autoF80B0BD0_ai = 1;
+    unitgroup auto82B2BCD2_g;
+    int auto82B2BCD2_u;
+    unit auto82B2BCD2_var;
+
+    // Variable Initialization
+    lv_dyingStructureUnit = EventUnit();
+    lv_structureType = MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_dyingStructureUnit);
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_structureType == MimicGameLib_ge_TownStructureTypes_TownHall))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_townIndex = MimicGameLib_gf_TownGetTownForUnit(lv_dyingStructureUnit);
+    autoF80B0BD0_ae = MimicGameLib_gv_townTownData[lv_townIndex].lv_structureCount;
+    lv_structureIndex = 1;
+    for ( ; ( (autoF80B0BD0_ai >= 0 && lv_structureIndex <= autoF80B0BD0_ae) || (autoF80B0BD0_ai < 0 && lv_structureIndex >= autoF80B0BD0_ae) ) ; lv_structureIndex += autoF80B0BD0_ai ) {
+        lv_structure = MimicGameLib_gv_townTownData[lv_townIndex].lv_structureUnits[lv_structureIndex];
+        if ((UnitIsAlive(lv_structure) == true) && (MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_structure) == MimicGameLib_ge_TownStructureTypes_Moonwell) && (UnitBehaviorCount(lv_structure, "HealingFountainIgnoreLinkedMinimapIcons") == 0)) {
+            UnitKill(lv_structure);
+        }
+
+    }
+    if ((UnitGroupCount(UnitGroup("TownTownHallL2", UnitGetOwner(lv_dyingStructureUnit), RegionPlayableMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) == 0) && (UnitGroupCount(UnitGroup("TownTownHallL3", UnitGetOwner(lv_dyingStructureUnit), RegionPlayableMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) == 0)) {
+        auto82B2BCD2_g = UnitGroup("TownMoonwellL3", MimicGameLib_gf_ComputerPlayerInTeam(MimicGameLib_gf_TeamNumberOfPlayer(UnitGetOwner(lv_dyingStructureUnit))), RegionPlayableMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto82B2BCD2_u = UnitGroupCount(auto82B2BCD2_g, c_unitCountAll);
+        for (;; auto82B2BCD2_u -= 1) {
+            auto82B2BCD2_var = UnitGroupUnitFromEnd(auto82B2BCD2_g, auto82B2BCD2_u);
+            if (auto82B2BCD2_var == null) { break; }
+            if ((UnitBehaviorCount(auto82B2BCD2_var, "HealingFountainIgnoreLinkedMinimapIcons") == 1)) {
+                UnitKill(auto82B2BCD2_var);
+            }
+
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_TownTownHallKilledMoonwellSearch_Init () {
+    MimicGameLib_gt_TownTownHallKilledMoonwellSearch = TriggerCreate("MimicGameLib_gt_TownTownHallKilledMoonwellSearch_Func");
+    TriggerAddEventUnitDied(MimicGameLib_gt_TownTownHallKilledMoonwellSearch, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -22286,6 +22374,7 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_MinionSpawnCycle_Init();
     MimicGameLib_gt_HeroMoonwellCooldownOnOff_Init();
     MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates_Init();
+    MimicGameLib_gt_TownTownHallKilledMoonwellSearch_Init();
     MimicGameLib_gt_HeroMount_Init();
     MimicGameLib_gt_HeroDismount_Init();
     MimicGameLib_gt_HeroDismountOnCheerDanceTauntUsed_Init();

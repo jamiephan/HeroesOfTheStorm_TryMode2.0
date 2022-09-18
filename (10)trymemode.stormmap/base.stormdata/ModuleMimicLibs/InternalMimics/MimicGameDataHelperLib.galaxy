@@ -1110,6 +1110,8 @@ void MimicGameDataHelperLib_gf_HeroDiabloIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloInfernoBreathEnd, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloOverpowerSetFacing, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection, true);
     }
 
 }
@@ -1127,6 +1129,8 @@ void MimicGameDataHelperLib_gf_HeroDiabloDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloInfernoBreathEnd, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloOverpowerSetFacing, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection, false);
     }
 
 }
@@ -1172,8 +1176,6 @@ void MimicGameDataHelperLib_gf_HeroDryadIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadDeactivateCameraSettings, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadActivateCameraforSymbiote, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadLossofControlCamera, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorActivate, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorDeactivate, true);
     }
 
 }
@@ -1197,9 +1199,6 @@ void MimicGameDataHelperLib_gf_HeroDryadDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadDeactivateCameraSettings, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadActivateCameraforSymbiote, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadLossofControlCamera, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorActivate, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorDeactivate, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, false);
     }
 
 }
@@ -9344,6 +9343,113 @@ void MimicGameDataHelperLib_gt_HeroDiabloInfernoBreathEnd_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Diablo - Eternal Soulstone Ressurection
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = libGame_gf_HeroLevelUpPlayer();
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((libGame_gf_HeroLevelUpLevel() >= 10))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroDiablo"))) {
+            return false;
+        }
+
+        if (!((UnitHasBehavior2(lv_unit, "DiabloBlackSoulstoneEternalSoulstone") == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorAdd(lv_unit, "DiabloBlackSoulstoneEternalSoulstone", lv_unit, 1);
+    UnitCreateEffectUnit(lv_unit, "DiabloBlackSoulstoneAdd1EternalSoulstoneTokenCount", lv_unit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection_Init () {
+    MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection = TriggerCreate("MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection, false);
+    libGame_gf_HeroLevelUp(MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Diablo - Reset Eternal Soulstone Ressurection
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = UnitGetOwner(EventUnit());
+    lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((UnitGetType(lv_unit) == "HeroDiablo"))) {
+            return false;
+        }
+
+        if (!((UnitHasBehavior2(lv_unit, "DiabloBlackSoulstoneEternalSoulstone") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(lv_unit, "DiabloBlackSoulstoneResetEternalSoulstoneTokenCount", lv_unit);
+    UnitBehaviorRemove(lv_unit, "DiabloBlackSoulstoneEternalSoulstone", 1);
+    Wait(0.125, c_timeGame);
+    if ((UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy") >= 10)) {
+        UnitBehaviorAdd(lv_unit, "DiabloBlackSoulstoneEternalSoulstone", lv_unit, 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection_Init () {
+    MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection = TriggerCreate("MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection, false);
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection, null, "MuradinItsHammerTimeTokenCounter", c_unitBehaviorChangeCreate);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Diablo - Black Soulstone Stack Talent Picked
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked_Func (bool testConds, bool runActions) {
@@ -9409,7 +9515,7 @@ bool MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff_Func (bool testCon
     }
 
     if ((PlayerHasTalent(lv_player, "DemonHunterDeathDealer") == true)) {
-        lv_stackMod = 0.14;
+        lv_stackMod = 0.15;
     }
 
     lv_finalMod = (lv_base + (lv_stackMod * lv_stacks));
@@ -18976,7 +19082,7 @@ bool MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown_Func (bool tes
         return true;
     }
 
-    UnitModifyCooldown(lv_rehgarUnit, CatalogReferenceGet("Abil,RehgarChainHeal,Cost[0].Cooldown.Link", UnitGetOwner(lv_rehgarUnit)), -0.75, c_cooldownOperationAdd);
+    UnitModifyCooldown(lv_rehgarUnit, CatalogReferenceGet("Abil,RehgarChainHeal,Cost[0].Cooldown.Link", UnitGetOwner(lv_rehgarUnit)), -1.0, c_cooldownOperationAdd);
     return true;
 }
 
@@ -19034,7 +19140,7 @@ bool MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem_Func (
 void MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem_Init () {
     MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem = TriggerCreate("MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem, c_playerAny, "RehgarEarthbindTotemCreateUnitSet");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem, c_playerAny, "RehgarEarthbindTotemSpawnSet");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -26578,6 +26684,8 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroDiabloOverpowerSetFacing_Init();
     MimicGameDataHelperLib_gt_HeroDiabloInfernoBreathCast_Init();
     MimicGameDataHelperLib_gt_HeroDiabloInfernoBreathEnd_Init();
+    MimicGameDataHelperLib_gt_HeroDiabloEternalSoulstoneRessurection_Init();
+    MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection_Init();
     MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked_Init();
     MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff_Init();
     MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Init();

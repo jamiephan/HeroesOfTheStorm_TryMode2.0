@@ -15,6 +15,21 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="ML90ETCPowerslide">
+        <Buttons Face="L90ETCPowerslide" Type="AbilCmd" AbilCmd="L90ETCPowerslide,Execute" Behavior="L90ETCPowerslide" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MTalentBucketCalldownMule">
+        <Buttons Face="TalentBucketCalldownMule" Type="AbilCmd" AbilCmd="TalentBucketCalldownMule,Execute" Behavior="TalentBucketCalldownMule" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MUnderworldBossRoots">
+        <Buttons Face="UnderworldBossRoots" Type="AbilCmd" AbilCmd="UnderworldBossRoots,Execute" Behavior="UnderworldBossRoots" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MUnderworldBossStun">
+        <Buttons Face="UnderworldBossStun" Type="AbilCmd" AbilCmd="UnderworldBossStun,Execute" Behavior="UnderworldBossStun" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -22,6 +37,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/startingexperience/tutorial01.stormmap/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MUtherHolyLight">
+        <Buttons Face="UtherHolyLight" Type="AbilCmd" AbilCmd="UtherHolyLight,Execute" Behavior="UtherHolyLight" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/startingexperience/tutorial01.stormmap/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -250,6 +268,9 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MTinkerRockItTurret">
         <Buttons Face="TinkerRockItTurret" Type="AbilCmd" AbilCmd="TinkerRockItTurret,Execute" Behavior="TinkerRockItTurret" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MTinkerSalvageAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="TinkerSalvageAttack,Execute" Behavior="TinkerSalvageAttack" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTinkerRockItTurretAttack">
         <Buttons Face="TinkerRockItTurretAttack" Type="AbilCmd" AbilCmd="TinkerRockItTurretAttack,Execute" Behavior="TinkerRockItTurretAttack" />
@@ -539,6 +560,12 @@
     <CBehaviorAbility id="MArthasHowlingBlast">
         <Buttons Face="ArthasHowlingBlast" Type="AbilCmd" AbilCmd="ArthasHowlingBlast,Execute" Behavior="ArthasHowlingBlast" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MArthasGhoulMagazine">
+        <Buttons Face="StormArmMagazine" Type="AbilCmd" AbilCmd="ArthasGhoulMagazine,Execute" Behavior="ArthasGhoulMagazine" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MArthasMasteryGhoulMagazine">
+        <Buttons Face="ArthasGhoulMagazine" Type="AbilCmd" AbilCmd="ArthasMasteryGhoulMagazine,Execute" Behavior="ArthasMasteryGhoulMagazine" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ArthasData/ArthasData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -674,6 +701,9 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MAbathurLocustNest">
         <Buttons Face="AbathurLocustMasterHotbar" Type="AbilCmd" AbilCmd="AbathurLocustNest,Execute" Behavior="AbathurLocustNest" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MToxicNestMasteryRangeDummy">
+        <Buttons Face="ToxicNestMasteryRangeDummy" Type="AbilCmd" AbilCmd="ToxicNestMasteryRangeDummy,Execute" Behavior="ToxicNestMasteryRangeDummy" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/AbathurData/AbathurData.xml}-->
@@ -828,6 +858,161 @@
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/DryadData/DryadData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RehgarData/RehgarData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MRehgarElementalConduit">
+        <Buttons Face="RehgarElementalConduit" Type="AbilCmd" AbilCmd="RehgarElementalConduit,Execute" Behavior="RehgarElementalConduit" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarBloodlust">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="RehgarBloodlust" Type="AbilCmd" AbilCmd="RehgarBloodlust,Execute" Behavior="RehgarBloodlust" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarGhostWolfActivate">
+        <Buttons Face="RehgarGhostWolfActivate" Type="AbilCmd" AbilCmd="RehgarGhostWolfActivate,Execute" Behavior="RehgarGhostWolfActivate" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarGhostWolfDeactivate">
+        <!-- Requirement Behavior Detected. Please add the behavior: RehgarGhostWolfActive -->
+        <Buttons Face="RehgarGhostWolfDeactivate" Type="AbilCmd" AbilCmd="RehgarGhostWolfDeactivate,Execute" Behavior="RehgarGhostWolfDeactivate" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarPurge">
+        <Buttons Face="RehgarPurge" Type="AbilCmd" AbilCmd="RehgarPurge,Execute" Behavior="RehgarPurge" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarTotemicProjection">
+        <!-- Requirement Behavior Detected. Please add the behavior: RehgarTotemProjectionAvailable -->
+        <Buttons Face="RehgarTotemicProjection" Type="AbilCmd" AbilCmd="RehgarTotemicProjection,Execute" Behavior="RehgarTotemicProjection" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarAncestralHealing">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="RehgarAncestralHealing" Type="AbilCmd" AbilCmd="RehgarAncestralHealing,Execute" Behavior="RehgarAncestralHealing" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarChainHeal">
+        <Buttons Face="RehgarChainHeal" Type="AbilCmd" AbilCmd="RehgarChainHeal,Execute" Behavior="RehgarChainHeal" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarEarthbindTotem">
+        <Buttons Face="RehgarEarthbindTotem" Type="AbilCmd" AbilCmd="RehgarEarthbindTotem,Execute" Behavior="RehgarEarthbindTotem" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarFarsight">
+        <!-- Requirement Behavior Detected. Please add the behavior: HeroHasNoDeadBehavior -->
+        <Buttons Face="RehgarFarsight" Type="AbilCmd" AbilCmd="RehgarFarsight,Execute" Behavior="RehgarFarsight" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarLightningShield">
+        <Buttons Face="RehgarLightningShield" Type="AbilCmd" AbilCmd="RehgarLightningShield,Execute" Behavior="RehgarLightningShield" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarHealingTotem">
+        <Buttons Face="RehgarHealingTotem" Type="AbilCmd" AbilCmd="RehgarHealingTotem,Execute" Behavior="RehgarHealingTotem" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRehgarGhostWolfLunge">
+        <Buttons Face="RehgarGhostWolf" Type="AbilCmd" AbilCmd="RehgarGhostWolfLunge,Execute" Behavior="RehgarGhostWolfLunge" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RehgarData/RehgarData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RexxarData/RexxarData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MRexxarPrimalIntimidation">
+        <Buttons Face="GenericImposingPresenceTalent" Type="AbilCmd" AbilCmd="RexxarPrimalIntimidation,Execute" Behavior="RexxarPrimalIntimidation" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaFollowCancel">
+        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaFollowActive -->
+        <Buttons Face="RexxarMishaFollowCancel" Type="AbilCmd" AbilCmd="RexxarMishaFollowCancel,Execute" Behavior="RexxarMishaFollowCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarHardenedSkin">
+        <Buttons Face="RexxarHardenedSkin" Type="AbilCmd" AbilCmd="RexxarHardenedSkin,Execute" Behavior="RexxarHardenedSkin" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaHold">
+        <Buttons Face="RexxarMishaHold" Type="AbilCmd" AbilCmd="RexxarMishaHold,Execute" Behavior="RexxarMishaHold" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaFollow">
+        <Buttons Face="RexxarMishaFollow" Type="AbilCmd" AbilCmd="RexxarMishaFollow,Execute" Behavior="RexxarMishaFollow" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarSpiritBond">
+        <Buttons Face="RexxarMishaFocus" Type="AbilCmd" AbilCmd="RexxarSpiritBond,Execute" Behavior="RexxarSpiritBond" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMendPet">
+        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
+        <Buttons Face="RexxarMendPet" Type="AbilCmd" AbilCmd="RexxarMendPet,Execute" Behavior="RexxarMendPet" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarBestialWrath">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="RexxarBestialWrath" Type="AbilCmd" AbilCmd="RexxarBestialWrath,Execute" Behavior="RexxarBestialWrath" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarFeignDeath">
+        <Buttons Face="RexxarFeignDeath" Type="AbilCmd" AbilCmd="RexxarFeignDeath,On" Behavior="RexxarFeignDeath" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarFlare">
+        <Buttons Face="RexxarFlare" Type="AbilCmd" AbilCmd="RexxarFlare,Execute" Behavior="RexxarFlare" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarSpiritSwoop">
+        <Buttons Face="RexxarSpiritSwoop" Type="AbilCmd" AbilCmd="RexxarSpiritSwoop,Execute" Behavior="RexxarSpiritSwoop" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaChargeRedirect">
+        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
+        <Buttons Face="RexxarMishaChargeRedirect" Type="AbilCmd" AbilCmd="RexxarMishaChargeRedirect,Execute" Behavior="RexxarMishaChargeRedirect" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaCharge">
+        <Buttons Face="RexxarMishaChargeRedirect" Type="AbilCmd" AbilCmd="RexxarMishaCharge,Execute" Behavior="RexxarMishaCharge" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaStampede">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="RexxarMishaChargeHeroSelect" Type="AbilCmd" AbilCmd="RexxarMishaStampede,Execute" Behavior="RexxarMishaStampede" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarUnleashTheBoars">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="RexxarUnleashTheBoars" Type="AbilCmd" AbilCmd="RexxarUnleashTheBoars,Execute" Behavior="RexxarUnleashTheBoars" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaFocus">
+        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
+        <Buttons Face="RexxarMishaFocus" Type="AbilCmd" AbilCmd="RexxarMishaFocus,Execute" Behavior="RexxarMishaFocus" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarUnleashTheBoarsTargeting">
+        <Buttons Face="RexxarUnleashTheBoars" Type="AbilCmd" AbilCmd="RexxarUnleashTheBoarsTargeting,Execute" Behavior="RexxarUnleashTheBoarsTargeting" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRexxarMishaMagazine">
+        <Buttons Face="StormArmMagazine" Type="AbilCmd" AbilCmd="RexxarMishaMagazine,Execute" Behavior="RexxarMishaMagazine" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RexxarData/RexxarData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RaynorData/RaynorData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MRaynorRaynorsRaidersDummy">
+        <!-- Requirement Behavior Detected. Please add the behavior: RaynorBansheesNotActive -->
+        <Buttons Face="RaynorRaynorsRaiderDummy" Type="AbilCmd" AbilCmd="RaynorRaynorsRaidersDummy,Execute" Behavior="RaynorRaynorsRaidersDummy" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorAdrenalineRush">
+        <Buttons Face="RaynorAdrenalineRushActivatable" Type="AbilCmd" AbilCmd="RaynorAdrenalineRush,Execute" Behavior="RaynorAdrenalineRush" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorInspire">
+        <Buttons Face="RaynorInspire" Type="AbilCmd" AbilCmd="RaynorInspire,Execute" Behavior="RaynorInspire" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorBountyHunter">
+        <!-- Requirement Behavior Detected. Please add the behavior: RaynorHasBountyHunterCarryBehavior -->
+        <Buttons Face="RaynorGiveEmSomePepperBountyHunterActive" Type="AbilCmd" AbilCmd="RaynorBountyHunter,Execute" Behavior="RaynorBountyHunter" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorRaynorsBansheeTargeted">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="RaynorRaynorsRaider" Type="AbilCmd" AbilCmd="RaynorRaynorsBansheeTargeted,Execute" Behavior="RaynorRaynorsBansheeTargeted" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorRaynorsRaidersRedirect">
+        <!-- Requirement Behavior Detected. Please add the behavior: RaynorBansheesActive -->
+        <Buttons Face="RaynorRaynorsRaidersIssueAttackOrder" Type="AbilCmd" AbilCmd="RaynorRaynorsRaidersRedirect,Execute" Behavior="RaynorRaynorsRaidersRedirect" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorPenetratingRound">
+        <Buttons Face="RaynorPenetratingRound" Type="AbilCmd" AbilCmd="RaynorPenetratingRound,Execute" Behavior="RaynorPenetratingRound" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorHyperion">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="RaynorHyperion" Type="AbilCmd" AbilCmd="RaynorHyperion,Execute" Behavior="RaynorHyperion" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RaynorData/RaynorData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
@@ -1114,6 +1299,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
         <Buttons Face="ButcherLambToTheSlaughter" Type="AbilCmd" AbilCmd="ButcherLambToTheSlaughter,Execute" Behavior="ButcherLambToTheSlaughter" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherFreshMeatAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="ButcherFreshMeatAttack,Execute" Behavior="ButcherFreshMeatAttack" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ButcherData/ButcherData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -1253,6 +1441,15 @@
     <CBehaviorAbility id="MLostVikingsRally">
         <Buttons Face="LostVikingsRally" Type="AbilCmd" AbilCmd="LostVikingsRally,Execute" Behavior="LostVikingsRally" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MLostVikingsBaleogRally">
+        <Buttons Face="LostVikingsRally" Type="AbilCmd" AbilCmd="LostVikingsBaleogRally,Execute" Behavior="LostVikingsBaleogRally" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLostVikingsErikRally">
+        <Buttons Face="LostVikingsRally" Type="AbilCmd" AbilCmd="LostVikingsErikRally,Execute" Behavior="LostVikingsErikRally" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLostVikingsOlafRally">
+        <Buttons Face="LostVikingsRally" Type="AbilCmd" AbilCmd="LostVikingsOlafRally,Execute" Behavior="LostVikingsOlafRally" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MLostVikingsPlayAgain">
         <!-- Requirement Behavior Detected. Please add the behavior: LostVikingsHasUltimate2AndNoAbathurUltimateEvolution -->
         <Buttons Face="LostVikingsPlayAgain" Type="AbilCmd" AbilCmd="LostVikingsPlayAgain,Execute" Behavior="LostVikingsPlayAgain" />
@@ -1290,152 +1487,6 @@
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/LostVikingsData/LostVikingsData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RehgarData/RehgarData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MRehgarTotemicProjection">
-        <!-- Requirement Behavior Detected. Please add the behavior: RehgarTotemProjectionAvailable -->
-        <Buttons Face="RehgarTotemicProjection" Type="AbilCmd" AbilCmd="RehgarTotemicProjection,Execute" Behavior="RehgarTotemicProjection" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarAncestralHealing">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="RehgarAncestralHealing" Type="AbilCmd" AbilCmd="RehgarAncestralHealing,Execute" Behavior="RehgarAncestralHealing" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarChainHeal">
-        <Buttons Face="RehgarChainHeal" Type="AbilCmd" AbilCmd="RehgarChainHeal,Execute" Behavior="RehgarChainHeal" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarEarthbindTotem">
-        <Buttons Face="RehgarEarthbindTotem" Type="AbilCmd" AbilCmd="RehgarEarthbindTotem,Execute" Behavior="RehgarEarthbindTotem" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarFarsight">
-        <!-- Requirement Behavior Detected. Please add the behavior: HeroHasNoDeadBehavior -->
-        <Buttons Face="RehgarFarsight" Type="AbilCmd" AbilCmd="RehgarFarsight,Execute" Behavior="RehgarFarsight" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarLightningShield">
-        <Buttons Face="RehgarLightningShield" Type="AbilCmd" AbilCmd="RehgarLightningShield,Execute" Behavior="RehgarLightningShield" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarHealingTotem">
-        <Buttons Face="RehgarHealingTotem" Type="AbilCmd" AbilCmd="RehgarHealingTotem,Execute" Behavior="RehgarHealingTotem" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarBloodlust">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="RehgarBloodlust" Type="AbilCmd" AbilCmd="RehgarBloodlust,Execute" Behavior="RehgarBloodlust" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarGhostWolfActivate">
-        <Buttons Face="RehgarGhostWolfActivate" Type="AbilCmd" AbilCmd="RehgarGhostWolfActivate,Execute" Behavior="RehgarGhostWolfActivate" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarGhostWolfDeactivate">
-        <!-- Requirement Behavior Detected. Please add the behavior: RehgarGhostWolfActive -->
-        <Buttons Face="RehgarGhostWolfDeactivate" Type="AbilCmd" AbilCmd="RehgarGhostWolfDeactivate,Execute" Behavior="RehgarGhostWolfDeactivate" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRehgarGhostWolfLunge">
-        <Buttons Face="RehgarGhostWolf" Type="AbilCmd" AbilCmd="RehgarGhostWolfLunge,Execute" Behavior="RehgarGhostWolfLunge" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RehgarData/RehgarData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RexxarData/RexxarData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MRexxarPrimalIntimidation">
-        <Buttons Face="GenericImposingPresenceTalent" Type="AbilCmd" AbilCmd="RexxarPrimalIntimidation,Execute" Behavior="RexxarPrimalIntimidation" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaFollowCancel">
-        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaFollowActive -->
-        <Buttons Face="RexxarMishaFollowCancel" Type="AbilCmd" AbilCmd="RexxarMishaFollowCancel,Execute" Behavior="RexxarMishaFollowCancel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarHardenedSkin">
-        <Buttons Face="RexxarHardenedSkin" Type="AbilCmd" AbilCmd="RexxarHardenedSkin,Execute" Behavior="RexxarHardenedSkin" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaHold">
-        <Buttons Face="RexxarMishaHold" Type="AbilCmd" AbilCmd="RexxarMishaHold,Execute" Behavior="RexxarMishaHold" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaFollow">
-        <Buttons Face="RexxarMishaFollow" Type="AbilCmd" AbilCmd="RexxarMishaFollow,Execute" Behavior="RexxarMishaFollow" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarSpiritBond">
-        <Buttons Face="RexxarMishaFocus" Type="AbilCmd" AbilCmd="RexxarSpiritBond,Execute" Behavior="RexxarSpiritBond" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMendPet">
-        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
-        <Buttons Face="RexxarMendPet" Type="AbilCmd" AbilCmd="RexxarMendPet,Execute" Behavior="RexxarMendPet" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarBestialWrath">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="RexxarBestialWrath" Type="AbilCmd" AbilCmd="RexxarBestialWrath,Execute" Behavior="RexxarBestialWrath" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarFeignDeath">
-        <Buttons Face="RexxarFeignDeath" Type="AbilCmd" AbilCmd="RexxarFeignDeath,On" Behavior="RexxarFeignDeath" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarFlare">
-        <Buttons Face="RexxarFlare" Type="AbilCmd" AbilCmd="RexxarFlare,Execute" Behavior="RexxarFlare" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarSpiritSwoop">
-        <Buttons Face="RexxarSpiritSwoop" Type="AbilCmd" AbilCmd="RexxarSpiritSwoop,Execute" Behavior="RexxarSpiritSwoop" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaChargeRedirect">
-        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
-        <Buttons Face="RexxarMishaChargeRedirect" Type="AbilCmd" AbilCmd="RexxarMishaChargeRedirect,Execute" Behavior="RexxarMishaChargeRedirect" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaCharge">
-        <Buttons Face="RexxarMishaChargeRedirect" Type="AbilCmd" AbilCmd="RexxarMishaCharge,Execute" Behavior="RexxarMishaCharge" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaStampede">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="RexxarMishaChargeHeroSelect" Type="AbilCmd" AbilCmd="RexxarMishaStampede,Execute" Behavior="RexxarMishaStampede" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarUnleashTheBoars">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="RexxarUnleashTheBoars" Type="AbilCmd" AbilCmd="RexxarUnleashTheBoars,Execute" Behavior="RexxarUnleashTheBoars" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarMishaFocus">
-        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
-        <Buttons Face="RexxarMishaFocus" Type="AbilCmd" AbilCmd="RexxarMishaFocus,Execute" Behavior="RexxarMishaFocus" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRexxarUnleashTheBoarsTargeting">
-        <Buttons Face="RexxarUnleashTheBoars" Type="AbilCmd" AbilCmd="RexxarUnleashTheBoarsTargeting,Execute" Behavior="RexxarUnleashTheBoarsTargeting" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RexxarData/RexxarData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RaynorData/RaynorData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MRaynorRaynorsRaidersDummy">
-        <!-- Requirement Behavior Detected. Please add the behavior: RaynorBansheesNotActive -->
-        <Buttons Face="RaynorRaynorsRaiderDummy" Type="AbilCmd" AbilCmd="RaynorRaynorsRaidersDummy,Execute" Behavior="RaynorRaynorsRaidersDummy" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorAdrenalineRush">
-        <Buttons Face="RaynorAdrenalineRushActivatable" Type="AbilCmd" AbilCmd="RaynorAdrenalineRush,Execute" Behavior="RaynorAdrenalineRush" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorInspire">
-        <Buttons Face="RaynorInspire" Type="AbilCmd" AbilCmd="RaynorInspire,Execute" Behavior="RaynorInspire" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorBountyHunter">
-        <!-- Requirement Behavior Detected. Please add the behavior: RaynorHasBountyHunterCarryBehavior -->
-        <Buttons Face="RaynorGiveEmSomePepperBountyHunterActive" Type="AbilCmd" AbilCmd="RaynorBountyHunter,Execute" Behavior="RaynorBountyHunter" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorRaynorsBansheeTargeted">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="RaynorRaynorsRaider" Type="AbilCmd" AbilCmd="RaynorRaynorsBansheeTargeted,Execute" Behavior="RaynorRaynorsBansheeTargeted" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorRaynorsRaidersRedirect">
-        <!-- Requirement Behavior Detected. Please add the behavior: RaynorBansheesActive -->
-        <Buttons Face="RaynorRaynorsRaidersIssueAttackOrder" Type="AbilCmd" AbilCmd="RaynorRaynorsRaidersRedirect,Execute" Behavior="RaynorRaynorsRaidersRedirect" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorPenetratingRound">
-        <Buttons Face="RaynorPenetratingRound" Type="AbilCmd" AbilCmd="RaynorPenetratingRound,Execute" Behavior="RaynorPenetratingRound" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRaynorHyperion">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="RaynorHyperion" Type="AbilCmd" AbilCmd="RaynorHyperion,Execute" Behavior="RaynorHyperion" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RaynorData/RaynorData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
@@ -1610,6 +1661,9 @@
     <CBehaviorAbility id="MKaelthasPyroblast">
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
         <Buttons Face="KaelthasPyroblast" Type="AbilCmd" AbilCmd="KaelthasPyroblast,Execute" Behavior="KaelthasPyroblast" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MKaelthasPhoenixMagazine">
+        <Buttons Face="StormArmMagazine" Type="AbilCmd" AbilCmd="KaelthasPhoenixMagazine,Execute" Behavior="KaelthasPhoenixMagazine" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/KaelthasData/KaelthasData.xml}-->
@@ -1981,6 +2035,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
         <Buttons Face="GreymaneGoForTheThroat" Type="AbilCmd" AbilCmd="GreymaneGoForTheThroat,Execute" Behavior="GreymaneGoForTheThroat" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MGreymaneGoForTheThroatCDHolder">
+        <Buttons Face="GreymaneGoForTheThroatCDHolder" Type="AbilCmd" AbilCmd="GreymaneGoForTheThroatCDHolder,Execute" Behavior="GreymaneGoForTheThroatCDHolder" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MGreymaneInnerBeast">
         <Buttons Face="GreymaneInnerBeast" Type="AbilCmd" AbilCmd="GreymaneInnerBeast,Execute" Behavior="GreymaneInnerBeast" />
     </CBehaviorAbility>
@@ -2185,6 +2242,12 @@
     <CBehaviorAbility id="MVolskayaVehicleChargeApproach">
         <Buttons Face="VolskayaVehicleCharge" Type="AbilCmd" AbilCmd="VolskayaVehicleChargeApproach,Execute" Behavior="VolskayaVehicleChargeApproach" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MVolskayaVehicleStructureChargeApproach">
+        <Buttons Face="VolskayaVehicleChargeApproach" Type="AbilCmd" AbilCmd="VolskayaVehicleStructureChargeApproach,Execute" Behavior="VolskayaVehicleStructureChargeApproach" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MVolskayaVehicleCoreChargeApproach">
+        <Buttons Face="VolskayaVehicleChargeApproach" Type="AbilCmd" AbilCmd="VolskayaVehicleCoreChargeApproach,Execute" Behavior="VolskayaVehicleCoreChargeApproach" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MVolskayaVehicleRocketFist">
         <Buttons Face="VolskayaVehicleRocketFist" Type="AbilCmd" AbilCmd="VolskayaVehicleRocketFist,Execute" Behavior="VolskayaVehicleRocketFist" />
     </CBehaviorAbility>
@@ -2333,6 +2396,15 @@
     <CBehaviorAbility id="MSmartTargetingRightClickParent">
         <Buttons Face="SmartTargetingRightClick" Type="AbilCmd" AbilCmd="SmartTargetingRightClickParent,Execute" Behavior="SmartTargetingRightClickParent" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MStormSkillshotDashParent">
+        <Buttons Face="StormSkillshotDashParent" Type="AbilCmd" AbilCmd="StormSkillshotDashParent,Execute" Behavior="StormSkillshotDashParent" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MHeroGenericSelfTeleportAbility">
+        <Buttons Face="HeroGenericSelfTeleportAbility" Type="AbilCmd" AbilCmd="HeroGenericSelfTeleportAbility,Execute" Behavior="HeroGenericSelfTeleportAbility" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MIntroVOInteractor">
+        <Buttons Face="IntroVOInteractor" Type="AbilCmd" AbilCmd="IntroVOInteractor,Execute" Behavior="IntroVOInteractor" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MHeroGenericSummonedUnitSpecialCaseInteraction">
         <Buttons Face="SummonedUnitSpecialCaseInteraction" Type="AbilCmd" AbilCmd="HeroGenericSummonedUnitSpecialCaseInteraction,Execute" Behavior="HeroGenericSummonedUnitSpecialCaseInteraction" />
     </CBehaviorAbility>
@@ -2368,6 +2440,9 @@
     <CBehaviorAbility id="MTalentScoutingDrone">
         <Buttons Face="GenericScoutingDrone" Type="AbilCmd" AbilCmd="TalentScoutingDrone,Execute" Behavior="TalentScoutingDrone" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MTaunt">
+        <Buttons Face="Taunt" Type="AbilCmd" AbilCmd="Taunt,Execute" Behavior="Taunt" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MMULERepair">
         <Buttons Face="GenericCalldownMULERepair" Type="AbilCmd" AbilCmd="MULERepair,Execute" Behavior="MULERepair" />
     </CBehaviorAbility>
@@ -2379,6 +2454,9 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MTalentBucketPromote">
         <Buttons Face="GenericPromote" Type="AbilCmd" AbilCmd="TalentBucketPromote,Execute" Behavior="TalentBucketPromote" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MTalentProtectiveShield">
+        <Buttons Face="TalentProtectiveShield" Type="AbilCmd" AbilCmd="TalentProtectiveShield,Execute" Behavior="TalentProtectiveShield" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTalentBucketBribe">
         <Buttons Face="GenericBribe" Type="AbilCmd" AbilCmd="TalentBucketBribe,Execute" Behavior="TalentBucketBribe" />
@@ -2413,6 +2491,9 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MUnderworldBossRoots">
         <Buttons Face="GraveGolemBindingRoots" Type="AbilCmd" AbilCmd="UnderworldBossRoots,Execute" Behavior="UnderworldBossRoots" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffinParent" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MCaptureMacGuffinTwo">
         <Buttons Face="CaptureMacGuffinTwo" Type="AbilCmd" AbilCmd="CaptureMacGuffinTwo,Execute" Behavior="CaptureMacGuffinTwo" />
@@ -2459,6 +2540,9 @@
     <CBehaviorAbility id="MMercDefenderOgreBuffAbility">
         <Buttons Face="MercLanerOgreBuffAbility" Type="AbilCmd" AbilCmd="MercDefenderOgreBuffAbility,Execute" Behavior="MercDefenderOgreBuffAbility" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MMinionFriendlyFire">
+        <Buttons Face="MinionFriendlyFire" Type="AbilCmd" AbilCmd="MinionFriendlyFire,Execute" Behavior="MinionFriendlyFire" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MShieldBuilding">
         <Buttons Face="ShieldBuilding" Type="AbilCmd" AbilCmd="ShieldBuilding,Execute" Behavior="ShieldBuilding" />
     </CBehaviorAbility>
@@ -2477,14 +2561,38 @@
     <CBehaviorAbility id="MVolskayaCoreSkyLaser">
         <Buttons Face="VolskayaCoreSkyLaser" Type="AbilCmd" AbilCmd="VolskayaCoreSkyLaser,Execute" Behavior="VolskayaCoreSkyLaser" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MStormArmMagazine">
+        <Buttons Face="StormArmMagazine" Type="AbilCmd" AbilCmd="StormArmMagazine,Execute" Behavior="StormArmMagazine" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormAugment">
+        <Buttons Face="StormAugment" Type="AbilCmd" AbilCmd="StormAugment,Execute" Behavior="StormAugment" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormBehavior">
+        <Buttons Face="StormBehavior" Type="AbilCmd" AbilCmd="StormBehavior,Execute" Behavior="StormBehavior" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MHeroGenericSpellShield">
         <Buttons Face="GenericSpellShieldItemEnabled" Type="AbilCmd" AbilCmd="HeroGenericSpellShield,On" Behavior="HeroGenericSpellShield" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTalentBucketIceBlock">
         <Buttons Face="GenericIceBlockTalent" Type="AbilCmd" AbilCmd="TalentBucketIceBlock,On" Behavior="TalentBucketIceBlock" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MStormMorph">
+        <Buttons Face="StormMorph" Type="AbilCmd" AbilCmd="StormMorph,Execute" Behavior="StormMorph" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MTowerDeadMorph">
         <Buttons Face="TowerDeadMorph" Type="AbilCmd" AbilCmd="TowerDeadMorph,Execute" Behavior="TowerDeadMorph" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormQueue">
+        <Buttons Face="StormQueue" Type="AbilCmd" AbilCmd="StormQueue,Execute" Behavior="StormQueue" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MQueue5Storm">
+        <Buttons Face="Queue5Storm" Type="AbilCmd" AbilCmd="Queue5Storm,Execute" Behavior="Queue5Storm" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MQue1Passive">
+        <Buttons Face="Que1Passive" Type="AbilCmd" AbilCmd="Que1Passive,Execute" Behavior="Que1Passive" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormTransport">
+        <Buttons Face="StormTransport" Type="AbilCmd" AbilCmd="StormTransport,Execute" Behavior="StormTransport" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MHoldFire">
         <!-- Requirement Behavior Detected. Please add the behavior: HaveNoDisableDanceAndTaunt -->
@@ -2492,6 +2600,27 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="Mstop">
         <Buttons Face="Tease" Type="AbilCmd" AbilCmd="stop,Tease" Behavior="stop" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="Mattack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="attack,Execute" Behavior="attack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormVehicleAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="StormVehicleAttack,Execute" Behavior="StormVehicleAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormBossAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="StormBossAttack,Execute" Behavior="StormBossAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAttackAlly">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="AttackAlly,Execute" Behavior="AttackAlly" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MStormMercenaryAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="StormMercenaryAttack,Execute" Behavior="StormMercenaryAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRegenGlobeAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="RegenGlobeAttack,Execute" Behavior="RegenGlobeAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="Mmove">
+        <Buttons Face="move" Type="AbilCmd" AbilCmd="move,Execute" Behavior="move" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/AbilData.xml}-->
@@ -2608,6 +2737,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/hanamura.stormmod/base.stormdata/GameData/Payload.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MPayloadAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="PayloadAttack,Execute" Behavior="PayloadAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPayloadMove">
+        <Buttons Face="move" Type="AbilCmd" AbilCmd="PayloadMove,Execute" Behavior="PayloadMove" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/hanamura.stormmod/base.stormdata/GameData/Payload.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2615,6 +2750,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/hanamuradata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MMapMechanicAbilityTarget">
+        <Buttons Face="MapMechanicAbilityTarget" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget,Execute" Behavior="MapMechanicAbilityTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPayloadAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="PayloadAttack,Execute" Behavior="PayloadAttack" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/hanamuradata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2629,6 +2770,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/hauntedmines.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/hauntedmines.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2654,6 +2798,12 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MTerranArchangelDefenderBulletstorm">
         <Buttons Face="TerranArchangelBulletstorm" Type="AbilCmd" AbilCmd="TerranArchangelDefenderBulletstorm,Execute" Behavior="TerranArchangelDefenderBulletstorm" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MTerranArchangelLanerBulletstorm">
+        <Buttons Face="TerranArchangelDefenderBulletstorm" Type="AbilCmd" AbilCmd="TerranArchangelLanerBulletstorm,Execute" Behavior="TerranArchangelLanerBulletstorm" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBraxisCoreBulletstorm">
+        <Buttons Face="TerranArchangelDefenderBulletstorm" Type="AbilCmd" AbilCmd="BraxisCoreBulletstorm,Execute" Behavior="BraxisCoreBulletstorm" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/braxisholdoutdata.stormmod/base.stormdata/GameData/AbilData.xml}-->
@@ -2700,6 +2850,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/blackheartsbay.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MGhostShipBombardChargedPort">
+        <Buttons Face="GhostShipBombardChargedPort" Type="AbilCmd" AbilCmd="GhostShipBombardChargedPort,Execute" Behavior="GhostShipBombardChargedPort" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGhostShipBombardChargedStarboard">
+        <Buttons Face="GhostShipBombardChargedStarboard" Type="AbilCmd" AbilCmd="GhostShipBombardChargedStarboard,Execute" Behavior="GhostShipBombardChargedStarboard" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MBlackheartsCoreBombardment">
         <Buttons Face="BlackheartsCoreBombardment" Type="AbilCmd" AbilCmd="BlackheartsCoreBombardment,Execute" Behavior="BlackheartsCoreBombardment" />
     </CBehaviorAbility>
@@ -2741,6 +2897,9 @@
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MUnderworldBossRoots">
         <Buttons Face="GraveGolemBindingRootsSkyTemple" Type="AbilCmd" AbilCmd="UnderworldBossRoots,Execute" Behavior="UnderworldBossRoots" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MTempleCoreTornado">
+        <Buttons Face="UnderworldBossRoots" Type="AbilCmd" AbilCmd="TempleCoreTornado,Execute" Behavior="TempleCoreTornado" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/skytempledata.stormmod/base.stormdata/GameData/LuxBazaarUnitData/LuxBazaarBossData.xml}-->
@@ -2803,6 +2962,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/volskayadata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MLeaveVehicle">
+        <Buttons Face="LeaveVehicle" Type="AbilCmd" AbilCmd="LeaveVehicle,Execute" Behavior="LeaveVehicle" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MVehicleGenericSwapVehicle">
+        <Buttons Face="VehicleGenericSwapVehicle" Type="AbilCmd" AbilCmd="VehicleGenericSwapVehicle,Execute" Behavior="VehicleGenericSwapVehicle" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MVolskayaVehicleSwap">
         <!-- Requirement Behavior Detected. Please add the behavior: VolskayaVehicleSwapRequirement -->
         <Buttons Face="VolskayaVehicleSwap" Type="AbilCmd" AbilCmd="VolskayaVehicleSwap,Execute" Behavior="VolskayaVehicleSwap" />
@@ -2825,6 +2990,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/warheadjunctiondata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MMapMechanicAbilityTarget">
+        <Buttons Face="MapMechanicAbilityTarget" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget,Execute" Behavior="MapMechanicAbilityTarget" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MWarheadCoreNukeAbility">
         <!-- Requirement Behavior Detected. Please add the behavior:  -->
         <Buttons Face="WarheadCoreNukeAbilityButton" Type="AbilCmd" AbilCmd="WarheadCoreNukeAbility,Execute" Behavior="WarheadCoreNukeAbility" />
@@ -2842,6 +3010,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/warcraftdata.stormmod/base.stormdata/GameData/MountainGiantGraveGolemOverride.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MUnderworldBossRoots">
+        <Buttons Face="UnderworldBossRoots" Type="AbilCmd" AbilCmd="UnderworldBossRoots,Execute" Behavior="UnderworldBossRoots" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/warcraftdata.stormmod/base.stormdata/GameData/MountainGiantGraveGolemOverride.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2849,6 +3020,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/towersofdoom.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MAttackAlly">
+        <Buttons Face="AttackAlly" Type="AbilCmd" AbilCmd="AttackAlly,Execute" Behavior="AttackAlly" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="ML3MoonwellMorph">
         <Buttons Face="L3MoonwellMorph" Type="AbilCmd" AbilCmd="L3MoonwellMorph,Execute" Behavior="L3MoonwellMorph" />
     </CBehaviorAbility>
@@ -2888,6 +3062,9 @@
     <CBehaviorAbility id="MSoulEaterDeathWave">
         <Buttons Face="SoulEaterDeathWave" Type="AbilCmd" AbilCmd="SoulEaterDeathWave,Execute" Behavior="SoulEaterDeathWave" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MUnderworldBossRoots">
+        <Buttons Face="UnderworldBossRoots" Type="AbilCmd" AbilCmd="UnderworldBossRoots,Execute" Behavior="UnderworldBossRoots" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MSoulEaterSpawnMinions">
         <Buttons Face="SoulEaterSpawnMinions" Type="AbilCmd" AbilCmd="SoulEaterSpawnMinions,Execute" Behavior="SoulEaterSpawnMinions" />
     </CBehaviorAbility>
@@ -2912,6 +3089,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/gardenofterror.stormmod/base.stormdata/GameData/HorrorData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MPlantHorrorOvergrowthPlant">
+        <Buttons Face="PlantHorrorOvergrowthPlant" Type="AbilCmd" AbilCmd="PlantHorrorOvergrowthPlant,Execute" Behavior="PlantHorrorOvergrowthPlant" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/gardenofterror.stormmod/base.stormdata/GameData/HorrorData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2921,6 +3101,9 @@
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MGardenCoreLignify">
         <Buttons Face="VehiclePlantHorrorPolymorph" Type="AbilCmd" AbilCmd="GardenCoreLignify,Execute" Behavior="GardenCoreLignify" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorLignify">
+        <Buttons Face="PlantHorrorLignify" Type="AbilCmd" AbilCmd="PlantHorrorLignify,Execute" Behavior="PlantHorrorLignify" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/gardenofterror.stormmod/base.stormdata/GameData/LignifyData.xml}-->
@@ -2948,6 +3131,9 @@
     <CBehaviorAbility id="MPlantHorrorOvergrowth">
         <Buttons Face="PlantHorrorOvergrowth" Type="AbilCmd" AbilCmd="PlantHorrorOvergrowth,Execute" Behavior="PlantHorrorOvergrowth" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorOvergrowthPlant">
+        <Buttons Face="PlantHorrorOvergrowthPlant" Type="AbilCmd" AbilCmd="PlantHorrorOvergrowthPlant,Execute" Behavior="PlantHorrorOvergrowthPlant" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MVehiclePlantHorrorVineShield">
         <Buttons Face="PlantHorrorVineShield" Type="AbilCmd" AbilCmd="VehiclePlantHorrorVineShield,Execute" Behavior="VehiclePlantHorrorVineShield" />
     </CBehaviorAbility>
@@ -2960,6 +3146,9 @@
     <CBehaviorAbility id="MPlantHorrorSpikeBurst">
         <!-- Requirement Behavior Detected. Please add the behavior: IsShambler -->
         <Buttons Face="AbathurSymbioteSpikeBurst" Type="AbilCmd" AbilCmd="PlantHorrorSpikeBurst,Execute" Behavior="PlantHorrorSpikeBurst" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorSprint">
+        <Buttons Face="PlantHorrorSprint" Type="AbilCmd" AbilCmd="PlantHorrorSprint,Execute" Behavior="PlantHorrorSprint" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MVehiclePlantHorrorTransPlant">
         <Buttons Face="VehiclePlantHorrorTransPlant" Type="AbilCmd" AbilCmd="VehiclePlantHorrorTransPlant,Execute" Behavior="VehiclePlantHorrorTransPlant" />
@@ -2974,6 +3163,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/gardenofterrordata.stormmod/base.stormdata/GameData/LignifyData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MPlantHorrorLignify">
+        <Buttons Face="PlantHorrorLignify" Type="AbilCmd" AbilCmd="PlantHorrorLignify,Execute" Behavior="PlantHorrorLignify" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/gardenofterrordata.stormmod/base.stormdata/GameData/LignifyData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -2981,6 +3173,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/infernalshrinesdata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MMercPunisherLanerLeap">
         <Buttons Face="MercPunisherLanerLeap" Type="AbilCmd" AbilCmd="MercPunisherLanerLeap,Execute" Behavior="MercPunisherLanerLeap" />
     </CBehaviorAbility>
@@ -3026,6 +3221,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/alteracpass.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MCapturedSoldierDummyAttack">
+        <Buttons Face="CapturedSoldierDummyAttack" Type="AbilCmd" AbilCmd="CapturedSoldierDummyAttack,Execute" Behavior="CapturedSoldierDummyAttack" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesmapmods/battlegroundmapmods/alteracpass.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3033,11 +3234,23 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesmapmods/battlegroundmapmods/overwatchdata.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MDragonsDinner">
         <Buttons Face="DragonsDinner" Type="AbilCmd" AbilCmd="DragonsDinner,Execute" Behavior="DragonsDinner" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityTarget">
+        <Buttons Face="MapMechanicAbilityTarget" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget,Execute" Behavior="MapMechanicAbilityTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityTarget2">
+        <Buttons Face="MapMechanicAbilityTarget2" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget2,Execute" Behavior="MapMechanicAbilityTarget2" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MOverwatchMechanicRepair">
         <Buttons Face="OverwatchMechanicRepair" Type="AbilCmd" AbilCmd="OverwatchMechanicRepair,Execute" Behavior="OverwatchMechanicRepair" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityInstant">
+        <Buttons Face="MapMechanicAbilityInstant" Type="AbilCmd" AbilCmd="MapMechanicAbilityInstant,Execute" Behavior="MapMechanicAbilityInstant" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MMercDefenderHealingPulse">
         <Buttons Face="MercDefenderHealingPulse" Type="AbilCmd" AbilCmd="MercDefenderHealingPulse,Execute" Behavior="MercDefenderHealingPulse" />
@@ -3137,6 +3350,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelVentTerrazineUnlocked -->
         <Buttons Face="ArchangelVentTerrazine" Type="AbilCmd" AbilCmd="ArchangelVentTerrazine,Execute" Behavior="ArchangelVentTerrazine" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityInstant">
+        <Buttons Face="MapMechanicAbilityInstant" Type="AbilCmd" AbilCmd="MapMechanicAbilityInstant,Execute" Behavior="MapMechanicAbilityInstant" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MSlivanBossDrawIn">
         <Buttons Face="SlivanBossDrawIn" Type="AbilCmd" AbilCmd="SlivanBossDrawIn,Execute" Behavior="SlivanBossDrawIn" />
     </CBehaviorAbility>
@@ -3181,6 +3397,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelLoadout4 -->
         <Buttons Face="ArchangelToxicSludgling" Type="AbilCmd" AbilCmd="ArchangelToxicSludgling,Execute" Behavior="ArchangelToxicSludgling" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MArchangelVentTerrazineHallucinationSuicide">
+        <Buttons Face="ArchangelVentTerrazineHallucinationSuicide" Type="AbilCmd" AbilCmd="ArchangelVentTerrazineHallucinationSuicide,Execute" Behavior="ArchangelVentTerrazineHallucinationSuicide" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MArchangelVileTumor">
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelLoadout4 -->
         <Buttons Face="ArchangelVileTumor" Type="AbilCmd" AbilCmd="ArchangelVileTumor,Execute" Behavior="ArchangelVileTumor" />
@@ -3188,6 +3407,9 @@
     <CBehaviorAbility id="MMapMechanicAbilityTarget">
         <!-- Requirement Behavior Detected. Please add the behavior: CanUseMapMechanicTargetAbility -->
         <Buttons Face="MapMechanicAbility" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget,Execute" Behavior="MapMechanicAbilityTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityTarget2">
+        <Buttons Face="MapMechanicAbilityTarget2" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget2,Execute" Behavior="MapMechanicAbilityTarget2" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MSlivanBossSlimeSpit">
         <Buttons Face="SlivanBossSlimeSpit" Type="AbilCmd" AbilCmd="SlivanBossSlimeSpit,Execute" Behavior="SlivanBossSlimeSpit" />
@@ -3205,6 +3427,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/pvebrawlmod.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MCaptureMacGuffinTwo">
+        <Buttons Face="CaptureMacGuffinTwo" Type="AbilCmd" AbilCmd="CaptureMacGuffinTwo,Execute" Behavior="CaptureMacGuffinTwo" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/pvebrawlmod.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3219,6 +3447,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/pvestarcraft.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MMapMechanicAbilityInstant">
+        <Buttons Face="MapMechanicAbilityInstant" Type="AbilCmd" AbilCmd="MapMechanicAbilityInstant,Execute" Behavior="MapMechanicAbilityInstant" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MSlivanBossDrawIn">
         <Buttons Face="SlivanBossDrawIn" Type="AbilCmd" AbilCmd="SlivanBossDrawIn,Execute" Behavior="SlivanBossDrawIn" />
     </CBehaviorAbility>
@@ -3228,6 +3459,9 @@
     <CBehaviorAbility id="MMapMechanicAbilityTarget">
         <!-- Requirement Behavior Detected. Please add the behavior: CanUseMapMechanicTargetAbility -->
         <Buttons Face="MapMechanicAbility" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget,Execute" Behavior="MapMechanicAbilityTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMapMechanicAbilityTarget2">
+        <Buttons Face="MapMechanicAbilityTarget2" Type="AbilCmd" AbilCmd="MapMechanicAbilityTarget2,Execute" Behavior="MapMechanicAbilityTarget2" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MSlivanBossSlimeSpit">
         <Buttons Face="SlivanBossSlimeSpit" Type="AbilCmd" AbilCmd="SlivanBossSlimeSpit,Execute" Behavior="SlivanBossSlimeSpit" />
@@ -3248,6 +3482,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/pvemod.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MCaptureMacGuffin">
+        <Buttons Face="CaptureMacGuffin" Type="AbilCmd" AbilCmd="CaptureMacGuffin,Execute" Behavior="CaptureMacGuffin" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MCaptureMacGuffinTwo">
+        <Buttons Face="CaptureMacGuffinTwo" Type="AbilCmd" AbilCmd="CaptureMacGuffinTwo,Execute" Behavior="CaptureMacGuffinTwo" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/pvemod.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3272,6 +3512,9 @@
     <CBehaviorAbility id="MArchangelBarrage">
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelLoadout1 -->
         <Buttons Face="ArchangelBarrage" Type="AbilCmd" AbilCmd="ArchangelBarrage,Execute" Behavior="ArchangelBarrage" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGhostShipBombardChargedPort">
+        <Buttons Face="GhostShipBombardChargedPort" Type="AbilCmd" AbilCmd="GhostShipBombardChargedPort,Execute" Behavior="GhostShipBombardChargedPort" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MArchangelBileLauncher">
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelLoadout4 -->
@@ -3344,6 +3587,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: HasArchangelLoadout3 -->
         <Buttons Face="ArchangelChaserBanelings" Type="AbilCmd" AbilCmd="ArchangelChaserBanelings,Execute" Behavior="ArchangelChaserBanelings" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MMercMedivacTransport">
+        <Buttons Face="MercMedivacTransport" Type="AbilCmd" AbilCmd="MercMedivacTransport,Execute" Behavior="MercMedivacTransport" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/coop/deadmansstand.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3361,8 +3607,17 @@
     <CBehaviorAbility id="MAttackCore">
         <Buttons Face="AttackCore" Type="AbilCmd" AbilCmd="AttackCore,Execute" Behavior="AttackCore" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MCaptureMacGuffinTwo">
+        <Buttons Face="CaptureMacGuffinTwo" Type="AbilCmd" AbilCmd="CaptureMacGuffinTwo,Execute" Behavior="CaptureMacGuffinTwo" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MCannonAttack">
         <Buttons Face="CannonAttack" Type="AbilCmd" AbilCmd="CannonAttack,Execute" Behavior="CannonAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSmartCommandUnitInteraction">
+        <Buttons Face="SmartCommandUnitInteraction" Type="AbilCmd" AbilCmd="SmartCommandUnitInteraction,Execute" Behavior="SmartCommandUnitInteraction" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MHearthstone">
+        <Buttons Face="Hearthstone" Type="AbilCmd" AbilCmd="Hearthstone,Execute" Behavior="Hearthstone" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/blackheartsrevenge.stormmod/base.stormdata/GameData/AbilData.xml}-->
@@ -3391,6 +3646,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Hidden -->
         <Buttons Face="Hearthstone" Type="AbilCmd" AbilCmd="Hearthstone,Execute" Behavior="Hearthstone" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="Mmove">
+        <Buttons Face="move" Type="AbilCmd" AbilCmd="move,Execute" Behavior="move" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/lunarfestival.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3398,6 +3656,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/hanamurapayloadpush.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MSmartCommandUnitInteraction">
+        <Buttons Face="SmartCommandUnitInteraction" Type="AbilCmd" AbilCmd="SmartCommandUnitInteraction,Execute" Behavior="SmartCommandUnitInteraction" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MCaptureMacGuffinTwo">
+        <Buttons Face="CaptureMacGuffinTwo" Type="AbilCmd" AbilCmd="CaptureMacGuffinTwo,Execute" Behavior="CaptureMacGuffinTwo" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/hanamurapayloadpush.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3405,6 +3669,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/arenamodemods/arenamode.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MHearthstone">
+        <Buttons Face="Hearthstone" Type="AbilCmd" AbilCmd="Hearthstone,Execute" Behavior="Hearthstone" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/arenamodemods/arenamode.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -3426,6 +3693,12 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/arenamodemods/punisherarena.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MMercPunisherLanerFixate">
+        <Buttons Face="MercPunisherLanerFixate" Type="AbilCmd" AbilCmd="MercPunisherLanerFixate,Execute" Behavior="MercPunisherLanerFixate" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMercPunisherLanerLeap">
+        <Buttons Face="MercPunisherLanerLeap" Type="AbilCmd" AbilCmd="MercPunisherLanerLeap,Execute" Behavior="MercPunisherLanerLeap" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MMercPunisherLanerLeapGlobal">
         <Buttons Face="MercPunisherLanerLeapGlobal" Type="AbilCmd" AbilCmd="MercPunisherLanerLeapGlobal,Execute" Behavior="MercPunisherLanerLeapGlobal" />
     </CBehaviorAbility>
@@ -3457,8 +3730,50 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/arenamodemods/gardenarena.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MPlantHorrorThornSpitter">
+        <Buttons Face="PlantHorrorThornSpitter" Type="AbilCmd" AbilCmd="PlantHorrorThornSpitter,Execute" Behavior="PlantHorrorThornSpitter" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorDisablingVines">
+        <Buttons Face="PlantHorrorDisablingVines" Type="AbilCmd" AbilCmd="PlantHorrorDisablingVines,Execute" Behavior="PlantHorrorDisablingVines" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MVehiclePlantHorrorVineShield">
+        <Buttons Face="VehiclePlantHorrorVineShield" Type="AbilCmd" AbilCmd="VehiclePlantHorrorVineShield,Execute" Behavior="VehiclePlantHorrorVineShield" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorStranglingBloom">
+        <Buttons Face="PlantHorrorStranglingBloom" Type="AbilCmd" AbilCmd="PlantHorrorStranglingBloom,Execute" Behavior="PlantHorrorStranglingBloom" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorPolymorph">
+        <Buttons Face="PlantHorrorPolymorph" Type="AbilCmd" AbilCmd="PlantHorrorPolymorph,Execute" Behavior="PlantHorrorPolymorph" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorOvergrowth">
+        <Buttons Face="PlantHorrorOvergrowth" Type="AbilCmd" AbilCmd="PlantHorrorOvergrowth,Execute" Behavior="PlantHorrorOvergrowth" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorOvergrowthPlant">
+        <Buttons Face="PlantHorrorOvergrowthPlant" Type="AbilCmd" AbilCmd="PlantHorrorOvergrowthPlant,Execute" Behavior="PlantHorrorOvergrowthPlant" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorLignify">
+        <Buttons Face="PlantHorrorLignify" Type="AbilCmd" AbilCmd="PlantHorrorLignify,Execute" Behavior="PlantHorrorLignify" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MPlantTerrorRoot">
         <Buttons Face="GraveGolemBindingRoots" Type="AbilCmd" AbilCmd="PlantTerrorRoot,Execute" Behavior="PlantTerrorRoot" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MVehiclePlantHorrorTransPlant">
+        <Buttons Face="VehiclePlantHorrorTransPlant" Type="AbilCmd" AbilCmd="VehiclePlantHorrorTransPlant,Execute" Behavior="VehiclePlantHorrorTransPlant" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MJunglePlantHorrorPoisonBulbs">
+        <Buttons Face="JunglePlantHorrorPoisonBulbs" Type="AbilCmd" AbilCmd="JunglePlantHorrorPoisonBulbs,Execute" Behavior="JunglePlantHorrorPoisonBulbs" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MVehiclePlantHorrorPoisonBulbs">
+        <Buttons Face="VehiclePlantHorrorPoisonBulbs" Type="AbilCmd" AbilCmd="VehiclePlantHorrorPoisonBulbs,Execute" Behavior="VehiclePlantHorrorPoisonBulbs" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorSpikeBurst">
+        <Buttons Face="PlantHorrorSpikeBurst" Type="AbilCmd" AbilCmd="PlantHorrorSpikeBurst,Execute" Behavior="PlantHorrorSpikeBurst" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MPlantHorrorSprint">
+        <Buttons Face="PlantHorrorSprint" Type="AbilCmd" AbilCmd="PlantHorrorSprint,Execute" Behavior="PlantHorrorSprint" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSeedSpray">
+        <Buttons Face="SeedSpray" Type="AbilCmd" AbilCmd="SeedSpray,Execute" Behavior="SeedSpray" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesbrawlmods/arenamodemods/gardenarena.stormmod/base.stormdata/GameData/AbilData.xml}-->
@@ -3575,6 +3890,18 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MAlexstraszaDragonqueen">
         <Buttons Face="AlexstraszaDragonqueen" Type="AbilCmd" AbilCmd="AlexstraszaDragonqueen,Execute" Behavior="AlexstraszaDragonqueen" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlexstraszaRitualOfLifeLifebinderActivate">
+        <Buttons Face="AlexstraszaRitualOfLifeLifebinderActivate" Type="AbilCmd" AbilCmd="AlexstraszaRitualOfLifeLifebinderActivate,Execute" Behavior="AlexstraszaRitualOfLifeLifebinderActivate" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlexstraszaDragonqueenHumanoidMorph">
+        <Buttons Face="StormMorph" Type="AbilCmd" AbilCmd="AlexstraszaDragonqueenHumanoidMorph,Execute" Behavior="AlexstraszaDragonqueenHumanoidMorph" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlexstraszaDragonqueenDragonMorph">
+        <Buttons Face="StormMorph" Type="AbilCmd" AbilCmd="AlexstraszaDragonqueenDragonMorph,Execute" Behavior="AlexstraszaDragonqueenDragonMorph" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlexstraszaLifeblossomGiftOfLifePickupAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="AlexstraszaLifeblossomGiftOfLifePickupAttack,Execute" Behavior="AlexstraszaLifeblossomGiftOfLifePickupAttack" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/alexstrasza.stormmod/base.stormdata/GameData/AlexstraszaData.xml}-->
@@ -4122,6 +4449,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
         <Buttons Face="DeckardLorenado" Type="AbilCmd" AbilCmd="DeckardLorenado,Execute" Behavior="DeckardLorenado" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MDeckardHealingPotionPickupAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="DeckardHealingPotionPickupAttack,Execute" Behavior="DeckardHealingPotionPickupAttack" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MDeckardStayAWhileAndListenCancel">
         <!-- Requirement Behavior Detected. Please add the behavior: DeckardStayAWhileAndListenActive -->
         <Buttons Face="DeckardStayAWhileAndListenCancel" Type="AbilCmd" AbilCmd="DeckardStayAWhileAndListenCancel,Execute" Behavior="DeckardStayAWhileAndListenCancel" />
@@ -4277,6 +4607,9 @@
     <CBehaviorAbility id="MDeathwingDragonflightFlyMorph">
         <Buttons Face="Cancel" Type="AbilCmd" AbilCmd="DeathwingDragonflightFlyMorph,Cancel" Behavior="DeathwingDragonflightFlyMorph" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MDeathwingDragonflightLandMorph">
+        <Buttons Face="StormMorph" Type="AbilCmd" AbilCmd="DeathwingDragonflightLandMorph,Execute" Behavior="DeathwingDragonflightLandMorph" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/deathwing.stormmod/base.stormdata/GameData/DeathwingData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -4291,6 +4624,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/dva.stormmod/base.stormdata/GameData/DVaData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MDVaAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="DVaAttack,Execute" Behavior="DVaAttack" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MDVaAutoMoveApproach">
         <Buttons Face="DVaAutoMove" Type="AbilCmd" AbilCmd="DVaAutoMoveApproach,Execute" Behavior="DVaAutoMoveApproach" />
     </CBehaviorAbility>
@@ -4478,6 +4814,9 @@
     <CBehaviorAbility id="MChromieSandBlast">
         <Buttons Face="ChromieSandBlast" Type="AbilCmd" AbilCmd="ChromieSandBlast,Execute" Behavior="ChromieSandBlast" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MChromiePastAndFutureMeSandBlast">
+        <Buttons Face="ChromieSandBlast" Type="AbilCmd" AbilCmd="ChromiePastAndFutureMeSandBlast,Execute" Behavior="ChromiePastAndFutureMeSandBlast" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MChromieTimewalkersPursuit">
         <Buttons Face="ChromieTimewalkersPursuitActive" Type="AbilCmd" AbilCmd="ChromieTimewalkersPursuit,Execute" Behavior="ChromieTimewalkersPursuit" />
     </CBehaviorAbility>
@@ -4503,78 +4842,6 @@
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/chromie.stormmod/base.stormdata/GameData/ChromieData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/GuldanData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MGuldanLifeTapFree">
-        <Buttons Face="GuldanLifeTapFree" Type="AbilCmd" AbilCmd="GuldanLifeTapFree,Execute" Behavior="GuldanLifeTapFree" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanLifeTap">
-        <!-- Requirement Behavior Detected. Please add the behavior: GuldanLifeTapManaControllerNotActive -->
-        <Buttons Face="GuldanLifeTap" Type="AbilCmd" AbilCmd="GuldanLifeTap,Execute" Behavior="GuldanLifeTap" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanDrainLifeCancel">
-        <!-- Requirement Behavior Detected. Please add the behavior: GuldanDrainLifeActive -->
-        <Buttons Face="GuldanDrainLifeCancel" Type="AbilCmd" AbilCmd="GuldanDrainLifeCancel,Execute" Behavior="GuldanDrainLifeCancel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanRainOfDestructionCancel">
-        <!-- Requirement Behavior Detected. Please add the behavior: GuldanRainOfDestructionActive -->
-        <Buttons Face="GuldanRainOfDestructionCancel" Type="AbilCmd" AbilCmd="GuldanRainOfDestructionCancel,Execute" Behavior="GuldanRainOfDestructionCancel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanHealthstone">
-        <Buttons Face="GuldanHealthstone" Type="AbilCmd" AbilCmd="GuldanHealthstone,Execute" Behavior="GuldanHealthstone" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanDemonicCircleSummon">
-        <Buttons Face="GuldanDemonicCircleSummon" Type="AbilCmd" AbilCmd="GuldanDemonicCircleSummon,Execute" Behavior="GuldanDemonicCircleSummon" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanDemonicCircleTeleport">
-        <Buttons Face="GuldanDemonicCircleTeleport" Type="AbilCmd" AbilCmd="GuldanDemonicCircleTeleport,Execute" Behavior="GuldanDemonicCircleTeleport" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanFelFlame">
-        <Buttons Face="GuldanFelFlame" Type="AbilCmd" AbilCmd="GuldanFelFlame,Execute" Behavior="GuldanFelFlame" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanDrainLife">
-        <Buttons Face="GuldanDrainLife" Type="AbilCmd" AbilCmd="GuldanDrainLife,Execute" Behavior="GuldanDrainLife" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanHorrify">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="GuldanHorrify" Type="AbilCmd" AbilCmd="GuldanHorrify,Execute" Behavior="GuldanHorrify" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanCorruption">
-        <Buttons Face="GuldanCorruption" Type="AbilCmd" AbilCmd="GuldanCorruption,Execute" Behavior="GuldanCorruption" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanRainOfDestruction">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="GuldanRainOfDestruction" Type="AbilCmd" AbilCmd="GuldanRainOfDestruction,Execute" Behavior="GuldanRainOfDestruction" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MGuldanConsumeSoul">
-        <Buttons Face="GuldanConsumeSoul" Type="AbilCmd" AbilCmd="GuldanConsumeSoul,Execute" Behavior="GuldanConsumeSoul" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/GuldanData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/CharacterData.xml}-->
-<!-- ///////////////////////////////////-->
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/CharacterData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/HeroData.xml}-->
-<!-- ///////////////////////////////////-->
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/HeroData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/VoiceOverData.xml}-->
-<!-- ///////////////////////////////////-->
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/VoiceOverData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
@@ -4661,6 +4928,78 @@
 <!-- ///////////////////////////////////-->
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/garrosh.stormmod/base.stormdata/GameData/ValidatorData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/GuldanData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MGuldanLifeTapFree">
+        <Buttons Face="GuldanLifeTapFree" Type="AbilCmd" AbilCmd="GuldanLifeTapFree,Execute" Behavior="GuldanLifeTapFree" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanLifeTap">
+        <!-- Requirement Behavior Detected. Please add the behavior: GuldanLifeTapManaControllerNotActive -->
+        <Buttons Face="GuldanLifeTap" Type="AbilCmd" AbilCmd="GuldanLifeTap,Execute" Behavior="GuldanLifeTap" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanDrainLifeCancel">
+        <!-- Requirement Behavior Detected. Please add the behavior: GuldanDrainLifeActive -->
+        <Buttons Face="GuldanDrainLifeCancel" Type="AbilCmd" AbilCmd="GuldanDrainLifeCancel,Execute" Behavior="GuldanDrainLifeCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanRainOfDestructionCancel">
+        <!-- Requirement Behavior Detected. Please add the behavior: GuldanRainOfDestructionActive -->
+        <Buttons Face="GuldanRainOfDestructionCancel" Type="AbilCmd" AbilCmd="GuldanRainOfDestructionCancel,Execute" Behavior="GuldanRainOfDestructionCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanHealthstone">
+        <Buttons Face="GuldanHealthstone" Type="AbilCmd" AbilCmd="GuldanHealthstone,Execute" Behavior="GuldanHealthstone" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanDemonicCircleSummon">
+        <Buttons Face="GuldanDemonicCircleSummon" Type="AbilCmd" AbilCmd="GuldanDemonicCircleSummon,Execute" Behavior="GuldanDemonicCircleSummon" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanDemonicCircleTeleport">
+        <Buttons Face="GuldanDemonicCircleTeleport" Type="AbilCmd" AbilCmd="GuldanDemonicCircleTeleport,Execute" Behavior="GuldanDemonicCircleTeleport" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanFelFlame">
+        <Buttons Face="GuldanFelFlame" Type="AbilCmd" AbilCmd="GuldanFelFlame,Execute" Behavior="GuldanFelFlame" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanDrainLife">
+        <Buttons Face="GuldanDrainLife" Type="AbilCmd" AbilCmd="GuldanDrainLife,Execute" Behavior="GuldanDrainLife" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanHorrify">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="GuldanHorrify" Type="AbilCmd" AbilCmd="GuldanHorrify,Execute" Behavior="GuldanHorrify" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanCorruption">
+        <Buttons Face="GuldanCorruption" Type="AbilCmd" AbilCmd="GuldanCorruption,Execute" Behavior="GuldanCorruption" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanRainOfDestruction">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="GuldanRainOfDestruction" Type="AbilCmd" AbilCmd="GuldanRainOfDestruction,Execute" Behavior="GuldanRainOfDestruction" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MGuldanConsumeSoul">
+        <Buttons Face="GuldanConsumeSoul" Type="AbilCmd" AbilCmd="GuldanConsumeSoul,Execute" Behavior="GuldanConsumeSoul" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/GuldanData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/CharacterData.xml}-->
+<!-- ///////////////////////////////////-->
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/CharacterData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/HeroData.xml}-->
+<!-- ///////////////////////////////////-->
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/HeroData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/VoiceOverData.xml}-->
+<!-- ///////////////////////////////////-->
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/guldan.stormmod/base.stormdata/GameData/VoiceOverData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
@@ -4789,6 +5128,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/tracer.stormmod/base.stormdata/GameData/TracerData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MTracerAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="TracerAttack,Execute" Behavior="TracerAttack" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MTracerBlink">
         <!-- Requirement Behavior Detected. Please add the behavior: TracerBlinkAvailable -->
         <Buttons Face="TracerBlink" Type="AbilCmd" AbilCmd="TracerBlink,Execute" Behavior="TracerBlink" />
@@ -4923,6 +5265,9 @@
     <CBehaviorAbility id="MVarianDemoralizingShout">
         <Buttons Face="VarianDemoralizingShout" Type="AbilCmd" AbilCmd="VarianDemoralizingShout,Execute" Behavior="VarianDemoralizingShout" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MVarianVictoryRush">
+        <Buttons Face="VarianVictoryRush" Type="AbilCmd" AbilCmd="VarianVictoryRush,Execute" Behavior="VarianVictoryRush" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MVarianParry">
         <Buttons Face="VarianParry" Type="AbilCmd" AbilCmd="VarianParry,Execute" Behavior="VarianParry" />
     </CBehaviorAbility>
@@ -4947,9 +5292,6 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MVarianShatteringThrow">
         <Buttons Face="VarianShatteringThrow" Type="AbilCmd" AbilCmd="VarianShatteringThrow,Execute" Behavior="VarianShatteringThrow" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MVarianVictoryRush">
-        <Buttons Face="VarianVictoryRush" Type="AbilCmd" AbilCmd="VarianVictoryRush,Execute" Behavior="VarianVictoryRush" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MVarianLionsFang">
         <Buttons Face="VarianLionsFang" Type="AbilCmd" AbilCmd="VarianLionsFang,Execute" Behavior="VarianLionsFang" />
@@ -5476,58 +5818,6 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MLucioBackInTheMix">
-        <Buttons Face="LucioBackInTheMix" Type="AbilCmd" AbilCmd="LucioBackInTheMix,Execute" Behavior="LucioBackInTheMix" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSummerAnthem">
-        <Buttons Face="LucioItemSummerAnthem" Type="AbilCmd" AbilCmd="LucioSummerAnthem,Execute" Behavior="LucioSummerAnthem" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioAmpItUp">
-        <Buttons Face="LucioAmpItUp" Type="AbilCmd" AbilCmd="LucioAmpItUp,Execute" Behavior="LucioAmpItUp" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioWallRide">
-        <Buttons Face="LucioWallRide" Type="AbilCmd" AbilCmd="LucioWallRide,Execute" Behavior="LucioWallRide" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSoundBarrier">
-        <!-- Requirement Behavior Detected. Please add the behavior: LucioHasUltimate1AndNoSoundBarrierDelay -->
-        <Buttons Face="LucioSoundBarrier" Type="AbilCmd" AbilCmd="LucioSoundBarrier,Execute" Behavior="LucioSoundBarrier" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioReverseAmp">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="LucioReverseAmp" Type="AbilCmd" AbilCmd="LucioReverseAmp,Execute" Behavior="LucioReverseAmp" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioPushOff">
-        <Buttons Face="LucioPushOff" Type="AbilCmd" AbilCmd="LucioPushOff,Execute" Behavior="LucioPushOff" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSoundwave">
-        <Buttons Face="LucioSoundwave" Type="AbilCmd" AbilCmd="LucioSoundwave,Execute" Behavior="LucioSoundwave" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioBoombox">
-        <Buttons Face="LucioBoomboxBoombox" Type="AbilCmd" AbilCmd="LucioBoombox,Execute" Behavior="LucioBoombox" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioSmartTargetingRightClick">
-        <Buttons Face="LucioSmartTargetingRightClick" Type="AbilCmd" AbilCmd="LucioSmartTargetingRightClick,Execute" Behavior="LucioSmartTargetingRightClick" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioTargetingAttackClick">
-        <Buttons Face="LucioSmartTargeting" Type="AbilCmd" AbilCmd="LucioTargetingAttackClick,Execute" Behavior="LucioTargetingAttackClick" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioHighFive">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFive,Execute" Behavior="LucioHighFive" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioHighFiveApproach">
-        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFiveApproach,Execute" Behavior="LucioHighFiveApproach" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MLucioCrossfade">
-        <Buttons Face="LucioCrossfadeActivateHealingBoost" Type="AbilCmd" AbilCmd="LucioCrossfade,On" Behavior="LucioCrossfade" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/junkrat.stormmod/base.stormdata/GameData/JunkratData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MJunkratFragLauncher">
@@ -5697,6 +5987,61 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MLucioBackInTheMix">
+        <Buttons Face="LucioBackInTheMix" Type="AbilCmd" AbilCmd="LucioBackInTheMix,Execute" Behavior="LucioBackInTheMix" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSummerAnthem">
+        <Buttons Face="LucioItemSummerAnthem" Type="AbilCmd" AbilCmd="LucioSummerAnthem,Execute" Behavior="LucioSummerAnthem" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioAmpItUp">
+        <Buttons Face="LucioAmpItUp" Type="AbilCmd" AbilCmd="LucioAmpItUp,Execute" Behavior="LucioAmpItUp" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioWallRide">
+        <Buttons Face="LucioWallRide" Type="AbilCmd" AbilCmd="LucioWallRide,Execute" Behavior="LucioWallRide" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSoundBarrier">
+        <!-- Requirement Behavior Detected. Please add the behavior: LucioHasUltimate1AndNoSoundBarrierDelay -->
+        <Buttons Face="LucioSoundBarrier" Type="AbilCmd" AbilCmd="LucioSoundBarrier,Execute" Behavior="LucioSoundBarrier" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioReverseAmp">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="LucioReverseAmp" Type="AbilCmd" AbilCmd="LucioReverseAmp,Execute" Behavior="LucioReverseAmp" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioPushOff">
+        <Buttons Face="LucioPushOff" Type="AbilCmd" AbilCmd="LucioPushOff,Execute" Behavior="LucioPushOff" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSoundwave">
+        <Buttons Face="LucioSoundwave" Type="AbilCmd" AbilCmd="LucioSoundwave,Execute" Behavior="LucioSoundwave" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioBoombox">
+        <Buttons Face="LucioBoomboxBoombox" Type="AbilCmd" AbilCmd="LucioBoombox,Execute" Behavior="LucioBoombox" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioSmartTargetingRightClick">
+        <Buttons Face="LucioSmartTargetingRightClick" Type="AbilCmd" AbilCmd="LucioSmartTargetingRightClick,Execute" Behavior="LucioSmartTargetingRightClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioTargetingAttackClick">
+        <Buttons Face="LucioSmartTargeting" Type="AbilCmd" AbilCmd="LucioTargetingAttackClick,Execute" Behavior="LucioTargetingAttackClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioHighFive">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFive,Execute" Behavior="LucioHighFive" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioHighFiveApproach">
+        <Buttons Face="LucioHighFive" Type="AbilCmd" AbilCmd="LucioHighFiveApproach,Execute" Behavior="LucioHighFiveApproach" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioCrossfade">
+        <Buttons Face="LucioCrossfadeActivateHealingBoost" Type="AbilCmd" AbilCmd="LucioCrossfade,On" Behavior="LucioCrossfade" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MLucioAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="LucioAttack,Execute" Behavior="LucioAttack" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heromods/lucio.stormmod/base.stormdata/GameData/LucioData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/probius.stormmod/base.stormdata/GameData/ProbiusData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MProbiusWarpInPylon">
@@ -5714,6 +6059,9 @@
     <CBehaviorAbility id="MProbiusNullGate">
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
         <Buttons Face="ProbiusNullGate" Type="AbilCmd" AbilCmd="ProbiusNullGate,Execute" Behavior="ProbiusNullGate" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MProbiusPhotonCannonGatherMineralsMineralAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="ProbiusPhotonCannonGatherMineralsMineralAttack,Execute" Behavior="ProbiusPhotonCannonGatherMineralsMineralAttack" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MProbiusPylonOvercharge">
         <!-- Requirement Behavior Detected. Please add the behavior: ProbiusHasPylonsAndPylonOvercharge -->
@@ -5808,6 +6156,9 @@
     <CBehaviorAbility id="MYrelBubbleHearth">
         <Buttons Face="YrelBubbleHearth" Type="AbilCmd" AbilCmd="YrelBubbleHearth,Execute" Behavior="YrelBubbleHearth" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MYrelBubbleHearthHearthstone">
+        <Buttons Face="Hearthstone" Type="AbilCmd" AbilCmd="YrelBubbleHearthHearthstone,Execute" Behavior="YrelBubbleHearthHearthstone" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MYrelSeraphim">
         <Buttons Face="YrelSeraphim" Type="AbilCmd" AbilCmd="YrelSeraphim,Execute" Behavior="YrelSeraphim" />
     </CBehaviorAbility>
@@ -5842,6 +6193,21 @@
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MTaunt">
         <Buttons Face="Taunt" Type="AbilCmd" AbilCmd="Taunt,Execute" Behavior="Taunt" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="Mmove">
+        <Buttons Face="move" Type="AbilCmd" AbilCmd="move,Execute" Behavior="move" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MReviveSelf">
+        <Buttons Face="ReviveSelf" Type="AbilCmd" AbilCmd="ReviveSelf,Execute" Behavior="ReviveSelf" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MReviveSelfAtTarget">
+        <Buttons Face="ReviveSelf" Type="AbilCmd" AbilCmd="ReviveSelfAtTarget,Execute" Behavior="ReviveSelfAtTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MReviveSelfReplaceTarget">
+        <Buttons Face="ReviveSelfAtTarget" Type="AbilCmd" AbilCmd="ReviveSelfReplaceTarget,Execute" Behavior="ReviveSelfReplaceTarget" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MReviveSelfOnCreep">
+        <Buttons Face="ReviveSelfAtTarget" Type="AbilCmd" AbilCmd="ReviveSelfOnCreep,Execute" Behavior="ReviveSelfOnCreep" />
     </CBehaviorAbility>
     <CBehaviorAbility id="Mstop">
         <Buttons Face="HoldFireSpecial" Type="AbilCmd" AbilCmd="stop,HoldFire" Behavior="stop" />

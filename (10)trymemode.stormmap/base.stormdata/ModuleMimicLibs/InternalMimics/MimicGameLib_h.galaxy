@@ -1818,6 +1818,7 @@ trigger MimicGameLib_gt_LootSpray;
 trigger MimicGameLib_gt_MinionSpawnCycle;
 trigger MimicGameLib_gt_HeroMoonwellCooldownOnOff;
 trigger MimicGameLib_gt_HeroMoonwellDurationTextTagUpdates;
+trigger MimicGameLib_gt_TownTownHallKilledMoonwellSearch;
 trigger MimicGameLib_gt_HeroMount;
 trigger MimicGameLib_gt_HeroDismount;
 trigger MimicGameLib_gt_HeroDismountOnCheerDanceTauntUsed;
