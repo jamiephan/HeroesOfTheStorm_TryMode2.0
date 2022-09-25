@@ -3,7 +3,7 @@
 
 Install Methods:
 
-- [Replace in-game Try Mode with Try-Mode Installer](#runStormmap-installer) (Recommended ✔)
+- [Replace in-game Try Mode with Try-Mode Installer (Windows)](#runStormmap-installer) (Recommended ✔)
 - [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap)
 - [Replace in-game Try Mode with repo's folder for modding (All Platforms)](#runStormmap-custom)
 - [Run the `.stormmap` file directly](#runStormmap)
@@ -16,16 +16,22 @@ Post Installation Check:
  - [Post-Install check](#runStormmap-postInstall)
 
 <a name="runStormmap-installer"></a>
-## Replace in-game Try Mode with Try-Mode Installer
+## Replace in-game Try Mode with Try-Mode Installer (Windows)
 
-I have created an Installer for Try Mode 2.0 to eliminate the inconvenience of installing a custom try mode.
+You can use the [Try Mode 2.0 Installer](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer) to automatically install the maps without manually doing to.
 
-> Currently only supports Windows. Linux/MacOS support will be added later.
+> Note: It currently only supports Windows. Linux/MacOS will be supported on a later date.
+
+It also include additional features such as:
+ - Install maps to Try Mode, and the three in-game tutorials
+ - [Storm Map Generator](https://stormmap.jamiephan.net/) Integration
+   - For more info, please [refer to its repo](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator).
+- Directly run the maps without installation
 
 You can download it at: https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest
 
 #### Screenshot:
-![Installer Screenshot](https://i.imgur.com/hgEh7bI.png)
+![Installer Screenshot](https://i.imgur.com/jIntFtH.png)
 
 <a name="runStormmap-customstormmap"></a>
 ## Replace in-game Try Mode with `.stormmap` file (All Platforms)
@@ -222,10 +228,14 @@ For even better, you can add `path/to/Heroes of the Storm/Support64/` into your 
 
 <a name="runStormmap-postInstall"></a>
 ## Post-Install check
-After you installed, Launch the try mode in game. During loading, it should have a *sexy jimmy-in-a-rabbit* 🔫🐰 background:
+After you installed, Launch the try mode in game.
 
-![Map Loading](https://i.imgur.com/jDPNHxg.png)
+It should have a Try Mode 2.0 background:
 
+
+![Map Loading](https://i.imgur.com/4jnTTFB.png)
+
+>Special Thanks to [Elitesparkle](https://www.reddit.com/u/Elitesparkle/) for the loading image! 
 
 When the game loaded, you should see the message on the left of the screen:
 
