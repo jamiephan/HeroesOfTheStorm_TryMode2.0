@@ -3,9 +3,9 @@
 
 Install Methods:
 
-- [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap) (Recommended ✔)
+- [Replace in-game Try Mode with Try-Mode Installer (Windows)](#runStormmap-installer) (Recommended ✔)
+- [Replace in-game Try Mode with `.stormmap` file (All Platforms)](#runStormmap-customstormmap)
 - [Replace in-game Try Mode with repo's folder for modding (All Platforms)](#runStormmap-custom)
-- [Replace in-game Try Mode with Try-Mode Installer](#runStormmap-installer)
 - [Run the `.stormmap` file directly](#runStormmap)
   - [File Association (Windows-Only)](#runStormmap-fileassoc)
   - [Command Line (Directly)](#runStormmap-cmdDirectly)
@@ -15,6 +15,23 @@ Post Installation Check:
 
  - [Post-Install check](#runStormmap-postInstall)
 
+<a name="runStormmap-installer"></a>
+## Replace in-game Try Mode with Try-Mode Installer (Windows)
+
+You can use the [Try Mode 2.0 Installer](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer) to automatically install the maps without manually doing to.
+
+> Note: It currently only supports Windows. Linux/MacOS will be supported on a later date.
+
+It also include additional features such as:
+ - Install maps to Try Mode, and the three in-game tutorials
+ - [Storm Map Generator](https://stormmap.jamiephan.net/) Integration
+   - For more info, please [refer to its repo](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator).
+- Directly run the maps without installation
+
+You can download it at: https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest
+
+#### Screenshot:
+![Installer Screenshot](https://i.imgur.com/jIntFtH.png)
 
 <a name="runStormmap-customstormmap"></a>
 ## Replace in-game Try Mode with `.stormmap` file (All Platforms)
@@ -116,19 +133,6 @@ If you would like to replace the in game tutorial instead (Setting -> Tutorial),
     ├── .product.db
     ├── Heroes of the Storm.exe
     └── Launcher.db
-
-<a name="runStormmap-installer"></a>
-## Replace in-game Try Mode with Try-Mode Installer
-
-I have created an Installer for Try Mode 2.0 to eliminate the inconvenience of installing a custom try mode.
-
-> Currently only supports Windows. Linux/MacOS support will be added later.
-
-You can download it at: https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest
-
-#### Screenshot:
-![Installer Screenshot](https://i.imgur.com/hgEh7bI.png)
-
 
 <a name="runStormmap"></a>
 ## Run the `.stormmap` file directly (Windows-only)
