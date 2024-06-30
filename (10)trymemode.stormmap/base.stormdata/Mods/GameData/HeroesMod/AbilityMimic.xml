@@ -1011,6 +1011,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
         <Buttons Face="RaynorHyperion" Type="AbilCmd" AbilCmd="RaynorHyperion,Execute" Behavior="RaynorHyperion" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MRaynorHyperionExecuteOrders">
+        <Buttons Face="RaynorHyperionExecuteOrders" Type="AbilCmd" AbilCmd="RaynorHyperionExecuteOrders,Execute" Behavior="RaynorHyperionExecuteOrders" />
+    </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RaynorData/RaynorData.xml}-->
 <!-- ///////////////////////////////////-->
@@ -1144,6 +1147,9 @@
     <CBehaviorAbility id="MSgtHammerBluntForceGun">
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
         <Buttons Face="SgtHammerBluntForceGun" Type="AbilCmd" AbilCmd="SgtHammerBluntForceGun,Execute" Behavior="SgtHammerBluntForceGun" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSgtHammerOrbitalBFGBluntForceGun">
+        <Buttons Face="SgtHammerBluntForceGunOrbitalBFGTalent" Type="AbilCmd" AbilCmd="SgtHammerOrbitalBFGBluntForceGun,Execute" Behavior="SgtHammerOrbitalBFGBluntForceGun" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MSgtHammerNapalmStrike">
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
@@ -2099,7 +2105,6 @@
         <Buttons Face="UtherEternalDevotion" Type="AbilCmd" AbilCmd="UtherEternalDevotion,Execute" Behavior="UtherEternalDevotion" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherDivineStorm">
-        <!-- Requirement Behavior Detected. Please add the behavior: UtherNoSpiritActiveUltimate2 -->
         <Buttons Face="UtherDivineStorm" Type="AbilCmd" AbilCmd="UtherDivineStorm,Execute" Behavior="UtherDivineStorm" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHandOfProtection">
@@ -2118,7 +2123,6 @@
         <Buttons Face="UtherHammerofJustice" Type="AbilCmd" AbilCmd="UtherHammerOfJustice,Execute" Behavior="UtherHammerOfJustice" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherDivineIntervention">
-        <!-- Requirement Behavior Detected. Please add the behavior: UtherNoSpiritActiveUltimate1 -->
         <Buttons Face="UtherDivineShield" Type="AbilCmd" AbilCmd="UtherDivineIntervention,Execute" Behavior="UtherDivineIntervention" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHolyLight">
@@ -4090,6 +4094,9 @@
         <!-- Requirement Behavior Detected. Please add the behavior: AmazonAvoidanceSurgeOfLightHasReadyBehavior -->
         <Buttons Face="AmazonAvoidance" Type="AbilCmd" AbilCmd="AmazonSurgeOfLight,Execute" Behavior="AmazonSurgeOfLight" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MAmazonWarTravelerSummonMount">
+        <Buttons Face="AmazonWarTravelerSummonMount" Type="AbilCmd" AbilCmd="AmazonWarTravelerSummonMount,Execute" Behavior="AmazonWarTravelerSummonMount" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MAmazonBlindingLight">
         <Buttons Face="AmazonBlindingLight" Type="AbilCmd" AbilCmd="AmazonBlindingLight,Execute" Behavior="AmazonBlindingLight" />
     </CBehaviorAbility>
@@ -4668,6 +4675,9 @@
     <CBehaviorAbility id="MDVaMechSelfDestruct">
         <!-- Requirement Behavior Detected. Please add the behavior: DVaMechAbilityUseRequirement -->
         <Buttons Face="DVaMechSelfDestruct" Type="AbilCmd" AbilCmd="DVaMechSelfDestruct,Execute" Behavior="DVaMechSelfDestruct" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MDVaMechPilotSelfDestruct">
+        <Buttons Face="DVaMechSelfDestruct" Type="AbilCmd" AbilCmd="DVaMechPilotSelfDestruct,Execute" Behavior="DVaMechPilotSelfDestruct" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MDVaPilotCallMech">
         <Buttons Face="DVaPilotCallMech" Type="AbilCmd" AbilCmd="DVaPilotCallMech,Execute" Behavior="DVaPilotCallMech" />
@@ -5404,6 +5414,9 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MSamuroIllusionMasterDummy">
         <Buttons Face="SamuroIllusionMaster" Type="AbilCmd" AbilCmd="SamuroIllusionMasterDummy,Execute" Behavior="SamuroIllusionMasterDummy" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSamuroIllusionMasterNoTarget">
+        <Buttons Face="SamuroAdvancingStrikes" Type="AbilCmd" AbilCmd="SamuroIllusionMasterNoTarget,Execute" Behavior="SamuroIllusionMasterNoTarget" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MSamuroIllusionMasterImageSelfCast">
         <!-- Requirement Behavior Detected. Please add the behavior: SamuroMirrorImageHasIllusionMasterTrackingBehavior -->

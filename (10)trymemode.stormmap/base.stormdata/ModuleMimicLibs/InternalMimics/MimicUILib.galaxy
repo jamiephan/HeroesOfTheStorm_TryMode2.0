@@ -100,6 +100,7 @@ void MimicUILib_InitVariables () {
     MimicUILib_gv_deathRecap_Panel.lv_tabScreenButton = c_invalidDialogControlId;
     MimicUILib_gv_deathRecap_Panel.lv_openDeathRecapButton = c_invalidDialogControlId;
     MimicUILib_gv_deathRecap_Panel.lv_mainGraphLabel = c_invalidDialogControlId;
+    MimicUILib_gv_deathRecap_Panel.lv_xpValueLabel = c_invalidDialogControlId;
     MimicUILib_gv_deathRecap_Panel.lv_highestDamagersPanel = c_invalidDialogControlId;
     for (init_i1 = 0; init_i1 <= libGame_gv_deathRecap_MaxMaxDamagersSort_C; init_i1 += 1) {
         MimicUILib_gv_deathRecap_Panel.lv_highestDamagersImages[init_i1] = c_invalidDialogControlId;
@@ -1552,6 +1553,7 @@ void MimicUILib_gf_DeathRecapPopulateEffectInstancesForAbilitiesPanel (int lp_de
     TextExpressionSetToken("Param/Expression/lib_UIUI_C622E95B", "A", IntToText(lv_totalDamage));
     TextExpressionSetToken("Param/Expression/lib_UIUI_C622E95B", "B", FixedToText(libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBarCount].lv_time, 1));
     libNtve_gf_SetDialogItemText(MimicUILib_gv_deathRecap_Panel.lv_mainGraphLabel, TextExpressionAssemble("Param/Expression/lib_UIUI_C622E95B"), libCore_gv_playerGroupFromPlayer[lp_deadPlayer]);
+    libNtve_gf_SetDialogItemText(MimicUILib_gv_deathRecap_Panel.lv_xpValueLabel, StringToText(""), libCore_gv_playerGroupFromPlayer[lp_deadPlayer]);
     lv_itEffect = (libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBarCount + 1);
     for ( ; ( (auto1087E968_ai >= 0 && lv_itEffect <= auto1087E968_ae) || (auto1087E968_ai < 0 && lv_itEffect >= auto1087E968_ae) ) ; lv_itEffect += auto1087E968_ai ) {
         DialogControlSetAnimationState(MimicUILib_gv_deathRecap_Panel.lv_abilitiesPanelTimeZone[lv_itEffect], libCore_gv_playerGroupFromPlayer[lp_deadPlayer], "DamageHealState", "NoData");
@@ -1597,7 +1599,7 @@ void MimicUILib_gf_DeathRecapPopulateAbilityandHeroDataForAbilitiesPanel (int lp
         }
         if ((libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_itEffect].lv_combinedNumOfEvents > 1)) {
             TextExpressionSetToken("Param/Expression/lib_UIUI_95C9FD85", "A", IntToText(libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_itEffect].lv_combinedNumOfEvents));
-            libNtve_gf_SetDialogItemText(MimicUILib_gv_deathRecap_Panel.lv_abilitiesPanelEventCountLabels[lv_itEffect], TextExpressionAssemble("Param/Expression/lib_UIUI_95C9FD85"), PlayerGroupAll());
+            libNtve_gf_SetDialogItemText(MimicUILib_gv_deathRecap_Panel.lv_abilitiesPanelEventCountLabels[lv_itEffect], TextExpressionAssemble("Param/Expression/lib_UIUI_95C9FD85"), libCore_gv_playerGroupFromPlayer[lp_deadPlayer]);
             DialogControlSetVisible(MimicUILib_gv_deathRecap_Panel.lv_abilitiesPanelEventCountLabels[lv_itEffect], libCore_gv_playerGroupFromPlayer[lp_deadPlayer], true);
         }
         else {
@@ -1706,6 +1708,22 @@ void MimicUILib_gf_DeathRecapPopulateHighestDamagersAbilities (int lp_deadPlayer
     DialogControlSetSize(MimicUILib_gv_deathRecap_Panel.lv_highestDamagersAbilityBarProgressBars[lp_highestDamager][lp_highestDamagerAbilities], libCore_gv_playerGroupFromPlayer[lp_deadPlayer], FixedToInt((IntToFixed(libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_highestDamagers[lp_highestDamager].lv_maxDamageAbils[lp_highestDamagerAbilities].lv_amount) / IntToFixed(libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_highestDamagers[lp_highestDamager].lv_amount) * 248)), 24);
     libNtve_gf_SetDialogItemTooltip(MimicUILib_gv_deathRecap_Panel.lv_highestDamagersAbilityBarTooltips[lp_highestDamager][lp_highestDamagerAbilities], lv_simpleTooltip, libCore_gv_playerGroupFromPlayer[lp_deadPlayer]);
     DialogControlSetVisible(MimicUILib_gv_deathRecap_Panel.lv_highestDamagersAbilityFrame[lp_highestDamager][lp_highestDamagerAbilities], libCore_gv_playerGroupFromPlayer[lp_deadPlayer], true);
+}
+
+void MimicUILib_gf_DeathRecapPopulateXPValue (int lp_deadPlayer, int lp_xpValue, unit lp_deadHero) {
+    // Variable Declarations
+    text lv_text;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    TextExpressionSetToken("UI/HeroLeaderPanel/DeathRecap/XPValue", "A", FormatNumber(lp_xpValue));
+    lv_text = TextExpressionAssemble("UI/HeroLeaderPanel/DeathRecap/XPValue");
+    if ((UnitGetType(lp_deadHero) != "RexxarMisha")) {
+        libNtve_gf_SetDialogItemText(MimicUILib_gv_deathRecap_Panel.lv_xpValueLabel, lv_text, libCore_gv_playerGroupFromPlayer[lp_deadPlayer]);
+    }
+
 }
 
 void MimicUILib_gf_DeathTimerPanelShowHideTeamsPanelForPlayer (bool lp_showHide, int lp_team, int lp_player) {
@@ -4244,7 +4262,7 @@ void MimicUILib_gf_HeroConsoleUnitStatusBarsUpdateStunDeathBar (string lp_newBeh
         return ;
     }
 
-    if ((lp_newBehavior == ("OverwatchBossBeingImprisonedBehavior"))) {
+    if (((lp_newBehavior == ("OverwatchBossBeingImprisonedBehavior")) || (lp_newBehavior == ("MaievContainmentDiscStoppedSilence")))) {
         return ;
     }
 
@@ -5730,7 +5748,7 @@ void MimicUILib_gf_KillLogAnnounceQuestCompletion (int lp_player, string lp_ques
     DialogControlSendAnimationEvent(DialogControlLastCreated(), PlayerGroupAll(), "FadeIn");
     SoundPlayForPlayer(SoundLink("TalentQuestLogCompleteAlly", -1), c_maxPlayers, PlayerGroupMath(PlayerGroupAlliance(c_playerGroupAlly, lp_player), PlayerGroupSingle(lp_player), libNtve_ge_PlayerGroupOperation_Subtract), 100.0, 0.0);
     SoundPlayForPlayer(SoundLink("TalentQuestLogCompleteEnemy", -1), c_maxPlayers, PlayerGroupAlliance(c_playerGroupEnemy, lp_player), 100.0, 0.0);
-    lv_questName = StringExternal(("Button/Name/" + CatalogFieldValueGet(c_gameCatalogBehavior, lp_questToken, "Face", c_playerAny)));
+    lv_questName = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, CatalogFieldValueGet(c_gameCatalogBehavior, lp_questToken, "Face", c_playerAny), "Name", c_playerAny));
     libGame_gf_AnnouncementAddItemForPlayerGroup(libCore_gv_playerGroupFromPlayer[lp_player], libGame_ge_AnnouncementPriorities_Normal, libCore_ge_AnnouncerVOEvents_Null, "ShowQuestNotification", StringExternal("Param/Value/lib_UIUI_607B6246"), lv_questName, null, null, (lv_icon), libGame_gv_announcement_LongAnnouncementDuration_C, false);
 }
 
@@ -6614,9 +6632,11 @@ void MimicUILib_gf_UIPartyFrameSetDVaFrame (int lp_playerID, bool lp_inMech) {
     // Implementation
     lv_rosterSlot = libGame_gv_players[lp_playerID].lv_rosterSlot;
     if ((lp_inMech == true)) {
+        libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIObserverUI.lv_heroStatusBars[lv_rosterSlot], UnitTransport(libGame_gv_players[lp_playerID].lv_heroUnit), libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer]);
         libNtve_gf_SetDialogItemImage(MimicUILib_gv_uIPartyFrame.lv_heroPortraitImages[lv_rosterSlot][MimicUILib_gv_uIPartyFrameHeroSlot_C], "Assets\\Textures\\storm_ui_ingame_partyframe_dva_mech.dds", PlayerGroupActive());
     }
     else {
+        libNtve_gf_SetDialogItemUnit(MimicUILib_gv_uIObserverUI.lv_heroStatusBars[lv_rosterSlot], libGame_gv_players[lp_playerID].lv_heroUnit, libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer]);
         libNtve_gf_SetDialogItemImage(MimicUILib_gv_uIPartyFrame.lv_heroPortraitImages[lv_rosterSlot][MimicUILib_gv_uIPartyFrameHeroSlot_C], "Assets\\Textures\\storm_ui_ingame_partyframe_dva.dds", PlayerGroupActive());
     }
 }
@@ -7265,7 +7285,7 @@ void MimicUILib_gf_PartyFrameEnemyPing (int lp_pingingPlayer, unit lp_targetUnit
             lv_foundVisibleUnit = true;
         }
 
-        if ((lv_activeVehicleUnit == null) && ((UnitFilterMatch(lv_targetUnit, lp_pingingPlayer, UnitFilter(0, (1 << (c_targetFilterAITargetableStructure - 32)), 0, 0)) == true) || ((libNtve_gf_UnitIsVisibleToPlayer(lv_targetUnit, lp_pingingPlayer) == true) && (UnitHasBehavior2(lv_targetUnit, "ZagaraInsideNydusWorm") == false)))) {
+        if ((lv_activeVehicleUnit == null) && ((UnitFilterMatch(lv_targetUnit, lp_pingingPlayer, UnitFilter(0, (1 << (c_targetFilterAITargetableStructure - 32)), 0, 0)) == true) || ((libNtve_gf_UnitIsVisibleToPlayer(lv_targetUnit, lp_pingingPlayer) == true) && (UnitHasBehavior2(lv_targetUnit, "ZagaraInsideNydusWorm") == false) && (UnitHasBehavior2(lv_targetUnit, "DeathwingDragonflightBuff") == false)))) {
             UnitCreateEffectUnit(libGame_gv_players[lp_pingingPlayer].lv_heroUnit, "AttackPing", lv_targetUnit);
             libNtve_gf_CreatePingFacingAngleWithType(lv_pingPlayerGroup, "StormGeneralPing", UnitGetPosition(lv_targetUnit), Color(100.00, 100.00, 100.00), 3.0, 270.0, -1, lp_pingingPlayer);
             lv_foundVisibleUnit = true;
@@ -9384,6 +9404,8 @@ bool MimicUILib_gt_DeathRecapPanelInitialize_Func (bool testConds, bool runActio
     }
     DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeLabel, "GraphTopLabel");
     MimicUILib_gv_deathRecap_Panel.lv_abilitiesPanelStartingHealthLabels = DialogControlLastCreated();
+    DialogControlHookup(lv_panels[lv_currentPanelLayer], c_triggerControlTypeLabel, "XPValueLabel");
+    MimicUILib_gv_deathRecap_Panel.lv_xpValueLabel = DialogControlLastCreated();
     lv_currentPanelLayer -= 1;
     return true;
 }
@@ -12057,12 +12079,21 @@ bool MimicUILib_gt_UIFloatingCombatTextQuestProgressViaTokens_Func (bool testCon
         return true;
     }
 
+    if ((UnitHasBehavior2(EventUnit(), "AbathurUltimateEvolutionControlBehavior") == true)) {
+        return true;
+    }
+
     lv_impactUnit = EventUnitTokenContextUnit();
     lv_launchUnit = EventUnit();
     lv_launchPlayer = UnitGetOwner(lv_launchUnit);
     lv_questIdentifier = EventUnitTokenBehavior();
     if ((lv_launchPlayer <= libCore_gv_bALMaxPlayers) && (lv_launchPlayer > 0)) {
-        FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_impactUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, (lv_questIdentifier));
+        if ((libNtve_gf_UnitIsVisibleToPlayer(lv_impactUnit, lv_launchPlayer) == true)) {
+            FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_impactUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, (lv_questIdentifier));
+        }
+        else {
+            FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_launchUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, (lv_questIdentifier));
+        }
     }
 
     return true;
@@ -12096,7 +12127,12 @@ bool MimicUILib_gt_UIFloatingCombatTextQuestProgressViaEffect_Func (bool testCon
     lv_launchUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     lv_launchPlayer = UnitGetOwner(lv_launchUnit);
     if ((lv_launchPlayer <= libCore_gv_bALMaxPlayers) && (lv_launchPlayer > 0)) {
-        FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_impactUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, "");
+        if ((libNtve_gf_UnitIsVisibleToPlayer(lv_impactUnit, lv_launchPlayer) == true)) {
+            FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_impactUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, "");
+        }
+        else {
+            FloatingCombatElementCreateTextAtPointWithId(libCore_gv_playerGroupFromPlayer[lv_launchPlayer], "FloatingCombatElements/FloatingCombatQuestProgress", "", UnitGetPosition(lv_launchUnit), null, libNtve_gv_FloatingCombatTextAutoRandomSeed, "");
+        }
     }
 
     return true;
@@ -14809,7 +14845,10 @@ bool MimicUILib_gt_UIObserverUIHeroDies_Func (bool testConds, bool runActions) {
     libNtve_gf_SetDialogItemColor(MimicUILib_gv_uIObserverUI.lv_heroPortraitImages[lv_rosterSlot], Color(29.41, 29.41, 29.41), libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer]);
     libNtve_gf_SetDialogItemText(MimicUILib_gv_uIObserverUI.lv_heroDeathTimeLabels[lv_rosterSlot], StringToText(""), libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer]);
     DialogControlSetVisible(MimicUILib_gv_uIObserverUI.lv_heroDeathTimeLabels[lv_rosterSlot], libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer], true);
-    DialogControlSetVisible(MimicUILib_gv_uIObserverUI.lv_heroStatusBars[lv_rosterSlot], libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer], false);
+    if ((UnitGetType(libGame_gv_players[libGame_gf_HeroKilledPlayer()].lv_heroUnit) != "HeroLostVikingsController")) {
+        DialogControlSetVisible(MimicUILib_gv_uIObserverUI.lv_heroStatusBars[lv_rosterSlot], libCore_gv_playerGroupFromPlayer[libCore_gv_oBSERVER_ObserverUIPlayer], false);
+    }
+
     return true;
 }
 
@@ -15750,7 +15789,7 @@ bool MimicUILib_gt_UIPartyFrameUnitClicked_Func (bool testConds, bool runActions
 
     // Conditions
     if (testConds) {
-        if (!(((EventKeyAlt() == true) && ((EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[10]))))) {
+        if (!((((EventKeyAlt() == true) || (EventKeyControl() == true) || (EventKeyShift() == true)) && ((EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[1]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[2]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[3]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[4]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[5]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[6]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[7]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[8]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[9]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButton[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPetowner[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonPet[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonA[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonB[10]) || (EventDialogControl() == MimicUILib_gv_uIPartyFrame.lv_heroPartyButtonC[10]))))) {
             return false;
         }
     }
@@ -15845,7 +15884,7 @@ bool MimicUILib_gt_UIPartyFrameTeamXPClicked_Func (bool testConds, bool runActio
 
     // Conditions
     if (testConds) {
-        if (!((EventKeyAlt() == true))) {
+        if (!(((EventKeyControl() == true) || (EventKeyShift() == true) || (EventKeyAlt() == true)))) {
             return false;
         }
 

@@ -932,7 +932,6 @@ void MimicGameDataHelperLib_gf_HeroButcherIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroButcherTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroButcherTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTargetAudioTelegraph, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTravelValidation, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtCast, true);
@@ -954,7 +953,6 @@ void MimicGameDataHelperLib_gf_HeroButcherDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroButcherTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTargetAudioTelegraph, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTravelValidation, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtCast, false);
@@ -1176,6 +1174,8 @@ void MimicGameDataHelperLib_gf_HeroDryadIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadDeactivateCameraSettings, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadActivateCameraforSymbiote, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadLossofControlCamera, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorActivate, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorDeactivate, true);
     }
 
 }
@@ -1199,6 +1199,8 @@ void MimicGameDataHelperLib_gf_HeroDryadDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadDeactivateCameraSettings, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadActivateCameraforSymbiote, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadLossofControlCamera, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorActivate, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicBehaviorDeactivate, false);
     }
 
 }
@@ -1580,7 +1582,6 @@ void MimicGameDataHelperLib_gf_HeroLiLiIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroLiLiTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroLiLiTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplifiedAI, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentSummonandSimplifiedAI, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentAttackMimic, true);
@@ -1597,7 +1598,6 @@ void MimicGameDataHelperLib_gf_HeroLiLiDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroLiLiTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplifiedAI, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentSummonandSimplifiedAI, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentAttackMimic, false);
@@ -2967,6 +2967,7 @@ void MimicGameDataHelperLib_gf_HeroRaynorIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate, true);
     }
 
 }
@@ -2988,6 +2989,7 @@ void MimicGameDataHelperLib_gf_HeroRaynorDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorRemoveBansheeOnEnterVehicle, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate, false);
     }
 
 }
@@ -3659,6 +3661,7 @@ void MimicGameDataHelperLib_gf_HeroSgtHammerIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunPrepStart, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculation, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculationViaEffect, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunCheckForLocation, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastCancel, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastForcedDestruction, true);
@@ -3682,6 +3685,7 @@ void MimicGameDataHelperLib_gf_HeroSgtHammerDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunPrepStart, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculation, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculationViaEffect, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunCheckForLocation, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastCancel, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastForcedDestruction, false);
@@ -7853,39 +7857,6 @@ void MimicGameDataHelperLib_gt_HeroBarbarianLeapArreatCraterForcedDestruction_In
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Butcher - Butcher's Brand Duration Refresh
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    fixed lv_increaseAmount;
-    unit lv_target;
-    unit lv_butcher;
-    fixed lv_currentAmount;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_increaseAmount = 0.5;
-    lv_target = EventPlayerEffectUsedUnit(c_effectUnitTarget);
-    lv_butcher = EventPlayerEffectUsedUnit(c_effectUnitCaster);
-    lv_currentAmount = UnitBehaviorDuration(lv_target, "ButchersBrand");
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitBehaviorSetDuration(lv_target, "ButchersBrand", (lv_currentAmount + lv_increaseAmount));
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh_Init () {
-    MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh = TriggerCreate("MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh, c_playerAny, "ButcherButchersBrandDurationIncreaseDummy");
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Butcher - Ruthless Onslaught - Target Audio Telegraph
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTargetAudioTelegraph_Func (bool testConds, bool runActions) {
@@ -8204,13 +8175,8 @@ bool MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate_Func (bool testConds
     // Variable Declarations
     unit lv_chen;
     int lv_player;
-    int lv_itPlayer;
-    bool lv_pandamoniumMoveEnable;
 
     // Automatic Variable Declarations
-    const int auto9AF15E39_ae = libCore_gv_bALMaxPlayers;
-    const int auto9AF15E39_ai = 1;
-
     // Variable Initialization
 
     // Actions
@@ -8220,45 +8186,8 @@ bool MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate_Func (bool testConds
 
     lv_chen = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     lv_player = UnitGetOwner(lv_chen);
-    MimicGameDataHelperLib_gv_heroChenWanderingKegActive[lv_player] = true;
-    MimicGameDataHelperLib_gv_heroChenWanderingKegHealthStore[lv_player] = UnitGetPropertyFixed(lv_chen, c_unitPropLife, c_unitPropCurrent);
-    if ((MimicGameDataHelperLib_gv_heroChenWanderingKegEventAdded[lv_player] == false)) {
-        TriggerAddEventMouseMoved(MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker, EventPlayer());
-    }
-
-    MimicGameDataHelperLib_gv_heroChenWanderingKegEventAdded[lv_player] = true;
-    MimicGameDataHelperLib_gv_heroChenWanderingKegAngleMoveTo[lv_player] = UnitGetFacing(lv_chen);
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker, true);
-    MimicGameDataHelperLib_gv_heroChenWanderingKegActive[lv_player] = true;
     if ((libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player) == false)) {
         UnitBehaviorAdd(lv_chen, "ChenWanderingKegMovementDisabler", lv_chen, 1);
-    }
-
-    while ((UnitIsAlive(lv_chen) == true) && (UnitHasBehavior2(lv_chen, "ChenWanderingKegCasterBuff") == true)) {
-        UnitIssueOrder(lv_chen, OrderTargetingPoint(AbilityCommand("ChenWanderingKegMoveDummy", 0), PointWithOffsetPolar(UnitGetPosition(lv_chen), 4.0, MimicGameDataHelperLib_gv_heroChenWanderingKegAngleMoveTo[lv_player])), c_orderQueueReplace);
-        if ((libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player) == false)) {
-            Wait(0.1, c_timeGame);
-        }
-        else {
-            Wait(0.25, c_timeGame);
-        }
-    }
-    lv_itPlayer = 1;
-    for ( ; ( (auto9AF15E39_ai >= 0 && lv_itPlayer <= auto9AF15E39_ae) || (auto9AF15E39_ai < 0 && lv_itPlayer >= auto9AF15E39_ae) ) ; lv_itPlayer += auto9AF15E39_ai ) {
-        if ((MimicGameDataHelperLib_gv_heroChenWanderingKegActive[lv_itPlayer] == true)) {
-            lv_pandamoniumMoveEnable = true;
-            break;
-        }
-
-    }
-    if ((lv_pandamoniumMoveEnable == false)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker, false);
-    }
-
-    MimicGameDataHelperLib_gv_heroChenWanderingKegActive[lv_player] = false;
-    if ((MimicGameDataHelperLib_gv_heroChenWanderingKegEventAdded[lv_player] == true)) {
-        MimicGameDataHelperLib_gv_heroChenWanderingKegEventAdded[lv_player] = false;
-        TriggerRemoveEventMouseMoved(MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker, EventPlayer());
     }
 
     return true;
@@ -8269,48 +8198,6 @@ void MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate_Init () {
     MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate = TriggerCreate("MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate, false);
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate, c_playerAny, "ChenWanderingKegInitialSet");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Chen - Wandering Keg Move Tracker
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_player;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_player = EventPlayer();
-
-    // Conditions
-    if (testConds) {
-        if (!((MimicGameDataHelperLib_gv_heroChenWanderingKegActive[lv_player] == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((UnitGetType(libGame_gv_players[lv_player].lv_activeVehicle) == "HeroChen")) {
-        MimicGameDataHelperLib_gv_heroChenWanderingKegMoveTo[lv_player] = Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld());
-        MimicGameDataHelperLib_gv_heroChenWanderingKegAngleMoveTo[lv_player] = AngleBetweenPoints(UnitGetPosition(libGame_gv_players[lv_player].lv_activeVehicle), Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld()));
-    }
-
-    if ((UnitGetType(libGame_gv_players[lv_player].lv_heroUnit) == "HeroChen")) {
-        MimicGameDataHelperLib_gv_heroChenWanderingKegMoveTo[lv_player] = Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld());
-        MimicGameDataHelperLib_gv_heroChenWanderingKegAngleMoveTo[lv_player] = AngleBetweenPoints(UnitGetPosition(libGame_gv_players[lv_player].lv_heroUnit), Point(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld()));
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker_Init () {
-    MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker = TriggerCreate("MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker, false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9905,16 +9792,8 @@ bool MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition_Func (bool tes
 void MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition_Init () {
     MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition = TriggerCreate("MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, false);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryDebuffRoot, c_unitBehaviorChangeCreate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryDebuffRoot, c_unitBehaviorChangeRefresh);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryStun, c_unitBehaviorChangeCreate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryStun, c_unitBehaviorChangeRefresh);
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryDebuffSilence, c_unitBehaviorChangeCreate);
     TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryDebuffSilence, c_unitBehaviorChangeRefresh);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategorySlow, c_unitBehaviorChangeCreate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategorySlow, c_unitBehaviorChangeRefresh);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryFear, c_unitBehaviorChangeCreate);
-    TriggerAddEventUnitBehaviorChangeFromCategory(MimicGameDataHelperLib_gt_HeroDryadAbolishMagicCCRecognition, null, c_behaviorCategoryFear, c_unitBehaviorChangeRefresh);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11929,60 +11808,6 @@ void MimicGameDataHelperLib_gt_HeroL90ETCMoshPitOn_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Li Li - Cloud Serpent Stat Tracking
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_itPlayer;
-    fixed lv_healingAmount;
-    int lv_hostPlayer;
-    int lv_liLiPlayer;
-    fixed lv_vertOffset;
-    fixed lv_horizOffset;
-
-    // Automatic Variable Declarations
-    playergroup auto8915D851_g;
-
-    // Variable Initialization
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_hostPlayer = EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster);
-    lv_healingAmount = EventPlayerEffectUsedAmountFixed(c_effectAmountHealed, false);
-    lv_vertOffset = 2.0;
-    lv_horizOffset = RandomFixed(-0.4, -0.6);
-    auto8915D851_g = libGame_gf_PlayersOnTeamHeroes(libGame_gf_TeamNumberOfPlayer(lv_hostPlayer), false);
-    lv_itPlayer = -1;
-    while (true) {
-        	lv_itPlayer = PlayerGroupNextPlayer(auto8915D851_g, lv_itPlayer);
-        	if (lv_itPlayer<0) { break; }
-        	if ((libGame_gv_players[lv_itPlayer].lv_heroIndex == libCore_gf_GetHeroIndexForUnitType("HeroLiLi"))) {
-            lv_liLiPlayer = lv_itPlayer;
-            break;
-        }
-
-    }
-    libGame_gf_ScoreValuesReportRealValueAndLog(lv_liLiPlayer, "Healing", (PlayerScoreValueGetAsFixed(lv_liLiPlayer, "Healing") + lv_healingAmount));
-    if ((lv_hostPlayer != lv_liLiPlayer)) {
-        FloatingCombatElementCreateTextAtUnit(PlayerGroupSingle(lv_liLiPlayer), "FloatingCombatElements/FloatingCombatNormalAmountReceived", "HealState", EventPlayerEffectUsedUnit(c_effectUnitTarget), FixedToText(lv_healingAmount, 0), libNtve_gv_FloatingCombatTextAutoRandomSeed);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking_Init () {
-    MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking = TriggerCreate("MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, c_playerAny, "LiLiCloudSerpentCreateHealer");
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, c_playerAny, "LiLiCloudSerpentBlessingsOfYulonTalentCreateHealer");
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking, c_playerAny, "LiLiCloudSerpentLightningSerpentCreateHealer");
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Li Li - Cloud Serpent Turret Serpent Summon and Simplified AI
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplifiedAI_Func (bool testConds, bool runActions) {
@@ -13713,6 +13538,7 @@ bool MimicGameDataHelperLib_gt_HeroLostVikingsVikingDies_Func (bool testConds, b
         UnitBehaviorSetDuration(lv_deadUnit, "Dead", TimerGetRemaining(lv_vikingDeathTimer));
     }
     else {
+        UnitSetPropertyFixed(lv_deadUnit, c_unitPropLifePercent, 100.0);
         UnitBehaviorSetDuration(lv_deadUnit, "Dead", 0.0);
     }
     auto973DB6EB_g = libGame_gv_players[lv_lVPlayer].lv_heroUnitGroup;
@@ -15522,22 +15348,6 @@ bool MimicGameDataHelperLib_gt_HeroLostVikingsAbathurClone_Func (bool testConds,
     }
     UnitBehaviorAdd(EventUnit(), "LostVikings1VikingAlive", EventUnit(), 1);
     UnitBehaviorAdd(EventUnit(), "UltimateEvolutionAlternateHero", EventUnit(), 1);
-    if ((PlayerHasTalent(lv_lVPlayer, "LostVikingsMasteryJump") == true)) {
-        UnitBehaviorAdd(EventUnit(), "LostVikingsJumpEnabled", EventUnit(), 1);
-    }
-
-    if ((PlayerHasTalent(lv_lVPlayer, "LostVikingsMasterySpinToWin") == true)) {
-        UnitBehaviorAdd(EventUnit(), "LostVikingsSpinToWinCarry", EventUnit(), 1);
-    }
-
-    if ((PlayerHasTalent(lv_lVPlayer, "LostVikingsMasteryNordicAttackSquad") == true)) {
-        UnitBehaviorAdd(EventUnit(), "LostVikingsNordicAttackSquadCarry", EventUnit(), 1);
-    }
-
-    if ((PlayerHasTalent(lv_lVPlayer, "LostVikingsMasteryNorseForce") == true)) {
-        UnitBehaviorAdd(EventUnit(), "LostVikingsNorseForceEnabled", EventUnit(), 1);
-    }
-
     PlayerAddCooldown(UnitGetOwner(EventUnit()), CatalogFieldValueGet(c_gameCatalogAbil, "LostVikingsLongboatRaidNewer", "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(EventUnit())), 15.0);
     PlayerAddCooldown(UnitGetOwner(EventUnit()), CatalogFieldValueGet(c_gameCatalogAbil, "LostVikingsPlayAgain", "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(EventUnit())), 15.0);
     return true;
@@ -16639,7 +16449,7 @@ bool MimicGameDataHelperLib_gt_HeroMedicMedivacDropshipOverlay_Func (bool testCo
     if (((PlayerSkin(lv_ownerOfTransport) == "MedicSkinLove") || (PlayerSkin(lv_ownerOfTransport) == "MedicSkinLoveVar1") || (PlayerSkin(lv_ownerOfTransport) == "MedicSkinLoveVar2"))) {
         libUIUI_gf_FullscreenOverlayAddItemForPlayer(lv_player, libUIUI_ge_FullscreenOverlayPriorities_Stasis, "Cutscenes\\GameUI_MedivacLoveOverlay.StormCutscene", lv_triggeringBehavior);
     }
-    else if (((PlayerSkin(lv_ownerOfTransport) == "MedicEnforcer") || (PlayerSkin(lv_ownerOfTransport) == "MedicEnforcerVar3") || (PlayerSkin(lv_ownerOfTransport) == "MedicEnforcerVar1"))) {
+    else if (((PlayerSkin(lv_ownerOfTransport) == "MedicEnforcerVar4") || (PlayerSkin(lv_ownerOfTransport) == "MedicEnforcer") || (PlayerSkin(lv_ownerOfTransport) == "MedicEnforcerVar3") || (PlayerSkin(lv_ownerOfTransport) == "MedicEnforcerVar1"))) {
         libUIUI_gf_FullscreenOverlayAddItemForPlayer(lv_player, libUIUI_ge_FullscreenOverlayPriorities_Stasis, "Cutscenes\\GameUI_MedivacEnforcerOverlay.StormCutscene", lv_triggeringBehavior);
     }
     else if (true) {
@@ -17343,6 +17153,10 @@ bool MimicGameDataHelperLib_gt_HeroMuradinHaymakerGrandSlamTalentProc_Func (bool
 
     // Conditions
     if (testConds) {
+        if (!((PlayerHasTalent(lv_killingPlayer, "MuradinMasteryHaymakerGrandSlam") == true))) {
+            return false;
+        }
+
         if (!((UnitHasBehavior2(lv_killedUnit, "MuradinHaymakerGrandSlamTalentDeathMarker") == true))) {
             return false;
         }
@@ -19067,6 +18881,35 @@ void MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Raynor - Execute Order - Hyperion Activate
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_raynor;
+    point lv_targetPoint;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_raynor = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_targetPoint = EventPlayerEffectUsedPoint(c_effectLocationTargetPoint);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectPointWithSource(lv_raynor, "HyperionInitialCreatePersistent", lv_targetPoint, c_gameCatalogAbil, "RaynorHyperionExecuteOrders");
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate_Init () {
+    MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate = TriggerCreate("MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate, c_playerAny, "RaynorExecuteOrdersDummyEffect");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Rehgar - Tidal Waves Modify Cooldown
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown_Func (bool testConds, bool runActions) {
@@ -19907,6 +19750,10 @@ bool MimicGameDataHelperLib_gt_HeroRexxarMishaSpawn_Func (bool testConds, bool r
             UnitBehaviorAdd(lv_misha, "RexxarAnimalHusbandryTokenCounter", lv_misha, 1);
             CatalogFieldValueSetInt(c_gameCatalogEffect, "RexxarAnimalHusbandryDynamicModifyTokenCounter", "Value", lv_rexxarPlayer, (UnitBehaviorCount(lv_rexxar, "RexxarAnimalHusbandryTokenCounter") / 2));
             UnitCreateEffectUnit(lv_rexxar, "RexxarAnimalHusbandryDynamicModifyTokenCounter", lv_misha);
+        }
+
+        if ((PlayerHasTalent(lv_rexxarPlayer, "RexxarSpiritBondPrimalIntimidation") == true)) {
+            UnitBehaviorAdd(lv_misha, "TalentImposingPresenceCarry", lv_misha, 1);
         }
 
         if ((PlayerHasTalent(lv_rexxarPlayer, "RexxarDireBeast") == true)) {
@@ -21972,6 +21819,40 @@ void MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunCheckForLocation_Init (
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - SgtHammer - Blunt Force Gun Apply Orbital Scan
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_sourceUnit;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_sourceUnit = EventPlayerEffectUsedUnit(c_effectUnitSource);
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(lv_sourceUnit) == "SgtHammerBluntForceGunMissileOrbital"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnitWithSource(libGame_gv_players[UnitGetOwner(lv_sourceUnit)].lv_heroUnit, "BluntForceGunApplyMissileScanOrbital", lv_sourceUnit, c_gameCatalogAbil, "SgtHammerOrbitalBFGBluntForceGun");
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan_Init () {
+    MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan = TriggerCreate("MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan, c_playerAny, "BluntForceGunApplyMissileScanDelay");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - SgtHammer - Concussive Blast - Cancel
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastCancel_Func (bool testConds, bool runActions) {
@@ -23161,7 +23042,10 @@ bool MimicGameDataHelperLib_gt_HeroSylvanasPossessionRewire_Func (bool testConds
             libNtve_gf_CreateUnitsWithDefaultFacing(1, "RegenGlobe", c_unitCreateIgnorePlacement, lv_regenGlobeOwner, UnitGetPosition(lv_bribedUnit), null);
         }
         else {
-            UnitCreateEffectUnit(lv_bribedUnit, "ExperienceGlobeDummyImpactSetLastHit", lv_greedUnit);
+            if ((UnitHasBehavior2(lv_bribedUnit, "IsCatapultMinionOrCatapultReplacement") == false)) {
+                UnitCreateEffectUnit(lv_bribedUnit, "ExperienceGlobeDummyImpactSetLastHit", lv_greedUnit);
+            }
+
         }
     }
     libGame_gf_SendEventHeroMindControlsNPC(lv_bribedUnit, UnitGetOwner(lv_bribedUnit));
@@ -23952,7 +23836,7 @@ bool MimicGameDataHelperLib_gt_HeroTychusThatsTheStuffOff_Func (bool testConds, 
 
     CatalogFieldValueSetFixed(c_gameCatalogEffect, "TychusMinigunThatsTheStuffTalentCreateHealer", "RechargeVitalRate", lv_itPlayer, lv_healAmount);
     CatalogFieldValueSet(c_gameCatalogEffect, "TychusMinigunThatsTheStuffTalentDummyHealer", "RechargeVitalRate", lv_itPlayer, "0");
-    UnitCreateEffectUnit(lv_itUnit, "TychusMinigunThatsTheStuffTalentCreateHealer", lv_itUnit);
+    UnitCreateEffectUnitWithSource(lv_itUnit, "TychusMinigunThatsTheStuffTalentCreateHealer", lv_itUnit, c_gameCatalogAbil, "TychusMinigunActive");
     MimicGameDataHelperLib_gv_heroTychusThatsTheStuffCombinedHeal[lv_itPlayer] = 0.0;
     MimicGameDataHelperLib_gv_heroTychusThatsTheStuffHealPreviewCombinedDamage[lv_itPlayer] = 0.0;
     return true;
@@ -24310,7 +24194,7 @@ bool MimicGameDataHelperLib_gt_HeroTyrandeElunesChosenDamageProc_Func (bool test
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_damageDealt = EventUnitDamageAttempted();
+    lv_damageDealt = (EventUnitDamageAmount()+EventUnitDamageBehaviorShield());
     lv_damageScale = 1.75;
     lv_tyrande = EventUnitDamageSourceUnit();
     lv_tyrandePlayer = UnitGetOwner(lv_tyrande);
@@ -24606,6 +24490,10 @@ bool MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget_Func (bool testConds
     // Conditions
     if (testConds) {
         if (!(((UnitBehaviorCount(lv_killedUnit, "WitchDoctorVoodooRitualDoT") == 1) || (UnitBehaviorCount(lv_killedUnit, "WitchDoctorVoodooRitualDeathRitualTalentDoT") == 1)))) {
+            return false;
+        }
+
+        if (!((UnitBehaviorCount(lv_killedUnit, "SylvanasPossessionTarget") == 0))) {
             return false;
         }
     }
@@ -25647,6 +25535,7 @@ bool MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage_Func (bool testConds, b
 
     libNtve_gf_UnitCreateFacingPoint(1, "ZagaraBaneling", c_unitCreateIgnorePlacement, lv_triggeringPlayer, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_zagara), 0.75, lv_targetPoint), lv_targetPoint, lv_zagara);
     lv_baneling = UnitLastCreated();
+    UnitBehaviorAdd(lv_baneling, "ZagaraBanelingExplode", lv_zagara, 1);
     SoundPlayOnUnit(SoundLink("Zagara_BanelingEgg_Explode", -1), PlayerGroupAll(), lv_baneling, 0.0, 100.0, 0.0);
     lv_forwardPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_baneling), lv_movementIncrement, lv_targetPoint);
     UnitIssueOrder(lv_baneling, OrderTargetingPoint(AbilityCommand("move", 0), lv_forwardPoint), c_orderQueueReplace);
@@ -26651,7 +26540,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroBarbarianLeap_Init();
     MimicGameDataHelperLib_gt_HeroBarbarianLeapRefactor_Init();
     MimicGameDataHelperLib_gt_HeroBarbarianLeapArreatCraterForcedDestruction_Init();
-    MimicGameDataHelperLib_gt_HeroButcherButchersBrandDurationRefresh_Init();
     MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTargetAudioTelegraph_Init();
     MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtTravelValidation_Init();
     MimicGameDataHelperLib_gt_HeroButcherRuthlessOnslaughtCast_Init();
@@ -26661,7 +26549,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroButcherFreshMeatVehicleOccupy_Init();
     MimicGameDataHelperLib_gt_HeroButcherFreshMeatUpdateStackCounter_Init();
     MimicGameDataHelperLib_gt_HeroChenWanderingKegActivate_Init();
-    MimicGameDataHelperLib_gt_HeroChenWanderingKegMoveTracker_Init();
     MimicGameDataHelperLib_gt_HeroChenWanderingKegDeactivate_Init();
     MimicGameDataHelperLib_gt_HeroChenStormEarthFireTimedLifeIncrease_Init();
     MimicGameDataHelperLib_gt_HeroChenStormEarthAndFireStasis_Init();
@@ -26748,7 +26635,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroL90ETCStageDiveTeleportUnit_Init();
     MimicGameDataHelperLib_gt_HeroL90ETCStageDiveFinalSet_Init();
     MimicGameDataHelperLib_gt_HeroL90ETCMoshPitOn_Init();
-    MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentStatTracking_Init();
     MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplifiedAI_Init();
     MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentSummonandSimplifiedAI_Init();
     MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentAttackMimic_Init();
@@ -26878,6 +26764,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroRaynorACardToPlayTalentGained_Init();
     MimicGameDataHelperLib_gt_HeroRaynorACardToPlayHeroTakedown_Init();
     MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Init();
+    MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate_Init();
     MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown_Init();
     MimicGameDataHelperLib_gt_HeroRehgarEarthlivingEnchantHotApply_Init();
     MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionTalentSaveTotem_Init();
@@ -26935,6 +26822,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculation_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunTargetCalculationViaEffect_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunCheckForLocation_Init();
+    MimicGameDataHelperLib_gt_HeroSgtHammerBluntForceGunApplyOrbitalScan_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastCancel_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerConcussiveBlastForcedDestruction_Init();
     MimicGameDataHelperLib_gt_HeroSgtHammerMaelstromRoundsAddCharge_Init();

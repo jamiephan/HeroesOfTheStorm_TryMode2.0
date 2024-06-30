@@ -1703,6 +1703,7 @@ void MimicGameLib_gf_DeathRecapAddEffectInstanceForPlayer (int lp_deadPlayer, st
     MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectEventCount += 1;
     if ((MimicGameLib_gf_DeathRecapCheckforCombineEvent(lp_deadPlayer, MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBarCount, lp_effectTime, lv_effectingPlayer, lp_effectingUnitType, lp_sourceButton, lv_nPCPlayer, lv_structureSource) == true)) {
         lv_effectEventTimeIndex = MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBarCount;
+        MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amountShielded += lp_effectAmountShielded;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amount += lp_effectAmount;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_postEffectHealth = 0;
     }
@@ -6515,6 +6516,8 @@ bool auto_MimicGameLib_gf_HeroDeathAwardXP_TriggerFunc (bool testConds, bool run
         }
         libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_itPlayer, lp_deadHero, libCore_ge_FloatingTextType_XPLarge, FixedToInt(lv_xPGranted));
     }
+    libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_deadPlayer, lp_deadHero, libCore_ge_FloatingTextType_XPSelf, FixedToInt(lv_xPGranted));
+    libUIUI_gf_DeathRecapPopulateXPValue(lv_deadPlayer, FixedToInt(lv_xPGranted), lp_deadHero);
     return true;
 }
 
@@ -15231,7 +15234,7 @@ bool MimicGameLib_gt_AddCombatMedicHealing_Func (bool testConds, bool runActions
 //--------------------------------------------------------------------------------------------------
 void MimicGameLib_gt_AddCombatMedicHealing_Init () {
     MimicGameLib_gt_AddCombatMedicHealing = TriggerCreate("MimicGameLib_gt_AddCombatMedicHealing_Func");
-    TriggerAddEventUnitHealed(MimicGameLib_gt_AddCombatMedicHealing, null, c_unitVitalAny, null);
+    TriggerAddEventUnitHealed(MimicGameLib_gt_AddCombatMedicHealing, null, c_unitVitalLife, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15342,7 +15345,7 @@ bool MimicGameLib_gt_ProtectorDataCollection_Func (bool testConds, bool runActio
 
     // Conditions
     if (testConds) {
-        if (!((UnitBehaviorHasCategoryFlag(EventUnitBehavior(), c_behaviorCategoryBuffTempMaxHealth) == true))) {
+        if (!(((UnitBehaviorHasCategoryFlag(EventUnitBehavior(), c_behaviorCategoryBuffTempMaxHealth) == true) || (UnitBehaviorHasCategoryFlag(EventUnitBehavior(), c_behaviorCategoryProtected) == true)))) {
             return false;
         }
 
@@ -15525,7 +15528,7 @@ bool MimicGameLib_gt_ClutchHealerIncrement_Func (bool testConds, bool runActions
 //--------------------------------------------------------------------------------------------------
 void MimicGameLib_gt_ClutchHealerIncrement_Init () {
     MimicGameLib_gt_ClutchHealerIncrement = TriggerCreate("MimicGameLib_gt_ClutchHealerIncrement_Func");
-    TriggerAddEventUnitHealed(MimicGameLib_gt_ClutchHealerIncrement, null, c_unitVitalAny, null);
+    TriggerAddEventUnitHealed(MimicGameLib_gt_ClutchHealerIncrement, null, c_unitVitalLife, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15758,7 +15761,7 @@ bool MimicGameLib_gt_ExperienceGlobeGrantXP_Func (bool testConds, bool runAction
     }
     MimicGameLib_gf_ScoreValuesRecordXPContributionForPlayer(lv_targetPlayer, lv_xPAmount, true);
     if ((EventPlayerEffectUsed() == "ExperienceGlobeDummyImpactSetLastHit")) {
-        libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_targetPlayer, EventPlayerEffectUsedUnit(c_effectUnitSource), libCore_ge_FloatingTextType_XPSelf, FixedToInt(lv_xPAmount));
+        libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_targetPlayer, EventPlayerEffectUsedUnit(c_effectUnitSource), libCore_ge_FloatingTextType_XPSmall, FixedToInt(lv_xPAmount));
     }
     else {
         libUIUI_gf_UIFloatingCombatTextH16MidXP(lv_targetPlayer, EventPlayerEffectUsedUnit(c_effectUnitSource), libCore_ge_FloatingTextType_XPSmall, FixedToInt(lv_xPAmount));
@@ -17538,7 +17541,7 @@ bool MimicGameLib_gt_HeroDeathDiabloDiabloDies_Func (bool testConds, bool runAct
 
     lv_respawnDuration = FixedToInt(libCore_gf_HeroDeathTime(lv_deadPlayer, UnitLevel(lv_deadUnit)));
     if ((PlayerHasTalent(lv_deadPlayer, "DiabloMasteryDyingBreathApocalypse") == true)) {
-        UnitCreateEffectUnit(lv_deadUnit, "DiabloApocalypseEnumerateTrackedUnits", lv_deadUnit);
+        UnitCreateEffectUnitWithSource(lv_deadUnit, "DiabloApocalypseEnumerateTrackedUnits", lv_deadUnit, c_gameCatalogAbil, "DiabloApocalypse");
     }
 
     MimicGameLib_gv_players[lv_deadPlayer].lv_isDead = true;
@@ -19346,6 +19349,10 @@ bool MimicGameLib_gt_MountCaboose_Func (bool testConds, bool runActions) {
         ActorSend(lv_heroActor, (("AnimGroupApply " + lv_poseAnimGroup + " {} {} Instant")));
         ActorSend(lv_heroActor, libNtve_gf_RefSet("::Host", lv_actorNameForMount));
         ActorSend(lv_heroActor, libNtve_gf_HostSiteOpsSet("::Host", "SOpAttachMount", 0, 0));
+        if ((MimicGameLib_gv_players[lv_mountingPlayer].lv_mountData.lv_mountID == "MechaTassadarMorphForm")) {
+            ActorSend(lv_mountActor, libNtve_gf_HostSiteOpsSet("::Host", "SOpBasicScopeFollow", 0, 0));
+        }
+
         ActorSend(lv_heroActor, libNtve_gf_RefSet("::HostForProps", "PropsHost"));
         ActorSend(lv_mountActor, libNtve_gf_RefSet("::HostForProps", (lv_mountingUnitType)));
     }
@@ -19867,6 +19874,8 @@ bool MimicGameLib_gt_CoreDiesGameOver_Func (bool testConds, bool runActions) {
             libNtve_gf_ChangeUnitDamage(lv_itHeroUnit, libNtve_ge_UnitDamageTakenDealt_Damage_Deal, libNtve_ge_UnitDamageChangeOption_No);
             libNtve_gf_ChangeUnitDamage(lv_itHeroUnit, libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
         }
+        PlayerPauseAllCooldowns(lv_itPlayer, true);
+        PlayerPauseAllCharges(lv_itPlayer, true);
     }
     libNtve_gf_ChangeUnitDamage(MimicGameLib_gv_teams[MimicGameLib_gv_teamOrderIndex_C].lv_core, libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);
     libNtve_gf_ChangeUnitDamage(MimicGameLib_gv_teams[MimicGameLib_gv_teamChaosIndex_C].lv_core, libNtve_ge_UnitDamageTakenDealt_Damage_Take, libNtve_ge_UnitDamageChangeOption_No);

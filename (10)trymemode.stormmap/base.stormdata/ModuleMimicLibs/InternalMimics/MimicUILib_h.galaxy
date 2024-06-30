@@ -141,6 +141,7 @@ struct MimicUILib_gs_DeathRecapPanel {
     int lv_tabScreenButton;
     int lv_openDeathRecapButton;
     int lv_mainGraphLabel;
+    int lv_xpValueLabel;
     int lv_highestDamagersPanel;
     int[libGame_gv_deathRecap_MaxMaxDamagersSort_C + 1] lv_highestDamagersImages;
     int[libGame_gv_deathRecap_MaxMaxDamagersSort_C + 1] lv_highestDamagersAmountLabels;
@@ -878,6 +879,7 @@ void MimicUILib_gf_DeathRecapPopulateEffectInstancesForAbilitiesPanel (int lp_de
 void MimicUILib_gf_DeathRecapPopulateAbilityandHeroDataForAbilitiesPanel (int lp_deadPlayer);
 void MimicUILib_gf_DeathRecapPopulateHighestDamagersForPlayer (int lp_deadPlayer);
 void MimicUILib_gf_DeathRecapPopulateHighestDamagersAbilities (int lp_deadPlayer, int lp_highestDamager, int lp_highestDamagerAbilities);
+void MimicUILib_gf_DeathRecapPopulateXPValue (int lp_deadPlayer, int lp_xpValue, unit lp_deadHero);
 void MimicUILib_gf_DeathTimerPanelShowHideTeamsPanelForPlayer (bool lp_showHide, int lp_team, int lp_player);
 void MimicUILib_gf_DeathAnnouncementPanelRegisterDeath (int lp_player, int lp_killingPlayer, string lp_portraitImage, unit lp_deadUnit, text lp_deadUnitName, timer lp_deathTimer);
 void MimicUILib_gf_DeathAnnouncementPanelTransitionFrameOut (int lp_team);

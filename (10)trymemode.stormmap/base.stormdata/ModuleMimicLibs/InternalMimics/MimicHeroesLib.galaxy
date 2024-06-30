@@ -393,6 +393,7 @@ void MimicHeroesLib_gf_UpdateTassadarAbilityStats (unit lp_tassadar) {
         CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamCreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
         CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamKhaydarinAmuletTalentSearch1CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
         CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamKhaydarinAmuletTalentSearch2CreatePersistent", "PeriodicPeriodArray[" + IntToString(0) + "]", lv_player, lv_finalPeriod);
+        CatalogFieldValueSetFixed(c_gameCatalogEffect, "TassadarResonanceBeamKhaydarinAmuletRevealTarget", "Duration", lv_player, (lv_finalPeriod + 0.0625));
     }
 
 }

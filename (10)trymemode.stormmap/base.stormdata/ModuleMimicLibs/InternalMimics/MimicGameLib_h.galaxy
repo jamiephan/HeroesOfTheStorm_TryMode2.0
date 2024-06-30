@@ -1058,6 +1058,7 @@ int MimicGameLib_gv_onFireWindowStage;
 bool MimicGameLib_gv_onFireEnabled;
 bool MimicGameLib_gv_onFirePrintingEnabled;
 bool MimicGameLib_gv_onFireUpdating;
+int[libCore_gv_bALMaxEnginePlayerCount + 1] MimicGameLib_gv_playerLeaveCheck;
 MimicGameLib_gs_Player[libCore_gv_bALMaxEnginePlayerCount + 1] MimicGameLib_gv_players;
 unitgroup MimicGameLib_gv_heroes;
 unitgroup[libCore_gv_bALMaxTeams + 1] MimicGameLib_gv_players_Heroes_AllTrackedHeroesForTeam;
