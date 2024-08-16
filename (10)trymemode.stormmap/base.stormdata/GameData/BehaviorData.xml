@@ -8,4 +8,8 @@
             <ModifyFlags index="SuppressMoving" value="1"/>
         </Modification>
     </CBehaviorBuff>
+	<CBehaviorBuff id="GenerateRegenGlobe">
+		<Duration value="2" />
+		<ExpireEffect value="GenerateRegenGlobePersistent" />
+	</CBehaviorBuff>
 </Catalog>

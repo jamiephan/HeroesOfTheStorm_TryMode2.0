@@ -31,6 +31,9 @@
     <ObjectUnit Id="533450073" Position="42,63,0" Rotation="1.8422" Scale="1,1,1" UnitType="TownTownHallL3" Player="11">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
+	<ObjectUnit Id="454446" Position="40.5,73,0" Rotation="0.023" Scale="1,1,1" UnitType="RegenGlobeGenerator">
+		<Flag Index="ForcePlacement" Value="1"/>
+	</ObjectUnit>
     <ObjectDoodad Id="23" Variation="1" Position="137.902,41.8781,7.9428" Rotation="4.6118" Scale="1,1,1" Type="Storm_Doodad_KingsCrest_CastleBackGround">
         <Flag Index="HeightAbsolute" Value="1"/>
     </ObjectDoodad>

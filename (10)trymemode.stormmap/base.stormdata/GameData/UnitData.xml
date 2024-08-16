@@ -26,4 +26,9 @@
     <CUnit id="TownGateL315BRULGarden">
         <Facing value="277.998"/>
     </CUnit>
+	<CUnit id="RegenGlobeGenerator">
+		<Footprint value=""/>
+		<PlacementFootprint value=""/>
+		<Collide index="Ground" value="0"/>
+	</CUnit>
 </Catalog>

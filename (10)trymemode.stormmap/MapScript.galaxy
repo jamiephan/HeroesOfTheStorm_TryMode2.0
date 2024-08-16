@@ -1127,11 +1127,6 @@ void gf_Createalltownstructures () {
         if (lv_itBuilding == null) { break; }
         gv_buildingScopesCount += 1;
         gv_buildingScopes[gv_buildingScopesCount] = ActorScopeFromUnit(lv_itBuilding);
-        if (((UnitGetType(lv_itBuilding) == "TownCannonTowerL2") || (UnitGetType(lv_itBuilding) == "TownTownHallL2") || (UnitGetType(lv_itBuilding) == "TownTownHallL3"))) {
-            UnitBehaviorAdd(lv_itBuilding, "TowerCFHUpdateNearbyHeroes", lv_itBuilding, 1);
-            UnitBehaviorAdd(lv_itBuilding, "TowerCFHFocusedTargetTracker", lv_itBuilding, 1);
-        }
-
     }
     TriggerExecute(libGame_gt_InitializeTownSystem, true, true);
     Wait(0.0625, c_timeGame);

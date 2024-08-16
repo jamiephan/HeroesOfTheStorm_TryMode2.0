@@ -177,4 +177,12 @@
       <Image value="Assets\Textures\Storm_UI_InGame_TargetInfoPanel_Unit_DragonShire_Building_Core.dds" />
     </GroupIcon>
   </CActorUnit>
+  <CActorUnit id="RegenGlobeGenerator">
+    <Model value="Invisible" />
+    <EditorModel value="RegenGlobeGenerator" />
+    <On Terms="Behavior.GenerateHealthPack.Off" Send="MinimapIcon Assets\Textures\storm_ui_minimapicon_HealthGenerator.dds" />
+    <On Terms="Behavior.GenerateHealthPack.Off" Send="MinimapIconTintColor 255,49,255,248" />
+    <On Terms="Behavior.GenerateHealthPack.On" Send="MinimapIcon Assets\Textures\storm_ui_minimapicon_HealthGenerator_off.dds" />
+    <On Terms="Behavior.GenerateHealthPack.On" Send="MinimapIconTintColor" />
+  </CActorUnit>
 </Catalog>
