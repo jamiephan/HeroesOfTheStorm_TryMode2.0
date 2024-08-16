@@ -1396,14 +1396,29 @@ text MimicUILib_gf_DeathRecapCreateTooltipTextNoSentence (int lp_deadPlayer, int
     text lv_damageAmountText;
     text lv_simpleTooltip;
     text lv_finalText;
+    int lv_overkillOverride;
 
     // Automatic Variable Declarations
     // Variable Initialization
 
     // Implementation
+    if (((UnitGetType(libGame_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroDVaPilot") || (UnitGetType(libGame_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroUther") || (UnitGetType(libGame_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroTyrael") || (UnitGetType(libGame_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroLeoric"))) {
+        lv_overkillOverride = PlayerScoreValueGetAsInt(lp_deadPlayer, "DeadHeroDamagePreventedByAbsorb");
+    }
+    else {
+        lv_overkillOverride = 0;
+    }
     lv_effectAmount = libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lp_effectIndex].lv_amount;
     lv_effectShielded = libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lp_effectIndex].lv_amountShielded;
     lv_effectOverkill = libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lp_effectIndex].lv_amountOverkill;
+    if ((lp_effectIndex == 1)) {
+        lv_effectShielded -= lv_overkillOverride;
+        if ((lv_effectShielded < 0)) {
+            lv_effectShielded = 0;
+        }
+
+    }
+
     TextExpressionSetToken("Param/Expression/lib_UIUI_140BB2E3", "A", StringExternal(CatalogFieldValueGet(c_gameCatalogButton, libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lp_effectIndex].lv_button, "SimpleDisplayText", c_playerAny)));
     lv_simpleTooltip = TextExpressionAssemble("Param/Expression/lib_UIUI_140BB2E3");
     if ((libGame_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lp_effectIndex].lv_isHeal == true)) {

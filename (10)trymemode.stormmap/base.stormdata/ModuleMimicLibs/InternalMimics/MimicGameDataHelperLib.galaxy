@@ -1636,6 +1636,7 @@ void MimicGameDataHelperLib_gf_HeroLeoricIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_LeoricFealtyUntoDeathAlliedNPCProcListener, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricOsseinRenewalTalentGlobeProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricEntombForcedDestruction, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText, true);
     }
 
 }
@@ -1659,6 +1660,7 @@ void MimicGameDataHelperLib_gf_HeroLeoricDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_LeoricFealtyUntoDeathAlliedNPCProcListener, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricOsseinRenewalTalentGlobeProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricEntombForcedDestruction, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText, false);
     }
 
 }
@@ -12854,6 +12856,41 @@ void MimicGameDataHelperLib_gt_HeroLeoricOsseinRenewalTalentGlobeProc_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Leoric - Shroud of the Dead King Floating Text
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_triggeringUnitOwner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_triggeringUnitOwner = UnitGetOwner(EventUnit());
+
+    // Conditions
+    if (testConds) {
+        if (!((EventUnitBehaviorCumulativeDamageModification() >= 0.0))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    FloatingCombatElementCreateNumberTextAtUnit(PlayerGroupSingle(lv_triggeringUnitOwner), "FloatingCombatElements/FloatingCombatAmountReadable", "", EventUnit(), FixedToInt(EventUnitBehaviorCumulativeDamageModification()), StringExternal("Param/Value/lib_HVAR_D90A4267"), libNtve_gv_FloatingCombatTextAutoRandomSeed);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText_Init () {
+    MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText = TriggerCreate("MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText, false);
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText, null, "LeoricShroudoftheDeadKingProtectedBuff", c_unitBehaviorChangeRefresh);
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText, null, "LeoricShroudoftheDeadKingProtectedBuff", c_unitBehaviorChangeDecrease);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Lost Vikings - Viking Bribery NPC Proc Listener
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroLostVikingsVikingBriberyNPCProcListener_Func (bool testConds, bool runActions) {
@@ -14900,7 +14937,7 @@ bool MimicGameDataHelperLib_gt_HeroLostVikingsCheckpointReachTimerExpires_Func (
                     UnitSelect(autoF6B97AA2_var, lv_itPlayer, true);
                 }
 
-                UnitCreateEffectUnit(autoF6B97AA2_var, "LostVikingsPlayAgainHeal", autoF6B97AA2_var);
+                UnitCreateEffectUnit(autoF6B97AA2_var, "LostVikingsCheckpointReachedCreateHealer", autoF6B97AA2_var);
             }
             TimerPause(MimicGameDataHelperLib_gv_lostVikingsPlayer[lv_itPlayer].lv_olafDeathTimer, true);
             TimerPause(MimicGameDataHelperLib_gv_lostVikingsPlayer[lv_itPlayer].lv_erikDeathTimer, true);
@@ -18898,7 +18935,7 @@ bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderHyperionActivate_Func (bool
         return true;
     }
 
-    UnitCreateEffectPointWithSource(lv_raynor, "HyperionInitialCreatePersistent", lv_targetPoint, c_gameCatalogAbil, "RaynorHyperionExecuteOrders");
+    UnitCreateEffectPointWithSource(lv_raynor, "ExecuteOrdersInitialCreatePersistent", lv_targetPoint, c_gameCatalogAbil, "RaynorHyperionExecuteOrders");
     return true;
 }
 
@@ -26651,6 +26688,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_LeoricFealtyUntoDeathEnemyNPCProcListener_Init();
     MimicGameDataHelperLib_gt_LeoricFealtyUntoDeathAlliedNPCProcListener_Init();
     MimicGameDataHelperLib_gt_HeroLeoricOsseinRenewalTalentGlobeProc_Init();
+    MimicGameDataHelperLib_gt_HeroLeoricShroudOfTheDeadKingFloatingText_Init();
     MimicGameDataHelperLib_gt_HeroLostVikingsVikingBriberyNPCProcListener_Init();
     MimicGameDataHelperLib_gt_HeroLostVikingsVikingBriberyUsed_Init();
     MimicGameDataHelperLib_gt_HeroLostVikingsVikingBriberyScoreReset_Init();

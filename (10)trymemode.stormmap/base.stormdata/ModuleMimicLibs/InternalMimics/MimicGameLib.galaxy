@@ -1677,6 +1677,7 @@ void MimicGameLib_gf_DeathRecapAddEffectInstanceForPlayer (int lp_deadPlayer, st
     int lv_itEffect;
     int lv_itMaxDamagerIndex;
     int lv_postEffectHealth;
+    int lv_overkillOverride;
 
     // Automatic Variable Declarations
     int auto11913262_ae;
@@ -1691,6 +1692,12 @@ void MimicGameLib_gf_DeathRecapAddEffectInstanceForPlayer (int lp_deadPlayer, st
         return ;
     }
 
+    if (((UnitGetType(MimicGameLib_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroDVaPilot") || (UnitGetType(MimicGameLib_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroUther") || (UnitGetType(MimicGameLib_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroTyrael") || (UnitGetType(MimicGameLib_gv_players[lp_deadPlayer].lv_heroUnit) == "HeroLeoric"))) {
+        lv_overkillOverride = PlayerScoreValueGetAsInt(lp_deadPlayer, "DeadHeroDamagePreventedByAbsorb");
+    }
+    else {
+        lv_overkillOverride = 0;
+    }
     lv_effectingPlayer = lp_effectingPlayer;
     if ((lv_effectingPlayer >= 1) && (lv_effectingPlayer <= libCore_gv_bALMaxPlayers)) {
         lv_effectHeroIndex = MimicGameLib_gv_players[lv_effectingPlayer].lv_heroIndex;
@@ -1719,7 +1726,7 @@ void MimicGameLib_gf_DeathRecapAddEffectInstanceForPlayer (int lp_deadPlayer, st
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amount = lp_effectAmount;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amountAttempted = lp_effectAmountAttempted;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amountShielded = lp_effectAmountShielded;
-        MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amountOverkill = (lp_effectAmountAttempted - (lp_effectAmount + lp_effectAmountShielded));
+        MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_amountOverkill = ((lp_effectAmountAttempted - (lp_effectAmount + lp_effectAmountShielded)) + lv_overkillOverride);
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_abilityLink = lp_effectingAbility;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_button = lp_sourceButton;
         MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectBars[lv_effectEventTimeIndex].lv_unitType = (CatalogFieldValueGet(c_gameCatalogUnit, lp_effectingUnitType, "LeaderAlias", 0));
@@ -2021,6 +2028,7 @@ void MimicGameLib_gf_DeathRecapPopulateDeathRecapDataForPlayer (unit lp_playerHe
     if ((MimicGameLib_gv_deathRecap_DeathData[lp_deadPlayer].lv_effectEventCount >= 1)) {
         libUIUI_gf_DeathRecapPopulateHighestDamagersForPlayer(lp_deadPlayer);
         libUIUI_gf_DeathRecapPopulateEffectInstancesForAbilitiesPanel(lp_deadPlayer);
+        PlayerScoreValueSetFromInt(lp_deadPlayer, "DeadHeroDamagePreventedByAbsorb", 0);
     }
     else {
         MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_Game_A143D762"), true);
@@ -17924,6 +17932,10 @@ bool MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Func (bool testConds, bool ru
         if (!((MimicGameLib_gv_gameOver == false))) {
             return false;
         }
+
+        if (!((MimicGameLib_gv_playerLeaveCheck[EventPlayer()] != 1))) {
+            return false;
+        }
     }
 
     // Actions
@@ -17932,6 +17944,7 @@ bool MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Func (bool testConds, bool ru
     }
 
     if ((UnitGroupCount(MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup, c_unitCountAll) == 0)) {
+        MimicGameLib_gv_playerLeaveCheck[EventPlayer()] = 1;
         Wait(5.0, c_timeGame);
         auto9C0B1166_g = MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup;
         auto9C0B1166_u = UnitGroupCount(auto9C0B1166_g, c_unitCountAll);
@@ -17940,6 +17953,7 @@ bool MimicGameLib_gt_PlayerLeavesGameIsHumanPlayer_Func (bool testConds, bool ru
             if (lv_itUnit == null) { break; }
             UnitBehaviorAdd(lv_itUnit, "IsHumanPlayer", lv_itUnit, 1);
         }
+        MimicGameLib_gv_playerLeaveCheck[EventPlayer()] = 0;
     }
     else {
         auto534FCED5_g = MimicGameLib_gv_players[EventPlayer()].lv_heroUnitGroup;

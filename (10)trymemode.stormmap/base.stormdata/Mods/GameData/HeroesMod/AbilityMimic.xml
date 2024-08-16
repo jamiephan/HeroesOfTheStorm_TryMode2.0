@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="us-ascii"?>
 
 <!-- ======================================================== -->
-<!-- This file is generated via "npm run buildmimicabilities" -->
+<!-- This file is generated via "npm run build:mimicabilities" -->
 <!-- ======================================================== -->
 <!-- It will find all <CAbil*> and map to a <CBehaviorAbility>, -->
 <!-- That enabled most abilities to be added with behavior, as an item like ice block. -->
-<!-- To prevent collision, all Mimic Abilties's id will have prefixed "M" -->
-<!-- Some Abilites required a specific behavior to be unlocked, which will shown next to the ability below. -->
+<!-- To prevent collision, all Mimic Abilities' id will have prefixed "M" -->
+<!-- Some Abilities required a specific behavior to be unlocked, which will shown next to the ability below. -->
 <!-- Such as "Ultimate1Unlocked" for ultimates -->
 <!-- Please also manually add the behavior to the units. -->
 
@@ -4091,7 +4091,6 @@
         <Buttons Face="AmazonCancelFend" Type="AbilCmd" AbilCmd="AmazonFendCancelChannel,Execute" Behavior="AmazonFendCancelChannel" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MAmazonSurgeOfLight">
-        <!-- Requirement Behavior Detected. Please add the behavior: AmazonAvoidanceSurgeOfLightHasReadyBehavior -->
         <Buttons Face="AmazonAvoidance" Type="AbilCmd" AbilCmd="AmazonSurgeOfLight,Execute" Behavior="AmazonSurgeOfLight" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MAmazonWarTravelerSummonMount">
