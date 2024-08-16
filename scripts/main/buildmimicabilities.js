@@ -11,14 +11,14 @@ const idPrefix = 'M';
 
 let finalXML = '<?xml version="1.0" encoding="us-ascii"?>\n\n';
 finalXML += '<!-- ======================================================== -->\n';
-finalXML += '<!-- This file is generated via "npm run buildmimicabilities" -->\n';
+finalXML += '<!-- This file is generated via "npm run build:mimicabilities" -->\n';
 finalXML += '<!-- ======================================================== -->\n';
 finalXML += '<!-- It will find all <CAbil*> and map to a <CBehaviorAbility>, -->\n';
 // eslint-disable-next-line max-len
 finalXML += '<!-- That enabled most abilities to be added with behavior, as an item like ice block. -->\n';
-finalXML += '<!-- To prevent collision, all Mimic Abilties\'s id will have prefixed "M" -->\n';
+finalXML += '<!-- To prevent collision, all Mimic Abilities\' id will have prefixed "M" -->\n';
 // eslint-disable-next-line max-len
-finalXML += '<!-- Some Abilites required a specific behavior to be unlocked, which will shown next to the ability below. -->\n';
+finalXML += '<!-- Some Abilities required a specific behavior to be unlocked, which will shown next to the ability below. -->\n';
 finalXML += '<!-- Such as "Ultimate1Unlocked" for ultimates -->\n';
 finalXML += '<!-- Please also manually add the behavior to the units. -->\n';
 finalXML += '\n<Catalog>\n';

@@ -93,7 +93,7 @@ To do so, just simply add the behavior to the selected units (e.g using the [cha
 
 Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
->Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
+>Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
 Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
 
@@ -118,7 +118,7 @@ This will generate an ability with the prefixed `MB`. For instance, the behavior
 
 >Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
 
->Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
+>Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
 Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
 
@@ -136,7 +136,7 @@ This tool will search though all the `<CModel>` and map it to a `<CUnit>`, which
 
 This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, which you can summon this unit using tools such as [summon](usage.md#cmd-summon), with the command of `summon UNRetreatPing`.
 
->Note: After generation, it will run a function similar to `npm run buildxml` once, since its a XML mod after all.
+>Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
 Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml`
 

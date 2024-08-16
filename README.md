@@ -5,4 +5,4 @@ A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/)
 
 ---
 
-To get started, please see the project page: https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/
+## To get started, please visit the project page: https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/

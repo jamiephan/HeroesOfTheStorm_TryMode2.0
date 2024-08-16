@@ -3,16 +3,19 @@
 
   <!-- This file enables applying a permanent armor by adding the behavior of: -->
 
-  <!-- PermaKArmor -->
-  <!-- PermaKPhysicalArmor -->
-  <!-- PermaKSpellArmor -->
+  <!-- PermaNArmor -->
+  <!-- PermaNPhysicalArmor -->
+  <!-- PermaNSpellArmor -->
 
-  <!-- Where K can be a numebr between -75 to 75 -->
-  <!-- E.g  Perma10SpellArmor      = Permanent 10 Spell Armor -->
-  <!--      Perma-75Armor          = Permanent -75 Spell Armor-->
+  <!-- Where N can be a number between -75 to 75 -->
+  <!-- E.g  Perma10SpellArmor      = Permanent 10 Spell Armor     -->
+  <!--      Perma-75Armor          = Permanent -75 Armor          -->
   <!--      Perma-50PhysicalArmor  = Permanent -50 Physical Armor -->
 
-  <!-- Yes, XML id key allow hyphen (-) symbol -->
+  <!-- (Yes, XML id key allow hyphen (-) symbol) -->
+
+  <!-- To apply in game, add the behaviour to the unit, or use the chat command: -->
+  <!-- "addbehavior" - "adb Perma-75Armor", "adb Perma10SpellArmor" -->
 
   <!-- ================================================================================== -->
 

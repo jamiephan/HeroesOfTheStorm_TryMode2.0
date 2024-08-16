@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <Catalog>
-  <!-- This file does absolutly nothing but for testing the Generate XML tool.
+  <!-- This file does absolutely nothing but for testing the Generate XML tool.
   As well as force git to upload the empty directory.
-  You can delete this file at any will and do a "npm run buildxml"
+  You can delete this file at any will and do a "npm run build:xml"
   or manually update the GameData.xml file. -->
 </Catalog>

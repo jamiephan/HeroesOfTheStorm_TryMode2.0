@@ -79,7 +79,7 @@ Currently, there are two ways to load a custom map:
 - Replacing in-game single player maps (Tutorial maps, Try Mode):
   - The in game single player maps was loaded from CASC (Blizzard's game file storage) storage: `mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/(10)trymemode.stormmap`. However due to how StarCraft II's engine works, the game will attempt to priorities loading from `Heroes of the Storm Installation/maps` folder before CASC, therefore, this modified map can be "side-loaded" into the game without modifying the CASC storage (which is against the EULA).
 - Run a `.stormmap` file directly:
-  - The game allows to run a `.stormmap` file, which is a modified version of `.sc2map` from StarCraft 2 and it is paclaged in a [MPQ format](http://www.zezula.net/en/mpq/main.html). Simply just run the map with `"HeroesSwitcher_x64.exe <path>"`, where path is the *absolute* path to the `.stormmap` file. Note that unlike usual command line applications where relative path is relative to your working directory, Heroes treats relative path as it is from CASC. So the "relative" path of the `<Path>` argument is relative to `mods/heroes.stormmod/base.stormmaps/maps` (CASC) or `Heroes of the Storm Installation/maps`(File System).
+  - The game allows to run a `.stormmap` file, which is a modified version of `.sc2map` from StarCraft 2 and it is packaged in a [MPQ format](http://www.zezula.net/en/mpq/main.html). Simply just run the map with `"HeroesSwitcher_x64.exe <path>"`, where path is the *absolute* path to the `.stormmap` file. Note that unlike usual command line applications where relative path is relative to your working directory, Heroes treats relative path as it is from CASC. So the "relative" path of the `<Path>` argument is relative to `mods/heroes.stormmod/base.stormmaps/maps` (CASC) or `Heroes of the Storm Installation/maps`(File System).
 
 > Note that both methods allow loading the map which are either a file, folder, or a symbolic link of both, as long as the name is ending in `.stormmap`.
 
@@ -126,7 +126,7 @@ It have various functionalities such as switch heroes, level, etc, which can sav
 
 Base on the naming of the internal variables, I assume this is for QA testers. To use it, type `-devcheats` in the chat (on either Ally or All chats only).
 
->Note: In a recent commit, I have sync the `/` key with QA Cheat menu and Debug menu, which means the `/` key will open both debug and QA menu together. I am considering should I "desync" them.
+>Note: In a recent commit, I have sync the `/` key with QA Cheat menu and Debug menu, which means the `/` key will open both debug and QA menu together. I am considering should I "de-sync" them.
 
 Here is a quick look of the QA cheat menu:
 
