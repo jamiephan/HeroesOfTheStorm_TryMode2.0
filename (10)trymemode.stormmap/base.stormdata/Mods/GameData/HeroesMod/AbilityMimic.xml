@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="us-ascii"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ======================================================== -->
 <!-- This file is generated via "npm run build:mimicabilities" -->
@@ -10,7 +10,7 @@
 <!-- Such as "Ultimate1Unlocked" for ultimates -->
 <!-- Please also manually add the behavior to the units. -->
 
-<Catalog>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
 
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap/base.stormdata/GameData/AbilData.xml}-->

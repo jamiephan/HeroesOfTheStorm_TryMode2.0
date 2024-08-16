@@ -28,12 +28,17 @@ module.exports = (configParam) => {
     rootName: 'Catalog',
     xmldec: {
       version: '1.0',
-      encoding: 'us-ascii',
-      standalone: false,
+      encoding: 'UTF-8',
     },
   });
 
-  const mainObj = {};
+  const mainObj = {
+    $: {
+      'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+      // eslint-disable-next-line max-len
+      'xsi:noNamespaceSchemaLocation': 'https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd',
+    },
+  };
 
   if (!(config.generation.pre === null || typeof config.generation.pre === 'undefined')) {
     config.generation.pre.forEach((o) => {

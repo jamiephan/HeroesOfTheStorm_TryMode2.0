@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="us-ascii"?>
-<Catalog>
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
 
   <!-- This file enabled the glowing icons (e.g when Zuljin D active) on Q W E R D buttons -->
   <!-- To have a button glowing, simply add the following behaviors (e.g using tools such as "adb" chat command): -->

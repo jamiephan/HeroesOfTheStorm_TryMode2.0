@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="us-ascii"?>
-<Catalog>
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
   <!-- This file does absolutely nothing but for testing the Generate XML tool.
   As well as force git to upload the empty directory.
   You can delete this file at any will and do a "npm run build:xml"

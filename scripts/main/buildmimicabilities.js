@@ -9,7 +9,7 @@ const XMLFiles = HeroesFiles.ReadEach(HeroesFiles.AllXMLs);
 
 const idPrefix = 'M';
 
-let finalXML = '<?xml version="1.0" encoding="us-ascii"?>\n\n';
+let finalXML = '<?xml version="1.0" encoding="UTF-8"?>\n\n';
 finalXML += '<!-- ======================================================== -->\n';
 finalXML += '<!-- This file is generated via "npm run build:mimicabilities" -->\n';
 finalXML += '<!-- ======================================================== -->\n';
@@ -21,7 +21,8 @@ finalXML += '<!-- To prevent collision, all Mimic Abilities\' id will have prefi
 finalXML += '<!-- Some Abilities required a specific behavior to be unlocked, which will shown next to the ability below. -->\n';
 finalXML += '<!-- Such as "Ultimate1Unlocked" for ultimates -->\n';
 finalXML += '<!-- Please also manually add the behavior to the units. -->\n';
-finalXML += '\n<Catalog>\n';
+// eslint-disable-next-line max-len
+finalXML += '\n<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">\n';
 
 XMLFiles.forEach((obj) => {
   XMLParser(obj.fileData, (err, result) => {
