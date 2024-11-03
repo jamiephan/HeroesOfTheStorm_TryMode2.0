@@ -3008,6 +3008,8 @@ void MimicGameDataHelperLib_gf_HeroRehgarIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionResetOnRewindUse, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarEarthlivingEnchantHotApply, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc, true);
     }
 
 }
@@ -3028,6 +3030,8 @@ void MimicGameDataHelperLib_gf_HeroRehgarDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionResetOnRewindUse, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarTidalWavesModifyCooldown, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarEarthlivingEnchantHotApply, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc, false);
     }
 
 }
@@ -5146,6 +5150,7 @@ void MimicGameDataHelperLib_gt_HeroAbathurCarapaceRegenerativeMicrobes_Init () {
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroAbathurCarapaceRegenerativeMicrobes, c_playerAny, "CarapaceEvolutionApplyShield");
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroAbathurCarapaceRegenerativeMicrobes, c_playerAny, "CarapaceEvolutionApplyShieldHivemind");
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroAbathurCarapaceRegenerativeMicrobes, c_playerAny, "AbathurSymbioteApplyCarapaceNetworkedCarapaceTalentShield");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroAbathurCarapaceRegenerativeMicrobes, c_playerAny, "AbathurSymbioteApplyCarapaceNetworkedCarapaceHivemindTalentShield");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -18744,7 +18749,10 @@ bool MimicGameDataHelperLib_gt_HeroRaynorBansheeTeleport_Func (bool testConds, b
         if (autoD0FD4CB9_var == null) { break; }
         if ((UnitGetType(autoD0FD4CB9_var) == "RaynorRaynorsBanshee")) {
             UnitSetPosition(autoD0FD4CB9_var, UnitGetPosition(libGame_gv_players[lv_player].lv_heroUnit), false);
-            UnitCreateEffectUnit(autoD0FD4CB9_var, "HearthstoneHealthCreateHealer", autoD0FD4CB9_var);
+            if ((EventPlayerEffectUsed() == "HearthstoneTeleport")) {
+                UnitCreateEffectUnit(autoD0FD4CB9_var, "HearthstoneHealthCreateHealer", autoD0FD4CB9_var);
+            }
+
             UnitCreateEffectUnit(lv_unit, "RaynorRaynorsRaidersLeashTrackedUnits", lv_unit);
         }
 
@@ -19163,6 +19171,105 @@ void MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase_Init () {
     MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase = TriggerCreate("MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase, false);
     libGame_gf_HeroSpecialCaseMounting(MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Rehgar - Electric Charge - Add Leech
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv_damageAmount;
+    unit lv_rehgarUnit;
+    int lv_rehgarPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_rehgarUnit = EventUnitDamageSourceUnit();
+    lv_rehgarPlayer = UnitGetOwner(EventUnitDamageSourceUnit());
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitTypeTestAttribute(UnitGetType(EventUnit()), c_unitAttributeHeroic) == true))) {
+            return false;
+        }
+
+        if (!((PlayerHasTalent(lv_rehgarPlayer, "RehgarLightningShieldElectricCharge") == true))) {
+            return false;
+        }
+
+        if (!((lv_rehgarPlayer >= 1))) {
+            return false;
+        }
+
+        if (!((lv_rehgarPlayer <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_damageAmount = ((EventUnitDamageAmount() + EventUnitDamageBehaviorShield()) * CatalogFieldValueGetAsFixed(c_gameCatalogEffect, EventUnitDamageEffect(), "LeechFraction[" + IntToString(c_unitVitalLife) + "]", lv_rehgarPlayer));
+    MimicGameDataHelperLib_gv_heroRehgarElecrtricChargeLeechCombined[lv_rehgarPlayer] = (MimicGameDataHelperLib_gv_heroRehgarElecrtricChargeLeechCombined[lv_rehgarPlayer] + lv_damageAmount);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech_Init () {
+    MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech = TriggerCreate("MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech, false);
+    TriggerAddDamageEvent(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech, "HeroRehgar", null, c_unitDamageTypeAbility, c_unitDamageEither, "RehgarLightningShieldDamage");
+    TriggerAddDamageEvent(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech, "HeroRehgar", null, c_unitDamageTypeAbility, c_unitDamageEither, "RehgarLightningShieldElectricChargeTalentDamage");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Rehgar - Electric Charge - Leech Proc
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_rehgarUnit;
+    unit lv_sourceUnit;
+    int lv_rehgarPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_rehgarUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_sourceUnit = EventPlayerEffectUsedUnit(c_effectUnitSource);
+    lv_rehgarPlayer = UnitGetOwner(lv_rehgarUnit);
+
+    // Conditions
+    if (testConds) {
+        if (!((MimicGameDataHelperLib_gv_heroRehgarElecrtricChargeLeechCombined[lv_rehgarPlayer] > 0.0))) {
+            return false;
+        }
+
+        if (!((lv_rehgarPlayer >= 1))) {
+            return false;
+        }
+
+        if (!((lv_rehgarPlayer <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CatalogFieldValueSetFixed(c_gameCatalogEffect, "RehgarElectricChargeCreateHealer", "RechargeVitalRate", lv_rehgarPlayer, MimicGameDataHelperLib_gv_heroRehgarElecrtricChargeLeechCombined[lv_rehgarPlayer]);
+    UnitCreateEffectUnit(lv_rehgarUnit, "RehgarElectricChargeCreateHealerSet", lv_sourceUnit);
+    MimicGameDataHelperLib_gv_heroRehgarElecrtricChargeLeechCombined[lv_rehgarPlayer] = 0.0;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc_Init () {
+    MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc, c_playerAny, "RehgarLightningShieldLeechProcDummy");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -20366,7 +20473,10 @@ bool MimicGameDataHelperLib_gt_HeroRexxarMishaTeleport_Func (bool testConds, boo
         if ((UnitGetType(autoFF82D22F_var) == "RexxarMisha")) {
             UnitCreateEffectUnit(autoFF82D22F_var, "RexxarMishaHoldIssueStopOrder", autoFF82D22F_var);
             UnitSetPosition(autoFF82D22F_var, UnitGetPosition(libGame_gv_players[lv_player].lv_heroUnit), false);
-            UnitCreateEffectUnit(autoFF82D22F_var, "HearthstoneHealthCreateHealer", autoFF82D22F_var);
+            if ((EventPlayerEffectUsed() == "HearthstoneTeleport")) {
+                UnitCreateEffectUnit(autoFF82D22F_var, "HearthstoneHealthCreateHealer", autoFF82D22F_var);
+            }
+
             Wait(0.0625, c_timeGame);
             MimicGameDataHelperLib_gf_HeroRexxarMishaStopMishaandResetThink(autoFF82D22F_var);
         }
@@ -26810,6 +26920,8 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroRehgarTotemicProjectionResetOnRewindUse_Init();
     MimicGameDataHelperLib_gt_HeroRehgarGhostWolfAfterPortToTown_Init();
     MimicGameDataHelperLib_gt_HeroRehgarGhostWolfMountingSpecialCase_Init();
+    MimicGameDataHelperLib_gt_HeroRehgarElectricChargeAddLeech_Init();
+    MimicGameDataHelperLib_gt_HeroRehgarElectricChargeLeechProc_Init();
     MimicGameDataHelperLib_gt_RexxarUIInitialize_Init();
     MimicGameDataHelperLib_gt_RexxarUICleanupForHeroSwap_Init();
     MimicGameDataHelperLib_gt_HeroRexxarCleanUpForAbathurUltimateEvolutionClone_Init();

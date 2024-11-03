@@ -3606,6 +3606,13 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/onelane/onelanemapshared.stormmod/base.stormdata/GameData/ButtonData.xml}-->
+<!-- ///////////////////////////////////-->
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesbrawlmods/brawlmapmods/onelane/onelanemapshared.stormmod/base.stormdata/GameData/ButtonData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/brawlmapmods/blackheartsrevenge.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MAttackCore">
