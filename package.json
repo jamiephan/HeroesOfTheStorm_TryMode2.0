@@ -31,7 +31,7 @@
     "dependencies": {
         "app-root-path": "^3.0.0",
         "dotenv": "^8.2.0",
-        "nodemon": "^2.0.6",
+        "nodemon": "^2.0.20",
         "rimraf": "^3.0.2",
         "storm-extract": "^1.0.3",
         "tmp": "^0.2.1",
