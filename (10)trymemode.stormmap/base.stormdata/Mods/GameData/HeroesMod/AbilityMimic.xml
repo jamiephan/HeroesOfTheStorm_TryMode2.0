@@ -1746,10 +1746,6 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2UnlockedandStormEarthFireNotActive -->
         <Buttons Face="ChenStormEarthFire" Type="AbilCmd" AbilCmd="ChenStormEarthFire,Execute" Behavior="ChenStormEarthFire" />
     </CBehaviorAbility>
-    <CBehaviorAbility id="MChenWanderingKeg">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="ChenWanderingKeg" Type="AbilCmd" AbilCmd="ChenWanderingKeg,Execute" Behavior="ChenWanderingKeg" />
-    </CBehaviorAbility>
     <CBehaviorAbility id="MChenBreathOfFire">
         <Buttons Face="ChenBreathOfFire" Type="AbilCmd" AbilCmd="ChenBreathOfFire,Execute" Behavior="ChenBreathOfFire" />
     </CBehaviorAbility>
@@ -1762,6 +1758,10 @@
     <CBehaviorAbility id="MChenEarth">
         <!-- Requirement Behavior Detected. Please add the behavior: ChenEarthAlive -->
         <Buttons Face="ChenEarth" Type="AbilCmd" AbilCmd="ChenEarth,Execute" Behavior="ChenEarth" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MChenWanderingKeg">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="ChenWanderingKeg" Type="AbilCmd" AbilCmd="ChenWanderingKeg,Execute" Behavior="ChenWanderingKeg" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MChenWanderingKegMoveDummy">
         <Buttons Face="Move" Type="AbilCmd" AbilCmd="ChenWanderingKegMoveDummy,Execute" Behavior="ChenWanderingKegMoveDummy" />
@@ -4301,6 +4301,9 @@
     <CBehaviorAbility id="MMedivhPolyBomb">
         <!-- Requirement Behavior Detected. Please add the behavior: MedivhSpecialCaseUltimate1Unlocked -->
         <Buttons Face="MedivhPolyBomb" Type="AbilCmd" AbilCmd="MedivhPolyBomb,Execute" Behavior="MedivhPolyBomb" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MMedivhPolyBombGlyphOfPolyBomb">
+        <Buttons Face="MedivhPolyBomb" Type="AbilCmd" AbilCmd="MedivhPolyBombGlyphOfPolyBomb,Execute" Behavior="MedivhPolyBombGlyphOfPolyBomb" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MMedivhDustofDisappearance">
         <!-- Requirement Behavior Detected. Please add the behavior: MedivhAbilityCastLocationPathable -->

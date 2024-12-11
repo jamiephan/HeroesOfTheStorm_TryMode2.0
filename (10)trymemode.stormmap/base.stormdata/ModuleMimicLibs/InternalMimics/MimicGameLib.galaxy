@@ -4306,12 +4306,13 @@ void MimicGameLib_gf_HeroUnitSwappedForPlayer (trigger t) {
     TriggerAddEventGeneric(t, MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C);
 }
 
-void MimicGameLib_gf_SendEventHeroUnitSwappedForPlayer (unit lp_oldUnit, unit lp_newUnit, int lp_playerNumber) {
+void MimicGameLib_gf_SendEventHeroUnitSwappedForPlayer (unit lp_oldUnit, unit lp_newUnit, int lp_playerNumber, bool lp_preserveOnOld) {
     // Automatic Variable Declarations
     // Implementation
     DataTableSetUnit(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_OldUnit_C), lp_oldUnit);
     DataTableSetUnit(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_NewUnit_C), lp_newUnit);
     DataTableSetInt(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_PlayerNumber_C), lp_playerNumber);
+    DataTableSetBool(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_PreserveOnOld_C), lp_preserveOnOld);
     TriggerSendEvent(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C);
 }
 
@@ -4331,6 +4332,12 @@ int MimicGameLib_gf_HeroUnitSwappedForPlayerPlayerNumber () {
     // Automatic Variable Declarations
     // Implementation
     return DataTableGetInt(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_PlayerNumber_C));
+}
+
+bool MimicGameLib_gf_HeroUnitSwappedForPlayerPreserveOnOld () {
+    // Automatic Variable Declarations
+    // Implementation
+    return DataTableGetBool(false, TriggerEventParamName(MimicGameLib_gv_eventID_HeroUnitSwappedForPlayer_C, MimicGameLib_gv_eventParam_HeroUnitSwappedForPlayer_PreserveOnOld_C));
 }
 
 void MimicGameLib_gf_JungleCampSpawning (trigger t) {

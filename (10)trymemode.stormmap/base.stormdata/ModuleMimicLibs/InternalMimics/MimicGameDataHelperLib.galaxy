@@ -11848,11 +11848,11 @@ bool MimicGameDataHelperLib_gt_HeroLiLiCloudSerpentTurretSerpentSummonandSimplif
     UnitCreateEffectUnit(lv_owningUnit, "HeroGenericTimeStopListenerApplyBehavior", lv_cloudSerpent);
     MimicGameDataHelperLib_gv_hero_LiLi_ActiveCloudSerpents[lv_liLiPlayer][lv_owningPlayer] = UnitLastCreated();
     UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentUnitTracker", lv_owningUnit, 1);
-    UnitBehaviorAdd(lv_cloudSerpent, "LiLiBlindingWindSurgingWindsCloudSerpentAbilityPower", lv_caster, 1);
     UnitCreateEffectUnit(lv_cloudSerpent, "LiLiCloudSerpentAddTrackedUnit", lv_owningUnit);
     UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentMinionBehavior", lv_caster, 1);
     UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentBlessingsOfYulon", lv_caster, 1);
     UnitBehaviorAdd(lv_cloudSerpent, "CloudSerpentLightningSerpentBehavior", lv_caster, 1);
+    UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentAbilityController", lv_caster, 1);
     if ((PlayerHasTalent(lv_liLiPlayer, "LiLiMasteryCloudSerpentSerpentSidekick") == true) && (lv_liLiPlayer == UnitGetOwner(EventPlayerEffectUsedUnit(c_effectUnitTarget)))) {
         UnitBehaviorAdd(lv_cloudSerpent, "LiLiCloudSerpentSerpentSidekickOwnerBehavior", lv_owningUnit, 1);
     }
