@@ -2709,7 +2709,6 @@ void MimicGameDataHelperLib_gf_HeroMonkIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroMonkTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroMonkTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkSixthSenseProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmSetLife, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmOverlayOn, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmOverlayOff, true);
@@ -2730,7 +2729,6 @@ void MimicGameDataHelperLib_gf_HeroMonkDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroMonkTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkSixthSenseProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmSetLife, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmOverlayOn, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMonkDivinePalmOverlayOff, false);
@@ -9514,6 +9512,11 @@ bool MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeFindLandingLocation_Func (b
     lv_lunara = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     while (((PathingType(lv_newLocation) != c_pathingGround))) {
         lv_newLocation = libNtve_gf_PointOffsetTowardsPoint(lv_newLocation, lv_searchIncrements, UnitGetPosition(lv_lunara));
+        if ((DistanceBetweenPoints(lv_newLocation, UnitGetPosition(lv_lunara)) <= lv_searchIncrements)) {
+            lv_newLocation = UnitTypePlacementTestsFromPoint(UnitGetType(lv_lunara), 0, lv_newLocation, 5.0, c_placementTestIgnoreBlockersMask);
+            break;
+        }
+
     }
     if ((UnitHasBehavior2(lv_lunara, "DryadLeapingStrikeFriendlyCast") == true)) {
         UnitCreateEffectPoint(lv_lunara, "DryadLeapingStrikeBoundlessStrideLaunchMissile", lv_newLocation);
@@ -22243,7 +22246,7 @@ bool MimicGameDataHelperLib_gt_HeroStitchesHookHookVision_Func (bool testConds, 
         lv_enemyTeam = libCore_gv_cOMPUTER_TeamOrder;
     }
     if ((VisIsVisibleForPlayer(lv_enemyTeam, lv_effectPoint) == true)) {
-        VisRevealArea(lv_enemyTeam, RegionCircle(UnitGetPosition(lv_stitches), 0.5), 0.25, false);
+        PlayerCreateEffectUnit(lv_enemyTeam, "ApplyMissileSourceRevealer", lv_stitches);
     }
 
     return true;
@@ -23346,7 +23349,7 @@ bool MimicGameDataHelperLib_gt_HeroTassadarShockRayVision_Func (bool testConds, 
         lv_enemyTeam = libCore_gv_cOMPUTER_TeamOrder;
     }
     if ((VisIsVisibleForPlayer(lv_enemyTeam, lv_effectPoint) == true)) {
-        VisRevealArea(lv_enemyTeam, RegionCircle(UnitGetPosition(lv_tass), 0.5), 0.3125, false);
+        PlayerCreateEffectUnit(lv_enemyTeam, "ApplyMissileSourceRevealer", lv_tass);
     }
 
     return true;

@@ -3678,6 +3678,16 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesbrawlmods/arenamodemods/arenashared.stormmod/base.stormdata/GameData/AbilData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MDeathwingCataclysm">
+        <Buttons Face="DeathwingCataclysm" Type="AbilCmd" AbilCmd="DeathwingCataclysm,Execute" Behavior="DeathwingCataclysm" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesbrawlmods/arenamodemods/arenashared.stormmod/base.stormdata/GameData/AbilData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesbrawlmods/arenamodemods/arenamode.stormmod/base.stormdata/GameData/AbilData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MHearthstone">
