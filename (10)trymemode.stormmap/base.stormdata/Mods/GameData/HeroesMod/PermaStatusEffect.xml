@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
+
+  <!-- This file added permanent status effects, like unstoppable/fear -->
+  <!-- To have a status effect, simply add the following behaviors (e.g using tools such as "adb" chat command): -->
+
+  <!-- For Permanent +/- Armors, please see PermaArmor.xml file. -->
+
+  <!-- ╔═════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                          - Buffs -                          ║ -->
+  <!-- ╠═════════════════════════════════════════════════════════════╣ -->
+  <!-- ║ PermaAbsorbing     (e.g Yrel's R ........Ardent Defender)   ║ -->
+  <!-- ║ PermaEvade         (e.g Illidan's E......Evasion)           ║ -->
+  <!-- ║ PermaInvulnerable  (e.g Uther's R........Divine Shield)     ║ -->
+  <!-- ║ PermaParry         (e.g Varian's W.......Parry)             ║ -->
+  <!-- ║ PermaProtect       (e.g Medivh's W ......Force of Will)     ║ -->
+  <!-- ║ PermaStasis        (e.g Nazeebo's lv13...Ice Block)         ║ -->
+  <!-- ║ PermaSprint        (e.g Arthas's lv20....Death's Advance)   ║ -->
+  <!-- ║ PermaStealth       (e.g Nova's Trait.....Permanent Cloak )  ║ -->
+  <!-- ║ PermaUnkillable    (e.g Zuljin's R.......Tazdingo)          ║ -->
+  <!-- ║ PermaUnstoppable   (e.g Anubarak's E.....Burrow Charge)     ║ -->
+  <!-- ║ PermaUntargetable  (e.g Valeera's R......Smoke Bomb)        ║ -->
+  <!-- ╚═════════════════════════════════════════════════════════════╝ -->
+
+  <!-- ╔═════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                         - Debuffs -                         ║ -->
+  <!-- ╠═════════════════════════════════════════════════════════════╣ -->
+  <!-- ║ PermaBlind         (e.g Johanna's E......Shield Glare)      ║ -->
+  <!-- ║ PermaDisplacement  (e.g ETC's W..........Face Melt)         ║ -->
+  <!-- ║ PermaFear          (e.g Guldan's R.......Horrify)           ║ -->
+  <!-- ║ PermaMindControl   (e.g Sylvanas's R.....Mind Control)      ║ -->
+  <!-- ║ PermaRevealed      (e.g Tassadar's lv13..Oracle)            ║ -->
+  <!-- ║ PermaRoot          (e.g Malfurion's E....Entangling Roots)  ║ -->
+  <!-- ║ PermaSilence       (e.g Sylvanas's R.....Wailing Arrow)     ║ -->
+  <!-- ║ PermaSleep         (e.g Ana's E..........Sleep Dart)        ║ -->
+  <!-- ║ PermaSlow          (e.g Arthas's E.......Frozen Tempest)    ║ -->
+  <!-- ║ PermaTimeStop      (e.g Zeratul's R......Void Prison)       ║ -->
+  <!-- ║ PermaStun          (e.g Muradin's Q......Strom Bolt)        ║ -->
+  <!-- ║ PermaTaunt         (e.g Varian's R.......Taunt)             ║ -->
+  <!-- ╚═════════════════════════════════════════════════════════════╝ -->
+
+
+
+
+
+
+
+
+  <!-- ============================================================= -->
+  <!-- ======================== Buffs ============================== -->
+
+  <!-- // TODO Make effects separate from the heroes FX, so using the actual ability will not override the effect -->
+
+  <!-- Absorbing (// TODO figure how to absorb to heal...)-->
+  <CBehaviorBuff id="PermaAbsorbing">
+    <Alignment value="Positive" />
+    <BehaviorCategories index="Restorable" value="1" />
+    <BehaviorCategories index="Absorbing" value="1" />
+    <DamageResponse Chance="1" Priority="96" ModifyFraction="0">
+      <ModifyScoreArray Value="SelfHealing" />
+      <RecordBehaviorShieldDamage value="1" />
+    </DamageResponse>
+  </CBehaviorBuff>
+
+  <!-- Evade-->
+  <CBehaviorBuff id="PermaEvade" parent="StormEvasion" />
+  <CActorSimple id="PermaEvadeSimpleFx">
+    <!-- On Enable -->
+    <On Terms="Behavior.PermaEvade.On" Send="Create" />
+    <On Terms="ActorCreation" Send="Create IllidanEvasionCastSound" />
+    <On Terms="ActorCreation" Target="_Unit" Send="SetOpacity 0.500000 0.100000 Opacity" />
+    <On Terms="ActorCreation" Target="_Unit" Send="ModelMaterialApply IllidanEvasionGlaze" />
+
+    <!-- On Disable -->
+    <On Terms="Behavior.PermaEvade.Off" Send="Destroy" />
+    <On Terms="ActorDestruction" Target="_Unit" Send="ClearOpacity 0.250000 Opacity" />
+    <On Terms="ActorDestruction" Target="IllidanEvasionGlaze" Send="AnimBracketStop BSD" />
+  </CActorSimple>
+
+  <!-- Invulnerable -->
+  <!-- PermaInvulnerable (Built in) -->
+  <CActorSimple id="PermaInvulnerableSimpleFX">
+    <!-- On Enable -->
+    <On Terms="Behavior.PermaInvulnerable.On" Send="Create" />
+    <On Terms="ActorCreation" Send="Create AnduinHolyWordSalvationBuffFX" />
+    <On Terms="ActorCreation" Target="_Unit" Send="ModelMaterialApply AnduinHolyWordSalvationBuffGlazeFX" />
+    <!-- On Disable -->
+    <On Terms="Behavior.PermaInvulnerable.Off" Send="Destroy" />
+    <On Terms="ActorDestruction" Target="AnduinHolyWordSalvationBuffFX" Send="AnimBracketStop BSD" />
+    <On Terms="ActorDestruction" Target="AnduinHolyWordSalvationBuffGlazeFX" Send="AnimBracketStop BSD" />
+  </CActorSimple>
+
+  <!-- Parry -->
+  <CBehaviorBuff id="PermaParry" parent="StormProtect">
+    <BehaviorCategories index="Protected" value="0" />
+    <BehaviorCategories index="Evasion" value="1" />
+    <DamageResponse TargetFilters="-;Player,Ally" Priority="95">
+      <Kind index="Ability" value="0" />
+    </DamageResponse>
+  </CBehaviorBuff>
+  <CActorSimple id="PermaParrySimpleFX">
+    <!-- On Enable -->
+    <On Terms="Behavior.PermaParry.On" Send="Create" />
+    <On Terms="ActorCreation" Send="Create VarianParryActiveSound" />
+    <On Terms="ActorCreation" Target="_Unit" Send="ModelMaterialApply VarianParryActiveGlaze" />
+
+    <!-- On Disable -->
+    <On Terms="Behavior.PermaParry.Off" Send="Destroy" />
+    <On Terms="ActorDestruction" Target="VarianParryActiveGlaze" Send="AnimBracketStop BSD" />
+  </CActorSimple>
+
+
+  <!-- Protect -->
+  <CBehaviorBuff id="PermaProtect" parent="StormProtect" />
+  <CActorSimple id="PermaProtectSimpleFX">
+    <!-- On Enable -->
+    <On Terms="Behavior.PermaProtect.On" Send="Create" />
+    <On Terms="ActorCreation" Send="Create Medivh_ForceOfWill_Impact" />
+    <On Terms="ActorCreation" Target="_Unit" Send="Create MedivhForceOfWillBuffFX" />
+
+    <!-- On Disable -->
+    <On Terms="Behavior.PermaProtect.Off" Send="Destroy" />
+    <On Terms="ActorDestruction" Target="MedivhForceOfWillBuffFX" Send="AnimBracketStop BSD" />
+  </CActorSimple>
+
+  <!-- Stasis -->
+  <!-- PermaStasis (Built in) -->
+  <CBehaviorBuff id="PermaStasis">
+    <!-- Add Disable movement and weapon to build in-->
+    <Modification>
+      <ModifyFlags index="DisableAbils" value="1" />
+      <ModifyFlags index="SuppressCloak" value="1" />
+      <ModifyFlags index="SuppressFidgeting" value="1" />
+      <ModifyFlags index="SuppressMoving" value="1" />
+      <ModifyFlags index="DisableWeapons" value="1" />
+    </Modification>
+  </CBehaviorBuff>
+  <CActorSimple id="PermaStasisSimpleFX">
+    <!-- On Enable -->
+    <On Terms="Behavior.PermaStasis.On" Send="Create" />
+    <On Terms="ActorCreation" Target="::Main" Send="SetTintColor 129,129,129 0.25 OneShot Active" />
+    <On Terms="ActorCreation" Target="_Unit" Send="AnimSetPausedAll" />
+    <!-- On Disable -->
+    <On Terms="Behavior.PermaStasis.Off" Send="Destroy" />
+    <On Terms="ActorDestruction" Target="::Main" Send="ClearTintColor 0.25 Active" />
+    <On Terms="ActorDestruction" Target="_Unit" Send="AnimSetPausedAll 0" />
+  </CActorSimple>
+
+  <!-- Sprint -->
+  <CBehaviorBuff id="PermaSprint" parent="StormSprint">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.25" />
+    </Modification>
+  </CBehaviorBuff>
+
+  <!-- Stealth -->
+  <CBehaviorBuff id="PermaStealth" parent="StormPersistentCloak" />
+
+  <!-- Unkillable -->
+  <CBehaviorBuff id="PermaUnkillable">
+    <InfoFlags index="AlwaysUseGameText" value="1" />
+    <BehaviorCategories index="Restorable" value="1" />
+    <BehaviorCategories index="Unkillable" value="1" />
+    <DisplayDuration index="Self" value="1" />
+    <DisplayDuration index="Ally" value="1" />
+    <DisplayDuration index="Neutral" value="1" />
+    <DisplayDuration index="Enemy" value="1" />
+    <DamageResponse>
+      <Chance value="1" />
+      <Priority value="23" />
+      <Fatal value="1" />
+      <RecordBehaviorShieldDamage value="1" />
+      <RestoreLifeAfterFatal value="1" />
+      <ModifyFraction value="0" />
+      <ModifyMinimumDamage value="1" />
+      <ProvideCategories index="Shield" value="1" />
+      <PreventCategories index="Shield" value="1" />
+    </DamageResponse>
+  </CBehaviorBuff>
+
+  <!-- Unstoppable -->
+  <!-- PermaUnstoppable (Built in) -->
+
+  <!-- Untargetable -->
+  <CBehaviorBuff id="PermaUntargetable" parent="StormUnrevealableCloak" />
+
+
+  <!-- ============================================================== -->
+  <!-- ========================= Debuffs ============================ -->
+
+  <!-- Blind -->
+  <!-- PermaBlind (Built in)-->
+
+  <!-- Displacement (// TODO Effects)-->
+  <CBehaviorBuff id="PermaDisplacement" parent="PushPullParent" />
+
+  <!-- Fear -->
+  <!-- PermaFear (Built in)-->
+
+  <!-- Mind Control -->
+  <CBehaviorBuff id="PermaMindControl" parent="PermaSilence">
+    <BehaviorCategories index="MindControl" value="1" />
+    <Modification>
+      <!-- <ModifyFlags index="SuppressMoving" value="1" /> -->
+      <ModifyFlags index="DisableWeapons" value="1" />
+    </Modification>
+  </CBehaviorBuff>
+
+  <!-- Poly -->
+  <!-- PermaPoly (Built in)-->
+  
+  <!-- Revealed -->
+  <CBehaviorBuff id="PermaRevealed" parent="StormReveal" />
+  
+  <!-- Root -->
+  <!-- PermaRoot (Built in)-->
+  
+  <!-- Silence -->
+  <!-- PermaSilence (Built in)-->
+    
+  <!-- Sleep -->
+  <!-- PermaSleep (Built in)-->
+  
+  <!-- Slow -->
+  <!-- PermaSlow (Built in)-->
+    
+  <!-- Time Stop -->
+  <!-- PermaTimeStop (Built in)-->
+  
+  <!-- Stun -->
+  <!-- PermaStun (Built in)-->
+
+  <!-- Taunt -->
+  <CBehaviorBuff id="PermaTaunt" parent="StormTauntParent" />
+
+</Catalog>

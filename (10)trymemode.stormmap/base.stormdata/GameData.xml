@@ -5,6 +5,7 @@
   <Catalog path="Mods/GameData/HeroesMod/IconGlowing.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/ModelMimic.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/PermaArmor.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaStatusEffect.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/TestHero.xml"/>
   <Catalog path="Mods/GameData/SystemMod/TestSystem.xml"/>
 </Includes>

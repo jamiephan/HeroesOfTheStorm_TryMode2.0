@@ -12,10 +12,10 @@
   <!--      Perma-75Armor          = Permanent -75 Armor          -->
   <!--      Perma-50PhysicalArmor  = Permanent -50 Physical Armor -->
 
-  <!-- (Yes, XML id key allow hyphen (-) symbol) -->
-
   <!-- To apply in game, add the behaviour to the unit, or use the chat command: -->
   <!-- "addbehavior" - "adb Perma-75Armor", "adb Perma10SpellArmor" -->
+
+  <!-- For Permanent Status Effects, please see PermaStatusEffect.xml file. -->
 
   <!-- ================================================================================== -->
 
