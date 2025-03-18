@@ -13,6 +13,7 @@ const int libFUNY_gv_randomEffectLength = 16;
 struct libFUNY_gs_Whatishappening {
     string[libFUNY_gv_randomEffectLength + 1] lv_randomEffectList;
     bool lv_randomBigger;
+    bool lv_randomSmaller;
     bool lv_randomStopAnimation;
 };
 
@@ -30,6 +31,8 @@ trigger libFUNY_gt_initRandomEffects;
 trigger libFUNY_gt_ToggleWhatisHappening;
 trigger libFUNY_gt_WhatisHappening;
 trigger libFUNY_gt_Imfeelinglucky;
+trigger libFUNY_gt_ImfeelingluckytooActuallyrandomeffects;
+trigger libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours;
 
 // Library Initialization
 void libFUNY_InitVariables ();
@@ -298,6 +301,10 @@ bool libFUNY_gt_WhatisHappening_Func (bool testConds, bool runActions) {
         libFUNY_gv_whatishappening.lv_randomBigger = !(libFUNY_gv_whatishappening.lv_randomBigger);
     }
 
+    if ((lv_random == 4)) {
+        libFUNY_gv_whatishappening.lv_randomSmaller = !(libFUNY_gv_whatishappening.lv_randomSmaller);
+    }
+
     auto3A47B911_g = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter(0, 0, 0, (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
     auto3A47B911_u = UnitGroupCount(auto3A47B911_g, c_unitCountAll);
     for (;; auto3A47B911_u -= 1) {
@@ -396,7 +403,12 @@ bool libFUNY_gt_WhatisHappening_Func (bool testConds, bool runActions) {
             UnitSetScale(lv_unit, 200.0, 200.0, 200.0);
         }
         else {
-            UnitSetScale(lv_unit, 100.0, 100.0, 100.0);
+            if ((libFUNY_gv_whatishappening.lv_randomSmaller == true)) {
+                UnitSetScale(lv_unit, 35.0, 35.0, 35.0);
+            }
+            else {
+                UnitSetScale(lv_unit, 100.0, 100.0, 100.0);
+            }
         }
         if ((lv_random == 3)) {
             UnitCreateEffectUnit(UnitGroupUnit(UnitGroupAlliance(UnitGetOwner(lv_unit), c_unitAllianceEnemy, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1), (libFUNY_gv_whatishappening.lv_randomEffectList[RandomInt(0, libFUNY_gv_randomEffectLength)]), lv_unit);
@@ -448,6 +460,156 @@ void libFUNY_gt_Imfeelinglucky_Init () {
     TriggerAddEventChatMessage(libFUNY_gt_Imfeelinglucky, c_playerAny, "Im feeling lucky", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Im feeling lucky too (Actually random effects)
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_ImfeelingluckytooActuallyrandomeffects_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__eachUnitInListIdx;
+    unit[1001] lv_unitList;
+    string[1001] lv__randomEffects;
+    int lv__i;
+    int lv__effectCounter;
+    int[1001] lv__randomEffectIdx;
+    int lv_totalEffectCount;
+    string lv_random;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    int auto24AE23FC_catalog;
+    int auto24AE23FC_i;
+    unitgroup auto3407F4A0_g;
+    int auto3407F4A0_u;
+    int autoB75E1AFF_catalog;
+    int autoB75E1AFF_i;
+    const int autoFBB36FF0_ae = 1000;
+    const int autoFBB36FF0_ai = 1;
+    const int auto039C0677_ae = 1000;
+    const int auto039C0677_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto24AE23FC_catalog = c_gameCatalogEffect;
+    auto24AE23FC_i = 1;
+    for ( ; auto24AE23FC_i <= CatalogEntryCount(c_gameCatalogEffect) ; auto24AE23FC_i += 1 ) {
+        lv_random = CatalogEntryGet(auto24AE23FC_catalog, auto24AE23FC_i);
+        lv_totalEffectCount = (lv_totalEffectCount + 1);
+    }
+    auto3407F4A0_g = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterStructure) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto3407F4A0_u = UnitGroupCount(auto3407F4A0_g, c_unitCountAll);
+    for (;; auto3407F4A0_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(auto3407F4A0_g, auto3407F4A0_u);
+        if (lv_unit == null) { break; }
+        lv_unitList[lv__i] = lv_unit;
+        lv__randomEffectIdx[lv__i] = RandomInt(0, lv_totalEffectCount);
+        lv__i = (lv__i + 1);
+    }
+    autoB75E1AFF_catalog = c_gameCatalogEffect;
+    autoB75E1AFF_i = 1;
+    for ( ; autoB75E1AFF_i <= CatalogEntryCount(c_gameCatalogEffect) ; autoB75E1AFF_i += 1 ) {
+        lv_random = CatalogEntryGet(autoB75E1AFF_catalog, autoB75E1AFF_i);
+        lv__eachUnitInListIdx = 0;
+        for ( ; ( (autoFBB36FF0_ai >= 0 && lv__eachUnitInListIdx <= autoFBB36FF0_ae) || (autoFBB36FF0_ai < 0 && lv__eachUnitInListIdx >= autoFBB36FF0_ae) ) ; lv__eachUnitInListIdx += autoFBB36FF0_ai ) {
+            if ((lv__randomEffectIdx[lv__eachUnitInListIdx] == lv__effectCounter)) {
+                lv__randomEffects[lv__eachUnitInListIdx] = lv_random;
+            }
+
+        }
+        lv__effectCounter = (lv__effectCounter + 1);
+    }
+    lv__eachUnitInListIdx = 0;
+    for ( ; ( (auto039C0677_ai >= 0 && lv__eachUnitInListIdx <= auto039C0677_ae) || (auto039C0677_ai < 0 && lv__eachUnitInListIdx >= auto039C0677_ae) ) ; lv__eachUnitInListIdx += auto039C0677_ai ) {
+        UnitCreateEffectUnit(UnitGroupUnit(UnitGroupAlliance(UnitGetOwner(lv_unitList[lv__eachUnitInListIdx]), c_unitAllianceEnemy, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1), lv__randomEffects[lv__eachUnitInListIdx], lv_unitList[lv__eachUnitInListIdx]);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_ImfeelingluckytooActuallyrandomeffects_Init () {
+    libFUNY_gt_ImfeelingluckytooActuallyrandomeffects = TriggerCreate("libFUNY_gt_ImfeelingluckytooActuallyrandomeffects_Func");
+    TriggerAddEventChatMessage(libFUNY_gt_ImfeelingluckytooActuallyrandomeffects, c_playerAny, "Im feeling lucky too", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Im really feeling lucky (Actually random behavours)
+//--------------------------------------------------------------------------------------------------
+bool libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__eachUnitInListIdx;
+    unit[1001] lv_unitList;
+    string[1001] lv__randomBehaviours;
+    int lv__i;
+    int lv__effectCounter;
+    int[1001] lv__randomBehavourIdx;
+    int lv_totalBehaviourCount;
+    string lv_random;
+    unit lv_unit;
+
+    // Automatic Variable Declarations
+    int autoAFB1B6A3_catalog;
+    int autoAFB1B6A3_i;
+    unitgroup auto273D059F_g;
+    int auto273D059F_u;
+    int auto62FABA49_catalog;
+    int auto62FABA49_i;
+    const int autoF0C07545_ae = 1000;
+    const int autoF0C07545_ai = 1;
+    const int auto56744631_ae = 1000;
+    const int auto56744631_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoAFB1B6A3_catalog = c_gameCatalogBehavior;
+    autoAFB1B6A3_i = 1;
+    for ( ; autoAFB1B6A3_i <= CatalogEntryCount(c_gameCatalogBehavior) ; autoAFB1B6A3_i += 1 ) {
+        lv_random = CatalogEntryGet(autoAFB1B6A3_catalog, autoAFB1B6A3_i);
+        lv_totalBehaviourCount = (lv_totalBehaviourCount + 1);
+    }
+    auto273D059F_g = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterStructure) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto273D059F_u = UnitGroupCount(auto273D059F_g, c_unitCountAll);
+    for (;; auto273D059F_u -= 1) {
+        lv_unit = UnitGroupUnitFromEnd(auto273D059F_g, auto273D059F_u);
+        if (lv_unit == null) { break; }
+        lv_unitList[lv__i] = lv_unit;
+        lv__randomBehavourIdx[lv__i] = RandomInt(0, lv_totalBehaviourCount);
+        lv__i = (lv__i + 1);
+    }
+    auto62FABA49_catalog = c_gameCatalogBehavior;
+    auto62FABA49_i = 1;
+    for ( ; auto62FABA49_i <= CatalogEntryCount(c_gameCatalogBehavior) ; auto62FABA49_i += 1 ) {
+        lv_random = CatalogEntryGet(auto62FABA49_catalog, auto62FABA49_i);
+        lv__eachUnitInListIdx = 0;
+        for ( ; ( (autoF0C07545_ai >= 0 && lv__eachUnitInListIdx <= autoF0C07545_ae) || (autoF0C07545_ai < 0 && lv__eachUnitInListIdx >= autoF0C07545_ae) ) ; lv__eachUnitInListIdx += autoF0C07545_ai ) {
+            if ((lv__randomBehavourIdx[lv__eachUnitInListIdx] == lv__effectCounter)) {
+                lv__randomBehaviours[lv__eachUnitInListIdx] = lv_random;
+            }
+
+        }
+        lv__effectCounter = (lv__effectCounter + 1);
+    }
+    lv__eachUnitInListIdx = 0;
+    for ( ; ( (auto56744631_ai >= 0 && lv__eachUnitInListIdx <= auto56744631_ae) || (auto56744631_ai < 0 && lv__eachUnitInListIdx >= auto56744631_ae) ) ; lv__eachUnitInListIdx += auto56744631_ai ) {
+        UnitBehaviorAdd(lv_unitList[lv__eachUnitInListIdx], lv__randomBehaviours[lv__eachUnitInListIdx], UnitGroupUnit(UnitGroupAlliance(UnitGetOwner(lv_unitList[lv__eachUnitInListIdx]), c_unitAllianceEnemy, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), 1), 1);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours_Init () {
+    libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours = TriggerCreate("libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours_Func");
+    TriggerAddEventChatMessage(libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours, c_playerAny, "Im really feeling lucky", true);
+}
+
 void libFUNY_InitTriggers () {
     libFUNY_gt_MapInit_Init();
     libFUNY_gt_GreetingModeOutput_Init();
@@ -457,6 +619,8 @@ void libFUNY_InitTriggers () {
     libFUNY_gt_ToggleWhatisHappening_Init();
     libFUNY_gt_WhatisHappening_Init();
     libFUNY_gt_Imfeelinglucky_Init();
+    libFUNY_gt_ImfeelingluckytooActuallyrandomeffects_Init();
+    libFUNY_gt_ImreallyfeelingluckyActuallyrandombehavours_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
