@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Fri, 27 Aug 2021 18:05:59 GMT)*</sup>
+<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 22 Mar 2025 09:41:18 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -180,6 +180,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `respawnpoint`](#cmd-respawnpoint)
 
   - 💭 [Command: `respawntime`](#cmd-respawntime)
+
+  - 💭 [Command: `selectalltalent`](#cmd-selectalltalent)
 
   - 💭 [Command: `setmasteryring`](#cmd-setmasteryring)
 
@@ -3436,6 +3438,50 @@ Override the current respawn timer for all players.
     	(set the respawn timer to 0.0625 second)
 
 <a name="cmd-respawntime-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
+<a name="cmd-selectalltalent"></a>
+
+## (`selectalltalent` | `sat`) `[PlayerId]`
+
+<a name="cmd-selectalltalent-description"></a>
+
+#### ✏ Description: 
+Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like?
+>Note: This uses the heroes build in `libGame_gf_TalentsChooseTalentForPlayer()` function, which will will add the telent for the hero of the player only. Summon other hero units does not count. And unlike the `addalltalent` command, this will work most of the time.
+
+
+<a name="cmd-selectalltalent-parameters"></a>
+
+#### ⚙ Parameters:
+    [PlayerId]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The target player id to have the talent being selected.
+    	Default:	The player id of whoever used this command.
+
+<a name="cmd-selectalltalent-examples"></a>
+
+#### 🔧 Examples:
+    > sat
+    	(Select all the talents for player whoever uses the command)
+    > selectalltalent
+    	(Select all the talents for player whoever uses the command)
+    > sat 6
+    	(Select all the talents for player 6)
+    > selectalltalent 6
+    	(Select all the talents for player 6)
+
+<a name="cmd-selectalltalent-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**

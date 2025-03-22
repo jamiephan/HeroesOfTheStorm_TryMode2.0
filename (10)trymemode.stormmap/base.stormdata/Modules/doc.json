@@ -1858,6 +1858,41 @@
                             "description": "Add ALL the talents from the game to the player 10"
                         }
                     ]
+                },                {
+                    "shortCommand": "sat",
+                    "command": "selectalltalent",
+                    "description": [
+                        "Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like?",
+                        ">Note: This uses the heroes build in `libGame_gf_TalentsChooseTalentForPlayer()` function, which will will add the telent for the hero of the player only. Summon other hero units does not count. And unlike the `addalltalent` command, this will work most of the time."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "PlayerId",
+                            "required": false,
+                            "description": "The target player id to have the talent being selected.",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Select all the talents for player whoever uses the command"
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Select all the talents for player whoever uses the command"
+                        },
+                        {
+                            "command": "{shortCommand} 6",
+                            "description": "Select all the talents for player 6"
+                        },
+                        {
+                            "command": "{command} 6",
+                            "description": "Select all the talents for player 6"
+                        }
+                    ]
                 },
                 {
                     "shortCommand": "rmt",

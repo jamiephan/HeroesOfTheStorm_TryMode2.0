@@ -32,6 +32,7 @@ trigger libPLYR_gt_TogglePause;
 trigger libPLYR_gt_ToggleTalentTree;
 trigger libPLYR_gt_AddTalent;
 trigger libPLYR_gt_AddAllTalents;
+trigger libPLYR_gt_SelectAllTalents;
 trigger libPLYR_gt_RemoveTalent;
 trigger libPLYR_gt_RemoveAllTalents;
 trigger libPLYR_gt_EnableTalent;
@@ -483,6 +484,60 @@ void libPLYR_gt_AddAllTalents_Init () {
     libPLYR_gt_AddAllTalents = TriggerCreate("libPLYR_gt_AddAllTalents_Func");
     TriggerAddEventChatMessage(libPLYR_gt_AddAllTalents, c_playerAny, "aat", false);
     TriggerAddEventChatMessage(libPLYR_gt_AddAllTalents, c_playerAny, "addalltalent", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Select All Talents
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_SelectAllTalents_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_currentCol;
+    int lv_currentTier;
+    const int lv_mAX_TIER = 7;
+    const int lv_mAX_COL = 5;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    const int autoD01B3D7B_ae = lv_mAX_TIER;
+    const int autoD01B3D7B_ai = 1;
+    const int autoA247B982_ae = lv_mAX_COL;
+    const int autoA247B982_ai = 1;
+
+    // Variable Initialization
+    lv_player = EventPlayer();
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "sat") || (StringWord(EventChatMessage(false), 1) == "selectalltalent")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((StringWord(EventChatMessage(false), 2) != null)) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 2));
+    }
+
+    lv_currentTier = 1;
+    for ( ; ( (autoD01B3D7B_ai >= 0 && lv_currentTier <= autoD01B3D7B_ae) || (autoD01B3D7B_ai < 0 && lv_currentTier >= autoD01B3D7B_ae) ) ; lv_currentTier += autoD01B3D7B_ai ) {
+        lv_currentCol = 1;
+        for ( ; ( (autoA247B982_ai >= 0 && lv_currentCol <= autoA247B982_ae) || (autoA247B982_ai < 0 && lv_currentCol >= autoA247B982_ae) ) ; lv_currentCol += autoA247B982_ai ) {
+            libGame_gf_TalentsChooseTalentForPlayer(lv_currentTier, lv_currentCol, lv_player);
+        }
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Selected all talents for Player " + IntToString(lv_player))));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_SelectAllTalents_Init () {
+    libPLYR_gt_SelectAllTalents = TriggerCreate("libPLYR_gt_SelectAllTalents_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_SelectAllTalents, c_playerAny, "sat", false);
+    TriggerAddEventChatMessage(libPLYR_gt_SelectAllTalents, c_playerAny, "selectalltalent", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1455,6 +1510,7 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_ToggleTalentTree_Init();
     libPLYR_gt_AddTalent_Init();
     libPLYR_gt_AddAllTalents_Init();
+    libPLYR_gt_SelectAllTalents_Init();
     libPLYR_gt_RemoveTalent_Init();
     libPLYR_gt_RemoveAllTalents_Init();
     libPLYR_gt_EnableTalent_Init();
