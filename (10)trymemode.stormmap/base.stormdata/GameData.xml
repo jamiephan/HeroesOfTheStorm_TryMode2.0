@@ -4,7 +4,11 @@
   <Catalog path="Mods/GameData/HeroesMod/BehaviorMimic.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/IconGlowing.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/ModelMimic.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaAADamage.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaAASpeed.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/PermaArmor.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaMovementSpeed.xml"/>
+  <Catalog path="Mods/GameData/HeroesMod/PermaSpellPower.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/PermaStatusEffect.xml"/>
   <Catalog path="Mods/GameData/HeroesMod/TestHero.xml"/>
   <Catalog path="Mods/GameData/SystemMod/TestSystem.xml"/>

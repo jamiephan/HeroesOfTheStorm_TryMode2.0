@@ -1,0 +1,3263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
+
+  <!-- This file enables applying a permanent AA Damage by adding the behavior of: -->
+
+  <!-- PermaNAADamage -->
+
+  <!-- Where N can be a number between -1600 to 1600 -->
+  <!-- E.g  Perma10AADamage      = Permanent +10% AA Damage           -->
+  <!--      Perma-75AADamage     = Permanent -75% AA Damage           -->
+  <!--      Perma-5AADamage      = Permanent -5% AA Damage            -->
+
+  <!-- To apply in game, add the behaviour to the unit, or use the chat command: -->
+  <!-- "addbehavior" - "adb Perma10AADamage", "adb Perma-75AADamage" -->
+
+  <!-- Crappy Nodejs Generation with the magic of VSCode formatting document: -->
+  <!-- 
+      console.log(`
+      <CBehaviorBuff id="ChromieAProperGreetingDamageIncrease" parent="StormDamageIncrease">
+        <Alignment value="Positive" />
+        <Aliases value="RangedDamageCrit" />
+      </CBehaviorBuff>
+
+      <CBehaviorBuff id="PermaBaseNegativeAADamage" parent="StormDamageReduction">
+        <BehaviorCategories index="DebuffAutoattackDPS" value="1" />
+      </CBehaviorBuff>\n`);
+
+    // From -1600 to 1600, with 5 increments
+    for (let i = -1600; i <= 1600; i += 5) {
+      if (i < 0) {
+        console.log(`
+      <CBehaviorBuff id="Perma${i}AADamage" parent="PermaBaseNegativeAADamage">
+        <Modification>
+          <DamageDealtFraction index="Basic" value="${(i / 100).toFixed(2)}" />
+        </Modification>
+      </CBehaviorBuff>`);
+      } else {
+        console.log(`
+        <CBehaviorBuff id="Perma${i}AADamage" parent="PermaBasePositiveAADamage">
+          <Modification>
+            <DamageDealtFraction index="Basic" value="${(i / 100).toFixed(2)}" />
+          </Modification>
+        </CBehaviorBuff>`);
+      }
+    }
+
+  -->
+  <!-- =============================== -->
+
+ <CBehaviorBuff id="PermaBasePositiveAADamage" parent="StormDamageIncrease">
+    <Alignment value="Positive" />
+    <Aliases value="RangedDamageCrit" />
+  </CBehaviorBuff>
+  <CBehaviorBuff id="PermaBaseNegativeAADamage" parent="StormDamageReduction">
+    <BehaviorCategories index="DebuffAutoattackDPS" value="1" />
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1600AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-16.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1595AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1590AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1585AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1580AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1575AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1570AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1565AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1560AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1555AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1550AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1545AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1540AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1535AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1530AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1525AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1520AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1515AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1510AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1505AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1500AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-15.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1495AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1490AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1485AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1480AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1475AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1470AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1465AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1460AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1455AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1450AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1445AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1440AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1435AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1430AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1425AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1420AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1415AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1410AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1405AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1400AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-14.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1395AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1390AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1385AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1380AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1375AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1370AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1365AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1360AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1355AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1350AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1345AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1340AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1335AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1330AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1325AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1320AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1315AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1310AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1305AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1300AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-13.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1295AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1290AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1285AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1280AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1275AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1270AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1265AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1260AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1255AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1250AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1245AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1240AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1235AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1230AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1225AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1220AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1215AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1210AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1205AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1200AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-12.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1195AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1190AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1185AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1180AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1175AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1170AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1165AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1160AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1155AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1150AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1145AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1140AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1135AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1130AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1125AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1120AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1115AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1110AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1105AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1100AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-11.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1095AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1090AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1085AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1080AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1075AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1070AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1065AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1060AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1055AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1050AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1045AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1040AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1035AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1030AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1025AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1020AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1015AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1010AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1005AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1000AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-10.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-995AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-990AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-985AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-980AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-975AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-970AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-965AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-960AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-955AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-950AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-945AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-940AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-935AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-930AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-925AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-920AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-915AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-910AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-905AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-900AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-9.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-895AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-890AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-885AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-880AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-875AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-870AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-865AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-860AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-855AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-850AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-845AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-840AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-835AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-830AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-825AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-820AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-815AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-810AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-805AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-800AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-8.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-795AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-790AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-785AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-780AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-775AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-770AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-765AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-760AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-755AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-750AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-745AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-740AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-735AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-730AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-725AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-720AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-715AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-710AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-705AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-700AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-7.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-695AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-690AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-685AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-680AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-675AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-670AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-665AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-660AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-655AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-650AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-645AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-640AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-635AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-630AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-625AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-620AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-615AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-610AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-605AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-600AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-6.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-595AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-590AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-585AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-580AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-575AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-570AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-565AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-560AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-555AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-550AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-545AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-540AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-535AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-530AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-525AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-520AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-515AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-510AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-505AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-500AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-5.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-495AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-490AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-485AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-480AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-475AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-470AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-465AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-460AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-455AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-450AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-445AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-440AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-435AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-430AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-425AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-420AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-415AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-410AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-405AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-400AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-4.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-395AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-390AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-385AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-380AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-375AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-370AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-365AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-360AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-355AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-350AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-345AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-340AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-335AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-330AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-325AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-320AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-315AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-310AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-305AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-300AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-3.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-295AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-290AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-285AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-280AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-275AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-270AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-265AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-260AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-255AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-250AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-245AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-240AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-235AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-230AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-225AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-220AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-215AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-210AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-205AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-200AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-2.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-195AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-190AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-185AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-180AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-175AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-170AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-165AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-160AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-155AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-150AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-145AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-140AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-135AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-130AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-125AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-120AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-115AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-110AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-105AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-100AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-95AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-90AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-85AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-80AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-75AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-70AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-65AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-60AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-55AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-50AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-45AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-40AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-35AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-30AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-25AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-20AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-15AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-10AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-5AADamage" parent="PermaBaseNegativeAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="-0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma0AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma5AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma10AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma15AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma20AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma25AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma30AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma35AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma40AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma45AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma50AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma55AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma60AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma65AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma70AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma75AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma80AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma85AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma90AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma95AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma100AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma105AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma110AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma115AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma120AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma125AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma130AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma135AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma140AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma145AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma150AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma155AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma160AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma165AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma170AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma175AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma180AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma185AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma190AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma195AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="1.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma200AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma205AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma210AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma215AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma220AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma225AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma230AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma235AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma240AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma245AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma250AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma255AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma260AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma265AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma270AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma275AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma280AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma285AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma290AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma295AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="2.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma300AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma305AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma310AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma315AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma320AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma325AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma330AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma335AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma340AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma345AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma350AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma355AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma360AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma365AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma370AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma375AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma380AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma385AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma390AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma395AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="3.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma400AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma405AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma410AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma415AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma420AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma425AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma430AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma435AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma440AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma445AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma450AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma455AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma460AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma465AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma470AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma475AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma480AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma485AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma490AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma495AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="4.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma500AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma505AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma510AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma515AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma520AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma525AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma530AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma535AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma540AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma545AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma550AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma555AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma560AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma565AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma570AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma575AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma580AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma585AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma590AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma595AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="5.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma600AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma605AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma610AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma615AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma620AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma625AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma630AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma635AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma640AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma645AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma650AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma655AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma660AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma665AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma670AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma675AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma680AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma685AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma690AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma695AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="6.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma700AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma705AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma710AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma715AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma720AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma725AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma730AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma735AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma740AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma745AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma750AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma755AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma760AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma765AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma770AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma775AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma780AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma785AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma790AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma795AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="7.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma800AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma805AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma810AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma815AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma820AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma825AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma830AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma835AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma840AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma845AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma850AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma855AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma860AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma865AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma870AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma875AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma880AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma885AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma890AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma895AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="8.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma900AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma905AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma910AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma915AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma920AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma925AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma930AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma935AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma940AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma945AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma950AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma955AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma960AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma965AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma970AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma975AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma980AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma985AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma990AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma995AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="9.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1000AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1005AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1010AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1015AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1020AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1025AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1030AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1035AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1040AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1045AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1050AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1055AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1060AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1065AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1070AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1075AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1080AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1085AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1090AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1095AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="10.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1100AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1105AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1110AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1115AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1120AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1125AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1130AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1135AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1140AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1145AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1150AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1155AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1160AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1165AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1170AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1175AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1180AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1185AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1190AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1195AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="11.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1200AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1205AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1210AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1215AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1220AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1225AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1230AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1235AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1240AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1245AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1250AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1255AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1260AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1265AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1270AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1275AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1280AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1285AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1290AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1295AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="12.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1300AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1305AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1310AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1315AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1320AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1325AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1330AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1335AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1340AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1345AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1350AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1355AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1360AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1365AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1370AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1375AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1380AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1385AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1390AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1395AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="13.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1400AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1405AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1410AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1415AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1420AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1425AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1430AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1435AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1440AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1445AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1450AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1455AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1460AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1465AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1470AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1475AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1480AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1485AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1490AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1495AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="14.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1500AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1505AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1510AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1515AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1520AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1525AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1530AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1535AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1540AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1545AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1550AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1555AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1560AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1565AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1570AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1575AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1580AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1585AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1590AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1595AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="15.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1600AADamage" parent="PermaBasePositiveAADamage">
+    <Modification>
+      <DamageDealtFraction index="Basic" value="16.00" />
+    </Modification>
+  </CBehaviorBuff>
+</Catalog>

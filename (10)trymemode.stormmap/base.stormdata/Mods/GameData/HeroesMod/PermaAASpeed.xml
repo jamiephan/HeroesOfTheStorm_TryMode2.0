@@ -1,0 +1,3251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
+
+  <!-- This file enables applying a permanent AA Speed by adding the behavior of: -->
+
+  <!-- PermaNAASpeed -->
+
+  <!-- Where N can be a number between -1600 to 1600 -->
+  <!-- E.g  Perma10AASpeed      = Permanent +10% AA Speed           -->
+  <!--      Perma-75AASpeed     = Permanent -75% AA Speed           -->
+  <!--      Perma-5AASpeed      = Permanent -5% AA Speed            -->
+
+  <!-- To apply in game, add the behaviour to the unit, or use the chat command: -->
+  <!-- "addbehavior" - "adb Perma10AASpeed", "adb Perma-75AASpeed" -->
+
+
+  <!-- !! Please note that Attack Speed cannot exceed 16 per second, and cannot be reduced below 25% of its base value. !! -->
+
+  <!-- Crappy Nodejs Generation with the magic of VSCode formatting document: -->
+  <!-- 
+    console.log(`
+        <CBehaviorBuff id="PermaBaseAASpeed">
+        <BehaviorCategories index="BuffAutoattackDPS" value="1" />
+        <Alignment value="Positive" />
+      </CBehaviorBuff>\n`);
+
+    // From -16 to 16, with 0.05 increments
+    for (let i = -1600; i <= 1600; i += 5) {
+      console.log(`
+        <CBehaviorBuff id="Perma${i}AASpeed" parent="PermaBaseAASpeed">
+          <Modification>
+            <AdditiveAttackSpeedFactor value="${i}" />
+          </Modification>
+        </CBehaviorBuff>`);
+    }
+
+  -->
+  <!-- =============================== -->
+
+  
+  <CBehaviorBuff id="PermaBaseAASpeed">
+    <BehaviorCategories index="BuffAutoattackDPS" value="1" />
+    <Alignment value="Positive" />
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1600AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-16.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1595AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1590AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1585AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1580AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1575AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1570AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1565AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1560AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1555AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1550AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1545AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1540AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1535AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1530AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1525AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1520AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1515AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1510AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1505AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1500AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-15.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1495AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1490AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1485AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1480AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1475AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1470AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1465AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1460AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1455AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1450AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1445AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1440AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1435AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1430AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1425AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1420AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1415AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1410AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1405AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1400AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-14.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1395AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1390AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1385AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1380AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1375AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1370AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1365AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1360AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1355AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1350AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1345AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1340AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1335AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1330AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1325AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1320AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1315AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1310AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1305AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1300AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-13.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1295AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1290AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1285AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1280AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1275AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1270AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1265AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1260AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1255AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1250AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1245AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1240AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1235AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1230AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1225AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1220AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1215AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1210AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1205AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1200AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-12.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1195AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1190AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1185AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1180AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1175AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1170AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1165AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1160AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1155AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1150AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1145AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1140AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1135AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1130AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1125AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1120AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1115AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1110AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1105AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1100AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-11.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1095AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1090AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1085AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1080AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1075AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1070AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1065AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1060AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1055AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1050AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1045AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1040AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1035AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1030AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1025AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1020AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1015AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1010AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1005AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-1000AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-10.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-995AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-990AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-985AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-980AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-975AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-970AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-965AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-960AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-955AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-950AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-945AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-940AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-935AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-930AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-925AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-920AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-915AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-910AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-905AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-900AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-9.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-895AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-890AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-885AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-880AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-875AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-870AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-865AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-860AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-855AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-850AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-845AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-840AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-835AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-830AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-825AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-820AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-815AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-810AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-805AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-800AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-8.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-795AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-790AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-785AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-780AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-775AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-770AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-765AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-760AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-755AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-750AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-745AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-740AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-735AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-730AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-725AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-720AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-715AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-710AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-705AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-700AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-7.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-695AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-690AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-685AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-680AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-675AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-670AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-665AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-660AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-655AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-650AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-645AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-640AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-635AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-630AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-625AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-620AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-615AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-610AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-605AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-600AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-6.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-595AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-590AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-585AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-580AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-575AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-570AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-565AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-560AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-555AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-550AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-545AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-540AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-535AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-530AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-525AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-520AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-515AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-510AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-505AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-500AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-5.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-495AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-490AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-485AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-480AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-475AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-470AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-465AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-460AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-455AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-450AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-445AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-440AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-435AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-430AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-425AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-420AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-415AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-410AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-405AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-400AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-4.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-395AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-390AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-385AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-380AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-375AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-370AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-365AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-360AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-355AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-350AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-345AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-340AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-335AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-330AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-325AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-320AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-315AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-310AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-305AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-300AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-3.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-295AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-290AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-285AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-280AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-275AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-270AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-265AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-260AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-255AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-250AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-245AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-240AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-235AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-230AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-225AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-220AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-215AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-210AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-205AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-200AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-2.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-195AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-190AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-185AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-180AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-175AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-170AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-165AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-160AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-155AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-150AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-145AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-140AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-135AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-130AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-125AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-120AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-115AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-110AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-105AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-100AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-95AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-90AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-85AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-80AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-75AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-70AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-65AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-60AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-55AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-50AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-45AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-40AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-35AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-30AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-25AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-20AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-15AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-10AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-5AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="-0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma0AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma5AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma10AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma15AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma20AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma25AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma30AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma35AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma40AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma45AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma50AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma55AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma60AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma65AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma70AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma75AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma80AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma85AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma90AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma95AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma100AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma105AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma110AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma115AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma120AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma125AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma130AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma135AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma140AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma145AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma150AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma155AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma160AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma165AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma170AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma175AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma180AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma185AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma190AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma195AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="1.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma200AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma205AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma210AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma215AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma220AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma225AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma230AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma235AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma240AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma245AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma250AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma255AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma260AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma265AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma270AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma275AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma280AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma285AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma290AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma295AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="2.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma300AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma305AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma310AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma315AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma320AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma325AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma330AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma335AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma340AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma345AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma350AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma355AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma360AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma365AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma370AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma375AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma380AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma385AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma390AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma395AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="3.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma400AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma405AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma410AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma415AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma420AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma425AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma430AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma435AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma440AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma445AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma450AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma455AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma460AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma465AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma470AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma475AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma480AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma485AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma490AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma495AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="4.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma500AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma505AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma510AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma515AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma520AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma525AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma530AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma535AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma540AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma545AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma550AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma555AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma560AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma565AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma570AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma575AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma580AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma585AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma590AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma595AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="5.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma600AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma605AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma610AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma615AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma620AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma625AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma630AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma635AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma640AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma645AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma650AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma655AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma660AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma665AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma670AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma675AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma680AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma685AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma690AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma695AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="6.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma700AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma705AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma710AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma715AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma720AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma725AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma730AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma735AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma740AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma745AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma750AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma755AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma760AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma765AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma770AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma775AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma780AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma785AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma790AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma795AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="7.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma800AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma805AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma810AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma815AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma820AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma825AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma830AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma835AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma840AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma845AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma850AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma855AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma860AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma865AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma870AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma875AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma880AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma885AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma890AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma895AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="8.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma900AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma905AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma910AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma915AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma920AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma925AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma930AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma935AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma940AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma945AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma950AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma955AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma960AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma965AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma970AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma975AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma980AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma985AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma990AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma995AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="9.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1000AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1005AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1010AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1015AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1020AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1025AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1030AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1035AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1040AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1045AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1050AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1055AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1060AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1065AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1070AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1075AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1080AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1085AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1090AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1095AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="10.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1100AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1105AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1110AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1115AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1120AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1125AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1130AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1135AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1140AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1145AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1150AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1155AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1160AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1165AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1170AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1175AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1180AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1185AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1190AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1195AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="11.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1200AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1205AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1210AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1215AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1220AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1225AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1230AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1235AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1240AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1245AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1250AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1255AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1260AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1265AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1270AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1275AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1280AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1285AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1290AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1295AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="12.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1300AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1305AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1310AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1315AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1320AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1325AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1330AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1335AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1340AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1345AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1350AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1355AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1360AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1365AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1370AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1375AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1380AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1385AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1390AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1395AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="13.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1400AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1405AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1410AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1415AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1420AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1425AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1430AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1435AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1440AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1445AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1450AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1455AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1460AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1465AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1470AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1475AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1480AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1485AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1490AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1495AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="14.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1500AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1505AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1510AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1515AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1520AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1525AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1530AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1535AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1540AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1545AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1550AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1555AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1560AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1565AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1570AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1575AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1580AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1585AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1590AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1595AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="15.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma1600AASpeed" parent="PermaBaseAASpeed">
+    <Modification>
+      <AdditiveAttackSpeedFactor value="16.00" />
+    </Modification>
+  </CBehaviorBuff>
+</Catalog>

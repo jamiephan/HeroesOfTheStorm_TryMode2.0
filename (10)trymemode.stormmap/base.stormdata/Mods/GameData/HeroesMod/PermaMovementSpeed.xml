@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/jamiephan/HeroesOfTheStorm_Gamedata/master/xsd/latest.xsd">
+
+  <!-- This file enables applying a permanent Movement Speed by adding the behavior of: -->
+
+  <!-- PermaNMovementSpeed -->
+
+  <!-- Where N can be a number between -100 to 300 -->
+  <!-- E.g  Perma10MovementSpeed      = Permanent +10% Movement Speed           -->
+  <!--      Perma-75MovementSpeed     = Permanent -75% Movement Speed           -->
+  <!--      Perma-5MovementSpeed      = Permanent -5% Movement Speed            -->
+
+  <!-- To apply in game, add the behaviour to the unit, or use the chat command: -->
+  <!-- "addbehavior" - "adb Perma10MovementSpeed", "adb Perma-75MovementSpeed" -->
+
+
+  <!-- !! Please note that Attack Speed cannot exceed 16 per second, and cannot be reduced below 25% of its base value. !! -->
+
+  <!-- Crappy Nodejs Generation with the magic of VSCode formatting document: -->
+  <!-- 
+      console.log(`
+        <CBehaviorBuff id="PermaBasePositiveMovementSpeed" parent="StormSprint">
+        </CBehaviorBuff>
+
+        <CBehaviorBuff id="PermaBaseNegativeMovementSpeed" parent="StormSlowParent">
+        </CBehaviorBuff>\n`);
+
+      // From -100 to 300, with 5 increments
+      for (let i = -100; i <= 300; i += 5) {
+        if (i < 0) {
+          console.log(`
+        <CBehaviorBuff id="Perma${i}MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+          <Modification>
+            <UnifiedMoveSpeedFactor value="${(i / 100).toFixed(2)}" />
+          </Modification>
+        </CBehaviorBuff>`);
+        } else {
+          console.log(`
+          <CBehaviorBuff id="Perma${i}MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+            <Modification>
+              <UnifiedMoveSpeedFactor value="${(i / 100).toFixed(2)}" />
+            </Modification>
+          </CBehaviorBuff>`);
+        }
+      }
+  -->
+  <!-- =============================== -->
+
+  
+  <CBehaviorBuff id="PermaBasePositiveMovementSpeed" parent="StormSprint">
+  </CBehaviorBuff>
+  <CBehaviorBuff id="PermaBaseNegativeMovementSpeed" parent="StormSlowParent">
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-100MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-95MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-90MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-85MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-80MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-75MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-70MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-65MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-60MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-55MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-50MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-45MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-40MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-35MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-30MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-25MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-20MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-15MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-10MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma-5MovementSpeed" parent="PermaBaseNegativeMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="-0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma0MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma5MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma10MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma15MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma20MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma25MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma30MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma35MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma40MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma45MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma50MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma55MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma60MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma65MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma70MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma75MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma80MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma85MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma90MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma95MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="0.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma100MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma105MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma110MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma115MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma120MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma125MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma130MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma135MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma140MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma145MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma150MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma155MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma160MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma165MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma170MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma175MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma180MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma185MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma190MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma195MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="1.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma200MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.00" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma205MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.05" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma210MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.10" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma215MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.15" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma220MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.20" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma225MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.25" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma230MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.30" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma235MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.35" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma240MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.40" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma245MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.45" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma250MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.50" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma255MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.55" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma260MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.60" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma265MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.65" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma270MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.70" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma275MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.75" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma280MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.80" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma285MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.85" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma290MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.90" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma295MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="2.95" />
+    </Modification>
+  </CBehaviorBuff>
+  <CBehaviorBuff id="Perma300MovementSpeed" parent="PermaBasePositiveMovementSpeed">
+    <Modification>
+      <UnifiedMoveSpeedFactor value="3.00" />
+    </Modification>
+  </CBehaviorBuff>
+</Catalog>
