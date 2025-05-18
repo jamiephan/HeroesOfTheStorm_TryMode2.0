@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sat, 22 Mar 2025 09:41:18 GMT)*</sup>
+<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 18 May 2025 08:06:44 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -107,6 +107,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
   - 💭 [Command: `clearweapon`](#cmd-clearweapon)
 
+  - 💭 [Command: `enablecollision`](#cmd-enablecollision)
+
   - 💭 [Command: `getbehavior`](#cmd-getbehavior)
 
   - 💭 [Command: `getselectedunits`](#cmd-getselectedunits)
@@ -126,6 +128,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `removeanimation`](#cmd-removeanimation)
 
   - 💭 [Command: `removebehavior`](#cmd-removebehavior)
+
+  - 💭 [Command: `removecollision`](#cmd-removecollision)
 
   - 💭 [Command: `removeeffect`](#cmd-removeeffect)
 
@@ -168,6 +172,8 @@ Some of the commands have an UI counterpart implemented, which will display a me
   - 💭 [Command: `getcatalog`](#cmd-getcatalog)
 
   - 💭 [Command: `modifycatalog`](#cmd-modifycatalog)
+
+  - 💭 [Command: `modifycatalogvalue`](#cmd-modifycatalogvalue)
 
   - 💭 [Command: `removealltalent`](#cmd-removealltalent)
 
@@ -1770,6 +1776,42 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
 [\[Return to Top ⬆\]](#meta-top)
 
 
+<a name="cmd-enablecollision"></a>
+
+## (`enablecollision` | `encol`) 
+
+<a name="cmd-enablecollision-description"></a>
+
+#### ✏ Description: 
+Enable Collision for selected unit(s).
+> This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it
+
+
+<a name="cmd-enablecollision-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+
+<a name="cmd-enablecollision-examples"></a>
+
+#### 🔧 Examples:
+    > encol
+    	(Enable Collision for selected unit(s).)
+    > enablecollision
+    	(Enable Collision for selected unit(s).)
+
+<a name="cmd-enablecollision-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
 <a name="cmd-getbehavior"></a>
 
 ## (`getbehavior` | `getb`) 
@@ -2139,6 +2181,42 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
     	(No longer makes all selected units permanent Invulnerable)
 
 <a name="cmd-removebehavior-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
+<a name="cmd-removecollision"></a>
+
+## (`removecollision` | `rmcol`) 
+
+<a name="cmd-removecollision-description"></a>
+
+#### ✏ Description: 
+Remove Collision for selected unit(s).
+> This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it
+
+
+<a name="cmd-removecollision-parameters"></a>
+
+#### ⚙ Parameters:
+    None
+
+<a name="cmd-removecollision-examples"></a>
+
+#### 🔧 Examples:
+    > rmcol
+    	(Disable Collision for selected unit(s).)
+    > removecollision
+    	(Disable Collision for selected unit(s).)
+
+<a name="cmd-removecollision-uiAvailability"></a>
 
 #### 🖼 UI Availability:
 - ❌ **Not Implemented**
@@ -2568,6 +2646,8 @@ Commands that are related to Players, eg, scoreboard, respawn timer, etc
 <a name="cmd-addalltalent-description"></a>
 
 #### ✏ Description: 
+** ***DEPRECATED: Please use [`selectalltalent`](#cmd-selectalltalent-description) command instead.*** **
+
 Add all talents to a player.
 The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
@@ -3190,6 +3270,77 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 [\[Return to Top ⬆\]](#meta-top)
 
 
+<a name="cmd-modifycatalogvalue"></a>
+
+## (`modifycatalogvalue` | `mcv`) `<CatalogType>` `<CatalogEntry>` `<CatalogField>` `<value>` `[PlayerID]`
+
+<a name="cmd-modifycatalogvalue-description"></a>
+
+#### ✏ Description: 
+Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
+
+For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
+
+This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, but directly via `CatalogFieldValueSet()` function. If the regular `modifycatalog` command does not work, try this one.
+
+> Note: This command format is a bit different from the `modifycatalog` command, as it does not require the `CatalogReference` to be separated by comma. Instead, it is separated by space.
+
+> Note: due to unknown reason, `<CItemClass>` and `<CItemContainer>` currently does not work with this command.
+
+
+<a name="cmd-modifycatalogvalue-parameters"></a>
+
+#### ⚙ Parameters:
+    <CatalogType>
+    	Required:	true
+    	Type:		string
+    	Usage:		The Catalog Type to be modified
+    <CatalogEntry>
+    	Required:	true
+    	Type:		string
+    	Usage:		The Catalog Entry to be modified
+    <CatalogField>
+    	Required:	true
+    	Type:		string
+    	Usage:		The Catalog Field to be modified
+    <value>
+    	Required:	true
+    	Type:		float
+    	Usage:		The value to be set for the specified catalog field
+    [PlayerID]
+    	Required:	false
+    	Type:		integer
+    	Usage:		The Player ID for the catalog modification
+    	Default:	The player id of whoever used this command.
+
+<a name="cmd-modifycatalogvalue-examples"></a>
+
+#### 🔧 Examples:
+    > modifycatalogvalue Effect WizardTeleportCalamityDamage Amount 9999
+    	(Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command)
+    > mcv Abil VarianCharge Cost.Vital[Energy] 5
+    	(Modify Varian's Charge mana cost to 5 for whoever uses this command)
+    > mcv Behavior Mounted Modification.UnifiedMoveSpeedFactor -0.3 2
+    	(Modify the mount speed for all Heroes to -30% (30% slower instead of faster) for Player 2)
+    > mcv Weapon StukovHeroWeapon Period 0.0625
+    	(Modify Stukov's Basic Attack speed to 16 (1 second performs 16 attacks = 0.0625 period per AA) for whoever uses this command)
+    > mcv Weapon ChromieHeroWeapon Effect WizardWeaponLaunchSwitch
+    	(Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missile) for whoever uses this command)
+    > mcv Behavior DehakaDarkSwarm Modification.StateFlags[SuppressCollision] 0 2
+    	(Modify Dehaka's Dark Swarm Ability to no longer Suppress Collision When active (No longer pass though units) for Player 2)
+
+<a name="cmd-modifycatalogvalue-uiAvailability"></a>
+
+#### 🖼 UI Availability:
+- ❌ **Not Implemented**
+
+
+
+[\[Return to Table of Contents 🧾\]](#meta-toc)
+
+[\[Return to Top ⬆\]](#meta-top)
+
+
 <a name="cmd-removealltalent"></a>
 
 ## (`removealltalent` | `rmat`) `<HeroId>` `[PlayerId]`
@@ -3456,7 +3607,7 @@ Override the current respawn timer for all players.
 <a name="cmd-selectalltalent-description"></a>
 
 #### ✏ Description: 
-Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like?
+Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like? Or a Varian with Twin Blade+Smash+Taunt and triple banners?
 >Note: This uses the heroes build in `libGame_gf_TalentsChooseTalentForPlayer()` function, which will will add the telent for the hero of the player only. Summon other hero units does not count. And unlike the `addalltalent` command, this will work most of the time.
 
 

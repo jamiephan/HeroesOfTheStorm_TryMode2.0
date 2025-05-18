@@ -43,8 +43,9 @@ trigger libPLYR_gt_SetMasteryRing;
 trigger libPLYR_gt_OverrideRespawnTime;
 trigger libPLYR_gt_SetOverlay;
 trigger libPLYR_gt_ResetOverlay;
-trigger libPLYR_gt_GetCatalog;
-trigger libPLYR_gt_ModifyCatalog;
+trigger libPLYR_gt_GetCatalogReference;
+trigger libPLYR_gt_ModifyCatalogReference;
+trigger libPLYR_gt_ModifyCatalogValue;
 trigger libPLYR_gt_GrantXPtoPlayer;
 trigger libPLYR_gt_ToggleAI;
 trigger libPLYR_gt_EnableAI;
@@ -1097,9 +1098,9 @@ void libPLYR_gt_ResetOverlay_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Get Catalog
+// Trigger: Get Catalog Reference
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_GetCatalog_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_GetCatalogReference_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_player;
     string lv_value;
@@ -1144,16 +1145,16 @@ bool libPLYR_gt_GetCatalog_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_GetCatalog_Init () {
-    libPLYR_gt_GetCatalog = TriggerCreate("libPLYR_gt_GetCatalog_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_GetCatalog, c_playerAny, "gcl", false);
-    TriggerAddEventChatMessage(libPLYR_gt_GetCatalog, c_playerAny, "getcatalog", false);
+void libPLYR_gt_GetCatalogReference_Init () {
+    libPLYR_gt_GetCatalogReference = TriggerCreate("libPLYR_gt_GetCatalogReference_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_GetCatalogReference, c_playerAny, "gcl", false);
+    TriggerAddEventChatMessage(libPLYR_gt_GetCatalogReference, c_playerAny, "getcatalog", false);
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Modify Catalog
+// Trigger: Modify Catalog Reference
 //--------------------------------------------------------------------------------------------------
-bool libPLYR_gt_ModifyCatalog_Func (bool testConds, bool runActions) {
+bool libPLYR_gt_ModifyCatalogReference_Func (bool testConds, bool runActions) {
     // Variable Declarations
     int lv_player;
     string lv_originalValue;
@@ -1181,7 +1182,7 @@ bool libPLYR_gt_ModifyCatalog_Func (bool testConds, bool runActions) {
     }
 
     if (((StringWord(EventChatMessage(false), 2) == null) || (StringWord(EventChatMessage(false), 3) == null))) {
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <mcl|mosifycatalog> <CatalogReference> <Value> [PlayerID]"));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <mcl|modifycatalog> <CatalogReference> <Value> [PlayerID]"));
     }
     else {
         if (((StringWord(EventChatMessage(false), 4) != null) && (StringToInt(StringWord(EventChatMessage(false), 4)) > 0))) {
@@ -1214,10 +1215,164 @@ bool libPLYR_gt_ModifyCatalog_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void libPLYR_gt_ModifyCatalog_Init () {
-    libPLYR_gt_ModifyCatalog = TriggerCreate("libPLYR_gt_ModifyCatalog_Func");
-    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalog, c_playerAny, "mcl", false);
-    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalog, c_playerAny, "modifycatalog", false);
+void libPLYR_gt_ModifyCatalogReference_Init () {
+    libPLYR_gt_ModifyCatalogReference = TriggerCreate("libPLYR_gt_ModifyCatalogReference_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalogReference, c_playerAny, "mcl", false);
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalogReference, c_playerAny, "modifycatalog", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Modify Catalog Value
+//--------------------------------------------------------------------------------------------------
+bool libPLYR_gt_ModifyCatalogValue_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    int lv_catalogType;
+    string lv_catalogField;
+    string lv_catalogEntry;
+    string lv_value;
+    string lv__catalogTypeLower;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = EventPlayer();
+    lv_catalogType = c_gameCatalogAbil;
+    lv_value = "";
+    lv__catalogTypeLower = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "mcv") || (StringWord(EventChatMessage(false), 1) == "modifycatalogvalue")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((StringWord(EventChatMessage(false), 2) == null) || (StringWord(EventChatMessage(false), 3) == null) || (StringWord(EventChatMessage(false), 4) == null) || (StringWord(EventChatMessage(false), 5) == null))) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Usage: <mcv|modifycatalogvalue> <CatalogType> <CatalogEntry> <CatalogField> <Value> [PlayerID]"));
+        return true;
+    }
+
+    if (((StringWord(EventChatMessage(false), 6) != null) && (StringToInt(StringWord(EventChatMessage(false), 6)) > 0))) {
+        lv_player = StringToInt(StringWord(EventChatMessage(false), 4));
+    }
+
+    lv__catalogTypeLower = StringCase(StringWord(EventChatMessage(false), 2), false);
+    lv_catalogEntry = StringWord(EventChatMessage(false), 3);
+    lv_catalogField = StringWord(EventChatMessage(false), 4);
+    lv_value = StringWord(EventChatMessage(false), 5);
+    // Mass generated from mods/core.stormmod/base.stormdata/GameData. Its a bit different from SC2.
+    if (lv__catalogTypeLower == "abil") { lv_catalogType = c_gameCatalogAbil; }
+    else if (lv__catalogTypeLower == "accumulator") { lv_catalogType = c_gameCatalogAccumulator; }
+    else if (lv__catalogTypeLower == "achievement") { lv_catalogType = c_gameCatalogAchievement; }
+    else if (lv__catalogTypeLower == "achievementterm") { lv_catalogType = c_gameCatalogAchievementTerm; }
+    else if (lv__catalogTypeLower == "actor") { lv_catalogType = c_gameCatalogActor; }
+    else if (lv__catalogTypeLower == "actorsupport") { lv_catalogType = c_gameCatalogActorSupport; }
+    else if (lv__catalogTypeLower == "alert") { lv_catalogType = c_gameCatalogAlert; }
+    else if (lv__catalogTypeLower == "announcement") { lv_catalogType = c_gameCatalogAnnouncement; }
+    else if (lv__catalogTypeLower == "announcerpack") { lv_catalogType = c_gameCatalogAnnouncerPack; }
+    else if (lv__catalogTypeLower == "armor") { lv_catalogType = c_gameCatalogArmor; }
+    else if (lv__catalogTypeLower == "attachmethod") { lv_catalogType = c_gameCatalogAttachMethod; }
+    else if (lv__catalogTypeLower == "banner") { lv_catalogType = c_gameCatalogBanner; }
+    else if (lv__catalogTypeLower == "beam") { lv_catalogType = c_gameCatalogBeam; }
+    else if (lv__catalogTypeLower == "behavior") { lv_catalogType = c_gameCatalogBehavior; }
+    else if (lv__catalogTypeLower == "boost") { lv_catalogType = c_gameCatalogBoost; }
+    else if (lv__catalogTypeLower == "bundle") { lv_catalogType = c_gameCatalogBundle; }
+    else if (lv__catalogTypeLower == "button") { lv_catalogType = c_gameCatalogButton; }
+    else if (lv__catalogTypeLower == "camera") { lv_catalogType = c_gameCatalogCamera; }
+    else if (lv__catalogTypeLower == "character") { lv_catalogType = c_gameCatalogCharacter; }
+    else if (lv__catalogTypeLower == "cliff") { lv_catalogType = c_gameCatalogCliff; }
+    else if (lv__catalogTypeLower == "cliffmesh") { lv_catalogType = c_gameCatalogCliffMesh; }
+    else if (lv__catalogTypeLower == "collectioncategory") { lv_catalogType = c_gameCatalogCollectionCategory; }
+    else if (lv__catalogTypeLower == "colorspec") { lv_catalogType = c_gameCatalogColorSpec; }
+    else if (lv__catalogTypeLower == "colorstyle") { lv_catalogType = c_gameCatalogColorStyle; }
+    else if (lv__catalogTypeLower == "config") { lv_catalogType = c_gameCatalogConfig; }
+    else if (lv__catalogTypeLower == "conversation") { lv_catalogType = c_gameCatalogConversation; }
+    else if (lv__catalogTypeLower == "conversationstate") { lv_catalogType = c_gameCatalogConversationState; }
+    else if (lv__catalogTypeLower == "cursor") { lv_catalogType = c_gameCatalogCursor; }
+    else if (lv__catalogTypeLower == "dsp") { lv_catalogType = c_gameCatalogDSP; }
+    else if (lv__catalogTypeLower == "effect") { lv_catalogType = c_gameCatalogEffect; }
+    else if (lv__catalogTypeLower == "emoticon") { lv_catalogType = c_gameCatalogEmoticon; }
+    else if (lv__catalogTypeLower == "emoticonpack") { lv_catalogType = c_gameCatalogEmoticonPack; }
+    else if (lv__catalogTypeLower == "error") { lv_catalogType = c_gameCatalogError; }
+    else if (lv__catalogTypeLower == "footprint") { lv_catalogType = c_gameCatalogFootprint; }
+    else if (lv__catalogTypeLower == "fow") { lv_catalogType = c_gameCatalogFoW; }
+    else if (lv__catalogTypeLower == "game") { lv_catalogType = c_gameCatalogGame; }
+    else if (lv__catalogTypeLower == "gamequestui") { lv_catalogType = c_gameCatalogGameQuestUI; }
+    else if (lv__catalogTypeLower == "gameui") { lv_catalogType = c_gameCatalogGameUI; }
+    else if (lv__catalogTypeLower == "gempack") { lv_catalogType = c_gameCatalogGemPack; }
+    else if (lv__catalogTypeLower == "goal") { lv_catalogType = c_gameCatalogGoal; }
+    else if (lv__catalogTypeLower == "hero") { lv_catalogType = c_gameCatalogHero; }
+    else if (lv__catalogTypeLower == "heromastery") { lv_catalogType = c_gameCatalogHeroMastery; }
+    else if (lv__catalogTypeLower == "herorole") { lv_catalogType = c_gameCatalogHeroRole; }
+    // else if (lv__catalogTypeLower == "itemclass") { lv_catalogType = c_gameCatalogItemClass; } // TODO: Why crash??
+    // else if (lv__catalogTypeLower == "itemcontainer") { lv_catalogType = c_gameCatalogItemContainer; } // TODO: Why crash??
+    else if (lv__catalogTypeLower == "kinetic") { lv_catalogType = c_gameCatalogKinetic; }
+    else if (lv__catalogTypeLower == "lensflareset") { lv_catalogType = c_gameCatalogLensFlareSet; }
+    else if (lv__catalogTypeLower == "light") { lv_catalogType = c_gameCatalogLight; }
+    else if (lv__catalogTypeLower == "lootchest") { lv_catalogType = c_gameCatalogLootChest; }
+    else if (lv__catalogTypeLower == "map") { lv_catalogType = c_gameCatalogMap; }
+    else if (lv__catalogTypeLower == "model") { lv_catalogType = c_gameCatalogModel; }
+    else if (lv__catalogTypeLower == "mount") { lv_catalogType = c_gameCatalogMount; }
+    else if (lv__catalogTypeLower == "mover") { lv_catalogType = c_gameCatalogMover; }
+    else if (lv__catalogTypeLower == "physicsmaterial") { lv_catalogType = c_gameCatalogPhysicsMaterial; }
+    else if (lv__catalogTypeLower == "ping") { lv_catalogType = c_gameCatalogPing; }
+    else if (lv__catalogTypeLower == "portraitpack") { lv_catalogType = c_gameCatalogPortraitPack; }
+    else if (lv__catalogTypeLower == "preload") { lv_catalogType = c_gameCatalogPreload; }
+    else if (lv__catalogTypeLower == "productset") { lv_catalogType = c_gameCatalogProductSet; }
+    else if (lv__catalogTypeLower == "race") { lv_catalogType = c_gameCatalogRace; }
+    else if (lv__catalogTypeLower == "requirement") { lv_catalogType = c_gameCatalogRequirement; }
+    else if (lv__catalogTypeLower == "requirementnode") { lv_catalogType = c_gameCatalogRequirementNode; }
+    else if (lv__catalogTypeLower == "reverb") { lv_catalogType = c_gameCatalogReverb; }
+    else if (lv__catalogTypeLower == "reward") { lv_catalogType = c_gameCatalogReward; }
+    else if (lv__catalogTypeLower == "scoreresult") { lv_catalogType = c_gameCatalogScoreResult; }
+    else if (lv__catalogTypeLower == "scorevalue") { lv_catalogType = c_gameCatalogScoreValue; }
+    else if (lv__catalogTypeLower == "shape") { lv_catalogType = c_gameCatalogShape; }
+    else if (lv__catalogTypeLower == "skin") { lv_catalogType = c_gameCatalogSkin; }
+    else if (lv__catalogTypeLower == "sound") { lv_catalogType = c_gameCatalogSound; }
+    else if (lv__catalogTypeLower == "soundexclusivity") { lv_catalogType = c_gameCatalogSoundExclusivity; }
+    else if (lv__catalogTypeLower == "soundmixsnapshot") { lv_catalogType = c_gameCatalogSoundMixSnapshot; }
+    else if (lv__catalogTypeLower == "soundtrack") { lv_catalogType = c_gameCatalogSoundtrack; }
+    else if (lv__catalogTypeLower == "spray") { lv_catalogType = c_gameCatalogSpray; }
+    else if (lv__catalogTypeLower == "stat") { lv_catalogType = c_gameCatalogStat; }
+    else if (lv__catalogTypeLower == "talent") { lv_catalogType = c_gameCatalogTalent; }
+    else if (lv__catalogTypeLower == "talentprofile") { lv_catalogType = c_gameCatalogTalentProfile; }
+    else if (lv__catalogTypeLower == "targetsort") { lv_catalogType = c_gameCatalogTargetSort; }
+    else if (lv__catalogTypeLower == "terrain") { lv_catalogType = c_gameCatalogTerrain; }
+    else if (lv__catalogTypeLower == "terrainobject") { lv_catalogType = c_gameCatalogTerrainObject; }
+    else if (lv__catalogTypeLower == "terraintex") { lv_catalogType = c_gameCatalogTerrainTex; }
+    else if (lv__catalogTypeLower == "texture") { lv_catalogType = c_gameCatalogTexture; }
+    else if (lv__catalogTypeLower == "texturesheet") { lv_catalogType = c_gameCatalogTextureSheet; }
+    else if (lv__catalogTypeLower == "tile") { lv_catalogType = c_gameCatalogTile; }
+    else if (lv__catalogTypeLower == "trophy") { lv_catalogType = c_gameCatalogTrophy; }
+    else if (lv__catalogTypeLower == "turret") { lv_catalogType = c_gameCatalogTurret; }
+    else if (lv__catalogTypeLower == "typedescription") { lv_catalogType = c_gameCatalogTypeDescription; }
+    else if (lv__catalogTypeLower == "unit") { lv_catalogType = c_gameCatalogUnit; }
+    else if (lv__catalogTypeLower == "upgrade") { lv_catalogType = c_gameCatalogUpgrade; }
+    else if (lv__catalogTypeLower == "user") { lv_catalogType = c_gameCatalogUser; }
+    else if (lv__catalogTypeLower == "validator") { lv_catalogType = c_gameCatalogValidator; }
+    else if (lv__catalogTypeLower == "vodefinition") { lv_catalogType = c_gameCatalogVODefinition; }
+    else if (lv__catalogTypeLower == "voiceline") { lv_catalogType = c_gameCatalogVoiceLine; }
+    else if (lv__catalogTypeLower == "voiceover") { lv_catalogType = c_gameCatalogVoiceOver; }
+    else if (lv__catalogTypeLower == "water") { lv_catalogType = c_gameCatalogWater; }
+    else if (lv__catalogTypeLower == "weapon") { lv_catalogType = c_gameCatalogWeapon; }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Invalid Catalog Type"));
+        return true;
+    }
+    CatalogFieldValueSet(lv_catalogType, lv_catalogEntry, lv_catalogField, EventPlayer(), lv_value);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libPLYR_gt_ModifyCatalogValue_Init () {
+    libPLYR_gt_ModifyCatalogValue = TriggerCreate("libPLYR_gt_ModifyCatalogValue_Func");
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalogValue, c_playerAny, "mcv", false);
+    TriggerAddEventChatMessage(libPLYR_gt_ModifyCatalogValue, c_playerAny, "modifycatalogvalue", false);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1521,8 +1676,9 @@ void libPLYR_InitTriggers () {
     libPLYR_gt_OverrideRespawnTime_Init();
     libPLYR_gt_SetOverlay_Init();
     libPLYR_gt_ResetOverlay_Init();
-    libPLYR_gt_GetCatalog_Init();
-    libPLYR_gt_ModifyCatalog_Init();
+    libPLYR_gt_GetCatalogReference_Init();
+    libPLYR_gt_ModifyCatalogReference_Init();
+    libPLYR_gt_ModifyCatalogValue_Init();
     libPLYR_gt_GrantXPtoPlayer_Init();
     libPLYR_gt_ToggleAI_Init();
     libPLYR_gt_EnableAI_Init();

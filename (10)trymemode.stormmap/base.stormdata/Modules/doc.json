@@ -1614,6 +1614,46 @@
                             "description": "Kill all units owned by Player 15 (Player 15 usually are neutral mercenary camps.)"
                         }
                     ]
+                },
+                {
+                    "shortCommand": "encol",
+                    "command": "enablecollision",
+                    "description": [
+                        "Enable Collision for selected unit(s).",
+                        "> This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Enable Collision for selected unit(s)."
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Enable Collision for selected unit(s)."
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "rmcol",
+                    "command": "removecollision",
+                    "description": [
+                        "Remove Collision for selected unit(s).",
+                        "> This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it"
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [],
+                    "examples": [
+                        {
+                            "command": "{shortCommand}",
+                            "description": "Disable Collision for selected unit(s)."
+                        },
+                        {
+                            "command": "{command}",
+                            "description": "Disable Collision for selected unit(s)."
+                        }
+                    ]
                 }
             ]
         },
@@ -1820,6 +1860,8 @@
                     "shortCommand": "aat",
                     "command": "addalltalent",
                     "description": [
+                        "** ***DEPRECATED: Please use [`selectalltalent`](#cmd-selectalltalent-description) command instead.*** **",
+                        "",
                         "Add all talents to a player.",
                         "The `HeroId` can be either the ID of `<CHero id=\"xxx\">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.",
                         ">Note: Some of the talents won't work, so you might want to experiment a bit."
@@ -1862,7 +1904,7 @@
                     "shortCommand": "sat",
                     "command": "selectalltalent",
                     "description": [
-                        "Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like?",
+                        "Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like? Or a Varian with Twin Blade+Smash+Taunt and triple banners?",
                         ">Note: This uses the heroes build in `libGame_gf_TalentsChooseTalentForPlayer()` function, which will will add the telent for the hero of the player only. Summon other hero units does not count. And unlike the `addalltalent` command, this will work most of the time."
                     ],
                     "uiAvailable": false,
@@ -2377,6 +2419,81 @@
                         },
                         {
                             "command": "{shortCommand} Behavior,DehakaDarkSwarm,Modification.StateFlags[SuppressCollision] 0 2",
+                            "description": "Modify Dehaka's Dark Swarm Ability to no longer Suppress Collision When active (No longer pass though units) for Player 2"
+                        }
+                    ]
+                },
+                {
+                    "shortCommand": "mcv",
+                    "command": "modifycatalogvalue",
+                    "description": [
+                        "Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.",
+                        "",
+                        "For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.",
+                        "",
+                        "This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, but directly via `CatalogFieldValueSet()` function. If the regular `modifycatalog` command does not work, try this one.",
+                        "",
+                        "> Note: This command format is a bit different from the `modifycatalog` command, as it does not require the `CatalogReference` to be separated by comma. Instead, it is separated by space.",
+                        "",
+                        "> Note: due to unknown reason, `<CItemClass>` and `<CItemContainer>` currently does not work with this command."
+                    ],
+                    "uiAvailable": false,
+                    "parameters": [
+                        {
+                            "name": "CatalogType",
+                            "required": true,
+                            "description": "The Catalog Type to be modified",
+                            "type": "string"
+                        },
+                        {
+                            "name": "CatalogEntry",
+                            "required": true,
+                            "description": "The Catalog Entry to be modified",
+                            "type": "string"
+                        },
+                        {
+                            "name": "CatalogField",
+                            "required": true,
+                            "description": "The Catalog Field to be modified",
+                            "type": "string"
+                        },
+                        {
+                            "name": "value",
+                            "required": true,
+                            "description": "The value to be set for the specified catalog field",
+                            "type": "float"
+                        },
+                        {
+                            "name": "PlayerID",
+                            "required": false,
+                            "description": "The Player ID for the catalog modification",
+                            "type": "integer",
+                            "defaultValue": "The player id of whoever used this command."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "command": "{command} Effect WizardTeleportCalamityDamage Amount 9999",
+                            "description": "Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command"
+                        },
+                        {
+                            "command": "{shortCommand} Abil VarianCharge Cost.Vital[Energy] 5",
+                            "description": "Modify Varian's Charge mana cost to 5 for whoever uses this command"
+                        },
+                        {
+                            "command": "{shortCommand} Behavior Mounted Modification.UnifiedMoveSpeedFactor -0.3 2",
+                            "description": "Modify the mount speed for all Heroes to -30% (30% slower instead of faster) for Player 2"
+                        },
+                        {
+                            "command": "{shortCommand} Weapon StukovHeroWeapon Period 0.0625",
+                            "description": "Modify Stukov's Basic Attack speed to 16 (1 second performs 16 attacks = 0.0625 period per AA) for whoever uses this command"
+                        },
+                        {
+                            "command": "{shortCommand} Weapon ChromieHeroWeapon Effect WizardWeaponLaunchSwitch",
+                            "description": "Modify Chromie's Basic Attack to behave like Li-ming's Basic Attack (Shooting a Purple Missile) for whoever uses this command"
+                        },
+                        {
+                            "command": "{shortCommand} Behavior DehakaDarkSwarm Modification.StateFlags[SuppressCollision] 0 2",
                             "description": "Modify Dehaka's Dark Swarm Ability to no longer Suppress Collision When active (No longer pass though units) for Player 2"
                         }
                     ]

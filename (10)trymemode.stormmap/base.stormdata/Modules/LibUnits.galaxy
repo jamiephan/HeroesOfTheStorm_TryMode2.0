@@ -90,6 +90,8 @@ trigger libUNIT_gt_SummonUnitPanelSummonButtonClicked;
 trigger libUNIT_gt_SummonUnitPanelCloseButtonClicked;
 trigger libUNIT_gt_SummonUnit;
 trigger libUNIT_gt_ClearSummonedUnits;
+trigger libUNIT_gt_EnableCollision;
+trigger libUNIT_gt_RemoveCollision;
 
 // Library Initialization
 void libUNIT_InitVariables ();
@@ -2121,8 +2123,8 @@ bool libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func (bool testConds, bool ru
             auto779A4170_ae = lv_amount;
             lv_i = 1;
             for ( ; ( (auto779A4170_ai >= 0 && lv_i <= auto779A4170_ae) || (auto779A4170_ai < 0 && lv_i >= auto779A4170_ae) ) ; lv_i += auto779A4170_ai ) {
-                libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
-                AIAddPlayerUnit(UnitLastCreated());
+                //_heroes_replace_//libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+                //_heroes_replace_//AIAddPlayerUnit(UnitLastCreated());
                 UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
                 UnitSelect(UnitLastCreated(), lv_player, true);
                 if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
@@ -2248,8 +2250,8 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
     autoE55C84B8_ae = lv_amount;
     lv_i = 1;
     for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
-        libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
-        AIAddPlayerUnit(UnitLastCreated());
+        //_heroes_replace_//libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+        //_heroes_replace_//AIAddPlayerUnit(UnitLastCreated());
         UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
         UnitSelect(UnitLastCreated(), lv_player, true);
         if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
@@ -2342,6 +2344,88 @@ void libUNIT_gt_ClearSummonedUnits_Init () {
     TriggerAddEventChatMessage(libUNIT_gt_ClearSummonedUnits, c_playerAny, "clearunits", false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Enable Collision
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_EnableCollision_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoA25850A0_g;
+    int autoA25850A0_u;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoA25850A0_g = UnitGroupSelected(EventPlayer());
+    autoA25850A0_u = UnitGroupCount(autoA25850A0_g, c_unitCountAll);
+    for (;; autoA25850A0_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoA25850A0_g, autoA25850A0_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Mover", EventPlayer(), "Ground");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(1) + "]", EventPlayer(), "1");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(12) + "]", EventPlayer(), "1");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(8) + "]", EventPlayer(), "1");
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Enabled collision for unit " + ((lv_unittype) + (" for player " + IntToString(EventPlayer()))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_EnableCollision_Init () {
+    libUNIT_gt_EnableCollision = TriggerCreate("libUNIT_gt_EnableCollision_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_EnableCollision, c_playerAny, "encol", true);
+    TriggerAddEventChatMessage(libUNIT_gt_EnableCollision, c_playerAny, "enablecollision", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Collision
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_RemoveCollision_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unittype;
+    unit lv_currentUnit;
+
+    // Automatic Variable Declarations
+    unitgroup autoE54127E5_g;
+    int autoE54127E5_u;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoE54127E5_g = UnitGroupSelected(EventPlayer());
+    autoE54127E5_u = UnitGroupCount(autoE54127E5_g, c_unitCountAll);
+    for (;; autoE54127E5_u -= 1) {
+        lv_currentUnit = UnitGroupUnitFromEnd(autoE54127E5_g, autoE54127E5_u);
+        if (lv_currentUnit == null) { break; }
+        lv_unittype = UnitGetType(lv_currentUnit);
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Mover", EventPlayer(), "FlyGroundHM");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(1) + "]", EventPlayer(), "0");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(12) + "]", EventPlayer(), "0");
+        CatalogFieldValueSet(c_gameCatalogUnit, lv_unittype, "Collide[" + IntToString(8) + "]", EventPlayer(), "0");
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(("Disabled collision for unit " + ((lv_unittype) + (" for player " + IntToString(EventPlayer()))))));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_RemoveCollision_Init () {
+    libUNIT_gt_RemoveCollision = TriggerCreate("libUNIT_gt_RemoveCollision_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveCollision, c_playerAny, "rmcol", true);
+    TriggerAddEventChatMessage(libUNIT_gt_RemoveCollision, c_playerAny, "removecollision", true);
+}
+
 void libUNIT_InitTriggers () {
     libUNIT_gt_MapInit_Init();
     libUNIT_gt_AddEffectstoCamera_Init();
@@ -2388,6 +2472,8 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_SummonUnitPanelCloseButtonClicked_Init();
     libUNIT_gt_SummonUnit_Init();
     libUNIT_gt_ClearSummonedUnits_Init();
+    libUNIT_gt_EnableCollision_Init();
+    libUNIT_gt_RemoveCollision_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
