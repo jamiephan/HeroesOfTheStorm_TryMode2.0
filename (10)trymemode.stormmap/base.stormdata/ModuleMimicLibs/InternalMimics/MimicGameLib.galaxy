@@ -406,7 +406,8 @@ string MimicGameLib_ge_BehaviorCategoriesStorm_Ident (int lp_val) {
     else if (lp_val == c_behaviorCategoryImmuneToAllyDisplacement) { return "ImmuneToAllyDisplacement"; }
     else if (lp_val == c_behaviorCategoryImmuneToEnemyDisplacement) { return "ImmuneToEnemyDisplacement"; }
     else if (lp_val == c_behaviorCategoryStackingComboMarker) { return "StackingComboMarker"; }
-    else if (lp_val == c_behaviorCategoryStackingComboMarker+1) { return "Any"; }
+    else if (lp_val == c_behaviorCategoryPreventsMovement) { return "PreventsMovement"; }
+    else if (lp_val == c_behaviorCategoryPreventsMovement+1) { return "Any"; }
     return null;
 }
 

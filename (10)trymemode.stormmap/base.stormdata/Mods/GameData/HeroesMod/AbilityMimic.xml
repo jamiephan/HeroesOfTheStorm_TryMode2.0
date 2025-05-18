@@ -488,11 +488,9 @@
         <Buttons Face="MedicMedivacDropshipDepart" Type="AbilCmd" AbilCmd="MedicMedivacDropshipDepart,Execute" Behavior="MedicMedivacDropshipDepart" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MMedicCancelHealingBeam">
-        <!-- Requirement Behavior Detected. Please add the behavior: MedicHasHealingBeamActiveShow -->
         <Buttons Face="MedicCancelHealingBeam" Type="AbilCmd" AbilCmd="MedicCancelHealingBeam,Execute" Behavior="MedicCancelHealingBeam" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MMedicRedirectHealingBeam">
-        <!-- Requirement Behavior Detected. Please add the behavior: MedicHasHealingBeamActiveShow -->
         <Buttons Face="MedicRedirectHealingBeam" Type="AbilCmd" AbilCmd="MedicRedirectHealingBeam,Execute" Behavior="MedicRedirectHealingBeam" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MMedicSafeguard">
@@ -1332,12 +1330,18 @@
     <CBehaviorAbility id="ML90ETCFaceMelt">
         <Buttons Face="L90ETCFaceMelt" Type="AbilCmd" AbilCmd="L90ETCFaceMelt,Execute" Behavior="L90ETCFaceMelt" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="ML90ETCPoweroftheHorde">
+        <Buttons Face="GenericStormShield" Type="AbilCmd" AbilCmd="L90ETCPoweroftheHorde,Execute" Behavior="L90ETCPoweroftheHorde" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="ML90ETCPowerslide">
         <Buttons Face="L90ETCPowerslide" Type="AbilCmd" AbilCmd="L90ETCPowerslide,Execute" Behavior="L90ETCPowerslide" />
     </CBehaviorAbility>
     <CBehaviorAbility id="ML90ETCStageDive">
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
         <Buttons Face="L90ETCStageDive" Type="AbilCmd" AbilCmd="L90ETCStageDive,Execute" Behavior="L90ETCStageDive" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="ML90ETCRidetheLightning">
+        <Buttons Face="L90ETCRidetheLightning" Type="AbilCmd" AbilCmd="L90ETCRidetheLightning,Execute" Behavior="L90ETCRidetheLightning" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/L90ETCData/L90ETCData.xml}-->
