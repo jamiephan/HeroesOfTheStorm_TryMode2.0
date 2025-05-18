@@ -33,6 +33,7 @@
 <Unit id="TownMoonwellL2"/>
 <Unit id="TownTownHallL3"/>
 <Unit id="MercDefenderSiegeGiant"/>
+<Unit id="RegenGlobeGenerator"/>
 <Unit id="TownTownHallL2"/>
 <Unit id="HallOfStormsLocationUnit"/>
 <Unit id="RangedMinion"/>

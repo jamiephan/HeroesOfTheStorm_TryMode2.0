@@ -137,7 +137,7 @@ string gv_bank_Key_EnemyHero_C;
 int gv_heroCurrentLevel;
 
 void InitGlobals () {
-    gv_pLAYER_AI_AllyHero = "Malfurion";
+    gv_pLAYER_AI_AllyHero = "Anduin";
     gv_pLAYER_AI_EnemyHero = "Arthas";
     gv_fortToggleTextTag = c_textTagNone;
     gv_minionToggleTextTag = c_textTagNone;

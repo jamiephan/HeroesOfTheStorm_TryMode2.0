@@ -67,9 +67,10 @@
         <Value Type="Param" Id="553CDDEF"/>
     </Element>
     <Element Type="Param" Id="553CDDEF">
-        <Value>Malfurion</Value>
-        <ValueType Type="gamelink"/>
-        <ValueGameType Type="Hero"/>
+        <CustomType Type="gamelink"/>
+        <ScriptCode>
+            &quot;Anduin&quot;
+        </ScriptCode>
     </Element>
     <Element Type="Variable" Id="754195A0">
         <VariableType>
