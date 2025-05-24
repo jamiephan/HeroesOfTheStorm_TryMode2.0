@@ -2123,8 +2123,8 @@ bool libUNIT_gt_SummonUnitPanelSummonButtonClicked_Func (bool testConds, bool ru
             auto779A4170_ae = lv_amount;
             lv_i = 1;
             for ( ; ( (auto779A4170_ai >= 0 && lv_i <= auto779A4170_ae) || (auto779A4170_ai < 0 && lv_i >= auto779A4170_ae) ) ; lv_i += auto779A4170_ai ) {
-                //_heroes_replace_//libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
-                //_heroes_replace_//AIAddPlayerUnit(UnitLastCreated());
+                libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+                AIAddPlayerUnit(UnitLastCreated());
                 UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
                 UnitSelect(UnitLastCreated(), lv_player, true);
                 if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
@@ -2250,8 +2250,8 @@ bool libUNIT_gt_SummonUnit_Func (bool testConds, bool runActions) {
     autoE55C84B8_ae = lv_amount;
     lv_i = 1;
     for ( ; ( (autoE55C84B8_ai >= 0 && lv_i <= autoE55C84B8_ae) || (autoE55C84B8_ai < 0 && lv_i >= autoE55C84B8_ae) ) ; lv_i += autoE55C84B8_ai ) {
-        //_heroes_replace_//libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
-        //_heroes_replace_//AIAddPlayerUnit(UnitLastCreated());
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, lv_unittype, 0, lv_player, CameraGetTarget(EventPlayer()), null);
+        AIAddPlayerUnit(UnitLastCreated());
         UnitSetScale(UnitLastCreated(), (lv_scale * 100.0), (lv_scale * 100.0), (lv_scale * 100.0));
         UnitSelect(UnitLastCreated(), lv_player, true);
         if ((libUNIT_gv_summonedUnits_index[lv_player] >= libUNIT_gv_summonedUnits_MaxLength)) {
