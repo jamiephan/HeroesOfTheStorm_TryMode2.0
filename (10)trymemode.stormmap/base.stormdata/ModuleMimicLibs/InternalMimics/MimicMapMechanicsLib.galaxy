@@ -40,9 +40,9 @@ void MimicMapMechanicsLib_InitVariables () {
     MimicMapMechanicsLib_gv_bALJungleLeashRespawnTime = 45.0;
     MimicMapMechanicsLib_gv_bALJungleCampScalingTimerDuration = 60.0;
     MimicMapMechanicsLib_gv_bALJungleOgreMageAuraAbilityPowerPercentage = 0.2;
-    MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C = 60.0;
+    MimicMapMechanicsLib_gv_genericMercCampInitialSpawnDelay_C = 30.0;
     MimicMapMechanicsLib_gv_genericMercBossCampInitialSpawnDelay_C = 300.0;
-    MimicMapMechanicsLib_gv_mercSapperDefaultSpawnTime_C = 60.0;
+    MimicMapMechanicsLib_gv_mercSapperDefaultSpawnTime_C = 30.0;
     MimicMapMechanicsLib_gv_mercSapperDefaultRespawnTime_C = 150.0;
     for (init_i = 0; init_i <= MimicMapMechanicsLib_gv_dataJungleMaxNumberOfDefenderTypes; init_i += 1) {
         MimicMapMechanicsLib_gv_dataJungleCampDefenderData[init_i].lv_aIGoalLink = "MercenaryCamp";

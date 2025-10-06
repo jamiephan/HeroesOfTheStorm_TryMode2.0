@@ -1138,8 +1138,6 @@ void MimicGameDataHelperLib_gf_HeroDemonHunterIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, true);
     }
 
 }
@@ -1153,8 +1151,6 @@ void MimicGameDataHelperLib_gf_HeroDemonHunterDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroDemonHunterTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, false);
     }
 
 }
@@ -3069,8 +3065,6 @@ void MimicGameDataHelperLib_gf_HeroRexxarIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaWildfireBear, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaPrimalIntimidation, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaHunterGatherer, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarThrilloftheHuntProc, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarHardenedSkin, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarBestialWrathSpiritBondBearNecessitiesHealProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarChargeCast, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarSelectMishaOnVehicleExit, true);
@@ -3123,8 +3117,6 @@ void MimicGameDataHelperLib_gf_HeroRexxarDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaWildfireBear, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaPrimalIntimidation, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarAliveMishaHunterGatherer, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarThrilloftheHuntProc, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarHardenedSkin, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarBestialWrathSpiritBondBearNecessitiesHealProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarChargeCast, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroRexxarSelectMishaOnVehicleExit, false);
@@ -4164,7 +4156,6 @@ void MimicGameDataHelperLib_gf_HeroUtherIncrementHeroCountFunction () {
     // Implementation
     MimicGameDataHelperLib_gv_heroUtherTriggerRegistrationVariable += 1;
     if ((MimicGameDataHelperLib_gv_heroUtherTriggerRegistrationVariable == 1)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherArmorofFaithProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionTargetProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionSelfHealingProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionDummyProcs, true);
@@ -4185,7 +4176,6 @@ void MimicGameDataHelperLib_gf_HeroUtherDecrementHeroCountFunction () {
     }
 
     if ((MimicGameDataHelperLib_gv_heroUtherTriggerRegistrationVariable == 0)) {
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherArmorofFaithProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionTargetProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionSelfHealingProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroUtherBlessedChampionDummyProcs, false);
@@ -4366,6 +4356,104 @@ bool MimicGameDataHelperLib_gt_SummonedUnitAPApplication_Func (bool testConds, b
 void MimicGameDataHelperLib_gt_SummonedUnitAPApplication_Init () {
     MimicGameDataHelperLib_gt_SummonedUnitAPApplication = TriggerCreate("MimicGameDataHelperLib_gt_SummonedUnitAPApplication_Func");
     TriggerAddEventUnitCreated(MimicGameDataHelperLib_gt_SummonedUnitAPApplication, null, null, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Summoned Unit Imposing Presence Application
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_attackingUnit;
+    unit lv_attackedUnit;
+    int lv_attackedPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_attackingUnit = EventPlayerEffectUsedUnitLaunch();
+    lv_attackedUnit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    lv_attackedPlayer = EventPlayerEffectUsedUnitOwner(c_effectPlayerTarget);
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_attackingUnit != null))) {
+            return false;
+        }
+
+        if (!((lv_attackedPlayer <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((lv_attackedPlayer >= 1))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(lv_attackedUnit, "TalentImposingPresenceApplyDamageResponseBehavior", lv_attackingUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication_Init () {
+    MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication = TriggerCreate("MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication, c_playerAny, "StormSummonedUnitApplyImposingPresenceDamageResponseDebuffToCasterTriggerDummy");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Summoned Unit Damage Dealt Enum Target Caster Handled
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_summonUnit;
+    int lv_summonUnitOwner;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_summonUnit = EventPlayerEffectUsedUnitImpact();
+    lv_summonUnitOwner = EventPlayerEffectUsedUnitOwner(c_effectPlayerTarget);
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitHasBehavior2(lv_summonUnit, "StormSummonedUnitDamagedUnitTracker") == true))) {
+            return false;
+        }
+
+        if (!((lv_summonUnit != null))) {
+            return false;
+        }
+
+        if (!((lv_summonUnitOwner <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+
+        if (!((lv_summonUnitOwner >= 1))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventPlayerEffectUsed() == "StormSummonedUnitPhysicalDamageDealtDummy")) {
+        UnitCreateEffectUnit(lv_summonUnit, "StormStummonedUnitEnumUnitsSetPhysicalDamage", lv_summonUnit);
+    }
+    else if ((EventPlayerEffectUsed() == "StormSummonedUnitSpellDamageDealtDummy")) {
+        UnitCreateEffectUnit(lv_summonUnit, "StormStummonedUnitEnumUnitsSetSpellDamage", lv_summonUnit);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled_Init () {
+    MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled = TriggerCreate("MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled_Func");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled, c_playerAny, "StormSummonedUnitPhysicalDamageDealtDummy");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled, c_playerAny, "StormSummonedUnitSpellDamageDealtDummy");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -17976,7 +18064,7 @@ bool MimicGameDataHelperLib_gt_HeroNecromancerSkeletonMasteryProc_Func (bool tes
 
     // Conditions
     if (testConds) {
-        if (!(((UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "FootmanMinion") || (UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "RangedMinion") || (UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "CatapultMinion") || (UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "WizardMinion") || ((libCore_gv_sYSGameMode == libCore_ge_GameModes_ModeC) && (UnitFilterMatch(libGame_gf_HeroParticipatedInNPCTakedownMinion(), libCore_gv_cOMPUTER_TeamChaos, UnitFilter((1 << c_targetFilterMinion), 0, 0, 0)) == true))))) {
+        if (!(((UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "FootmanMinion") || (UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "RangedMinion") || (UnitBehaviorCount(libGame_gf_HeroParticipatedInNPCTakedownMinion(), "IsCatapultMinionOrCatapultReplacement") > 0) || (UnitGetType(libGame_gf_HeroParticipatedInNPCTakedownMinion()) == "WizardMinion") || ((libCore_gv_sYSGameMode == libCore_ge_GameModes_ModeC) && (UnitFilterMatch(libGame_gf_HeroParticipatedInNPCTakedownMinion(), libCore_gv_cOMPUTER_TeamChaos, UnitFilter((1 << c_targetFilterMinion), 0, 0, 0)) == true))))) {
             return false;
         }
     }
@@ -18892,6 +18980,7 @@ bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Func (bool te
     // Variable Declarations
     unit lv_raynor;
     int lv_player;
+    fixed lv_reductionAmount;
 
     // Automatic Variable Declarations
     fixed auto2762DC95_at;
@@ -18899,6 +18988,7 @@ bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Func (bool te
     // Variable Initialization
     lv_raynor = libGame_gf_HeroKilledUnit();
     lv_player = libGame_gf_HeroKilledPlayer();
+    lv_reductionAmount = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "RaynorExecuteOrdersDeathTimerReduction", "XP", lv_player);
 
     // Conditions
     if (testConds) {
@@ -18917,7 +19007,7 @@ bool MimicGameDataHelperLib_gt_HeroRaynorExecuteOrderDeathTimerMod_Func (bool te
         Wait(0.125, c_timeGame);
         auto2762DC95_at = auto2762DC95_at + 0.125;
     }
-    libGame_gf_HeroDeathModifyRespawnTimer(lv_player, -35.0);
+    libGame_gf_HeroDeathModifyRespawnTimer(lv_player, lv_reductionAmount);
     return true;
 }
 
@@ -19868,8 +19958,6 @@ bool MimicGameDataHelperLib_gt_HeroRexxarMishaSpawn_Func (bool testConds, bool r
     MimicGameDataHelperLib_gv_commandMishaTargetUnit[lv_rexxarPlayer] = null;
     MimicGameDataHelperLib_gv_mishaCurrentAIState[lv_rexxarPlayer] = MimicGameDataHelperLib_ge_MishaState_Idle;
     UnitBehaviorRemove(lv_misha, "RexxarMishaHold", 1);
-    UnitCreateEffectUnit(lv_rexxar, "RexxarMishaApplyBasicAttackDamageResponseController", lv_misha);
-    UnitCreateEffectUnit(lv_misha, "RexxarMishaApplyBasicAttackDamageResponseController2", lv_rexxar);
     libNtve_gf_MakeUnitFacePoint(lv_misha, PointWithOffset(UnitGetGoalPosition(lv_rexxar), 0.0, -5.0), 0.0);
     if ((UnitGetType(libGame_gv_players[lv_rexxarPlayer].lv_heroUnit) == "HeroAbathur")) {
         lv_rexxar = libGame_gv_players[lv_rexxarPlayer].lv_activeVehicle;
@@ -20474,10 +20562,9 @@ bool MimicGameDataHelperLib_gt_HeroRexxarMishaTeleport_Func (bool testConds, boo
         autoFF82D22F_var = UnitGroupUnitFromEnd(autoFF82D22F_g, autoFF82D22F_u);
         if (autoFF82D22F_var == null) { break; }
         if ((UnitGetType(autoFF82D22F_var) == "RexxarMisha")) {
-            UnitCreateEffectUnit(autoFF82D22F_var, "RexxarMishaHoldIssueStopOrder", autoFF82D22F_var);
-            UnitSetPosition(autoFF82D22F_var, UnitGetPosition(libGame_gv_players[lv_player].lv_heroUnit), false);
-            if ((EventPlayerEffectUsed() == "HearthstoneTeleport")) {
-                UnitCreateEffectUnit(autoFF82D22F_var, "HearthstoneHealthCreateHealer", autoFF82D22F_var);
+            if ((EventPlayerEffectUsed() != "HearthstoneTeleport")) {
+                UnitCreateEffectUnit(autoFF82D22F_var, "RexxarMishaHoldIssueStopOrder", autoFF82D22F_var);
+                UnitSetPosition(autoFF82D22F_var, UnitGetPosition(libGame_gv_players[lv_player].lv_heroUnit), false);
             }
 
             Wait(0.0625, c_timeGame);
@@ -22500,11 +22587,15 @@ bool MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Func (bool test
     // Variable Declarations
     int lv_player;
     unit lv_unit;
+    int lv_level;
+    int lv_max;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_player = libGame_gf_HeroLevelUpPlayer();
     lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+    lv_level = libGame_gf_HeroLevelUpLevel();
+    lv_max = CatalogFieldValueGetAsInt(c_gameCatalogBehavior, "StitchesHookExtendedHookTokenCounter", "Max", 0);
 
     // Conditions
     if (testConds) {
@@ -22513,10 +22604,6 @@ bool MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Func (bool test
         }
 
         if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
-            return false;
-        }
-
-        if (!((libGame_gf_HeroLevelUpLevel() >= 13))) {
             return false;
         }
 
@@ -22534,8 +22621,15 @@ bool MimicGameDataHelperLib_gt_HeroStitchesFreeFishingHookTalent_Func (bool test
         return true;
     }
 
-    PlayerAddTalent(lv_player, "StitchesFishingHook");
-    UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookSet", lv_unit);
+    if ((UnitGetTokenCount(lv_unit, "StitchesHookExtendedHookTokenCounter") <= lv_max)) {
+        UnitSetTokenCount(lv_unit, "StitchesHookExtendedHookTokenCounter", lv_level, lv_unit);
+    }
+
+    if ((lv_level >= lv_max)) {
+        PlayerAddTalent(lv_player, "StitchesFishingHook");
+        UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookModifyPlayer", lv_unit);
+    }
+
     return true;
 }
 
@@ -22552,11 +22646,15 @@ bool MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Func (bool
     // Variable Declarations
     int lv_player;
     unit lv_unit;
+    int lv_level;
+    int lv_max;
 
     // Automatic Variable Declarations
     // Variable Initialization
     lv_player = UnitGetOwner(EventUnit());
     lv_unit = libGame_gv_players[lv_player].lv_heroUnit;
+    lv_level = UnitGetOwner(EventUnit());
+    lv_max = CatalogFieldValueGetAsInt(c_gameCatalogBehavior, "StitchesHookExtendedHookTokenCounter", "Max", 0);
 
     // Conditions
     if (testConds) {
@@ -22585,11 +22683,17 @@ bool MimicGameDataHelperLib_gt_HeroStitchesResetFreeFishingHookTalent_Func (bool
     PlayerRemoveTalent(lv_player, "StitchesFishingHook");
     UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookResetPlayer", lv_unit);
     Wait(0.125, c_timeGame);
-    if ((UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy") >= 13)) {
+    lv_level = UnitBehaviorCount(EventUnit(), "HeroDummyVeterancy");
+    if ((lv_level >= lv_max)) {
         PlayerAddTalent(lv_player, "StitchesFishingHook");
-        UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookSet", lv_unit);
+        UnitCreateEffectUnit(lv_unit, "StitchesHookLevel13ExtendedHookModifyPlayer", lv_unit);
     }
+    else {
+        if ((UnitGetTokenCount(lv_unit, "StitchesHookExtendedHookTokenCounter") < lv_max)) {
+            UnitSetTokenCount(lv_unit, "StitchesHookExtendedHookTokenCounter", lv_level, lv_unit);
+        }
 
+    }
     return true;
 }
 
@@ -25067,6 +25171,7 @@ bool MimicGameDataHelperLib_gt_HeroUtherBlessedChampionTargetProc_Func (bool tes
     unit lv_unit;
     int lv_player;
     fixed lv_healAmount;
+    fixed lv_blessedChampionMod;
     fixed lv_healAmountMod;
 
     // Automatic Variable Declarations
@@ -25074,7 +25179,8 @@ bool MimicGameDataHelperLib_gt_HeroUtherBlessedChampionTargetProc_Func (bool tes
     lv_unit = EventUnitHealLaunchUnit();
     lv_player = UnitGetOwner(lv_unit);
     lv_healAmount = EventUnitHealAmount();
-    lv_healAmountMod = (lv_healAmount * MimicGameDataHelperLib_gv_bALHeroUtherBlessedChampionHeal);
+    lv_blessedChampionMod = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "UtherBlessedChampionHealRatio", "XP", lv_player);
+    lv_healAmountMod = (lv_healAmount * lv_blessedChampionMod);
 
     // Conditions
     if (testConds) {
@@ -25112,6 +25218,7 @@ bool MimicGameDataHelperLib_gt_HeroUtherBlessedChampionSelfHealingProc_Func (boo
     unit lv_unit;
     int lv_player;
     fixed lv_healAmount;
+    fixed lv_blessedChampionMod;
     fixed lv_healAmountMod;
 
     // Automatic Variable Declarations
@@ -25119,7 +25226,8 @@ bool MimicGameDataHelperLib_gt_HeroUtherBlessedChampionSelfHealingProc_Func (boo
     lv_unit = EventUnitHealLaunchUnit();
     lv_player = UnitGetOwner(lv_unit);
     lv_healAmount = EventUnitHealAmount();
-    lv_healAmountMod = (lv_healAmount * MimicGameDataHelperLib_gv_bALHeroUtherBlessedChampionHeal);
+    lv_blessedChampionMod = CatalogFieldValueGetAsFixed(c_gameCatalogEffect, "UtherBlessedChampionHealRatio", "XP", lv_player);
+    lv_healAmountMod = (lv_healAmount * lv_blessedChampionMod);
 
     // Conditions
     if (testConds) {
@@ -25685,7 +25793,12 @@ bool MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage_Func (bool testConds, b
 
     libNtve_gf_UnitCreateFacingPoint(1, "ZagaraBaneling", c_unitCreateIgnorePlacement, lv_triggeringPlayer, libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_zagara), 0.75, lv_targetPoint), lv_targetPoint, lv_zagara);
     lv_baneling = UnitLastCreated();
-    UnitBehaviorAdd(lv_baneling, "ZagaraBanelingExplode", lv_zagara, 1);
+    if ((EventPlayerEffectUsed() == "SummonBanelingsLaunchDummy")) {
+        UnitBehaviorAdd(lv_baneling, "ZagaraBanelingExplode", lv_zagara, 1);
+    }
+    else {
+        UnitBehaviorAdd(lv_baneling, "ZagaraBanelingExplodeBroodmother", lv_zagara, 1);
+    }
     SoundPlayOnUnit(SoundLink("Zagara_BanelingEgg_Explode", -1), PlayerGroupAll(), lv_baneling, 0.0, 100.0, 0.0);
     lv_forwardPoint = libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(lv_baneling), lv_movementIncrement, lv_targetPoint);
     UnitIssueOrder(lv_baneling, OrderTargetingPoint(AbilityCommand("move", 0), lv_forwardPoint), c_orderQueueReplace);
@@ -25712,6 +25825,7 @@ void MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage_Init () {
     MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage = TriggerCreate("MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage, false);
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage, c_playerAny, "SummonBanelingsLaunchDummy");
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroZagaraBanelingBarrage, c_playerAny, "SummonBanelingsBroodmotherLaunchDummy");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -25751,6 +25865,7 @@ bool MimicGameDataHelperLib_gt_HeroZagaraHydraliskorMutaliskControl_Func (bool t
         UnitCreate(1, lv_summonedPetType, 0, lv_triggeringPlayer, PointWithOffsetPolar(UnitGetPosition(lv_zagara), 1.0, 0.0), 0.0, lv_zagara);
     }
     lv_summonedPet = UnitLastCreated();
+    UnitBehaviorAdd(lv_summonedPet, "ZagaraHydraliskAbilityController", lv_zagara, 1);
     libAIAI_gf_MinionAIUnhookUnitFromMinionAI(lv_summonedPet);
     while ((UnitIsValid(lv_targetUnit) == true) && (UnitIsAlive(lv_summonedPet) == true) && (UnitFilterMatch(lv_targetUnit, lv_triggeringPlayer, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterStasis - 32)) | (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)))) == true) && ((libNtve_gf_UnitIsVisibleToPlayer(lv_targetUnit, lv_triggeringPlayer) == true) || (DistanceBetweenPoints(UnitGetPosition(lv_summonedPet), lv_lastKnownLocation) != 0.0))) {
         if ((DistanceBetweenPoints(UnitGetPosition(lv_summonedPet), UnitGetPosition(lv_targetUnit)) > 30.0)) {
@@ -25816,7 +25931,7 @@ bool MimicGameDataHelperLib_gt_HeroZagaraInfestScaling_Func (bool testConds, boo
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_rangedDamageDealtFraction = 1.25;
+    lv_rangedDamageDealtFraction = 1.0;
     lv_player = EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster);
     lv_zagara = EventPlayerEffectUsedUnit(c_effectUnitCaster);
     lv_siegeScore = PlayerScoreValueGetAsFixed(lv_player, "SiegeDamage");
@@ -26612,6 +26727,8 @@ void MimicGameDataHelperLib_gt_TalentBribeCampRespawnTimerModification_Init () {
 void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_IncludeGameDataHelper_Init();
     MimicGameDataHelperLib_gt_SummonedUnitAPApplication_Init();
+    MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication_Init();
+    MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled_Init();
     MimicGameDataHelperLib_gt_HeroGenericCameraShakeLightTarget_Init();
     MimicGameDataHelperLib_gt_HeroGenericCameraShakeMediumTarget_Init();
     MimicGameDataHelperLib_gt_HeroGenericCameraShakeHeavyTarget_Init();

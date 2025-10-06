@@ -74,7 +74,6 @@ const fixed MimicGameDataHelperLib_gv_rexxar_Misha_LeashMoveOffset_C = 2.0;
 const int MimicGameDataHelperLib_gv_thrallTraitMaxStacks = 5;
 const fixed MimicGameDataHelperLib_gv_heroTychusSuppressiveFireMaxTurnRate = 500.0;
 const fixed MimicGameDataHelperLib_gv_illusionistProcPercentageConstant = 0.2;
-const fixed MimicGameDataHelperLib_gv_bALHeroUtherBlessedChampionHeal = 0.15;
 
 // Structures
 struct MimicGameDataHelperLib_gs_SymbioteHivemind {
@@ -572,6 +571,8 @@ void MimicGameDataHelperLib_gf_HeroZeratulDecrementHeroCountFunction ();
 // Trigger Declarations
 trigger MimicGameDataHelperLib_gt_IncludeGameDataHelper;
 trigger MimicGameDataHelperLib_gt_SummonedUnitAPApplication;
+trigger MimicGameDataHelperLib_gt_SummonedUnitImposingPresenceApplication;
+trigger MimicGameDataHelperLib_gt_SummonedUnitDamageDealtEnumTargetCasterHandled;
 trigger MimicGameDataHelperLib_gt_HeroGenericCameraShakeLightTarget;
 trigger MimicGameDataHelperLib_gt_HeroGenericCameraShakeMediumTarget;
 trigger MimicGameDataHelperLib_gt_HeroGenericCameraShakeHeavyTarget;

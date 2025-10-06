@@ -365,7 +365,6 @@ trigger MimicSupportLib_gt_DEBUGSapperAttackDamage;
 trigger MimicSupportLib_gt_DEBUGSapperHealth;
 trigger MimicSupportLib_gt_DEBUGApplyArmorValueChange;
 trigger MimicSupportLib_gt_DEBUGApplySpellPowerValueChange;
-trigger MimicSupportLib_gt_GPU2021EnableDisableExtendedDurationXPGlobes;
 
 // Library Initialization
 void MimicSupportLib_InitVariables ();

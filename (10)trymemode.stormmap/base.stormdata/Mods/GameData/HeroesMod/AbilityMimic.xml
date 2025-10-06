@@ -76,6 +76,9 @@
     <CBehaviorAbility id="MTyraelRighteousness">
         <Buttons Face="TyraelRighteousness" Type="AbilCmd" AbilCmd="TyraelRighteousness,Execute" Behavior="TyraelRighteousness" />
     </CBehaviorAbility>
+    <CBehaviorAbility id="MTyraelAspectofJustice">
+        <Buttons Face="TyraelArchangelsWrathActive" Type="AbilCmd" AbilCmd="TyraelAspectofJustice,Execute" Behavior="TyraelAspectofJustice" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MTyraelArchangelsWrathFinalThrow">
         <!-- Requirement Behavior Detected. Please add the behavior: TyraelDeathPassiveActive -->
         <Buttons Face="TyraelFinalThrow" Type="AbilCmd" AbilCmd="TyraelArchangelsWrathFinalThrow,Execute" Behavior="TyraelArchangelsWrathFinalThrow" />
@@ -755,7 +758,6 @@
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/DemonHunterData/DemonHunterData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MDemonHunterGloom">
-        <!-- Requirement Behavior Detected. Please add the behavior: DemonHunterHas1StacksOfHatred -->
         <Buttons Face="DemonHunterGloomItem" Type="AbilCmd" AbilCmd="DemonHunterGloom,Execute" Behavior="DemonHunterGloom" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MDemonHunterStrafe">
@@ -949,7 +951,6 @@
         <Buttons Face="RexxarSpiritSwoop" Type="AbilCmd" AbilCmd="RexxarSpiritSwoop,Execute" Behavior="RexxarSpiritSwoop" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MRexxarMishaChargeRedirect">
-        <!-- Requirement Behavior Detected. Please add the behavior: RexxarMishaAlive -->
         <Buttons Face="RexxarMishaChargeRedirect" Type="AbilCmd" AbilCmd="RexxarMishaChargeRedirect,Execute" Behavior="RexxarMishaChargeRedirect" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MRexxarMishaCharge">
@@ -1664,8 +1665,11 @@
         <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
         <Buttons Face="KaelthasPhoenix" Type="AbilCmd" AbilCmd="KaelthasPhoenix,Execute" Behavior="KaelthasPhoenix" />
     </CBehaviorAbility>
-    <CBehaviorAbility id="MKaelthasPhoenixRetarget">
+    <CBehaviorAbility id="MKaelthasPhoenixRetargetPhoenixAbility">
         <!-- Requirement Behavior Detected. Please add the behavior: KaelthasHasPhoenixRetargetReady -->
+        <Buttons Face="KaelthasPhoenixRetarget" Type="AbilCmd" AbilCmd="KaelthasPhoenixRetargetPhoenixAbility,Execute" Behavior="KaelthasPhoenixRetargetPhoenixAbility" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MKaelthasPhoenixRetarget">
         <Buttons Face="KaelthasPhoenixRetarget" Type="AbilCmd" AbilCmd="KaelthasPhoenixRetarget,Execute" Behavior="KaelthasPhoenixRetarget" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MKaelthasPyroblast">
@@ -2115,12 +2119,10 @@
         <Buttons Face="UtherHandOfProtection" Type="AbilCmd" AbilCmd="UtherHandOfProtection,Execute" Behavior="UtherHandOfProtection" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherFlashofLight">
-        <!-- Requirement Behavior Detected. Please add the behavior: UtherHasSpiritActive -->
         <Buttons Face="UtherFlashofLight" Type="AbilCmd" AbilCmd="UtherFlashofLight,Execute" Behavior="UtherFlashofLight" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHolyShock">
-        <!-- Requirement Behavior Detected. Please add the behavior: UtherNoSpiritActiveAndHasHolyLightHolyShock -->
-        <Buttons Face="UtherHolyLight" Type="AbilCmd" AbilCmd="UtherHolyShock,Execute" Behavior="UtherHolyShock" />
+        <Buttons Face="UtherHolyShock" Type="AbilCmd" AbilCmd="UtherHolyShock,Execute" Behavior="UtherHolyShock" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHammerOfJustice">
         <!-- Requirement Behavior Detected. Please add the behavior: UtherNoSpiritActive -->
@@ -2130,7 +2132,6 @@
         <Buttons Face="UtherDivineShield" Type="AbilCmd" AbilCmd="UtherDivineIntervention,Execute" Behavior="UtherDivineIntervention" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHolyLight">
-        <!-- Requirement Behavior Detected. Please add the behavior: UtherNoSpiritActiveAndNoHolyLightHolyShock -->
         <Buttons Face="UtherHolyLight" Type="AbilCmd" AbilCmd="UtherHolyLight,Execute" Behavior="UtherHolyLight" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MUtherHolyRadiance">
@@ -3814,8 +3815,10 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heromods/alarak.stormmod/base.stormdata/GameData/AlarakData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MAlarakCounterStrikeTargeted">
+        <Buttons Face="AlarakCounterStrikeTargeted" Type="AbilCmd" AbilCmd="AlarakCounterStrikeTargeted,Execute" Behavior="AlarakCounterStrikeTargeted" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MAlarakCounterStrikeTargeted2ndHeroic">
-        <!-- Requirement Behavior Detected. Please add the behavior: AlarakHasCounterStrike2ndHeroicCarry -->
         <Buttons Face="AlarakCounterStrikeTargeted" Type="AbilCmd" AbilCmd="AlarakCounterStrikeTargeted2ndHeroic,Execute" Behavior="AlarakCounterStrikeTargeted2ndHeroic" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MAlarakLightningSurgeLightningBarrage">
@@ -3824,10 +3827,6 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MAlarakRiteofRakShir">
         <Buttons Face="AlarakRiteofRakShir" Type="AbilCmd" AbilCmd="AlarakRiteofRakShir,Execute" Behavior="AlarakRiteofRakShir" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MAlarakCounterStrikeTargeted">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="AlarakCounterStrikeTargeted" Type="AbilCmd" AbilCmd="AlarakCounterStrikeTargeted,Execute" Behavior="AlarakCounterStrikeTargeted" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MAlarakDiscordStrike">
         <Buttons Face="AlarakDiscordStrike" Type="AbilCmd" AbilCmd="AlarakDiscordStrike,Execute" Behavior="AlarakDiscordStrike" />
@@ -3856,6 +3855,12 @@
     <CBehaviorAbility id="MAlarakHastyBargain">
         <!-- Requirement Behavior Detected. Please add the behavior: HeroHasNoDeadBehavior -->
         <Buttons Face="AlarakHastyBargain" Type="AbilCmd" AbilCmd="AlarakHastyBargain,Execute" Behavior="AlarakHastyBargain" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlarakMightOfTheHighlordSetDeadlyChargeAsHeroic">
+        <Buttons Face="AlarakMightOfTheHighlord" Type="AbilCmd" AbilCmd="AlarakMightOfTheHighlordSetDeadlyChargeAsHeroic,Execute" Behavior="AlarakMightOfTheHighlordSetDeadlyChargeAsHeroic" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MAlarakMightOfTheHighlordSetCounterStrikeAsHeroic">
+        <Buttons Face="AlarakMightOfTheHighlordSetDeadlyChargeAsHeroic" Type="AbilCmd" AbilCmd="AlarakMightOfTheHighlordSetCounterStrikeAsHeroic,Execute" Behavior="AlarakMightOfTheHighlordSetCounterStrikeAsHeroic" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heromods/alarak.stormmod/base.stormdata/GameData/AlarakData.xml}-->

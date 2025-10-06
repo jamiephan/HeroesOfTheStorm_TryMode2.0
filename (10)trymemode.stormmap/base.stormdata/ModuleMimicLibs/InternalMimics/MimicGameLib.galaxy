@@ -18565,41 +18565,30 @@ bool MimicGameLib_gt_MinionSpawnCycle_Func (bool testConds, bool runActions) {
         }
 
         TimerStart(lv_waveTimer, libCore_gv_bALMinionWaveInterval, false, c_timeGame);
-        MimicGameLib_gv_minionWaveSpawnCounter += 1;
-        auto2740E61A_ae = MimicGameLib_gv_laneCount;
-        lv_lane = 1;
-        for ( ; ( (auto2740E61A_ai >= 0 && lv_lane <= auto2740E61A_ae) || (auto2740E61A_ai < 0 && lv_lane >= auto2740E61A_ae) ) ; lv_lane += auto2740E61A_ai ) {
-            if ((MimicGameLib_gv_laneData[lv_lane].lv_minionSpawningEnabled == true)) {
-                if ((MimicGameLib_gv_minionSystemPausedAdvanced[MimicGameLib_gv_teamOrderIndex_C][lv_lane] == false)) {
-                    lv_waveComposition = MimicGameLib_gf_MinionDetermineWaveComposition(lv_lane, MimicGameLib_gv_teamOrderIndex_C);
-                    MimicGameLib_gf_MinionSpawnWave(lv_lane, libCore_gv_cOMPUTER_TeamOrder, lv_waveComposition);
+        if ((MimicGameLib_gv_minionSpawningEnabled == true)) {
+            MimicGameLib_gv_minionWaveSpawnCounter += 1;
+            auto2740E61A_ae = MimicGameLib_gv_laneCount;
+            lv_lane = 1;
+            for ( ; ( (auto2740E61A_ai >= 0 && lv_lane <= auto2740E61A_ae) || (auto2740E61A_ai < 0 && lv_lane >= auto2740E61A_ae) ) ; lv_lane += auto2740E61A_ai ) {
+                if ((MimicGameLib_gv_laneData[lv_lane].lv_minionSpawningEnabled == true)) {
+                    if ((MimicGameLib_gv_minionSystemPausedAdvanced[MimicGameLib_gv_teamOrderIndex_C][lv_lane] == false)) {
+                        lv_waveComposition = MimicGameLib_gf_MinionDetermineWaveComposition(lv_lane, MimicGameLib_gv_teamOrderIndex_C);
+                        MimicGameLib_gf_MinionSpawnWave(lv_lane, libCore_gv_cOMPUTER_TeamOrder, lv_waveComposition);
+                    }
+
+                    if ((MimicGameLib_gv_minionSystemPausedAdvanced[MimicGameLib_gv_teamChaosIndex_C][lv_lane] == false)) {
+                        lv_waveComposition = MimicGameLib_gf_MinionDetermineWaveComposition(lv_lane, MimicGameLib_gv_teamChaosIndex_C);
+                        MimicGameLib_gf_MinionSpawnWave(lv_lane, libCore_gv_cOMPUTER_TeamChaos, lv_waveComposition);
+                    }
+
+                    Wait(0.1875, c_timeGame);
                 }
 
-                if ((MimicGameLib_gv_minionSystemPausedAdvanced[MimicGameLib_gv_teamChaosIndex_C][lv_lane] == false)) {
-                    lv_waveComposition = MimicGameLib_gf_MinionDetermineWaveComposition(lv_lane, MimicGameLib_gv_teamChaosIndex_C);
-                    MimicGameLib_gf_MinionSpawnWave(lv_lane, libCore_gv_cOMPUTER_TeamChaos, lv_waveComposition);
-                }
-
-                Wait(0.1875, c_timeGame);
             }
-
+            Wait((TimerGetRemaining(lv_waveTimer) - 0.0625), c_timeGame);
         }
-        while ((TimerGetRemaining(lv_waveTimer) > 0.0)) {
-            if ((MimicGameLib_gv_minionSpawningEnabled == false)) {
-                if ((lv_paused == false)) {
-                    TimerPause(lv_waveTimer, true);
-                    lv_paused = true;
-                }
-
-            }
-            else {
-                if ((lv_paused == true)) {
-                    TimerPause(lv_waveTimer, false);
-                    lv_paused = false;
-                }
-
-            }
-            Wait(0.25, c_timeGame);
+        else {
+            Wait(TimerGetRemaining(lv_waveTimer), c_timeGame);
         }
     }
     return true;
