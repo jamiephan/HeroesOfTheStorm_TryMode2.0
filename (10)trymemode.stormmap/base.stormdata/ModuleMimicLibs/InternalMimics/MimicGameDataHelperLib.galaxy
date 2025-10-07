@@ -4212,7 +4212,6 @@ void MimicGameDataHelperLib_gf_HeroZagaraIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraInfestedDropSpawnRoach, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraInfestScaling, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraTyrantMawCDRonDeath, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraHunterKillerHydraliskTransfusion, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraEndlessCreepApplyBehavior, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraDevouringMawOverlayOn, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraDevouringMawOverlayOff, true);
@@ -4240,7 +4239,6 @@ void MimicGameDataHelperLib_gf_HeroZagaraDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraHydraliskorMutaliskControl, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraInfestedDropSpawnRoach, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraTyrantMawCDRonDeath, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraHunterKillerHydraliskTransfusion, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraEndlessCreepApplyBehavior, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraDevouringMawOverlayOn, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraDevouringMawOverlayOff, false);
