@@ -1270,7 +1270,7 @@ void MimicSupportLib_gf_QACheatsPopulateSpawnItemsPulldown () {
     const int autoF95D342D_ai = 1;
 
     // Variable Initialization
-    lv_spawnItemsCount = 4;
+    lv_spawnItemsCount = 5;
     for (init_i = 0; init_i <= 5; init_i += 1) {
         lv_panels[init_i] = c_invalidDialogControlId;
     }
@@ -1392,6 +1392,7 @@ void MimicSupportLib_gf_QACheatsCompileSpawnItems () {
     MimicSupportLib_gv_qACheatsCompiledSpawnItemsList[2] = "Garden Seeds";
     MimicSupportLib_gv_qACheatsCompiledSpawnItemsList[3] = "Haunted Skulls";
     MimicSupportLib_gv_qACheatsCompiledSpawnItemsList[4] = "Doubloons";
+    MimicSupportLib_gv_qACheatsCompiledSpawnItemsList[5] = "Experience Globe";
 }
 
 void MimicSupportLib_gf_QACheatsCleanseAllEffects () {
@@ -3238,7 +3239,16 @@ void MimicSupportLib_gt_QACheatsCloseButtonClicked_Init () {
 // Trigger: QA Cheats - Allied Control Checkbox Clicked
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_QACheatsAlliedControlCheckboxClicked_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    playergroup lv_playerGroup;
+
     // Automatic Variable Declarations
+    playergroup autoE40422D2_g;
+    int autoE40422D2_var;
+
+    // Variable Initialization
+    lv_playerGroup = PlayerGroupEmpty();
+
     // Conditions
     if (testConds) {
         if (!((true == true))) {
@@ -3255,33 +3265,21 @@ bool MimicSupportLib_gt_QACheatsAlliedControlCheckboxClicked_Func (bool testCond
         return true;
     }
 
-    if ((libNtve_gf_DialogItemIsChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_alliedControlCheckbox, EventPlayer()) == true)) {
-        PlayerSetAlliance(2, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(3, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(4, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(5, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(6, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(7, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(8, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(9, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(10, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(11, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(12, c_allianceIdControl, EventPlayer(), true);
-        PlayerSetAlliance(15, c_allianceIdControl, EventPlayer(), true);
-    }
-    else {
-        PlayerSetAlliance(2, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(3, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(4, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(5, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(6, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(7, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(8, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(9, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(10, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(11, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(12, c_allianceIdControl, EventPlayer(), false);
-        PlayerSetAlliance(15, c_allianceIdControl, EventPlayer(), false);
+    libNtve_gf_AddPlayerGroupToPlayerGroup(libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamOrderIndex_C, true), lv_playerGroup);
+    libNtve_gf_AddPlayerGroupToPlayerGroup(libGame_gf_PlayersOnTeamHeroes(libGame_gv_teamChaosIndex_C, true), lv_playerGroup);
+    PlayerGroupAdd(lv_playerGroup, 15);
+    PlayerGroupRemove(lv_playerGroup, EventPlayer());
+    autoE40422D2_g = PlayerGroupAll();
+    autoE40422D2_var = -1;
+    while (true) {
+        	autoE40422D2_var = PlayerGroupNextPlayer(autoE40422D2_g, autoE40422D2_var);
+        	if (autoE40422D2_var<0) { break; }
+        	if ((libNtve_gf_DialogItemIsChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_alliedControlCheckbox, EventPlayer()) == true)) {
+            PlayerSetAlliance(autoE40422D2_var, c_allianceIdControl, EventPlayer(), true);
+        }
+        else {
+            PlayerSetAlliance(autoE40422D2_var, c_allianceIdControl, EventPlayer(), false);
+        }
     }
     return true;
 }
@@ -3327,7 +3325,16 @@ void MimicSupportLib_gt_QACheatsShowMapCheckboxClicked_Init () {
 // Trigger: QA Cheats - Vision Checkbox Clicked
 //--------------------------------------------------------------------------------------------------
 bool MimicSupportLib_gt_QACheatsVisionCheckboxClicked_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    playergroup lv_playerGroup;
+
     // Automatic Variable Declarations
+    playergroup autoFA5F1A65_g;
+    int autoFA5F1A65_var;
+
+    // Variable Initialization
+    lv_playerGroup = PlayerGroupEmpty();
+
     // Conditions
     if (testConds) {
         if (!((true == true))) {
@@ -3344,19 +3351,18 @@ bool MimicSupportLib_gt_QACheatsVisionCheckboxClicked_Func (bool testConds, bool
         return true;
     }
 
-    if ((libNtve_gf_DialogItemIsChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_visionCheckbox, EventPlayer()) == true)) {
-        PlayerSetAlliance(6, c_allianceIdVision, EventPlayer(), true);
-        PlayerSetAlliance(7, c_allianceIdVision, EventPlayer(), true);
-        PlayerSetAlliance(8, c_allianceIdVision, EventPlayer(), true);
-        PlayerSetAlliance(9, c_allianceIdVision, EventPlayer(), true);
-        PlayerSetAlliance(10, c_allianceIdVision, EventPlayer(), true);
-    }
-    else {
-        PlayerSetAlliance(6, c_allianceIdVision, EventPlayer(), false);
-        PlayerSetAlliance(7, c_allianceIdVision, EventPlayer(), false);
-        PlayerSetAlliance(8, c_allianceIdVision, EventPlayer(), false);
-        PlayerSetAlliance(9, c_allianceIdVision, EventPlayer(), false);
-        PlayerSetAlliance(10, c_allianceIdVision, EventPlayer(), false);
+    libNtve_gf_AddPlayerGroupToPlayerGroup(libGame_gf_PlayersOnTeamHeroes(libGame_gf_EnemyTeamNumberOfPlayer(EventPlayer()), false), lv_playerGroup);
+    autoFA5F1A65_g = lv_playerGroup;
+    autoFA5F1A65_var = -1;
+    while (true) {
+        	autoFA5F1A65_var = PlayerGroupNextPlayer(autoFA5F1A65_g, autoFA5F1A65_var);
+        	if (autoFA5F1A65_var<0) { break; }
+        	if ((libNtve_gf_DialogItemIsChecked(MimicSupportLib_gv_qACheatsControlsPanel.lv_visionCheckbox, EventPlayer()) == true)) {
+            PlayerSetAlliance(autoFA5F1A65_var, c_allianceIdVision, EventPlayer(), true);
+        }
+        else {
+            PlayerSetAlliance(autoFA5F1A65_var, c_allianceIdVision, EventPlayer(), false);
+        }
     }
     return true;
 }
@@ -4305,7 +4311,7 @@ bool MimicSupportLib_gt_QACheatsRefreshCooldownsButtonClicked_Func (bool testCon
         UnitClearCooldowns(MimicSupportLib_gv_qACheatsSelectedUnit, true);
     }
     else {
-        UnitClearCooldowns(libGame_gv_players[1].lv_heroUnit, true);
+        UnitClearCooldowns(libGame_gv_players[EventPlayer()].lv_heroUnit, true);
     }
     return true;
 }
@@ -4405,6 +4411,7 @@ bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, boo
     int lv_yOffset;
     string lv_itemCouintEditBoxContents;
     int lv_itemCount;
+    int lv_itemOwner;
 
     // Automatic Variable Declarations
     int autoB40E258C_val;
@@ -4431,6 +4438,7 @@ bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, boo
     lv_itemCouintEditBoxContents = libNtve_gf_DialogItemEditValue(MimicSupportLib_gv_qACheatsControlsPanel.lv_itemCountEditbox, EventPlayer());
     lv_itemCount = StringToInt(lv_itemCouintEditBoxContents);
     lv_currentPos = CameraGetTarget(EventPlayer());
+    lv_itemOwner = libGame_gf_ComputerPlayerInTeam(EventPlayer());
     autoB40E258C_val = DialogControlGetSelectedItem(MimicSupportLib_gv_qACheatsControlsPanel.lv_spawnItemListPulldown, EventPlayer());
     if (autoB40E258C_val == 1) {
         libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "RegenGlobeNeutral", 0, 1, lv_currentPos, null);
@@ -4443,6 +4451,9 @@ bool MimicSupportLib_gt_QACheatsSpawnItemButtonClicked_Func (bool testConds, boo
     }
     else if (autoB40E258C_val == 4) {
         libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ItemCannonball", 0, 1, lv_currentPos, null);
+    }
+    else if (autoB40E258C_val == 5) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(lv_itemCount, "ExperienceGlobeMinion", 0, lv_itemOwner, lv_currentPos, null);
     }
     else {
     }

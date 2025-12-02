@@ -335,6 +335,7 @@ const int MimicHeroesLib_gv_talents_MaxTalentsPerTier_C = 5;
 const int MimicHeroesLib_gv_talents_MaxTalentRank_C = 1;
 const int MimicHeroesLib_gv_talents_MaxBehaviorsPerTalent_C = 5;
 const int MimicHeroesLib_gv_talents_MaxModificationsPerTalent_C = 30;
+const fixed MimicHeroesLib_gv_talents_RelentlessCCReduction25_C = 0.25;
 const fixed MimicHeroesLib_gv_talents_RelentlessCCReduction50_C = 0.5;
 const fixed MimicHeroesLib_gv_talents_0ManaCostBuffMod_C = 1.0;
 const fixed MimicHeroesLib_gv_talents_BucketOverdriveManaCostIncreasePercent_C = 0.4;

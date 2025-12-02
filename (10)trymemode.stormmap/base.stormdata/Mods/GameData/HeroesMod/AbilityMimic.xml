@@ -134,7 +134,6 @@
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/TychusData/TychusData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MCancelOverkill">
-        <!-- Requirement Behavior Detected. Please add the behavior: TychusOverkillTargetedActive -->
         <Buttons Face="TychusOverkillCancel" Type="AbilCmd" AbilCmd="CancelOverkill,Execute" Behavior="CancelOverkill" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTychusOdinNoHealth">
@@ -148,7 +147,6 @@
         <Buttons Face="TychusNeosteelCoatingTalent" Type="AbilCmd" AbilCmd="TychusNeosteelCoating,Execute" Behavior="TychusNeosteelCoating" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTychusRunAndGunOverkill">
-        <!-- Requirement Behavior Detected. Please add the behavior: TychusNotInOdinAndOverkillActive -->
         <Buttons Face="TychusRunandGun" Type="AbilCmd" AbilCmd="TychusRunAndGunOverkill,Execute" Behavior="TychusRunAndGunOverkill" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTychusOdinRagnarokMissilesTargeted">
@@ -168,11 +166,9 @@
         <Buttons Face="TychusRunandGun" Type="AbilCmd" AbilCmd="TychusRunAndGun,Execute" Behavior="TychusRunAndGun" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTychusOverkillTargeted">
-        <!-- Requirement Behavior Detected. Please add the behavior: NoTychusOdin -->
         <Buttons Face="TychusOverkill" Type="AbilCmd" AbilCmd="TychusOverkillTargeted,Execute" Behavior="TychusOverkillTargeted" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MOverkillTargetedRetarget">
-        <!-- Requirement Behavior Detected. Please add the behavior: TychusOverkillTargetedActive -->
         <Buttons Face="TychusOverkillRetarget" Type="AbilCmd" AbilCmd="OverkillTargetedRetarget,Execute" Behavior="OverkillTargetedRetarget" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MTychusDrakkenLaserDrillIssueOrder">
@@ -861,6 +857,145 @@
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BarbarianData/BarbarianData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBarbarianStridingGiant">
+        <Buttons Face="BarbarianStridingGiantActive" Type="AbilCmd" AbilCmd="BarbarianStridingGiant,Execute" Behavior="BarbarianStridingGiant" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianNervesOfSteel">
+        <Buttons Face="BarbarianNervesOfSteel" Type="AbilCmd" AbilCmd="BarbarianNervesOfSteel,Execute" Behavior="BarbarianNervesOfSteel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianBattleRage">
+        <!-- Requirement Behavior Detected. Please add the behavior: AbathurHasNoStrainBuffs -->
+        <Buttons Face="BarbarianBattleRage" Type="AbilCmd" AbilCmd="BarbarianBattleRage,Execute" Behavior="BarbarianBattleRage" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianCancelLeapArreatCrater">
+        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianLeapArreatCraterActive -->
+        <Buttons Face="BarbarianLeapArreatCraterCancel" Type="AbilCmd" AbilCmd="BarbarianCancelLeapArreatCrater,Execute" Behavior="BarbarianCancelLeapArreatCrater" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianCancelWrathoftheBerserker">
+        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianWrathoftheBerserkerActive -->
+        <Buttons Face="BarbarianWrathoftheBerserkerCancel" Type="AbilCmd" AbilCmd="BarbarianCancelWrathoftheBerserker,Execute" Behavior="BarbarianCancelWrathoftheBerserker" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianShotofFury">
+        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianHasShotofFury -->
+        <Buttons Face="BarbarianFuryShotOfFury" Type="AbilCmd" AbilCmd="BarbarianShotofFury,Execute" Behavior="BarbarianShotofFury" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianWrathoftheBerserker">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="BarbarianWrathoftheBerserker" Type="AbilCmd" AbilCmd="BarbarianWrathoftheBerserker,Execute" Behavior="BarbarianWrathoftheBerserker" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianWhirlwindCancel">
+        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianWhirlwindActive -->
+        <Buttons Face="BarbarianWhirlwindCancel" Type="AbilCmd" AbilCmd="BarbarianWhirlwindCancel,Execute" Behavior="BarbarianWhirlwindCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianWhirlwind">
+        <Buttons Face="BarbarianWhirlwind" Type="AbilCmd" AbilCmd="BarbarianWhirlwind,Execute" Behavior="BarbarianWhirlwind" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianIgnorePain">
+        <Buttons Face="BarbarianIgnorePain" Type="AbilCmd" AbilCmd="BarbarianIgnorePain,Execute" Behavior="BarbarianIgnorePain" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianAncientSpear">
+        <Buttons Face="BarbarianAncientSpear" Type="AbilCmd" AbilCmd="BarbarianAncientSpear,Execute" Behavior="BarbarianAncientSpear" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianSeismicSlam">
+        <Buttons Face="BarbarianSeismicSlam" Type="AbilCmd" AbilCmd="BarbarianSeismicSlam,Execute" Behavior="BarbarianSeismicSlam" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBarbarianLeap">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="BarbarianLeap" Type="AbilCmd" AbilCmd="BarbarianLeap,Execute" Behavior="BarbarianLeap" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BarbarianData/BarbarianData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ButcherData/ButcherData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MButcherFreshMeatDummy">
+        <Buttons Face="ButcherFreshMeat" Type="AbilCmd" AbilCmd="ButcherFreshMeatDummy,Execute" Behavior="ButcherFreshMeatDummy" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherEnraged">
+        <Buttons Face="ButcherEnragedHotbar" Type="AbilCmd" AbilCmd="ButcherEnraged,Execute" Behavior="ButcherEnraged" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MRuthlessOnslaughtCancel">
+        <!-- Requirement Behavior Detected. Please add the behavior: ButcherRuthlessOnslaughtActive -->
+        <Buttons Face="ButcherRuthlessOnslaughtCancel" Type="AbilCmd" AbilCmd="RuthlessOnslaughtCancel,Execute" Behavior="RuthlessOnslaughtCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherFurnaceBlast">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="ButcherFurnaceBlast" Type="AbilCmd" AbilCmd="ButcherFurnaceBlast,Execute" Behavior="ButcherFurnaceBlast" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherHamstring">
+        <Buttons Face="ButcherHamstring" Type="AbilCmd" AbilCmd="ButcherHamstring,Execute" Behavior="ButcherHamstring" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherButchersBrand">
+        <Buttons Face="ButcherButchersBrand" Type="AbilCmd" AbilCmd="ButcherButchersBrand,Execute" Behavior="ButcherButchersBrand" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherRuthlessOnslaught">
+        <Buttons Face="ButcherRuthlessOnslaught" Type="AbilCmd" AbilCmd="ButcherRuthlessOnslaught,Execute" Behavior="ButcherRuthlessOnslaught" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherRuthlessOnslaughtCharge">
+        <Buttons Face="RuthlessOnslaughtCharge" Type="AbilCmd" AbilCmd="ButcherRuthlessOnslaughtCharge,Execute" Behavior="ButcherRuthlessOnslaughtCharge" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherLambToTheSlaughter">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="ButcherLambToTheSlaughter" Type="AbilCmd" AbilCmd="ButcherLambToTheSlaughter,Execute" Behavior="ButcherLambToTheSlaughter" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MButcherFreshMeatAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="ButcherFreshMeatAttack,Execute" Behavior="ButcherFreshMeatAttack" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ButcherData/ButcherData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
+<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BrightwingData/BrightwingData.xml}-->
+<!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBrightwingFaerieProtector">
+        <Buttons Face="BrightwingFaerieProtector" Type="AbilCmd" AbilCmd="BrightwingFaerieProtector,Execute" Behavior="BrightwingFaerieProtector" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBrightwingPhaseOut">
+        <Buttons Face="BrightwingPhaseOut" Type="AbilCmd" AbilCmd="BrightwingPhaseOut,Execute" Behavior="BrightwingPhaseOut" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBrightwingCalmingMist">
+        <Buttons Face="BrightwingSoothingMistCalmingMist" Type="AbilCmd" AbilCmd="BrightwingCalmingMist,Execute" Behavior="BrightwingCalmingMist" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBrightwingSoothingMistDummyCooldown">
+        <Buttons Face="BrightwingSoothingMistCalmingMist" Type="AbilCmd" AbilCmd="BrightwingSoothingMistDummyCooldown,Execute" Behavior="BrightwingSoothingMistDummyCooldown" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonEmeraldWind">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="BrightwingEmeraldWind" Type="AbilCmd" AbilCmd="FaerieDragonEmeraldWind,Execute" Behavior="FaerieDragonEmeraldWind" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBrightwingBlinkHealDoubleWyrmholeDash">
+        <!-- Requirement Behavior Detected. Please add the behavior: BrightwingHasDoubleWyrmholeActive -->
+        <Buttons Face="BrightwingDoubleWyrmhole" Type="AbilCmd" AbilCmd="BrightwingBlinkHealDoubleWyrmholeDash,Execute" Behavior="BrightwingBlinkHealDoubleWyrmholeDash" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonPixieCharm">
+        <Buttons Face="FaerieDragonPixieCharm" Type="AbilCmd" AbilCmd="FaerieDragonPixieCharm,Execute" Behavior="FaerieDragonPixieCharm" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MBrightwingPhaseShift">
+        <Buttons Face="BrightwingPhaseShift" Type="AbilCmd" AbilCmd="BrightwingPhaseShift,Execute" Behavior="BrightwingPhaseShift" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonPixieDust">
+        <Buttons Face="BrightwingPixieDust" Type="AbilCmd" AbilCmd="FaerieDragonPixieDust,Execute" Behavior="FaerieDragonPixieDust" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonArcaneFlare">
+        <Buttons Face="BrightwingArcaneFlare" Type="AbilCmd" AbilCmd="FaerieDragonArcaneFlare,Execute" Behavior="FaerieDragonArcaneFlare" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonPolymorph">
+        <Buttons Face="BrightwingPolymorph" Type="AbilCmd" AbilCmd="FaerieDragonPolymorph,Execute" Behavior="FaerieDragonPolymorph" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MFaerieDragonBlinkHealDash">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="BrightwingBlinkHealAllyDash" Type="AbilCmd" AbilCmd="FaerieDragonBlinkHealDash,Execute" Behavior="FaerieDragonBlinkHealDash" />
+    </CBehaviorAbility>
+<!-- ///////////////////////////////////-->
+<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BrightwingData/BrightwingData.xml}-->
+<!-- ///////////////////////////////////-->
+
+<!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/RehgarData/RehgarData.xml}-->
 <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MRehgarElementalConduit">
@@ -1061,30 +1196,8 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/SylvanasData/SylvanasData.xml}-->
 <!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MSylvanasMindControlMissile">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="SylvanasMindControlMissile" Type="AbilCmd" AbilCmd="SylvanasMindControlMissile,Execute" Behavior="SylvanasMindControlMissile" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasMindControl">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="SylvanasMindControl" Type="AbilCmd" AbilCmd="SylvanasMindControl,Execute" Behavior="SylvanasMindControl" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasHauntingWaveWindrunnerTalent">
-        <!-- Requirement Behavior Detected. Please add the behavior: SylvanasHasHauntingWaveWindrunnerProc -->
-        <Buttons Face="SylvanasHauntingWaveFree" Type="AbilCmd" AbilCmd="SylvanasHauntingWaveWindrunnerTalent,Execute" Behavior="SylvanasHauntingWaveWindrunnerTalent" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasWailingArrow">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="SylvanasWailingArrow" Type="AbilCmd" AbilCmd="SylvanasWailingArrow,Execute" Behavior="SylvanasWailingArrow" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasHauntingWave">
-        <Buttons Face="SylvanasHauntingWave" Type="AbilCmd" AbilCmd="SylvanasHauntingWave,Execute" Behavior="SylvanasHauntingWave" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasPossession">
-        <Buttons Face="SylvanasPossession" Type="AbilCmd" AbilCmd="SylvanasPossession,Execute" Behavior="SylvanasPossession" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MSylvanasShadowDagger">
-        <Buttons Face="SylvanasShadowDagger" Type="AbilCmd" AbilCmd="SylvanasShadowDagger,Execute" Behavior="SylvanasShadowDagger" />
+    <CBehaviorAbility id="MSylvanasBlackArrowsPassive">
+        <Buttons Face="SylvanasBlackArrowsPassive" Type="AbilCmd" AbilCmd="SylvanasBlackArrowsPassive,Execute" Behavior="SylvanasBlackArrowsPassive" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MSylvanasBlackArrowsActive">
         <Buttons Face="SylvanasBlackArrows" Type="AbilCmd" AbilCmd="SylvanasBlackArrowsActive,Execute" Behavior="SylvanasBlackArrowsActive" />
@@ -1113,6 +1226,31 @@
     </CBehaviorAbility>
     <CBehaviorAbility id="MSylvanasWillOfTheForsaken">
         <Buttons Face="SylvanasWillOfTheForsaken" Type="AbilCmd" AbilCmd="SylvanasWillOfTheForsaken,Execute" Behavior="SylvanasWillOfTheForsaken" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasMindControlMissile">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="SylvanasMindControlMissile" Type="AbilCmd" AbilCmd="SylvanasMindControlMissile,Execute" Behavior="SylvanasMindControlMissile" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasMindControl">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
+        <Buttons Face="SylvanasMindControl" Type="AbilCmd" AbilCmd="SylvanasMindControl,Execute" Behavior="SylvanasMindControl" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasHauntingWaveWindrunnerTalent">
+        <!-- Requirement Behavior Detected. Please add the behavior: SylvanasHasHauntingWaveWindrunnerProc -->
+        <Buttons Face="SylvanasHauntingWaveFree" Type="AbilCmd" AbilCmd="SylvanasHauntingWaveWindrunnerTalent,Execute" Behavior="SylvanasHauntingWaveWindrunnerTalent" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasWailingArrow">
+        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
+        <Buttons Face="SylvanasWailingArrow" Type="AbilCmd" AbilCmd="SylvanasWailingArrow,Execute" Behavior="SylvanasWailingArrow" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasHauntingWave">
+        <Buttons Face="SylvanasHauntingWave" Type="AbilCmd" AbilCmd="SylvanasHauntingWave,Execute" Behavior="SylvanasHauntingWave" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasPossession">
+        <Buttons Face="SylvanasPossession" Type="AbilCmd" AbilCmd="SylvanasPossession,Execute" Behavior="SylvanasPossession" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MSylvanasShadowDagger">
+        <Buttons Face="SylvanasShadowDagger" Type="AbilCmd" AbilCmd="SylvanasShadowDagger,Execute" Behavior="SylvanasShadowDagger" />
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/SylvanasData/SylvanasData.xml}-->
@@ -1170,145 +1308,6 @@
     </CBehaviorAbility>
 <!-- ///////////////////////////////////-->
 <!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/SgtHammerData/SgtHammerData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BarbarianData/BarbarianData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MBarbarianStridingGiant">
-        <Buttons Face="BarbarianStridingGiantActive" Type="AbilCmd" AbilCmd="BarbarianStridingGiant,Execute" Behavior="BarbarianStridingGiant" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianNervesOfSteel">
-        <Buttons Face="BarbarianNervesOfSteel" Type="AbilCmd" AbilCmd="BarbarianNervesOfSteel,Execute" Behavior="BarbarianNervesOfSteel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianBattleRage">
-        <!-- Requirement Behavior Detected. Please add the behavior: AbathurHasNoStrainBuffs -->
-        <Buttons Face="BarbarianBattleRage" Type="AbilCmd" AbilCmd="BarbarianBattleRage,Execute" Behavior="BarbarianBattleRage" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianCancelLeapArreatCrater">
-        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianLeapArreatCraterActive -->
-        <Buttons Face="BarbarianLeapArreatCraterCancel" Type="AbilCmd" AbilCmd="BarbarianCancelLeapArreatCrater,Execute" Behavior="BarbarianCancelLeapArreatCrater" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianCancelWrathoftheBerserker">
-        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianWrathoftheBerserkerActive -->
-        <Buttons Face="BarbarianWrathoftheBerserkerCancel" Type="AbilCmd" AbilCmd="BarbarianCancelWrathoftheBerserker,Execute" Behavior="BarbarianCancelWrathoftheBerserker" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianShotofFury">
-        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianHasShotofFury -->
-        <Buttons Face="BarbarianFuryShotOfFury" Type="AbilCmd" AbilCmd="BarbarianShotofFury,Execute" Behavior="BarbarianShotofFury" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianWrathoftheBerserker">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="BarbarianWrathoftheBerserker" Type="AbilCmd" AbilCmd="BarbarianWrathoftheBerserker,Execute" Behavior="BarbarianWrathoftheBerserker" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianWhirlwindCancel">
-        <!-- Requirement Behavior Detected. Please add the behavior: BarbarianWhirlwindActive -->
-        <Buttons Face="BarbarianWhirlwindCancel" Type="AbilCmd" AbilCmd="BarbarianWhirlwindCancel,Execute" Behavior="BarbarianWhirlwindCancel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianWhirlwind">
-        <Buttons Face="BarbarianWhirlwind" Type="AbilCmd" AbilCmd="BarbarianWhirlwind,Execute" Behavior="BarbarianWhirlwind" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianIgnorePain">
-        <Buttons Face="BarbarianIgnorePain" Type="AbilCmd" AbilCmd="BarbarianIgnorePain,Execute" Behavior="BarbarianIgnorePain" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianAncientSpear">
-        <Buttons Face="BarbarianAncientSpear" Type="AbilCmd" AbilCmd="BarbarianAncientSpear,Execute" Behavior="BarbarianAncientSpear" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianSeismicSlam">
-        <Buttons Face="BarbarianSeismicSlam" Type="AbilCmd" AbilCmd="BarbarianSeismicSlam,Execute" Behavior="BarbarianSeismicSlam" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBarbarianLeap">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="BarbarianLeap" Type="AbilCmd" AbilCmd="BarbarianLeap,Execute" Behavior="BarbarianLeap" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BarbarianData/BarbarianData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BrightwingData/BrightwingData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MBrightwingFaerieProtector">
-        <Buttons Face="BrightwingFaerieProtector" Type="AbilCmd" AbilCmd="BrightwingFaerieProtector,Execute" Behavior="BrightwingFaerieProtector" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBrightwingPhaseOut">
-        <Buttons Face="BrightwingPhaseOut" Type="AbilCmd" AbilCmd="BrightwingPhaseOut,Execute" Behavior="BrightwingPhaseOut" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBrightwingCalmingMist">
-        <Buttons Face="BrightwingSoothingMistCalmingMist" Type="AbilCmd" AbilCmd="BrightwingCalmingMist,Execute" Behavior="BrightwingCalmingMist" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBrightwingSoothingMistDummyCooldown">
-        <Buttons Face="BrightwingSoothingMistCalmingMist" Type="AbilCmd" AbilCmd="BrightwingSoothingMistDummyCooldown,Execute" Behavior="BrightwingSoothingMistDummyCooldown" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonEmeraldWind">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="BrightwingEmeraldWind" Type="AbilCmd" AbilCmd="FaerieDragonEmeraldWind,Execute" Behavior="FaerieDragonEmeraldWind" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBrightwingBlinkHealDoubleWyrmholeDash">
-        <!-- Requirement Behavior Detected. Please add the behavior: BrightwingHasDoubleWyrmholeActive -->
-        <Buttons Face="BrightwingDoubleWyrmhole" Type="AbilCmd" AbilCmd="BrightwingBlinkHealDoubleWyrmholeDash,Execute" Behavior="BrightwingBlinkHealDoubleWyrmholeDash" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonPixieCharm">
-        <Buttons Face="FaerieDragonPixieCharm" Type="AbilCmd" AbilCmd="FaerieDragonPixieCharm,Execute" Behavior="FaerieDragonPixieCharm" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MBrightwingPhaseShift">
-        <Buttons Face="BrightwingPhaseShift" Type="AbilCmd" AbilCmd="BrightwingPhaseShift,Execute" Behavior="BrightwingPhaseShift" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonPixieDust">
-        <Buttons Face="BrightwingPixieDust" Type="AbilCmd" AbilCmd="FaerieDragonPixieDust,Execute" Behavior="FaerieDragonPixieDust" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonArcaneFlare">
-        <Buttons Face="BrightwingArcaneFlare" Type="AbilCmd" AbilCmd="FaerieDragonArcaneFlare,Execute" Behavior="FaerieDragonArcaneFlare" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonPolymorph">
-        <Buttons Face="BrightwingPolymorph" Type="AbilCmd" AbilCmd="FaerieDragonPolymorph,Execute" Behavior="FaerieDragonPolymorph" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MFaerieDragonBlinkHealDash">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="BrightwingBlinkHealAllyDash" Type="AbilCmd" AbilCmd="FaerieDragonBlinkHealDash,Execute" Behavior="FaerieDragonBlinkHealDash" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/BrightwingData/BrightwingData.xml}-->
-<!-- ///////////////////////////////////-->
-
-<!-- ///////////////////////////////////-->
-<!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ButcherData/ButcherData.xml}-->
-<!-- ///////////////////////////////////-->
-    <CBehaviorAbility id="MButcherFreshMeatDummy">
-        <Buttons Face="ButcherFreshMeat" Type="AbilCmd" AbilCmd="ButcherFreshMeatDummy,Execute" Behavior="ButcherFreshMeatDummy" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherEnraged">
-        <Buttons Face="ButcherEnragedHotbar" Type="AbilCmd" AbilCmd="ButcherEnraged,Execute" Behavior="ButcherEnraged" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MRuthlessOnslaughtCancel">
-        <!-- Requirement Behavior Detected. Please add the behavior: ButcherRuthlessOnslaughtActive -->
-        <Buttons Face="ButcherRuthlessOnslaughtCancel" Type="AbilCmd" AbilCmd="RuthlessOnslaughtCancel,Execute" Behavior="RuthlessOnslaughtCancel" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherFurnaceBlast">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked -->
-        <Buttons Face="ButcherFurnaceBlast" Type="AbilCmd" AbilCmd="ButcherFurnaceBlast,Execute" Behavior="ButcherFurnaceBlast" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherHamstring">
-        <Buttons Face="ButcherHamstring" Type="AbilCmd" AbilCmd="ButcherHamstring,Execute" Behavior="ButcherHamstring" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherButchersBrand">
-        <Buttons Face="ButcherButchersBrand" Type="AbilCmd" AbilCmd="ButcherButchersBrand,Execute" Behavior="ButcherButchersBrand" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherRuthlessOnslaught">
-        <Buttons Face="ButcherRuthlessOnslaught" Type="AbilCmd" AbilCmd="ButcherRuthlessOnslaught,Execute" Behavior="ButcherRuthlessOnslaught" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherRuthlessOnslaughtCharge">
-        <Buttons Face="RuthlessOnslaughtCharge" Type="AbilCmd" AbilCmd="ButcherRuthlessOnslaughtCharge,Execute" Behavior="ButcherRuthlessOnslaughtCharge" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherLambToTheSlaughter">
-        <!-- Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked -->
-        <Buttons Face="ButcherLambToTheSlaughter" Type="AbilCmd" AbilCmd="ButcherLambToTheSlaughter,Execute" Behavior="ButcherLambToTheSlaughter" />
-    </CBehaviorAbility>
-    <CBehaviorAbility id="MButcherFreshMeatAttack">
-        <Buttons Face="attack" Type="AbilCmd" AbilCmd="ButcherFreshMeatAttack,Execute" Behavior="ButcherFreshMeatAttack" />
-    </CBehaviorAbility>
-<!-- ///////////////////////////////////-->
-<!-- End Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/ButcherData/ButcherData.xml}-->
 <!-- ///////////////////////////////////-->
 
 <!-- ///////////////////////////////////-->
@@ -1597,6 +1596,9 @@
 <!-- ///////////////////////////////////-->
 <!-- Start Abilities in {mods/heroesdata.stormmod/base.stormdata/GameData/Heroes/KerriganData/KerriganData.xml}-->
 <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MAssimilationActivate">
+        <Buttons Face="KerriganAssimilation" Type="AbilCmd" AbilCmd="AssimilationActivate,Execute" Behavior="AssimilationActivate" />
+    </CBehaviorAbility>
     <CBehaviorAbility id="MKerriganChrysalisCancel">
         <Buttons Face="KerriganChrysalis" Type="AbilCmd" AbilCmd="KerriganChrysalisCancel,Execute" Behavior="KerriganChrysalisCancel" />
     </CBehaviorAbility>
@@ -5530,7 +5532,7 @@
         <Buttons Face="StukovLurkingArmCancel" Type="AbilCmd" AbilCmd="StukovLurkingArmCancel,Execute" Behavior="StukovLurkingArmCancel" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MStukovWeightedPustuleReactiveBallistospores">
-        <Buttons Face="StukovReactiveBallistosporesHotbar" Type="AbilCmd" AbilCmd="StukovWeightedPustuleReactiveBallistospores,Execute" Behavior="StukovWeightedPustuleReactiveBallistospores" />
+        <Buttons Face="StukovReactiveBallistosporesTalent" Type="AbilCmd" AbilCmd="StukovWeightedPustuleReactiveBallistospores,Execute" Behavior="StukovWeightedPustuleReactiveBallistospores" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MStukovSpineLauncher">
         <Buttons Face="StukovSpineLauncherTalentEnabled" Type="AbilCmd" AbilCmd="StukovSpineLauncher,On" Behavior="StukovSpineLauncher" />

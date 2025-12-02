@@ -2169,15 +2169,19 @@ fixed MimicHeroesLib_gf_DataXPGetMoreGranularBountyXPModifier (unit lp_deadHero,
         lv_moduloMod = 2.0;
     }
     else if ((lv_levelDifferenceTrunc == 2.0)) {
-        lv_truncMod = 0.3;
+        lv_truncMod = 0.35;
         lv_moduloMod = 3.0;
     }
     else if ((lv_levelDifferenceTrunc == 3.0)) {
-        lv_truncMod = 0.6;
+        lv_truncMod = 0.75;
         lv_moduloMod = 4.0;
     }
-    else if ((lv_levelDifferenceTrunc >= 4.0)) {
-        lv_truncMod = 1.0;
+    else if ((lv_levelDifferenceTrunc == 4.0)) {
+        lv_truncMod = 1.3;
+        lv_moduloMod = 5.0;
+    }
+    else if ((lv_levelDifferenceTrunc >= 5.0)) {
+        lv_truncMod = 2.0;
         lv_moduloMod = 0.0;
     }
     if ((MimicHeroesLib_gv_dataXPGranularBountyXPMathDisplayEnabled == true)) {
@@ -2205,11 +2209,11 @@ fixed MimicHeroesLib_gf_DataXPGetMoreGranularBountyXPModifier (unit lp_deadHero,
         MimicTriggerDebugOutput(1, (StringExternal("Param/Value/lib_Core_68E57718") + FixedToText(lv_combinedMod, 3)), true);
     }
 
-    if ((lv_combinedMod >= 0.05) && (lv_combinedMod <= 2.0)) {
+    if ((lv_combinedMod >= 0.05) && (lv_combinedMod <= 3.0)) {
         lv_finalMod = lv_combinedMod;
     }
-    else if ((lv_combinedMod > 2.0)) {
-        lv_finalMod = 2.0;
+    else if ((lv_combinedMod > 3.0)) {
+        lv_finalMod = 3.0;
     }
     else if ((lv_combinedMod < 0.05)) {
         lv_finalMod = 0.05;

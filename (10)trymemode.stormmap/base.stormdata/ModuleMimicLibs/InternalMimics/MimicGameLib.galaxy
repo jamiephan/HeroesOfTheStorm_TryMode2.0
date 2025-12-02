@@ -18585,7 +18585,8 @@ bool MimicGameLib_gt_MinionSpawnCycle_Func (bool testConds, bool runActions) {
                 }
 
             }
-            Wait((TimerGetRemaining(lv_waveTimer) - 0.0625), c_timeGame);
+            Wait((TimerGetRemaining(lv_waveTimer) - 0.0625
+), c_timeGame);
         }
         else {
             Wait(TimerGetRemaining(lv_waveTimer), c_timeGame);
@@ -18816,7 +18817,7 @@ bool MimicGameLib_gt_TownTownHallKilledMoonwellSearch_Func (bool testConds, bool
     lv_structureIndex = 1;
     for ( ; ( (autoF80B0BD0_ai >= 0 && lv_structureIndex <= autoF80B0BD0_ae) || (autoF80B0BD0_ai < 0 && lv_structureIndex >= autoF80B0BD0_ae) ) ; lv_structureIndex += autoF80B0BD0_ai ) {
         lv_structure = MimicGameLib_gv_townTownData[lv_townIndex].lv_structureUnits[lv_structureIndex];
-        if ((UnitIsAlive(lv_structure) == true) && (MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_structure) == MimicGameLib_ge_TownStructureTypes_Moonwell) && (UnitBehaviorCount(lv_structure, "HealingFountainIgnoreLinkedMinimapIcons") == 0)) {
+        if ((UnitIsAlive(lv_structure) == true) && ((MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_structure) == MimicGameLib_ge_TownStructureTypes_Moonwell) || (MimicGameLib_gf_TownGetTownStructurePresetFromUnit(lv_structure) == MimicGameLib_ge_TownStructureTypes_Moonwell)) && (UnitBehaviorCount(lv_structure, "HealingFountainIgnoreLinkedMinimapIcons") == 0)) {
             UnitKill(lv_structure);
         }
 
@@ -21395,6 +21396,43 @@ void MimicGameLib_gt_InitializeTownSystem_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Kill Standalone Towers
+//--------------------------------------------------------------------------------------------------
+bool MimicGameLib_gt_KillStandaloneTowers_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup auto61769700_g;
+    int auto61769700_u;
+    unit auto61769700_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGetType(EventUnit()) == "TownTownHallL2")) {
+        auto61769700_g = UnitGroupSearch(null, c_playerAny, UnitGetPosition(EventUnit()), 15.0, UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto61769700_u = UnitGroupCount(auto61769700_g, c_unitCountAll);
+        for (;; auto61769700_u -= 1) {
+            auto61769700_var = UnitGroupUnitFromEnd(auto61769700_g, auto61769700_u);
+            if (auto61769700_var == null) { break; }
+            if ((UnitGetType(auto61769700_var) == "TownCannonTowerL3Standalone")) {
+                UnitDamage(auto61769700_var, "TowerDeathDamage", auto61769700_var, 20000.0);
+                break;
+            }
+
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameLib_gt_KillStandaloneTowers_Init () {
+    MimicGameLib_gt_KillStandaloneTowers = TriggerCreate("MimicGameLib_gt_KillStandaloneTowers_Func");
+    TriggerAddEventUnitDied(MimicGameLib_gt_KillStandaloneTowers, null);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Initialize Moonwell Minimap Icons on Towns
 //--------------------------------------------------------------------------------------------------
 bool MimicGameLib_gt_InitializeMoonwellIconsonTowns_Func (bool testConds, bool runActions) {
@@ -22452,6 +22490,7 @@ void MimicGameLib_InitTriggers () {
     MimicGameLib_gt_TowerTowerDeadStateGateCheck_Init();
     MimicGameLib_gt_TowerTowerMorphToDeadStateStructureDies_Init();
     MimicGameLib_gt_InitializeTownSystem_Init();
+    MimicGameLib_gt_KillStandaloneTowers_Init();
     MimicGameLib_gt_InitializeMoonwellIconsonTowns_Init();
     MimicGameLib_gt_TownMidLateGamePowerTransitionOn_Init();
     MimicGameLib_gt_HallOfStormsKnockbackLaunchMissile_Init();

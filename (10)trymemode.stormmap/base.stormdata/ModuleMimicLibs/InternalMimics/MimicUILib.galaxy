@@ -5767,6 +5767,38 @@ void MimicUILib_gf_KillLogAnnounceQuestCompletion (int lp_player, string lp_ques
     libGame_gf_AnnouncementAddItemForPlayerGroup(libCore_gv_playerGroupFromPlayer[lp_player], libGame_ge_AnnouncementPriorities_Normal, libCore_ge_AnnouncerVOEvents_Null, "ShowQuestNotification", StringExternal("Param/Value/lib_UIUI_607B6246"), lv_questName, null, null, (lv_icon), libGame_gv_announcement_LongAnnouncementDuration_C, false);
 }
 
+void MimicUILib_gf_KillLogAnnounceQuestMilestone (int lp_player, string lp_questToken, fixed lp_progress) {
+    // Variable Declarations
+    int lv_itemFrame;
+    string lv_icon;
+    string lv_questTalent;
+    text lv_questName;
+    int lv_itemIndex;
+    int lv_combo;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_itemFrame = c_invalidDialogControlId;
+    lv_icon = "";
+
+    // Implementation
+    if ((lp_player <= 0) && (lp_player > libCore_gv_bALMaxPlayers)) {
+        TextExpressionSetToken("Param/Expression/lib_UIUI_E0FFD098", "Player", IntToText(lp_player));
+        MimicTriggerDebugOutput(1, TextExpressionAssemble("Param/Expression/lib_UIUI_E0FFD098"), true);
+        return ;
+    }
+
+    if ((lp_questToken == null)) {
+        MimicTriggerDebugOutput(1, StringExternal("Param/Value/lib_UIUI_FF3CBDB1"), true);
+        return ;
+    }
+
+    lv_icon = CatalogFieldValueGet(c_gameCatalogButton, CatalogFieldValueGet(c_gameCatalogBehavior, lp_questToken, "Face", c_playerAny), "Icon", c_playerAny);
+    lv_questName = StringExternal(CatalogFieldValueGet(c_gameCatalogButton, CatalogFieldValueGet(c_gameCatalogBehavior, lp_questToken, "Face", c_playerAny), "Name", c_playerAny));
+    SoundPlayForPlayer(SoundLink("TalentQuestLogCompleteAlly", -1), c_maxPlayers, libCore_gv_playerGroupFromPlayer[lp_player], 100.0, 0.0);
+    libGame_gf_AnnouncementAddItemForPlayerGroup(libCore_gv_playerGroupFromPlayer[lp_player], libGame_ge_AnnouncementPriorities_Normal, libCore_ge_AnnouncerVOEvents_Null, "ShowQuestNotification", StringExternal("Param/Value/lib_UIUI_F7FD8E35"), lv_questName, null, null, (lv_icon), libGame_gv_announcement_LongAnnouncementDuration_C, false);
+}
+
 void MimicUILib_gf_KillLogSaveQuestResetdatatoCache (int lp_player, string lp_quest) {
     // Variable Declarations
     int lv_i_CacheEntryBehavior;
@@ -14483,6 +14515,38 @@ void MimicUILib_gt_KillLogOnQuestComplete_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Kill Log - On Quest Milestone New
+//--------------------------------------------------------------------------------------------------
+bool MimicUILib_gt_KillLogOnQuestMilestoneNew_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_hero;
+    string lv_quest;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_hero = EventUnit();
+    lv_quest = EventUnitTokenBehavior();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitTestState(lv_hero, c_unitStateHallucination) == true)) {
+        return true;
+    }
+
+    MimicUILib_gf_KillLogAnnounceQuestMilestone(UnitGetOwner(lv_hero), lv_quest, 1.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicUILib_gt_KillLogOnQuestMilestoneNew_Init () {
+    MimicUILib_gt_KillLogOnQuestMilestoneNew = TriggerCreate("MimicUILib_gt_KillLogOnQuestMilestoneNew_Func");
+    TriggerAddEventUnitToken(MimicUILib_gt_KillLogOnQuestMilestoneNew, "QuestMilestone", null, "");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Kill Log - On Quest Reset
 //--------------------------------------------------------------------------------------------------
 bool MimicUILib_gt_KillLogOnQuestReset_Func (bool testConds, bool runActions) {
@@ -16854,6 +16918,7 @@ void MimicUILib_InitTriggers () {
     MimicUILib_gt_KillLogInitialize_Init();
     MimicUILib_gt_KillLogOnHeroUnitDies_Init();
     MimicUILib_gt_KillLogOnQuestComplete_Init();
+    MimicUILib_gt_KillLogOnQuestMilestoneNew_Init();
     MimicUILib_gt_KillLogOnQuestReset_Init();
     MimicUILib_gt_KillLogItemTimerExpires_Init();
     MimicUILib_gt_KillLogDebugShowPanel_Init();
