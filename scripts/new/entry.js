@@ -1,6 +1,6 @@
 import minimist from "minimist";
 import nodemon from "nodemon";
-import checkEnv from "./utils/checkEnv.js";
+import { checkEnv, heroesFileExtract } from "./utils/index.js";
 
 checkEnv();
 
@@ -9,24 +9,41 @@ const args = minimist(process.argv);
 const SCRIPT_MAPPING = {
   xml: {
     script: {
-      fn: () =>
-        import("./shared/buildIncludeXml.js").then((module) => {
-          module.default();
-        }),
+      fn: async () => {
+        (await import("./shared/mimic/buildIncludeXml.js")).default();
+      },
     },
     watch: {
       ext: "xml",
       dir: ".",
     },
   },
+
+  // Mimic Commands
   mimicabilities: {
     script: {
-      fn: () =>
-        import("./shared/mimic/abilities.js").then((module) => {
-          module.default();
-        }),
+      fn: async () => {
+        (await import("./shared/mimic/abilities.js")).default();
+      },
     },
-    watch: null
+    watch: null,
+  },
+  mimicmodels: {
+    script: {
+      fn: async () => {
+        (await import("./shared/mimic/models.js")).default();
+      },
+    },
+    watch: null,
+  },
+  allmimic: {
+    script: {
+      fn: async () => {
+        (await import("./shared/mimic/abilities.js")).default();
+        (await import("./shared/mimic/models.js")).default();
+      },
+    },
+    watch: null,
   },
 };
 
@@ -52,7 +69,10 @@ if (args.script) {
     });
   } else {
     // Run the script function
-    scriptConfig?.script?.fn();
+    await scriptConfig?.script?.fn();
+
+    // start extraction queue
+    heroesFileExtract.execute();
   }
 } else {
   console.error("Please specify a script to run using --script");
