@@ -1,25 +1,31 @@
 import { Storage } from "@jamiephan/casclib";
 import os from "os";
 import fs from "fs";
+import { logger } from "./logger.js";
+
+const LOGGER = logger("heroesFileExtract");
 
 class HeroesFileExtract {
   queueList = [];
+  // Cache for extracted files by fileName
+  extractedCache = new Map();
 
   constructor() {}
 
   /**
    * Add a file search task to the queue
+   * @param {string} jobName - A unique name for the job, used for logging purposes
    * @param {RegExp} search - The regex to search for files
    * @param {function(Array<{fileName: string, fileData: string}>): void} callback - The callback function to receive the extracted files, which is an array of objects containing file paths and their content
    * @example
-   * heroesFileExtract.queue(/^mods.*$/, (files) => {
-   *   console.log(files);
+   * heroesFileExtract.queue("exampleJob", /^mods.*$/, (files) => {
+   *   LOGGER.info(files);
    *   // Output: [{fileName: "mods/heroes/heroes.txt", fileData: "some content"}]
    * });
    */
-  queue(search, callback) {
-    console.log(`Queued file extraction task with search pattern: ${search}`);
-    this.queueList.push({ search, callback });
+  queue(jobName, search, callback) {
+    LOGGER.info(`Queued file extraction task "${jobName}" with search pattern: ${search}`);
+    this.queueList.push({ jobName, search, callback });
   }
 
   /**
@@ -28,11 +34,13 @@ class HeroesFileExtract {
   execute() {
     // Check if there are tasks in the queue
     if (this.queueList.length === 0) {
-      console.warn("No file extraction tasks in the queue to execute.");
+      LOGGER.warn("No file extraction tasks in the queue to execute.");
       return;
     }
 
-    console.log(`Starting execution of ${this.queueList.length} queued file extraction tasks...`);
+    LOGGER.info(
+      `Starting execution of ${this.queueList.length} queued file extraction tasks...`,
+    );
     const IS_ONLINE_MODE =
       process.env.TOOLS_USE_CASC_ONLINE_MODE?.toLowerCase() === "true";
     const IS_KEEP_ONLINE_CACHE =
@@ -47,11 +55,11 @@ class HeroesFileExtract {
       // If exists, remove the temp directory to prevent cache issues
       if (fs.existsSync(ONLINE_TEMP_DIR) && !IS_KEEP_ONLINE_CACHE) {
         fs.rmSync(ONLINE_TEMP_DIR, { recursive: true, force: true });
-        console.log(
+        LOGGER.info(
           `Removed existing online cache directory: ${ONLINE_TEMP_DIR}`,
         );
       }
-      console.log(
+      LOGGER.info(
         "Opening CASCLib using online mode. This may take a while for game files to be downloaded to cache one the first time.",
         onlineParam,
       );
@@ -74,35 +82,48 @@ class HeroesFileExtract {
 
     // Execute each queued task sequentially
     this.queueList.forEach((task, index) => {
-      console.log(
-        `Executing task ${index + 1}/${this.queueList.length} with search pattern: ${task.search}`,
+      LOGGER.info(
+        `Executing task "${task.jobName}" ${index + 1}/${this.queueList.length} with search pattern: ${task.search}`,
       );
       // Filter files based on the search regex
       const filteredFiles = totalGameFiles.filter((f) =>
         f.fileName.match(task.search),
       );
 
-      console.log(
+      LOGGER.info(
         `Found ${filteredFiles.length}/${totalGameFiles.length} files matching pattern: ${task.search}`,
       );
 
       const extractedFiles = [];
-      // Extract each file for the current task
+      // Extract each file for the current task, using cache if available
       filteredFiles.forEach((file, i) => {
         // Replace the "\" with "/" in the file name to ensure the correct path structure
         file.fileName = file.fileName.replace(/\\/g, "/");
-        console.log(
-          `[${i + 1}/${filteredFiles.length}] Extracting file: fileSize=${file.contentFlags}\tfileName=${file.fileName}`,
-        );
-        const openedFile = storage.openFile(file.fileName);
-        if (openedFile) {
-          const fileData = openedFile.readAll();
-          extractedFiles.push({ fileName: file.fileName, fileData });
+        // Check cache first
+        if (this.extractedCache.has(file.fileName)) {
+          LOGGER.info(
+            `[${i + 1}/${filteredFiles.length}] Using cached file: fileName=${file.fileName}`,
+          );
+          extractedFiles.push({
+            fileName: file.fileName,
+            fileData: this.extractedCache.get(file.fileName),
+          });
         } else {
-          console.error(`Failed to open file: ${file.fileName}`);
+          LOGGER.info(
+            `[${i + 1}/${filteredFiles.length}] Extracting file: fileSize=${file.contentFlags}\tfileName=${file.fileName}`,
+          );
+          const openedFile = storage.openFile(file.fileName);
+          if (openedFile) {
+            const fileData = openedFile.readAll();
+            extractedFiles.push({ fileName: file.fileName, fileData });
+            // Cache the file data
+            this.extractedCache.set(file.fileName, fileData);
+          } else {
+            LOGGER.error(`Failed to open file: ${file.fileName}`);
+          }
+          // close the file handle
+          openedFile.close();
         }
-        // close the file handle
-        openedFile.close();
       });
 
       // Sort the extracted files by file name
@@ -116,10 +137,11 @@ class HeroesFileExtract {
       // Clean up the temp directory after use
       if (fs.existsSync(ONLINE_TEMP_DIR) && !IS_KEEP_ONLINE_CACHE) {
         fs.rmSync(ONLINE_TEMP_DIR, { recursive: true, force: true });
-        console.log(`Cleaned up online cache directory: ${ONLINE_TEMP_DIR}`);
+        LOGGER.info(`Cleaned up online cache directory: ${ONLINE_TEMP_DIR}`);
       }
     }
 
+    LOGGER.info("Completed execution of all queued file extraction tasks.");
     storage.close();
   }
 }

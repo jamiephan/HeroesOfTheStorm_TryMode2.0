@@ -1,6 +1,8 @@
 import minimist from "minimist";
 import nodemon from "nodemon";
-import { checkEnv, heroesFileExtract } from "./utils/index.js";
+import { checkEnv, heroesFileExtract, logger } from "./utils/index.js";
+
+const LOGGER = logger("entry");
 
 checkEnv();
 
@@ -28,6 +30,14 @@ const SCRIPT_MAPPING = {
     },
     watch: null,
   },
+  mimicbehaviors: {
+    script: {
+      fn: async () => {
+        (await import("./shared/mimic/behaviors.js")).default();
+      },
+    },
+    watch: null,
+  },
   mimicmodels: {
     script: {
       fn: async () => {
@@ -36,11 +46,21 @@ const SCRIPT_MAPPING = {
     },
     watch: null,
   },
+  mimiclib: {
+    script: {
+      fn: async () => {
+        (await import("./shared/mimic/lib.js")).default();
+      },
+    },
+    watch: null,
+  },
   allmimic: {
     script: {
       fn: async () => {
         (await import("./shared/mimic/abilities.js")).default();
+        (await import("./shared/mimic/behaviors.js")).default();
         (await import("./shared/mimic/models.js")).default();
+        (await import("./shared/mimic/lib.js")).default();
       },
     },
     watch: null,
@@ -50,17 +70,17 @@ const SCRIPT_MAPPING = {
 if (args.script) {
   const scriptConfig = SCRIPT_MAPPING[args.script];
   if (!scriptConfig) {
-    console.error(`Unknown script: ${args.script}`);
+    LOGGER.error(`Unknown script: ${args.script}`);
     process.exit(1);
   }
 
   // If watch mode
   if (args?.mode === "watch") {
     if (!scriptConfig.watch) {
-      console.error(`Watch mode is not supported for script: ${args.script}`);
+      LOGGER.error(`Watch mode is not supported for script: ${args.script}`);
       process.exit(1);
     }
-    console.log(`Starting in watch mode for ${args.script}...`);
+    LOGGER.info(`Starting in watch mode for ${args.script}...`);
     nodemon({
       script: args._[1],
       args: ["--script", args.script],
@@ -75,5 +95,5 @@ if (args.script) {
     heroesFileExtract.execute();
   }
 } else {
-  console.error("Please specify a script to run using --script");
+  LOGGER.error("Please specify a script to run using --script");
 }

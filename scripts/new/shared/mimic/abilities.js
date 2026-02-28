@@ -2,12 +2,14 @@ import fs from "fs";
 import path from "path";
 import { parseString as XMLParser } from "xml2js";
 
-import { TAB, heroesFileExtract } from "../../utils/index.js";
+import { TAB, heroesFileExtract, logger } from "../../utils/index.js";
 import buildXml from "../buildIncludeXml.js";
+
+const LOGGER = logger("mimicabilities");
 
 export default () => {
   const ID_PREFIX = "M";
-  heroesFileExtract.queue(/^mods.*\.xml$/, (extractedFiles) => {
+  heroesFileExtract.queue("mimicabilities", /^mods.*\.xml$/, (extractedFiles) => {
     let finalXML = '<?xml version="1.0" encoding="UTF-8"?>\n\n';
     finalXML +=
       "<!-- ======================================================== -->\n";
@@ -69,17 +71,28 @@ export default () => {
               let requirement;
               let face;
               let verb;
+              let showValidator;
+              let useValidator;
 
               if (Array.isArray(a.CmdButtonArray)) {
                 // Have CmdButtonArray
                 requirement = a.CmdButtonArray[0].$.Requirements;
                 face = a.CmdButtonArray[0].$.DefaultButtonFace || name;
                 verb = a.CmdButtonArray[0].$.index || "Execute";
+                showValidator = a.CmdButtonArray[0].$.ShowValidator;
+                useValidator = a.CmdButtonArray[0].$.UseValidator;
               } else {
                 verb = "Execute";
                 face = parent || name;
               }
               finalXML += `${TAB(1)}<CBehaviorAbility id="${ID_PREFIX}${name}">\n`;
+              if (showValidator) {
+                finalXML += `${TAB(2)}<!-- showValidator="${showValidator}" Detected. Please check the game data for the requirement of <CValidator* id="${showValidator}" /> class -->\n`;
+              }
+              if (useValidator) {
+                finalXML += `${TAB(2)}<!-- useValidator="${useValidator}" Detected. Please check the game data for the requirement of <CValidator* id="${useValidator}" /> class -->\n`;
+              }
+
               if (!(requirement === undefined)) {
                 finalXML += `${TAB(2)}<!-- ↓ Requirement Behavior Detected. Please add the behavior: ${requirement} ↓ -->\n`;
               }
@@ -87,7 +100,7 @@ export default () => {
               finalXML += `${TAB(2)}<Buttons Face="${face}" Type="AbilCmd" AbilCmd="${name},${verb}" Behavior="${name}" />\n`;
               finalXML += `${TAB(1)}</CBehaviorAbility>\n`;
 
-              console.log(
+              LOGGER.info(
                 `Generated Ability: ${name}`,
                 `\t\tButton Face: ${face}`,
                 `\t\tVerb: ${verb}`,
@@ -95,7 +108,7 @@ export default () => {
                 `\t\tPrefixed Id: ${ID_PREFIX}${name}`,
               );
             } catch (e) {
-              console.log(
+              LOGGER.error(
                 `Error when adding ability from ${obj.fileName}`,
                 e.message,
               );
@@ -110,7 +123,7 @@ export default () => {
 
     finalXML += "</Catalog>\n";
 
-    console.log("===================");
+    LOGGER.info("===================");
 
     // if parent dir of TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION does not exist
     // As fs.writeFile() will throw not found error if the parent dir does not exist.
@@ -126,7 +139,7 @@ export default () => {
         },
       );
 
-      console.log(
+      LOGGER.info(
         `Created directory: ${path.dirname(process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION)}`,
       );
     }
@@ -137,10 +150,10 @@ export default () => {
       { encoding: "utf8" },
     );
 
-    console.log(
+    LOGGER.info(
       `Created file: ${process.env.TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION}`,
     );
-    console.log("===================");
+    LOGGER.info("===================");
     buildXml();
   });
 };

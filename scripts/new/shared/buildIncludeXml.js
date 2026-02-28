@@ -1,6 +1,9 @@
 import { glob } from "glob";
 import fs from "fs";
 import xml2js from "xml2js";
+import { logger } from "../utils/index.js";
+
+const LOGGER = logger("buildIncludeXml");
 
 const buildXml = () => {
   // Get all XML files under ModDir
@@ -21,7 +24,7 @@ const buildXml = () => {
 
   // Check if there is any XML file
   if (xmlFiles.length === 0) {
-    console.log("Cannot find any XML files.");
+    LOGGER.error("Cannot find any XML files.");
     return false;
   }
 
@@ -43,13 +46,13 @@ const buildXml = () => {
   const builder = new xml2js.Builder();
   const xml = builder.buildObject(xmlObj);
 
-  console.log(xml);
+  LOGGER.info(xml);
   // Write to mainXML
   fs.writeFile(process.env.TOOLS_XML_MAIN_XML_PATH, xml, (error) => {
     if (error) {
-      console.log(error);
+      LOGGER.error(error);
     }
-    console.log(
+    LOGGER.info(
       `Successfully generate XML file: ${process.env.TOOLS_XML_MAIN_XML_PATH}`,
     );
   });
