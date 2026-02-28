@@ -12,12 +12,13 @@ const SCRIPT_MAPPING = {
   xml: {
     script: {
       fn: async () => {
-        (await import("./shared/mimic/buildIncludeXml.js")).default();
+        (await import("./shared/buildIncludeXml.js")).default();
       },
     },
     watch: {
       ext: "xml",
       dir: ".",
+      ignore: [process.env.TOOLS_XML_MAIN_XML_PATH], // Ignore the generated main XML file to prevent infinite loop
     },
   },
 
@@ -84,15 +85,15 @@ if (args.script) {
     nodemon({
       script: args._[1],
       args: ["--script", args.script],
-      ext: scriptConfig?.watch?.ext,
-      watch: scriptConfig?.watch?.dir,
+      verbose: true,
+      ...scriptConfig.watch,
     });
   } else {
     // Run the script function
     await scriptConfig?.script?.fn();
 
     // start extraction queue
-    heroesFileExtract.execute();
+    if (heroesFileExtract.queueList.length > 0) heroesFileExtract.execute();
   }
 } else {
   LOGGER.error("Please specify a script to run using --script");
