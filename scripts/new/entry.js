@@ -67,6 +67,16 @@ const SCRIPT_MAPPING = {
     watch: null,
   },
 
+  // Extract Commands
+  extracts2ma: {
+    script: {
+      fn: async () => {
+        (await import("./shared/extractS2ma.js")).default();
+      },
+    },
+    watch: null,
+  },
+
   // Library Commands
   libraries: {
     script: {
