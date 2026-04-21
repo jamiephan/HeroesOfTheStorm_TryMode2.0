@@ -486,7 +486,9 @@ const int MimicGameLib_gv_townMaxTownCount = 30;
 const int MimicGameLib_gv_townMaxStructureCount = 63;
 const fixed MimicGameLib_gv_hallOfStormsKnockbackLaunchDistance = 12.0;
 const fixed MimicGameLib_gv_hallOfStormsKnockbackCutoffDistance = -1.0;
-const int MimicGameLib_gv_watchTowersMaxCount = 10;
+const int MimicGameLib_gv_watchTowersMaxCount = 15;
+const int MimicGameLib_gv_TimeToStartDecay_C = 15;
+const int MimicGameLib_gv_TimeToDecay_C2 = 30;
 
 // Structures
 struct MimicGameLib_gs_Team {
@@ -896,6 +898,9 @@ struct MimicGameLib_gs_WatchTowers {
     int lv_captureCounter;
     bool lv_enabled;
     int lv_capturePointIndex;
+    int lv_decayDelayTicks;
+    int lv_neutralDecayTicks;
+    bool lv_startedDecaying;
 };
 
 // Variable Declarations
@@ -991,8 +996,10 @@ bool MimicGameLib_gv_gameOver_DetermineWinningTeamHasRun;
 bool MimicGameLib_gv_dEBUG_PercentScalingEnabled;
 int MimicGameLib_gv_heroDeathRespawnSetting;
 unit[libCore_gv_bALMaxPlayers + 1] MimicGameLib_gv_heroDeathMurkyRespawnEggs;
+unit[libCore_gv_bALMaxPlayers + 1] MimicGameLib_gv_heroDeathMurkyRespawnEgg2FromTalent;
 fixed[libCore_gv_bALMaxPlayers + 1] MimicGameLib_gv_heroDeathMurkyRespawnEggDeathTimeStamp;
 point[libCore_gv_bALMaxPlayers + 1] MimicGameLib_gv_heroDeathMurkyRespawnEggPoint;
+point[libCore_gv_bALMaxPlayers + 1] MimicGameLib_gv_heroDeathMurkyRespawnEggPoint2;
 bool MimicGameLib_gv_heroDeath_UpdateStats;
 bool MimicGameLib_gv_heroDeath_RespawnMounted;
 bool MimicGameLib_gv_heroDeath_RunDeathUIUpdates;

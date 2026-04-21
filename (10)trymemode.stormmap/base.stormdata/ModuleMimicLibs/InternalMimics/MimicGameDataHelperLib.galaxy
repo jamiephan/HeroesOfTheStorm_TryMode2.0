@@ -39,6 +39,7 @@ void MimicGameDataHelperLib_InitVariables () {
 
     MimicGameDataHelperLib_InitVariables_completed = true;
 
+    MimicGameDataHelperLib_gv_updateOnAnyVisibilityChangeUnitGroup = UnitGroupEmpty();
     MimicGameDataHelperLib_gv_gPU2020EventEnabled = true;
     MimicGameDataHelperLib_gv_gPU2020TimerDurationMod = 6.0;
     MimicGameDataHelperLib_gv_gPU2020Phase1Threshold = 0.01;
@@ -177,6 +178,7 @@ void MimicGameDataHelperLib_InitVariables () {
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
         MimicGameDataHelperLib_gv_murkyEggDeathTimer[init_i] = TimerCreate();
     }
+    MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT = 30.0;
     for (init_i = 0; init_i <= libCore_gv_bALMaxPlayers; init_i += 1) {
         MimicGameDataHelperLib_gv_heroMurkyEggHuntUnitGroup[init_i] = UnitGroupEmpty();
     }
@@ -792,6 +794,10 @@ void MimicGameDataHelperLib_gf_HeroArthasIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadMinionAITakeoverTransport, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadPortGhouls, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc, true);
     }
 
 }
@@ -810,6 +816,10 @@ void MimicGameDataHelperLib_gf_HeroArthasDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadMinionAITakeoverTransport, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadPortGhouls, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc, false);
     }
 
 }
@@ -1286,8 +1296,6 @@ void MimicGameDataHelperLib_gf_HeroFalstadIncrementHeroCountFunction () {
     if ((MimicGameDataHelperLib_gv_heroFalstadTriggerRegistrationVariable == 1)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightPing, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown, true);
     }
 
@@ -1304,8 +1312,6 @@ void MimicGameDataHelperLib_gf_HeroFalstadDecrementHeroCountFunction () {
     if ((MimicGameDataHelperLib_gv_heroFalstadTriggerRegistrationVariable == 0)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFlightPing, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown, false);
     }
 
@@ -2781,7 +2787,6 @@ void MimicGameDataHelperLib_gf_HeroMurkyIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyCreateEggOnSpawn, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyFishEyeDynamicApplication, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyRespawnEggCreated, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyAFishyDealChargeCountProc, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyEggSpawnsChangeDeathSound, true);
     }
@@ -2803,7 +2808,6 @@ void MimicGameDataHelperLib_gf_HeroMurkyDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyCreateEggOnSpawn, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyFishEyeDynamicApplication, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyRespawnEggCreated, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyAFishyDealChargeCountProc, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyEggSpawnsChangeDeathSound, false);
     }
@@ -2847,6 +2851,7 @@ void MimicGameDataHelperLib_gf_HeroMurkyCreateEggAtBaseforPlayer (int lp_player)
 
 void MimicGameDataHelperLib_gf_HeroMurkyRespawnLogicCheck (int lp_player) {
     // Variable Declarations
+    int lv_randomEgg;
     unit lv_murky;
 
     // Automatic Variable Declarations
@@ -2854,31 +2859,39 @@ void MimicGameDataHelperLib_gf_HeroMurkyRespawnLogicCheck (int lp_player) {
 
     // Implementation
     lv_murky = libGame_gv_players[lp_player].lv_heroUnit;
-    if ((((libGame_gv_heroDeathMurkyRespawnEggDeathTimeStamp[lp_player] >= (TimerGetElapsed(libGame_gv_gameTimer) - 0.0625)) && (libGame_gv_heroDeathMurkyRespawnEggDeathTimeStamp[lp_player] <= (TimerGetElapsed(libGame_gv_gameTimer) + 0.0625))) || ((libGame_gv_heroDeathMurkyRespawnEggs[lp_player] != null) && (UnitIsAlive(libGame_gv_heroDeathMurkyRespawnEggs[lp_player]) == true)))) {
+    if ((((libGame_gv_heroDeathMurkyRespawnEggDeathTimeStamp[lp_player] >= (TimerGetElapsed(libGame_gv_gameTimer) - 0.0625)) && (libGame_gv_heroDeathMurkyRespawnEggDeathTimeStamp[lp_player] <= (TimerGetElapsed(libGame_gv_gameTimer) + 0.0625))) || (((libGame_gv_heroDeathMurkyRespawnEggs[lp_player] != null) || (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player] != null)) && ((UnitIsAlive(libGame_gv_heroDeathMurkyRespawnEggs[lp_player]) == true) || (UnitIsAlive(libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player]) == true))))) {
         UnitBehaviorRemove(lv_murky, "HallOfStormsProtectionBuff", 1);
-        libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player] = UnitGetPosition(libGame_gv_heroDeathMurkyRespawnEggs[lp_player]);
-        UnitSetPosition(lv_murky, libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player], false);
-        if ((PlayerHasTalent(lp_player, "MurkyEggShell") == true)) {
-            UnitCreateEffectUnit(lv_murky, "MurkyEggShellProcSet", lv_murky);
+        lv_randomEgg = RandomInt(1, 2);
+        if ((libGame_gv_heroDeathMurkyRespawnEggs[lp_player] == null)) {
+            libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player] = UnitGetPosition(libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player]);
         }
-
+        else {
+            if ((libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player] == null)) {
+                libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player] = UnitGetPosition(libGame_gv_heroDeathMurkyRespawnEggs[lp_player]);
+            }
+            else {
+                if ((lv_randomEgg == 1)) {
+                    libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player] = UnitGetPosition(libGame_gv_heroDeathMurkyRespawnEggs[lp_player]);
+                }
+                else {
+                    libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player] = UnitGetPosition(libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player]);
+                }
+            }
+        }
+        UnitSetPosition(lv_murky, libGame_gv_heroDeathMurkyRespawnEggPoint[lp_player], false);
+        UnitCreateEffectUnit(lv_murky, "MurkyReviveShieldApplyShieldBuff", lv_murky);
         if ((PlayerHasTalent(lp_player, "MurkyFishEye") == true)) {
             UnitCreateEffectUnit(lv_murky, "MurkyFishEyeApplyMountSpeedBuff", lv_murky);
         }
 
     }
     else {
-        if ((libGame_gv_heroDeathMurkyRespawnEggs[lp_player] == null)) {
+        if ((libGame_gv_heroDeathMurkyRespawnEggs[lp_player] == null) && (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lp_player] == null)) {
             MimicGameDataHelperLib_gf_HeroMurkyCreateEggAtBaseforPlayer(lp_player);
         }
 
     }
     UnitModifyCooldown(lv_murky, "Abil/MurkyRespawnEgg", -60.0, c_cooldownOperationAdd);
-    if ((PlayerHasTalent(lp_player, "MurkyEggHunt") == true)) {
-        Wait(0.0625, c_timeGame);
-        UnitBehaviorAdd(lv_murky, "MurkyEggHuntCloak", lv_murky, 1);
-    }
-
 }
 
 void MimicGameDataHelperLib_gf_HeroNecromancerIncrementHeroCountFunction () {
@@ -4808,6 +4821,45 @@ void MimicGameDataHelperLib_gt_HeroGenericSuperStealthActivateDeactivate_Init ()
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - All - Hero Respec
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroAllHeroRespec_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_player;
+    unit lv_thrall;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_player = libGame_gf_HeroRespecsTalentsPlayer();
+    lv_thrall = libGame_gv_players[lv_player].lv_heroUnit;
+
+    // Conditions
+    if (testConds) {
+        if (!((lv_player >= 1))) {
+            return false;
+        }
+
+        if (!((lv_player <= libCore_gv_bALMaxPlayers))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitCreateEffectUnit(libGame_gv_players[lv_player].lv_heroUnit, "ResetQuestMinimums", libGame_gv_players[lv_player].lv_heroUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroAllHeroRespec_Init () {
+    MimicGameDataHelperLib_gt_HeroAllHeroRespec = TriggerCreate("MimicGameDataHelperLib_gt_HeroAllHeroRespec_Func");
+    libGame_gf_HeroRespecsTalents(MimicGameDataHelperLib_gt_HeroAllHeroRespec);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hearthstone - Teleport
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HearthstoneTeleport_Func (bool testConds, bool runActions) {
@@ -6604,6 +6656,106 @@ void MimicGameDataHelperLib_gt_HeroArthasAntiMagicShellHeal_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Arthas - Army of the Dead - Legion of Northrend Talent Spawn
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_unit;
+    int lv_player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    lv_player = UnitGetOwner(lv_unit);
+
+    // Conditions
+    if (testConds) {
+        if (!((PlayerHasTalent(lv_player, "ArthasMasteryLegionOfNorthrendArmyoftheDead") == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libGame_gf_CalculateSpawnedMinionGoalPoints(lv_player, UnitGetPosition(lv_unit));
+    libAIAI_gf_MinionAIStartMinionAI(-1, lv_unit, libGame_gv_spawnedMinionLane, libGame_gv_spawnedMinionFirstWaypointIndex, false, true, false, 0, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn_Init () {
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn = TriggerCreate("MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn, false);
+    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn, c_playerAny, "ArthasArmyoftheDeadLegionofNorthrendTalentSpawnSet");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Arthas - Army of the Dead - NPC Death Proc
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_killingPlayer;
+    unit lv_minion;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_killingPlayer = libGame_gf_HeroParticipatedInNPCTakedownKillingPlayer();
+    lv_minion = libGame_gf_HeroParticipatedInNPCTakedownMinion();
+    if ((PlayerHasTalent(lv_killingPlayer, "ArthasHeroicAbilityArmyoftheDead") == true) && (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeSummoned) == false) && (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeStructure) == false) && (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeCreep) == false) && ((UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMerc) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMinion) == true))) {
+        UnitCreateEffectUnit(libGame_gv_players[lv_killingPlayer].lv_heroUnit, "ArthasArmyoftheDeadNPCDeathModifyChargeCooldown", libGame_gv_players[lv_killingPlayer].lv_heroUnit);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc_Init () {
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc, false);
+    libGame_gf_HeroParticipatedInNPCTakedown(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Arthas - Army of the Dead - Takedown Death Proc
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_killingPlayer;
+    unit lv_minion;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_killingPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+    if ((PlayerHasTalent(lv_killingPlayer, "ArthasHeroicAbilityArmyoftheDead") == true)) {
+        UnitCreateEffectUnit(libGame_gv_players[lv_killingPlayer].lv_heroUnit, "ArthasArmyoftheDeadTakedownModifyChargeCooldown", libGame_gv_players[lv_killingPlayer].lv_heroUnit);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc_Init () {
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc, false);
+    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Arthas - Army of the Dead - Minion AI Takeover (Death)
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadMinionAITakeoverDeath_Func (bool testConds, bool runActions) {
@@ -6789,6 +6941,37 @@ void MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned_Init () {
     MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned = TriggerCreate("MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned, false);
     TriggerAddEventUnitCreated(MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned, null, "ArthasGhoulMagazine", null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Arthas - Death Pact Talent - Takedown Token Proc 
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_killingPlayer;
+    unit lv_minion;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_killingPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
+    if ((PlayerHasTalent(lv_killingPlayer, "ArthasDeathPact") == true)) {
+        UnitCreateEffectUnit(libGame_gv_players[lv_killingPlayer].lv_heroUnit, "ArthasFrostmourneHungersDeathPactTalentTakedownModifyTokens", libGame_gv_players[lv_killingPlayer].lv_heroUnit);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc_Init () {
+    MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc_Func");
+    TriggerEnable(MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc, false);
+    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10389,87 +10572,6 @@ void MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Falstad - Frequent Flyer - Hero Takedown
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_localPlayer;
-    unit lv_falstad;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_localPlayer = libGame_gf_HeroParticipatedInTakedownKillingPlayer();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_localPlayer, "FalstadTailwindFrequentFlyer") == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_falstad = libGame_gv_players[lv_localPlayer].lv_heroUnit;
-    UnitCreateEffectUnit(lv_falstad, "FalstadFrequentFlyerHeroKillIncreaseQuestToken", lv_falstad);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Init () {
-    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown = TriggerCreate("MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown, false);
-    libGame_gf_HeroParticipatedInTakedown(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Falstad - Frequent Flyer - NPC Kill
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    int lv_killingPlayer;
-    unit lv_killingHero;
-    unit lv_minion;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_killingPlayer = libGame_gf_HeroParticipatedInNPCTakedownKillingPlayer();
-    lv_killingHero = libGame_gv_players[lv_killingPlayer].lv_heroUnit;
-    lv_minion = libGame_gf_HeroParticipatedInNPCTakedownMinion();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_killingPlayer, "FalstadTailwindFrequentFlyer") == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if (((UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeSummoned) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeUser1) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMapBoss) == true))) {
-        return true;
-    }
-
-    if ((UnitTypeTestAttribute(UnitGetType(lv_minion), c_unitAttributeMinion) == true) && (UnitFilterMatch(lv_minion, lv_killingPlayer, UnitFilter(0, 0, (1 << c_targetFilterCreep) | (1 << c_targetFilterMerc), 0)) == true)) {
-        UnitCreateEffectUnit(lv_killingHero, "FalstadFrequentFlyerMinionKillIncreaseQuestToken", lv_killingHero);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Init () {
-    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill = TriggerCreate("MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill, false);
-    libGame_gf_HeroParticipatedInNPCTakedown(MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Falstad - Wingman Variables
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables_Func (bool testConds, bool runActions) {
@@ -11151,6 +11253,7 @@ bool MimicGameDataHelperLib_gt_HeroJainaFrostbiteQuestReset_Func (bool testConds
     }
 
     PlayerScoreValueSetFromInt(lv_player, "JainaFrostbiteDamage", 0);
+    UnitBehaviorAdd(lv_unit, "ImprovedIceBlock", lv_unit, 1);
     return true;
 }
 
@@ -11264,7 +11367,7 @@ bool MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy_Func (bool te
 void MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy_Init () {
     MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy = TriggerCreate("MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy, false);
-    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy, null, "JainaFrostbiteCompletionCarry", c_unitBehaviorChangeCreate);
+    TriggerAddEventUnitBehaviorChange(MimicGameDataHelperLib_gt_HeroJainaFrostbittenCompletionDummy, null, "IceColdCarryBehavior", c_unitBehaviorChangeCreate);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11349,6 +11452,10 @@ bool MimicGameDataHelperLib_gt_HeroKaelthasPhoenixSpawnSelection_Func (bool test
     MimicGameDataHelperLib_gv_kaelthas_PhoenixUnit[lv_player] = lv_unit;
     if ((libGame_gv_players[lv_player].lv_activeVehicle == null)) {
         UnitSelect(lv_unit, lv_player, true);
+    }
+
+    if ((libAIAI_gf_HeroAIIsAIEnabledForPlayer(lv_player) == true)) {
+        UnitCreateAIThinkTree(lv_unit);
     }
 
     return true;
@@ -17346,7 +17453,7 @@ bool MimicGameDataHelperLib_gt_HeroMuradinItsHammerTimeOnDeathProc_Func (bool te
     for ( ; ( (auto534F8C5E_ai >= 0 && lv_i <= auto534F8C5E_ae) || (auto534F8C5E_ai < 0 && lv_i >= auto534F8C5E_ae) ) ; lv_i += auto534F8C5E_ai ) {
         lv_unit[lv_i] = UnitBehaviorEffectUnit(lv_killedUnit, "MuradinStormBoltPerfectStormKillBonusBehavior", c_effectUnitCaster, lv_i);
         if ((UnitGetOwner(lv_unit[lv_i]) == lv_killingPlayer)) {
-            UnitCreateEffectUnit(lv_unit[lv_i], "MuradinStormboltPerfectStormHeroKillModifyTokenCount", lv_unit[lv_i]);
+            UnitCreateEffectUnit(lv_unit[lv_i], "MuradinStormboltPerfectStormKillCDReset", lv_unit[lv_i]);
         }
 
     }
@@ -17537,7 +17644,7 @@ bool MimicGameDataHelperLib_gt_HeroMurkyMurkyEggDies_Func (bool testConds, bool 
             return false;
         }
 
-        if (!((libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == EventUnit()))) {
+        if (!(((libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == EventUnit()) || (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] == EventUnit())))) {
             return false;
         }
 
@@ -17558,67 +17665,120 @@ bool MimicGameDataHelperLib_gt_HeroMurkyMurkyEggDies_Func (bool testConds, bool 
     lv_eggOwnerPlayer = EventPlayer();
     lv_eggOwnerPlayerTeam = libGame_gf_TeamNumberOfPlayer(lv_eggOwnerPlayer);
     lv_murkyHeroUnit = libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit;
+    if ((UnitGetOwner(libNtve_gf_KillingUnit()) != lv_eggOwnerPlayer) && (PlayerHasTalent(lv_eggOwnerPlayer, "MurkyEggShell") == true)) {
+        UnitCreateEffectUnit(lv_murkyHeroUnit, "MurkyEggShellProcSet", lv_murkyHeroUnit);
+    }
+
     if ((UnitIsValid(lv_murkyHeroUnit) == false)) {
         libGame_gv_heroDeathMurkyRespawnEggs[lv_eggOwnerPlayer] = null;
+        libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lv_eggOwnerPlayer] = null;
         return true;
+    }
+
+    if ((libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == EventUnit())) {
+        if ((libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] != null)) {
+            libGame_gv_heroDeathMurkyRespawnEggs[lv_eggOwnerPlayer] = libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lv_eggOwnerPlayer];
+            libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lv_eggOwnerPlayer] = null;
+        }
+        else {
+            libGame_gv_heroDeathMurkyRespawnEggs[lv_eggOwnerPlayer] = null;
+        }
+    }
+
+    if ((libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] == EventUnit())) {
+        libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lv_eggOwnerPlayer] = null;
     }
 
     libGame_gv_players[lv_eggOwnerPlayer].lv_soundDeathAlertPrefix = "UI_HeroDeath_Murky_";
     lv_killingPlayer = libNtve_gf_KillingPlayer();
-    libGame_gv_heroDeathMurkyRespawnEggs[lv_eggOwnerPlayer] = null;
-    libGame_gv_heroDeathMurkyRespawnEggPoint[lv_eggOwnerPlayer] = UnitGetPosition(EventUnit());
     libGame_gv_heroDeathMurkyRespawnEggDeathTimeStamp[lv_eggOwnerPlayer] = TimerGetElapsed(libGame_gv_gameTimer);
     if ((UnitHasBehavior2(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, "Dead") == true) && (libGame_gv_players[lv_eggOwnerPlayer].lv_isDead == true)) {
         UnitSetPosition(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, libGame_gv_players[lv_eggOwnerPlayer].lv_spawnPoint, false);
         lv_level = libGame_gf_GetCustomValueLevelofHeroUnit(lv_murkyHeroUnit);
         if (((TimerGetElapsed(libGame_gv_players[lv_eggOwnerPlayer].lv_respawnTimer) > 0.0) || ((TimerGetElapsed(libGame_gv_players[lv_eggOwnerPlayer].lv_respawnTimer) == 0.0) && (TimerGetRemaining(libGame_gv_players[lv_eggOwnerPlayer].lv_respawnTimer) != libCore_gf_HeroDeathTime(lv_eggOwnerPlayer, lv_level))))) {
-            if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyBigTunaKahuna") == true)) {
-                libGame_gf_HeroDeathModifyRespawnTimer(lv_eggOwnerPlayer, (libCore_gf_HeroDeathTime(lv_eggOwnerPlayer, lv_level) - libCore_gv_bALMurkyWithEggandBigFishTalentDeathTime));
-            }
-            else {
-                libGame_gf_HeroDeathModifyRespawnTimer(lv_eggOwnerPlayer, (libCore_gf_HeroDeathTime(lv_eggOwnerPlayer, lv_level) - libCore_gv_bALMurkyWithEggDeathTime));
-            }
-            if ((MimicGameDataHelperLib_gv_murkyDeathOverlayActive[lv_eggOwnerPlayer] == true)) {
+            if ((MimicGameDataHelperLib_gv_murkyDeathOverlayActive[lv_eggOwnerPlayer] == true) && (libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == null) && (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] == null)) {
                 libUIUI_gf_FullscreenOverlayRemoveItemFromQueueForPlayer(UnitGetOwner(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit), "Cutscenes\\GameUI_MedivacOverlay.StormCutscene", "MurkyDeathTimerDummy");
                 MimicGameDataHelperLib_gv_murkyDeathOverlayActive[lv_eggOwnerPlayer] = false;
                 libUIUI_gf_FullscreenOverlaysShowHideDeathOverlay(true, lv_eggOwnerPlayer);
             }
 
+            if ((libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == null) && (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] == null)) {
+                libGame_gf_HeroDeathModifyRespawnTimer(lv_eggOwnerPlayer, (libCore_gf_HeroDeathTime(lv_eggOwnerPlayer, lv_level) - libCore_gv_bALMurkyWithEggDeathTime));
+                SoundPlayForPlayer(SoundLink("Murky_Death_NoEgg_Vox", -1), lv_eggOwnerPlayer, PlayerGroupAll(), 100.0, 0.0);
+            }
+
         }
 
-        SoundPlayForPlayer(SoundLink("Murky_Death_NoEgg_Vox", -1), lv_eggOwnerPlayer, PlayerGroupAll(), 100.0, 0.0);
     }
     else {
-        UnitBehaviorAdd(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, "MurkyDeadEggReveal", libNtve_gf_KillingUnit(), 1);
+        if ((libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] == null) && (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] == null)) {
+            UnitBehaviorAdd(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, "MurkyDeadEggReveal", libNtve_gf_KillingUnit(), 1);
+        }
+
         lv_enemyTeam = (3 - lv_eggOwnerPlayerTeam);
         lv_revealDuration = CatalogFieldValueGetAsFixed(c_gameCatalogBehavior, "MurkyDeadEggReveal", "Duration", c_playerAny);
         MimicGameDataHelperLib_gv_murkyRevealPing[lv_eggOwnerPlayer] = PingLastCreated();
         if ((UnitGetOwner(libNtve_gf_KillingUnit()) <= libCore_gv_bALMaxPlayers)) {
-            TextExpressionSetToken("Param/Expression/lib_GDHL_39CFD00B", "A", UnitTypeGetName(UnitGetType(libGame_gv_players[UnitGetOwner(libNtve_gf_KillingUnit())].lv_heroUnit)));
-            TextExpressionSetToken("Param/Expression/lib_GDHL_39CFD00B", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
-            UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_39CFD00B"));
+            if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == true)) {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_39CFD00B", "A", UnitTypeGetName(UnitGetType(libGame_gv_players[UnitGetOwner(libNtve_gf_KillingUnit())].lv_heroUnit)));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_39CFD00B", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_39CFD00B"));
+            }
+            else {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_886F69BD", "A", UnitTypeGetName(UnitGetType(libGame_gv_players[UnitGetOwner(libNtve_gf_KillingUnit())].lv_heroUnit)));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_886F69BD", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_886F69BD"));
+            }
         }
-        else if (((UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_TeamOrder) || (UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_TeamChaos))) {
-            TextExpressionSetToken("Param/Expression/lib_GDHL_2F88A6C6", "A", StringExternal("Param/Value/lib_GDHL_A749A22B"));
-            TextExpressionSetToken("Param/Expression/lib_GDHL_2F88A6C6", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
-            UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_2F88A6C6"));
+        else if (((UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_TeamOrder) || (UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_TeamChaos) || (libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] != null) || (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] != null))) {
+            if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == true)) {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_06884218", "A", StringExternal("Param/Value/lib_GDHL_B22AD03A"));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_06884218", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_06884218"));
+            }
+            else {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_2F88A6C6", "A", StringExternal("Param/Value/lib_GDHL_A749A22B"));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_2F88A6C6", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_2F88A6C6"));
+            }
         }
-        else if ((UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_Hostile)) {
-            TextExpressionSetToken("Param/Expression/lib_GDHL_A932E0EB", "A", StringExternal("Param/Value/lib_GDHL_A501371D"));
-            TextExpressionSetToken("Param/Expression/lib_GDHL_A932E0EB", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
-            UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_A932E0EB"));
+        else if ((UnitGetOwner(libNtve_gf_KillingUnit()) == libCore_gv_cOMPUTER_Hostile) && (libGame_gv_heroDeathMurkyRespawnEggs[EventPlayer()] != null) && (libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[EventPlayer()] != null)) {
+            if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == true)) {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_2226FB00", "A", StringExternal("Param/Value/lib_GDHL_EB28EBD4"));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_2226FB00", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_2226FB00"));
+            }
+            else {
+                TextExpressionSetToken("Param/Expression/lib_GDHL_C06C1EB1", "A", StringExternal("Param/Value/lib_GDHL_D5FDD47E"));
+                TextExpressionSetToken("Param/Expression/lib_GDHL_C06C1EB1", "B", FixedToText(MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, 0));
+                UIDisplayMessage(libGame_gv_teams[lv_enemyTeam].lv_teamPlayerGroupNoNPCPlayers, c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_GDHL_C06C1EB1"));
+            }
         }
     }
     SoundPlayForPlayer(SoundLink("Murky_RespawnEgg_Death_Vox", -1), lv_eggOwnerPlayer, PlayerGroupSingle(lv_eggOwnerPlayer), 100.0, 0.0);
     MimicGameDataHelperLib_gf_UIHeroSpecificStatusFrameUpdateMurkyEggStatus(UnitGetOwner(EventUnit()));
     lv_cooldownOnEgg = UnitGetCooldown(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, CatalogFieldValueGet(c_gameCatalogAbil, "MurkyRespawnEgg", "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit)));
     UnitCreateEffectUnit(lv_murkyHeroUnit, "RespawnEggCancelOrder", lv_murkyHeroUnit);
-    if ((lv_cooldownOnEgg <= MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd)) {
+    if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == false) && (lv_cooldownOnEgg <= MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd)) {
         lv_cooldownToAdd = (MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd - lv_cooldownOnEgg);
         UnitModifyCooldown(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, CatalogFieldValueGet(c_gameCatalogAbil, "MurkyRespawnEgg", "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit)), lv_cooldownToAdd, c_cooldownOperationAdd);
+        TimerStart(MimicGameDataHelperLib_gv_murkyEggDeathTimer[lv_eggOwnerPlayer], MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, false, c_timeGame);
     }
-
-    TimerStart(MimicGameDataHelperLib_gv_murkyEggDeathTimer[lv_eggOwnerPlayer], MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, false, c_timeGame);
+    else {
+        if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == true) && (lv_cooldownOnEgg <= MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT)) {
+            lv_cooldownToAdd = (MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT - lv_cooldownOnEgg);
+            UnitModifyCooldown(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit, CatalogFieldValueGet(c_gameCatalogAbil, "MurkyRespawnEgg", "Cost[" + IntToString(0) + "].Cooldown.Link", UnitGetOwner(libGame_gv_players[lv_eggOwnerPlayer].lv_heroUnit)), lv_cooldownToAdd, c_cooldownOperationAdd);
+            TimerStart(MimicGameDataHelperLib_gv_murkyEggDeathTimer[lv_eggOwnerPlayer], MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT, false, c_timeGame);
+        }
+        else {
+            if ((PlayerHasTalent(lv_eggOwnerPlayer, "MurkyShellGame") == true)) {
+                TimerStart(MimicGameDataHelperLib_gv_murkyEggDeathTimer[lv_eggOwnerPlayer], MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_TALENT, false, c_timeGame);
+            }
+            else {
+                TimerStart(MimicGameDataHelperLib_gv_murkyEggDeathTimer[lv_eggOwnerPlayer], MimicGameDataHelperLib_gv_mURKY_BAL_EGG_DEATH_cd, false, c_timeGame);
+            }
+        }
+    }
     return true;
 }
 
@@ -17684,6 +17844,7 @@ bool MimicGameDataHelperLib_gt_HeroMurkyMurkyDies_Func (bool testConds, bool run
     }
     else {
         UnitBehaviorAdd(libGame_gv_heroDeathMurkyRespawnEggs[lv_deadPlayer], "MurkyEggAnimDelay", libGame_gv_players[lv_deadPlayer].lv_heroUnit, 1);
+        UnitBehaviorAdd(libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[lv_deadPlayer], "MurkyEggAnimDelay", libGame_gv_players[lv_deadPlayer].lv_heroUnit, 1);
         libNtve_gf_CreateUnitsWithDefaultFacing(1, "DeadUnitCameraTarget", 0, lv_deadPlayer, UnitGetPosition(lv_deadUnit), null);
         libGame_gv_players[lv_deadPlayer].lv_cameraDeadUnitCameraTarget = UnitLastCreated();
         if ((libCore_gv_sYSGameMode != libCore_ge_GameModes_Tutorial1Deprecated)) {
@@ -17694,12 +17855,7 @@ bool MimicGameDataHelperLib_gt_HeroMurkyMurkyDies_Func (bool testConds, bool run
         libGame_gf_HeroDeathUpdateUIElementsForDeath(false, true, false, lv_deadPlayer, lv_killingPlayer);
         libUIUI_gf_FullscreenOverlayAddItemForPlayer(lv_deadPlayer, libUIUI_ge_FullscreenOverlayPriorities_Death, "Cutscenes\\GameUI_MurkyRespawnOverlay.StormCutscene", "MurkyDeathTimerDummy");
         MimicGameDataHelperLib_gv_murkyDeathOverlayActive[lv_deadPlayer] = true;
-        if ((PlayerHasTalent(lv_deadPlayer, "MurkyBigTunaKahuna") == true)) {
-            lv_respawnTime = libCore_gv_bALMurkyWithEggandBigFishTalentDeathTime;
-        }
-        else {
-            lv_respawnTime = libCore_gv_bALMurkyWithEggDeathTime;
-        }
+        lv_respawnTime = libCore_gv_bALMurkyWithEggDeathTime;
     }
     libGame_gf_CameraUpdateCameraForPlayer(lv_deadPlayer);
     SoundPlayForPlayer(SoundLink("Murky_Death_NoEgg_Vox", -1), lv_deadPlayer, lv_killingGroup, 100.0, 0.0);
@@ -17778,6 +17934,10 @@ bool MimicGameDataHelperLib_gt_HeroMurkyCreateEggOnSpawn_Func (bool testConds, b
         }
 
         if (!((libGame_gv_heroDeathMurkyRespawnEggs[libGame_gf_HeroSpawnPlayer()] == null))) {
+            return false;
+        }
+
+        if (!((libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[libGame_gf_HeroSpawnPlayer()] == null))) {
             return false;
         }
     }
@@ -17930,49 +18090,6 @@ void MimicGameDataHelperLib_gt_HeroMurkyAFishyDealChargeCountProc_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Murky - Egg Hunt Unit Group Controller
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_u;
-    int lv_player;
-
-    // Automatic Variable Declarations
-    unitgroup auto9B9A13E9_g;
-    int auto9B9A13E9_u;
-
-    // Variable Initialization
-    lv_player = UnitGetOwner(EventUnitCreatedUnit());
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitGroupAdd(MimicGameDataHelperLib_gv_heroMurkyEggHuntUnitGroup[lv_player], EventUnitCreatedUnit());
-    if ((UnitGroupCount(MimicGameDataHelperLib_gv_heroMurkyEggHuntUnitGroup[lv_player], c_unitCountAlive) > MimicGameDataHelperLib_gv_heroMurkyEggHuntMaxCount)) {
-        auto9B9A13E9_g = MimicGameDataHelperLib_gv_heroMurkyEggHuntUnitGroup[lv_player];
-        auto9B9A13E9_u = UnitGroupCount(auto9B9A13E9_g, c_unitCountAll);
-        for (;; auto9B9A13E9_u -= 1) {
-            lv_u = UnitGroupUnitFromEnd(auto9B9A13E9_g, auto9B9A13E9_u);
-            if (lv_u == null) { break; }
-            UnitGroupRemove(MimicGameDataHelperLib_gv_heroMurkyEggHuntUnitGroup[lv_player], lv_u);
-            UnitKill(lv_u);
-            break;
-        }
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController_Init () {
-    MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController = TriggerCreate("MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController, false);
-    TriggerAddEventUnitCreated(MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController, null, "MurkyEggHunt", null);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Murky - Fish Eye Dynamic Application
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroMurkyFishEyeDynamicApplication_Func (bool testConds, bool runActions) {
@@ -18017,6 +18134,11 @@ bool MimicGameDataHelperLib_gt_HeroMurkyRespawnEggCreated_Func (bool testConds, 
         return true;
     }
 
+    if ((PlayerHasTalent(UnitGetOwner(EventUnit()), "MurkyShellGame") == true)) {
+        libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[UnitGetOwner(EventUnit())] = libGame_gv_heroDeathMurkyRespawnEggs[UnitGetOwner(EventUnit())];
+        libGame_gv_heroDeathMurkyRespawnEggPoint2[UnitGetOwner(EventUnit())] = libGame_gv_heroDeathMurkyRespawnEggPoint[UnitGetOwner(EventUnit())];
+    }
+
     libGame_gv_heroDeathMurkyRespawnEggs[UnitGetOwner(EventUnit())] = EventUnitCreatedUnit();
     libGame_gv_heroDeathMurkyRespawnEggPoint[UnitGetOwner(EventUnit())] = UnitGetPosition(EventUnitCreatedUnit());
     MimicGameDataHelperLib_gf_UIHeroSpecificStatusFrameUpdateMurkyEggStatus(UnitGetOwner(EventUnitCreatedUnit()));
@@ -18025,7 +18147,7 @@ bool MimicGameDataHelperLib_gt_HeroMurkyRespawnEggCreated_Func (bool testConds, 
     for (;; auto20EC3322_u -= 1) {
         auto20EC3322_var = UnitGroupUnitFromEnd(auto20EC3322_g, auto20EC3322_u);
         if (auto20EC3322_var == null) { break; }
-        if ((auto20EC3322_var != libGame_gv_heroDeathMurkyRespawnEggs[UnitGetOwner(EventUnit())])) {
+        if ((auto20EC3322_var != libGame_gv_heroDeathMurkyRespawnEggs[UnitGetOwner(EventUnit())]) && (auto20EC3322_var != libGame_gv_heroDeathMurkyRespawnEgg2FromTalent[UnitGetOwner(EventUnit())])) {
             UnitCreateEffectUnit(auto20EC3322_var, "TimedLifeFate", auto20EC3322_var);
         }
 
@@ -25898,7 +26020,7 @@ bool MimicGameDataHelperLib_gt_HeroZagaraInfestedDropSpawnRoach_Func (bool testC
         return true;
     }
 
-    UnitCreateEffectPoint(EventPlayerEffectUsedUnit(c_effectUnitCaster), "InfestedDropLaunchTriggeredRoachSpawnMissile", UnitTypePlacementFromPoint(UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitCaster)), UnitGetOwner(EventPlayerEffectUsedUnit(c_effectUnitCaster)), EventPlayerEffectUsedPoint(c_effectLocationTargetPoint), 15.0));
+    UnitCreateEffectPointWithSource(EventPlayerEffectUsedUnit(c_effectUnitCaster), "InfestedDropLaunchTriggeredRoachSpawnMissile", UnitTypePlacementFromPoint(UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitCaster)), UnitGetOwner(EventPlayerEffectUsedUnit(c_effectUnitCaster)), EventPlayerEffectUsedPoint(c_effectLocationTargetPoint), 15.0), c_gameCatalogAbil, "ZagaraInfestedDrop");
     return true;
 }
 
@@ -26733,6 +26855,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroGenericRevealCloakedPeriodicDamageSource_Init();
     MimicGameDataHelperLib_gt_HeroGenericRevealCloakedOneOffDamageSource_Init();
     MimicGameDataHelperLib_gt_HeroGenericSuperStealthActivateDeactivate_Init();
+    MimicGameDataHelperLib_gt_HeroAllHeroRespec_Init();
     MimicGameDataHelperLib_gt_HearthstoneTeleport_Init();
     MimicGameDataHelperLib_gt_HearthstoneChannelingBuffOn_Init();
     MimicGameDataHelperLib_gt_HearthstoneChannelingBuffOff_Init();
@@ -26770,10 +26893,14 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroArtanisSpearofAdunPurifierBeamUnitCreated_Init();
     MimicGameDataHelperLib_gt_HeroArtanisSpearofAdunPurifierBeamRedirectTarget2ElectricBoogaloo_Init();
     MimicGameDataHelperLib_gt_HeroArthasAntiMagicShellHeal_Init();
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadLegionofNorthrendTalentSpawn_Init();
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadNPCDeathProc_Init();
+    MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadTakedownDeathProc_Init();
     MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadMinionAITakeoverDeath_Init();
     MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadMinionAITakeoverTransport_Init();
     MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadPortGhouls_Init();
     MimicGameDataHelperLib_gt_HeroArthasArmyoftheDeadGhoulSpawned_Init();
+    MimicGameDataHelperLib_gt_HeroArthasDeathPactTalentTakedownTokenProc_Init();
     MimicGameDataHelperLib_gt_HeroAnubarakBurrowChargeSuppressCollision_Init();
     MimicGameDataHelperLib_gt_HeroAnubarakBurrowChargeMaxRange_Init();
     MimicGameDataHelperLib_gt_HeroAnubarakBurrowChargeCancel_Init();
@@ -26857,8 +26984,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroFalstadDishonorableDischargeHeroKillRefreshCooldown_Init();
     MimicGameDataHelperLib_gt_HeroFalstadFlightPing_Init();
     MimicGameDataHelperLib_gt_HeroFalstadFlightCameraHeightRestore_Init();
-    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerHeroTakedown_Init();
-    MimicGameDataHelperLib_gt_HeroFalstadFrequentFlyerNPCKill_Init();
     MimicGameDataHelperLib_gt_HeroFalstadWingmanVariables_Init();
     MimicGameDataHelperLib_gt_HeroIllidanApplyFotBCooldownonInventoryUse_Init();
     MimicGameDataHelperLib_gt_HeroIllidanMetamorphosisAvatarApplyHealthBuff_Init();
@@ -27000,7 +27125,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroMurkyCleanUpEggUIForDebugHeroSwap_Init();
     MimicGameDataHelperLib_gt_HeroMurkyAFishyDealVariables_Init();
     MimicGameDataHelperLib_gt_HeroMurkyAFishyDealChargeCountProc_Init();
-    MimicGameDataHelperLib_gt_HeroMurkyEggHuntUnitGroupController_Init();
     MimicGameDataHelperLib_gt_HeroMurkyFishEyeDynamicApplication_Init();
     MimicGameDataHelperLib_gt_HeroMurkyRespawnEggCreated_Init();
     MimicGameDataHelperLib_gt_HeroNecromancerSkeletonMasteryProc_Init();
