@@ -57,8 +57,8 @@ archive.close();
 
 // --- Step 2: Clone map repositories ---
 console.log("\n=== Cloning map repositories ===");
-execSync(`git clone "${S2MA_REPO_URL}" "${mapRepoDir}"`, {stdio: "inherit"});
-execSync(`git clone "${AI_REPO_URL}" "${aiRepoDir}"`, {stdio: "inherit"});
+execSync(`git clone --depth 1 "${S2MA_REPO_URL}" "${mapRepoDir}"`, {stdio: "inherit"});
+execSync(`git clone --depth 1 "${AI_REPO_URL}" "${aiRepoDir}"`, {stdio: "inherit"});
 
 // --- Step 3: Copy the 5v5 maps from ai_repo/maps/5v5 to the map_repo/maps directory and rename as "<map_name>.stormmap" to "<map_name> AI.stormmap" ---
 console.log("\n=== Copying 5v5 maps from AI repo to Map repo ===");
