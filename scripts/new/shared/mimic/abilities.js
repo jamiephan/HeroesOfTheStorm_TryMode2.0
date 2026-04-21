@@ -9,7 +9,7 @@ const LOGGER = logger("mimicabilities");
 
 export default () => {
   const ID_PREFIX = "M";
-  heroesFileExtract.queue("mimicabilities", /^mods.*\.xml$/, (extractedFiles) => {
+  heroesFileExtract.queue("mimicabilities", /^mods.*\.xml$/i, (extractedFiles) => {
     let finalXML = '<?xml version="1.0" encoding="UTF-8"?>\n\n';
     finalXML +=
       "<!-- ======================================================== -->\n";

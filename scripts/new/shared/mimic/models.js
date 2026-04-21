@@ -9,7 +9,7 @@ const LOGGER = logger("mimicmodels");
 
 export default () => {
   const ID_PREFIX = "UN";
-  heroesFileExtract.queue("mimicmodels", /^mods.*\.xml$/, (extractedFiles) => {
+  heroesFileExtract.queue("mimicmodels", /^mods.*\.xml$/i, (extractedFiles) => {
     let finalXML = '<?xml version="1.0" encoding="UTF-8"?>\n\n';
     finalXML +=
       "<!-- ======================================================== -->\n";
