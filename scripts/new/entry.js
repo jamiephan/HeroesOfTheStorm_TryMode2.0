@@ -66,6 +66,19 @@ const SCRIPT_MAPPING = {
     },
     watch: null,
   },
+
+  // Library Commands
+  libraries: {
+    script: {
+      fn: async () => {
+        (await import("./shared/patchLibraries.js")).default();
+      },
+    },
+    watch: {
+      ext: "galaxy",
+      watch: [process.env.TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION],
+    },
+  },
 };
 
 if (args.script) {

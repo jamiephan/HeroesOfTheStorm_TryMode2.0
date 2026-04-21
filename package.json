@@ -13,8 +13,8 @@
         "build:allmimic": "node ./scripts/new/entry.js --script=allmimic --mode=script",
         "build:usagedoc": "bash -c -i \"node ./scripts/main/buildusagedoc.js\"",
         "watch:usagedoc": "bash -c -i \"node ./scripts/watch/usagedoc.js\"",
-        "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",
-        "watch:libraries": "bash -c -i \"node ./scripts/watch/libraries.js\"",
+        "patch:libraries": "node ./scripts/new/entry.js --script=libraries --mode=script",
+        "watch:libraries": "node ./scripts/new/entry.js --script=libraries --mode=watch",
         "extract:s2ma": "bash -c -i \"node ./scripts/main/extracts2ma.js\"",
         "util:symlink": "node ./scripts/main/utilsymlink.js"
     },
