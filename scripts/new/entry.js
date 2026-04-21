@@ -77,6 +77,16 @@ const SCRIPT_MAPPING = {
     watch: null,
   },
 
+  // Utility Commands
+  symlink: {
+    script: {
+      fn: async () => {
+        (await import("./shared/utilSymlink.js")).default();
+      },
+    },
+    watch: null,
+  },
+
   // Library Commands
   libraries: {
     script: {
