@@ -73,7 +73,7 @@ const buildUsageDoc = () => {
   }
 
   md.addRaw = '<a name="meta-libraries"></a>';
-  md.addH1 = "📚 Libraries";
+  md.addH2 = "📚 Libraries";
 
   md.addEmptyLine = 1;
   md.addTable = {
@@ -89,7 +89,7 @@ const buildUsageDoc = () => {
 
   // TOC
   md.addRaw = '<a name="meta-toc"></a>';
-  md.addH1 = "🧾 Table of Contents";
+  md.addH2 = "🧾 Table of Contents";
   jsonData.libraries.forEach((library) => {
     md.addRaw = `- 📙 [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
     if (!library._metadata.overrideMarkdown) {
@@ -111,7 +111,7 @@ const buildUsageDoc = () => {
   jsonData.libraries.forEach((library) => {
     md.addEmptyLine = 1;
     md.addRaw = `<a name="lib-${library._metadata.libraryId}"></a>`;
-    md.addH1 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
+    md.addH2 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
     md.addRaw = library._metadata.libraryDescription;
 
     if (library._metadata.overrideMarkdown) {
@@ -136,7 +136,7 @@ const buildUsageDoc = () => {
 
         md.addEmptyLine = 1;
         md.addRaw = `<a name="cmd-${command.command}-description"></a>`;
-        md.addH4 = "✏ Description: ";
+        md.addH3 = "✏ Description: ";
         if (Array.isArray(command.description)) {
           md.addRaw = command.description.join("\n");
         } else {
@@ -146,7 +146,7 @@ const buildUsageDoc = () => {
         if (Array.isArray(command.parameters)) {
           md.addEmptyLine = 1;
           md.addRaw = `<a name="cmd-${command.command}-parameters"></a>`;
-          md.addH4 = "⚙ Parameters:";
+          md.addH3 = "⚙ Parameters:";
           if (command.parameters.length === 0) {
             md.addCode = "None";
           } else {
@@ -163,7 +163,7 @@ const buildUsageDoc = () => {
         if (Array.isArray(command.examples)) {
           md.addEmptyLine = 1;
           md.addRaw = `<a name="cmd-${command.command}-examples"></a>`;
-          md.addH4 = "🔧 Examples:";
+          md.addH3 = "🔧 Examples:";
           command.examples.forEach((e) => {
             md.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
             md.addCode = `\t(${e.description})`;
@@ -173,7 +173,7 @@ const buildUsageDoc = () => {
         if (typeof command.uiAvailable === "boolean") {
           md.addEmptyLine = 1;
           md.addRaw = `<a name="cmd-${command.command}-uiAvailability"></a>`;
-          md.addH4 = "🖼 UI Availability:";
+          md.addH3 = "🖼 UI Availability:";
           if (command.uiAvailable) {
             md.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
           } else {

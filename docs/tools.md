@@ -16,7 +16,7 @@ In order for the tools to work, some specific environment configurations must be
 
 After installed the libraries and application above, in this directory, run `npm install`.
 
-# Pre-usage Configuration (\*Required)
+## Pre-usage Configuration (\*Required)
 
 All the settings are stored in the `.env` file in the root of the project directory.
 
@@ -31,6 +31,8 @@ The current values required are:
 | Key                                          | Type   | Description                                                                                                                                                                                                                  |
 |----------------------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `HEROES_OF_THE_STORM_INSTALL_LOCATION` | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`. |
+| `TOOLS_USE_CASC_ONLINE_MODE` | Bool | Whether to use the online data when extracting game files (will not extract from `HEROES_OF_THE_STORM_INSTALL_LOCATION`) |
+| `TOOLS_KEEP_CASC_ONLINE_MODE_CACHE` | Bool | Whether to cache the online data files |
 | `TOOLS_XML_MAIN_XML_PATH` | String | The location of `base.stormdata/gamedata.xml` file. Default: `./(10)trymemode.stormmap/base.stormdata/GameData.xml` |
 | `TOOLS_XML_MODS_DIR` | String | Default: The location where the XML mods are stored. `./(10)trymemode.stormmap/base.stormdata/Mods` |
 | `TOOLS_GAMEDATA_DIR` | String | The location of `base.stormdata` directory. Default: `./(10)trymemode.stormmap/base.stormdata` |
@@ -46,13 +48,13 @@ The current values required are:
 >Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
 
 
-# Scripts
+## Scripts
 
 >Note: Tools that requires extraction from the Heroes of the Storm game file will take a while.
 
 <a name="tools-symlink"></a>
 
-## Symbolic Linker Tool
+### Symbolic Linker Tool
 
 **Command**: `npm run util:symlink`
 
@@ -65,7 +67,7 @@ This command should not need to use more than once if it completed successfully.
 
 <a name="tools-s2ma"></a>
 
-## Finder Tool for `*.s2ma`
+### Finder Tool for `*.s2ma`
 
 **Command**: `npm run extract:s2ma`
 
@@ -79,7 +81,7 @@ To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mp
 ---
 <a name="tools-buildmimicabilities"></a>
 
-## Ability Mimic Generator
+### Ability Mimic Generator
 
 **Command**: `npm run build:mimicabilities`
 
@@ -108,7 +110,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 ---
 <a name="tools-buildmimicbehaviors"></a>
 
-## `<CBehaviorBuff>` Mimic Generator
+### `<CBehaviorBuff>` Mimic Generator
 
 **Command**: `npm run build:mimicbehaviors`
 
@@ -128,7 +130,7 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 ---
 <a name="tools-buildmimicmodels"></a>
 
-## `<CModel>` Mimic Generator
+### `<CModel>` Mimic Generator
 
 **Command**: `npm run build:mimicmodels`
 
@@ -146,7 +148,7 @@ Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 ---
 <a name="tools-buildxml"></a>
 
-## Automatically generate `GameData.XML`
+### Automatically generate `GameData.XML`
 
 **Command**: `npm run build:xml`
 
@@ -159,7 +161,7 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 ---
 <a name="tools-buildmimiclib"></a>
 
-## Mimic Lib Generator
+### Mimic Lib Generator
 
 **Command**: `npm run build:mimiclib`
 
@@ -193,7 +195,7 @@ Currently will mimic (AI and Native Libs is excluded):
 - `UILib.galaxy`
 - `UILib_h.galaxy`
 
-### Internal Library Mimics
+#### Internal Library Mimics
 
 Mimic Libraries are identical to internal trigger libs (Created by Blizzard). However, due to some restrictions, some functionalities cannot be easily used (for example it will detect whether it is a development build or production build, to prevent normal users accessing the commands.)
 
@@ -201,11 +203,11 @@ Mimic Libraries are identical to internal trigger libs (Created by Blizzard). Ho
 
 Hence, I have create a mimic lib that is identical to internal libs, but modified a few things automatically.
 
-#### Renamed all triggers, variables, function etc.
+##### Renamed all triggers, variables, function etc.
 
 To prevent conflict with the original library, I have renamed the prefix name to `Mimic[LibFileName]`, for example `libSprt_gt_DEBUGShortHeroDeath_Func` will changed to `MimicSupportLib_gt_DEBUGShortHeroDeath_Func`.
 
-#### Changed Game Cheat Detection (Dev/Prod build detect)
+##### Changed Game Cheat Detection (Dev/Prod build detect)
 
 Since there are two ways that Blizzard detect whether does the game are in dev mode (maybe by different Blizzard Staff), some of the triggers have them both validated:
 
@@ -225,7 +227,7 @@ Because this `c_gameCheatCategoryDevelopment` is a **constant** that was pre-def
 
 Hence, all the mimic internal libs that checks for `GameCheatsEnabled(c_gameCheatCategoryDevelopment)` and `libCore_gv_dEBUGDebuggingEnabled` will be replaced to `true`.
 
-#### Override `TriggerDebugOutput()` with a custom command `MimicTriggerDebugOutput()`
+##### Override `TriggerDebugOutput()` with a custom command `MimicTriggerDebugOutput()`
 
 Since those code are for debug purpose only, if you have played around SC2 Maps, you should come around the `TriggerDebugOutput` function. This is internally, which looks something like this:
 
@@ -237,7 +239,7 @@ Those messages still carry out important information about the current state of 
 
 **Note:** This feature is *disabled* by default. Meaning it will not showing any messages. This is to prevent the bombardment from `SupportLib`'s logging messages (like `00:00|Player 1|ExperienceContribution 1234`). If you would like to toggle this functionality, you can use the chat command `tmtdo` or `togglemimictriggerdebugoutput` to do so.
 
-#### Prefixing Chat Commands
+##### Prefixing Chat Commands
 
 In order to prevent a chat command have conflict with the original lib (for example both internal and mimic lib listen for the same chat command and execute the same function), I have added a `m` prefix to all chat commands, regardless what characters do they start with.
 
@@ -252,7 +254,7 @@ Internal Command | Mimicked Command
 ---
 <a name="tools-patchlibraries"></a>
 
-## Patching Libraries
+### Patching Libraries
 
 **Command**: `npm run patch:libraries`
 
@@ -267,7 +269,7 @@ This does not need to do a manual search/replace in Galaxy Editor.
 ---
 <a name="tools-buildusagedoc"></a>
 
-## Build Usage Doc ([usage.md](usage.md))
+### Build Usage Doc ([usage.md](usage.md))
 **Command**: `npm run build:usagedoc`
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.

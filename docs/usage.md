@@ -2,7 +2,7 @@
 <a name="meta-top"></a>
 
 # Usage
-<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Sun, 18 May 2025 08:06:44 GMT)*</sup>
+<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at Tue, 21 Apr 2026 18:14:02 GMT)*</sup>
 
 Generally, most of the functionalities are using chat commands. Simply type the commands in the chat box (like how you would normally chat with teammates).
 >Note: Remember to either use allies or all chat channel when try to use the commands. Public chat channels and Private Messages (PM) does not work.
@@ -11,7 +11,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 <a name="meta-libraries"></a>
 
-# 📚 Libraries
+## 📚 Libraries
 
 |Library Name|File Name|Library ID|Library Description|
 |-|-|-|-|
@@ -26,7 +26,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 <a name="meta-toc"></a>
 
-# 🧾 Table of Contents
+## 🧾 Table of Contents
 - 📙 [Module Loader](#lib-LibMODL)
 
 - 📙 [Utilities](#lib-LibUTIL)
@@ -214,7 +214,7 @@ Some of the commands have an UI counterpart implemented, which will display a me
 
 <a name="lib-LibMODL"></a>
 
-# 📙 Module Loader Library (`LibModuleLoader.galaxy`):
+## 📙 Module Loader Library (`LibModuleLoader.galaxy`):
 A unified Module Loader Lib that allows you to choose which module to load.
 
 
@@ -232,7 +232,7 @@ This module is for loading other modules. **DO NOT** modify this file in SC2Edit
 
 <a name="lib-LibUTIL"></a>
 
-# 📙 Utilities Library (`LibUtilities.galaxy`):
+## 📙 Utilities Library (`LibUtilities.galaxy`):
 A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
 
@@ -242,13 +242,13 @@ A Library with multiple utilities tools such as "Toggle Fog Of War", "Toggle UI"
 
 <a name="cmd-addmarker-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a marker at the position of the first selected unit.
 
 
 <a name="cmd-addmarker-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MarkerID>
     	Required:	true
     	Type:		integer
@@ -256,7 +256,7 @@ Add a marker at the position of the first selected unit.
 
 <a name="cmd-addmarker-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > marker 1
     	(Add marker 1 at the position of the first selected unit.)
     > addmarker 10
@@ -264,7 +264,7 @@ Add a marker at the position of the first selected unit.
 
 <a name="cmd-addmarker-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -280,7 +280,7 @@ Add a marker at the position of the first selected unit.
 
 <a name="cmd-addmarkercamera-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a marker at the center position of the camera.
 
 >Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely.
@@ -288,7 +288,7 @@ Add a marker at the center position of the camera.
 
 <a name="cmd-addmarkercamera-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MarkerID>
     	Required:	true
     	Type:		integer
@@ -296,7 +296,7 @@ Add a marker at the center position of the camera.
 
 <a name="cmd-addmarkercamera-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > markerc 1
     	(Add marker 1 at the center position of the camera.)
     > addmarkercamera 10
@@ -304,7 +304,7 @@ Add a marker at the center position of the camera.
 
 <a name="cmd-addmarkercamera-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -320,19 +320,19 @@ Add a marker at the center position of the camera.
 
 <a name="cmd-alliancecontrolteamselection-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle Alliance Control + Multi-Selection, a shortcut re-implementation to QA Cheat Menu's `/ac` and `ts`.
 This will enable/disable "Alliance Control" (control units from other players, including Enemy) and "Multi-Selection" (selecting multiple units like Vikings and Samuro).
 
 
 <a name="cmd-alliancecontrolteamselection-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-alliancecontrolteamselection-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > acts
     	(Toggle Alliance Control + Multi-Selection)
     > alliancecontrolteamselection
@@ -340,7 +340,7 @@ This will enable/disable "Alliance Control" (control units from other players, i
 
 <a name="cmd-alliancecontrolteamselection-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -356,13 +356,13 @@ This will enable/disable "Alliance Control" (control units from other players, i
 
 <a name="cmd-clear-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Clear all text messages, including chat and debug messages with an optional delay.
 
 
 <a name="cmd-clear-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [seconds]
     	Required:	false
     	Type:		float
@@ -371,7 +371,7 @@ Clear all text messages, including chat and debug messages with an optional dela
 
 <a name="cmd-clear-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > cls
     	(Clear all texts instantly)
     > clear 5.4
@@ -379,7 +379,7 @@ Clear all text messages, including chat and debug messages with an optional dela
 
 <a name="cmd-clear-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -395,18 +395,18 @@ Clear all text messages, including chat and debug messages with an optional dela
 
 <a name="cmd-clearmarker-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Clear all created markers.
 
 
 <a name="cmd-clearmarker-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-clearmarker-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > clmarker
     	(Clear all created markers.)
     > clearmarker
@@ -414,7 +414,7 @@ Clear all created markers.
 
 <a name="cmd-clearmarker-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -430,14 +430,14 @@ Clear all created markers.
 
 <a name="cmd-colormarker-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Change the color of the specific marker with RGB value. This also applies to future markers.
 > Note: The color of each marker will be generated randomly when the game started.
 
 
 <a name="cmd-colormarker-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MarkerID>
     	Required:	true
     	Type:		integer
@@ -457,7 +457,7 @@ Change the color of the specific marker with RGB value. This also applies to fut
 
 <a name="cmd-colormarker-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > colmarker 1 255 0 0
     	(Change Marker 1 color to 255, 0, 0  (Red))
     > colormarker 10 0 0 0
@@ -467,7 +467,7 @@ Change the color of the specific marker with RGB value. This also applies to fut
 
 <a name="cmd-colormarker-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -483,18 +483,18 @@ Change the color of the specific marker with RGB value. This also applies to fut
 
 <a name="cmd-endgame-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 End the game instantly and kick all players from the game.
 
 
 <a name="cmd-endgame-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-endgame-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > eg
     	(End the game instantly)
     > endgame
@@ -502,7 +502,7 @@ End the game instantly and kick all players from the game.
 
 <a name="cmd-endgame-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -518,7 +518,7 @@ End the game instantly and kick all players from the game.
 
 <a name="cmd-floatingcombattext-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Show a custom floating combat text with different built-in templates.
 
 The table is the available combinations of `state` and `type`. Columns are `state` (e.g `Shield`) and Rows are `type` (e.g `NormalAmountGiven`):
@@ -546,7 +546,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 <a name="cmd-floatingcombattext-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <message>
     	Required:	true
     	Type:		string
@@ -564,7 +564,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 <a name="cmd-floatingcombattext-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > fct 100
     	(Shows the FCT "100" with the style of basic attack (orange))
     > fct 50 XP SelfAmountReceived
@@ -576,7 +576,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 <a name="cmd-floatingcombattext-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -592,7 +592,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 <a name="cmd-forceruntrigger-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Force to Run a Trigger created by `TriggerCreate()` with ignoring conditions and wait until finish.
 This can be used to run a trigger that bypass the `testConds`, such as `GameCheatsEnabled(c_gameCheatCategoryDevelopment)`.
 
@@ -636,7 +636,7 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 
 <a name="cmd-forceruntrigger-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TriggerName>
     	Required:	true
     	Type:		string
@@ -644,7 +644,7 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 
 <a name="cmd-forceruntrigger-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > frt libUIUI_gt_InputBackslashKeyDown_Func
     	(Force to run the trigger "libUIUI_gt_InputBackslashKeyDown_Func", which will show up the debug menu.)
     > forceruntrigger libSprt_gt_DEBUGHaveAITakeOverAI_Func
@@ -652,7 +652,7 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 
 <a name="cmd-forceruntrigger-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -668,13 +668,13 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 
 <a name="cmd-getmarker-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get a Markers position in (X, Y, Z).
 
 
 <a name="cmd-getmarker-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MarkerID>
     	Required:	true
     	Type:		integer
@@ -682,7 +682,7 @@ Get a Markers position in (X, Y, Z).
 
 <a name="cmd-getmarker-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > gmarker 1
     	(Get the position of Marker 1 in (X, Y, Z).)
     > getmarker 10
@@ -690,7 +690,7 @@ Get a Markers position in (X, Y, Z).
 
 <a name="cmd-getmarker-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -706,7 +706,7 @@ Get a Markers position in (X, Y, Z).
 
 <a name="cmd-loadmap-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 End the game and load a .stormmap file instantly.
 The `MapPath` is relative to:
  - `*.stormmods/base.stormmap/` for CASC / MPQ storage
@@ -723,7 +723,7 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 
 <a name="cmd-loadmap-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MapPath>
     	Required:	true
     	Type:		string
@@ -731,7 +731,7 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 
 <a name="cmd-loadmap-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > lm heroes/singleplayermaps/startingexperience/tutorial01.stormmap
     	(Exit and Load the tutorial 1 map)
     > loadmap heroes/singleplayermaps/startingexperience/tutorialveteran.stormmap
@@ -739,7 +739,7 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 
 <a name="cmd-loadmap-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -755,13 +755,13 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 
 <a name="cmd-minionwaveinterval-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but for 15s in ARAM.)
 
 
 <a name="cmd-minionwaveinterval-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [seconds]
     	Required:	false
     	Type:		float
@@ -770,7 +770,7 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
 
 <a name="cmd-minionwaveinterval-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > mwi
     	(Get the minion wave interval)
     > minionwaveinterval
@@ -782,7 +782,7 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
 
 <a name="cmd-minionwaveinterval-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -798,7 +798,7 @@ Get or Set the minion wave interval (Times to spawn a minion. Usually 30s but fo
 
 <a name="cmd-playcutscene-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.
 
 The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)
@@ -806,7 +806,7 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 
 <a name="cmd-playcutscene-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <mode>
     	Required:	true
     	Type:		string
@@ -814,7 +814,7 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 
 <a name="cmd-playcutscene-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > pcs Cutscenes/Tutorial_CursedHollow.StormCutscene
     	(Plays the Tutorial Cutscene for Cursed Hollow)
     > playcutscene Cutscenes/StoreMuradin.StormCutscene
@@ -822,7 +822,7 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 
 <a name="cmd-playcutscene-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -838,13 +838,13 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 
 <a name="cmd-removemarker-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Removes a specific marker.
 
 
 <a name="cmd-removemarker-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MarkerID>
     	Required:	true
     	Type:		integer
@@ -852,7 +852,7 @@ Removes a specific marker.
 
 <a name="cmd-removemarker-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rmmarker 1
     	(Removed Marker 1)
     > removemarker 10
@@ -860,7 +860,7 @@ Removes a specific marker.
 
 <a name="cmd-removemarker-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -876,18 +876,18 @@ Removes a specific marker.
 
 <a name="cmd-resetcameraobject-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Reset the game camera to `BlizzardAllStars` (default game camera)
 
 
 <a name="cmd-resetcameraobject-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-resetcameraobject-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rco
     	(Reset the game camera to BlizzardAllStars)
     > resetcameraobject
@@ -895,7 +895,7 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
 
 <a name="cmd-resetcameraobject-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -911,18 +911,18 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
 
 <a name="cmd-resetgamespeed-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Reset the game speed 2 (Normal).
 
 
 <a name="cmd-resetgamespeed-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-resetgamespeed-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rgs
     	(Reset the game speed 2 (Normal).)
     > resetgamespeed
@@ -930,7 +930,7 @@ Reset the game speed 2 (Normal).
 
 <a name="cmd-resetgamespeed-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -946,19 +946,19 @@ Reset the game speed 2 (Normal).
 
 <a name="cmd-restartgame-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Restart the map without needed to re-enter. This is extremely useful when you want to try the new modified XML files or galaxy scripts. 
  >Note: It will **NOT** reload or add mods from `Includes.xml` automatically. You will need to manually re-enter for mods to be added.
 
 
 <a name="cmd-restartgame-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-restartgame-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > re
     	(Restart the game instantly)
     > restartgame
@@ -966,7 +966,7 @@ Restart the map without needed to re-enter. This is extremely useful when you wa
 
 <a name="cmd-restartgame-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -982,14 +982,14 @@ Restart the map without needed to re-enter. This is extremely useful when you wa
 
 <a name="cmd-setcameraobject-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 >**WARNING**: Set a non existing camera will actually **crash** the game.
 
 
 <a name="cmd-setcameraobject-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <camera>
     	Required:	true
     	Type:		string
@@ -997,7 +997,7 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 
 <a name="cmd-setcameraobject-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sco BlizzardAllStars
     	(Set the camera object to BlizzardAllStars (default game camera))
     > setcameraobject Dflt
@@ -1005,7 +1005,7 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 
 <a name="cmd-setcameraobject-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1021,7 +1021,7 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 
 <a name="cmd-setgamespeed-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Set the game speed.
 
 The game speed can only between 0 - 4:
@@ -1037,7 +1037,7 @@ The game speed can only between 0 - 4:
 
 <a name="cmd-setgamespeed-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <speed>
     	Required:	true
     	Type:		integer
@@ -1045,7 +1045,7 @@ The game speed can only between 0 - 4:
 
 <a name="cmd-setgamespeed-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sgs 0
     	(Set the game speed to 0 (Slower))
     > setgamespeed 3
@@ -1053,7 +1053,7 @@ The game speed can only between 0 - 4:
 
 <a name="cmd-setgamespeed-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1069,18 +1069,18 @@ The game speed can only between 0 - 4:
 
 <a name="cmd-startgame-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Start the game instantly (timer start, gate open, etc).
 
 
 <a name="cmd-startgame-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-startgame-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sg
     	(Start the game instantly)
     > startgame
@@ -1088,7 +1088,7 @@ Start the game instantly (timer start, gate open, etc).
 
 <a name="cmd-startgame-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1104,7 +1104,7 @@ Start the game instantly (timer start, gate open, etc).
 
 <a name="cmd-string-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Display a string with the value of `TextExpressionAssemble` or `StringExternal`
 This is pretty useful to quickly shows the string from the functions internally.
 `mode` must be either `TextExpressionAssemble` or `StringExternal`
@@ -1112,7 +1112,7 @@ This is pretty useful to quickly shows the string from the functions internally.
 
 <a name="cmd-string-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <mode>
     	Required:	true
     	Type:		string
@@ -1124,7 +1124,7 @@ This is pretty useful to quickly shows the string from the functions internally.
 
 <a name="cmd-string-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > str TextExpressionAssemble Param/Expression/lib_Sprt_B1FD42AF
     	(Shows the string "Set Mastery Ring..." from supportlib)
     > string StringExternal Param/Value/lib_Sprt_F697F4C7
@@ -1132,7 +1132,7 @@ This is pretty useful to quickly shows the string from the functions internally.
 
 <a name="cmd-string-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1148,19 +1148,19 @@ This is pretty useful to quickly shows the string from the functions internally.
 
 <a name="cmd-togglecdr-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle Mass CDR. This will reset the cooldown on all abilities on every game loop (0.0625s)
 This is useful to bypass the limit of try mode's Toggle Cooldown, as it have a 1.5s cooldown between each reset.
 
 
 <a name="cmd-togglecdr-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-togglecdr-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tcdr
     	(Toggle Mass CDR)
     > togglecdr
@@ -1168,7 +1168,7 @@ This is useful to bypass the limit of try mode's Toggle Cooldown, as it have a 1
 
 <a name="cmd-togglecdr-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1184,18 +1184,18 @@ This is useful to bypass the limit of try mode's Toggle Cooldown, as it have a 1
 
 <a name="cmd-togglecrosshair-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle to show a crosshair on the center of the camera. This allows for e.g more precise placement of [summon units](#cmd-summon) and [adding effects](#cmd-addeffectcamera).
 
 
 <a name="cmd-togglecrosshair-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-togglecrosshair-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tch
     	(Toggle showing crosshair)
     > togglecrosshair
@@ -1203,7 +1203,7 @@ Toggle to show a crosshair on the center of the camera. This allows for e.g more
 
 <a name="cmd-togglecrosshair-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1219,18 +1219,18 @@ Toggle to show a crosshair on the center of the camera. This allows for e.g more
 
 <a name="cmd-toggledebugmode-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)
 
 
 <a name="cmd-toggledebugmode-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-toggledebugmode-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tdb
     	(Toggle Debug Mode)
     > toggledebugmode
@@ -1238,7 +1238,7 @@ Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)
 
 <a name="cmd-toggledebugmode-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1254,18 +1254,18 @@ Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable)
 
 <a name="cmd-togglefogofwar-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle Fog Of War. This can enable or disable full map vision.
 
 
 <a name="cmd-togglefogofwar-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-togglefogofwar-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tfow
     	(Toggle Full Map Vision)
     > togglefogofwar
@@ -1273,7 +1273,7 @@ Toggle Fog Of War. This can enable or disable full map vision.
 
 <a name="cmd-togglefogofwar-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1289,7 +1289,7 @@ Toggle Fog Of War. This can enable or disable full map vision.
 
 <a name="cmd-togglerandommovement-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 ![trm screenshot](https://i.imgur.com/d4fg4Oj.png)
 
 Toggle random movement for selected units.
@@ -1307,7 +1307,7 @@ Run this command to turn off this functionality.
 
 <a name="cmd-togglerandommovement-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [radius]
     	Required:	false
     	Type:		float
@@ -1316,7 +1316,7 @@ Run this command to turn off this functionality.
 
 <a name="cmd-togglerandommovement-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > trm 10
     	(Toggle Random Movement with circle radius of 10.)
     > togglerandommovement
@@ -1324,7 +1324,7 @@ Run this command to turn off this functionality.
 
 <a name="cmd-togglerandommovement-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1340,18 +1340,18 @@ Run this command to turn off this functionality.
 
 <a name="cmd-toggleterrainindicator-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle Terrain Indicator (used by Diablo and Auriel, etc) for any units
 
 
 <a name="cmd-toggleterrainindicator-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-toggleterrainindicator-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tti
     	(Toggle Terrain Indicator)
     > toggleterrainindicator
@@ -1359,7 +1359,7 @@ Toggle Terrain Indicator (used by Diablo and Auriel, etc) for any units
 
 <a name="cmd-toggleterrainindicator-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1375,19 +1375,19 @@ Toggle Terrain Indicator (used by Diablo and Auriel, etc) for any units
 
 <a name="cmd-toggleui-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle User Interface. This can hide or show all the UIs including HP bar, talents panel, floating combat text, abilities bar etc.
 >Note: If the UI is off, all abilities will be disabled.
 
 
 <a name="cmd-toggleui-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-toggleui-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tui
     	(Toggle In game UI)
     > toggleui
@@ -1395,7 +1395,7 @@ Toggle User Interface. This can hide or show all the UIs including HP bar, talen
 
 <a name="cmd-toggleui-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1411,14 +1411,14 @@ Toggle User Interface. This can hide or show all the UIs including HP bar, talen
 
 <a name="cmd-wingame-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Instantly declare a win for a team and end the game.
 Generally left team is **Team 1** and right team is **Team 2**.
 
 
 <a name="cmd-wingame-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TeamID>
     	Required:	true
     	Type:		integer
@@ -1426,7 +1426,7 @@ Generally left team is **Team 1** and right team is **Team 2**.
 
 <a name="cmd-wingame-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > wg 1
     	(Win the game for Team 1)
     > wingame 2
@@ -1434,7 +1434,7 @@ Generally left team is **Team 1** and right team is **Team 2**.
 
 <a name="cmd-wingame-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1447,7 +1447,7 @@ Generally left team is **Team 1** and right team is **Team 2**.
 
 <a name="lib-LibUNIT"></a>
 
-# 📙 Units Library (`LibUnits.galaxy`):
+## 📙 Units Library (`LibUnits.galaxy`):
 A library with commands related to selected units, such as kill, spawn, etc.
 
 
@@ -1457,13 +1457,13 @@ A library with commands related to selected units, such as kill, spawn, etc.
 
 <a name="cmd-addbehavior-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
 
 
 <a name="cmd-addbehavior-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <BehaviorId>
     	Required:	true
     	Type:		string
@@ -1471,7 +1471,7 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
 
 <a name="cmd-addbehavior-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > addbehavior MedivhArcaneBrillianceItem
     	(Add Medivh's Arcane Brilliance Ability to selected units)
     > adb PermaInvulnerable
@@ -1479,7 +1479,7 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
 
 <a name="cmd-addbehavior-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ✔ **Yes.** Use the command `addbehaviorui` or `adbui` to toggle the UI counterpart of this command.
 
 
@@ -1495,13 +1495,13 @@ Add a behavior to selected unit(s). Which are generally from `<CBehavior*>`, suc
 
 <a name="cmd-addeffect-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
 
 <a name="cmd-addeffect-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <EffectId>
     	Required:	true
     	Type:		string
@@ -1514,7 +1514,7 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
 
 <a name="cmd-addeffect-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > addeffect StormSuicide
     	(Make all selected units "suicide" a.k.a kill the unit)
     > ade MedivhPolyBombPersistent
@@ -1524,7 +1524,7 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
 
 <a name="cmd-addeffect-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1540,13 +1540,13 @@ Add an Effect to selected unit(s). Which are generally from `<CEffect*>`, such a
 
 <a name="cmd-addeffectcamera-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add an Effect to the center of the camera. Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
 
 <a name="cmd-addeffectcamera-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <EffectId>
     	Required:	true
     	Type:		string
@@ -1564,7 +1564,7 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
 
 <a name="cmd-addeffectcamera-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > addeffectcamera DropUnderworldPowerupPersistent
     	(Add some Haunted Mines Skulls to camera location)
     > adec UnderworldBossRootsCreatePersistent
@@ -1576,7 +1576,7 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
 
 <a name="cmd-addeffectcamera-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1592,13 +1592,13 @@ Add an Effect to the center of the camera. Which are generally from `<CEffect*>`
 
 <a name="cmd-addweapon-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 
 <a name="cmd-addweapon-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <WeaponID>
     	Required:	true
     	Type:		string
@@ -1606,7 +1606,7 @@ Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id=
 
 <a name="cmd-addweapon-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > adw AlexstraszaDragonConeWeapon
     	(Add Alexstrasza's Dragon Form weapon to selected unit(s))
     > addweapon FirebatHeroWeapon
@@ -1614,7 +1614,7 @@ Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id=
 
 <a name="cmd-addweapon-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1630,14 +1630,14 @@ Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id=
 
 <a name="cmd-changeunitownership-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Changes ownership of the selected unit(s).
 >Note: 0 is neutral, which cannot be selected once ownership have changed.
 
 
 <a name="cmd-changeunitownership-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <PlayerId>
     	Required:	true
     	Type:		integer
@@ -1645,7 +1645,7 @@ Changes ownership of the selected unit(s).
 
 <a name="cmd-changeunitownership-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > changeunitownership 1
     	(Change all selected units's ownership to Player 1)
     > cuo
@@ -1653,7 +1653,7 @@ Changes ownership of the selected unit(s).
 
 <a name="cmd-changeunitownership-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1669,18 +1669,18 @@ Changes ownership of the selected unit(s).
 
 <a name="cmd-clearbehavior-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Clear all active behaviors for selected units.
 
 
 <a name="cmd-clearbehavior-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-clearbehavior-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > clb
     	(Clear all active behaviors for selected units)
     > clearbehavior
@@ -1688,7 +1688,7 @@ Clear all active behaviors for selected units.
 
 <a name="cmd-clearbehavior-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1704,7 +1704,7 @@ Clear all active behaviors for selected units.
 
 <a name="cmd-clearunits-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a Player. This is useful for remove large numbers of summoned units, or when summoned untargetable/unselectable units that are not able to use the [killunits](#cmd-killunits) command.
 
 >Note: Due to the memory limitation, only the **last 500 summoned units** will be able to remove with this command. Older units will not be affected, if you would like to remove ALL summoned units, either respec your hero, or restart the game.
@@ -1714,7 +1714,7 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 
 <a name="cmd-clearunits-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerId]
     	Required:	false
     	Type:		integer
@@ -1723,7 +1723,7 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 
 <a name="cmd-clearunits-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > clu
     	(Clear summoned unit(s) from player who used the command)
     > clearunits 6
@@ -1731,7 +1731,7 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 
 <a name="cmd-clearunits-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1747,18 +1747,18 @@ Clear all summoned unit(s) (summoned by the [summon](#cmd-summon) command) for a
 
 <a name="cmd-clearweapon-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 
 <a name="cmd-clearweapon-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-clearweapon-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > clw
     	(Remove all weapons from selected units)
     > clearweapon
@@ -1766,7 +1766,7 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
 
 <a name="cmd-clearweapon-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1782,19 +1782,19 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
 
 <a name="cmd-enablecollision-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Enable Collision for selected unit(s).
 > This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it
 
 
 <a name="cmd-enablecollision-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-enablecollision-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > encol
     	(Enable Collision for selected unit(s).)
     > enablecollision
@@ -1802,7 +1802,7 @@ Enable Collision for selected unit(s).
 
 <a name="cmd-enablecollision-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1818,18 +1818,18 @@ Enable Collision for selected unit(s).
 
 <a name="cmd-getbehavior-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 List all active behaviors for selected units.
 
 
 <a name="cmd-getbehavior-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-getbehavior-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > getb
     	(List all active behaviors for selected units)
     > getbehavior
@@ -1837,7 +1837,7 @@ List all active behaviors for selected units.
 
 <a name="cmd-getbehavior-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1853,13 +1853,13 @@ List all active behaviors for selected units.
 
 <a name="cmd-getselectedunits-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get all selected units from a specific player
 
 
 <a name="cmd-getselectedunits-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerId]
     	Required:	false
     	Type:		integer
@@ -1868,7 +1868,7 @@ Get all selected units from a specific player
 
 <a name="cmd-getselectedunits-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > gsu
     	(Get all selected units from whoever uses this command)
     > getselectedunits 6
@@ -1876,7 +1876,7 @@ Get all selected units from a specific player
 
 <a name="cmd-getselectedunits-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1892,18 +1892,18 @@ Get all selected units from a specific player
 
 <a name="cmd-getunitownership-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Gets the Ownership (Player ID) of selected unit(s).
 
 
 <a name="cmd-getunitownership-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-getunitownership-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > guo
     	(Gets the Ownership (Player ID) of selected unit(s).)
     > getunitownership
@@ -1911,7 +1911,7 @@ Gets the Ownership (Player ID) of selected unit(s).
 
 <a name="cmd-getunitownership-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1927,13 +1927,13 @@ Gets the Ownership (Player ID) of selected unit(s).
 
 <a name="cmd-getunits-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get all units owned by a specific players
 
 
 <a name="cmd-getunits-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerId]
     	Required:	false
     	Type:		integer
@@ -1942,7 +1942,7 @@ Get all units owned by a specific players
 
 <a name="cmd-getunits-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > gu
     	(Get all units own by whoever uses this command.)
     > getunits 7
@@ -1952,7 +1952,7 @@ Get all units owned by a specific players
 
 <a name="cmd-getunits-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -1968,18 +1968,18 @@ Get all units owned by a specific players
 
 <a name="cmd-getweapon-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 
 <a name="cmd-getweapon-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-getweapon-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > getw
     	(Get all weapons from selected units)
     > getweapon
@@ -1987,7 +1987,7 @@ Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 <a name="cmd-getweapon-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2003,7 +2003,7 @@ Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 <a name="cmd-killallunits-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Kill all units owned by a specific players. 
 Unlike other commands with player ID param, this commands allow to specify Player 0 (Neutual).
 > Note that in most maps, the Core are owned by Player 11 and 12, where 11 is left team and 12 is right team, killing it will instantly kill the core thus ending the game.
@@ -2011,7 +2011,7 @@ Unlike other commands with player ID param, this commands allow to specify Playe
 
 <a name="cmd-killallunits-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerId]
     	Required:	false
     	Type:		integer
@@ -2020,7 +2020,7 @@ Unlike other commands with player ID param, this commands allow to specify Playe
 
 <a name="cmd-killallunits-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > kau
     	(Kill all units own by whoever uses this command.)
     > killallunits 7
@@ -2030,7 +2030,7 @@ Unlike other commands with player ID param, this commands allow to specify Playe
 
 <a name="cmd-killallunits-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2046,18 +2046,18 @@ Unlike other commands with player ID param, this commands allow to specify Playe
 
 <a name="cmd-killunits-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Instantly kill all selected unit(s).
 
 
 <a name="cmd-killunits-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-killunits-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > ku
     	(Instantly kill all selected unit(s).)
     > killunits
@@ -2065,7 +2065,7 @@ Instantly kill all selected unit(s).
 
 <a name="cmd-killunits-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2081,14 +2081,14 @@ Instantly kill all selected unit(s).
 
 <a name="cmd-playanimation-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Play an Animation for selected unit(s).
 >Note: There are Walk, Attack, A to Z animations etc
 
 
 <a name="cmd-playanimation-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <AnimationId>
     	Required:	true
     	Type:		string
@@ -2096,7 +2096,7 @@ Play an Animation for selected unit(s).
 
 <a name="cmd-playanimation-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > playanimation Attack
     	(Play the Attack Animation for selected unit(s))
     > pa Walk
@@ -2104,7 +2104,7 @@ Play an Animation for selected unit(s).
 
 <a name="cmd-playanimation-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2120,14 +2120,14 @@ Play an Animation for selected unit(s).
 
 <a name="cmd-removeanimation-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove an Animation from selected unit(s).
 >Note: There are Walk, Attack, A to Z animations etc
 
 
 <a name="cmd-removeanimation-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <AnimationId>
     	Required:	true
     	Type:		string
@@ -2135,7 +2135,7 @@ Remove an Animation from selected unit(s).
 
 <a name="cmd-removeanimation-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > removeanimation Attack
     	(Stop the Attack Animation for selected unit(s))
     > rma Walk
@@ -2143,7 +2143,7 @@ Remove an Animation from selected unit(s).
 
 <a name="cmd-removeanimation-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2159,14 +2159,14 @@ Remove an Animation from selected unit(s).
 
 <a name="cmd-removebehavior-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
 > Tips: You can get active behaviors with the `getbehavior` command above.
 
 
 <a name="cmd-removebehavior-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <BehaviorId>
     	Required:	true
     	Type:		string
@@ -2174,7 +2174,7 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
 
 <a name="cmd-removebehavior-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > removebehavior MedivhArcaneBrillianceItem
     	(Remove Medivh's Arcane Brilliance Ability from selected units)
     > rmb PermaInvulnerable
@@ -2182,7 +2182,7 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
 
 <a name="cmd-removebehavior-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2198,19 +2198,19 @@ Remove a behavior from selected unit(s). Which are generally from `<CBehavior*>`
 
 <a name="cmd-removecollision-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove Collision for selected unit(s).
 > This command will have conflict with non collision unit, such as Medivh's Raven form, Please dont use this command for it
 
 
 <a name="cmd-removecollision-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-removecollision-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rmcol
     	(Disable Collision for selected unit(s).)
     > removecollision
@@ -2218,7 +2218,7 @@ Remove Collision for selected unit(s).
 
 <a name="cmd-removecollision-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2234,13 +2234,13 @@ Remove Collision for selected unit(s).
 
 <a name="cmd-removeeffect-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
 
 <a name="cmd-removeeffect-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <EffectId>
     	Required:	true
     	Type:		string
@@ -2248,7 +2248,7 @@ Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, s
 
 <a name="cmd-removeeffect-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > removeeffect MedivhPolyBombPersistent
     	(No longer make selected unit(s) affect by Medivh's Polybomb)
     > rme MedivhPolyBombPersistent
@@ -2256,7 +2256,7 @@ Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, s
 
 <a name="cmd-removeeffect-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2272,13 +2272,13 @@ Remove an Effect from selected unit(s). Which are generally from `<CEffect*>`, s
 
 <a name="cmd-removeeffectcamera-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove an Effect from the center of the camera. Which are generally from `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
 
 <a name="cmd-removeeffectcamera-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <EffectId>
     	Required:	true
     	Type:		string
@@ -2286,7 +2286,7 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
 
 <a name="cmd-removeeffectcamera-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > removeeffectcamera DropUnderworldPowerupPersistent
     	(Remove Haunted Mines Skulls from camera location)
     > rmec UnderworldBossRootsCreatePersistent
@@ -2294,7 +2294,7 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
 
 <a name="cmd-removeeffectcamera-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2310,13 +2310,13 @@ Remove an Effect from the center of the camera. Which are generally from `<CEffe
 
 <a name="cmd-removeweapon-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
 
 <a name="cmd-removeweapon-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <WeaponID>
     	Required:	true
     	Type:		string
@@ -2324,7 +2324,7 @@ Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 <a name="cmd-removeweapon-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rmw AnaHeroWeapon
     	(Remove Ana's weapon from selected unit(s))
     > removeweapon DVaMechWeapon
@@ -2332,7 +2332,7 @@ Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 <a name="cmd-removeweapon-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2348,14 +2348,14 @@ Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 <a name="cmd-replaceunit-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Replace all selected units to the Target Unit.
 >Note: Don't recommend using this command, as weird stuff will happen if you replaced to an non-existing unit or unit getting killed. If it happens, use the debug menu to respawn your hero for resetting.
 
 
 <a name="cmd-replaceunit-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TargetUnitId>
     	Required:	true
     	Type:		string
@@ -2363,7 +2363,7 @@ Replace all selected units to the Target Unit.
 
 <a name="cmd-replaceunit-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rpu HeroRaynor
     	(Replace all selected unit(s) to Raynor Hero.)
     > replaceunit CatapultMinion
@@ -2371,7 +2371,7 @@ Replace all selected units to the Target Unit.
 
 <a name="cmd-replaceunit-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2387,14 +2387,14 @@ Replace all selected units to the Target Unit.
 
 <a name="cmd-sendactormessage-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on send="xxx">`.
 >Note: The command allows spaces for the parameter, since most actor messages have spaces.
 
 
 <a name="cmd-sendactormessage-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <ActorMessage>
     	Required:	true
     	Type:		string
@@ -2402,7 +2402,7 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 
 <a name="cmd-sendactormessage-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sendactormessage AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale
     	(Play the A Spell animation, different on each hero)
     > sam StatusIncrement StatusBarHide
@@ -2410,7 +2410,7 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 
 <a name="cmd-sendactormessage-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2426,7 +2426,7 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 
 <a name="cmd-summon-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Spawn unit(s) at the centre of your camera location.
 >Note: A new summoned unit will automatically added to select group.
 >Note: To control the summoned units, you will need to enable multi-selection from either the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, also use `/ac` if the unit does not belong to you), which will behave like Vikings and Samuro with Illusion Master. 
@@ -2435,7 +2435,7 @@ Spawn unit(s) at the centre of your camera location.
 
 <a name="cmd-summon-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <UnitId>
     	Required:	true
     	Type:		string
@@ -2458,7 +2458,7 @@ Spawn unit(s) at the centre of your camera location.
 
 <a name="cmd-summon-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > summon TownTownHallL2
     	(Summon a tower structure to the player who used the command)
     > summon HeroRaynor 3
@@ -2472,7 +2472,7 @@ Spawn unit(s) at the centre of your camera location.
 
 <a name="cmd-summon-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ✔ **Yes.** Use the command `summonui` or `sumui` to toggle the UI counterpart of this command.
 
 
@@ -2488,18 +2488,18 @@ Spawn unit(s) at the centre of your camera location.
 
 <a name="cmd-togglenoweaponcd-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Constantly resetting the weapons (auto attack) cooldown, effectively increasing weapon speed.
 
 
 <a name="cmd-togglenoweaponcd-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-togglenoweaponcd-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tnwcd
     	(Constantly resetting the weapons (auto attack) cooldown)
     > togglenoweaponcd
@@ -2507,7 +2507,7 @@ Constantly resetting the weapons (auto attack) cooldown, effectively increasing 
 
 <a name="cmd-togglenoweaponcd-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2523,18 +2523,18 @@ Constantly resetting the weapons (auto attack) cooldown, effectively increasing 
 
 <a name="cmd-toggleoutputid-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle displaying units' id mode. Which will shows the unit's id on the screen with a left click.
 
 
 <a name="cmd-toggleoutputid-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-toggleoutputid-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > toi
     	(Toggle displaying units' id mode.)
     > toggleoutputid
@@ -2542,7 +2542,7 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
 
 <a name="cmd-toggleoutputid-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2558,7 +2558,7 @@ Toggle displaying units' id mode. Which will shows the unit's id on the screen w
 
 <a name="cmd-unitproperty-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Allow to show / modify a selected units' property, such as max health, regen, movement speed etc.
 If the `type` parameter is not supplied, it will return the value of the property. If the `type` parameter was set, it will modify the selected unit's property.
 
@@ -2593,7 +2593,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 
 <a name="cmd-unitproperty-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <type>
     	Required:	true
     	Type:		integer/string
@@ -2606,7 +2606,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 
 <a name="cmd-unitproperty-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > up life
     	(Shows the unit's current HP)
     > up 0 1
@@ -2622,7 +2622,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 
 <a name="cmd-unitproperty-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2635,7 +2635,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 
 <a name="lib-LibPLYR"></a>
 
-# 📙 Players Library (`LibPlayers.galaxy`):
+## 📙 Players Library (`LibPlayers.galaxy`):
 Commands that are related to Players, eg, scoreboard, respawn timer, etc
 
 
@@ -2645,7 +2645,7 @@ Commands that are related to Players, eg, scoreboard, respawn timer, etc
 
 <a name="cmd-addalltalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 ** ***DEPRECATED: Please use [`selectalltalent`](#cmd-selectalltalent-description) command instead.*** **
 
 Add all talents to a player.
@@ -2655,7 +2655,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 <a name="cmd-addalltalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <HeroId>
     	Required:	true
     	Type:		string
@@ -2668,7 +2668,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 <a name="cmd-addalltalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > aat Tyrande
     	(Add all the talents from Tyrande to the player whoever uses the command)
     > addalltalent Firebat 2
@@ -2680,7 +2680,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 <a name="cmd-addalltalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2696,13 +2696,13 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 <a name="cmd-addqueststack-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a specific amount of quest stacks to a player.
 
 
 <a name="cmd-addqueststack-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <stacks>
     	Required:	true
     	Type:		integer
@@ -2715,7 +2715,7 @@ Add a specific amount of quest stacks to a player.
 
 <a name="cmd-addqueststack-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > aqs 10
     	(Add 10 quest stacks to whoever uses this command)
     > addqueststack 20 6
@@ -2723,7 +2723,7 @@ Add a specific amount of quest stacks to a player.
 
 <a name="cmd-addqueststack-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2739,14 +2739,14 @@ Add a specific amount of quest stacks to a player.
 
 <a name="cmd-addtalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
 
 <a name="cmd-addtalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TalentId>
     	Required:	true
     	Type:		string
@@ -2759,7 +2759,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-addtalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > addtalent MedivhForceOfWillArcaneExplosion
     	(Add Medivh's Arcane Explosion Talent to whoever uses this command)
     > adt MalfurionCelestialAlignment 2
@@ -2767,7 +2767,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-addtalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2783,7 +2783,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-difficultyai-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Get/Set the AI Difficulty for a Player.
 
 The difficulty settings are below:
@@ -2808,7 +2808,7 @@ The difficulty settings are below:
 
 <a name="cmd-difficultyai-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerID]
     	Required:	false
     	Type:		integer
@@ -2822,7 +2822,7 @@ The difficulty settings are below:
 
 <a name="cmd-difficultyai-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > diffai
     	(Get the AI difficulty for whoever uses this command)
     > diffai 2 11
@@ -2834,7 +2834,7 @@ The difficulty settings are below:
 
 <a name="cmd-difficultyai-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2850,7 +2850,7 @@ The difficulty settings are below:
 
 <a name="cmd-disableai-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Disable AI for a Player.
 
 >Note: This will also disable AI for units summoned via `[summon units](#cmd-summon)` command.
@@ -2858,7 +2858,7 @@ Disable AI for a Player.
 
 <a name="cmd-disableai-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerID]
     	Required:	false
     	Type:		integer
@@ -2867,7 +2867,7 @@ Disable AI for a Player.
 
 <a name="cmd-disableai-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > disai
     	(Disable AI for whoever use this command)
     > disai 10
@@ -2877,7 +2877,7 @@ Disable AI for a Player.
 
 <a name="cmd-disableai-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2893,14 +2893,14 @@ Disable AI for a Player.
 
 <a name="cmd-disabletalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Disable a for all players. Generally found in `<CTalent id="xxxx">`.
 >Note: This only lock the selection of the talent. If the player already took the talent, it will not have any effect on the player.
 
 
 <a name="cmd-disabletalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TalentId>
     	Required:	true
     	Type:		string
@@ -2908,7 +2908,7 @@ Disable a for all players. Generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-disabletalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > disabletalent RagnarosLavaWave
     	(Disable Rag's Lava Wave talent, similar to ARAM.)
     > dist MaievUmbralBindPursuitOfVengeance 0
@@ -2916,7 +2916,7 @@ Disable a for all players. Generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-disabletalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2932,7 +2932,7 @@ Disable a for all players. Generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-enableai-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Enable AI for a Player.
 
 >Note: This will also enable AI for units summoned via `[summon units](#cmd-summon)` command.
@@ -2940,7 +2940,7 @@ Enable AI for a Player.
 
 <a name="cmd-enableai-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerID]
     	Required:	false
     	Type:		integer
@@ -2949,7 +2949,7 @@ Enable AI for a Player.
 
 <a name="cmd-enableai-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > enai
     	(Enable AI for whoever use this command)
     > enai 10
@@ -2959,7 +2959,7 @@ Enable AI for a Player.
 
 <a name="cmd-enableai-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -2975,13 +2975,13 @@ Enable AI for a Player.
 
 <a name="cmd-enabletalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx">`.
 
 
 <a name="cmd-enabletalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TalentId>
     	Required:	true
     	Type:		string
@@ -2989,7 +2989,7 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 
 <a name="cmd-enabletalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > enabletalent RagnarosLavaWave
     	(Enable Rag's Lava Wave talent, which was disabled in ARAM.)
     > ent MaievUmbralBindPursuitOfVengeance
@@ -2997,7 +2997,7 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 
 <a name="cmd-enabletalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3013,7 +3013,7 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 
 <a name="cmd-experience-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Gives Experience to a Specific Player.
 
 The `SourceId` can be represent as an Integer with the source value of:
@@ -3031,7 +3031,7 @@ The `SourceId` can be represent as an Integer with the source value of:
 
 <a name="cmd-experience-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <Amount>
     	Required:	true
     	Type:		integer
@@ -3049,7 +3049,7 @@ The `SourceId` can be represent as an Integer with the source value of:
 
 <a name="cmd-experience-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > xp 10
     	(Grant 10 xp to whoever use this command)
     > experience 100 6
@@ -3059,7 +3059,7 @@ The `SourceId` can be represent as an Integer with the source value of:
 
 <a name="cmd-experience-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3075,7 +3075,7 @@ The `SourceId` can be represent as an Integer with the source value of:
 
 <a name="cmd-getcatalog-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Directly get a Catalog value (a.k.a XMLs) from a player.
 
 The `CatalogReference` string consist of three parts: `<Category Type>,<Category Entry>,<Catalog Field Path>` separated by comma, whereas:
@@ -3169,7 +3169,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
 
 <a name="cmd-getcatalog-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <CatalogReference>
     	Required:	true
     	Type:		string
@@ -3182,7 +3182,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
 
 <a name="cmd-getcatalog-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > getcatalog Effect,WizardTeleportCalamityDamage,Amount
     	(Get Li-Ming's Calamity damage from whoever uses this command)
     > gcl Abil,VarianCharge,Cost.Vital[Energy]
@@ -3198,7 +3198,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
 
 <a name="cmd-getcatalog-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3214,7 +3214,7 @@ In order to reference the armor value against Structure, the `CatalogReference` 
 
 <a name="cmd-modifycatalog-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 
 For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
@@ -3227,7 +3227,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 <a name="cmd-modifycatalog-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <CatalogReference>
     	Required:	true
     	Type:		string
@@ -3244,7 +3244,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 <a name="cmd-modifycatalog-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > modifycatalog Effect,WizardTeleportCalamityDamage,Amount 9999
     	(Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command)
     > mcl Abil,VarianCharge,Cost.Vital[Energy] 5
@@ -3260,7 +3260,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 <a name="cmd-modifycatalog-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3276,7 +3276,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 <a name="cmd-modifycatalogvalue-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 
 For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.
@@ -3290,7 +3290,7 @@ This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, bu
 
 <a name="cmd-modifycatalogvalue-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <CatalogType>
     	Required:	true
     	Type:		string
@@ -3315,7 +3315,7 @@ This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, bu
 
 <a name="cmd-modifycatalogvalue-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > modifycatalogvalue Effect WizardTeleportCalamityDamage Amount 9999
     	(Modify Li=Ming's Calamity damage to 9999 for the whoever uses this command)
     > mcv Abil VarianCharge Cost.Vital[Energy] 5
@@ -3331,7 +3331,7 @@ This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, bu
 
 <a name="cmd-modifycatalogvalue-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3347,7 +3347,7 @@ This is similar to [`modifycatalog`](#cmd-modifycatalog-description) command, bu
 
 <a name="cmd-removealltalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove all talents from a player.
 The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all of the talents from that hero from the player, or it can be `ALL`, which will remove ALL the talents in the game from the player.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
@@ -3355,7 +3355,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 <a name="cmd-removealltalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <HeroId>
     	Required:	true
     	Type:		string
@@ -3368,7 +3368,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 <a name="cmd-removealltalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rmat Tyrande
     	(Remove all the talents from Tyrande from the player whoever uses the command)
     > removealltalent Firebat 2
@@ -3380,7 +3380,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 <a name="cmd-removealltalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3396,13 +3396,13 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 <a name="cmd-removequeststack-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove a specific amount of quest stacks from a player.
 
 
 <a name="cmd-removequeststack-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <stacks>
     	Required:	true
     	Type:		integer
@@ -3415,7 +3415,7 @@ Remove a specific amount of quest stacks from a player.
 
 <a name="cmd-removequeststack-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rqs 10
     	(Remove 10 quest stacks to whoever uses this command)
     > removequeststack 20 6
@@ -3423,7 +3423,7 @@ Remove a specific amount of quest stacks from a player.
 
 <a name="cmd-removequeststack-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3439,14 +3439,14 @@ Remove a specific amount of quest stacks from a player.
 
 <a name="cmd-removetalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
 
 <a name="cmd-removetalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <TalentId>
     	Required:	true
     	Type:		string
@@ -3459,7 +3459,7 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-removetalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > removetalent MedivhForceOfWillArcaneExplosion
     	(Removed Medivh's Arcane Explosion Talent from whoever uses this command)
     > rmt MalfurionCelestialAlignment 2
@@ -3467,7 +3467,7 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-removetalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3483,18 +3483,18 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 
 <a name="cmd-resetoverlay-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Remove all the overlays with the default one.
 
 
 <a name="cmd-resetoverlay-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-resetoverlay-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > rol
     	(Remove all the overlays with the default one.)
     > resetoverlay
@@ -3502,7 +3502,7 @@ Remove all the overlays with the default one.
 
 <a name="cmd-resetoverlay-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3518,13 +3518,13 @@ Remove all the overlays with the default one.
 
 <a name="cmd-respawnpoint-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Modify the respawn point for a player. Either at the current camera location or its default location.
 
 
 <a name="cmd-respawnpoint-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <Action>
     	Required:	true
     	Type:		string
@@ -3537,7 +3537,7 @@ Modify the respawn point for a player. Either at the current camera location or 
 
 <a name="cmd-respawnpoint-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > respawnpoint set all
     	(set the respawn point for all players at the current camera location)
     > rsp set
@@ -3551,7 +3551,7 @@ Modify the respawn point for a player. Either at the current camera location or 
 
 <a name="cmd-respawnpoint-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3567,14 +3567,14 @@ Modify the respawn point for a player. Either at the current camera location or 
 
 <a name="cmd-respawntime-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Override the current respawn timer for all players.
 >Notice: Due to the system limitation, if you set to 0, it will change it to 0.0625 automatically (1 game tick).
 
 
 <a name="cmd-respawntime-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <seconds>
     	Required:	true
     	Type:		float
@@ -3582,7 +3582,7 @@ Override the current respawn timer for all players.
 
 <a name="cmd-respawntime-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > respawntime 99
     	(set the respawn timer to 99 seconds)
     > rst 0
@@ -3590,7 +3590,7 @@ Override the current respawn timer for all players.
 
 <a name="cmd-respawntime-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3606,14 +3606,14 @@ Override the current respawn timer for all players.
 
 <a name="cmd-selectalltalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Select all talents to a player. Ever wonder what a Q and AA build Zera at the same time would feel like? Or a Varian with Twin Blade+Smash+Taunt and triple banners?
 >Note: This uses the heroes build in `libGame_gf_TalentsChooseTalentForPlayer()` function, which will will add the telent for the hero of the player only. Summon other hero units does not count. And unlike the `addalltalent` command, this will work most of the time.
 
 
 <a name="cmd-selectalltalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerId]
     	Required:	false
     	Type:		integer
@@ -3622,7 +3622,7 @@ Select all talents to a player. Ever wonder what a Q and AA build Zera at the sa
 
 <a name="cmd-selectalltalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sat
     	(Select all the talents for player whoever uses the command)
     > selectalltalent
@@ -3634,7 +3634,7 @@ Select all talents to a player. Ever wonder what a Q and AA build Zera at the sa
 
 <a name="cmd-selectalltalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3650,14 +3650,14 @@ Select all talents to a player. Ever wonder what a Q and AA build Zera at the sa
 
 <a name="cmd-setmasteryring-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Set the Mastery Ring level. The ring below the hero will be automatically updated.
 >Note: If the new Level is lower than the current one, you may need to respawn(e.g suicide) the selected units.
 
 
 <a name="cmd-setmasteryring-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <MasteryRingLevel>
     	Required:	true
     	Type:		integer
@@ -3665,7 +3665,7 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 
 <a name="cmd-setmasteryring-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > setmasteryring 0
     	(Remove the mastery ring from the player)
     > smr 3
@@ -3673,7 +3673,7 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 
 <a name="cmd-setmasteryring-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3689,14 +3689,14 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 
 <a name="cmd-setoverlay-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Set the in-game overlay (e.g golden overlay for Uther's Divine Shield). 
 >Note: The path is relative to `*.storm*/base.gamedata/`, usually with the extension of `*.stormcutscene`.
 
 
 <a name="cmd-setoverlay-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <OverlayPath>
     	Required:	true
     	Type:		string
@@ -3704,7 +3704,7 @@ Set the in-game overlay (e.g golden overlay for Uther's Divine Shield).
 
 <a name="cmd-setoverlay-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > sol Cutscenes/GameUI_InvulnerableOverlay.StormCutscene
     	(Set the overlay to "Invulnerable", e.g Divine Shield / Sanctification.)
     > setoverlay cutscenes\gameui_gorgeoverlay.stormcutscene
@@ -3712,7 +3712,7 @@ Set the in-game overlay (e.g golden overlay for Uther's Divine Shield).
 
 <a name="cmd-setoverlay-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3728,7 +3728,7 @@ Set the in-game overlay (e.g golden overlay for Uther's Divine Shield).
 
 <a name="cmd-setscore-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Set the score for the scoreboard (some of them will shows in tab screen). This is good to use when some talents interact with scoreboard such as Zagara's Infest.
 >Note: Though Infest internal function limits to `524%`, max of fixed value, but details are out of scope here.
 You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
@@ -3737,7 +3737,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 <a name="cmd-setscore-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     <Field>
     	Required:	true
     	Type:		string
@@ -3754,7 +3754,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 <a name="cmd-setscore-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > setscore HeroDamage 0
     	(Set the field "Hero Damage" to 0 for the player who use this command.)
     > score SoloKill 524287
@@ -3764,7 +3764,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 <a name="cmd-setscore-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3780,7 +3780,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 <a name="cmd-toggleai-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle to enable/disable AI for a Player.
 
 >Note: This will also enable/disable AI for units summoned via `[summon units](#cmd-summon)` command.
@@ -3788,7 +3788,7 @@ Toggle to enable/disable AI for a Player.
 
 <a name="cmd-toggleai-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [PlayerID]
     	Required:	false
     	Type:		integer
@@ -3797,7 +3797,7 @@ Toggle to enable/disable AI for a Player.
 
 <a name="cmd-toggleai-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > togai
     	(Toggle AI for whoever use this command)
     > togai 10
@@ -3807,7 +3807,7 @@ Toggle to enable/disable AI for a Player.
 
 <a name="cmd-toggleai-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3823,14 +3823,14 @@ Toggle to enable/disable AI for a Player.
 
 <a name="cmd-togglemassquest-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle mass quest completion mode to give stack every game tick (0.0625s) for whoever uses this command.
 >Note: This is useful on heroes with actual infinite stacking such as Zuljin or Nazeebo. However due to Integer / Floating Point overflow, after reached certain amount for the quest, the actual functionality will be overflowed, such as Nazeebo HP reduced to 1 if having max stacks with lv4 extra HP per stack
 
 
 <a name="cmd-togglemassquest-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     [stacks]
     	Required:	false
     	Type:		integer
@@ -3839,7 +3839,7 @@ Toggle mass quest completion mode to give stack every game tick (0.0625s) for wh
 
 <a name="cmd-togglemassquest-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tmq 10
     	(Enable mass quest completion mode and give 10 stacks every game tick if not enabled)
     > togglemassquest
@@ -3847,7 +3847,7 @@ Toggle mass quest completion mode to give stack every game tick (0.0625s) for wh
 
 <a name="cmd-togglemassquest-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3863,18 +3863,18 @@ Toggle mass quest completion mode to give stack every game tick (0.0625s) for wh
 
 <a name="cmd-togglepausegametalent-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle whether to pause the game when viewing talents, similar to heroes tutorial.
 
 
 <a name="cmd-togglepausegametalent-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-togglepausegametalent-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > tpgt
     	(Toggle whether to pause the game when viewing talents)
     > togglepausegametalent
@@ -3882,7 +3882,7 @@ Toggle whether to pause the game when viewing talents, similar to heroes tutoria
 
 <a name="cmd-togglepausegametalent-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3898,18 +3898,18 @@ Toggle whether to pause the game when viewing talents, similar to heroes tutoria
 
 <a name="cmd-toggletalenttree-description"></a>
 
-#### ✏ Description: 
+### ✏ Description: 
 Toggle the display of the talents selection tree.
 
 
 <a name="cmd-toggletalenttree-parameters"></a>
 
-#### ⚙ Parameters:
+### ⚙ Parameters:
     None
 
 <a name="cmd-toggletalenttree-examples"></a>
 
-#### 🔧 Examples:
+### 🔧 Examples:
     > ttt
     	(Toggle the display of the talents selection tree.)
     > toggletalenttree
@@ -3917,7 +3917,7 @@ Toggle the display of the talents selection tree.
 
 <a name="cmd-toggletalenttree-uiAvailability"></a>
 
-#### 🖼 UI Availability:
+### 🖼 UI Availability:
 - ❌ **Not Implemented**
 
 
@@ -3930,7 +3930,7 @@ Toggle the display of the talents selection tree.
 
 <a name="lib-libBULM"></a>
 
-# 📙 Builder Mode Library (`LibBuilderMode.galaxy`):
+## 📙 Builder Mode Library (`LibBuilderMode.galaxy`):
 A Builder Library that allows you to place objects anywhere in the map.
 
 
@@ -3951,7 +3951,7 @@ To place the unit(s), press `backspace` again to deactivate builder mode.
 
 <a name="lib-libFPSM"></a>
 
-# 📙 FPS Mode Library (`LibFPSMode.galaxy`):
+## 📙 FPS Mode Library (`LibFPSMode.galaxy`):
 A First Person Shooter like Library that allows you to see the map in first person camera.
 
 
@@ -3977,7 +3977,7 @@ To toggle FPS mode, simply use the `fps` chat command.
 
 <a name="lib-libFRCM"></a>
 
-# 📙 Free Camera Mode Library (`LibFreeCameraMode.galaxy`):
+## 📙 Free Camera Mode Library (`LibFreeCameraMode.galaxy`):
 Free Camera Mode allows you to change the angle of the camera easily.
 
 
@@ -3998,7 +3998,7 @@ To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!
 
 <a name="lib-libFUNY"></a>
 
-# 📙 Funny Stuff Library (`LibFunny.galaxy`):
+## 📙 Funny Stuff Library (`LibFunny.galaxy`):
 Random useless stuff just for the lolz.
 
 
