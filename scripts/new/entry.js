@@ -77,6 +77,19 @@ const SCRIPT_MAPPING = {
     watch: null,
   },
 
+  // Usage Doc Commands
+  usagedoc: {
+    script: {
+      fn: async () => {
+        (await import("./shared/buildUsageDoc.js")).default();
+      },
+    },
+    watch: {
+      ext: "json",
+      watch: [process.env.TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION],
+    },
+  },
+
   // Utility Commands
   symlink: {
     script: {
