@@ -26,7 +26,7 @@ await fs.promises.mkdir(outputDir, { recursive: true });
 
 // Build the trymode20.stormmap
 const archive = new Archive();
-archive.create(path.join(tempDir, "trymode20.stormmap"), {
+archive.create(path.join(outputDir, "trymode20.stormmap"), {
   maxFileCount: 8000,
 });
 
