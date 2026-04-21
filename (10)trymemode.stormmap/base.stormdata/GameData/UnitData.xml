@@ -6,6 +6,7 @@
         <FlagArray index="Untargetable" value="1"/>
         <FlagArray index="NoDraw" value="1"/>
         <FlagArray index="Invulnerable" value="1"/>
+		<BehaviorArray Link="CFHArmorGrantDisabled"/>
         <WeaponArray index="0" removed="1"/>
         <Radius value="0"/>
         <Footprint value=""/>
