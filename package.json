@@ -1,45 +1,53 @@
 {
     "name": "heroesofthestorm_trymode2.0",
     "version": "1.0.0",
-    "description": "Enhanced Try mode",
+    "description": "A modified Try Mode Map for Heroes of the Storm to create a better experience with enhanced functionalities.",
     "main": "index.js",
     "scripts": {
-        "build:xml": "bash -c -i \"node ./scripts/main/buildxml.js\"",
-        "watch:xml": "bash -c -i \"node ./scripts/watch/xml.js\"",
-        "build:mimiclib": "bash -c -i \"node ./scripts/main/buildmimiclib.js\"",
-        "build:mimicabilities": "bash -c -i \"node ./scripts/main/buildmimicabilities.js\"",
-        "build:mimicbehaviors": "bash -c -i \"node ./scripts/main/buildmimicbehaviors.js\"",
-        "build:mimicmodels": "bash -c -i \"node ./scripts/main/buildmimicmodels.js\"",
-        "build:allmimic": "npm run build:mimiclib && npm run build:mimicabilities && npm run build:mimicbehaviors && npm run build:mimicmodels",
-        "build:usagedoc": "bash -c -i \"node ./scripts/main/buildusagedoc.js\"",
-        "watch:usagedoc": "bash -c -i \"node ./scripts/watch/usagedoc.js\"",
-        "patch:libraries": "bash -c -i \"node ./scripts/main/patchlibraries.js\"",
-        "watch:libraries": "bash -c -i \"node ./scripts/watch/libraries.js\"",
-        "extract:s2ma": "bash -c -i \"node ./scripts/main/extracts2ma.js\"",
-        "util:symlink": "node ./scripts/main/utilsymlink.js"
+        "build:xml": "node ./scripts/entry.js --script=xml --mode=script",
+        "watch:xml": "node ./scripts/entry.js --script=xml --mode=watch",
+        "build:mimiclib": "node ./scripts/entry.js --script=mimiclib --mode=script",
+        "build:mimicabilities": "node ./scripts/entry.js --script=mimicabilities --mode=script",
+        "build:mimicbehaviors": "node ./scripts/entry.js --script=mimicbehaviors --mode=script",
+        "build:mimicmodels": "node ./scripts/entry.js --script=mimicmodels --mode=script",
+        "build:allmimic": "node ./scripts/entry.js --script=allmimic --mode=script",
+        "build:usagedoc": "node ./scripts/entry.js --script=usagedoc --mode=script",
+        "watch:usagedoc": "node ./scripts/entry.js --script=usagedoc --mode=watch",
+        "patch:libraries": "node ./scripts/entry.js --script=libraries --mode=script",
+        "watch:libraries": "node ./scripts/entry.js --script=libraries --mode=watch",
+        "extract:s2ma": "node ./scripts/entry.js --script=extracts2ma --mode=script",
+        "util:symlink": "node ./scripts/entry.js --script=symlink --mode=script",
+        "ci:patchmaps": "node ./scripts/ci/patchMaps.mjs"
     },
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0.git"
     },
     "author": "Jamie Phan",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/issues"
     },
-    "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0#readme",
-    "dependencies": {
-        "app-root-path": "^3.0.0",
-        "dotenv": "^8.2.0",
-        "nodemon": "^2.0.6",
-        "rimraf": "^3.0.2",
-        "storm-extract": "^1.0.3",
-        "tmp": "^0.2.1",
-        "xml2js": "^0.4.23"
-    },
+    "homepage": "https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0",
     "devDependencies": {
-        "eslint": "^7.7.0",
-        "eslint-config-airbnb-base": "^14.2.0",
-        "eslint-plugin-import": "^2.22.0"
+        "@eslint/js": "^10.0.1",
+        "@eslint/json": "^1.2.0",
+        "@eslint/markdown": "^8.0.1",
+        "@jamiephan/casclib": "^0.0.2",
+        "app-root-path": "^3.1.0",
+        "dotenv": "^17.4.2",
+        "eslint": "^10.2.1",
+        "glob": "^13.0.6",
+        "globals": "^17.3.0",
+        "minimist": "^1.2.8",
+        "nodemon": "^3.1.14",
+        "tmp": "^0.2.5",
+        "xml2js": "^0.6.2"
+    },
+    "dependencies": {
+        "@jamiephan/stormlib": "^0.0.2",
+        "pino": "^10.3.1",
+        "pino-pretty": "^13.1.3"
     }
 }
