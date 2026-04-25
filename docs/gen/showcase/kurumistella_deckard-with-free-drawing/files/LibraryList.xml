@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TriggerData>
+    <Library Id="DEKD" External="TriggerLibs/LibDrawing" SharedExt="0"/>
+</TriggerData>

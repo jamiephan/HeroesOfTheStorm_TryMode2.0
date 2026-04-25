@@ -77,6 +77,16 @@ const SCRIPT_MAPPING = {
     watch: null,
   },
 
+  // Showcase Doc Commands
+  showcasedoc: {
+    script: {
+      fn: async () => {
+        (await import("./shared/buildShowcase.js")).default();
+      },
+    },
+    watch: null,
+  },
+
   // Usage Doc Commands
   usagedoc: {
     script: {

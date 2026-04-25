@@ -13,6 +13,7 @@
         "build:allmimic": "node ./scripts/entry.js --script=allmimic --mode=script",
         "build:usagedoc": "node ./scripts/entry.js --script=usagedoc --mode=script",
         "watch:usagedoc": "node ./scripts/entry.js --script=usagedoc --mode=watch",
+        "build:showcasedoc": "node ./scripts/entry.js --script=showcasedoc --mode=script",
         "patch:libraries": "node ./scripts/entry.js --script=libraries --mode=script",
         "watch:libraries": "node ./scripts/entry.js --script=libraries --mode=watch",
         "extract:s2ma": "node ./scripts/entry.js --script=extracts2ma --mode=script",

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+
+  <!-- Constants -->
+  <const id="$DehakaSpawnBrushAbilityCooldown" value="60" />
+  <const id="$DehakaSpawnBrushUnitTimedLife" value="15" />
+  <const id="$DehakaSpawnBrushUnitSightRadius" value="10" />
+    <!-- Temp Button Face -->
+  <const id="$DehakaSpawnBrushAbilityButtonFace" value="DehakaSpawnBrushAbility" />
+
+  <!-- Add Talent to Dehaka, T1C4 -->
+  <!-- <CHero id="Dehaka">
+    <TalentTreeArray Talent="DehakaSpawnBrush" Tier="1" Column="4" />
+  </CHero> -->
+
+  <!-- Define the Talent -->
+  <!-- <CTalent id="DehakaSpawnBrush">
+    <Face value="$DehakaSpawnBrushAbilityButtonFace" />
+    <Abil value="DehakaSpawnBrush" />
+    <RankArray>
+      <BehaviorArray value="DehakaSpawnBrushItem" />
+    </RankArray>
+    <Active value="1" />
+  </CTalent> -->
+
+  <!-- Was thinking to make it as a talent -->
+  <!-- But its easier to play with if its a baseline ability, hmm... -->
+
+  <CUnit id="HeroDehaka">
+    <BehaviorArray Link="DehakaSpawnBrushItem" />
+  </CUnit>
+
+  <CButton id="DehakaSpawnBrushAbility" parent="StormButtonParent">
+    <Icon value="Assets\Textures\storm_ui_icon_dehaka_brushstalker_a.dds"/>
+  </CButton>
+
+  <!-- Gives this behavior when Talent Selected -->
+  <CBehaviorAbility id="DehakaSpawnBrushItem">
+    <Buttons Face="$DehakaSpawnBrushAbilityButtonFace" Type="AbilCmd" AbilCmd="DehakaSpawnBrush,Execute" />
+  </CBehaviorAbility>
+
+  <!-- The Spawn Brush Ability -->
+  <CAbilEffectTarget id="DehakaSpawnBrush">
+    <AbilityCategories index="Control" value="1" />
+    <PrepEffect value="DismountDecloakCasterSet" />
+    <Effect value="DehakaSpawnBrushInitialSet" />
+    <Flags index="ClearLastMoveTarget" value="1" />
+    <Flags index="RequireTargetVision" value="0" />
+    <Cost>
+      <Cooldown TimeUse="$DehakaSpawnBrushAbilityCooldown" />
+    </Cost>
+    <Range value="500" />
+    <Arc value="360" />
+    <CastIntroTime value="0" />
+    <CastOutroTime value="0.25" />
+    <PlaceUnit value="DehakaSpawnBrushUnit" />
+    <CmdButtonArray index="Execute" DefaultButtonFace="$DehakaSpawnBrushAbilityButtonFace" />
+  </CAbilEffectTarget>
+
+  <!-- When the Button was pressed -->
+  <CEffectSet id="DehakaSpawnBrushInitialSet">
+    <EffectArray value="DehakaSpawnBrushInitialPersistent" />
+    <TargetLocationType value="Point" />
+    <ValidatorArray value="TargetLocationIsPathable" />
+    <ValidatorArray value="TargetPointWalkable" />
+  </CEffectSet>
+
+  <!-- Do something on the point -->
+  <CEffectCreatePersistent id="DehakaSpawnBrushInitialPersistent">
+    <ExpireEffect value="DehakaSpawnBrushCreateUnit" />
+    <RevealRadius value="1.5" />
+    <RevealFlags index="Unfog" value="1" />
+  </CEffectCreatePersistent>
+
+  <!-- KEKW -->
+  <!-- <CEffectCreatePersistent id="DehakaSpawnBrushInitialPersistent">
+    <OffsetFacingFallback Value="TargetPoint" />
+    <PeriodCount value="9" />
+    <PeriodicEffectArray value="DehakaSpawnBrushCreateUnit" />
+    <PeriodicOffsetArray X="1.733" Y="1.454" />
+    <PeriodicOffsetArray X="0.393" Y="2.228" />
+    <PeriodicOffsetArray X="-1.131" Y="1.959" />
+    <PeriodicOffsetArray X="-2.126" Y="0.774" />
+    <PeriodicOffsetArray X="-2.126" Y="-0.774" />
+    <PeriodicOffsetArray X="-1.131" Y="-1.959" />
+    <PeriodicOffsetArray X="0.393" Y="-2.228" />
+    <PeriodicOffsetArray X="1.733" Y="-1.454" />
+    <PeriodicOffsetArray X="2.262" />
+    <PeriodicPeriodArray value="0" />
+  </CEffectCreatePersistent> -->
+
+  <!-- Create the DehakaSpawnBrushUnit Unit-->
+  <CEffectCreateUnit id="DehakaSpawnBrushCreateUnit">
+    <WhichLocation Value="TargetPoint" />
+    <SpawnUnit value="DehakaSpawnBrushUnit" />
+    <SpawnEffect value="DehakaSpawnBrushUnitSpawnSet" />
+  </CEffectCreateUnit>
+
+  <!-- Add some effect to the unit -->
+  <CEffectSet id="DehakaSpawnBrushUnitSpawnSet">
+    <EffectArray value="DehakaSpawnBrushUnitApplyTimedLifeBehavior" />
+  </CEffectSet>
+
+  <!-- Add a timed life behavior -->
+  <CEffectApplyBehavior id="DehakaSpawnBrushUnitApplyTimedLifeBehavior">
+    <Behavior value="DehakaSpawnBrushUnitTimedLife" />
+  </CEffectApplyBehavior>
+
+  <!-- The Time life Behavior -->
+  <CBehaviorBuff id="DehakaSpawnBrushUnitTimedLife" parent="StormTimedLife">
+    <DisplayDuration index="Enemy" value="0" />
+    <DisplayDuration index="Neutral" value="0" />
+    <DisplayDuration index="Ally" value="1" />
+    <Duration value="$DehakaSpawnBrushUnitTimedLife" />
+  </CBehaviorBuff>
+
+
+  <!-- DehakaSpawnBrushUnit Unit -->
+
+  <!-- Instead of directly spawning Storm_KingsCrest_Shrubbery -->
+  <!-- Need to do some workaround wrapper for to insert -->
+  <!-- "CustomUnitStatusFrame" into the brush unit -->
+  <!-- So that it can display a duration bar -->
+
+  <CUnit id="DehakaSpawnBrushUnit" parent="Storm_KingsCrest_Shrubbery">
+    <!-- Unselectable some-how make the duration bar not visible -->
+    <FlagArray index="Unselectable" value="0" />
+    <Sight value="$DehakaSpawnBrushUnitSightRadius" />
+  </CUnit>
+
+  <CActorUnit id="DehakaSpawnBrushUnit" parent="StormUnitBase" unitName="DehakaSpawnBrushUnit">
+    <!-- Copied From <CActorUnit id="Storm_KingsCrest_Shrubbery" /> -->
+    <!-- Apparently you cannot parent a <CActorUnit> with a unitName in it-->
+    <VisibleOpacity value="0.500000" />
+    <VisibleOpacityBlendDuration value="0.250000" />
+    <SnapshotActor value="SnapshotNoOpacity" />
+    <HighlightTooltip value="Unit/Name/Bogus" />
+    <!-- A little minimap icon -->
+    <MinimapIconScale value="1.000000" />
+    <!-- Add the Unit frame to display the duration -->
+    <CustomUnitStatusFrame value="UnitStatus/IndestructibleTimedUnitStatusFrameTemplate" />
+  </CActorUnit>
+
+  <CModel id="DehakaSpawnBrushUnit" parent="Storm_KingsCrest_Shrubbery" />
+
+  <!-- ===================================================================== -->
+
+
+  <!-- Literally copied everything from <CActorUnit id="HeroDehaka" /> -->
+  <!-- because you cannot parent a <CActorUnit> with a unitName in it -->
+
+
+  <CActorUnit id="HeroDehaka" parent="StormHeroStandard" unitName="HeroDehaka">
+    <!-- The added animation when the spawn brush button was pressed -->
+    <On Terms="Abil.DehakaSpawnBrush.SourceCastStart" Send="AnimPlay Attack Attack,C 0 -1.000000 -1.000000 1 AsTimeScale" />
+
+    <Remove Terms="AnimDone; AnimName Taunt" Send="Signal ApplyReady" />
+    <Remove Terms="AnimPlay; AnimName Spell" Send="TimerSet 0.750000 UnitWalkingCheckDelay" />
+    <On Terms="ActorCreation" Send="StatusSet AttackOrder 0" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 0" Send="AnimPlay Attack Attack,A" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 1; !ValidateUnit CasterHasPickedAnUltimate" Send="AnimPlay Attack Attack,B" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 1; ValidateUnit CasterHasPickedAnUltimate" Send="AnimPlay Attack Attack,X" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 2" Send="AnimPlay Attack Attack,C" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 3; !ValidateUnit CasterHasPickedAnUltimate" Send="AnimPlay Attack Attack,D" />
+    <On Terms="WeaponStart.*.AttackStart; IsStatus AttackOrder 3; ValidateUnit CasterHasPickedAnUltimate" Send="AnimPlay Attack Attack,Y" />
+    <On Terms="Effect.DehakaHeroWeaponImpactSet.Start" Send="StatusIncrement AttackOrder" />
+    <On Terms="StatusIncrement.*.AttackOrder; IsStatus AttackOrder 4" Send="StatusSet AttackOrder 0" />
+    <On Terms="Effect.DehakaHeroWeaponDamage.Start; At Caster" Send="Create DehakaWeaponBase" />
+    <On Terms="Abil.DehakaBrushstalker.SourceCastStart; !ValidatePlayer DehakaHasBrushstalkerApexPredator" Send="AnimPlay StandWorkStart Stand,Work,Start PlayForever,NonLooping -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Abil.DehakaBrushstalker.SourceCastStart; ValidatePlayer DehakaHasBrushstalkerApexPredator" Send="AnimPlay StandWorkStart Stand,Work,Start PlayForever,NonLooping -1.000000 -1.000000 1.250000 AsTimeScale" />
+    <On Terms="Abil.DehakaBrushstalker.SourceCastStop" Send="TimerSet 0.187500 ClearStandWork" />
+    <On Terms="TimerExpired; TimerName ClearStandWork" Send="AnimClear StandWorkStart 0.250000" />
+    <On Terms="Behavior.DehakaBrushstalkerDurationBehavior.On" Send="AnimPlay Spell Stand,Work,End 0 0.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Behavior.DehakaBrushstalkerTravelBehavior.On" Send="StatusIncrement StatusBarHide" />
+    <On Terms="Behavior.DehakaBrushstalkerDurationBehavior.Off" Send="StatusDecrement StatusBarHide" />
+    <On Terms="Behavior.DehakaBrushstalkerTravelBehavior.On" Target="_HeroRing" Send="SetVisibility" />
+    <On Terms="Behavior.DehakaBrushstalkerDurationBehavior.Off" Target="_HeroRing" Send="SetVisibility 1" />
+    <On Terms="Abil.DehakaBrushstalker.TargetOn; IsActorLocalPlayer" Send="Create DehakaBrushSearchOn" />
+    <On Terms="Abil.DehakaBrushstalker.TargetOn; IsActorLocalPlayer" Target="::Terrain" Send="TerrainSetShrubClustersVisible" />
+    <On Terms="Abil.DehakaBrushstalker.TargetOff; IsActorLocalPlayer" Send="Create DehakaBrushSearchOff" />
+    <On Terms="Abil.DehakaBrushstalker.TargetOff; IsActorLocalPlayer" Target="::Terrain" Send="TerrainSetShrubClustersVisible Clear" />
+    <On Terms="UnitDeath" Target="::Terrain" Send="TerrainSetShrubClustersVisible Clear" />
+    <On Terms="Abil.DehakaDrag.SourceCastStart" Send="AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Signal.*.DehakaDragBeamCreation" Send="RefSetFromMsg ::actor.DehakaDragBeamReference ::Sender" />
+    <On Terms="Behavior.HeroGenericRecentlyTeleported.On" Target="::actor.DehakaDragBeamReference" Send="Destroy Immediate" />
+    <On Terms="Signal.*.DragTargetDummyCreated" Send="RefSetFromMsg ::actor.DragTarget ::Sender" />
+    <On Terms="Signal.*.DragTargetDummyCreated" Send="HostSiteOpsSet ::Host {SOpBasicScopeFollow SOpDragForwardGuide}" />
+    <On Terms="StatusOn.*.TimeStopPaused; ValidateUnit DehakaHasDragChannel" Send="HostSiteOpsSet ::Host {SOpBasicScopeFollow SOpDragForwardGuide} 1 1" />
+    <On Terms="StatusOff.*.TimeStopPaused; ValidateUnit DehakaHasDragChannel" Send="HostSiteOpsSet ::Host {SOpBasicScopeFollow SOpDragForwardGuide}" />
+    <On Terms="Behavior.DehakaDragChannelBehavior.Off; !ValidateUnit Mounted" Send="HostSiteOpsSet ::Host SOpBasicScopeFollow" />
+    <On Terms="Effect.DehakaDragTalentFinalSet.Start; !ValidateUnit Mounted" Send="HostSiteOpsSet ::Host SOpBasicScopeFollow" />
+    <On Terms="Abil.DehakaDarkSwarm.SourceCastStart" Send="AnimPlay Spell Spell,B 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Abil.DehakaDarkSwarm.SourceCastStart" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End" />
+    <On Terms="Behavior.DehakaDarkSwarm.Off" Send="AnimBracketStop Unpowered" />
+    <On Terms="Abil.DehakaIsolation.SourceCastStart" Send="AnimPlay Spell Spell,C 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Abil.DehakaAdaptation.SourceCastStart" Send="AnimPlay Spell Spell,D 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="Behavior.DehakaBurrowChannel.On" Send="AnimPlay Burrow Burrow,Start 0 -1.000000 0.000000 -1.000000 AsAutomatic 0.000000 13" />
+    <On Terms="AnimDone; AnimPlaying Burrow Burrow,Start" Send="AnimPlay Burrow Burrow PlayForever 0.000000 -1.000000 -1.000000 AsAutomatic 0.000000 15" />
+    <On Terms="Behavior.DehakaBurrowChannel.On" Send="AnimGroupRemove Ready" />
+    <On Terms="Behavior.DehakaBurrowChannel.On" Send="AnimClear Ready" />
+    <On Terms="Behavior.DehakaBurrowChannel.On" Send="TimerKill StandReadyOutroDuration" />
+    <On Terms="Behavior.DehakaBurrowChannel.On" Send="AnimBracketStop Unpowered" />
+    <On Terms="Behavior.DehakaBurrowChannel.Off" Send="TimerSet 5.000000 StandReadyOutroDuration" />
+    <On Terms="Behavior.DehakaBurrowChannel.Off" Send="AnimClear Burrow" />
+    <On Terms="AnimDone; AnimPlayingProps Burrow,End" Send="AnimGroupApply Ready" />
+    <On Terms="Behavior.DehakaBurrowChannel.Off" Send="AnimPlay Burrow Burrow,End" />
+    <On Terms="Effect.DehakaBurrowRemoveBehavior.Start" Send="AnimClear Burrow" />
+    <On Terms="Effect.DehakaBurrowRemoveBehavior.Start" Send="AnimPlay Spell Burrow,End 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="UnitMovementUpdate.*.Walk; ValidateUnit DehakaBurrowed" Target="DehakaBurrowFX" Send="Signal Walk" />
+    <On Terms="UnitMovementUpdate.*.Stand; ValidateUnit DehakaBurrowed" Target="DehakaBurrowFX" Send="Signal Stand" />
+    <On Terms="Abil.DehakaEssenceCollection.SourceCastStart" Send="AnimPlay Spell Spell,E 0 -1.000000 -1.000000 1.000000 AsTimeScale" />
+    <On Terms="ActorCreation; !ValidateUnit CasterHasPickedAnUltimate" Send="AnimPlay Cover Cover PlayForever" />
+    <On Terms="Behavior.Ultimate1Unlocked.On" Send="Signal UltimatePicked" />
+    <On Terms="Behavior.Ultimate2Unlocked.On" Send="Signal UltimatePicked" />
+    <On Terms="Signal.*.UltimatePicked; !AnimPlaying Spell; !AnimPlayingName Attack" Send="AnimPlay Spell Spell,F" />
+    <On Terms="Signal.*.UltimatePicked" Send="Create DehakaArmGrowthFXLeft" />
+    <On Terms="Signal.*.UltimatePicked" Send="Create DehakaArmGrowthFXRight" />
+    <On Terms="Signal.*.UltimatePicked" Send="Create DehakaArmGrowthGlaze" />
+    <On Terms="Signal.*.UltimatePicked" Send="AnimPlay CoverEnd Cover,End" />
+    <On Terms="Signal.*.UltimatePicked" Send="AnimClear Cover" />
+    <On Terms="Signal.*.UltimatePicked" Target="::PortraitGameSelf" Send="Signal DoRegrow" />
+    <On Terms="Behavior.Ultimate1Unlocked.Off" Send="AnimPlay Cover Cover PlayForever" />
+    <On Terms="Behavior.Ultimate2Unlocked.Off" Send="AnimPlay Cover Cover PlayForever" />
+    <On Terms="AnimPlay; AnimName Taunt" Send="AnimGroupApply Ready" />
+    <On Terms="AnimPlay; AnimName Taunt" Send="AnimClear Ready" />
+    <On Terms="AnimPlay; AnimName Taunt" Send="TimerKill StandReadyOutroDuration" />
+    <On Terms="AnimPlay; AnimName Taunt" Send="TimerSet 5.000000 StandReadyOutroDuration" />
+    <PortraitActor value="DehakaPortrait" />
+    <PortraitModel value="DehakaPortrait" />
+    <GroupIcon>
+      <Image value="Assets\Textures\storm_ui_ingame_partyframe_dehaka.dds" />
+    </GroupIcon>
+    <HeroIcon value="Assets\Textures\UI_targetportrait_Hero_dehaka.dds" />
+    <MinimapIcon value="Assets\Textures\storm_ui_minimapicon_dehaka.dds" />
+    <UnitIcon value="Assets\Textures\UI_targetportrait_Hero_dehaka.dds" />
+    <Wireframe>
+      <Image value="Assets\Textures\UI_targetportrait_Hero_dehaka.dds" />
+    </Wireframe>
+    <ModelFlags index="AutomateGlobalLoops" value="0" />
+    <AbilSoundArray AbilCmd="DehakaBrushstalker,Execute" Sound="DehakaBase_VOX_CastingZ" />
+    <AbilSoundArray AbilCmd="DehakaBurrow,Execute" Sound="DehakaBase_VOX_CastingE" />
+    <AbilSoundArray AbilCmd="DehakaDrag,Execute" Sound="DehakaBase_VOX_CastingQ" />
+    <AbilSoundArray AbilCmd="DehakaDarkSwarm,255" Sound="DehakaBase_VOX_CastingW" />
+    <AbilSoundArray AbilCmd="DehakaIsolation,Execute" Sound="DehakaBase_Ultimate1Used" />
+    <AbilSoundArray AbilCmd="DehakaAdaptation,Execute" Sound="DehakaBase_Ultimate2Used" />
+    <AbilSoundArray AbilCmd="DehakaEssenceCollection,Execute" Sound="DehakaBase_VOX_CastingD" />
+    <ErrorArray Error="NotEnoughEnergy" Sound="DehakaBase_LowMana" />
+    <SoundArray index="Ready" value="DehakaBase_Revive" />
+    <SoundArray index="Yes" value="DehakaBase_Yes" />
+    <SoundArray index="Attack" value="DehakaBase_Attack" />
+    <SoundArray index="Pissed" value="DehakaBase_Pissed" />
+    <MinimapIconBackgroundScale value="0.950000" />
+  </CActorUnit>
+</Catalog>
