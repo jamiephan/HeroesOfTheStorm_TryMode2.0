@@ -100,7 +100,7 @@ const SPECIAL_GAMEDATA_XML = files.filter((x) =>
 )[0];
 
 const baseFiles = files
-  // Whitelist dir
+  // Whitelist dir:
   // base.stormassets/**/*
   // base.stormdata/Mods/**/*
   // base.stormdata/ModuleMimicLibs/**/*
