@@ -19,11 +19,11 @@ Post Installation Check:
 
 ## Replace in-game Try Mode with Try-Mode Installer (Windows)
 
-You can use the [Try Mode 2.0 Installer](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer) to automatically install the maps without manually doing to.
+You can use the [Try Mode 2.0 Installer](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer) to automatically install the maps without manually doing so.
 
-> Note: It currently only supports Windows. Linux/MacOS will be supported on a later date.
+> Note: It currently only supports Windows. Linux/macOS support is planned for a future release.
 
-It also include additional features such as:
+It also includes additional features such as:
  - Install maps to Try Mode, and the three in-game tutorials
  - [Storm Map Generator](https://stormmap.jamiephan.net/) Integration
    - For more info, please [refer to its repo](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator).
@@ -39,7 +39,7 @@ You can download it at: https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0
 
 This method is **recommended** if you are not going to mod/change anything in the try mode, as it is the easiest way to install and manage.
 
->Note that: `trymode20.stormmap` in the Release page is the same as the `(10)trymemode.stormmap` folder in this repo.
+>Note: `trymode20.stormmap` on the Release page is the same as the `(10)trymemode.stormmap` folder in this repo.
 
 1. Download any `.stormmap` file from [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) page
 2. Rename the file to `(10)trymemode.stormmap`.
@@ -144,7 +144,7 @@ If you would like to replace the in game tutorial instead (Setting -> Tutorial),
 
 **Important**: Using the methods in this section will cause stuff such as heroes talent will not be loaded.
 
-> TODO: Figuring out what talents are not loaded
+> TODO: Determine why talents are not loaded.
 
 <a name="runStormmap-fileassoc"></a>
 
@@ -152,11 +152,11 @@ If you would like to replace the in game tutorial instead (Setting -> Tutorial),
 
 This allows you to double click on the `*.stormmap` file and run the map directly.
 
-Each of the push request to Github will automatically generate a patched version of the all the maps in the game. Including main maps (e.g Cursed Hollow, Sky temple, etc) and Brawl Maps (e.g Lost Cavern, Lunar Rocket Racing and PVE Escape from Braxis).
+Each commit to GitHub automatically generates a patched version of all maps in the game. Including main maps (e.g Cursed Hollow, Sky temple, etc) and Brawl Maps (e.g Lost Cavern, Lunar Rocket Racing and PVE Escape from Braxis).
 
 These maps will automatically include additional functionalities provided in this repo (such as using the debug menu with the `\` key, chat command, XML files, extra UIs).
 
->Note: Please noted that some maps will not work properly, showing the "Map Error" Screen (As shown in [Post-Install check](#runStormmap-postInstall) section). This is due to some maps are not maintained by Blizzard anymore (surprisingly Haunted Mines still works), this problem mainly exists on Brawl maps.
+>Note: Some maps may not work properly, showing the "Map Error" screen (as shown in the [Post-Install check](#runStormmap-postInstall) section). This is due to some maps no longer being maintained by Blizzard (surprisingly, Haunted Mines still works). This issue mainly affects Brawl maps.
 
 >Note: The map `trymode20.stormmap` is the packaged map file for this repo's `./(10)trymemode.stormmap`.
 
@@ -254,6 +254,6 @@ Start by typing "hi" in the chat message (in-game allies or all chat, **not priv
 
 ![Name Response](https://i.imgur.com/TjWJmdd.png)
 
-If you see something like this, maybe the game just updated with broken compatibility, please wait for update or create an issue.
+If you see something like this, the game may have updated with a breaking change. Please wait for an update or create an issue.
 
 ![Map script error](https://i.imgur.com/cjXbq07.jpg)

@@ -5,41 +5,44 @@ A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/)
 
 ## What is this?
 
-[Heroes of the Storm](https://heroesofthestorm.com/) have a build in Try Mode that can be launched with any heroes and with any (available) skins from the Collection tab. The try mode includes basic cheats such as setting level, toggling a *slow* cooldown and reset talents.
+[Heroes of the Storm](https://heroesofthestorm.com/) has a built-in Try Mode that can be launched with any hero and any available skin from the Collection tab. The Try Mode includes basic cheats such as setting level, toggling a *slow* cooldown reset, and resetting talents.
 
-However, it lacks lots of features such as changing Heroes, spawning any units, adding extra AI players, interacting with the game data and a *fast* cooldown reset.
+However, it lacks many features, such as changing heroes, spawning units, adding extra AI players, interacting with game data, and a *fast* cooldown reset.
 
-This project aims to provide extra functionalities which were built on top of the original try mode with extra tools for customisation.
+This project provides extra functionality built on top of the original Try Mode, along with additional tools for customization.
 
-## Stuff you can do:
+## What you can do:
+
+**[See Community Showcases here!](showcase.md)**
+
 
 - Simple stuff:
 
-  - Actually "Toggle Cooldown" without a 0.5s stupid delay
+  - Toggle cooldowns instantly without the built-in 0.5s delay
 
   - Gain 1000 or more quest stacks every seconds
 
-  - Modify your current HP, Mana, Speed, Height, Size
+  - Modify your HP, Mana, Speed, Height, and Size
 
   - Spawn any units in the game (provided it was loaded)
 
-  - Control any units, including non-Heroes and Target Dummy
+  - Control any unit, including non-Heroes and Target Dummies
 
-  - Instantly Kill/Respawn / Set respawn timer and location
+  - Instantly kill or respawn units, and set the respawn timer and location
 
-  - and more...
+  - *and more...*
 
 - Advanced Stuff:
 
-  - Data mine and show hidden/unavailable skins/mounts/voice lines/emojis/abilities/art, etc
+  - Data mine and view hidden or unavailable skins, mounts, voice lines, emojis, abilities, art, and more
 
-  - Creating your own abilities (to a degree with a help of SC2 Editor)
+  - Create your own abilities (to a degree, with the help of the SC2 Editor)
 
-  - Creating your own Arts (such as models/music) and add/replace the in-game's one
+  - Create your own assets (such as models and music) and add or replace in-game ones
 
-  - Testing Interactions between Heroes/Abilities/Behaviours/Effects etc
+  - Test interactions between heroes, abilities, behaviours, effects, and more
 
-  - and more...
+  - *and more...*
 
 
 ---
@@ -70,28 +73,21 @@ Please see [custom.md](custom.md).
 
 ### How does it work?
 
-Heroes of the Storm built on top of the StarCraft II engine. Therefore, some features (loading custom maps and mods) were inherited from it.
+Heroes of the Storm is built on top of the StarCraft II engine, inheriting some features such as loading custom maps and mods.
 
-Try Mode 2.0 aims to adding extra functionalities to the original Try Mode and provide various tooling for customisation. It will also generate `.stormmap` map files which added the extra functionalities to various maps that can be loaded into the game. 
+Try Mode 2.0 aims to add extra functionality to the original Try Mode and provide various tools for customization. It also generates `.stormmap` map files that include these extra functionalities for various maps that can be loaded into the game. 
 
-Currently, there are two ways to load a custom map:
-
-- Replacing in-game single player maps (Tutorial maps, Try Mode):
-  - The in game single player maps was loaded from CASC (Blizzard's game file storage) storage: `mods/heroes.stormmod/base.stormmaps/maps/heroes/singleplayermaps/(10)trymemode.stormmap`. However due to how StarCraft II's engine works, the game will attempt to priorities loading from `Heroes of the Storm Installation/maps` folder before CASC, therefore, this modified map can be "side-loaded" into the game without modifying the CASC storage (which is against the EULA).
-- Run a `.stormmap` file directly:
-  - The game allows to run a `.stormmap` file, which is a modified version of `.sc2map` from StarCraft 2 and it is packaged in a [MPQ format](http://www.zezula.net/en/mpq/main.html). Simply just run the map with `"HeroesSwitcher_x64.exe <path>"`, where path is the *absolute* path to the `.stormmap` file. Note that unlike usual command line applications where relative path is relative to your working directory, Heroes treats relative path as it is from CASC. So the "relative" path of the `<Path>` argument is relative to `mods/heroes.stormmod/base.stormmaps/maps` (CASC) or `Heroes of the Storm Installation/maps`(File System).
-
-> Note that both methods allow loading the map which are either a file, folder, or a symbolic link of both, as long as the name is ending in `.stormmap`.
+For installation guide, please refer to [install.md](install.md).
 
 ### Can I get banned from using it?
 
-The Try Mode 2.0 (including the in-game official's one and tutorial maps) runs on your computer locally (offline) without connecting to Blizzard's server, therefore it is **not possible** to e.g. level up your account, gaining gold and loot boxes, altering Match History or carrying the altered files to other online maps/modes, including Custom Games.
+The Try Mode 2.0 (including the in-game official's one and tutorial maps) runs on your computer locally (offline) without connecting to Blizzard's server, therefore it is **not possible** to, for example, level up your account, gain gold and loot boxes, alter Match History, or carry altered files into other online maps or modes, including Custom Games.
 
-Strictly speaking, Blizzard can ban users from doing so. However, there is not a single instance of that event occurs despite multiple side-loaded was shown in the official Forums and Subreddit, which Blizzard even replied (unrelated to banning or ToS). The loaded map is also offline and not able to interact with other online maps/modes.
+Strictly speaking, Blizzard can ban users for doing so. However, there is not a single known instance of this occurring, despite multiple instances of side-loading being shown on the official Forums and Subreddit — to which Blizzard even replied (on unrelated topics). The loaded map runs offline and cannot interact with other online maps or modes.
 
 - Will Blizzard eventually patch the game and remove the possibility of loading the map? [Perhaps](https://i.kym-cdn.com/photos/images/newsfeed/001/462/400/978.jpg), but extremely unlikely.
 
-- Will Blizzard ban players who loading a **offline-only** custom map which **does not** interfere with online game modes? Extremely unlikely.
+- Will Blizzard ban players for loading an **offline-only** custom map that **does not** interfere with online game modes? Extremely unlikely.
 
 > Disclaimer: I do not hold any responsibility if your account was banned by doing so.
 
@@ -106,7 +102,7 @@ Not to be confused with the official "Custom Games" game mode, it is still conne
 ## TODOs:
 
 - [ ]  Create a Tool to generate a custom camera Object
-- [ ]  Tools to patch the actual Try mode with live game data automatically
+- [x]  Tools to patch the actual Try mode with live game data automatically
 - [ ]  Actually modify the map / Create a new map in SC2 Editor (Working in Progress)
 - [x]  GitHub Release more `stormmaps` which patch the live maps such as Cursed Hollow or Infernal Shrines. (Completed. Check the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases) Page.)
 

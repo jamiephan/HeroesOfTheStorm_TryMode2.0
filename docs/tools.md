@@ -3,28 +3,15 @@
 
 ## Prerequisite
 
-In order for the tools to work, some specific environment configurations must be done. 
+- Node.js: (Latest or LTS should be fine)
 
-- Environment: `Linux` (or `WSL`)
-- System Libraries:
-    - cmake 
-    - libbz2-dev 
-    - zlib1g-dev 
-    - python 
-    - build-essential
-- Nodejs: `10.X.X` (Other versions might not work)
-
-After installed the libraries and application above, in this directory, run `npm install`.
+After installing the libraries and applications above, run `npm install` in this directory.
 
 ## Pre-usage Configuration (\*Required)
 
-All the settings are stored in the `.env` file in the root of the project directory.
+All settings are stored in the `.env` file at the root of the project directory.
 
-Before using any tools, rename `.env.example` into `.env` (remove the `.example` at the end) and modify the configuration to fit your need.
-
-This tool uses `dotenv` to load the configs into Environment Variables (`process.env`). The settings are `key=value` pairs with strings having double quote.
-
-Example: `HEROES_OF_THE_STORM_INSTALL_LOCATION="/mnt/c/Program Files/Heroes of the Storm"`.
+Before using any tools, rename `.env.example` to `.env` (removing the `.example` extension) and adjust the configuration as needed.
 
 The current values required are:
 
@@ -45,12 +32,12 @@ The current values required are:
 | `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml` |
 
 
->Note: Generally, only modifying `HEROES_OF_THE_STORM_INSTALL_LOCATION` is enough, which its the install location for Heroes of the Storm under Linux / WSL path. (e.g in WSL, the letter drive will mount to `/mnt/{drive}`, so `C:/Program Files/Heroes of the Storm` will be `/mnt/c/Program Files/Heroes of the Storm`.) 
+>Note: In most cases, only `HEROES_OF_THE_STORM_INSTALL_LOCATION` needs to be set. This is the install location for Heroes of the Storm
 
 
 ## Scripts
 
->Note: Tools that requires extraction from the Heroes of the Storm game file will take a while.
+>Note: Tools that require extraction from Heroes of the Storm game files may take some time if you using CASC online mode (`TOOLS_USE_CASC_ONLINE_MODE=true`).
 
 <a name="tools-symlink"></a>
 
@@ -58,12 +45,9 @@ The current values required are:
 
 **Command**: `npm run util:symlink`
 
-This tool will create a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, which will "mirror" the directory, such that you can continue to edit the files in the directory but will also take effect in the Heroes actual try mode map.
+This tool creates a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, mirroring the directory so that edits made in this repo are reflected in the actual Try Mode map.
 
-This command should not need to use more than once if it completed successfully.
-
->Note: For some reason symlink created in WSL Environment does not work, please change the `.env` `HEROES_OF_THE_STORM_INSTALL_LOCATION` to a windows path first (e.g `C:/games/Heroes of the Storm` instead of `/mnt/c/games/Heroes of the Storm`), run `npm run symlink` in CMD (not WSL), then change it back to linux path for other commands.
-
+This command only needs to be run once if it completes successfully.
 
 <a name="tools-s2ma"></a>
 
@@ -72,7 +56,7 @@ This command should not need to use more than once if it completed successfully.
 **Command**: `npm run extract:s2ma`
 
 
-`*.s2ma` files are the generated libs for Heroes of the Storm. But most importantly it will also contain actual map files as well.
+`*.s2ma` files are the generated libraries for Heroes of the Storm and also contain actual map files.
 
 The tool will find all of the `*.s2ma` files and output them to `s2ma/` directory.
 
@@ -85,15 +69,15 @@ To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mp
 
 **Command**: `npm run build:mimicabilities`
 
-This tools will search through most the abilities (Q, W, E, R, which are `<CAbil*>`) and map them to a a corresponding `<CBehaviorAbility>`. With the id having prefixed `"M"`.
+This tool searches through most abilities (Q, W, E, R, represented as `<CAbil*>`) and maps each to a corresponding `<CBehaviorAbility>`, with the ID prefixed with `"M"`.
 
 For example `<CAbilEffectInstant id="ZeratulCleave">` => `<CBehaviorAbility id="MZeratulCleave">`.
 
-The reason for this is you can add any abilities to any heroes freely (which will appear on the items bar, the top bar where active buttons like ice block, cleanse placed)
+This allows you to freely add any ability to any hero (it will appear in the items bar — the top bar where active items like Ice Block and Cleanse are placed).
 
-To do so, just simply add the behavior to the selected units (e.g using the [chat command](usage.md) `adb MZeratulCleave`)
+To do so, add the behavior to the selected units (e.g using the [chat command](usage.md) `adb MZeratulCleave`)
 
-Also note that some abilities have special requirements, such as ultimates requires `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior, you will need to also add them to the units as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
+Note that some abilities have special requirements. For example, ultimates may require `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior — you will need to add these to the unit as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
 >Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
@@ -114,9 +98,9 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 **Command**: `npm run build:mimicbehaviors`
 
-This tool will search though all the `<CBehaviorBuff>` and map it to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
+This tool searches through all `<CBehaviorBuff>` entries and maps each to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
-This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, which you can add this ability as a behavior to units using tools such as [addbehavior](usage.md#cmd-addbehavior), with the command of `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, You can add this ability as a behavior to units using the [addbehavior](usage.md#cmd-addbehavior) command: `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
 
 >Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
 
@@ -134,9 +118,9 @@ Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 **Command**: `npm run build:mimicmodels`
 
-This tool will search though all the `<CModel>` and map it to a `<CUnit>`, which allows to be controlled on the map.
+This tool searches through all `<CModel>` entries and maps each to a `<CUnit>`, which can then be controlled on the map.
 
-This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, which you can summon this unit using tools such as [summon](usage.md#cmd-summon), with the command of `summon UNRetreatPing`.
+This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, You can summon this unit using the [summon](usage.md#cmd-summon) command: `summon UNRetreatPing`.
 
 >Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
@@ -154,9 +138,9 @@ Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 
 >Use `npm run watch:xml` for automatically run the command above when required files were changed
 
-This tool will automatically generate the `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, that will include all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods`, which will scan through all its subdirectories. 
+This tool automatically generates `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, including all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods` by scanning through all subdirectories. 
 
->Note: It **will ignore** any files that does not end with `.xml` (case insensitive) and **does not** validate whether the XML file is valid (syntax error, etc). TODO: Also validate XML syntax.
+>Note: It **will ignore** any files that do not end with `.xml` (case-insensitive) and **does not** validate XML syntax.
 
 ---
 <a name="tools-buildmimiclib"></a>
@@ -165,7 +149,7 @@ This tool will automatically generate the `GameData.XML` under `./(10)trymemode.
 
 **Command**: `npm run build:mimiclib`
 
-**Important**: Please note that this feature is disabled by default in the game (the tool can still generate the mimic libs). This is due to it is incompatible with some maps and the feature it provides does not have sufficient reason for it to enable by default (it cause more harm from what I can tell). Due to it was disabled via .galaxy modification, it is not possible to toggle this option with a chat command. If you would like to enable this feature, please manually edit the file:
+This feature is disabled by default in the game (though the tool can still generate the mimic libraries). This is because it is incompatible with some maps, and the feature does not provide sufficient benefit to justify enabling it by default. Because it is disabled via a `.galaxy` modification, it cannot be toggled with a chat command. If you would like to enable this feature, please manually edit the file:
 
 File: [`(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/LibTryMeMode.galaxy)
 
@@ -260,7 +244,7 @@ Internal Command | Mimicked Command
 
 >Use `npm run watch:libraries` for automatically run the command above when required files were changed.
 
-A command to automatically remove all `//_heroes_replace_//` string in the Modules folder. This allows for less human errors.
+Automatically removes all `//_heroes_replace_//` strings in the Modules folder, reducing the chance of human error.
 
 After exported and saved the galaxy file, run this command and enter Try mode to test it out.
 
@@ -274,4 +258,14 @@ This does not need to do a manual search/replace in Galaxy Editor.
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
 
-A Command to build [usage.md](usage.md) document base on `usage.json` in `./docs/gen/usage.json`.
+Builds the [usage.md](usage.md) document from `usage.json` in `./docs/gen/usage.json`.
+
+---
+<a name="tools-buildshowcasedoc"></a>
+
+### Build Showcase Doc ([showcase.md](showcase.md))
+**Command**: `npm run build:showcasedoc`
+
+Builds the [showcase.md](showcase.md) document from `showcase.json` in `./docs/gen/showcase.json` and the individual showcase entries stored under `./docs/gen/showcase/`.
+
+Each subdirectory inside `./docs/gen/showcase/` represents a single showcase entry and must contain a `metadata.json` file. An optional `files/` subdirectory may also be included, whose contents will be embedded as fenced code blocks in the generated document.

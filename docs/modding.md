@@ -54,11 +54,11 @@ Using the [In Game Hero Selection](https://github.com/jamiephan/HeroesOfTheStorm
 
 ### Editor Setup
 
->This section of setting up the editor is optional, but its highly recommended
+>This section of setting up the editor is optional, but it's highly recommended
 
 It is recommended using [Visual Studio Code](https://code.visualstudio.com/) with the extension [XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml) installed.
 
-This extension also allows to load a `.xsd` file for auto completion.
+This extension also allows you to load a `.xsd` file for autocompletion.
 
 In a regular XML file:
 
@@ -78,7 +78,7 @@ Modify the `<Catalog>` to include the XSD (XML Schema Definition) file :
 </Catalog>
 ```
 
-> Note: This will not affect how the game read the xml file nor it will change any outputs
+> Note: This will not affect how the game reads the XML file, nor will it change any output.
 
 This enables you to auto complete the XML tags and attributes:
 
@@ -91,7 +91,7 @@ This enables you to auto complete the XML tags and attributes:
 
 ### Modifying the XML files
 
-Generally, You can override the XMLs that the game has. The game will use your own version instead. However, you must follow the XML level structure similar to the game has. For example, to make Maiev's Fan of Knives (Q) to have no cooldown and do insane damage, your XML should look something like this:
+Generally, you can override the game's XML files. The game will use your version instead. However, you must follow the same XML hierarchy as the game uses. For example, to make Maiev's Fan of Knives (Q) to have no cooldown and do insane damage, your XML should look something like this:
 
 ```xml
 <?xml version="1.0" encoding="us-ascii"?>
@@ -123,13 +123,13 @@ Now save this XML into a file, e.g `MaievQModify.xml` and place it in the `(10)t
 </Includes>
 ```
 
-Note that the `path` is relative to `base.stormdata`. Therefore if you place it in `(10)trymemode.stormmap/base.stormdata/MaievMod/QModify.xml`, the path will be `MaievMod/QModify.xml`.
+The `path` is relative to `base.stormdata`. Therefore, if you place it in `(10)trymemode.stormmap/base.stormdata/MaievMod/QModify.xml`, the path will be `MaievMod/QModify.xml`.
 
-If you would like to automate this process, I recommend to use the [Build XML tool](tools.md#tools-buildxml)
+To automate this process, use the [Build XML tool](tools.md#tools-buildxml).
 
->Note: If you wish to use the tool `npm run build:xml` to build the XML files, **All XML modifications must be inside the `Mods/GameData` folder (`./(10)trymemode.stormmap/base.stormdata/Mods/GameData`)**. Any subdirectories or file name (provided its ending with `.xml`) are not limited.
+>Note: If you use `npm run build:xml` to build the XML files, **all XML modifications must be inside the `Mods/GameData` folder (`./(10)trymemode.stormmap/base.stormdata/Mods/GameData`)**. Any subdirectories or file name (provided its ending with `.xml`) are not limited.
 
-Now restart the try mode, by either exit and reenter, or using the [`restartgame`](usage.md#cmd-restartgame) command, you should see Maive's Q Damage is skyrocketed with no cooldown:
+Restart the Try Mode by exiting and re-entering, or by using the [`restartgame`](usage.md#cmd-restartgame) command, you should see Maive's Q Damage is skyrocketed with no cooldown:
 
 ![Maiev Q Damage](https://i.imgur.com/yHJjpeo.png)
 
@@ -142,9 +142,9 @@ Now restart the try mode, by either exit and reenter, or using the [`restartgame
 
 Modifications of Galaxy files in (`./(10)trymemode.stormmap/base.stormdata/Modules/`), same as where the custom command library located at.
 
-I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/base.stormdata/Modules/` that you can open it in SC2 Editor, However due to some issues between SC2 Editor and Heroes (some functions and variables does not exist is both sides or even have incompatible function signature)
+The `Modules_Editor.SC2Mod` is also available in `(10)trymemode.stormmap/base.stormdata/Modules/` and can be opened in SC2 Editor. However, due to compatibility issues between SC2 Editor and Heroes (some functions and variables do not exist in both environments, or have incompatible signatures)
 
-**IMPORTANT: For the following instructions, DO NOT do it to `LibModuleLoader.galaxy` and `Module Loader` in SC2Editor or the whole modding will fail.**
+**IMPORTANT: Do not apply the following instructions to `LibModuleLoader.galaxy` or `Module Loader` in SC2 Editor, as doing so will break the entire modding setup.**
 
 ### Modifying Current Library Files:
 
@@ -152,7 +152,7 @@ I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/bas
 
 ![mod-step-1](https://i.imgur.com/tjWy1BG.png)
 
-2. Change Whatever you like in here, with some exceptions, see below:
+2. Make your changes here, noting the exceptions listed below:
 
 ![mod-step-2](https://i.imgur.com/owiyGwk.png)
 
@@ -162,28 +162,28 @@ I have also published the `Modules_Editor.SC2Mod` in `(10)trymemode.stormmap/bas
 
 Adding a New lib is also pretty simple:
 
-1. Adding a new Lib by right click on empty space:
+1. Add a new library by right-clicking on an empty space:
 
 ![add-step-1](https://i.imgur.com/5rogkWe.png)
 
 ![add-step-1-1](https://i.imgur.com/inOHIqD.png)
 
-2. However, I do suggest you change the library ID to a 4 character ID:
+2. It is recommended to change the library ID to a 4-character ID:
 
 ![add-step-2](https://i.imgur.com/MwQr2NP.png)
 
-3. Change whatever you like on the first box and uncheck the "Auto Load":
+3. Make your changes in the first box and uncheck "Auto Load":
 
 ![add-step-3](https://i.imgur.com/s30zhnO.png)
 
-4. To Save, do the thing similar to above with Export and stuff but not replacing the file when saving. (Also place the new file on the same directory if possible)
+4. To save, follow the same export steps as above, but save it as a new file rather than replacing an existing one (place it in the same directory if possible).
 
 5. Modify the `LibModuleLoader.galaxy` file with a text editor (NOT the SC2 Editor):
 
 ![add-step-5](https://i.imgur.com/P7iDABh.png)
 
 
-6. Append the new File without the `.galaxy` extension. For instance, if your file name is `LibNice.galaxy`, append the lane: `include "Modules/LibNice`
+6. Append the new file without the `.galaxy` extension. For example, if your file name is `LibNice.galaxy`, append the line: `include "Modules/LibNice`
 
 ![add-step-6](https://i.imgur.com/cN85UN8.png)
 
@@ -251,7 +251,7 @@ Note that If you attempt to save the SC2Mod file (the one you currently opening 
 
 ![save-step-2](https://i.imgur.com/UY4nOq0.png)
 
-3. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+3. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching.):
 
 ![save-step-3](https://i.imgur.com/ztgHF1n.png)
 
@@ -279,7 +279,7 @@ This sections demonstrates how to remove the `//_heroes_replace_//` in SC2 Edito
 
 ![manual-step-4](https://i.imgur.com/UY4nOq0.png)
 
-5. Select the corresponding galaxy file to replace and save (Note: Please do make sure you replace the correct file, as it will not able to launch the game if so.):
+5. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching.):
 
 ![manual-step-4](https://i.imgur.com/ztgHF1n.png)
 
@@ -289,7 +289,7 @@ If you encounter stuff like this, mostly likely you have error on your galaxy fi
 
 ![Map script error](https://i.imgur.com/cjXbq07.jpg)
 
-Currently it is **unable** to call the Heroes' specific debug menu like in SC2, the best way to [debug](https://xkcd.com/1722/) is mostly likely just to print out messages (Text Message).
+It is currently not possible to open the Heroes-specific debug menu as in SC2. The best debugging approach is to print output messages.
 
 ![SC2 debug window](https://i.imgur.com/7IofkYI.png)
 
@@ -299,7 +299,7 @@ Currently it is **unable** to call the Heroes' specific debug menu like in SC2, 
 
 ## Edit the Asset files
 
-Generally, you can replace any in game assets with your own. The game will priorities loading your own asset over the internal ones, provided they are have the same name. For instance, the Raynor-with-a-bunny-ear loading screen in this map, the file is under `(10)trymemode.stormmap/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`, which is to replace the default in-game file: heroes.`stormmod/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`. Note that the path in `base.stormassets` must be the same.
+Generally, you can replace any in game assets with your own. The game will priorities loading your own asset over the internal ones, provided they have the same name. For instance, the *Raynor-with-a-bunny-ear* loading screen image in this map, the file is under `(10)trymemode.stormmap/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`, which is to replace the default in-game file: heroes.`stormmod/base.stormassets/Assets/Textures/storm_ui_loading_startup.dds`. Note that the path in `base.stormassets` must be the same.
 
 You can use this to also replace assets such as but not limited to: `*.dds` (texture), `*.m3` (models) and `*.ogg` (sound/music files).
 
