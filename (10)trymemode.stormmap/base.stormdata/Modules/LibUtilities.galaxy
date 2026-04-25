@@ -46,6 +46,7 @@ trigger libUTIL_gt_StartGame;
 trigger libUTIL_gt_EndGame;
 trigger libUTIL_gt_RestartGame;
 trigger libUTIL_gt_LoadMap;
+trigger libUTIL_gt_RemoveCameraBound;
 trigger libUTIL_gt_SetCameraObject;
 trigger libUTIL_gt_ResetCameraObject;
 trigger libUTIL_gt_ForceRunTrigger;
@@ -559,6 +560,33 @@ void libUTIL_gt_LoadMap_Init () {
     libUTIL_gt_LoadMap = TriggerCreate("libUTIL_gt_LoadMap_Func");
     TriggerAddEventChatMessage(libUTIL_gt_LoadMap, c_playerAny, "lm", false);
     TriggerAddEventChatMessage(libUTIL_gt_LoadMap, c_playerAny, "loadmap", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Remove Camera Bound
+//--------------------------------------------------------------------------------------------------
+bool libUTIL_gt_RemoveCameraBound_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const string lv_defaultCamera = "BlizzardAllStars";
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    CameraSetBounds(PlayerGroupAll(), RegionEntireMap(), true);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Camera Bound"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUTIL_gt_RemoveCameraBound_Init () {
+    libUTIL_gt_RemoveCameraBound = TriggerCreate("libUTIL_gt_RemoveCameraBound_Func");
+    TriggerAddEventChatMessage(libUTIL_gt_RemoveCameraBound, c_playerAny, "rcb", true);
+    TriggerAddEventChatMessage(libUTIL_gt_RemoveCameraBound, c_playerAny, "removecamerabound", true);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1508,6 +1536,7 @@ void libUTIL_InitTriggers () {
     libUTIL_gt_EndGame_Init();
     libUTIL_gt_RestartGame_Init();
     libUTIL_gt_LoadMap_Init();
+    libUTIL_gt_RemoveCameraBound_Init();
     libUTIL_gt_SetCameraObject_Init();
     libUTIL_gt_ResetCameraObject_Init();
     libUTIL_gt_ForceRunTrigger_Init();
