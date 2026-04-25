@@ -38,7 +38,7 @@ class Markdowner {
 const buildUsageDoc = () => {
   const jsonFile = path.join(
     appRoot.path,
-    "(10)trymemode.stormmap/base.stormdata/Modules/doc.json",
+    "docs/gen/usage.json",
   );
 
   if (!fs.existsSync(jsonFile)) {
@@ -65,7 +65,7 @@ const buildUsageDoc = () => {
   md.addEmptyLine = 1;
   md.addRaw = '<a name="meta-top"></a>';
   md.addH1 = jsonData._metadata.MDTitle;
-  md.addRaw = `<sup>*(Generated from [doc.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/(10)trymemode.stormmap/base.stormdata/Modules/doc.json) at ${new Date().toGMTString()})*</sup>`;
+  md.addRaw = `<sup>*(Generated from [usage.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/docs/gen/usage.json) at ${new Date().toGMTString()})*</sup>`;
   if (Array.isArray(jsonData._metadata.MDDescription)) {
     md.addRaw = jsonData._metadata.MDDescription.join("\n");
   } else {

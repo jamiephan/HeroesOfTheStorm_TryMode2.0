@@ -274,4 +274,4 @@ This does not need to do a manual search/replace in Galaxy Editor.
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
 
-A Command to build [usage.md](usage.md) document base on `doc.json` in `./(10)trymemode.stormmap/base.stormdata/Modules`.
+A Command to build [usage.md](usage.md) document base on `usage.json` in `./docs/gen/usage.json`.
