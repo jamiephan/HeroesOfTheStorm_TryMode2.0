@@ -123,7 +123,7 @@ The `path` is relative to `base.stormdata`. If you place it in `(10)trymemode.st
 
 To automate this process, use the [Build XML tool](tools.md#tool---automatically-generate-gamedataxml).
 
-Restart the Try Mode by exiting and re-entering, or by using the [`restartgame`](usage.md#cmd-restartgame) command, you should see Maive's Q Damage is skyrocketed with no cooldown:
+Restart the Try Mode by exiting and re-entering, or by using the [`restartgame`](../usage/LibUtilities#-command-restartgame) command, you should see Maive's Q Damage is skyrocketed with no cooldown:
 
 ![Maiev Q Damage](https://i.imgur.com/yHJjpeo.png)
 

@@ -96,7 +96,7 @@ For example `<CAbilEffectInstant id="ZeratulCleave">` will map to `<CBehaviorAbi
 
 This allows you to freely add any ability to any hero (it will appear in the items bar — the top bar where active items like Ice Block and Cleanse are placed).
 
-To do so, add the behavior to the selected units (e.g using the [chat command](usage.md) `addbehavior MZeratulCleave`)
+To do so, add the behavior to the selected units (e.g using the chat command [`addbehavior MZeratulCleave`](../usage/LibUnits#-command-addbehavior))
 
 {: .note }
 > Note that some abilities have special requirements. For example, ultimates may require `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior — you will need to add these to the unit as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
@@ -118,7 +118,7 @@ Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret
 
 This tool searches through all `<CBehaviorBuff>` entries and maps each to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
-This will generate an ability with the prefixed `MB`. For example, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will generate an ability `MBAurielResurrectLightSpeedControllerBehavior`, You can add this ability as a behavior to units using the [addbehavior](usage.md#cmd-addbehavior) command: `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+This will generate an ability with the prefixed `MB`. For example, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will generate an ability `MBAurielResurrectLightSpeedControllerBehavior`, You can add this ability as a behavior to units using the chat command [`addbehavior MBAurielResurrectLightSpeedControllerBehavior`](../usage/LibUnits#-command-addbehavior).
 
 {: .note }
 > Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
@@ -136,7 +136,7 @@ The generated XML file location is: `./(10)trymemode.stormmap/base.stormdata/Mod
 
 This tool searches through all `<CModel>` entries and maps each to a `<CUnit>`, which can then be controlled on the map.
 
-This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, You can summon this unit using the [summon](usage.md#cmd-summon) command: `summon UNRetreatPing`.
+This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, You can summon this unit using the chat command: []`summon UNRetreatPing`](../usage/LibUnits#-command-summon).
 
 {: .note }
 > Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.

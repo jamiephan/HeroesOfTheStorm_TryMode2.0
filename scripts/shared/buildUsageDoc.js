@@ -155,7 +155,7 @@ const buildUsageDoc = () => {
 
       commands.forEach((command) => {
 
-        libMd.addH2 = `💭 Command: \`${command.command}\`` + (command.uiAvailable ? " (✔ UI)" : "");
+        libMd.addH2 = `💭 Command: \`${command.command}\``;
 
         // Syntax
         libMd.addH3 = "🔍 Syntax:"

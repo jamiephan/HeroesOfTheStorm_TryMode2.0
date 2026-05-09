@@ -13,6 +13,8 @@ A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/)
 - Table of Contents
 {:toc}
 
+---
+
 ## What is this?
 
 [Heroes of the Storm](https://heroesofthestorm.com/) has a built-in Try Mode that can be launched with any hero and any available skin from the Collection tab. The Try Mode includes basic cheats such as setting level, toggling a *slow* cooldown reset, and resetting talents.
@@ -84,8 +86,6 @@ Here is a quick look of the QA cheat menu:
 Heroes of the Storm is built on top of the StarCraft II engine, inheriting some features such as loading custom maps and mods.
 
 Try Mode 2.0 aims to add extra functionality to the original Try Mode and provide various tools for customization. It also generates `.stormmap` map files that include these extra functionalities for various maps that can be loaded into the game. 
-
-For installation guide, please refer to [install.md](install.md).
 
 ### Can I get banned from using it?
 

@@ -1,7 +1,7 @@
 ---
 title: 📚 Funny Stuff Library
 nav_order: 7
-last_modified_date: Sat, 09 May 2026 16:16:29 GMT
+last_modified_date: Sat, 09 May 2026 16:54:44 GMT
 parent: Usage
 ---
 

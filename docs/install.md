@@ -107,7 +107,7 @@ Each commit to GitHub automatically generates a patched version of all maps in t
 
 These maps will automatically include additional functionalities provided in this repo (such as using the debug menu with the `\` key, chat command, XML files, extra UIs).
 
->Note: Some maps may not work properly, showing the "Map Error" screen (as shown in the [Post-Install check](#runStormmap-postInstall) section). This is due to some maps no longer being maintained by Blizzard (surprisingly, Haunted Mines still works). This issue mainly affects Brawl maps.
+>Note: Some maps may not work properly, showing the "Map Error" screen (as shown in the [Post-Install check](#post-installation-check) section). This is due to some maps no longer being maintained by Blizzard (surprisingly, Haunted Mines still works). This issue mainly affects Brawl maps.
 
 >Note: The map `trymode20.stormmap` is the packaged map file for this repo's `./(10)trymemode.stormmap`.
 
