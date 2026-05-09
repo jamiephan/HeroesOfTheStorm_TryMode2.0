@@ -2751,7 +2751,7 @@
           "**This system is still in early development.**",
           "FPS Mode lets you view the map through a first-person camera attached to your unit. The camera continuously looks forward and rotates while the mode is active.",
           "To toggle FPS mode, simply use the `fps` chat command.",
-          "### Controls:",
+          "### Controls",
           " - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)",
           " - `← (arrow key)` : Turn your unit and camera to left.",
           " - `→ (arrow key)` : Turn your unit and camera to right.",
