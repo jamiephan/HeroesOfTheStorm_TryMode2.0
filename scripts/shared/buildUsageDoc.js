@@ -93,6 +93,7 @@ const buildUsageDoc = () => {
   md.addRaw = "title: 💻 Usage"
   md.addRaw = "nav_order: 2"
   md.addRaw = `last_modified_date: ${new Date().toGMTString()}`
+  md.addRaw = "permalink: usage.html"
   md.addRawMD = "---"
   md.addEmptyLine = 1
 

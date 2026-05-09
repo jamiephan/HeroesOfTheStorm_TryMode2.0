@@ -2,6 +2,7 @@
 title: 💻 Usage
 nav_order: 2
 last_modified_date: Sat, 09 May 2026 18:33:34 GMT
+permalink: usage.html
 ---
 
 # 💻 Usage
