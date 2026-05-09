@@ -1,7 +1,7 @@
 ---
 title: 📚 Utilities Library
 nav_order: 1
-last_modified_date: Sat, 09 May 2026 17:26:15 GMT
+last_modified_date: Sat, 09 May 2026 18:18:59 GMT
 parent: 💻 Usage
 ---
 
@@ -488,7 +488,7 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 ### ✏ Description: 
 {: .no_toc }
 Remove the camera bounding box, which is defined in the map editor. This allows the camera to move freely without being limited to a specific area.
->Note: This command cannot be reverted. You will need to restart the game to get the bounding box back.
+>Note: This command cannot be reverted. You will need to restart the current map to get the bounding box back. (e.g the [`restartgame`](../LibUtilities#-command-restartgame) command)
 
 ### ⚙ Parameters:
 {: .no_toc }

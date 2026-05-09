@@ -440,7 +440,7 @@
           "command": "removecamerabound",
           "description": [
             "Remove the camera bounding box, which is defined in the map editor. This allows the camera to move freely without being limited to a specific area.",
-            ">Note: This command cannot be reverted. You will need to restart the game to get the bounding box back."
+            ">Note: This command cannot be reverted. You will need to restart the current map to get the bounding box back. (e.g the [`restartgame`](../LibUtilities#-command-restartgame) command)"
           ],
           "uiAvailable": false,
           "parameters": [],
