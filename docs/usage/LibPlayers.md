@@ -1,7 +1,7 @@
 ---
 title: 📚 Players Library
 nav_order: 3
-last_modified_date: Sat, 09 May 2026 18:33:34 GMT
+last_modified_date: Sat, 09 May 2026 18:52:30 GMT
 parent: 💻 Usage
 ---
 
@@ -21,7 +21,7 @@ Commands related to players, such as scoreboard, respawn timer, etc.
 
 ### ✏ Description: 
 {: .no_toc }
-** ***DEPRECATED: Please use [`selectalltalent`](../LibPlayers#-command-selectalltalent) command instead.*** **
+** ***DEPRECATED: Please use [`selectalltalent`](LibPlayers.md#-command-selectalltalent) command instead.*** **
 
 Add all talents to a player.
 The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.
@@ -196,7 +196,7 @@ The difficulty settings are below:
 {: .no_toc }
 Disable AI for a player.
 
->Note: This also disables AI for units summoned via the [summon](../LibUnits#-command-summon) command.
+>Note: This also disables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
 ### ⚙ Parameters:
 {: .no_toc }
@@ -262,7 +262,7 @@ Disable a talent for all players. Generally found in `<CTalent id="xxxx">`.
 {: .no_toc }
 Enable AI for a player.
 
->Note: This also enables AI for units summoned via the [summon](../LibUnits#-command-summon) command.
+>Note: This also enables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
 ### ⚙ Parameters:
 {: .no_toc }
@@ -512,7 +512,7 @@ To get a reference to the armor value against Structures, the `CatalogReference`
 {: .no_toc }
 Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 
-For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](../LibPlayers#-command-getcatalog) command.
+For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](LibPlayers.md#-command-getcatalog) command.
 
 **Caveats:**
  - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [modding.md](modding.md)).
@@ -566,9 +566,9 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 {: .no_toc }
 Directly modify a catalog value (i.e., XML data) for a player at runtime.
 
-For how to obtain and construct `CatalogReference`, please refer to the [`getcatalog`](../LibPlayers#-command-getcatalog) command.
+For how to obtain and construct `CatalogReference`, please refer to the [`getcatalog`](LibPlayers.md#-command-getcatalog) command.
 
-This is similar to the [`modifycatalog`](../LibPlayers#-command-modifycatalog) command, but uses the `CatalogFieldValueSet()` function directly. If the regular `modifycatalog` command does not work, try this one.
+This is similar to the [`modifycatalog`](LibPlayers.md#-command-modifycatalog) command, but uses the `CatalogFieldValueSet()` function directly. If the regular `modifycatalog` command does not work, try this one.
 
 > Note: This command format is a bit different from the `modifycatalog` command, as it does not require the `CatalogReference` to be separated by comma. Instead, it is separated by space.
 
@@ -982,7 +982,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 {: .no_toc }
 Toggle AI for a player.
 
->Note: This also enables/disables AI for units summoned via the [summon](../LibUnits#-command-summon) command.
+>Note: This also enables/disables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
 ### ⚙ Parameters:
 {: .no_toc }

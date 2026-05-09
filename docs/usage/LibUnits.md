@@ -1,7 +1,7 @@
 ---
 title: 📚 Units Library
 nav_order: 2
-last_modified_date: Sat, 09 May 2026 18:33:34 GMT
+last_modified_date: Sat, 09 May 2026 18:52:30 GMT
 parent: 💻 Usage
 ---
 
@@ -220,7 +220,7 @@ Clear all active behaviors for selected units.
 
 ### ✏ Description: 
 {: .no_toc }
-Clear all summoned unit(s) (spawned via the [summon](../LibUnits#-command-summon) command) for a player. Useful for removing large numbers of summoned units, or when summoned units are untargetable/unselectable and cannot be removed with the [killunits](../LibUnits#-command-killunits) command.
+Clear all summoned unit(s) (spawned via the [summon](LibUnits.md#-command-summon) command) for a player. Useful for removing large numbers of summoned units, or when summoned units are untargetable/unselectable and cannot be removed with the [killunits](LibUnits.md#-command-killunits) command.
 
 >Note: Due to memory limitations, only the **last 500 summoned units** can be removed with this command. Older units will not be affected. To remove ALL summoned units, either respec your hero or restart the game.
 
@@ -580,7 +580,7 @@ Remove an Animation from selected unit(s).
 ### ✏ Description: 
 {: .no_toc }
 Remove a behavior from selected unit(s). Behaviors are generally found in `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
->Tip: Use the [`getbehavior`](../LibUnits#-command-getbehavior) command to list active behaviors.
+>Tip: Use the [`getbehavior`](LibUnits.md#-command-getbehavior) command to list active behaviors.
 
 ### ⚙ Parameters:
 {: .no_toc }
@@ -790,7 +790,7 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 {: .no_toc }
 Spawn unit(s) at the center of the camera.
 >Note: Newly summoned units are automatically added to the selection group.
->Note: To control summoned units, enable multi-selection via the [`alliancecontrolteamselection`](../LibUtilities#-command-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, and also `/ac` if the unit does not belong to you). They will behave like Vikings and Samuro with Illusion Master.
+>Note: To control summoned units, enable multi-selection via the [`alliancecontrolteamselection`](LibUtilities.md#-command-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, and also `/ac` if the unit does not belong to you). They will behave like Vikings and Samuro with Illusion Master.
 >Note: If your hero is Samuro, multi-selection may behave unexpectedly due to Blizzard's implementation.
 
 ### ⚙ Parameters:

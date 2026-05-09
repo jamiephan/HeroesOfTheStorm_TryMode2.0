@@ -1,7 +1,7 @@
 ---
 title: 📚 Utilities Library
 nav_order: 1
-last_modified_date: Sat, 09 May 2026 18:33:34 GMT
+last_modified_date: Sat, 09 May 2026 18:52:30 GMT
 parent: 💻 Usage
 ---
 
@@ -53,7 +53,7 @@ Add a marker at the position of the first selected unit.
 {: .no_toc }
 Add a marker at the center position of the camera.
 
->Tip: Also use [`togglecrosshair`](../LibUtilities#-command-togglecrosshair) command to set the location precisely.
+>Tip: Also use [`togglecrosshair`](LibUtilities.md#-command-togglecrosshair) command to set the location precisely.
 
 ### ⚙ Parameters:
 {: .no_toc }
@@ -815,7 +815,7 @@ This is useful for bypassing the limit of Try Mode's Toggle Cooldown, which has 
 
 ### ✏ Description: 
 {: .no_toc }
-Toggle a crosshair at the center of the camera. This allows for more precise placement of [summon units](../LibUnits#-command-summon) and [adding effects](../LibUnits#-command-addeffectcamera).
+Toggle a crosshair at the center of the camera. This allows for more precise placement of [summon units](LibUnits.md#-command-summon) and [adding effects](LibUnits.md#-command-addeffectcamera).
 
 ### ⚙ Parameters:
 {: .no_toc }
@@ -904,9 +904,9 @@ This command creates a circle centered on your camera. Selected units will begin
 This is useful for practicing various things, such as skillshots.
 Run this command again to turn off this functionality.
 
->Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](../LibUtilities#-command-alliancecontrolteamselection) to select desired units, then use [summon units](../LibUnits#-command-summon) to let them move randomly.
+>Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](LibUtilities.md#-command-alliancecontrolteamselection) to select desired units, then use [summon units](LibUnits.md#-command-summon) to let them move randomly.
 
->Tip: Also use the [`addbehavior`](../LibUnits#-command-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable auto attacks.
+>Tip: Also use the [`addbehavior`](LibUnits.md#-command-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable auto attacks.
 
 >Note: You can still issue commands to units that are moving randomly, but once all commands are finished (e.g., the unit stops), it will resume moving randomly within the circle.
 
