@@ -1,8 +1,8 @@
 {
   "_metadata": {
-    "tagetMarkdownFile": "./docs/usage/index.md",
-    "MDTitle": "Usage",
-    "MDDescription": [
+    "file": "./docs/usage/index.md",
+    "title": "Usage",
+    "description": [
       "Most functionality is accessed through chat commands. Simply type a command in the chat box, just as you would when chatting with teammates.",
       ">Note: Remember to use the Allies or All chat channel when entering commands. Public chat channels and Private Messages (PM) do not work.",
       "All commands have a short alias with identical functionality, allowing for less typing.",
@@ -12,24 +12,22 @@
   "libraries": [
     {
       "_metadata": {
-        "libraryName": "Module Loader",
-        "libraryFile": "LibModuleLoader.galaxy",
-        "libraryId": "LibMODL",
-        "libraryDescription": "A unified module loader library for selecting which modules to load.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor.",
-        "tagetMarkdownFile": "./docs/usage/LibModuleLoader.md"
+        "title": "Module Loader",
+        "name": "LibModuleLoader.galaxy",
+        "id": "LibMODL",
+        "description": "A unified module loader library for selecting which modules to load.",
+        "overrideContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor.",
+        "file": "./docs/usage/LibModuleLoader.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Utilities",
-        "libraryFile": "LibUtilities.galaxy",
-        "libraryId": "LibUTIL",
-        "libraryDescription": "A library providing utility tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null,
-        "tagetMarkdownFile": "./docs/usage/LibUtilities.md"
+        "title": "Utilities",
+        "name": "LibUtilities.galaxy",
+        "id": "LibUTIL",
+        "description": "A library providing utility tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibUtilities.md"
       },
       "commands": [
         {
@@ -866,13 +864,12 @@
     },
     {
       "_metadata": {
-        "libraryName": "Units",
-        "libraryFile": "LibUnits.galaxy",
-        "libraryId": "LibUNIT",
-        "libraryDescription": "A library with commands related to selected units, such as kill, spawn, etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null,
-        "tagetMarkdownFile": "./docs/usage/LibUnits.md"
+        "title": "Units",
+        "name": "LibUnits.galaxy",
+        "id": "LibUNIT",
+        "description": "A library with commands related to selected units, such as kill, spawn, etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibUnits.md"
       },
       "commands": [
         {
@@ -1672,13 +1669,12 @@
     },
     {
       "_metadata": {
-        "libraryName": "Players",
-        "libraryFile": "LibPlayers.galaxy",
-        "libraryId": "LibPLYR",
-        "libraryDescription": "Commands related to players, such as scoreboard, respawn timer, etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null,
-        "tagetMarkdownFile": "./docs/usage/LibPlayers.md"
+        "title": "Players",
+        "name": "LibPlayers.galaxy",
+        "id": "LibPLYR",
+        "description": "Commands related to players, such as scoreboard, respawn timer, etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibPlayers.md"
       },
       "commands": [
         {
@@ -2731,28 +2727,26 @@
     },
     {
       "_metadata": {
-        "libraryName": "Builder Mode",
-        "libraryFile": "LibBuilderMode.galaxy",
-        "libraryId": "libBULM",
-        "libraryDescription": "A Builder Library that allows you to place objects anywhere in the map.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "Builder Mode",
+        "name": "LibBuilderMode.galaxy",
+        "id": "libBULM",
+        "description": "A Builder Library that allows you to place objects anywhere in the map.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "Builder mode lets you place objects anywhere on the map. Units will continuously teleport to your cursor (following it). Remember to select `/ac` and `ts` in the QA menu (these will be added automatically in a future update).",
           "To use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.",
           "To place the unit(s), press `backspace` again to deactivate builder mode."
         ],
-        "tagetMarkdownFile": "./docs/usage/LibBuilderMode.md"
+        "file": "./docs/usage/LibBuilderMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "FPS Mode",
-        "libraryFile": "LibFPSMode.galaxy",
-        "libraryId": "libFPSM",
-        "libraryDescription": "A First Person Shooter like Library that allows you to see the map in first person camera.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "FPS Mode",
+        "name": "LibFPSMode.galaxy",
+        "id": "libFPSM",
+        "description": "A First Person Shooter like Library that allows you to see the map in first person camera.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "FPS Mode lets you view the map through a first-person camera attached to your unit. The camera continuously looks forward and rotates while the mode is active.",
           "To toggle FPS mode, simply use the `fps` chat command.",
@@ -2763,34 +2757,32 @@
           " - `↑ (arrow key)` : Turn your camera upwards.",
           " - `↓ (arrow key)` : Turn your camera downwards."
         ],
-        "tagetMarkdownFile": "./docs/usage/LibFPSMode.md"
+        "file": "./docs/usage/LibFPSMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Free Camera Mode",
-        "libraryFile": "LibFreeCameraMode.galaxy",
-        "libraryId": "libFRCM",
-        "libraryDescription": "Free Camera Mode allows you to change the angle of the camera easily.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "Free Camera Mode",
+        "name": "LibFreeCameraMode.galaxy",
+        "id": "libFRCM",
+        "description": "Free Camera Mode allows you to change the angle of the camera easily.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "Free Camera Mode lets you use the `Middle Mouse Wheel` to freely change your camera angle and direction.",
           "To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!",
           ">Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active"
         ],
-        "tagetMarkdownFile": "./docs/usage/LibFreeCameraMode.md"
+        "file": "./docs/usage/LibFreeCameraMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Funny Stuff",
-        "libraryFile": "LibFunny.galaxy",
-        "libraryId": "libFUNY",
-        "libraryDescription": "Random useless stuff just for the lolz.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ==",
-        "tagetMarkdownFile": "./docs/usage/LibFunny.md"
+        "title": "Funny Stuff",
+        "name": "LibFunny.galaxy",
+        "id": "libFUNY",
+        "description": "Random useless stuff just for the lolz.",
+        "overrideContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ==",
+        "file": "./docs/usage/LibFunny.md"
       }
     }
   ]
