@@ -1,10 +1,10 @@
 ---
-title: ⬇ Installation and Running
+title: ⬇️ Installation and Running
 nav_order: 1
 last_modified_date: 2026-05-09 20:00:00
 ---
 
-# ⬇ Installation and Running
+# ⬇️ Installation and Running
 {: .no_toc }
 
 - Table of Contents
@@ -39,7 +39,7 @@ You can download it at: [https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.
 
 You should get the similar folder structure as below:
 
-```
+```text
   Heroes of the Storm/
     ├── HeroesData/
     ├── maps/
@@ -59,7 +59,7 @@ Then, you can launch try mode in the game and the modified map should be launche
 
 If you want to replace the in game tutorial (Setting -> Tutorial) instead, you can place it in the following location:
 
-```
+```text
   Heroes of the Storm/
     ├── HeroesData/
     ├── maps/
@@ -158,7 +158,7 @@ In the [Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releas
 
 Create a `maps` folder in `Heroes_Of_The_Storm_Install_Location/` and copy the downloaded `trymode20.stormmap` into it:
 
-```
+```text
   Heroes of the Storm/
     ├── HeroesData/
     ├── maps/                     <- Create This folder

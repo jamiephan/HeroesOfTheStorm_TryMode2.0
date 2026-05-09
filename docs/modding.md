@@ -1,10 +1,10 @@
 ---
-title: ⚙ Modding
+title: ⚙️ Modding
 nav_order: 3
 last_modified_date: 2026-05-09 20:00:00
 ---
 
-# ⚙ Modding
+# ⚙️ Modding
 {: .no_toc }
 
 - Table of Contents
@@ -16,7 +16,7 @@ last_modified_date: 2026-05-09 20:00:00
 
 If you would like to include a `*.stormmod` file into this map, you can copy the file into `HEROES_OF_THE_STORM/mods/yourmod.stormmod`:
 
-```
+```text
   Heroes of the Storm
     ├── HeroesData
     ├── mods

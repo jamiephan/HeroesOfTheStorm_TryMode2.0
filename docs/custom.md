@@ -2,7 +2,7 @@
 title: ➕ Adding the mod to your map
 nav_order: 0
 last_modified_date: 2026-05-09 20:00:00
-parent: ⚙ Modding
+parent: ⚙️ Modding
 ---
 
 # ➕ Adding the mods to your map
