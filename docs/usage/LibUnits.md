@@ -1,7 +1,7 @@
 ---
 title: 📚 Units Library
 nav_order: 2
-last_modified_date: Sat, 09 May 2026 18:18:59 GMT
+last_modified_date: Sat, 09 May 2026 18:33:34 GMT
 parent: 💻 Usage
 ---
 
@@ -41,6 +41,8 @@ Add a behavior to selected unit(s). Behaviors are generally found in `<CBehavior
 {: .no_toc }
 - ✔ **Yes.** Use the command `addbehaviorui` or `adbui` to toggle the UI counterpart of this command.
 
+---
+
 ## 💭 Command: `addeffect`
 
 ### 🔍 Syntax:
@@ -75,6 +77,8 @@ Add an effect to selected unit(s). Effects are generally found in `<CEffect*>`, 
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `addeffectcamera`
 
@@ -118,6 +122,8 @@ Add an effect to the center of the camera. Effects are generally found in `<CEff
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `addweapon`
 
 ### 🔍 Syntax:
@@ -145,6 +151,8 @@ Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id=
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `changeunitownership`
 
@@ -175,6 +183,8 @@ Changes ownership of the selected unit(s).
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `clearbehavior`
 
 ### 🔍 Syntax:
@@ -199,6 +209,8 @@ Clear all active behaviors for selected units.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `clearunits`
 
@@ -233,6 +245,8 @@ Clear all summoned unit(s) (spawned via the [summon](../LibUnits#-command-summon
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `clearweapon`
 
 ### 🔍 Syntax:
@@ -257,6 +271,8 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `enablecollision`
 
@@ -284,6 +300,8 @@ Enable collision for selected unit(s).
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `getbehavior`
 
 ### 🔍 Syntax:
@@ -308,6 +326,8 @@ List all active behaviors for selected units.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `getselectedunits`
 
@@ -338,6 +358,8 @@ Get all selected units from a specific player.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `getunitownership`
 
 ### 🔍 Syntax:
@@ -362,6 +384,8 @@ Gets the Ownership (Player ID) of selected unit(s).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `getunits`
 
@@ -394,6 +418,8 @@ Get all units owned by a specific player.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `getweapon`
 
 ### 🔍 Syntax:
@@ -418,6 +444,8 @@ Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `killallunits`
 
@@ -452,6 +480,8 @@ Unlike other commands that accept a player ID, this command also accepts Player 
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `killunits`
 
 ### 🔍 Syntax:
@@ -476,6 +506,8 @@ Instantly kill all selected unit(s).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `playanimation`
 
@@ -506,6 +538,8 @@ Play an Animation for selected unit(s).
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removeanimation`
 
 ### 🔍 Syntax:
@@ -534,6 +568,8 @@ Remove an Animation from selected unit(s).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `removebehavior`
 
@@ -564,6 +600,8 @@ Remove a behavior from selected unit(s). Behaviors are generally found in `<CBeh
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removecollision`
 
 ### 🔍 Syntax:
@@ -590,6 +628,8 @@ Remove collision for selected unit(s).
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removeeffect`
 
 ### 🔍 Syntax:
@@ -615,6 +655,8 @@ Remove an effect from selected unit(s). Effects are generally found in `<CEffect
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `removeeffectcamera`
 
@@ -644,6 +686,8 @@ Remove an effect from the center of the camera. Effects are generally found in `
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removeweapon`
 
 ### 🔍 Syntax:
@@ -671,6 +715,8 @@ Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `replaceunit`
 
@@ -701,6 +747,8 @@ Replace all selected units with the target unit.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `sendactormessage`
 
 ### 🔍 Syntax:
@@ -729,6 +777,8 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `summon`
 
@@ -782,6 +832,8 @@ Spawn unit(s) at the center of the camera.
 {: .no_toc }
 - ✔ **Yes.** Use the command `summonui` or `sumui` to toggle the UI counterpart of this command.
 
+---
+
 ## 💭 Command: `togglenoweaponcd`
 
 ### 🔍 Syntax:
@@ -807,6 +859,8 @@ Continuously reset the weapon (auto attack) cooldown, effectively increasing att
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `toggleoutputid`
 
 ### 🔍 Syntax:
@@ -831,6 +885,8 @@ Toggle unit ID display mode. When enabled, left-clicking a unit shows its ID on 
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `unitproperty`
 
@@ -901,3 +957,5 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---

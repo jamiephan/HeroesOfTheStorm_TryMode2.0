@@ -1,7 +1,7 @@
 ---
 title: 📚 Players Library
 nav_order: 3
-last_modified_date: Sat, 09 May 2026 18:18:59 GMT
+last_modified_date: Sat, 09 May 2026 18:33:34 GMT
 parent: 💻 Usage
 ---
 
@@ -54,6 +54,8 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `addqueststack`
 
 ### 🔍 Syntax:
@@ -86,6 +88,8 @@ Add a specific amount of quest stacks to a player.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `addtalent`
 
@@ -120,6 +124,8 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `difficultyai`
 
@@ -178,6 +184,8 @@ The difficulty settings are below:
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `disableai`
 
 ### 🔍 Syntax:
@@ -211,6 +219,8 @@ Disable AI for a player.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `disabletalent`
 
 ### 🔍 Syntax:
@@ -239,6 +249,8 @@ Disable a talent for all players. Generally found in `<CTalent id="xxxx">`.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `enableai`
 
@@ -273,6 +285,8 @@ Enable AI for a player.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `enabletalent`
 
 ### 🔍 Syntax:
@@ -300,6 +314,8 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `experience`
 
@@ -352,6 +368,8 @@ The `SourceId` is an integer with the following values:
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `getcatalog`
 
@@ -482,6 +500,8 @@ To get a reference to the armor value against Structures, the `CatalogReference`
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `modifycatalog`
 
 ### 🔍 Syntax:
@@ -533,6 +553,8 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `modifycatalogvalue`
 
@@ -595,6 +617,8 @@ This is similar to the [`modifycatalog`](../LibPlayers#-command-modifycatalog) c
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removealltalent`
 
 ### 🔍 Syntax:
@@ -634,6 +658,8 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removequeststack`
 
 ### 🔍 Syntax:
@@ -666,6 +692,8 @@ Remove a specific amount of quest stacks from a player.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `removetalent`
 
@@ -701,6 +729,8 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `resetoverlay`
 
 ### 🔍 Syntax:
@@ -725,6 +755,8 @@ Reset to the default overlay, removing all custom overlays.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `respawnpoint`
 
@@ -765,6 +797,8 @@ Modify the respawn point for a player. Either at the current camera location or 
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `respawntime`
 
 ### 🔍 Syntax:
@@ -793,6 +827,8 @@ Override the current respawn timer for all players.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `selectalltalent`
 
@@ -828,6 +864,8 @@ Select all talents for a player. Ever wonder what a Q and AA build Zeratul at th
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `setmasteryring`
 
 ### 🔍 Syntax:
@@ -857,6 +895,8 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `setoverlay`
 
 ### 🔍 Syntax:
@@ -885,6 +925,8 @@ Set the in-game overlay (e.g., the golden overlay for Uther's Divine Shield).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `setscore`
 
@@ -928,6 +970,8 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `toggleai`
 
 ### 🔍 Syntax:
@@ -961,6 +1005,8 @@ Toggle AI for a player.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `togglemassquest`
 
 ### 🔍 Syntax:
@@ -991,6 +1037,8 @@ Toggle mass quest completion mode, granting stacks every game tick (0.0625s) for
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `togglepausegametalent`
 
 ### 🔍 Syntax:
@@ -1016,6 +1064,8 @@ Toggle whether to pause the game when viewing talents, similar to heroes tutoria
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `toggletalenttree`
 
 ### 🔍 Syntax:
@@ -1040,3 +1090,5 @@ Toggle the display of the talents selection tree.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---

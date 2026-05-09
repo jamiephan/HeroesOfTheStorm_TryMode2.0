@@ -204,6 +204,8 @@ const buildUsageDoc = () => {
             libMd.addRaw = "- ❌ **Not Implemented**";
           }
         }
+
+        libMd.addLine = 1
       });
     }
 

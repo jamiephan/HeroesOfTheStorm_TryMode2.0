@@ -1,7 +1,7 @@
 ---
 title: 📚 Utilities Library
 nav_order: 1
-last_modified_date: Sat, 09 May 2026 18:18:59 GMT
+last_modified_date: Sat, 09 May 2026 18:33:34 GMT
 parent: 💻 Usage
 ---
 
@@ -41,6 +41,8 @@ Add a marker at the position of the first selected unit.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `addmarkercamera`
 
 ### 🔍 Syntax:
@@ -71,6 +73,8 @@ Add a marker at the center position of the camera.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `alliancecontrolteamselection`
 
 ### 🔍 Syntax:
@@ -96,6 +100,8 @@ This enables or disables "Alliance Control" (control units from other players, i
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `clear`
 
@@ -126,6 +132,8 @@ Clear all text messages, including chat and debug messages with an optional dela
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `clearmarker`
 
 ### 🔍 Syntax:
@@ -150,6 +158,8 @@ Clear all created markers.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `colormarker`
 
@@ -194,6 +204,8 @@ Change the color of a specific marker using an RGB value. The new color also app
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `endgame`
 
 ### 🔍 Syntax:
@@ -218,6 +230,8 @@ End the game instantly and kick all players from the game.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `floatingcombattext`
 
@@ -282,6 +296,8 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `forceruntrigger`
 
@@ -349,6 +365,8 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `getmarker`
 
 ### 🔍 Syntax:
@@ -376,6 +394,8 @@ Get a Markers position in (X, Y, Z).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `loadmap`
 
@@ -416,6 +436,8 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `minionwaveinterval`
 
 ### 🔍 Syntax:
@@ -449,6 +471,8 @@ Get or set the minion wave spawn interval. Usually 30s, or 15s in ARAM.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `playcutscene`
 
 ### 🔍 Syntax:
@@ -479,6 +503,8 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `removecamerabound`
 
 ### 🔍 Syntax:
@@ -504,6 +530,8 @@ Remove the camera bounding box, which is defined in the map editor. This allows 
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `removemarker`
 
@@ -533,6 +561,8 @@ Removes a specific marker.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `resetcameraobject`
 
 ### 🔍 Syntax:
@@ -557,6 +587,8 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `resetgamespeed`
 
@@ -583,6 +615,8 @@ Reset the game speed to 2 (Normal).
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `restartgame`
 
 ### 🔍 Syntax:
@@ -608,6 +642,8 @@ Restart the map without needing to re-enter. This is extremely useful when testi
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `setcameraobject`
 
@@ -637,6 +673,8 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `setgamespeed`
 
@@ -676,6 +714,8 @@ The game speed must be between 0 and 4:
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `startgame`
 
 ### 🔍 Syntax:
@@ -700,6 +740,8 @@ Start the game instantly (timer start, gate open, etc).
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `string`
 
@@ -735,6 +777,8 @@ Useful for quickly displaying strings from internal functions.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `togglecdr`
 
 ### 🔍 Syntax:
@@ -761,6 +805,8 @@ This is useful for bypassing the limit of Try Mode's Toggle Cooldown, which has 
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `togglecrosshair`
 
 ### 🔍 Syntax:
@@ -785,6 +831,8 @@ Toggle a crosshair at the center of the camera. This allows for more precise pla
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `toggledebugmode`
 
@@ -811,6 +859,8 @@ Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `togglefogofwar`
 
 ### 🔍 Syntax:
@@ -835,6 +885,8 @@ Toggle Fog Of War. This can enable or disable full map vision.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `togglerandommovement`
 
@@ -877,6 +929,8 @@ Run this command again to turn off this functionality.
 {: .no_toc }
 - ❌ **Not Implemented**
 
+---
+
 ## 💭 Command: `toggleterrainindicator`
 
 ### 🔍 Syntax:
@@ -901,6 +955,8 @@ Toggle the Terrain Indicator (used by Diablo, Auriel, etc.) for any unit.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `toggleui`
 
@@ -927,6 +983,8 @@ Toggle the UI. This hides or shows all UI elements, including the HP bar, talent
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
 
 ## 💭 Command: `wingame`
 
@@ -956,3 +1014,5 @@ Generally left team is **Team 1** and right team is **Team 2**.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ❌ **Not Implemented**
+
+---
