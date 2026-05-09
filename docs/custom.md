@@ -1,5 +1,11 @@
-[◁ Back to Home](index.md)
-# Adding the mods to your map
+---
+title: ➕ Adding the mod to your map
+nav_order: 0
+last_modified_date: 2026-05-09 20:00:00
+parent: ⚙ Modding
+---
+
+# ➕ Adding the mods to your map
 
 ## Modules
 
@@ -31,10 +37,10 @@ If you are developing a map, you should have a `MapScript.galaxy` file in the ro
 2. For the first few lines, you should see bunch of `include "XXXX"`. (If not, just add it on top of the file.)
 3. After the last line, add the code in a new line: `include "Modules/LibModuleLoader"`:
      
-        include "XXXXXXX"
-        include "XXXXXXX"
-        ...
-        include "Modules/LibModuleLoader"
+  include "XXXXXXX"
+  include "XXXXXXX"
+  ...
+  include "Modules/LibModuleLoader"
         
 4. Then find the function named `InitLibs ()`, which look like this:
 
@@ -54,13 +60,12 @@ If you are developing a map, you should have a `MapScript.galaxy` file in the ro
             ...
             libMODL_InitLib();
         }
-6. Save the file and open the map, you should see some modules loaded message appear: 
 
-![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
+6. Save the file and open the map, you should see some modules loaded message appear:
+  ![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
 
 7. If there any errors, which will looks like this, then check your code again:
-
-![Map script error](https://i.imgur.com/cjXbq07.jpg)
+  ![Map script error](https://i.imgur.com/cjXbq07.jpg)
 
 
 ## How to use in your own Mod
@@ -100,8 +105,8 @@ If you are developing a mod, you should have a created a `.galaxy` file inside `
         }
 6. Save the file and open the map, you should see some modules loaded message appear:
 
-![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
+  ![Loaded Modules](https://i.imgur.com/Jwci20Y.jpg)
 
 7. If there any errors, which will looks like this, then check your code again:
 
-![Map script error](https://i.imgur.com/cjXbq07.jpg)
+  ![Map script error](https://i.imgur.com/cjXbq07.jpg)

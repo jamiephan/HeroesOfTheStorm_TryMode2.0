@@ -1,151 +1,151 @@
-[◁ Back to Home](index.md)
-# Tools
+---
+title: 🛠 Tools and Utilities
+nav_order: 4
+last_modified_date: 2026-05-09 20:00:00
+---
+
+# 🛠 Tools and Utilities
+{: .no_toc }
+
+- Table of Contents
+{:toc}
 
 ## Prerequisite
 
-- Node.js: (Latest or LTS should be fine)
+### Install dependency
 
-After installing the libraries and applications above, run `npm install` in this directory.
+- [Node.js](https://nodejs.org): (Latest or LTS should be fine)
 
-## Pre-usage Configuration (\*Required)
+After installing the the applications above, run `npm install` in this directory.
+
+### Configuration
 
 All settings are stored in the `.env` file at the root of the project directory.
 
-Before using any tools, rename `.env.example` to `.env` (removing the `.example` extension) and adjust the configuration as needed.
+Before using any tools, rename `.env.example` to `.env` and adjust the configuration as needed.
 
 The current values required are:
 
-| Key                                          | Type   | Description                                                                                                                                                                                                                  |
-|----------------------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `HEROES_OF_THE_STORM_INSTALL_LOCATION` | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`. |
-| `TOOLS_USE_CASC_ONLINE_MODE` | Bool | Whether to use the online data when extracting game files (will not extract from `HEROES_OF_THE_STORM_INSTALL_LOCATION`) |
-| `TOOLS_KEEP_CASC_ONLINE_MODE_CACHE` | Bool | Whether to cache the online data files |
-| `TOOLS_XML_MAIN_XML_PATH` | String | The location of `base.stormdata/gamedata.xml` file. Default: `./(10)trymemode.stormmap/base.stormdata/GameData.xml` |
-| `TOOLS_XML_MODS_DIR` | String | Default: The location where the XML mods are stored. `./(10)trymemode.stormmap/base.stormdata/Mods` |
-| `TOOLS_GAMEDATA_DIR` | String | The location of `base.stormdata` directory. Default: `./(10)trymemode.stormmap/base.stormdata` |
-| `TOOLS_S2MA_SAVE_LOCATION` | String | The save location for `*.s2ma` files. Default: `./s2ma` |
-| `TOOLS_MIMIC_LIBRARY_SAVE_LOCATION` | String | The location to save the mimic libraries. Default: `./(10)trymemode.stormmap/base.stormdata/ModuleMimicLibs/InternalMimics` |
-| `TOOLS_MIMIC_LIBRARY_IMPORT_PREFIX` | String | The prefix of the import mimic library, relative to `TOOLS_GAMEDATA_DIR`. Default: `ModuleMimicLibs/InternalMimics/` |
-| `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules. Default: `./(10)trymemode.stormmap/base.stormdata/Modules` |
-| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml` |
-| `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/BehaviorMimic.xml` |
-| `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter). Default: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml` |
-
-
 >Note: In most cases, only `HEROES_OF_THE_STORM_INSTALL_LOCATION` needs to be set. This is the install location for Heroes of the Storm
 
+|Key|Type|Description|Default Value|
+|-|-|-|-|
+| `HEROES_OF_THE_STORM_INSTALL_LOCATION` | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`. |`C:/Program Files/Heroes of the Storm`|
+| `TOOLS_USE_CASC_ONLINE_MODE` | Bool | Whether to use the online data when extracting game files (will not extract from `HEROES_OF_THE_STORM_INSTALL_LOCATION`) |`false`|
+| `TOOLS_KEEP_CASC_ONLINE_MODE_CACHE` | Bool | Whether to cache the online data files |`true`|
+| `TOOLS_XML_MAIN_XML_PATH` | String | The location of `base.stormdata/gamedata.xml` file.|`./(10)trymemode.stormmap/base.stormdata/GameData.xml`|
+| `TOOLS_XML_MODS_DIR` | String | The location where the XML mods are stored.|`./(10)trymemode.stormmap/base.stormdata/Mods`|
+| `TOOLS_GAMEDATA_DIR` | String | The location of `base.stormdata` directory.|`./(10)trymemode.stormmap/base.stormdata`|
+| `TOOLS_S2MA_SAVE_LOCATION` | String | The save location for `*.s2ma` files.|`./s2ma`|
+| `TOOLS_MIMIC_LIBRARY_SAVE_LOCATION` | String | The location to save the mimic libraries.|`./(10)trymemode.stormmap/base.stormdata/ModuleMimicLibs/InternalMimics`|
+| `TOOLS_MIMIC_LIBRARY_IMPORT_PREFIX` | String | The prefix of the import mimic library, relative to `TOOLS_GAMEDATA_DIR`.|`ModuleMimicLibs/InternalMimics/`|
+| `TOOLS_UPDATE_LIBRARY_LIBRARIES_LOCATION` | String | The location of the galaxy modules.|`./(10)trymemode.stormmap/base.stormdata/Modules`|
+| `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION` | String | The location which Mimic Ability tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter).| `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`|
+| `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION` | String | The location which Mimic Behavior tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter).|`./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/BehaviorMimic.xml`|
+| `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION` | String | The location which Mimic Model tool will produce. Please have it inside `TOOLS_XML_MODS_DIR` (Any level subdirectory does not matter).|`./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml`|
 
-## Scripts
+---
 
->Note: Tools that require extraction from Heroes of the Storm game files may take some time if you using CASC online mode (`TOOLS_USE_CASC_ONLINE_MODE=true`).
+## Tools and Utilities
 
-<a name="tools-symlink"></a>
-
-### Symbolic Linker Tool
+### Utility - Symbolic Linker
 
 **Command**: `npm run util:symlink`
 
-This tool creates a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, mirroring the directory so that edits made in this repo are reflected in the actual Try Mode map.
+This utility creates a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_link) to the Heroes of the Storm installation folder, mirroring the directory so that edits made in this repo are reflected in the actual Try Mode map.
 
-This command only needs to be run once if it completes successfully.
+{: .important }
+> This command only needs to be run once if it completes successfully.
 
-<a name="tools-s2ma"></a>
+---
 
-### Finder Tool for `*.s2ma`
+### Utility - Finder Tool for `*.s2ma`
 
 **Command**: `npm run extract:s2ma`
 
-
 `*.s2ma` files are the generated libraries for Heroes of the Storm and also contain actual map files.
 
-The tool will find all of the `*.s2ma` files and output them to `s2ma/` directory.
+The tool will extract all of the `*.s2ma` files and output them to `s2ma/` directory.
 
 To view or extract them, I suggest uses [MPQ Editor](http://www.zezula.net/en/mpq/download.html).
 
----
-<a name="tools-buildmimicabilities"></a>
+> Note: This is the same as [s2ma repo](https://github.com/jamiephan/HeroesOfTheStorm_S2MA)
 
-### Ability Mimic Generator
+---
+
+### Tool - Automatically generate `GameData.XML`
+
+**Command**: `npm run build:xml`
+
+> Use `npm run watch:xml` for automatically run the command above when the files were changed
+
+This tool automatically generates `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, including all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods` by scanning through all subdirectories. 
+
+{: .note }
+>Note: It **will ignore** any files that do not end with `.xml` (case-insensitive) and **does not** validate XML syntax.
+
+---
+
+### Tool - Ability Mimic Generator
 
 **Command**: `npm run build:mimicabilities`
 
 This tool searches through most abilities (Q, W, E, R, represented as `<CAbil*>`) and maps each to a corresponding `<CBehaviorAbility>`, with the ID prefixed with `"M"`.
 
-For example `<CAbilEffectInstant id="ZeratulCleave">` => `<CBehaviorAbility id="MZeratulCleave">`.
+For example `<CAbilEffectInstant id="ZeratulCleave">` will map to `<CBehaviorAbility id="MZeratulCleave">`.
 
 This allows you to freely add any ability to any hero (it will appear in the items bar — the top bar where active items like Ice Block and Cleanse are placed).
 
-To do so, add the behavior to the selected units (e.g using the [chat command](usage.md) `adb MZeratulCleave`)
+To do so, add the behavior to the selected units (e.g using the chat command [`addbehavior MZeratulCleave`](../usage/LibUnits#-command-addbehavior))
 
-Note that some abilities have special requirements. For example, ultimates may require `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior — you will need to add these to the unit as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
+{: .note }
+> Note that some abilities have special requirements. For example, ultimates may require `Ultimate2Unlocked` or `Ultimate2Unlocked` behavior — you will need to add these to the unit as well (e.g chat command `adb Ultimate2Unlocked`). Details on each abilities requirements will be shown inside the generated XML file.
 
->Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
+{: .note }
+> Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
-
-Altering `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
-
+The generated XML file location is: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`. You can change it with `.env` variable: `TOOLS_MIMC_ABILITY_XML_GENERATION_LOCATION`
 
 Demo: Alarak with Zeratul's Cleave, VP, 2 banner from Varian, Gazlowe's Turret 
 
 ![Alarak with extra abilities](https://i.imgur.com/11ogJyt.png)
 
-
 ---
-<a name="tools-buildmimicbehaviors"></a>
 
-### `<CBehaviorBuff>` Mimic Generator
+### Tool - Behavior Mimic Generator
 
 **Command**: `npm run build:mimicbehaviors`
 
 This tool searches through all `<CBehaviorBuff>` entries and maps each to a *toggleable* hotkey button, similar to how Ice Block / Spell Shield works.
 
-This will generate an ability with the prefixed `MB`. For instance, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will have an ability `MBAurielResurrectLightSpeedControllerBehavior`, You can add this ability as a behavior to units using the [addbehavior](usage.md#cmd-addbehavior) command: `addbehavior MBAurielResurrectLightSpeedControllerBehavior`.
+This will generate an ability with the prefixed `MB`. For example, the behavior `AurielResurrectLightSpeedControllerBehavior` (The behavior that gives massive movement speed to units that are resurrected by Auriel Lv20 Resurrection talent) will generate an ability `MBAurielResurrectLightSpeedControllerBehavior`, You can add this ability as a behavior to units using the chat command [`addbehavior MBAurielResurrectLightSpeedControllerBehavior`](../usage/LibUnits#-command-addbehavior).
 
->Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
+{: .note }
+> Note: This will also respect the game settings, e.g Stuns and Silences will disable hotkey bars. Therefore it is not recommended to use `MBPermaStun` (Behavior Buff: `PermaStun`) or `MBPermaSilence` (Behavior Buff: `PermaSilence`) since you cannot active again to cancel it. You will need to respawn / remove the behavior (not the ability but actual behavior buff) if you would like to regain control.
 
->Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
+{: .note }
+> Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`
-
-Altering `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
-
+The generated XML file location is: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/AbilityMimic.xml`. You can change it with `.env` variable: `TOOLS_MIMC_BEHAVIOR_XML_GENERATION_LOCATION`
 
 ---
-<a name="tools-buildmimicmodels"></a>
 
-### `<CModel>` Mimic Generator
+### Tool - Model Mimic Generator
 
 **Command**: `npm run build:mimicmodels`
 
 This tool searches through all `<CModel>` entries and maps each to a `<CUnit>`, which can then be controlled on the map.
 
-This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, You can summon this unit using the [summon](usage.md#cmd-summon) command: `summon UNRetreatPing`.
+This will generate a unit with the prefixed `UN`. For instance, the model `RetreatPing` (White Flag retreat ping model) will have a unit `UNRetreatPing`, You can summon this unit using the chat command: []`summon UNRetreatPing`](../usage/LibUnits#-command-summon).
 
->Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
+{: .note }
+> Note: After generation, it will run a function similar to `npm run build:xml` once, since its a XML mod after all.
 
-Generated XML file location: `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml`
-
-Altering `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
-
+The generated XML file location is: : `./(10)trymemode.stormmap/base.stormdata/Mods/GameData/HeroesMod/ModelMimic.xml` You can change it with `.env` variable: `TOOLS_MIMC_MODEL_XML_GENERATION_LOCATION`
 
 ---
-<a name="tools-buildxml"></a>
 
-### Automatically generate `GameData.XML`
-
-**Command**: `npm run build:xml`
-
->Use `npm run watch:xml` for automatically run the command above when required files were changed
-
-This tool automatically generates `GameData.XML` under `./(10)trymemode.stormmap/base.stormdata`, including all XML files in `./(10)trymemode.stormmap/base.stormdata/Mods` by scanning through all subdirectories. 
-
->Note: It **will ignore** any files that do not end with `.xml` (case-insensitive) and **does not** validate XML syntax.
-
----
-<a name="tools-buildmimiclib"></a>
-
-### Mimic Lib Generator
+### Tool - Mimic Lib Generator
 
 **Command**: `npm run build:mimiclib`
 
@@ -219,7 +219,7 @@ Since those code are for debug purpose only, if you have played around SC2 Maps,
 
 However, I cannot find a way to get the debug window up despite manually calling the debug window out. This tool is extremely useful for debugging if Heroes can call it out. Well, unfortunately.
 
-Those messages still carry out important information about the current state of the trigger call so I changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageAreaSubtitle` instead, like how all the chat commands outputs.
+Those messages still carry out important information about the current state of the trigger call it was changed the `TriggerDebugOutput` inside the mimic internal libs to a custom function, that will output the message to `c_messageAreaSubtitle` instead, like how all the chat commands outputs.
 
 **Note:** This feature is *disabled* by default. Meaning it will not showing any messages. This is to prevent the bombardment from `SupportLib`'s logging messages (like `00:00|Player 1|ExperienceContribution 1234`). If you would like to toggle this functionality, you can use the chat command `tmtdo` or `togglemimictriggerdebugoutput` to do so.
 
@@ -236,9 +236,8 @@ Internal Command | Mimicked Command
 `-AI All` | `m-AI All`
 
 ---
-<a name="tools-patchlibraries"></a>
 
-### Patching Libraries
+### Tool - Patching Libraries
 
 **Command**: `npm run patch:libraries`
 
@@ -251,9 +250,8 @@ After exported and saved the galaxy file, run this command and enter Try mode to
 This does not need to do a manual search/replace in Galaxy Editor.
 
 ---
-<a name="tools-buildusagedoc"></a>
 
-### Build Usage Doc ([usage.md](usage.md))
+### Tool - Build Usage Doc ([usage.md](usage.md))
 **Command**: `npm run build:usagedoc`
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
@@ -261,9 +259,8 @@ This does not need to do a manual search/replace in Galaxy Editor.
 Builds the [usage.md](usage.md) document from `usage.json` in `./docs/gen/usage.json`.
 
 ---
-<a name="tools-buildshowcasedoc"></a>
 
-### Build Showcase Doc ([showcase.md](showcase.md))
+### Tool - Build Showcase Doc ([showcase.md](showcase.md))
 **Command**: `npm run build:showcasedoc`
 
 Builds the [showcase.md](showcase.md) document from `showcase.json` in `./docs/gen/showcase.json` and the individual showcase entries stored under `./docs/gen/showcase/`.

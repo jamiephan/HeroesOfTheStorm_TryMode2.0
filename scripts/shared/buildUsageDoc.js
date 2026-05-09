@@ -6,22 +6,21 @@ import { logger } from "../utils/index.js";
 const LOGGER = logger("buildUsageDoc");
 
 const SORT_COMMANDS = true;
-const SHOW_EXTRA_TOC = false;
 
 class Markdowner {
   constructor() {
     this.result = "";
   }
-  set addH1(text) { this.result += `# ${text}\n`; }
-  set addH2(text) { this.result += `## ${text}\n`; }
-  set addH3(text) { this.result += `### ${text}\n`; }
-  set addH4(text) { this.result += `#### ${text}\n`; }
-  set addH5(text) { this.result += `##### ${text}\n`; }
-  set addH6(text) { this.result += `###### ${text}\n`; }
-  set addRaw(md) { this.result += `${md}\n\n`; }
+  set addH1(text) { this.result += `\n# ${text}\n`; }
+  set addH2(text) { this.result += `\n## ${text}\n`; }
+  set addH3(text) { this.result += `\n### ${text}\n`; }
+  set addH4(text) { this.result += `\n#### ${text}\n`; }
+  set addH5(text) { this.result += `\n##### ${text}\n`; }
+  set addH6(text) { this.result += `\n###### ${text}\n`; }
+  set addRaw(md) { this.result += `${md}\n`; }
   set addRawMD(md) { this.result += md; }
   set addCode(code) { this.result += `    ${code}\n`; }
-  set addLine(n) { for (let i = 0; i < n; i++) this.result += "---\n"; }
+  set addLine(n) { for (let i = 0; i < n; i++) this.result += "\n---\n"; }
   set addEmptyLine(n) { for (let i = 0; i < n; i++) this.result += "\n"; }
   set addTable(options) {
     this.result += `|${options.headers.join("|")}|\n`;
@@ -30,12 +29,33 @@ class Markdowner {
     this.result += "\n";
   }
   save(location) {
+    // ensure directory exists
+    const dir = path.dirname(location);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     fs.writeFileSync(location, this.result, { encoding: "utf8" });
     LOGGER.info(`Saved usage doc to ${location}`);
   }
 }
 
+const getLongContent = (content) => {
+  if (Array.isArray(content)) {
+    return content.join("\n");
+  }
+  return content;
+};
+
 const buildUsageDoc = () => {
+
+  // Clear usage folder
+   const usageOutputDir = path.join(appRoot.path, "docs/usage");
+   if (fs.existsSync(usageOutputDir)) {
+     fs.rmSync(usageOutputDir, { recursive: true, force: true });
+     LOGGER.info(`Cleared existing usage output directory: ${usageOutputDir}`);
+   }
+   fs.mkdirSync(usageOutputDir, { recursive: true });
+
   const jsonFile = path.join(
     appRoot.path,
     "docs/gen/usage.json",
@@ -46,11 +66,18 @@ const buildUsageDoc = () => {
     process.exit(1);
   }
 
-  const jsonData = JSON.parse(fs.readFileSync(jsonFile, { encoding: "utf8" }));
+  const {
+    _metadata: {
+      title: mainTitle,
+      description: mainDescription,
+      file: mainFile,
+    },
+    libraries,
+  } = JSON.parse(fs.readFileSync(jsonFile, { encoding: "utf8" }));
 
   if (SORT_COMMANDS) {
-    jsonData.libraries.forEach((l) => {
-      if (!l._metadata.overrideMarkdown) {
+    libraries.forEach((l) => {
+      if (l.commands && Array.isArray(l.commands)) {
         l.commands = l.commands.sort((a, b) =>
           a.command < b.command ? -1 : a.command > b.command ? 1 : 0,
         );
@@ -61,135 +88,130 @@ const buildUsageDoc = () => {
   const md = new Markdowner();
 
   // Header
-  md.addRawMD = "[◁ Back to Home](index.md)";
-  md.addEmptyLine = 1;
-  md.addRaw = '<a name="meta-top"></a>';
-  md.addH1 = jsonData._metadata.MDTitle;
-  md.addRaw = `<sup>*(Generated from [usage.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/docs/gen/usage.json) at ${new Date().toGMTString()})*</sup>`;
-  if (Array.isArray(jsonData._metadata.MDDescription)) {
-    md.addRaw = jsonData._metadata.MDDescription.join("\n");
-  } else {
-    md.addRaw = jsonData._metadata.MDDescription;
-  }
+  md.addRawMD = "---"
+  md.addEmptyLine = 1
+  md.addRaw = "title: 💻 Usage"
+  md.addRaw = "nav_order: 2"
+  md.addRaw = `last_modified_date: ${new Date().toGMTString()}`
+  md.addRawMD = "---"
+  md.addEmptyLine = 1
 
-  md.addRaw = '<a name="meta-libraries"></a>';
+  md.addH1 = "💻 " + mainTitle;
+  md.addRaw = getLongContent(mainDescription);
+
+  // Library Table glance
   md.addH2 = "📚 Libraries";
-
-  md.addEmptyLine = 1;
+  md.addEmptyLine = 1
   md.addTable = {
     headers: ["Library Name", "File Name", "Library ID", "Library Description"],
-    data: jsonData.libraries.map((l) => [
-      l._metadata.libraryName,
-      l._metadata.libraryFile,
-      l._metadata.libraryId,
-      l._metadata.libraryDescription,
+    data: libraries.map((l) => [
+      l._metadata.title,
+      l._metadata.name,
+      l._metadata.id,
+      l._metadata.description,
     ]),
   };
-  md.addEmptyLine = 1;
-
-  // TOC
-  md.addRaw = '<a name="meta-toc"></a>';
-  md.addH2 = "🧾 Table of Contents";
-  jsonData.libraries.forEach((library) => {
-    md.addRaw = `- 📙 [${library._metadata.libraryName}](#lib-${library._metadata.libraryId})`;
-    if (!library._metadata.overrideMarkdown) {
-      library.commands.forEach((command) => {
-        md.addRaw = `  - 💭 [Command: \`${command.command}\`](#cmd-${command.command})${command.uiAvailable ? " (✔ UI)" : ""}`;
-        if (SHOW_EXTRA_TOC) {
-          md.addRaw = `    - [✏ Description](#cmd-${command.command}-description)`;
-          md.addRaw = `    - [⚙ Parameters](#cmd-${command.command}-parameters)`;
-          md.addRaw = `    - [🔧 Examples](#cmd-${command.command}-examples)`;
-          md.addRaw = `    - [🖼 UI Availability](#cmd-${command.command}-uiAvailability)`;
-        }
-      });
-    } else if (SHOW_EXTRA_TOC) {
-      md.addRaw = `  - [Description](#lib-${library._metadata.libraryId}-description)`;
-    }
-  });
 
   // Each Library
-  jsonData.libraries.forEach((library) => {
-    md.addEmptyLine = 1;
-    md.addRaw = `<a name="lib-${library._metadata.libraryId}"></a>`;
-    md.addH2 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
-    md.addRaw = library._metadata.libraryDescription;
+  libraries.forEach(({
+    _metadata: {
+      title: libTitle,
+      name: libName,
+      // id: libId,
+      description: libDescription,
+      overrideContent: libOverrideContent,
+      file: libFile,
+    },
+    commands
+  }, i) => {
 
-    if (library._metadata.overrideMarkdown) {
-      md.addEmptyLine = 1;
-      md.addRaw = `<a name="lib-${library._metadata.libraryId}-description"></a>`;
-      if (Array.isArray(library._metadata.overrideMarkdownContent)) {
-        md.addRaw = library._metadata.overrideMarkdownContent.join("\n");
-      } else {
-        md.addRaw = library._metadata.overrideMarkdownContent;
-      }
-      md.addRaw = "";
-      md.addRaw = "[\\[Return to Table of Contents 🧾\\]](#meta-toc)";
-      md.addRaw = "[\\[Return to Top ⬆\\]](#meta-top)";
+    // Each library get its own markdown instance, of a seperate file.
+
+    const libMd = new Markdowner();
+
+    libMd.addRawMD = "---"
+    libMd.addEmptyLine = 1
+    libMd.addRaw = "title: " + `📚 ${libTitle} Library`
+    libMd.addRaw = "nav_order: " + i
+    libMd.addRaw = `last_modified_date: ${new Date().toGMTString()}`
+    libMd.addRaw = "parent: 💻 Usage"
+    libMd.addRawMD = "---"
+
+
+    libMd.addEmptyLine = 1
+    libMd.addH1 = `📚 ${libTitle} Library (\`${libName}\`):`;
+    libMd.addRaw = "{: .no_toc }";
+    libMd.addRaw = getLongContent(libDescription);
+
+    if (libOverrideContent) {
+      libMd.addRaw = getLongContent(libOverrideContent);
     } else {
-      library.commands.forEach((command) => {
-        md.addEmptyLine = 1;
-        md.addRaw = `<a name="cmd-${command.command}"></a>`;
+      // Use command models to generate content for the library.
 
-        const title = `(\`${command.command}\` | \`${command.shortCommand}\`)`;
-        const titleparam = ` ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(" ")}`;
-        md.addH2 = title + titleparam;
+      // TOC
+      libMd.addRaw = "- Table of Contents";
+      libMd.addRaw = "{:toc}";
+      libMd.addLine = 1
 
-        md.addEmptyLine = 1;
-        md.addRaw = `<a name="cmd-${command.command}-description"></a>`;
-        md.addH3 = "✏ Description: ";
-        if (Array.isArray(command.description)) {
-          md.addRaw = command.description.join("\n");
-        } else {
-          md.addRaw = command.description;
-        }
+      commands.forEach((command) => {
 
+        libMd.addH2 = `💭 Command: \`${command.command}\``;
+
+        // Syntax
+        libMd.addH3 = "🔍 Syntax:"
+        libMd.addRaw = "{: .no_toc }"
+        libMd.addRaw = `(\`${command.command}\` | \`${command.shortCommand}\`) ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(" ")}`;
+
+        // Description
+        libMd.addH3 = "✏ Description: ";
+        libMd.addRaw = "{: .no_toc }"
+        libMd.addRaw = getLongContent(command.description);
+
+        // Parameters
         if (Array.isArray(command.parameters)) {
-          md.addEmptyLine = 1;
-          md.addRaw = `<a name="cmd-${command.command}-parameters"></a>`;
-          md.addH3 = "⚙ Parameters:";
+          libMd.addH3 = "⚙ Parameters:";
+          libMd.addRaw = "{: .no_toc }";
           if (command.parameters.length === 0) {
-            md.addCode = "None";
+            libMd.addCode = "None";
           } else {
             command.parameters.forEach((p) => {
-              md.addCode = p.required ? `<${p.name}>` : `[${p.name}]`;
-              md.addCode = `\tRequired:\t${p.required}`;
-              md.addCode = `\tType:\t\t${p.type}`;
-              md.addCode = `\tUsage:\t\t${p.description}`;
-              if (!p.required) md.addCode = `\tDefault:\t${p.defaultValue}`;
+              libMd.addCode = p.required ? `<${p.name}>` : `[${p.name}]`;
+              libMd.addCode = `\tRequired:\t${p.required}`;
+              libMd.addCode = `\tType:\t\t${p.type}`;
+              libMd.addCode = `\tUsage:\t\t${p.description}`;
+              if (!p.required) libMd.addCode = `\tDefault:\t${p.defaultValue}`;
             });
           }
         }
 
+        // Examples
         if (Array.isArray(command.examples)) {
-          md.addEmptyLine = 1;
-          md.addRaw = `<a name="cmd-${command.command}-examples"></a>`;
-          md.addH3 = "🔧 Examples:";
+          libMd.addH3 = "🔧 Examples:";
+          libMd.addRaw = "{: .no_toc }";
           command.examples.forEach((e) => {
-            md.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
-            md.addCode = `\t(${e.description})`;
+            libMd.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
+            libMd.addCode = `\t(${e.description})`;
           });
         }
 
+        // Ui Availability
         if (typeof command.uiAvailable === "boolean") {
-          md.addEmptyLine = 1;
-          md.addRaw = `<a name="cmd-${command.command}-uiAvailability"></a>`;
-          md.addH3 = "🖼 UI Availability:";
+          libMd.addH3 = "🖼 UI Availability:";
+          libMd.addRaw = "{: .no_toc }";
           if (command.uiAvailable) {
-            md.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
+            libMd.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
           } else {
-            md.addRaw = "- ❌ **Not Implemented**";
+            libMd.addRaw = "- ❌ **Not Implemented**";
           }
         }
-
-        md.addRaw = "";
-        md.addRaw = "[\\[Return to Table of Contents 🧾\\]](#meta-toc)";
-        md.addRaw = "[\\[Return to Top ⬆\\]](#meta-top)";
       });
     }
-    md.addLine = 1;
+
+    libMd.save(libFile);
+
   });
 
-  md.save(jsonData._metadata.tagetMarkdownFile);
+  md.save(mainFile);
 };
 
 export default buildUsageDoc;

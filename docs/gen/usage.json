@@ -1,8 +1,8 @@
 {
   "_metadata": {
-    "tagetMarkdownFile": "./docs/usage.md",
-    "MDTitle": "Usage",
-    "MDDescription": [
+    "file": "./docs/usage/index.md",
+    "title": "Usage",
+    "description": [
       "Most functionality is accessed through chat commands. Simply type a command in the chat box, just as you would when chatting with teammates.",
       ">Note: Remember to use the Allies or All chat channel when entering commands. Public chat channels and Private Messages (PM) do not work.",
       "All commands have a short alias with identical functionality, allowing for less typing.",
@@ -12,22 +12,22 @@
   "libraries": [
     {
       "_metadata": {
-        "libraryName": "Module Loader",
-        "libraryFile": "LibModuleLoader.galaxy",
-        "libraryId": "LibMODL",
-        "libraryDescription": "A unified module loader library for selecting which modules to load.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor."
+        "title": "Module Loader",
+        "name": "LibModuleLoader.galaxy",
+        "id": "LibMODL",
+        "description": "A unified module loader library for selecting which modules to load.",
+        "overrideContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor.",
+        "file": "./docs/usage/LibModuleLoader.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Utilities",
-        "libraryFile": "LibUtilities.galaxy",
-        "libraryId": "LibUTIL",
-        "libraryDescription": "A library providing utility tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "title": "Utilities",
+        "name": "LibUtilities.galaxy",
+        "id": "LibUTIL",
+        "description": "A library providing utility tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibUtilities.md"
       },
       "commands": [
         {
@@ -62,9 +62,9 @@
             "This is useful for practicing various things, such as skillshots.",
             "Run this command again to turn off this functionality.",
             "",
-            ">Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) to select desired units, then use [summon units](#cmd-summon) to let them move randomly.",
+            ">Tip: To get the most out of this tool, use [`alliancecontrolteamselection`](../LibUtilities#-command-alliancecontrolteamselection) to select desired units, then use [summon units](../LibUnits#-command-summon) to let them move randomly.",
             "",
-            ">Tip: Also use the [`addbehavior`](#cmd-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable auto attacks.",
+            ">Tip: Also use the [`addbehavior`](../LibUnits#-command-addbehavior) command to add the `Mounted` (`adb Mounted`) behavior for faster movement (mount speed), and `adb DisableWeaponsBehavior` to disable auto attacks.",
             "",
             ">Note: You can still issue commands to units that are moving randomly, but once all commands are finished (e.g., the unit stops), it will resume moving randomly within the circle."
           ],
@@ -121,7 +121,7 @@
           "description": [
             "Add a marker at the center position of the camera.",
             "",
-            ">Tip: Also use [`togglecrosshair`](#cmd-togglecrosshair) command to set the location precisely."
+            ">Tip: Also use [`togglecrosshair`](../LibUtilities#-command-togglecrosshair) command to set the location precisely."
           ],
           "uiAvailable": false,
           "parameters": [
@@ -260,7 +260,7 @@
         {
           "shortCommand": "tch",
           "command": "togglecrosshair",
-          "description": "Toggle a crosshair at the center of the camera. This allows for more precise placement of [summon units](#cmd-summon) and [adding effects](#cmd-addeffectcamera).",
+          "description": "Toggle a crosshair at the center of the camera. This allows for more precise placement of [summon units](../LibUnits#-command-summon) and [adding effects](../LibUnits#-command-addeffectcamera).",
           "uiAvailable": false,
           "parameters": [],
           "examples": [
@@ -864,12 +864,12 @@
     },
     {
       "_metadata": {
-        "libraryName": "Units",
-        "libraryFile": "LibUnits.galaxy",
-        "libraryId": "LibUNIT",
-        "libraryDescription": "A library with commands related to selected units, such as kill, spawn, etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "title": "Units",
+        "name": "LibUnits.galaxy",
+        "id": "LibUNIT",
+        "description": "A library with commands related to selected units, such as kill, spawn, etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibUnits.md"
       },
       "commands": [
         {
@@ -966,7 +966,7 @@
           "description": [
             "Spawn unit(s) at the center of the camera.",
             ">Note: Newly summoned units are automatically added to the selection group.",
-            ">Note: To control summoned units, enable multi-selection via the [`alliancecontrolteamselection`](#cmd-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, and also `/ac` if the unit does not belong to you). They will behave like Vikings and Samuro with Illusion Master.",
+            ">Note: To control summoned units, enable multi-selection via the [`alliancecontrolteamselection`](../LibUtilities#-command-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, and also `/ac` if the unit does not belong to you). They will behave like Vikings and Samuro with Illusion Master.",
             ">Note: If your hero is Samuro, multi-selection may behave unexpectedly due to Blizzard's implementation."
           ],
           "uiAvailable": true,
@@ -1026,7 +1026,7 @@
           "shortCommand": "clu",
           "command": "clearunits",
           "description": [
-            "Clear all summoned unit(s) (spawned via the [summon](#cmd-summon) command) for a player. Useful for removing large numbers of summoned units, or when summoned units are untargetable/unselectable and cannot be removed with the [killunits](#cmd-killunits) command.",
+            "Clear all summoned unit(s) (spawned via the [summon](../LibUnits#-command-summon) command) for a player. Useful for removing large numbers of summoned units, or when summoned units are untargetable/unselectable and cannot be removed with the [killunits](../LibUnits#-command-killunits) command.",
             "",
             ">Note: Due to memory limitations, only the **last 500 summoned units** can be removed with this command. Older units will not be affected. To remove ALL summoned units, either respec your hero or restart the game.",
             "",
@@ -1221,7 +1221,7 @@
           "command": "removebehavior",
           "description": [
             "Remove a behavior from selected unit(s). Behaviors are generally found in `<CBehavior*>`, such as `<CBehaviorBuff id=\"xxx\">` or `<CBehaviorAbility id=\"xxx\">`.",
-            ">Tip: Use the [`getbehavior`](#cmd-getbehavior) command to list active behaviors."
+            ">Tip: Use the [`getbehavior`](../LibUnits#-command-getbehavior) command to list active behaviors."
           ],
           "uiAvailable": false,
           "parameters": [
@@ -1669,12 +1669,12 @@
     },
     {
       "_metadata": {
-        "libraryName": "Players",
-        "libraryFile": "LibPlayers.galaxy",
-        "libraryId": "LibPLYR",
-        "libraryDescription": "Commands related to players, such as scoreboard, respawn timer, etc.",
-        "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "title": "Players",
+        "name": "LibPlayers.galaxy",
+        "id": "LibPLYR",
+        "description": "Commands related to players, such as scoreboard, respawn timer, etc.",
+        "overrideContent": null,
+        "file": "./docs/usage/LibPlayers.md"
       },
       "commands": [
         {
@@ -1868,7 +1868,7 @@
           "shortCommand": "aat",
           "command": "addalltalent",
           "description": [
-            "** ***DEPRECATED: Please use [`selectalltalent`](#cmd-selectalltalent-description) command instead.*** **",
+            "** ***DEPRECATED: Please use [`selectalltalent`](../LibPlayers#-command-selectalltalent) command instead.*** **",
             "",
             "Add all talents to a player.",
             "The `HeroId` can be either the ID of `<CHero id=\"xxx\">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.",
@@ -2376,7 +2376,7 @@
           "description": [
             "Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.",
             "",
-            "For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](#cmd-getcatalog-description) command.",
+            "For how to obtain and construct `CatalogReference`, Please refer to the [`getcatalog`](../LibPlayers#-command-getcatalog) command.",
             "",
             "**Caveats:**",
             " - Some of the fields are READ-ONLY, meaning it cannot be modified, e.g `Unit,HeroChromie,PlaneArray[Air]` (Unable to make Chromie become an air unit like Medivh Raven). This would require an override to the XML instead (see [modding.md](modding.md)).",
@@ -2438,9 +2438,9 @@
           "description": [
             "Directly modify a catalog value (i.e., XML data) for a player at runtime.",
             "",
-            "For how to obtain and construct `CatalogReference`, please refer to the [`getcatalog`](#cmd-getcatalog-description) command.",
+            "For how to obtain and construct `CatalogReference`, please refer to the [`getcatalog`](../LibPlayers#-command-getcatalog) command.",
             "",
-            "This is similar to the [`modifycatalog`](#cmd-modifycatalog-description) command, but uses the `CatalogFieldValueSet()` function directly. If the regular `modifycatalog` command does not work, try this one.",
+            "This is similar to the [`modifycatalog`](../LibPlayers#-command-modifycatalog) command, but uses the `CatalogFieldValueSet()` function directly. If the regular `modifycatalog` command does not work, try this one.",
             "",
             "> Note: This command format is a bit different from the `modifycatalog` command, as it does not require the `CatalogReference` to be separated by comma. Instead, it is separated by space.",
             "",
@@ -2569,7 +2569,7 @@
           "description": [
             "Toggle AI for a player.",
             "",
-            ">Note: This also enables/disables AI for units summoned via the [summon](#cmd-summon) command."
+            ">Note: This also enables/disables AI for units summoned via the [summon](../LibUnits#-command-summon) command."
           ],
           "uiAvailable": false,
           "parameters": [
@@ -2602,7 +2602,7 @@
           "description": [
             "Enable AI for a player.",
             "",
-            ">Note: This also enables AI for units summoned via the [summon](#cmd-summon) command."
+            ">Note: This also enables AI for units summoned via the [summon](../LibUnits#-command-summon) command."
           ],
           "uiAvailable": false,
           "parameters": [
@@ -2635,7 +2635,7 @@
           "description": [
             "Disable AI for a player.",
             "",
-            ">Note: This also disables AI for units summoned via the [summon](#cmd-summon) command."
+            ">Note: This also disables AI for units summoned via the [summon](../LibUnits#-command-summon) command."
           ],
           "uiAvailable": false,
           "parameters": [
@@ -2727,62 +2727,62 @@
     },
     {
       "_metadata": {
-        "libraryName": "Builder Mode",
-        "libraryFile": "LibBuilderMode.galaxy",
-        "libraryId": "libBULM",
-        "libraryDescription": "A Builder Library that allows you to place objects anywhere in the map.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "Builder Mode",
+        "name": "LibBuilderMode.galaxy",
+        "id": "libBULM",
+        "description": "A Builder Library that allows you to place objects anywhere in the map.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "Builder mode lets you place objects anywhere on the map. Units will continuously teleport to your cursor (following it). Remember to select `/ac` and `ts` in the QA menu (these will be added automatically in a future update).",
           "To use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.",
           "To place the unit(s), press `backspace` again to deactivate builder mode."
-        ]
+        ],
+        "file": "./docs/usage/LibBuilderMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "FPS Mode",
-        "libraryFile": "LibFPSMode.galaxy",
-        "libraryId": "libFPSM",
-        "libraryDescription": "A First Person Shooter like Library that allows you to see the map in first person camera.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "FPS Mode",
+        "name": "LibFPSMode.galaxy",
+        "id": "libFPSM",
+        "description": "A First Person Shooter like Library that allows you to see the map in first person camera.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "FPS Mode lets you view the map through a first-person camera attached to your unit. The camera continuously looks forward and rotates while the mode is active.",
           "To toggle FPS mode, simply use the `fps` chat command.",
-          "### Controls:",
+          "### Controls",
           " - `u` : Move your unit forward. (It will also clear queue commands and **Hold Position** after moved.)",
           " - `← (arrow key)` : Turn your unit and camera to left.",
           " - `→ (arrow key)` : Turn your unit and camera to right.",
           " - `↑ (arrow key)` : Turn your camera upwards.",
           " - `↓ (arrow key)` : Turn your camera downwards."
-        ]
+        ],
+        "file": "./docs/usage/LibFPSMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Free Camera Mode",
-        "libraryFile": "LibFreeCameraMode.galaxy",
-        "libraryId": "libFRCM",
-        "libraryDescription": "Free Camera Mode allows you to change the angle of the camera easily.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": [
+        "title": "Free Camera Mode",
+        "name": "LibFreeCameraMode.galaxy",
+        "id": "libFRCM",
+        "description": "Free Camera Mode allows you to change the angle of the camera easily.",
+        "overrideContent": [
           "**This system is still in early development.**",
           "Free Camera Mode lets you use the `Middle Mouse Wheel` to freely change your camera angle and direction.",
           "To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!",
           ">Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active"
-        ]
+        ],
+        "file": "./docs/usage/LibFreeCameraMode.md"
       }
     },
     {
       "_metadata": {
-        "libraryName": "Funny Stuff",
-        "libraryFile": "LibFunny.galaxy",
-        "libraryId": "libFUNY",
-        "libraryDescription": "Random useless stuff just for the lolz.",
-        "overrideMarkdown": true,
-        "overrideMarkdownContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ=="
+        "title": "Funny Stuff",
+        "name": "LibFunny.galaxy",
+        "id": "libFUNY",
+        "description": "Random useless stuff just for the lolz.",
+        "overrideContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ==",
+        "file": "./docs/usage/LibFunny.md"
       }
     }
   ]

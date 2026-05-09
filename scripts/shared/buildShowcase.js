@@ -50,7 +50,15 @@ function toAnchor(title) {
 const buildShowcase = () => {
   const showcaseJsonPath = path.join(appRoot.path, "docs/gen/showcase.json");
   const showcaseDirPath = path.join(appRoot.path, "docs/gen/showcase");
-  const outputPath = path.join(appRoot.path, "docs/showcase.md");
+  const outputPath = path.join(appRoot.path, "docs/showcase/index.md");
+
+  // Clear existing showcase folder
+  const showcaseOutputDir = path.dirname(outputPath);
+  if (fs.existsSync(showcaseOutputDir)) {
+    fs.rmSync(showcaseOutputDir, { recursive: true, force: true });
+    LOGGER.info(`Cleared existing showcase output directory: ${showcaseOutputDir}`);
+  }
+  fs.mkdirSync(showcaseOutputDir, { recursive: true });
 
   // --- Read page-level metadata ---
   if (!fs.existsSync(showcaseJsonPath)) {
@@ -103,29 +111,38 @@ const buildShowcase = () => {
     .filter(Boolean);
 
   // --- Build markdown ---
-  let md = "";
+  let md = `---
+title: 🖼 Community Showcases
+nav_order: 6
+last_modified_date: ${new Date().toGMTString()}
+---
 
-  // Back link + title
-  md += `[◁ Back to Home](index.md)\n\n`;
-  md += `# ${pageData.title}\n\n`;
-  md += `<sup>*(Generated from [showcase.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/docs/gen/showcase.json) at ${new Date().toGMTString()})*</sup>\n\n`;
+`;
+
+  md += `# 🖼 ${pageData.title}\n`;
+  md += `{: .no_toc }\n\n`
   md += `${pageData.description}\n\n`;
-
-  // --- Table of Contents ---
-  if (entries.length > 0) {
-    md += `## Table of Contents\n\n`;
-    entries.forEach(({ meta }) => {
-      const title = meta.title ?? "Untitled";
-      md += `- [${title}](#${toAnchor(title)})\n`;
-    });
-    md += "\n";
-  }
+  md += `- Table of Contents\n`
+  md += `{:toc}\n`
 
   if (entries.length === 0) {
     md += "*No showcase entries found.*\n";
   }
 
-  entries.forEach(({ meta, files }) => {
+  entries.forEach(({ folderName, meta, files }, i) => {
+
+    // Each entry create a new markdown file
+
+    let entryMd = "";
+
+    entryMd += `---\n`;
+    
+    entryMd += `title: 🎞 ${meta.title ?? "Untitled"}\n`;
+    entryMd += `nav_order: ${i}\n`;
+    entryMd += `last_modified_date: ${new Date().toGMTString()}\n`;
+    entryMd += `parent: 🖼 Community Showcases\n`;
+    entryMd += `---\n\n`;
+
     const {
       title,
       description,
@@ -137,54 +154,58 @@ const buildShowcase = () => {
     } = meta;
 
     // Section heading
-    md += `---\n\n`;
-    md += `## ${title ?? "Untitled"}\n\n`;
+    entryMd += `---\n\n`;
+    entryMd += `## 🖼 ${title ?? "Untitled"}\n\n`;
 
     // Author line
     if (author) {
       if (url) {
-        md += `**Author:** [${author}](${url})\n\n`;
+        entryMd += `**Author:** [${author}](${url})\n\n`;
       } else {
-        md += `**Author:** ${author}\n\n`;
+        entryMd += `**Author:** ${author}\n\n`;
       }
     }
 
     // Description
     if (description) {
-      md += `${description}\n\n`;
+      entryMd += `${description}\n\n`;
     }
 
     // Author comment (quoted)
     if (authorComment) {
-      md += `> ${authorComment}\n\n`;
+      entryMd += `> ${authorComment}\n\n`;
     }
 
     // Media — video takes priority over image
     if (video) {
-      md += `<video src="${video}" controls></video>\n\n`;
+      entryMd += `<video src="${video}" controls></video>\n\n`;
     } else if (image) {
-      md += `![${title ?? ""}](${image})\n\n`;
+      entryMd += `![${title ?? ""}](${image})\n\n`;
     }
 
     // Files
     if (files.length > 0) {
-      md += `### Relative Files\n\n`;
+      // md += `### Files\n\n`;
       files.forEach(({ name, content }) => {
         const lang = getLang(name);
-        md += `<details>\n`;
-        md += `<summary><code>${name}</code></summary>\n\n`;
-        md += `\`\`\`${lang}\n`;
-        md += `${content}`;
+        // md += `<details>\n`;
+        // md += `<summary><code>${name}</code></summary>\n\n`;
+        entryMd += `### File: \`${name}\`\n`
+        entryMd += `\`\`\`${lang}\n`;
+        entryMd += `${content}`;
         // Ensure there is a trailing newline before the closing fence
-        if (!content.endsWith("\n")) md += "\n";
-        md += `\`\`\`\n\n`;
-        md += `</details>\n\n`;
+        if (!content.endsWith("\n")) entryMd += "\n";
+        entryMd += `\`\`\`\n\n`;
+        // md += `</details>\n\n`;
       });
     }
+
+    // Save individual entry markdown file
+    const filePath = path.join(appRoot.path, "docs/showcase/" + folderName + ".md");
+    fs.writeFileSync(filePath, entryMd, { encoding: "utf8" });
+    LOGGER.info(`Saved entry "${title}" to ${filePath}`);
   });
 
-  // Final trailing separator
-  md += `---\n`;
 
   fs.writeFileSync(outputPath, md, { encoding: "utf8" });
   LOGGER.info(`Saved showcase doc to ${outputPath}`);
