@@ -103,23 +103,19 @@ const buildShowcase = () => {
     .filter(Boolean);
 
   // --- Build markdown ---
-  let md = "";
+  let md = `---
+title: Community Showcases
+nav_order: 6
+last_modified_date: ${new Date().toGMTString()}
+---
 
-  // Back link + title
-  md += `[◁ Back to Home](index.md)\n\n`;
-  md += `# ${pageData.title}\n\n`;
-  md += `<sup>*(Generated from [showcase.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/docs/gen/showcase.json) at ${new Date().toGMTString()})*</sup>\n\n`;
+`;
+
+  md += `# ${pageData.title}\n`;
+  md += `{: .no_toc }\n\n`
   md += `${pageData.description}\n\n`;
-
-  // --- Table of Contents ---
-  if (entries.length > 0) {
-    md += `## Table of Contents\n\n`;
-    entries.forEach(({ meta }) => {
-      const title = meta.title ?? "Untitled";
-      md += `- [${title}](#${toAnchor(title)})\n`;
-    });
-    md += "\n";
-  }
+  md += `- Table of Contents\n`
+  md += `{:toc}\n`
 
   if (entries.length === 0) {
     md += "*No showcase entries found.*\n";
@@ -168,17 +164,18 @@ const buildShowcase = () => {
 
     // Files
     if (files.length > 0) {
-      md += `### Relative Files\n\n`;
+      // md += `### Files\n\n`;
       files.forEach(({ name, content }) => {
         const lang = getLang(name);
-        md += `<details>\n`;
-        md += `<summary><code>${name}</code></summary>\n\n`;
+        // md += `<details>\n`;
+        // md += `<summary><code>${name}</code></summary>\n\n`;
+        md += `### File: \`${name}\`\n`
         md += `\`\`\`${lang}\n`;
         md += `${content}`;
         // Ensure there is a trailing newline before the closing fence
         if (!content.endsWith("\n")) md += "\n";
         md += `\`\`\`\n\n`;
-        md += `</details>\n\n`;
+        // md += `</details>\n\n`;
       });
     }
   });

@@ -1,16 +1,16 @@
-[◁ Back to Home](index.md)
+---
+title: Community Showcases
+nav_order: 6
+last_modified_date: Sat, 09 May 2026 12:17:20 GMT
+---
 
 # Showcase
+{: .no_toc }
 
-<sup>*(Generated from [showcase.json](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/blob/master/docs/gen/showcase.json) at Sat, 25 Apr 2026 13:16:23 GMT)*</sup>
+Showcase of Try Mode maps, mods, and other creations by the community! If you have something to share, please submit a PR with your creation's metadata in the [`docs/gen/showcase`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/tree/master/docs/gen/showcase) folder!
 
-Showcase of Try Mode maps, mods, and other creations by the community! If you have something to share, please submit a PR with your creation's metadata in the `docs/gen/showcase` folder!
-
-## Table of Contents
-
-- [Deckard With Free Drawing - Scroll of Freedom](#deckard-with-free-drawing---scroll-of-freedom)
-- [Dehaka With Spawn Brush Ability](#dehaka-with-spawn-brush-ability)
-
+- Table of Contents
+{:toc}
 ---
 
 ## Deckard With Free Drawing - Scroll of Freedom
@@ -21,11 +21,7 @@ Regular Deckard, but with an extra ability to freely draw any area and apply the
 
 <video src="https://i.imgur.com/tZ2uBxo.mp4" controls></video>
 
-### Relative Files
-
-<details>
-<summary><code>Drawing.xml</code></summary>
-
+### File: `Drawing.xml`
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Catalog>
@@ -131,11 +127,7 @@ Regular Deckard, but with an extra ability to freely draw any area and apply the
 </Catalog>
 ```
 
-</details>
-
-<details>
-<summary><code>LibDrawing.galaxy</code></summary>
-
+### File: `LibDrawing.galaxy`
 ```cpp
 include "TriggerLibs/NativeLib"
 
@@ -388,19 +380,13 @@ void libDRAW_InitLib () {
 
 ```
 
-</details>
-
-<details>
-<summary><code>LibraryList.xml</code></summary>
-
+### File: `LibraryList.xml`
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <TriggerData>
     <Library Id="DEKD" External="TriggerLibs/LibDrawing" SharedExt="0"/>
 </TriggerData>
 ```
-
-</details>
 
 ---
 
@@ -412,11 +398,7 @@ Regular Dehaka, but with an extra ability to spawn a brush anywhere! You can Bru
 
 <video src="https://i.imgur.com/S1gRZho.mp4" controls></video>
 
-### Relative Files
-
-<details>
-<summary><code>DehakaWithSpawnBrush.xml</code></summary>
-
+### File: `DehakaWithSpawnBrush.xml`
 ```xml
 <?xml version="1.0" encoding="us-ascii"?>
 <Catalog>
@@ -673,7 +655,5 @@ Regular Dehaka, but with an extra ability to spawn a brush anywhere! You can Bru
   </CActorUnit>
 </Catalog>
 ```
-
-</details>
 
 ---
