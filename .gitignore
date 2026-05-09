@@ -102,3 +102,11 @@ s2ma*/
 !(10)trymemode.stormmap/base.stormdata/Mods/GameData/SystemMod/
 (10)trymemode.stormmap/base.stormdata/Mods/GameData/SystemMod/*
 !(10)trymemode.stormmap/base.stormdata/Mods/GameData/SystemMod/TestSystem.xml
+
+# Docs
+
+docs/_site
+docs/.sass-cache
+docs/.jekyll-cache
+docs/.jekyll-metadata
+docs/vendor
