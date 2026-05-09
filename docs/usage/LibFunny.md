@@ -1,8 +1,8 @@
 ---
 title: 📚 Funny Stuff Library
 nav_order: 7
-last_modified_date: Sat, 09 May 2026 16:54:44 GMT
-parent: Usage
+last_modified_date: Sat, 09 May 2026 17:26:15 GMT
+parent: 💻 Usage
 ---
 
 # 📚 Funny Stuff Library (`LibFunny.galaxy`):

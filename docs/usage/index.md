@@ -1,10 +1,10 @@
 ---
-title: Usage
+title: 💻 Usage
 nav_order: 2
-last_modified_date: Sat, 09 May 2026 16:54:44 GMT
+last_modified_date: Sat, 09 May 2026 17:26:15 GMT
 ---
 
-# Usage
+# 💻 Usage
 Most functionality is accessed through chat commands. Simply type a command in the chat box, just as you would when chatting with teammates.
 >Note: Remember to use the Allies or All chat channel when entering commands. Public chat channels and Private Messages (PM) do not work.
 All commands have a short alias with identical functionality, allowing for less typing.

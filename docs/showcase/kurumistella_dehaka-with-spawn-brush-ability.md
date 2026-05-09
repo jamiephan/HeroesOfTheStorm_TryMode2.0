@@ -1,13 +1,13 @@
 ---
-title: Dehaka With Spawn Brush Ability
+title: 🎞 Dehaka With Spawn Brush Ability
 nav_order: 1
-last_modified_date: Sat, 09 May 2026 16:29:07 GMT
-parent: Community Showcases
+last_modified_date: Sat, 09 May 2026 17:26:41 GMT
+parent: 🖼 Community Showcases
 ---
 
 ---
 
-## Dehaka With Spawn Brush Ability
+## 🖼 Dehaka With Spawn Brush Ability
 
 **Author:** [KurumiStella](https://github.com/Kurumi-Stella/Heroes-of-the-storm-random-maps)
 

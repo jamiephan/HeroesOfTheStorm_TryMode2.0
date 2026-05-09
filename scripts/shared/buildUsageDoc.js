@@ -90,13 +90,13 @@ const buildUsageDoc = () => {
   // Header
   md.addRawMD = "---"
   md.addEmptyLine = 1
-  md.addRaw = "title: Usage"
+  md.addRaw = "title: 💻 Usage"
   md.addRaw = "nav_order: 2"
   md.addRaw = `last_modified_date: ${new Date().toGMTString()}`
   md.addRawMD = "---"
   md.addEmptyLine = 1
 
-  md.addH1 = mainTitle;
+  md.addH1 = "💻 " + mainTitle;
   md.addRaw = getLongContent(mainDescription);
 
   // Library Table glance
@@ -134,7 +134,7 @@ const buildUsageDoc = () => {
     libMd.addRaw = "title: " + `📚 ${libTitle} Library`
     libMd.addRaw = "nav_order: " + i
     libMd.addRaw = `last_modified_date: ${new Date().toGMTString()}`
-    libMd.addRaw = "parent: Usage"
+    libMd.addRaw = "parent: 💻 Usage"
     libMd.addRawMD = "---"
 
 

@@ -1,8 +1,8 @@
 ---
 title: 📚 Builder Mode Library
 nav_order: 4
-last_modified_date: Sat, 09 May 2026 16:54:44 GMT
-parent: Usage
+last_modified_date: Sat, 09 May 2026 17:26:15 GMT
+parent: 💻 Usage
 ---
 
 # 📚 Builder Mode Library (`LibBuilderMode.galaxy`):

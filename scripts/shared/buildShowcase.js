@@ -112,14 +112,14 @@ const buildShowcase = () => {
 
   // --- Build markdown ---
   let md = `---
-title: Community Showcases
+title: 🖼 Community Showcases
 nav_order: 6
 last_modified_date: ${new Date().toGMTString()}
 ---
 
 `;
 
-  md += `# ${pageData.title}\n`;
+  md += `# 🖼 ${pageData.title}\n`;
   md += `{: .no_toc }\n\n`
   md += `${pageData.description}\n\n`;
   md += `- Table of Contents\n`
@@ -137,10 +137,10 @@ last_modified_date: ${new Date().toGMTString()}
 
     entryMd += `---\n`;
     
-    entryMd += `title: ${meta.title ?? "Untitled"}\n`;
+    entryMd += `title: 🎞 ${meta.title ?? "Untitled"}\n`;
     entryMd += `nav_order: ${i}\n`;
     entryMd += `last_modified_date: ${new Date().toGMTString()}\n`;
-    entryMd += `parent: Community Showcases\n`;
+    entryMd += `parent: 🖼 Community Showcases\n`;
     entryMd += `---\n\n`;
 
     const {
@@ -155,7 +155,7 @@ last_modified_date: ${new Date().toGMTString()}
 
     // Section heading
     entryMd += `---\n\n`;
-    entryMd += `## ${title ?? "Untitled"}\n\n`;
+    entryMd += `## 🖼 ${title ?? "Untitled"}\n\n`;
 
     // Author line
     if (author) {

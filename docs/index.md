@@ -1,12 +1,12 @@
 ---
-title: Home
+title: 🏠 Home
 nav_order: 0
 last_modified_date: 2026-05-09 20:00:00
 ---
 
 # Heroes of the Storm - Try Mode 2.0
 {: .no_toc }
-A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/) to create a better experience with enhanced functionalities.
+Welcome to Heroes of the Storm - Try Mode 2.0. A modified Try Mode Map for [Heroes of the Storm](https://heroesofthestorm.com/) to create a better experience with enhanced functionalities.
 
 ![I believe, I can fly. I believe, I can touch the sky.](https://i.imgur.com/TTtE3fq.gif)
 
@@ -24,8 +24,6 @@ However, it lacks many features, such as changing heroes, spawning units, adding
 This project provides extra functionality built on top of the original Try Mode, along with additional tools for customization.
 
 ## What you can do:
-
-**[See Community Showcases here!](showcase.md)**
 
 - Simple stuff:
 

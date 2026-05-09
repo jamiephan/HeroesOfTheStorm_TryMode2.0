@@ -1,10 +1,10 @@
 ---
-title: Modding
+title: ⚙ Modding
 nav_order: 3
 last_modified_date: 2026-05-09 20:00:00
 ---
 
-# Modding
+# ⚙ Modding
 {: .no_toc }
 
 - Table of Contents

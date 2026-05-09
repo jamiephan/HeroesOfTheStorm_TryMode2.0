@@ -1,13 +1,13 @@
 ---
-title: Deckard With Free Drawing - Scroll of Freedom
+title: 🎞 Deckard With Free Drawing - Scroll of Freedom
 nav_order: 0
-last_modified_date: Sat, 09 May 2026 16:29:07 GMT
-parent: Community Showcases
+last_modified_date: Sat, 09 May 2026 17:26:41 GMT
+parent: 🖼 Community Showcases
 ---
 
 ---
 
-## Deckard With Free Drawing - Scroll of Freedom
+## 🖼 Deckard With Free Drawing - Scroll of Freedom
 
 **Author:** [KurumiStella](https://www.reddit.com/r/heroesofthestorm/comments/pc1m9h/deckards_scroll_of_sealing_but_you_can_draw/)
 
