@@ -47,6 +47,15 @@ const getLongContent = (content) => {
 };
 
 const buildUsageDoc = () => {
+
+  // Clear usage folder
+   const usageOutputDir = path.join(appRoot.path, "docs/usage");
+   if (fs.existsSync(usageOutputDir)) {
+     fs.rmSync(usageOutputDir, { recursive: true, force: true });
+     LOGGER.info(`Cleared existing usage output directory: ${usageOutputDir}`);
+   }
+   fs.mkdirSync(usageOutputDir, { recursive: true });
+
   const jsonFile = path.join(
     appRoot.path,
     "docs/gen/usage.json",

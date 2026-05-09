@@ -1,7 +1,7 @@
 ---
 title: 📚 Free Camera Mode Library
 nav_order: 6
-last_modified_date: Sat, 09 May 2026 16:01:30 GMT
+last_modified_date: Sat, 09 May 2026 16:16:29 GMT
 parent: Usage
 ---
 

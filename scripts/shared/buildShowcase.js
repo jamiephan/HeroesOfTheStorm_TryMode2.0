@@ -52,6 +52,14 @@ const buildShowcase = () => {
   const showcaseDirPath = path.join(appRoot.path, "docs/gen/showcase");
   const outputPath = path.join(appRoot.path, "docs/showcase/index.md");
 
+  // Clear existing showcase folder
+  const showcaseOutputDir = path.dirname(outputPath);
+  if (fs.existsSync(showcaseOutputDir)) {
+    fs.rmSync(showcaseOutputDir, { recursive: true, force: true });
+    LOGGER.info(`Cleared existing showcase output directory: ${showcaseOutputDir}`);
+  }
+  fs.mkdirSync(showcaseOutputDir, { recursive: true });
+
   // --- Read page-level metadata ---
   if (!fs.existsSync(showcaseJsonPath)) {
     LOGGER.error(`Unable to find showcase.json: ${showcaseJsonPath}`);
@@ -121,7 +129,7 @@ last_modified_date: ${new Date().toGMTString()}
     md += "*No showcase entries found.*\n";
   }
 
-  entries.forEach(({ meta, files }, i) => {
+  entries.forEach(({ folderName, meta, files }, i) => {
 
     // Each entry create a new markdown file
 
@@ -193,8 +201,7 @@ last_modified_date: ${new Date().toGMTString()}
     }
 
     // Save individual entry markdown file
-    const fileName = `${toAnchor(title ?? "untitled")}.md`;
-    const filePath = path.join(appRoot.path, "docs/showcase/" + fileName);
+    const filePath = path.join(appRoot.path, "docs/showcase/" + folderName + ".md");
     fs.writeFileSync(filePath, entryMd, { encoding: "utf8" });
     LOGGER.info(`Saved entry "${title}" to ${filePath}`);
   });
