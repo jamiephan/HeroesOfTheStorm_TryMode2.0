@@ -142,33 +142,45 @@ The `Modules_Editor.SC2Mod` is also available in `(10)trymemode.stormmap/base.st
 
 ####  Modifying Current Library Files:
 
-1. Change The Viewing mode to Triggers, or Pressing F6: ![mod-step-1](https://i.imgur.com/tjWy1BG.png)
+1. Change The Viewing mode to Triggers, or Pressing F6:
+  ![mod-step-1](https://i.imgur.com/tjWy1BG.png)
 
-2. Make your changes here ![mod-step-2](https://i.imgur.com/owiyGwk.png)
+2. Make your changes here
+  ![mod-step-2](https://i.imgur.com/owiyGwk.png)
 
 3. Please see the [save section](#save-the-galaxy-file) below:
 
 #### Adding New Galaxy Library:
 
-1. Add a new library by right-clicking on an empty space: ![add-step-1](https://i.imgur.com/5rogkWe.png) ![add-step-1-1](https://i.imgur.com/inOHIqD.png)
+1. Add a new library by right-clicking on an empty space: 
+  ![add-step-1](https://i.imgur.com/5rogkWe.png)
+  ![add-step-1-1](https://i.imgur.com/inOHIqD.png)
 
-2. It is recommended to change the library ID to a 4-character ID: ![add-step-2](https://i.imgur.com/MwQr2NP.png)
+2. It is recommended to change the library ID to a 4-character ID: 
+  ![add-step-2](https://i.imgur.com/MwQr2NP.png)
 
-3. Make your changes in the first box and uncheck "Auto Load": ![add-step-3](https://i.imgur.com/s30zhnO.png){: width="480px"}
+3. Make your changes in the first box and uncheck "Auto Load": 
+  ![add-step-3](https://i.imgur.com/s30zhnO.png){: width="480px"}
 
 4. To save, follow the same export steps as above, save as a new file and put it next to other galaxy files.
 
-5. Now we need to find the Lib init function by opening up the script file (Ctrl+F11 or Data->View Script): ![add-step-5](https://i.imgur.com/rDjPTAz.png)
+5. Now we need to find the Lib init function by opening up the script file (Ctrl+F11 or Data->View Script): 
+  ![add-step-5](https://i.imgur.com/rDjPTAz.png)
 
-6. Find the section `// Library Initialization` at the bottom and copy this section (`libXXXXX_InitLib()`) and remember it. Then you can close this dialog: ![add-step-6](https://i.imgur.com/AgC1DVC.png)
+6. Find the section `// Library Initialization` at the bottom and copy this section (`libXXXXX_InitLib()`) and remember it. Then you can close this dialog: 
+  ![add-step-6](https://i.imgur.com/AgC1DVC.png)
 
-7. Now we need to modify the `LibModuleLoader.galaxy` file with a text editor (NOT the SC2 Editor): ![add-step-7](https://i.imgur.com/P7iDABh.png)
+7. Now we need to modify the `LibModuleLoader.galaxy` file with a text editor (NOT the SC2 Editor): 
+  ![add-step-7](https://i.imgur.com/P7iDABh.png)
 
-    1. Append the new import without the `.galaxy` extension. For example, if your file name is `LibNice.galaxy`, append the line: `include "Modules/LibNice` ![add-step-7-1](https://i.imgur.com/cN85UN8.png){: width="480px"}
+    1. Append the new import without the `.galaxy` extension. For example, if your file name is `LibNice.galaxy`, append the line: `include "Modules/LibNice` 
+      ![add-step-7-1](https://i.imgur.com/cN85UN8.png){: width="480px"}
 
-    2. Copy the code (function name) into the `LibModuleLoader.galaxy` in this section: ![add-step-7-2](https://i.imgur.com/RyTaUEQ.png)
+    2. Copy the code (function name) into the `LibModuleLoader.galaxy` in this section: 
+      ![add-step-7-2](https://i.imgur.com/RyTaUEQ.png)
 
-    3. Remove the space and add a semicolon at the end (*important) and save the file:  ![add-step-7-3](https://i.imgur.com/9M77FKV.png)
+    3. Remove the space and add a semicolon at the end (*important) and save the file:  
+      ![add-step-7-3](https://i.imgur.com/9M77FKV.png)
 
 ### Dealing with Heroes of the Storm Specific Functions:
 
@@ -179,13 +191,17 @@ Since Heroes is a modified SC2 Engine, it introduced new native functions that c
 
 To add the Heroes Specific script:
 
-1. Create a new Action: ![deal-step-1](https://i.imgur.com/YbZavES.png)
+1. Create a new Action: 
+  ![deal-step-1](https://i.imgur.com/YbZavES.png)
 
-2. Select Custom Script: ![deal-step-2](https://i.imgur.com/CYPtAdg.png)
+2. Select Custom Script: 
+  ![deal-step-2](https://i.imgur.com/CYPtAdg.png)
 
-3. Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable): ![deal-step-3](https://i.imgur.com/ZXAT6DT.png)
+3. Type in the Heroes Code you want, Please also do check the parameter type and adding a semi-colon at the end (Note: It can also include the variables from Sc2Editor, such as `lv_*` for local variable and `gv_*` for global variable): 
+  ![deal-step-3](https://i.imgur.com/ZXAT6DT.png)
 
-4. Add `//_heroes_replace//` before the custom script: ![deal-step-4](https://i.imgur.com/faiq3Qt.png)
+4. Add `//_heroes_replace//` before the custom script: 
+  ![deal-step-4](https://i.imgur.com/faiq3Qt.png)
 
 5. Please see the [save section](#save-the-galaxy-file) below:
 
@@ -195,11 +211,15 @@ To add the Heroes Specific script:
 
 > Please see [tools.md](tools.md#tool---patching-libraries) for more details.
 
-1. When saving the galaxy file, Use use the "Export" functionality by going view script or Ctrl + F11: ![save-step-1](https://i.imgur.com/w7gk6Ym.png) ![save-step-1-1](https://i.imgur.com/J5klmRW.png)
+1. When saving the galaxy file, Use use the "Export" functionality by going view script or Ctrl + F11: 
+  ![save-step-1](https://i.imgur.com/w7gk6Ym.png) 
+  ![save-step-1-1](https://i.imgur.com/J5klmRW.png)
 
-2. Click On File -> Export ![save-step-2](https://i.imgur.com/UY4nOq0.png)
+2. Click On File -> Export 
+  ![save-step-2](https://i.imgur.com/UY4nOq0.png)
 
-3. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching): ![save-step-3](https://i.imgur.com/ztgHF1n.png)
+3. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching): 
+  ![save-step-3](https://i.imgur.com/ztgHF1n.png)
 
 4. Run `npm run patch:libraries` command
 
@@ -207,15 +227,21 @@ To add the Heroes Specific script:
 
 This sections demonstrates how to remove the `//_heroes_replace_//` in SC2 Editor when exporting, allows for custom heroes functionalities.
 
-1. When Save, Use the Export Functionality by going view script or Ctrl + F11: ![manual-step-1](https://i.imgur.com/w7gk6Ym.png) ![manual-step-1-1](https://i.imgur.com/J5klmRW.png)
+1. When Save, Use the Export Functionality by going view script or Ctrl + F11: 
+  ![manual-step-1](https://i.imgur.com/w7gk6Ym.png) 
+  ![manual-step-1-1](https://i.imgur.com/J5klmRW.png)
 
-2. After see this screen, Do a Find -> Replace or Ctrl + H: ![manual-step-2](https://i.imgur.com/ZzyUrT6.png)
+2. After see this screen, Do a Find -> Replace or Ctrl + H: 
+  ![manual-step-2](https://i.imgur.com/ZzyUrT6.png)
 
-3. Type in `//_heroes_replace_//` for text and empty text box for `Replace With` and spam the `Replace` Button (Not `Replace All`) until it can no longer replace anymore: ![manual-step-3](https://i.imgur.com/v9EePbP.png)
+3. Type in `//_heroes_replace_//` for text and empty text box for `Replace With` and spam the `Replace` Button (Not `Replace All`) until it can no longer replace anymore: 
+  ![manual-step-3](https://i.imgur.com/v9EePbP.png)
 
-4. Close the Replace Dialog and export the file: ![manual-step-4](https://i.imgur.com/UY4nOq0.png)
+4. Close the Replace Dialog and export the file: 
+  ![manual-step-4](https://i.imgur.com/UY4nOq0.png)
 
-5. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching): ![manual-step-4](https://i.imgur.com/ztgHF1n.png)
+5. Select the corresponding galaxy file to replace and save (Note: Make sure you select the correct file — choosing the wrong one will prevent the game from launching): 
+  ![manual-step-4](https://i.imgur.com/ztgHF1n.png)
 
 ### Error and Debugging
 
