@@ -50,7 +50,7 @@ function toAnchor(title) {
 const buildShowcase = () => {
   const showcaseJsonPath = path.join(appRoot.path, "docs/gen/showcase.json");
   const showcaseDirPath = path.join(appRoot.path, "docs/gen/showcase");
-  const outputPath = path.join(appRoot.path, "docs/showcase.md");
+  const outputPath = path.join(appRoot.path, "docs/showcase/index.md");
 
   // --- Read page-level metadata ---
   if (!fs.existsSync(showcaseJsonPath)) {
@@ -121,7 +121,20 @@ last_modified_date: ${new Date().toGMTString()}
     md += "*No showcase entries found.*\n";
   }
 
-  entries.forEach(({ meta, files }) => {
+  entries.forEach(({ meta, files }, i) => {
+
+    // Each entry create a new markdown file
+
+    let entryMd = "";
+
+    entryMd += `---\n`;
+    
+    entryMd += `title: ${meta.title ?? "Untitled"}\n`;
+    entryMd += `nav_order: ${i}\n`;
+    entryMd += `last_modified_date: ${new Date().toGMTString()}\n`;
+    entryMd += `parent: Community Showcases\n`;
+    entryMd += `---\n\n`;
+
     const {
       title,
       description,
@@ -133,33 +146,33 @@ last_modified_date: ${new Date().toGMTString()}
     } = meta;
 
     // Section heading
-    md += `---\n\n`;
-    md += `## ${title ?? "Untitled"}\n\n`;
+    entryMd += `---\n\n`;
+    entryMd += `## ${title ?? "Untitled"}\n\n`;
 
     // Author line
     if (author) {
       if (url) {
-        md += `**Author:** [${author}](${url})\n\n`;
+        entryMd += `**Author:** [${author}](${url})\n\n`;
       } else {
-        md += `**Author:** ${author}\n\n`;
+        entryMd += `**Author:** ${author}\n\n`;
       }
     }
 
     // Description
     if (description) {
-      md += `${description}\n\n`;
+      entryMd += `${description}\n\n`;
     }
 
     // Author comment (quoted)
     if (authorComment) {
-      md += `> ${authorComment}\n\n`;
+      entryMd += `> ${authorComment}\n\n`;
     }
 
     // Media — video takes priority over image
     if (video) {
-      md += `<video src="${video}" controls></video>\n\n`;
+      entryMd += `<video src="${video}" controls></video>\n\n`;
     } else if (image) {
-      md += `![${title ?? ""}](${image})\n\n`;
+      entryMd += `![${title ?? ""}](${image})\n\n`;
     }
 
     // Files
@@ -169,19 +182,23 @@ last_modified_date: ${new Date().toGMTString()}
         const lang = getLang(name);
         // md += `<details>\n`;
         // md += `<summary><code>${name}</code></summary>\n\n`;
-        md += `### File: \`${name}\`\n`
-        md += `\`\`\`${lang}\n`;
-        md += `${content}`;
+        entryMd += `### File: \`${name}\`\n`
+        entryMd += `\`\`\`${lang}\n`;
+        entryMd += `${content}`;
         // Ensure there is a trailing newline before the closing fence
-        if (!content.endsWith("\n")) md += "\n";
-        md += `\`\`\`\n\n`;
+        if (!content.endsWith("\n")) entryMd += "\n";
+        entryMd += `\`\`\`\n\n`;
         // md += `</details>\n\n`;
       });
     }
+
+    // Save individual entry markdown file
+    const fileName = `${toAnchor(title ?? "untitled")}.md`;
+    const filePath = path.join(appRoot.path, "docs/showcase/" + fileName);
+    fs.writeFileSync(filePath, entryMd, { encoding: "utf8" });
+    LOGGER.info(`Saved entry "${title}" to ${filePath}`);
   });
 
-  // Final trailing separator
-  md += `---\n`;
 
   fs.writeFileSync(outputPath, md, { encoding: "utf8" });
   LOGGER.info(`Saved showcase doc to ${outputPath}`);
