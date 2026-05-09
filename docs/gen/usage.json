@@ -1,6 +1,6 @@
 {
   "_metadata": {
-    "tagetMarkdownFile": "./docs/usage.md",
+    "tagetMarkdownFile": "./docs/usage/index.md",
     "MDTitle": "Usage",
     "MDDescription": [
       "Most functionality is accessed through chat commands. Simply type a command in the chat box, just as you would when chatting with teammates.",
@@ -17,7 +17,8 @@
         "libraryId": "LibMODL",
         "libraryDescription": "A unified module loader library for selecting which modules to load.",
         "overrideMarkdown": true,
-        "overrideMarkdownContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor."
+        "overrideMarkdownContent": "This module is for loading other modules. **DO NOT** modify this file in SC2Editor.",
+        "tagetMarkdownFile": "./docs/usage/LibModuleLoader.md"
       }
     },
     {
@@ -27,7 +28,8 @@
         "libraryId": "LibUTIL",
         "libraryDescription": "A library providing utility tools such as \"Toggle Fog Of War\", \"Toggle UI\", etc.",
         "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "overrideMarkdownContent": null,
+        "tagetMarkdownFile": "./docs/usage/LibUtilities.md"
       },
       "commands": [
         {
@@ -869,7 +871,8 @@
         "libraryId": "LibUNIT",
         "libraryDescription": "A library with commands related to selected units, such as kill, spawn, etc.",
         "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "overrideMarkdownContent": null,
+        "tagetMarkdownFile": "./docs/usage/LibUnits.md"
       },
       "commands": [
         {
@@ -1674,7 +1677,8 @@
         "libraryId": "LibPLYR",
         "libraryDescription": "Commands related to players, such as scoreboard, respawn timer, etc.",
         "overrideMarkdown": false,
-        "overrideMarkdownContent": null
+        "overrideMarkdownContent": null,
+        "tagetMarkdownFile": "./docs/usage/LibPlayers.md"
       },
       "commands": [
         {
@@ -2737,7 +2741,8 @@
           "Builder mode lets you place objects anywhere on the map. Units will continuously teleport to your cursor (following it). Remember to select `/ac` and `ts` in the QA menu (these will be added automatically in a future update).",
           "To use builder mode, select a unit, or units and press `backspace`. Builder mode will then be activated and you can place the units where you like.",
           "To place the unit(s), press `backspace` again to deactivate builder mode."
-        ]
+        ],
+        "tagetMarkdownFile": "./docs/usage/LibBuilderMode.md"
       }
     },
     {
@@ -2757,7 +2762,8 @@
           " - `→ (arrow key)` : Turn your unit and camera to right.",
           " - `↑ (arrow key)` : Turn your camera upwards.",
           " - `↓ (arrow key)` : Turn your camera downwards."
-        ]
+        ],
+        "tagetMarkdownFile": "./docs/usage/LibFPSMode.md"
       }
     },
     {
@@ -2772,7 +2778,8 @@
           "Free Camera Mode lets you use the `Middle Mouse Wheel` to freely change your camera angle and direction.",
           "To enable or disable, simply use the chat command `tfc` or `togglefreecamera`!",
           ">Note: Camera pan (move the camera by pushing mouse to the edge) will be disabled when free camera mode is active"
-        ]
+        ],
+        "tagetMarkdownFile": "./docs/usage/LibFreeCameraMode.md"
       }
     },
     {
@@ -2782,7 +2789,8 @@
         "libraryId": "libFUNY",
         "libraryDescription": "Random useless stuff just for the lolz.",
         "overrideMarkdown": true,
-        "overrideMarkdownContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ=="
+        "overrideMarkdownContent": ">Vm0weE1HRnRVWGRPVmxwT1ZsZG9WRmxVU205alJsVjNWMjFHYUZKdVFsaFdiWFF3VmtkS1NGVnVjRnBXVmxsM1dWWmFTMWRYUmtsYVJscFhUVEF4TkZkV1dsWmtNbFpJVkd0c1ZXSkdTbGhXYlhoM1UxWmtXV05GZEZSaVZscFhWR3hhYjFReFdsVlNiV2hoVmpOQ1ExUnNSVGxRVVQwOQ==",
+        "tagetMarkdownFile": "./docs/usage/LibFunny.md"
       }
     }
   ]

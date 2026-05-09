@@ -8,8 +8,6 @@ const LOGGER = logger("buildUsageDoc");
 const SORT_COMMANDS = true;
 const SHOW_EXTRA_TOC = false;
 
-// TODO: Seperate sub module into its own page, https://just-the-docs.com/docs/navigation/main/ancestry/
-
 class Markdowner {
   constructor() {
     this.result = "";
@@ -32,6 +30,11 @@ class Markdowner {
     this.result += "\n";
   }
   save(location) {
+    // ensure directory exists
+    const dir = path.dirname(location);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     fs.writeFileSync(location, this.result, { encoding: "utf8" });
     LOGGER.info(`Saved usage doc to ${location}`);
   }
@@ -72,7 +75,6 @@ const buildUsageDoc = () => {
   md.addEmptyLine = 1
 
   md.addH1 = jsonData._metadata.MDTitle;
-  md.addRaw = "{: .no_toc }";
   if (Array.isArray(jsonData._metadata.MDDescription)) {
     md.addRaw = jsonData._metadata.MDDescription.join("\n");
   } else {
@@ -80,7 +82,6 @@ const buildUsageDoc = () => {
   }
 
   md.addH2 = "📚 Libraries";
-  md.addRaw = "{: .no_toc }";
   md.addEmptyLine = 1
   md.addTable = {
     headers: ["Library Name", "File Name", "Library ID", "Library Description"],
@@ -91,10 +92,10 @@ const buildUsageDoc = () => {
       l._metadata.libraryDescription,
     ]),
   };
-  md.addH2 = "📚 Table of Contents";
-  md.addRaw = "{: .no_toc }";
-  md.addRaw = "- Table of Contents";
-  md.addRaw = "{:toc}";
+  // md.addH2 = "📚 Table of Contents";
+  // md.addRaw = "{: .no_toc }";
+  // md.addRaw = "- Table of Contents";
+  // md.addRaw = "{:toc}";
   // TOC
   // md.addH2 = "🧾 Table of Contents";
   // jsonData.libraries.forEach((library) => {
@@ -115,85 +116,102 @@ const buildUsageDoc = () => {
   // });
 
   // Each Library
-  jsonData.libraries.forEach((library) => {
+  jsonData.libraries.forEach((library, i) => {
 
-    md.addEmptyLine = 1
-    md.addH2 = `📙 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
-    md.addRaw = library._metadata.libraryDescription;
+    // Each library get its own markdown instance, of a seperate file.
+
+    const libMd = new Markdowner();
+
+    libMd.addRawMD = "---"
+    libMd.addEmptyLine = 1
+    libMd.addRaw = "title: " + `📚 ${library._metadata.libraryName} Library`
+    libMd.addRaw = "nav_order: " + i
+    libMd.addRaw = `last_modified_date: ${new Date().toGMTString()}`
+    libMd.addRaw = "parent: Usage"
+    libMd.addRawMD = "---"
+
+
+    libMd.addEmptyLine = 1
+    libMd.addH1 = `📚 ${library._metadata.libraryName} Library (\`${library._metadata.libraryFile}\`):`;
+    libMd.addRaw = "{: .no_toc }";
+    libMd.addRaw = library._metadata.libraryDescription;
 
     if (library._metadata.overrideMarkdown) {
-  
+
 
       if (Array.isArray(library._metadata.overrideMarkdownContent)) {
-        md.addRaw = library._metadata.overrideMarkdownContent.join("\n");
+        libMd.addRaw = library._metadata.overrideMarkdownContent.join("\n");
       } else {
-        md.addRaw = library._metadata.overrideMarkdownContent;
+        libMd.addRaw = library._metadata.overrideMarkdownContent;
       }
     } else {
+
+      // TOC
+      libMd.addRaw = "- Table of Contents";
+      libMd.addRaw = "{:toc}";
+      libMd.addLine = 1
+
       library.commands.forEach((command) => {
 
-    
+        libMd.addH2 = `💭 Command: \`${command.command}\`` + (command.uiAvailable ? " (✔ UI)" : "");
 
-        md.addH3 = `💭 Command: \`${command.command}\`` + (command.uiAvailable ? " (✔ UI)" : "");
+        libMd.addH3 = "🔍 Syntax:"
+        libMd.addRaw = "{: .no_toc }"
+        libMd.addRaw = `(\`${command.command}\` | \`${command.shortCommand}\`) ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(" ")}`;
 
-    
-
-        md.addH4 = "🔍 Syntax:"
-        md.addRaw = "{: .no_toc }"
-        md.addRaw = `(\`${command.command}\` | \`${command.shortCommand}\`) ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(" ")}`;
-
-        md.addH4 = "✏ Description: ";
-        md.addRaw = "{: .no_toc }"
+        libMd.addH3 = "✏ Description: ";
+        libMd.addRaw = "{: .no_toc }"
         if (Array.isArray(command.description)) {
-          md.addRaw = command.description.join("\n");
+          libMd.addRaw = command.description.join("\n");
         } else {
-          md.addRaw = command.description;
+          libMd.addRaw = command.description;
         }
 
         if (Array.isArray(command.parameters)) {
-      
 
-          md.addH4 = "⚙ Parameters:";
-          md.addRaw = "{: .no_toc }";
+
+          libMd.addH3 = "⚙ Parameters:";
+          libMd.addRaw = "{: .no_toc }";
           if (command.parameters.length === 0) {
-            md.addCode = "None";
+            libMd.addCode = "None";
           } else {
             command.parameters.forEach((p) => {
-              md.addCode = p.required ? `<${p.name}>` : `[${p.name}]`;
-              md.addCode = `\tRequired:\t${p.required}`;
-              md.addCode = `\tType:\t\t${p.type}`;
-              md.addCode = `\tUsage:\t\t${p.description}`;
-              if (!p.required) md.addCode = `\tDefault:\t${p.defaultValue}`;
+              libMd.addCode = p.required ? `<${p.name}>` : `[${p.name}]`;
+              libMd.addCode = `\tRequired:\t${p.required}`;
+              libMd.addCode = `\tType:\t\t${p.type}`;
+              libMd.addCode = `\tUsage:\t\t${p.description}`;
+              if (!p.required) libMd.addCode = `\tDefault:\t${p.defaultValue}`;
             });
           }
         }
 
         if (Array.isArray(command.examples)) {
-      
 
-          md.addH4 = "🔧 Examples:";
-          md.addRaw = "{: .no_toc }";
+
+          libMd.addH3 = "🔧 Examples:";
+          libMd.addRaw = "{: .no_toc }";
           command.examples.forEach((e) => {
-            md.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
-            md.addCode = `\t(${e.description})`;
+            libMd.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
+            libMd.addCode = `\t(${e.description})`;
           });
         }
 
         if (typeof command.uiAvailable === "boolean") {
-      
 
-          md.addH4 = "🖼 UI Availability:";
-          md.addRaw = "{: .no_toc }";
+
+          libMd.addH3 = "🖼 UI Availability:";
+          libMd.addRaw = "{: .no_toc }";
           if (command.uiAvailable) {
-            md.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
+            libMd.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
           } else {
-            md.addRaw = "- ❌ **Not Implemented**";
+            libMd.addRaw = "- ❌ **Not Implemented**";
           }
-      
         }
       });
     }
-    md.addLine = 1;
+
+    libMd.save(library._metadata.tagetMarkdownFile);
+
   });
 
   md.save(jsonData._metadata.tagetMarkdownFile);
