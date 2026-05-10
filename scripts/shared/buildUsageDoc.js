@@ -156,21 +156,21 @@ const buildUsageDoc = () => {
 
       commands.forEach((command) => {
 
-        libMd.addH2 = `💭 Command: \`${command.command}\``;
+        libMd.addH2 = `💬 Command: \`${command.command}\``;
 
         // Syntax
-        libMd.addH3 = "🔍 Syntax:"
+        libMd.addH3 = "#️⃣ Syntax:"
         libMd.addRaw = "{: .no_toc }"
         libMd.addRaw = `(\`${command.command}\` | \`${command.shortCommand}\`) ${command.parameters.map((p) => (p.required ? `\`<${p.name}>\`` : `\`[${p.name}]\``)).join(" ")}`;
 
         // Description
-        libMd.addH3 = "✏ Description: ";
+        libMd.addH3 = "📝 Description: ";
         libMd.addRaw = "{: .no_toc }"
         libMd.addRaw = getLongContent(command.description);
 
         // Parameters
         if (Array.isArray(command.parameters)) {
-          libMd.addH3 = "⚙ Parameters:";
+          libMd.addH3 = "⚙️ Parameters:";
           libMd.addRaw = "{: .no_toc }";
           if (command.parameters.length === 0) {
             libMd.addCode = "None";
@@ -187,7 +187,7 @@ const buildUsageDoc = () => {
 
         // Examples
         if (Array.isArray(command.examples)) {
-          libMd.addH3 = "🔧 Examples:";
+          libMd.addH3 = "💡 Examples:";
           libMd.addRaw = "{: .no_toc }";
           command.examples.forEach((e) => {
             libMd.addCode = `> ${e.command.replace("{shortCommand}", command.shortCommand).replace("{command}", command.command)}`;
@@ -200,7 +200,7 @@ const buildUsageDoc = () => {
           libMd.addH3 = "🖼 UI Availability:";
           libMd.addRaw = "{: .no_toc }";
           if (command.uiAvailable) {
-            libMd.addRaw = `- ✔ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
+            libMd.addRaw = `- ✅ **Yes.** Use the command \`${command.command}ui\` or \`${command.shortCommand}ui\` to toggle the UI counterpart of this command.`;
           } else {
             libMd.addRaw = "- ❌ **Not Implemented**";
           }

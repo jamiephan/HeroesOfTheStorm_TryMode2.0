@@ -1,7 +1,7 @@
 ---
 title: 📚 Utilities Library
 nav_order: 1
-last_modified_date: Sat, 09 May 2026 18:52:30 GMT
+last_modified_date: Sun, 10 May 2026 09:11:47 GMT
 parent: 💻 Usage
 ---
 
@@ -13,24 +13,24 @@ A library providing utility tools such as "Toggle Fog Of War", "Toggle UI", etc.
 
 ---
 
-## 💭 Command: `addmarker`
+## 💬 Command: `addmarker`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addmarker` | `marker`) `<MarkerID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a marker at the position of the first selected unit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MarkerID>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the Marker ID to be added (up to 20).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > marker 1
     	(Add marker 1 at the position of the first selected unit.)
@@ -43,26 +43,26 @@ Add a marker at the position of the first selected unit.
 
 ---
 
-## 💭 Command: `addmarkercamera`
+## 💬 Command: `addmarkercamera`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addmarkercamera` | `markerc`) `<MarkerID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a marker at the center position of the camera.
 
 >Tip: Also use [`togglecrosshair`](LibUtilities.md#-command-togglecrosshair) command to set the location precisely.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MarkerID>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the Marker ID to be added (up to 20).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > markerc 1
     	(Add marker 1 at the center position of the camera.)
@@ -75,22 +75,22 @@ Add a marker at the center position of the camera.
 
 ---
 
-## 💭 Command: `alliancecontrolteamselection`
+## 💬 Command: `alliancecontrolteamselection`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`alliancecontrolteamselection` | `acts`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle Alliance Control and Multi-Selection — a shortcut reimplementation of the QA Cheat Menu's `/ac` and `ts` commands.
 This enables or disables "Alliance Control" (control units from other players, including enemies) and "Multi-Selection" (select multiple units at once, like Vikings and Samuro).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > acts
     	(Toggle Alliance Control + Multi-Selection)
@@ -103,17 +103,17 @@ This enables or disables "Alliance Control" (control units from other players, i
 
 ---
 
-## 💭 Command: `clear`
+## 💬 Command: `clear`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`clear` | `cls`) `[seconds]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Clear all text messages, including chat and debug messages with an optional delay.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [seconds]
     	Required:	false
@@ -121,7 +121,7 @@ Clear all text messages, including chat and debug messages with an optional dela
     	Usage:		Defines the delay to clear text messages in seconds.
     	Default:	0
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > cls
     	(Clear all texts instantly)
@@ -134,21 +134,21 @@ Clear all text messages, including chat and debug messages with an optional dela
 
 ---
 
-## 💭 Command: `clearmarker`
+## 💬 Command: `clearmarker`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`clearmarker` | `clmarker`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Clear all created markers.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > clmarker
     	(Clear all created markers.)
@@ -161,18 +161,18 @@ Clear all created markers.
 
 ---
 
-## 💭 Command: `colormarker`
+## 💬 Command: `colormarker`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`colormarker` | `colmarker`) `<MarkerID>` `<Red>` `<Green>` `<Blue>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Change the color of a specific marker using an RGB value. The new color also applies to future markers.
 >Note: Each marker's color is generated randomly when the game starts.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MarkerID>
     	Required:	true
@@ -191,7 +191,7 @@ Change the color of a specific marker using an RGB value. The new color also app
     	Type:		integer
     	Usage:		Defines the Blue color of the marker's RGB color. (0 - 255)
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > colmarker 1 255 0 0
     	(Change Marker 1 color to 255, 0, 0  (Red))
@@ -206,21 +206,21 @@ Change the color of a specific marker using an RGB value. The new color also app
 
 ---
 
-## 💭 Command: `endgame`
+## 💬 Command: `endgame`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`endgame` | `eg`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 End the game instantly and kick all players from the game.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > eg
     	(End the game instantly)
@@ -233,13 +233,13 @@ End the game instantly and kick all players from the game.
 
 ---
 
-## 💭 Command: `floatingcombattext`
+## 💬 Command: `floatingcombattext`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`floatingcombattext` | `fct`) `<message>` `[state]` `[type]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Show a custom floating combat text with different built-in templates.
 
@@ -265,7 +265,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 >Note: The capitalization of `type` must be followed exactly.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <message>
     	Required:	true
@@ -282,7 +282,7 @@ The table is the available combinations of `state` and `type`. Columns are `stat
     	Usage:		Defines the type of the Floating Combat Text
     	Default:	NormalAmountGiven
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > fct 100
     	(Shows the FCT "100" with the style of basic attack (orange))
@@ -299,13 +299,13 @@ The table is the available combinations of `state` and `type`. Columns are `stat
 
 ---
 
-## 💭 Command: `forceruntrigger`
+## 💬 Command: `forceruntrigger`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`forceruntrigger` | `frt`) `<TriggerName>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Force-run a trigger created by `TriggerCreate()`, ignoring conditions and waiting until it finishes.
 This can be used to run a trigger that bypasses the `testConds` check, such as `GameCheatsEnabled(c_gameCheatCategoryDevelopment)`.
@@ -347,14 +347,14 @@ void libMLBD_gt_MMBOEDebugStartImmediately_Init () {
 ```
 The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using this command (`frt libMLBD_gt_MMBOEDebugStartImmediately_Func`), you can bypass the `GameCheatsEnabled(c_gameCheatCategoryDevelopment)` restriction, which was required when using the `-bd` command.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TriggerName>
     	Required:	true
     	Type:		string
     	Usage:		Defines the trigger to be run
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > frt libUIUI_gt_InputBackslashKeyDown_Func
     	(Force to run the trigger "libUIUI_gt_InputBackslashKeyDown_Func", which will show up the debug menu.)
@@ -367,24 +367,24 @@ The trigger name will be `libMLBD_gt_MMBOEDebugStartImmediately_Func`. By using 
 
 ---
 
-## 💭 Command: `getmarker`
+## 💬 Command: `getmarker`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getmarker` | `gmarker`) `<MarkerID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get a Markers position in (X, Y, Z).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MarkerID>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the Marker ID to be added (up to 20).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > gmarker 1
     	(Get the position of Marker 1 in (X, Y, Z).)
@@ -397,13 +397,13 @@ Get a Markers position in (X, Y, Z).
 
 ---
 
-## 💭 Command: `loadmap`
+## 💬 Command: `loadmap`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`loadmap` | `lm`) `<MapPath>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 End the game and instantly load a `.stormmap` file.
 The `MapPath` is relative to:
@@ -418,14 +418,14 @@ There are currently 4 built-in `.stormmaps` from CASC in Heroes, which the `MapP
 
 You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `HEROES_INSTALL_LOCATION/maps/cool.stormmap`, which the `MapPath` will be `cool.stormmap`
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MapPath>
     	Required:	true
     	Type:		string
     	Usage:		Defines the path to the stormmap
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > lm heroes/singleplayermaps/startingexperience/tutorial01.stormmap
     	(Exit and Load the tutorial 1 map)
@@ -438,17 +438,17 @@ You can also put a `.stormmap` file into `HEROES_INSTALL_LOCATION/maps/`, e.g `H
 
 ---
 
-## 💭 Command: `minionwaveinterval`
+## 💬 Command: `minionwaveinterval`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`minionwaveinterval` | `mwi`) `[seconds]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get or set the minion wave spawn interval. Usually 30s, or 15s in ARAM.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [seconds]
     	Required:	false
@@ -456,7 +456,7 @@ Get or set the minion wave spawn interval. Usually 30s, or 15s in ARAM.
     	Usage:		Defines interval for minion wave to spawn
     	Default:	(The map's original interval, usually 30 but 15 for ARAMs)
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > mwi
     	(Get the minion wave interval)
@@ -473,26 +473,26 @@ Get or set the minion wave spawn interval. Usually 30s, or 15s in ARAM.
 
 ---
 
-## 💭 Command: `playcutscene`
+## 💬 Command: `playcutscene`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`playcutscene` | `pcs`) `<mode>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Play a Cutscene file (`*.StormCutscene`) directly. Press `Esc` anytime to stop it.
 
 The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file is in `mods/heroesdata.stormmod/base.stormdata/Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`, the path will be `Cutscenes/EndOfMatch/EndOfMatch_LineUp_Tassadar.StormCutscene`)
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <mode>
     	Required:	true
     	Type:		string
     	Usage:		Defines the path of the *.StormCutscene file.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > pcs Cutscenes/Tutorial_CursedHollow.StormCutscene
     	(Plays the Tutorial Cutscene for Cursed Hollow)
@@ -505,22 +505,22 @@ The file path is relative to `*.stormmod/base.stormdata`. (e.g If Cutscene file 
 
 ---
 
-## 💭 Command: `removecamerabound`
+## 💬 Command: `removecamerabound`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removecamerabound` | `rcb`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove the camera bounding box, which is defined in the map editor. This allows the camera to move freely without being limited to a specific area.
 >Note: This command cannot be reverted. You will need to restart the current map to get the bounding box back. (e.g the [`restartgame`](../LibUtilities#-command-restartgame) command)
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rcb
     	(Remove the camera bounding box)
@@ -533,24 +533,24 @@ Remove the camera bounding box, which is defined in the map editor. This allows 
 
 ---
 
-## 💭 Command: `removemarker`
+## 💬 Command: `removemarker`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removemarker` | `rmmarker`) `<MarkerID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Removes a specific marker.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MarkerID>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the Marker ID to be added (up to 20).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rmmarker 1
     	(Removed Marker 1)
@@ -563,21 +563,21 @@ Removes a specific marker.
 
 ---
 
-## 💭 Command: `resetcameraobject`
+## 💬 Command: `resetcameraobject`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`resetcameraobject` | `rco`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Reset the game camera to `BlizzardAllStars` (default game camera)
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rco
     	(Reset the game camera to BlizzardAllStars)
@@ -590,21 +590,21 @@ Reset the game camera to `BlizzardAllStars` (default game camera)
 
 ---
 
-## 💭 Command: `resetgamespeed`
+## 💬 Command: `resetgamespeed`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`resetgamespeed` | `rgs`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Reset the game speed to 2 (Normal).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rgs
     	(Reset the game speed to 2 (Normal).)
@@ -617,22 +617,22 @@ Reset the game speed to 2 (Normal).
 
 ---
 
-## 💭 Command: `restartgame`
+## 💬 Command: `restartgame`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`restartgame` | `re`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Restart the map without needing to re-enter. This is extremely useful when testing modified XML files or Galaxy scripts.
 >Note: It will **NOT** automatically reload or add mods from `Includes.xml`. You must manually re-enter the map for mods to be applied.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > re
     	(Restart the game instantly)
@@ -645,25 +645,25 @@ Restart the map without needing to re-enter. This is extremely useful when testi
 
 ---
 
-## 💭 Command: `setcameraobject`
+## 💬 Command: `setcameraobject`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`setcameraobject` | `sco`) `<camera>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 >**WARNING**: Set a non existing camera will actually **crash** the game.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <camera>
     	Required:	true
     	Type:		string
     	Usage:		Defines the camera object.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sco BlizzardAllStars
     	(Set the camera object to BlizzardAllStars (default game camera))
@@ -676,13 +676,13 @@ Manually set the camera object. The parameter is the id of `<CCamera id="xxx">`.
 
 ---
 
-## 💭 Command: `setgamespeed`
+## 💬 Command: `setgamespeed`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`setgamespeed` | `sgs`) `<speed>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Set the game speed.
 
@@ -696,14 +696,14 @@ The game speed must be between 0 and 4:
 | 3 | Fast |
 | 4 | Faster |
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <speed>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the game speed to be set (between 0 - 4).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sgs 0
     	(Set the game speed to 0 (Slower))
@@ -716,21 +716,21 @@ The game speed must be between 0 and 4:
 
 ---
 
-## 💭 Command: `startgame`
+## 💬 Command: `startgame`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`startgame` | `sg`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Start the game instantly (timer start, gate open, etc).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sg
     	(Start the game instantly)
@@ -743,19 +743,19 @@ Start the game instantly (timer start, gate open, etc).
 
 ---
 
-## 💭 Command: `string`
+## 💬 Command: `string`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`string` | `str`) `<mode>` `<value>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Display a string using `TextExpressionAssemble` or `StringExternal`.
 Useful for quickly displaying strings from internal functions.
 `mode` must be either `TextExpressionAssemble` or `StringExternal`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <mode>
     	Required:	true
@@ -766,7 +766,7 @@ Useful for quickly displaying strings from internal functions.
     	Type:		string
     	Usage:		Defines the value of the string to be displayed
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > str TextExpressionAssemble Param/Expression/lib_Sprt_B1FD42AF
     	(Shows the string "Set Mastery Ring..." from supportlib)
@@ -779,22 +779,22 @@ Useful for quickly displaying strings from internal functions.
 
 ---
 
-## 💭 Command: `togglecdr`
+## 💬 Command: `togglecdr`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglecdr` | `tcdr`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle Mass CDR. Resets the cooldown on all abilities every game loop (0.0625s).
 This is useful for bypassing the limit of Try Mode's Toggle Cooldown, which has a 1.5s cooldown between each reset.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tcdr
     	(Toggle Mass CDR)
@@ -807,21 +807,21 @@ This is useful for bypassing the limit of Try Mode's Toggle Cooldown, which has 
 
 ---
 
-## 💭 Command: `togglecrosshair`
+## 💬 Command: `togglecrosshair`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglecrosshair` | `tch`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle a crosshair at the center of the camera. This allows for more precise placement of [summon units](LibUnits.md#-command-summon) and [adding effects](LibUnits.md#-command-addeffectcamera).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tch
     	(Toggle showing crosshair)
@@ -834,21 +834,21 @@ Toggle a crosshair at the center of the camera. This allows for more precise pla
 
 ---
 
-## 💭 Command: `toggledebugmode`
+## 💬 Command: `toggledebugmode`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggledebugmode` | `tdb`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tdb
     	(Toggle Debug Mode)
@@ -861,21 +861,21 @@ Toggle Debug Mode by modifying the `libCore_gv_dEBUGDebuggingEnabled` variable.
 
 ---
 
-## 💭 Command: `togglefogofwar`
+## 💬 Command: `togglefogofwar`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglefogofwar` | `tfow`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle Fog Of War. This can enable or disable full map vision.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tfow
     	(Toggle Full Map Vision)
@@ -888,13 +888,13 @@ Toggle Fog Of War. This can enable or disable full map vision.
 
 ---
 
-## 💭 Command: `togglerandommovement`
+## 💬 Command: `togglerandommovement`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglerandommovement` | `trm`) `[radius]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 ![trm screenshot](https://i.imgur.com/d4fg4Oj.png)
 
@@ -910,7 +910,7 @@ Run this command again to turn off this functionality.
 
 >Note: You can still issue commands to units that are moving randomly, but once all commands are finished (e.g., the unit stops), it will resume moving randomly within the circle.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [radius]
     	Required:	false
@@ -918,7 +918,7 @@ Run this command again to turn off this functionality.
     	Usage:		The radius of the circle that units will be moved randomly
     	Default:	7
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > trm 10
     	(Toggle Random Movement with circle radius of 10.)
@@ -931,21 +931,21 @@ Run this command again to turn off this functionality.
 
 ---
 
-## 💭 Command: `toggleterrainindicator`
+## 💬 Command: `toggleterrainindicator`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggleterrainindicator` | `tti`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle the Terrain Indicator (used by Diablo, Auriel, etc.) for any unit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tti
     	(Toggle Terrain Indicator)
@@ -958,22 +958,22 @@ Toggle the Terrain Indicator (used by Diablo, Auriel, etc.) for any unit.
 
 ---
 
-## 💭 Command: `toggleui`
+## 💬 Command: `toggleui`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggleui` | `tui`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle the UI. This hides or shows all UI elements, including the HP bar, talents panel, floating combat text, abilities bar, etc.
 >Note: When the UI is off, all abilities are disabled.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tui
     	(Toggle In game UI)
@@ -986,25 +986,25 @@ Toggle the UI. This hides or shows all UI elements, including the HP bar, talent
 
 ---
 
-## 💭 Command: `wingame`
+## 💬 Command: `wingame`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`wingame` | `wg`) `<TeamID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Instantly declare a win for a team and end the game.
 Generally left team is **Team 1** and right team is **Team 2**.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TeamID>
     	Required:	true
     	Type:		integer
     	Usage:		Defines the team ID to win the game.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > wg 1
     	(Win the game for Team 1)

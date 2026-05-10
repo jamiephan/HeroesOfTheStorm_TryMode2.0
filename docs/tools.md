@@ -1,10 +1,10 @@
 ---
-title: 🛠 Tools and Utilities
+title: 🛠️ Tools and Utilities
 nav_order: 4
 last_modified_date: 2026-05-09 20:00:00
 ---
 
-# 🛠 Tools and Utilities
+# 🛠️ Tools and Utilities
 {: .no_toc }
 
 - Table of Contents

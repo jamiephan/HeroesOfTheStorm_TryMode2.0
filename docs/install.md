@@ -1,10 +1,10 @@
 ---
-title: ⬇️ Installation and Running
+title: 📥 Installation and Running
 nav_order: 1
 last_modified_date: 2026-05-09 20:00:00
 ---
 
-# ⬇️ Installation and Running
+# 📥 Installation and Running
 {: .no_toc }
 
 - Table of Contents
@@ -12,7 +12,7 @@ last_modified_date: 2026-05-09 20:00:00
 
 ---
 
-## Replace in-game Try Mode with Try-Mode Installer (Windows) (Recommended ✔)
+## Replace in-game Try Mode with Try-Mode Installer (Windows) (Recommended ✅)
 
 You can use the [Try Mode 2.0 Installer](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer) to manage the installation of custom maps.
 

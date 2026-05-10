@@ -2,11 +2,18 @@ title: Try Mode 2.0
 description: A modified Try Mode Map for Heroes of the Storm to create a better experience with enhanced functionalities.
 repository: jamiephan/HeroesOfTheStorm_TryMode2.0
 theme: just-the-docs
+
+# To test locally:
+# cd docs
+# bundle install
+# bundle exec jekyll serve
+
 plugins:
   - jekyll-seo-tag
   - jekyll-github-metadata
   - jekyll-include-cache
   - jekyll-sitemap
+  
 tagline: A modified Try Mode Map for Heroes of the Storm
 baseurl: /HeroesOfTheStorm_TryMode2.0
 google_site_verification: OKKzM2WHK1hiYsONJfxwRDvo-iSydAZPpXonNgcoxWY
@@ -70,7 +77,7 @@ search:
   # Focus the search input by pressing `ctrl + focus_shortcut_key` (or `cmd + focus_shortcut_key` on macOS)
   focus_shortcut_key: "k"
 
-color_scheme: light
+color_scheme: trymode20
 
 callouts:
   highlight:

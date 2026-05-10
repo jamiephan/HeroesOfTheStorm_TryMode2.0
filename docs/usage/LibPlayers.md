@@ -1,7 +1,7 @@
 ---
 title: 📚 Players Library
 nav_order: 3
-last_modified_date: Sat, 09 May 2026 18:52:30 GMT
+last_modified_date: Sun, 10 May 2026 09:11:47 GMT
 parent: 💻 Usage
 ---
 
@@ -13,13 +13,13 @@ Commands related to players, such as scoreboard, respawn timer, etc.
 
 ---
 
-## 💭 Command: `addalltalent`
+## 💬 Command: `addalltalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addalltalent` | `aat`) `<HeroId>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 ** ***DEPRECATED: Please use [`selectalltalent`](LibPlayers.md#-command-selectalltalent) command instead.*** **
 
@@ -27,7 +27,7 @@ Add all talents to a player.
 The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of the talents from that hero to the player, or it can be `ALL`, which will add ALL the talents in the game to the player.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <HeroId>
     	Required:	true
@@ -39,7 +39,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
     	Usage:		The target player id to have the talent being added.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > aat Tyrande
     	(Add all the talents from Tyrande to the player whoever uses the command)
@@ -56,17 +56,17 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will add all of t
 
 ---
 
-## 💭 Command: `addqueststack`
+## 💬 Command: `addqueststack`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addqueststack` | `aqs`) `<stacks>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a specific amount of quest stacks to a player.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <stacks>
     	Required:	true
@@ -78,7 +78,7 @@ Add a specific amount of quest stacks to a player.
     	Usage:		The Player ID for the quest stacks to be added
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > aqs 10
     	(Add 10 quest stacks to whoever uses this command)
@@ -91,18 +91,18 @@ Add a specific amount of quest stacks to a player.
 
 ---
 
-## 💭 Command: `addtalent`
+## 💬 Command: `addtalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addtalent` | `adt`) `<TalentId>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TalentId>
     	Required:	true
@@ -114,7 +114,7 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
     	Usage:		The target player id to have the talent being added.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > addtalent MedivhForceOfWillArcaneExplosion
     	(Add Medivh's Arcane Explosion Talent to whoever uses this command)
@@ -127,13 +127,13 @@ Add a talent to a player, generally found in `<CTalent id="xxxx">`.
 
 ---
 
-## 💭 Command: `difficultyai`
+## 💬 Command: `difficultyai`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`difficultyai` | `diffai`) `[PlayerID]` `[DifficultyID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get or set the AI difficulty for a player.
 
@@ -156,7 +156,7 @@ The difficulty settings are below:
 | 12 | Veteran | `libAIAI_ge_HeroAIDifficulty_HeroAIVeryHard` |
 | 13 | Elite | `libAIAI_ge_HeroAIDifficulty_HeroAIElite` |
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerID]
     	Required:	false
@@ -169,7 +169,7 @@ The difficulty settings are below:
     	Usage:		The difficulty to be set
     	Default:	null
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > diffai
     	(Get the AI difficulty for whoever uses this command)
@@ -186,19 +186,19 @@ The difficulty settings are below:
 
 ---
 
-## 💭 Command: `disableai`
+## 💬 Command: `disableai`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`disableai` | `disai`) `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Disable AI for a player.
 
 >Note: This also disables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerID]
     	Required:	false
@@ -206,7 +206,7 @@ Disable AI for a player.
     	Usage:		The Player ID for the AI to be disabled
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > disai
     	(Disable AI for whoever use this command)
@@ -221,25 +221,25 @@ Disable AI for a player.
 
 ---
 
-## 💭 Command: `disabletalent`
+## 💬 Command: `disabletalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`disabletalent` | `dist`) `<TalentId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Disable a talent for all players. Generally found in `<CTalent id="xxxx">`.
 >Note: This only locks the talent selection. If a player has already taken the talent, it will not be affected.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TalentId>
     	Required:	true
     	Type:		string
     	Usage:		The talent id to be disabled.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > disabletalent RagnarosLavaWave
     	(Disable Rag's Lava Wave talent, similar to ARAM.)
@@ -252,19 +252,19 @@ Disable a talent for all players. Generally found in `<CTalent id="xxxx">`.
 
 ---
 
-## 💭 Command: `enableai`
+## 💬 Command: `enableai`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`enableai` | `enai`) `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Enable AI for a player.
 
 >Note: This also enables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerID]
     	Required:	false
@@ -272,7 +272,7 @@ Enable AI for a player.
     	Usage:		The Player ID for the AI to be enabled
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > enai
     	(Enable AI for whoever use this command)
@@ -287,24 +287,24 @@ Enable AI for a player.
 
 ---
 
-## 💭 Command: `enabletalent`
+## 💬 Command: `enabletalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`enabletalent` | `ent`) `<TalentId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TalentId>
     	Required:	true
     	Type:		string
     	Usage:		The talent id to be enabled.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > enabletalent RagnarosLavaWave
     	(Enable Rag's Lava Wave talent, which was disabled in ARAM.)
@@ -317,13 +317,13 @@ Enable a disabled talent for all players. Generally found in `<CTalent id="xxxx"
 
 ---
 
-## 💭 Command: `experience`
+## 💬 Command: `experience`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`experience` | `xp`) `<Amount>` `[PlayerId]` `[SourceId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Grant experience to a specific player.
 
@@ -339,7 +339,7 @@ The `SourceId` is an integer with the following values:
 |5|`libGame_ge_XPSources_Structure`|
 |6|`libGame_ge_XPSources_RegenGlobe`|
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <Amount>
     	Required:	true
@@ -356,7 +356,7 @@ The `SourceId` is an integer with the following values:
     	Usage:		The integer value of the xp source
     	Default:	0
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > xp 10
     	(Grant 10 xp to whoever use this command)
@@ -371,13 +371,13 @@ The `SourceId` is an integer with the following values:
 
 ---
 
-## 💭 Command: `getcatalog`
+## 💬 Command: `getcatalog`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getcatalog` | `gcl`) `<CatalogReference>` `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Directly get a catalog value (i.e., XML data) for a player.
 
@@ -469,7 +469,7 @@ To get a reference to Blaze's Jet Propulsion (E) cooldown, the `CatalogReference
 ```
 To get a reference to the armor value against Structures, the `CatalogReference` will be `Behavior,StukovHealingPathogenBioticArmorPhysicalArmorBehavior,ArmorModification.ArmorSet[Structure].ArmorMitigationTable[Basic]`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <CatalogReference>
     	Required:	true
@@ -481,7 +481,7 @@ To get a reference to the armor value against Structures, the `CatalogReference`
     	Usage:		The Player ID for the catalog modification
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > getcatalog Effect,WizardTeleportCalamityDamage,Amount
     	(Get Li-Ming's Calamity damage from whoever uses this command)
@@ -502,13 +502,13 @@ To get a reference to the armor value against Structures, the `CatalogReference`
 
 ---
 
-## 💭 Command: `modifycatalog`
+## 💬 Command: `modifycatalog`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`modifycatalog` | `mcl`) `<CatalogReference>` `<value>` `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Directly modify a Catalog value (a.k.a XMLs) for a player in runtime.
 
@@ -519,7 +519,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
  - The catalog modification is applied after parental inheritance, meaning it is not possible to modify a parent (`parent="xxx"`) and have the change apply to all child catalogs. You must apply it to each child catalog individually.
  - It is not possible to "create" a value that does not exist after the map has loaded. Only existing values (after inheriting from a parent) can be modified.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <CatalogReference>
     	Required:	true
@@ -535,7 +535,7 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
     	Usage:		The Player ID for the catalog modification
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > modifycatalog Effect,WizardTeleportCalamityDamage,Amount 9999
     	(Modify Li-Ming's Calamity damage to 9999 for whoever uses this command)
@@ -556,13 +556,13 @@ For how to obtain and construct `CatalogReference`, Please refer to the [`getcat
 
 ---
 
-## 💭 Command: `modifycatalogvalue`
+## 💬 Command: `modifycatalogvalue`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`modifycatalogvalue` | `mcv`) `<CatalogType>` `<CatalogEntry>` `<CatalogField>` `<value>` `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Directly modify a catalog value (i.e., XML data) for a player at runtime.
 
@@ -574,7 +574,7 @@ This is similar to the [`modifycatalog`](LibPlayers.md#-command-modifycatalog) c
 
 > Note: due to unknown reason, `<CItemClass>` and `<CItemContainer>` currently does not work with this command.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <CatalogType>
     	Required:	true
@@ -598,7 +598,7 @@ This is similar to the [`modifycatalog`](LibPlayers.md#-command-modifycatalog) c
     	Usage:		The Player ID for the catalog modification
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > modifycatalogvalue Effect WizardTeleportCalamityDamage Amount 9999
     	(Modify Li-Ming's Calamity damage to 9999 for whoever uses this command)
@@ -619,19 +619,19 @@ This is similar to the [`modifycatalog`](LibPlayers.md#-command-modifycatalog) c
 
 ---
 
-## 💭 Command: `removealltalent`
+## 💬 Command: `removealltalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removealltalent` | `rmat`) `<HeroId>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove all talents from a player.
 The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all of the talents from that hero from the player, or it can be `ALL`, which will remove ALL the talents in the game from the player.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <HeroId>
     	Required:	true
@@ -643,7 +643,7 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
     	Usage:		The target player ID from which to remove the talent.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rmat Tyrande
     	(Remove all the talents from Tyrande from the player whoever uses the command)
@@ -660,17 +660,17 @@ The `HeroId` can be either the ID of `<CHero id="xxx">`, which will remove all o
 
 ---
 
-## 💭 Command: `removequeststack`
+## 💬 Command: `removequeststack`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removequeststack` | `rqs`) `<stacks>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove a specific amount of quest stacks from a player.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <stacks>
     	Required:	true
@@ -682,7 +682,7 @@ Remove a specific amount of quest stacks from a player.
     	Usage:		The Player ID for the quest stacks to be removed
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rqs 10
     	(Remove 10 quest stacks from whoever uses this command)
@@ -695,18 +695,18 @@ Remove a specific amount of quest stacks from a player.
 
 ---
 
-## 💭 Command: `removetalent`
+## 💬 Command: `removetalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removetalent` | `rmt`) `<TalentId>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 >Note: Some of the talents won't work, so you might want to experiment a bit.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TalentId>
     	Required:	true
@@ -718,7 +718,7 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
     	Usage:		The target player id to have the talent being removed.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > removetalent MedivhForceOfWillArcaneExplosion
     	(Remove Medivh's Arcane Explosion Talent from whoever uses this command)
@@ -731,21 +731,21 @@ Remove a talent from a player, generally found in `<CTalent id="xxxx">`.
 
 ---
 
-## 💭 Command: `resetoverlay`
+## 💬 Command: `resetoverlay`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`resetoverlay` | `rol`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Reset to the default overlay, removing all custom overlays.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rol
     	(Reset to the default overlay.)
@@ -758,17 +758,17 @@ Reset to the default overlay, removing all custom overlays.
 
 ---
 
-## 💭 Command: `respawnpoint`
+## 💬 Command: `respawnpoint`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`respawnpoint` | `rsp`) `<Action>` `[PlayerId/all]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Modify the respawn point for a player. Either at the current camera location or its default location.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <Action>
     	Required:	true
@@ -780,7 +780,7 @@ Modify the respawn point for a player. Either at the current camera location or 
     	Usage:		Set the player id for the spawn modification to take effect, use "all" for all players.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > respawnpoint set all
     	(Set the respawn point for all players at the current camera location)
@@ -799,25 +799,25 @@ Modify the respawn point for a player. Either at the current camera location or 
 
 ---
 
-## 💭 Command: `respawntime`
+## 💬 Command: `respawntime`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`respawntime` | `rst`) `<seconds>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Override the current respawn timer for all players.
 >Note: Due to system limitations, setting the value to 0 will be automatically changed to 0.0625 (1 game tick).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <seconds>
     	Required:	true
     	Type:		float
     	Usage:		The respawn time to be set for all players
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > respawntime 99
     	(Set the respawn timer to 99 seconds)
@@ -830,18 +830,18 @@ Override the current respawn timer for all players.
 
 ---
 
-## 💭 Command: `selectalltalent`
+## 💬 Command: `selectalltalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`selectalltalent` | `sat`) `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Select all talents for a player. Ever wonder what a Q and AA build Zeratul at the same time would feel like? Or a Varian with Twin Blade+Smash+Taunt and triple banners?
 >Note: This uses the built-in `libGame_gf_TalentsChooseTalentForPlayer()` function, which adds talents for the player's current hero only. Summoned hero units do not count. Unlike the `addalltalent` command, this works reliably most of the time.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerId]
     	Required:	false
@@ -849,7 +849,7 @@ Select all talents for a player. Ever wonder what a Q and AA build Zeratul at th
     	Usage:		The target player id to have the talent being selected.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sat
     	(Select all the talents for player whoever uses the command)
@@ -866,25 +866,25 @@ Select all talents for a player. Ever wonder what a Q and AA build Zeratul at th
 
 ---
 
-## 💭 Command: `setmasteryring`
+## 💬 Command: `setmasteryring`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`setmasteryring` | `smr`) `<MasteryRingLevel>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Set the Mastery Ring level. The ring below the hero will be automatically updated.
 >Note: If the new level is lower than the current one, you may need to respawn (e.g., suicide) the selected units.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <MasteryRingLevel>
     	Required:	true
     	Type:		integer
     	Usage:		The level of the mastery ring to be set.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > setmasteryring 0
     	(Remove the mastery ring from the player)
@@ -897,25 +897,25 @@ Set the Mastery Ring level. The ring below the hero will be automatically update
 
 ---
 
-## 💭 Command: `setoverlay`
+## 💬 Command: `setoverlay`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`setoverlay` | `sol`) `<OverlayPath>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Set the in-game overlay (e.g., the golden overlay for Uther's Divine Shield).
 >Note: The path is relative to `*.storm*/base.stormdata/`, usually with the extension `*.StormCutscene`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <OverlayPath>
     	Required:	true
     	Type:		string
     	Usage:		The path of the overlay file, relative to base.stormdata.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sol Cutscenes/GameUI_InvulnerableOverlay.StormCutscene
     	(Set the overlay to "Invulnerable", e.g Divine Shield / Sanctification.)
@@ -928,20 +928,20 @@ Set the in-game overlay (e.g., the golden overlay for Uther's Divine Shield).
 
 ---
 
-## 💭 Command: `setscore`
+## 💬 Command: `setscore`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`setscore` | `score`) `<Field>` `<Value>` `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Set the score for the scoreboard (some values are visible on the Tab screen). Useful when testing talents that interact with scoreboard values, such as Zagara's Infest.
 >Note: The Infest internal function is capped at `524%` (maximum fixed value); further details are out of scope here.
 You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 >Note: Some fields uses Integer and some uses Fixed. However because this function is unified using `PlayerScoreValueSetFromInt()`, all decimals will be removed. As such, the max value for fixed is `524287` and `2147483647` for Integer. This limitation might change later.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <Field>
     	Required:	true
@@ -957,7 +957,7 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
     	Usage:		The player id for the modification to be applied.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > setscore HeroDamage 0
     	(Set the field "Hero Damage" to 0 for the player who use this command.)
@@ -972,19 +972,19 @@ You can obtain these FIELDs from `ScoreValueData.xml` in `heroesdata.stormmod`
 
 ---
 
-## 💭 Command: `toggleai`
+## 💬 Command: `toggleai`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggleai` | `togai`) `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle AI for a player.
 
 >Note: This also enables/disables AI for units summoned via the [summon](LibUnits.md#-command-summon) command.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerID]
     	Required:	false
@@ -992,7 +992,7 @@ Toggle AI for a player.
     	Usage:		The Player ID for the AI to be enabled/disabled
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > togai
     	(Toggle AI for whoever use this command)
@@ -1007,18 +1007,18 @@ Toggle AI for a player.
 
 ---
 
-## 💭 Command: `togglemassquest`
+## 💬 Command: `togglemassquest`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglemassquest` | `tmq`) `[stacks]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle mass quest completion mode, granting stacks every game tick (0.0625s) for whoever uses this command.
 >Note: Useful for heroes with truly infinite stacking such as Zul'jin or Nazeebo. However, due to integer/floating-point overflow, after reaching a certain stack count the functionality may overflow — for example, Nazeebo's HP may reduce to 1 when at maximum stacks with the level 4 bonus HP-per-stack talent.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [stacks]
     	Required:	false
@@ -1026,7 +1026,7 @@ Toggle mass quest completion mode, granting stacks every game tick (0.0625s) for
     	Usage:		The amount of stacks to add every game tick (0.0625s)
     	Default:	1
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tmq 10
     	(Enable mass quest completion mode and give 10 stacks every game tick if not enabled)
@@ -1039,21 +1039,21 @@ Toggle mass quest completion mode, granting stacks every game tick (0.0625s) for
 
 ---
 
-## 💭 Command: `togglepausegametalent`
+## 💬 Command: `togglepausegametalent`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglepausegametalent` | `tpgt`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle whether to pause the game when viewing talents, similar to heroes tutorial.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tpgt
     	(Toggle whether to pause the game when viewing talents)
@@ -1066,21 +1066,21 @@ Toggle whether to pause the game when viewing talents, similar to heroes tutoria
 
 ---
 
-## 💭 Command: `toggletalenttree`
+## 💬 Command: `toggletalenttree`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggletalenttree` | `ttt`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle the display of the talents selection tree.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > ttt
     	(Toggle the display of the talents selection tree.)

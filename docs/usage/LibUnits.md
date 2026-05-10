@@ -1,7 +1,7 @@
 ---
 title: 📚 Units Library
 nav_order: 2
-last_modified_date: Sat, 09 May 2026 18:52:30 GMT
+last_modified_date: Sun, 10 May 2026 09:11:47 GMT
 parent: 💻 Usage
 ---
 
@@ -13,24 +13,24 @@ A library with commands related to selected units, such as kill, spawn, etc.
 
 ---
 
-## 💭 Command: `addbehavior`
+## 💬 Command: `addbehavior`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addbehavior` | `adb`) `<BehaviorId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a behavior to selected unit(s). Behaviors are generally found in `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <BehaviorId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the behavior id to be added to selected units
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > addbehavior MedivhArcaneBrillianceItem
     	(Add Medivh's Arcane Brilliance Ability to selected units)
@@ -39,21 +39,21 @@ Add a behavior to selected unit(s). Behaviors are generally found in `<CBehavior
 
 ### 🖼 UI Availability:
 {: .no_toc }
-- ✔ **Yes.** Use the command `addbehaviorui` or `adbui` to toggle the UI counterpart of this command.
+- ✅ **Yes.** Use the command `addbehaviorui` or `adbui` to toggle the UI counterpart of this command.
 
 ---
 
-## 💭 Command: `addeffect`
+## 💬 Command: `addeffect`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addeffect` | `ade`) `<EffectId>` `[amount]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add an effect to selected unit(s). Effects are generally found in `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <EffectId>
     	Required:	true
@@ -65,7 +65,7 @@ Add an effect to selected unit(s). Effects are generally found in `<CEffect*>`, 
     	Usage:		Defines the amount of effects to be added to the units
     	Default:	1
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > addeffect StormSuicide
     	(Kill all selected units (self-destruct))
@@ -80,17 +80,17 @@ Add an effect to selected unit(s). Effects are generally found in `<CEffect*>`, 
 
 ---
 
-## 💭 Command: `addeffectcamera`
+## 💬 Command: `addeffectcamera`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addeffectcamera` | `adec`) `<EffectId>` `[amount]` `[PlayerID]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add an effect to the center of the camera. Effects are generally found in `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <EffectId>
     	Required:	true
@@ -107,7 +107,7 @@ Add an effect to the center of the camera. Effects are generally found in `<CEff
     	Usage:		The Player ID for the effect owner
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > addeffectcamera DropUnderworldPowerupPersistent
     	(Add some Haunted Mines Skulls to camera location)
@@ -124,24 +124,24 @@ Add an effect to the center of the camera. Effects are generally found in `<CEff
 
 ---
 
-## 💭 Command: `addweapon`
+## 💬 Command: `addweapon`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`addweapon` | `adw`) `<WeaponID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <WeaponID>
     	Required:	true
     	Type:		string
     	Usage:		The ID of the weapon
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > adw AlexstraszaDragonConeWeapon
     	(Add Alexstrasza's Dragon Form weapon to selected unit(s))
@@ -154,25 +154,25 @@ Add a weapon (Basic Attack) to selected unit(s). Usually found in `<CWeapon* id=
 
 ---
 
-## 💭 Command: `changeunitownership`
+## 💬 Command: `changeunitownership`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`changeunitownership` | `cuo`) `<PlayerId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Changes ownership of the selected unit(s).
 >Note: 0 is neutral; neutral units cannot be selected after their ownership is changed.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <PlayerId>
     	Required:	true
     	Type:		integer
     	Usage:		The new owner of the selected unit(s).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > changeunitownership 1
     	(Change ownership of all selected units to Player 1)
@@ -185,21 +185,21 @@ Changes ownership of the selected unit(s).
 
 ---
 
-## 💭 Command: `clearbehavior`
+## 💬 Command: `clearbehavior`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`clearbehavior` | `clb`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Clear all active behaviors for selected units.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > clb
     	(Clear all active behaviors for selected units)
@@ -212,13 +212,13 @@ Clear all active behaviors for selected units.
 
 ---
 
-## 💭 Command: `clearunits`
+## 💬 Command: `clearunits`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`clearunits` | `clu`) `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Clear all summoned unit(s) (spawned via the [summon](LibUnits.md#-command-summon) command) for a player. Useful for removing large numbers of summoned units, or when summoned units are untargetable/unselectable and cannot be removed with the [killunits](LibUnits.md#-command-killunits) command.
 
@@ -226,7 +226,7 @@ Clear all summoned unit(s) (spawned via the [summon](LibUnits.md#-command-summon
 
 >Self note: For each `MaxPlayer[16][100]`, is equivalent to around 30 `EventChatMessage` triggers. So more memory assigned to this, the less trigger can be used.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerId]
     	Required:	false
@@ -234,7 +234,7 @@ Clear all summoned unit(s) (spawned via the [summon](LibUnits.md#-command-summon
     	Usage:		Define to clear which player's summoned unit(s).
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > clu
     	(Clear summoned unit(s) from player who used the command)
@@ -247,21 +247,21 @@ Clear all summoned unit(s) (spawned via the [summon](LibUnits.md#-command-summon
 
 ---
 
-## 💭 Command: `clearweapon`
+## 💬 Command: `clearweapon`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`clearweapon` | `clw`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > clw
     	(Remove all weapons from selected units)
@@ -274,22 +274,22 @@ Remove all weapons (Basic Attack) from selected unit(s). Usually found in `<CWea
 
 ---
 
-## 💭 Command: `enablecollision`
+## 💬 Command: `enablecollision`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`enablecollision` | `encol`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Enable collision for selected unit(s).
 >Note: This may conflict with non-collision units such as Medivh's Raven form. Avoid using this command on those units.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > encol
     	(Enable collision for selected unit(s).)
@@ -302,21 +302,21 @@ Enable collision for selected unit(s).
 
 ---
 
-## 💭 Command: `getbehavior`
+## 💬 Command: `getbehavior`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getbehavior` | `getb`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 List all active behaviors for selected units.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > getb
     	(List all active behaviors for selected units)
@@ -329,17 +329,17 @@ List all active behaviors for selected units.
 
 ---
 
-## 💭 Command: `getselectedunits`
+## 💬 Command: `getselectedunits`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getselectedunits` | `gsu`) `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get all selected units from a specific player.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerId]
     	Required:	false
@@ -347,7 +347,7 @@ Get all selected units from a specific player.
     	Usage:		Define which player to get all the units.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > gsu
     	(Get all selected units from whoever uses this command)
@@ -360,21 +360,21 @@ Get all selected units from a specific player.
 
 ---
 
-## 💭 Command: `getunitownership`
+## 💬 Command: `getunitownership`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getunitownership` | `guo`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Gets the Ownership (Player ID) of selected unit(s).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > guo
     	(Gets the Ownership (Player ID) of selected unit(s).)
@@ -387,17 +387,17 @@ Gets the Ownership (Player ID) of selected unit(s).
 
 ---
 
-## 💭 Command: `getunits`
+## 💬 Command: `getunits`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getunits` | `gu`) `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get all units owned by a specific player.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerId]
     	Required:	false
@@ -405,7 +405,7 @@ Get all units owned by a specific player.
     	Usage:		Define which player to get all the units.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > gu
     	(Get all units owned by whoever uses this command.)
@@ -420,21 +420,21 @@ Get all units owned by a specific player.
 
 ---
 
-## 💭 Command: `getweapon`
+## 💬 Command: `getweapon`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`getweapon` | `getw`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > getw
     	(Get all weapons from selected units)
@@ -447,19 +447,19 @@ Get all weapons (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 ---
 
-## 💭 Command: `killallunits`
+## 💬 Command: `killallunits`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`killallunits` | `kau`) `[PlayerId]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Kill all units owned by a specific player.
 Unlike other commands that accept a player ID, this command also accepts Player 0 (Neutral).
 >Note: In most maps, the Core is owned by Player 11 (left team) and Player 12 (right team). Killing it will instantly destroy the core and end the game.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     [PlayerId]
     	Required:	false
@@ -467,7 +467,7 @@ Unlike other commands that accept a player ID, this command also accepts Player 
     	Usage:		Define which player to get all the units.
     	Default:	The player id of whoever used this command.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > kau
     	(Kill all units owned by whoever uses this command.)
@@ -482,21 +482,21 @@ Unlike other commands that accept a player ID, this command also accepts Player 
 
 ---
 
-## 💭 Command: `killunits`
+## 💬 Command: `killunits`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`killunits` | `ku`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Instantly kill all selected unit(s).
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > ku
     	(Instantly kill all selected unit(s).)
@@ -509,25 +509,25 @@ Instantly kill all selected unit(s).
 
 ---
 
-## 💭 Command: `playanimation`
+## 💬 Command: `playanimation`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`playanimation` | `pa`) `<AnimationId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Play an Animation for selected unit(s).
 >Note: There are Walk, Attack, A to Z animations etc
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <AnimationId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the Animation ID to be played on selected unit(s)
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > playanimation Attack
     	(Play the Attack Animation for selected unit(s))
@@ -540,25 +540,25 @@ Play an Animation for selected unit(s).
 
 ---
 
-## 💭 Command: `removeanimation`
+## 💬 Command: `removeanimation`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removeanimation` | `rma`) `<AnimationId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove an Animation from selected unit(s).
 >Note: There are Walk, Attack, A to Z animations etc
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <AnimationId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the Animation ID to be removed from selected unit(s)
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > removeanimation Attack
     	(Stop the Attack Animation for selected unit(s))
@@ -571,25 +571,25 @@ Remove an Animation from selected unit(s).
 
 ---
 
-## 💭 Command: `removebehavior`
+## 💬 Command: `removebehavior`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removebehavior` | `rmb`) `<BehaviorId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove a behavior from selected unit(s). Behaviors are generally found in `<CBehavior*>`, such as `<CBehaviorBuff id="xxx">` or `<CBehaviorAbility id="xxx">`.
 >Tip: Use the [`getbehavior`](LibUnits.md#-command-getbehavior) command to list active behaviors.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <BehaviorId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the behavior id to be removed from selected units
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > removebehavior MedivhArcaneBrillianceItem
     	(Remove Medivh's Arcane Brilliance Ability from selected units)
@@ -602,22 +602,22 @@ Remove a behavior from selected unit(s). Behaviors are generally found in `<CBeh
 
 ---
 
-## 💭 Command: `removecollision`
+## 💬 Command: `removecollision`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removecollision` | `rmcol`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove collision for selected unit(s).
 >Note: This may conflict with non-collision units such as Medivh's Raven form. Avoid using this command on those units.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rmcol
     	(Disable Collision for selected unit(s).)
@@ -630,24 +630,24 @@ Remove collision for selected unit(s).
 
 ---
 
-## 💭 Command: `removeeffect`
+## 💬 Command: `removeeffect`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removeeffect` | `rme`) `<EffectId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove an effect from selected unit(s). Effects are generally found in `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <EffectId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the effect id to be removed from selected unit(s).
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > removeeffect MedivhPolyBombPersistent
     	(Remove Medivh's Polybomb effect from selected unit(s))
@@ -658,24 +658,24 @@ Remove an effect from selected unit(s). Effects are generally found in `<CEffect
 
 ---
 
-## 💭 Command: `removeeffectcamera`
+## 💬 Command: `removeeffectcamera`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removeeffectcamera` | `rmec`) `<EffectId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove an effect from the center of the camera. Effects are generally found in `<CEffect*>`, such as `<CEffectSet id="xxxx">` or `<CEffectCreatePersistent id="xxx">`.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <EffectId>
     	Required:	true
     	Type:		string
     	Usage:		Defines the effect id to be removed from the center of the camera.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > removeeffectcamera DropUnderworldPowerupPersistent
     	(Remove Haunted Mines Skulls from camera location)
@@ -688,24 +688,24 @@ Remove an effect from the center of the camera. Effects are generally found in `
 
 ---
 
-## 💭 Command: `removeweapon`
+## 💬 Command: `removeweapon`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`removeweapon` | `rmw`) `<WeaponID>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon* id='xxx'>`
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <WeaponID>
     	Required:	true
     	Type:		string
     	Usage:		The ID of the weapon
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rmw AnaHeroWeapon
     	(Remove Ana's weapon from selected unit(s))
@@ -718,25 +718,25 @@ Remove a weapon (Basic Attack) from selected unit(s). Usually found in `<CWeapon
 
 ---
 
-## 💭 Command: `replaceunit`
+## 💬 Command: `replaceunit`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`replaceunit` | `rpu`) `<TargetUnitId>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Replace all selected units with the target unit.
 >Note: Use with caution. Unexpected behavior may occur if the target unit does not exist or if a unit dies during the replacement. If this happens, use the debug menu to respawn your hero.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <TargetUnitId>
     	Required:	true
     	Type:		string
     	Usage:		Define the selected units to be replaced with. You can get the id from <CUnit id="xxx"> in the game XML files.
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > rpu HeroRaynor
     	(Replace all selected unit(s) to Raynor Hero.)
@@ -749,25 +749,25 @@ Replace all selected units with the target unit.
 
 ---
 
-## 💭 Command: `sendactormessage`
+## 💬 Command: `sendactormessage`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`sendactormessage` | `sam`) `<ActorMessage>`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on send="xxx">`.
 >Note: The command allows spaces for the parameter, since most actor messages have spaces.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <ActorMessage>
     	Required:	true
     	Type:		string
     	Usage:		Defines the Actor Message to be sent. (This parameter allows spaces.)
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > sendactormessage AnimPlay Spell Spell,A 0 -1.000000 -1.000000 1.000000 AsTimeScale
     	(Play the A Spell animation, different on each hero)
@@ -780,20 +780,20 @@ Send an Actor Message for selected unit(s). Generally from `<CActor*>`, the `<on
 
 ---
 
-## 💭 Command: `summon`
+## 💬 Command: `summon`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`summon` | `sum`) `<UnitId>` `[Amount]` `[PlayerId]` `[Scale]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Spawn unit(s) at the center of the camera.
 >Note: Newly summoned units are automatically added to the selection group.
 >Note: To control summoned units, enable multi-selection via the [`alliancecontrolteamselection`](LibUtilities.md#-command-alliancecontrolteamselection) command or QA Cheat Menu (`ts`, and also `/ac` if the unit does not belong to you). They will behave like Vikings and Samuro with Illusion Master.
 >Note: If your hero is Samuro, multi-selection may behave unexpectedly due to Blizzard's implementation.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <UnitId>
     	Required:	true
@@ -815,7 +815,7 @@ Spawn unit(s) at the center of the camera.
     	Usage:		Define scale of the unit(s) to be spawned. default size is 1.0
     	Default:	1
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > summon TownTownHallL2
     	(Summon a tower structure to the player who used the command)
@@ -830,25 +830,25 @@ Spawn unit(s) at the center of the camera.
 
 ### 🖼 UI Availability:
 {: .no_toc }
-- ✔ **Yes.** Use the command `summonui` or `sumui` to toggle the UI counterpart of this command.
+- ✅ **Yes.** Use the command `summonui` or `sumui` to toggle the UI counterpart of this command.
 
 ---
 
-## 💭 Command: `togglenoweaponcd`
+## 💬 Command: `togglenoweaponcd`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`togglenoweaponcd` | `tnwcd`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Continuously reset the weapon (auto attack) cooldown, effectively increasing attack speed.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > tnwcd
     	(Continuously reset the weapon (auto attack) cooldown)
@@ -861,21 +861,21 @@ Continuously reset the weapon (auto attack) cooldown, effectively increasing att
 
 ---
 
-## 💭 Command: `toggleoutputid`
+## 💬 Command: `toggleoutputid`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`toggleoutputid` | `toi`) 
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Toggle unit ID display mode. When enabled, left-clicking a unit shows its ID on screen.
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     None
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > toi
     	(Toggle displaying units' id mode.)
@@ -888,13 +888,13 @@ Toggle unit ID display mode. When enabled, left-clicking a unit shows its ID on 
 
 ---
 
-## 💭 Command: `unitproperty`
+## 💬 Command: `unitproperty`
 
-### 🔍 Syntax:
+### #️⃣ Syntax:
 {: .no_toc }
 (`unitproperty` | `up`) `<type>` `[value]`
 
-### ✏ Description: 
+### 📝 Description: 
 {: .no_toc }
 Show or modify a selected unit's property, such as max health, regen, movement speed, etc.
 If `value` is not provided, the current property value is returned. If `value` is provided, the property is set accordingly.
@@ -927,7 +927,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
 | 29 | movementspeedcurrent | c_unitPropMovementSpeedCurrent |
 | 30 | lifeexpectedpercent | c_unitPropLifeExpectedPercent |
 
-### ⚙ Parameters:
+### ⚙️ Parameters:
 {: .no_toc }
     <type>
     	Required:	true
@@ -939,7 +939,7 @@ The `type` parameters accept either the `Type (int)` or `Type (string)` below.
     	Usage:		The value to be set for the property type
     	Default:	null
 
-### 🔧 Examples:
+### 💡 Examples:
 {: .no_toc }
     > up life
     	(Shows the unit's current HP)
