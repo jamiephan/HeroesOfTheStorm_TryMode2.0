@@ -59,7 +59,7 @@ This project provides extra functionality built on top of the original Try Mode,
 
 ### Debug Menu
 
-Internally, there is a hidden debug menu. By forcing enable debug mode (`libCore_gv_dEBUGDebuggingEnabled`), you can now use it as well by pressing the hotkey `/`.
+Internally, there is a hidden debug menu. By forcing enable debug mode (`libCore_gv_dEBUGDebuggingEnabled`), you can now use it as well by pressing the hotkey `\` (backslash).
 
 It have various functionalities such as switch heroes, level, etc, which can save lots of time when get used to it. Here is a quick look:
 

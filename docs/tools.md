@@ -251,18 +251,18 @@ This does not need to do a manual search/replace in Galaxy Editor.
 
 ---
 
-### Tool - Build Usage Doc ([usage.md](usage.md))
+### Tool - Build Usage Doc ([usage.md](./usage/index.md))
 **Command**: `npm run build:usagedoc`
 
 >Use `npm run watch:usagedoc` for automatically run the command above when required files were changed.
 
-Builds the [usage.md](usage.md) document from `usage.json` in `./docs/gen/usage.json`.
+Builds the [usage.md](./usage/index.md) document from `usage.json` in `./docs/gen/usage.json`.
 
 ---
 
-### Tool - Build Showcase Doc ([showcase.md](showcase.md))
+### Tool - Build Showcase Doc ([showcase.md](./showcase/index.md))
 **Command**: `npm run build:showcasedoc`
 
-Builds the [showcase.md](showcase.md) document from `showcase.json` in `./docs/gen/showcase.json` and the individual showcase entries stored under `./docs/gen/showcase/`.
+Builds the [showcase.md](./showcase/index.md) document from `showcase.json` in `./docs/gen/showcase.json` and the individual showcase entries stored under `./docs/gen/showcase/`.
 
 Each subdirectory inside `./docs/gen/showcase/` represents a single showcase entry and must contain a `metadata.json` file. An optional `files/` subdirectory may also be included, whose contents will be embedded as fenced code blocks in the generated document.
