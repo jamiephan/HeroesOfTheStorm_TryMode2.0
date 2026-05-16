@@ -26036,29 +26036,27 @@ void MimicGameDataHelperLib_gt_HeroZagaraInfestedDropSpawnRoach_Init () {
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroZagaraInfestScaling_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    fixed lv_rangedDamageDealtFraction;
-    int lv_player;
     unit lv_zagara;
+    int lv_player;
     fixed lv_siegeScore;
     fixed lv_modScore;
     fixed lv_finalScore;
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_rangedDamageDealtFraction = 1.0;
-    lv_player = EventPlayerEffectUsedUnitOwner(c_effectPlayerCaster);
-    lv_zagara = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_zagara = EventUnitDamageSourceUnit();
+    lv_player = UnitGetOwner(lv_zagara);
     lv_siegeScore = PlayerScoreValueGetAsFixed(lv_player, "SiegeDamage");
     lv_modScore = (lv_siegeScore / 1000.0);
-    lv_finalScore = (lv_rangedDamageDealtFraction + (Trunc(lv_modScore) / 100.0));
+    lv_finalScore = StringToFixed(FixedToString(lv_modScore, 1));
 
     // Actions
     if (!runActions) {
         return true;
     }
 
-    if ((CatalogFieldValueGet(c_gameCatalogBehavior, "ZagaraInfestBuff", "Modification.DamageDealtFraction[" + IntToString(c_unitDamageTypeBasic) + "]", lv_player) != FixedToString(lv_finalScore, c_fixedPrecisionAny))) {
-        CatalogFieldValueSetFixed(c_gameCatalogBehavior, "ZagaraInfestBuff", "Modification.DamageDealtFraction[" + IntToString(c_unitDamageTypeBasic) + "]", lv_player, lv_finalScore);
+    if ((UnitGetTokenCount(lv_zagara, CatalogFieldValueGet(c_gameCatalogBehavior, "ZagaraInfestTokenCounter", "TokenId", c_playerAny)) != lv_finalScore)) {
+        UnitSetTokenCount(lv_zagara, CatalogFieldValueGet(c_gameCatalogBehavior, "ZagaraInfestTokenCounter", "TokenId", c_playerAny), lv_finalScore, EventUnit());
     }
 
     return true;
@@ -26068,7 +26066,7 @@ bool MimicGameDataHelperLib_gt_HeroZagaraInfestScaling_Func (bool testConds, boo
 void MimicGameDataHelperLib_gt_HeroZagaraInfestScaling_Init () {
     MimicGameDataHelperLib_gt_HeroZagaraInfestScaling = TriggerCreate("MimicGameDataHelperLib_gt_HeroZagaraInfestScaling_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroZagaraInfestScaling, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroZagaraInfestScaling, c_playerAny, "ZagaraInfestSearch");
+    TriggerAddDamageEvent(MimicGameDataHelperLib_gt_HeroZagaraInfestScaling, "HeroZagara", null, c_unitDamageTypeAny, c_unitDamageEither, null);
 }
 
 //--------------------------------------------------------------------------------------------------
