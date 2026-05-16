@@ -1,4 +1,4 @@
-import { Storage } from "@jamiephan/casclib";
+import { CascStorageInfoClass, Storage } from "@jamiephan/casclib";
 import os from "os";
 import fs from "fs";
 import { logger } from "./logger.js";
@@ -45,7 +45,11 @@ class HeroesFileExtract {
       process.env.TOOLS_USE_CASC_ONLINE_MODE?.toLowerCase() === "true";
     const IS_KEEP_ONLINE_CACHE =
       process.env.TOOLS_KEEP_CASC_ONLINE_MODE_CACHE?.toLowerCase() === "true";
-    const ONLINE_TEMP_DIR = os.tmpdir() + "/trymode20_online_casc_cache";
+    const ONLINE_TEMP_DIR =
+      os.tmpdir() +
+      "/" +
+      (process.env.TOOLS_CASC_ONLINE_MODE_CACHE_DIR_NAME ||
+        "trymode20_online_casc_cache");
 
     const storage = new Storage();
 
@@ -67,6 +71,12 @@ class HeroesFileExtract {
     } else {
       storage.open(process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION);
     }
+
+    // Get the storage information for logging purposes
+    const storageInfo = storage.getStorageInfo(CascStorageInfoClass.Product);
+    LOGGER.info(
+      `Storage opened successfully. Product: ${storageInfo.codeName}, Build Number: ${storageInfo.buildNumber}`,
+    );
 
     // Get full list of game file first for better performance
     const totalGameFiles = [];
@@ -133,6 +143,9 @@ class HeroesFileExtract {
       task.callback(extractedFiles);
     });
 
+    LOGGER.info("Completed execution of all queued file extraction tasks.");
+    storage.close();
+
     if (IS_ONLINE_MODE) {
       // Clean up the temp directory after use
       if (fs.existsSync(ONLINE_TEMP_DIR) && !IS_KEEP_ONLINE_CACHE) {
@@ -141,8 +154,6 @@ class HeroesFileExtract {
       }
     }
 
-    LOGGER.info("Completed execution of all queued file extraction tasks.");
-    storage.close();
   }
 }
 

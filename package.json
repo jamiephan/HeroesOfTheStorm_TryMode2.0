@@ -18,6 +18,7 @@
         "watch:libraries": "node ./scripts/entry.js --script=libraries --mode=watch",
         "extract:s2ma": "node ./scripts/entry.js --script=extracts2ma --mode=script",
         "util:symlink": "node ./scripts/entry.js --script=symlink --mode=script",
+        "util:clearcasccache": "node ./scripts/entry.js --script=clearcasccache --mode=script",
         "ci:patchmaps": "node ./scripts/ci/patchMaps.mjs"
     },
     "type": "module",

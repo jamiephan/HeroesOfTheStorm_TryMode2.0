@@ -33,6 +33,7 @@ The current values required are:
 | `HEROES_OF_THE_STORM_INSTALL_LOCATION` | String | The location of HotS game file. (The main location, which should contain folders such as `HeroesData`, `Support`, `Versions` and files such as `.build.info`. |`C:/Program Files/Heroes of the Storm`|
 | `TOOLS_USE_CASC_ONLINE_MODE` | Bool | Whether to use the online data when extracting game files (will not extract from `HEROES_OF_THE_STORM_INSTALL_LOCATION`) |`false`|
 | `TOOLS_KEEP_CASC_ONLINE_MODE_CACHE` | Bool | Whether to cache the online data files |`true`|
+| `TOOLS_CASC_ONLINE_MODE_CACHE_DIR_NAME` | String | The directory name (inside the OS temp dir) used to store the online CASC cache. Used by both extraction and `npm run util:clearcasccache`. |`trymode20_online_casc_cache`|
 | `TOOLS_XML_MAIN_XML_PATH` | String | The location of `base.stormdata/gamedata.xml` file.|`./(10)trymemode.stormmap/base.stormdata/GameData.xml`|
 | `TOOLS_XML_MODS_DIR` | String | The location where the XML mods are stored.|`./(10)trymemode.stormmap/base.stormdata/Mods`|
 | `TOOLS_GAMEDATA_DIR` | String | The location of `base.stormdata` directory.|`./(10)trymemode.stormmap/base.stormdata`|
@@ -56,6 +57,16 @@ This utility creates a [Symbolic Link](https://en.wikipedia.org/wiki/Symbolic_li
 
 {: .important }
 > This command only needs to be run once if it completes successfully.
+
+---
+
+### Utility - Clear CASC Online Cache
+
+**Command**: `npm run util:clearcasccache`
+
+This utility removes the online CASC cache directory used when `TOOLS_USE_CASC_ONLINE_MODE=true`. The cache lives inside the OS temp directory under the folder named by the `TOOLS_CASC_ONLINE_MODE_CACHE_DIR_NAME` env variable (default: `trymode20_online_casc_cache`).
+
+Use this when you want to force a fresh download of game files on the next extraction run, or to free up disk space.
 
 ---
 

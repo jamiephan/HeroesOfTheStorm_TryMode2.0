@@ -109,6 +109,14 @@ const SCRIPT_MAPPING = {
     },
     watch: null,
   },
+  clearcasccache: {
+    script: {
+      fn: async () => {
+        (await import("./shared/utilClearCascCache.js")).default();
+      },
+    },
+    watch: null,
+  },
 
   // Library Commands
   libraries: {
