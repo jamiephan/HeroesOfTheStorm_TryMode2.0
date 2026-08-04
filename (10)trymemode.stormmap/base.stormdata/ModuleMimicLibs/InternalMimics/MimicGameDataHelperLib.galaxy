@@ -524,7 +524,7 @@ void MimicGameDataHelperLib_gf_HeroAbathurIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityDeselectedHooktoAI, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityUnhookAI, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityKillInitialTarget, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityAddSymbioteStacks, true);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurDeepTunnelPing, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurSymbioteMinimapIcon, true);
@@ -562,7 +562,7 @@ void MimicGameDataHelperLib_gf_HeroAbathurDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityDeselectedHooktoAI, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityUnhookAI, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityKillInitialTarget, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityAddSymbioteStacks, false);
+        TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurDeepTunnelPing, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurSymbioteMinimapIcon, false);
@@ -1360,9 +1360,6 @@ void MimicGameDataHelperLib_gf_HeroJainaIncrementHeroCountFunction () {
     if ((MimicGameDataHelperLib_gv_heroJainaTriggerRegistrationVariable == 1)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalCreated, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalCommand, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalVehicleInitial, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaChilledDamageResponse, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaImprovedIceBlockOverlayOn, true);
@@ -1386,9 +1383,6 @@ void MimicGameDataHelperLib_gf_HeroJainaDecrementHeroCountFunction () {
     if ((MimicGameDataHelperLib_gv_heroJainaTriggerRegistrationVariable == 0)) {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalCreated, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalCommand, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalVehicleInitial, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaChilledDamageResponse, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaImprovedIceBlockOverlayOn, false);
@@ -4012,10 +4006,8 @@ void MimicGameDataHelperLib_gf_HeroWitchDoctorIncrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorZombiePrisonRelicZombiesSpawned, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritCast, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritExpires, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanCreated, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanStompUsed, true);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorVileInfectionTaken, true);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc, true);
     }
 
@@ -4034,10 +4026,8 @@ void MimicGameDataHelperLib_gf_HeroWitchDoctorDecrementHeroCountFunction () {
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorZombiePrisonRelicZombiesSpawned, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritCast, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorRavenousSpiritExpires, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorPassiveTarget, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanCreated, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorGargantuanStompUsed, false);
-        TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorVileInfectionTaken, false);
         TriggerEnable(MimicGameDataHelperLib_gt_HeroWitchDoctorBloodRitualHeroTakedownProc, false);
     }
 
@@ -6017,9 +6007,6 @@ bool MimicGameDataHelperLib_gt_HeroAbathurMonstrosityAddMinionKillStacks_Func (b
     int lv_minionAbsorbedTokenCount;
 
     // Automatic Variable Declarations
-    unitgroup auto2B15A152_g;
-    int auto2B15A152_u;
-    unit auto2B15A152_var;
     unitgroup auto7E23C28A_g;
     int auto7E23C28A_u;
     unit auto7E23C28A_var;
@@ -6038,36 +6025,12 @@ bool MimicGameDataHelperLib_gt_HeroAbathurMonstrosityAddMinionKillStacks_Func (b
     }
 
     if ((UnitGetType(libGame_gv_players[lv_abathurPlayer].lv_heroUnit) == "HeroAbathur") && (PlayerHasTalent(lv_abathurPlayer, "AbathurHeroicAbilityEvolveMonstrosity") == true) && ((UnitTypeTestAttribute(UnitGetType(lv_minionUnit), c_unitAttributeMinion) == true) || (UnitTypeTestAttribute(UnitGetType(lv_minionUnit), c_unitAttributeMerc) == true))) {
-        if ((TechTreeUnitCount(lv_abathurPlayer, "AbathurSymbiote", c_techCountCompleteOnly) > 0)) {
-            auto2B15A152_g = UnitGroup("AbathurSymbiote", lv_abathurPlayer, RegionPlayableMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
-            auto2B15A152_u = UnitGroupCount(auto2B15A152_g, c_unitCountAll);
-            for (;; auto2B15A152_u -= 1) {
-                auto2B15A152_var = UnitGroupUnitFromEnd(auto2B15A152_g, auto2B15A152_u);
-                if (auto2B15A152_var == null) { break; }
-                UnitBehaviorAdd(auto2B15A152_var, "AbathurEvolveMonstrosityAbathurStack", auto2B15A152_var, 1);
-                lv_symbiote = auto2B15A152_var;
-            }
-        }
-
         auto7E23C28A_g = UnitGroupSearch("AbathurEvolvedMonstrosity", lv_abathurPlayer, UnitGetPosition(libGame_gf_SpecialCaseUnitParticipatedInNPCTakedownMinion()), libCore_gv_bALXPRadius, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
         auto7E23C28A_u = UnitGroupCount(auto7E23C28A_g, c_unitCountAll);
         for (;; auto7E23C28A_u -= 1) {
             auto7E23C28A_var = UnitGroupUnitFromEnd(auto7E23C28A_g, auto7E23C28A_u);
             if (auto7E23C28A_var == null) { break; }
-            UnitBehaviorAdd(auto7E23C28A_var, "AbathurEvolveMonstrosityHealthStack", auto7E23C28A_var, 1);
-            lv_minionAbsorbedTokenCount = UnitBehaviorCount(auto7E23C28A_var, "AbathurEvolveMonstrosityMinionAbsorbedToken");
-            lv_minionAbsorbedTokenCount = (lv_minionAbsorbedTokenCount+1);
-            UnitSetTokenCount(auto7E23C28A_var, "AbathurEvolveMonstrosityMinionAbsorbedToken", lv_minionAbsorbedTokenCount, auto7E23C28A_var);
-            UnitCreateEffectUnit(auto7E23C28A_var, "EvolveMonstrosityHealthStackHealer", auto7E23C28A_var);
-            UnitBehaviorAdd(libGame_gv_players[lv_abathurPlayer].lv_heroUnit, "AbathurEvolveMonstrosityAbathurStack", libGame_gv_players[lv_abathurPlayer].lv_heroUnit, 1);
-            UnitBehaviorSetDurationRemaining(libGame_gv_players[lv_abathurPlayer].lv_heroUnit, "AbathurEvolveMonstrosityAbathurStack", UnitBehaviorDuration(auto7E23C28A_var, "AbathurEvolveMonstrosity"));
-            UnitBehaviorSetDurationRemaining(lv_symbiote, "AbathurEvolveMonstrosityAbathurStack", UnitBehaviorDuration(auto7E23C28A_var, "AbathurEvolveMonstrosity"));
-            if ((PlayerHasTalent(lv_abathurPlayer, "AbathurMasteryEvolutionComplete") == true)) {
-                lv_evolutionCompleteStacks = PlayerScoreValueGetAsInt(lv_abathurPlayer, "EvolutionCompleteStacks");
-                lv_evolutionCompleteStacks += 1;
-                PlayerScoreValueSetFromInt(lv_abathurPlayer, "EvolutionCompleteStacks", lv_evolutionCompleteStacks);
-            }
-
+            UnitCreateEffectUnit(libGame_gv_players[lv_abathurPlayer].lv_heroUnit, "AbathurEvolveMonstrosityIncreaseQuestStack", lv_minionUnit);
         }
     }
 
@@ -6292,6 +6255,38 @@ void MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted_Init () 
     MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted = TriggerCreate("MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted, false);
     MimicGameDataHelperLib_gf_AbathurSymbiote(MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero - Abathur - Monstrosity - Quest Complete
+//--------------------------------------------------------------------------------------------------
+bool MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_hero;
+    string lv_quest;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_hero = EventUnit();
+    lv_quest = EventUnitTokenBehavior();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitTestState(lv_hero, c_unitStateHallucination) == true)) {
+        return true;
+    }
+
+    libUIUI_gf_KillLogAnnounceQuestCompletion(UnitGetOwner(lv_hero), lv_quest, 1.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete_Init () {
+    MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete = TriggerCreate("MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete_Func");
+    TriggerAddEventUnitToken(MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete, "MonstrosityQuestComplete", null, "");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10918,6 +10913,13 @@ bool MimicGameDataHelperLib_gt_HeroJainaWaterElementalCreated_Func (bool testCon
     lv_waterElementalUnit = EventUnitCreatedUnit();
     lv_jainaUnit = libGame_gv_players[lv_player].lv_heroUnit;
 
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(lv_waterElementalUnit) == "JainaWaterElemental"))) {
+            return false;
+        }
+    }
+
     // Actions
     if (!runActions) {
         return true;
@@ -11003,144 +11005,6 @@ void MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInt
     MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInteraction = TriggerCreate("MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInteraction_Func");
     TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInteraction, false);
     TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInteraction, c_playerAny, "JainaCommandWaterElementalSummonedUnitSpecialCaseDummy");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Jaina - Frostbolt Wintermute Cast
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_unit;
-    int lv_jainaPlayer;
-    unit lv_waterElemental;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_unit = EventUnit();
-    lv_jainaPlayer = EventPlayer();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_jainaPlayer, "JainaSummonWaterElementalWintermute") == true))) {
-            return false;
-        }
-
-        if (!(((lv_jainaPlayer <= libCore_gv_bALMaxPlayers) && (lv_jainaPlayer > 0)))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_waterElemental = MimicGameDataHelperLib_gv_heroJainaWaterElemental[lv_jainaPlayer];
-    if ((lv_waterElemental != null) && (UnitBehaviorCount(lv_waterElemental, "JainaWaterElementalStatusAvailable") == 1)) {
-        UnitBehaviorAdd(lv_waterElemental, "JainaWaterElementalAIAbilityOverride", lv_unit, 1);
-        UnitIssueOrder(lv_waterElemental, OrderTargetingPoint(AbilityCommand("JainaWaterElementalFrostbolt", 0), EventUnitTargetPoint()), c_orderQueueAddToFront);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast_Init () {
-    MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast = TriggerCreate("MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast, false);
-    TriggerAddEventUnitAbility(MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast, null, AbilityCommand("JainaFrostbolt", 0), c_abilEffectStageFinish, false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Jaina - Cone of Cold Wintermute Cast
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_unit;
-    int lv_jainaPlayer;
-    unit lv_waterElemental;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_unit = EventUnit();
-    lv_jainaPlayer = EventPlayer();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_jainaPlayer, "JainaSummonWaterElementalWintermute") == true))) {
-            return false;
-        }
-
-        if (!(((lv_jainaPlayer <= libCore_gv_bALMaxPlayers) && (lv_jainaPlayer > 0)))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_waterElemental = MimicGameDataHelperLib_gv_heroJainaWaterElemental[lv_jainaPlayer];
-    if ((lv_waterElemental != null) && (UnitBehaviorCount(lv_waterElemental, "JainaWaterElementalStatusAvailable") == 1)) {
-        UnitBehaviorAdd(lv_waterElemental, "JainaWaterElementalAIAbilityOverride", lv_unit, 1);
-        UnitIssueOrder(lv_waterElemental, OrderTargetingPoint(AbilityCommand("JainaWaterElementalConeOfCold", 0), EventUnitTargetPoint()), c_orderQueueAddToFront);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast_Init () {
-    MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast = TriggerCreate("MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast, false);
-    TriggerAddEventUnitAbility(MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast, null, AbilityCommand("JainaConeOfCold", 0), c_abilEffectStageFinish, false);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Jaina - Blizzard Wintermute Cast
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_unit;
-    int lv_jainaPlayer;
-    unit lv_waterElemental;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_unit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
-    lv_jainaPlayer = EventPlayer();
-
-    // Conditions
-    if (testConds) {
-        if (!((PlayerHasTalent(lv_jainaPlayer, "JainaSummonWaterElementalWintermute") == true))) {
-            return false;
-        }
-
-        if (!(((lv_jainaPlayer <= libCore_gv_bALMaxPlayers) && (lv_jainaPlayer > 0)))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    lv_waterElemental = MimicGameDataHelperLib_gv_heroJainaWaterElemental[lv_jainaPlayer];
-    if ((lv_waterElemental != null) && (UnitBehaviorCount(lv_waterElemental, "JainaWaterElementalStatusAvailable") == 1)) {
-        UnitBehaviorAdd(lv_waterElemental, "JainaWaterElementalAIAbilityOverride", lv_unit, 1);
-        UnitIssueOrder(lv_waterElemental, OrderTargetingPoint(AbilityCommand("JainaWaterElementalBlizzard", 0), EventPlayerEffectUsedPoint(c_effectLocationTargetPoint)), c_orderQueueAddToFront);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast_Init () {
-    MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast = TriggerCreate("MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast, c_playerAny, "JainaWaterElementalBlizzardDummyPersistent");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -26883,6 +26747,7 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroAbathurMonstrosityKillInitialTarget_Init();
     MimicGameDataHelperLib_gt_HeroAbathurMonstrosityAddSymbioteStacks_Init();
     MimicGameDataHelperLib_gt_HeroAbathurSymbiotedMonstrositySymbioted_Init();
+    MimicGameDataHelperLib_gt_HeroAbathurMonstrosityQuestComplete_Init();
     MimicGameDataHelperLib_gt_HeroAbathurSymbioteMinimapIcon_Init();
     MimicGameDataHelperLib_gt_HeroArtanisProtectorofAiurHeroTakedownProc_Init();
     MimicGameDataHelperLib_gt_HeroArtanisBladeDashPhasePrismCast_Init();
@@ -26993,9 +26858,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroJainaWaterElementalCreated_Init();
     MimicGameDataHelperLib_gt_HeroJainaWaterElementalCommand_Init();
     MimicGameDataHelperLib_gt_HeroJainaWaterElementalSummonedUnitSpecialCaseInteraction_Init();
-    MimicGameDataHelperLib_gt_HeroJainaFrostboltWintermuteCast_Init();
-    MimicGameDataHelperLib_gt_HeroJainaConeofColdWintermuteCast_Init();
-    MimicGameDataHelperLib_gt_HeroJainaBlizzardWintermuteCast_Init();
     MimicGameDataHelperLib_gt_HeroJainaWaterElementalVehicleInitial_Init();
     MimicGameDataHelperLib_gt_HeroJainaFrostbiteIceblockItem_Init();
     MimicGameDataHelperLib_gt_HeroJainaFrostbiteQuestReset_Init();

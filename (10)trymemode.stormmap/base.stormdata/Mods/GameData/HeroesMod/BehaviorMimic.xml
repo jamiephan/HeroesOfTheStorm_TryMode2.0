@@ -13344,6 +13344,61 @@
     <!-- ///////////////////////////////////-->
     <!-- Start Behaviors in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/abathurdata/abathurdata.xml}-->
     <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBSlapathurInternalCooldown">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBSlapathurInternalCooldown_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBSlapathurInternalCooldown_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBSlapathurInternalCooldown_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="SlapathurInternalCooldown" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAbathurLocustKillCreditAura">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurLocustKillCreditAura_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurLocustKillCreditAura_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAbathurLocustKillCreditAura_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AbathurLocustKillCreditAura" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBLocustFatalResponse">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBLocustFatalResponse_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBLocustFatalResponse_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBLocustFatalResponse_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="LocustFatalResponse" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAbathurSlapathurStun">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurSlapathurStun_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurSlapathurStun_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAbathurSlapathurStun_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AbathurSlapathurStun" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAbathurSlapathurStructureDisable">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurSlapathurStructureDisable_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurSlapathurStructureDisable_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAbathurSlapathurStructureDisable_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AbathurSlapathurStructureDisable" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBAbathurToxicNestEnvenomedNestArmorDebuff">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurToxicNestEnvenomedNestArmorDebuff_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurToxicNestEnvenomedNestArmorDebuff_AbilBehavior,Off" />
@@ -13586,17 +13641,6 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
-    <CBehaviorAbility id="MBAbathurEvolveMonstrosityAbathurStack">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurEvolveMonstrosityAbathurStack_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurEvolveMonstrosityAbathurStack_AbilBehavior,Off" />
-    </CBehaviorAbility>
-    <CAbilBehavior id="MBAbathurEvolveMonstrosityAbathurStack_AbilBehavior">
-        <Flags index="Toggle" value="1" />
-        <Flags index="Transient" value="1" />
-        <BehaviorArray value="AbathurEvolveMonstrosityAbathurStack" />
-        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
-        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
-    </CAbilBehavior>
     <CBehaviorAbility id="MBEvolveMonstrosityActive">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBEvolveMonstrosityActive_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBEvolveMonstrosityActive_AbilBehavior,Off" />
@@ -13638,6 +13682,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="AbathurMonstrositySpawn" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAbathurEvolveMonstrosityStackBonusController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAbathurEvolveMonstrosityStackBonusController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAbathurEvolveMonstrosityStackBonusController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAbathurEvolveMonstrosityStackBonusController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AbathurEvolveMonstrosityStackBonusController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -14338,6 +14393,28 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="AnubarakBedofBarbsStructureDebuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAnubarakScarabHostBeetleAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAnubarakScarabHostBeetleAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAnubarakScarabHostBeetleAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAnubarakScarabHostBeetleAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AnubarakScarabHostBeetleAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAnubarakScarabHostBeetleAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAnubarakScarabHostBeetleAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAnubarakScarabHostBeetleAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAnubarakScarabHostBeetleAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AnubarakScarabHostBeetleAbilityTargetController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -15771,6 +15848,28 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="ArthasArmyOfTheDeadGhoulTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBArthasArmyOfTheDeadAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBArthasArmyOfTheDeadAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBArthasArmyOfTheDeadAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBArthasArmyOfTheDeadAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="ArthasArmyOfTheDeadAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBArthasArmyOfTheDeadAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBArthasArmyOfTheDeadAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBArthasArmyOfTheDeadAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBArthasArmyOfTheDeadAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="ArthasArmyOfTheDeadAbilityTargetController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -22465,6 +22564,61 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
+    <CBehaviorAbility id="MBJainaWaterElementalAttackAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaWaterElementalAttackAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaWaterElementalAttackAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBJainaWaterElementalAttackAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="JainaWaterElementalAttackAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBJainaWaterElementalAttackAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaWaterElementalAttackAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaWaterElementalAttackAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBJainaWaterElementalAttackAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="JainaWaterElementalAttackAbilityTargetController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBJainaFrostboltWintermuteCastBehaviorMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaFrostboltWintermuteCastBehaviorMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaFrostboltWintermuteCastBehaviorMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBJainaFrostboltWintermuteCastBehaviorMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="JainaFrostboltWintermuteCastBehaviorMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBJainaBlizzardWintermuteCastBehaviorMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaBlizzardWintermuteCastBehaviorMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaBlizzardWintermuteCastBehaviorMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBJainaBlizzardWintermuteCastBehaviorMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="JainaBlizzardWintermuteCastBehaviorMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBJainaConeOfColdWintermuteCastBehaviorMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaConeOfColdWintermuteCastBehaviorMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaConeOfColdWintermuteCastBehaviorMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBJainaConeOfColdWintermuteCastBehaviorMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="JainaConeOfColdWintermuteCastBehaviorMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBJainaConeofColdNorthernExposureArmorDecrease">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBJainaConeofColdNorthernExposureArmorDecrease_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBJainaConeofColdNorthernExposureArmorDecrease_AbilBehavior,Off" />
@@ -23543,6 +23697,39 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="KerriganUltraliskTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBKerriganUltraliskAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBKerriganUltraliskAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBKerriganUltraliskAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBKerriganUltraliskAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="KerriganUltraliskAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBKerriganUltraliskAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBKerriganUltraliskAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBKerriganUltraliskAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBKerriganUltraliskAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="KerriganUltraliskAbilityTargetController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBKerriganUltraliskChargeDamageController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBKerriganUltraliskChargeDamageController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBKerriganUltraliskChargeDamageController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBKerriganUltraliskChargeDamageController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="KerriganUltraliskChargeDamageController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -26793,6 +26980,28 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
+    <CBehaviorAbility id="MBMalfurionVengefulRootsTreantAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMalfurionVengefulRootsTreantAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMalfurionVengefulRootsTreantAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBMalfurionVengefulRootsTreantAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="MalfurionVengefulRootsTreantAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBMalfurionVengefulRootsTreantAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMalfurionVengefulRootsTreantAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMalfurionVengefulRootsTreantAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBMalfurionVengefulRootsTreantAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="MalfurionVengefulRootsTreantAbilityTargetController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBMalfurionEntanglingRootsDeepRootsHealthBehavior">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMalfurionEntanglingRootsDeepRootsHealthBehavior_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMalfurionEntanglingRootsDeepRootsHealthBehavior_AbilBehavior,Off" />
@@ -29336,14 +29545,25 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
-    <CBehaviorAbility id="MBNecromancerRaiseSekeltonTalentDamageResponse">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSekeltonTalentDamageResponse_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSekeltonTalentDamageResponse_AbilBehavior,Off" />
+    <CBehaviorAbility id="MBNecromancerRaiseSkeletonAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSkeletonAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSkeletonAbilityController_AbilBehavior,Off" />
     </CBehaviorAbility>
-    <CAbilBehavior id="MBNecromancerRaiseSekeltonTalentDamageResponse_AbilBehavior">
+    <CAbilBehavior id="MBNecromancerRaiseSkeletonAbilityController_AbilBehavior">
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
-        <BehaviorArray value="NecromancerRaiseSekeltonTalentDamageResponse" />
+        <BehaviorArray value="NecromancerRaiseSkeletonAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBNecromancerRaiseSkeletonAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSkeletonAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBNecromancerRaiseSkeletonAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBNecromancerRaiseSkeletonAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="NecromancerRaiseSkeletonAbilityTargetController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -29597,6 +29817,28 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="NecromancerSkeletalMagesTimedLifeDummy" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBNecromancerSkeletalMagesAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBNecromancerSkeletalMagesAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBNecromancerSkeletalMagesAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBNecromancerSkeletalMagesAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="NecromancerSkeletalMagesAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBNecromancerSkeletalMagesAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBNecromancerSkeletalMagesAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBNecromancerSkeletalMagesAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBNecromancerSkeletalMagesAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="NecromancerSkeletalMagesAbilityTargetController" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -37875,6 +38117,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="WitchDoctorVoodooRitualVitalCarry" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBWitchDoctorVoodooRitualDeathResponse">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBWitchDoctorVoodooRitualDeathResponse_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBWitchDoctorVoodooRitualDeathResponse_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBWitchDoctorVoodooRitualDeathResponse_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="WitchDoctorVoodooRitualDeathResponse" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -47979,6 +48232,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="AlexstraszaCleansingFlameSuppressTurning" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBAlexstraszaCleansingFlameAmmoCounter">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAlexstraszaCleansingFlameAmmoCounter_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAlexstraszaCleansingFlameAmmoCounter_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBAlexstraszaCleansingFlameAmmoCounter_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="AlexstraszaCleansingFlameAmmoCounter" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -62673,17 +62937,6 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
-    <CBehaviorAbility id="MBMedivhArcaneRiftHeroHit">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMedivhArcaneRiftHeroHit_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMedivhArcaneRiftHeroHit_AbilBehavior,Off" />
-    </CBehaviorAbility>
-    <CAbilBehavior id="MBMedivhArcaneRiftHeroHit_AbilBehavior">
-        <Flags index="Toggle" value="1" />
-        <Flags index="Transient" value="1" />
-        <BehaviorArray value="MedivhArcaneRiftHeroHit" />
-        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
-        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
-    </CAbilBehavior>
     <CBehaviorAbility id="MBMedivhPortalMageArmor">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMedivhPortalMageArmor_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMedivhPortalMageArmor_AbilBehavior,Off" />
@@ -62725,6 +62978,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="MedivhArcaneRiftArcaneChargeMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBMedivhArcaneChargeMissileMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMedivhArcaneChargeMissileMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMedivhArcaneChargeMissileMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBMedivhArcaneChargeMissileMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="MedivhArcaneChargeMissileMarker" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -65238,6 +65502,28 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
+    <CBehaviorAbility id="MBProbiusPhotonCannonAbilityController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBProbiusPhotonCannonAbilityController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBProbiusPhotonCannonAbilityController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBProbiusPhotonCannonAbilityController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="ProbiusPhotonCannonAbilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBProbiusPhotonCannonAbilityTargetController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBProbiusPhotonCannonAbilityTargetController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBProbiusPhotonCannonAbilityTargetController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBProbiusPhotonCannonAbilityTargetController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="ProbiusPhotonCannonAbilityTargetController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBProbiusPylonOverchargeWeaponInitialCoolup">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBProbiusPylonOverchargeWeaponInitialCoolup_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBProbiusPylonOverchargeWeaponInitialCoolup_AbilBehavior,Off" />
@@ -66271,6 +66557,28 @@
     <!-- ///////////////////////////////////-->
     <!-- Start Behaviors in {mods/heromods/thefirelords.stormmod/base.stormdata/gamedata/thefirelordsdata.xml}-->
     <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBRagExplosiveRuneDOT">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBRagExplosiveRuneDOT_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBRagExplosiveRuneDOT_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBRagExplosiveRuneDOT_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="RagExplosiveRuneDOT" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBRagSwingKnockback">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBRagSwingKnockback_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBRagSwingKnockback_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBRagSwingKnockback_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="RagSwingKnockback" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBRagnaroResilientFlameCooldown">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBRagnaroResilientFlameCooldown_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBRagnaroResilientFlameCooldown_AbilBehavior,Off" />
@@ -66290,6 +66598,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="RagnarosBigRagHealingBlocker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBMoltenCoreEndSelfStun">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBMoltenCoreEndSelfStun_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBMoltenCoreEndSelfStun_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBMoltenCoreEndSelfStun_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="MoltenCoreEndSelfStun" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -66334,6 +66653,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="RagnarosBlisteringAttacksDamageBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBLavaSurgeMovespeed">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBLavaSurgeMovespeed_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBLavaSurgeMovespeed_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBLavaSurgeMovespeed_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="LavaSurgeMovespeed" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -66741,6 +67071,28 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="RagnarosCatchingFireAbilityAvailabilityController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBRagnarosBigRagAbilityRangeController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBRagnarosBigRagAbilityRangeController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBRagnarosBigRagAbilityRangeController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBRagnarosBigRagAbilityRangeController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="RagnarosBigRagAbilityRangeController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBRagnarosBigRagRangeIncreaseBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBRagnarosBigRagRangeIncreaseBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBRagnarosBigRagRangeIncreaseBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBRagnarosBigRagRangeIncreaseBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="RagnarosBigRagRangeIncreaseBehavior" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
@@ -68569,6 +68921,17 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="YrelDivineSteedMountSpeedBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBStunDetection">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBStunDetection_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBStunDetection_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBStunDetection_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="StunDetection" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>

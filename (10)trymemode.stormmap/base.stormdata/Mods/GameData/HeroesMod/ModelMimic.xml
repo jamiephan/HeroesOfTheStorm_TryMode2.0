@@ -27526,6 +27526,66 @@
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20basedata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNHeroLucioSkinToon20" parent="UN_t" />
+    <CUnit id="UNHeroLucioSkinToon20DeathRagdoll" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20Portrait" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20PortraitAddition" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20AmpItUpCrossfadeSpeedBoostActiveAtSource" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20CrossfadeSpeedBoostRibbon" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20CrossfadeSpeedBoostRibbonLow" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20CrossfadePulse" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20CrossfadeCast" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundBarrierCastSearchFX" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundBarrierCastWeaponFXB" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundwaveCast" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundwaveImpact" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundwaveChaseTheBassCast" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20FeetLights" parent="UN_t" />
+    <CUnit id="UNLucioToon20HeroLucioAttackImpact" parent="UN_t" />
+    <CUnit id="UNLucioToon20HeroLucioAttackLaunch" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20WeaponMissile" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20WeaponTargetingModel" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundBarrierShield" parent="UN_t" />
+    <CUnit id="UNLucioSkinToon20SoundBarrierCastWeaponFXA" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20basedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var1data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNLucioSkinToon20Var1Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var1data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNLucioSkinToon20Var2Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var3data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNLucioSkinToon20Var3Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var3data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNLucioSkinToon20Var4Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/luciotoon20data/luciotoon20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
     <!-- Start Models in {mods/heromods/lucio.stormmod/base.stormdata/gamedata/lucioskindata/lucioultimatedata/lucioultimatebasedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNHeroLucioSkinUltimate" parent="UN_t" />
@@ -83176,6 +83236,81 @@
     </CActorUnit>
     <CActorUnit id="UNLucioSkinSpring19Var2Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinSpring19Var2Portrait">
         <Model value="LucioSkinSpring19Var2Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroLucioSkinToon20" parent="GenericUnitStandard" unitName="UNHeroLucioSkinToon20">
+        <Model value="HeroLucioSkinToon20" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroLucioSkinToon20DeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroLucioSkinToon20DeathRagdoll">
+        <Model value="HeroLucioSkinToon20DeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinToon20Portrait">
+        <Model value="LucioSkinToon20Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20PortraitAddition" parent="GenericUnitStandard" unitName="UNLucioSkinToon20PortraitAddition">
+        <Model value="LucioSkinToon20PortraitAddition" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20AmpItUpCrossfadeSpeedBoostActiveAtSource" parent="GenericUnitStandard" unitName="UNLucioSkinToon20AmpItUpCrossfadeSpeedBoostActiveAtSource">
+        <Model value="LucioSkinToon20AmpItUpCrossfadeSpeedBoostActiveAtSource" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20CrossfadeSpeedBoostRibbon" parent="GenericUnitStandard" unitName="UNLucioSkinToon20CrossfadeSpeedBoostRibbon">
+        <Model value="LucioSkinToon20CrossfadeSpeedBoostRibbon" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20CrossfadeSpeedBoostRibbonLow" parent="GenericUnitStandard" unitName="UNLucioSkinToon20CrossfadeSpeedBoostRibbonLow">
+        <Model value="LucioSkinToon20CrossfadeSpeedBoostRibbonLow" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20CrossfadePulse" parent="GenericUnitStandard" unitName="UNLucioSkinToon20CrossfadePulse">
+        <Model value="LucioSkinToon20CrossfadePulse" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20CrossfadeCast" parent="GenericUnitStandard" unitName="UNLucioSkinToon20CrossfadeCast">
+        <Model value="LucioSkinToon20CrossfadeCast" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundBarrierCastSearchFX" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundBarrierCastSearchFX">
+        <Model value="LucioSkinToon20SoundBarrierCastSearchFX" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundBarrierCastWeaponFXB" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundBarrierCastWeaponFXB">
+        <Model value="LucioSkinToon20SoundBarrierCastWeaponFXB" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundwaveCast" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundwaveCast">
+        <Model value="LucioSkinToon20SoundwaveCast" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundwaveImpact" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundwaveImpact">
+        <Model value="LucioSkinToon20SoundwaveImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundwaveChaseTheBassCast" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundwaveChaseTheBassCast">
+        <Model value="LucioSkinToon20SoundwaveChaseTheBassCast" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20FeetLights" parent="GenericUnitStandard" unitName="UNLucioSkinToon20FeetLights">
+        <Model value="LucioSkinToon20FeetLights" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioToon20HeroLucioAttackImpact" parent="GenericUnitStandard" unitName="UNLucioToon20HeroLucioAttackImpact">
+        <Model value="LucioToon20HeroLucioAttackImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioToon20HeroLucioAttackLaunch" parent="GenericUnitStandard" unitName="UNLucioToon20HeroLucioAttackLaunch">
+        <Model value="LucioToon20HeroLucioAttackLaunch" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20WeaponMissile" parent="GenericUnitStandard" unitName="UNLucioSkinToon20WeaponMissile">
+        <Model value="LucioSkinToon20WeaponMissile" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20WeaponTargetingModel" parent="GenericUnitStandard" unitName="UNLucioSkinToon20WeaponTargetingModel">
+        <Model value="LucioSkinToon20WeaponTargetingModel" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundBarrierShield" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundBarrierShield">
+        <Model value="LucioSkinToon20SoundBarrierShield" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20SoundBarrierCastWeaponFXA" parent="GenericUnitStandard" unitName="UNLucioSkinToon20SoundBarrierCastWeaponFXA">
+        <Model value="LucioSkinToon20SoundBarrierCastWeaponFXA" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20Var1Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinToon20Var1Portrait">
+        <Model value="LucioSkinToon20Var1Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20Var2Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinToon20Var2Portrait">
+        <Model value="LucioSkinToon20Var2Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20Var3Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinToon20Var3Portrait">
+        <Model value="LucioSkinToon20Var3Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNLucioSkinToon20Var4Portrait" parent="GenericUnitStandard" unitName="UNLucioSkinToon20Var4Portrait">
+        <Model value="LucioSkinToon20Var4Portrait" />
     </CActorUnit>
     <CActorUnit id="UNHeroLucioSkinUltimate" parent="GenericUnitStandard" unitName="UNHeroLucioSkinUltimate">
         <Model value="HeroLucioSkinUltimate" />
