@@ -38131,6 +38131,17 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
+    <CBehaviorAbility id="MBWitchDoctorVoodooRitualVileInfectionIncreaseDummy">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBWitchDoctorVoodooRitualVileInfectionIncreaseDummy_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBWitchDoctorVoodooRitualVileInfectionIncreaseDummy_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBWitchDoctorVoodooRitualVileInfectionIncreaseDummy_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="WitchDoctorVoodooRitualVileInfectionIncreaseDummy" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBWitchDoctorGargantuanActive">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBWitchDoctorGargantuanActive_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBWitchDoctorGargantuanActive_AbilBehavior,Off" />
