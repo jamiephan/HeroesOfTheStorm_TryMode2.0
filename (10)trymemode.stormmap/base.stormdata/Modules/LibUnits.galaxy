@@ -8,6 +8,7 @@ include "TriggerLibs/NativeLib"
 // Constants
 const int libUNIT_gv_summonedUnits_MaxPlayer = 16;
 const int libUNIT_gv_summonedUnits_MaxLength = 500;
+const int libUNIT_gv_autoCastAbilListLength = 10;
 
 // Structures
 struct libUNIT_gs_AddBehaviorPanel {
@@ -43,6 +44,10 @@ bool libUNIT_gv_summonUnitPanel_IsShowingDialog;
 unit[libUNIT_gv_summonedUnits_MaxPlayer + 1][libUNIT_gv_summonedUnits_MaxLength + 1] libUNIT_gv_summonedUnits_database;
 int[libUNIT_gv_summonedUnits_MaxPlayer + 1] libUNIT_gv_summonedUnits_index;
 bool[libUNIT_gv_summonedUnits_MaxPlayer + 1] libUNIT_gv_summonedUnits_resetted;
+string[libUNIT_gv_autoCastAbilListLength + 1] libUNIT_gv_autoCastAbilList;
+point libUNIT_gv_autoCastMouseLoc;
+bool libUNIT_gv_isAutoCastRunning;
+int libUNIT_gv_autoCastPlayer;
 
 // Trigger Declarations
 trigger libUNIT_gt_MapInit;
@@ -92,6 +97,9 @@ trigger libUNIT_gt_SummonUnit;
 trigger libUNIT_gt_ClearSummonedUnits;
 trigger libUNIT_gt_EnableCollision;
 trigger libUNIT_gt_RemoveCollision;
+trigger libUNIT_gt_ToggleAutocast;
+trigger libUNIT_gt_AutocastExecution;
+trigger libUNIT_gt_AutocastExecutionGetCursorLoc;
 
 // Library Initialization
 void libUNIT_InitVariables ();
@@ -110,6 +118,8 @@ void libUNIT_InitLibraries () {
 bool libUNIT_InitVariables_completed = false;
 
 void libUNIT_InitVariables () {
+    int init_i;
+
     if (libUNIT_InitVariables_completed) {
         return;
     }
@@ -132,6 +142,9 @@ void libUNIT_InitVariables () {
     libUNIT_gv_summonUnitPanel.lv_scaleSelected = 1.0;
     libUNIT_gv_summonUnitPanel.lv_unitSummonButton = c_invalidDialogControlId;
     libUNIT_gv_summonUnitPanel.lv_closeButton = c_invalidDialogControlId;
+    for (init_i = 0; init_i <= libUNIT_gv_autoCastAbilListLength; init_i += 1) {
+        libUNIT_gv_autoCastAbilList[init_i] = "";
+    }
 }
 
 // Triggers
@@ -2426,6 +2439,153 @@ void libUNIT_gt_RemoveCollision_Init () {
     TriggerAddEventChatMessage(libUNIT_gt_RemoveCollision, c_playerAny, "removecollision", true);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: Toggle Autocast
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_ToggleAutocast_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_wc;
+    string lv_abil;
+
+    // Automatic Variable Declarations
+    const int autoA0C1F7A1_ae = libUNIT_gv_autoCastAbilListLength;
+    const int autoA0C1F7A1_ai = 1;
+    const int auto76F1C161_ae = libUNIT_gv_autoCastAbilListLength;
+    const int auto76F1C161_ai = 1;
+
+    // Variable Initialization
+    lv_abil = "";
+
+    // Conditions
+    if (testConds) {
+        if (!(((StringWord(EventChatMessage(false), 1) == "tac") || (StringWord(EventChatMessage(false), 1) == "toggleautocast")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libUNIT_gv_isAutoCastRunning = !(libUNIT_gv_isAutoCastRunning);
+    if ((libUNIT_gv_isAutoCastRunning == true)) {
+        lv_wc = 0;
+        for ( ; ( (autoA0C1F7A1_ai >= 0 && lv_wc <= autoA0C1F7A1_ae) || (autoA0C1F7A1_ai < 0 && lv_wc >= autoA0C1F7A1_ae) ) ; lv_wc += autoA0C1F7A1_ai ) {
+            libUNIT_gv_autoCastAbilList[lv_wc] = StringWord(EventChatMessage(false), (lv_wc + 2));
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText((("Enabled Ability Autocast" + "") + (" for player " + IntToString(EventPlayer())))));
+        libUNIT_gv_autoCastPlayer = EventPlayer();
+        TriggerEnable(libUNIT_gt_AutocastExecutionGetCursorLoc, true);
+        TriggerEnable(libUNIT_gt_AutocastExecution, true);
+    }
+    else {
+        TriggerStop(libUNIT_gt_AutocastExecutionGetCursorLoc);
+        TriggerEnable(libUNIT_gt_AutocastExecutionGetCursorLoc, false);
+        TriggerStop(libUNIT_gt_AutocastExecution);
+        TriggerEnable(libUNIT_gt_AutocastExecution, false);
+        lv_wc = 0;
+        for ( ; ( (auto76F1C161_ai >= 0 && lv_wc <= auto76F1C161_ae) || (auto76F1C161_ai < 0 && lv_wc >= auto76F1C161_ae) ) ; lv_wc += auto76F1C161_ai ) {
+            libUNIT_gv_autoCastAbilList[lv_wc] = "";
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Disabled Ability Autocast"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_ToggleAutocast_Init () {
+    libUNIT_gt_ToggleAutocast = TriggerCreate("libUNIT_gt_ToggleAutocast_Func");
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleAutocast, c_playerAny, "tac", false);
+    TriggerAddEventChatMessage(libUNIT_gt_ToggleAutocast, c_playerAny, "toggleautocast", false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Autocast (Execution)
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AutocastExecution_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_abilCls;
+    unitgroup lv_ug;
+    int lv_i;
+    string lv_abil;
+    unit lv_playerUnits;
+
+    // Automatic Variable Declarations
+    unitgroup auto8CD2A38C_g;
+    int auto8CD2A38C_u;
+    const int auto232AD28D_ae = libUNIT_gv_autoCastAbilListLength;
+    const int auto232AD28D_ai = 1;
+
+    // Variable Initialization
+    lv_ug = UnitGroupEmpty();
+    lv_abil = "";
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto8CD2A38C_g = UnitGroupSelected(libUNIT_gv_autoCastPlayer);
+    auto8CD2A38C_u = UnitGroupCount(auto8CD2A38C_g, c_unitCountAll);
+    for (;; auto8CD2A38C_u -= 1) {
+        lv_playerUnits = UnitGroupUnitFromEnd(auto8CD2A38C_g, auto8CD2A38C_u);
+        if (lv_playerUnits == null) { break; }
+        lv_i = 0;
+        for ( ; ( (auto232AD28D_ai >= 0 && lv_i <= auto232AD28D_ae) || (auto232AD28D_ai < 0 && lv_i >= auto232AD28D_ae) ) ; lv_i += auto232AD28D_ai ) {
+            lv_abil = libUNIT_gv_autoCastAbilList[lv_i];
+            if ((libUNIT_gv_autoCastAbilList[lv_i] != "")) {
+                lv_abilCls = CatalogEntryClass(c_gameCatalogAbil, lv_abil);
+                if ((lv_abilCls == c_classIdCAbilEffectInstant)) {
+                    UnitIssueOrder(lv_playerUnits, Order(AbilityCommand((lv_abil), 0)), c_orderQueueReplace);
+                }
+                else if ((lv_abilCls == c_classIdCAbilEffectTarget)) {
+                    if ((StringLength(CatalogFieldValueGet(c_gameCatalogAbil, lv_abil, "TargetFilters", c_playerAny)) == 3)) {
+                        lv_ug = UnitGroup(null, c_playerAny, RegionCircle(libUNIT_gv_autoCastMouseLoc, 5.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+                        UnitIssueOrder(lv_playerUnits, OrderTargetingUnit(AbilityCommand((lv_abil), 0), UnitGroupClosestToPoint(lv_ug, libUNIT_gv_autoCastMouseLoc)), c_orderQueueReplace);
+                    }
+                    else {
+                        UnitIssueOrder(lv_playerUnits, OrderTargetingPoint(AbilityCommand((lv_abil), 0), libUNIT_gv_autoCastMouseLoc), c_orderQueueReplace);
+                    }
+                }
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AutocastExecution_Init () {
+    libUNIT_gt_AutocastExecution = TriggerCreate("libUNIT_gt_AutocastExecution_Func");
+    TriggerEnable(libUNIT_gt_AutocastExecution, false);
+    TriggerAddEventTimePeriodic(libUNIT_gt_AutocastExecution, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Autocast Get Mouse Pos)
+//--------------------------------------------------------------------------------------------------
+bool libUNIT_gt_AutocastExecutionGetCursorLoc_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventPlayer() == libUNIT_gv_autoCastPlayer)) {
+        libUNIT_gv_autoCastMouseLoc = libNtve_gf_PointFromXYZ(EventMouseMovedPosXWorld(), EventMouseMovedPosYWorld(), EventMouseMovedPosZWorld());
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUNIT_gt_AutocastExecutionGetCursorLoc_Init () {
+    libUNIT_gt_AutocastExecutionGetCursorLoc = TriggerCreate("libUNIT_gt_AutocastExecutionGetCursorLoc_Func");
+    TriggerEnable(libUNIT_gt_AutocastExecutionGetCursorLoc, false);
+    TriggerAddEventMouseMoved(libUNIT_gt_AutocastExecutionGetCursorLoc, c_playerAny);
+}
+
 void libUNIT_InitTriggers () {
     libUNIT_gt_MapInit_Init();
     libUNIT_gt_AddEffectstoCamera_Init();
@@ -2474,6 +2634,9 @@ void libUNIT_InitTriggers () {
     libUNIT_gt_ClearSummonedUnits_Init();
     libUNIT_gt_EnableCollision_Init();
     libUNIT_gt_RemoveCollision_Init();
+    libUNIT_gt_ToggleAutocast_Init();
+    libUNIT_gt_AutocastExecution_Init();
+    libUNIT_gt_AutocastExecutionGetCursorLoc_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 ---
 title: 📚 Units Library
 nav_order: 2
-last_modified_date: Sun, 10 May 2026 09:11:47 GMT
+last_modified_date: Sat, 19 Sep 2026 23:25:02 GMT
 parent: 💻 Usage
 ---
 
@@ -831,6 +831,70 @@ Spawn unit(s) at the center of the camera.
 ### 🖼 UI Availability:
 {: .no_toc }
 - ✅ **Yes.** Use the command `summonui` or `sumui` to toggle the UI counterpart of this command.
+
+---
+
+## 💬 Command: `toggleautocast`
+
+### #️⃣ Syntax:
+{: .no_toc }
+(`toggleautocast` | `tac`) `[Ability1]` `[Ability2]` `[Ability3]` `[Ability4]`
+
+### 📝 Description: 
+{: .no_toc }
+Toggle autocast for abilities (including active hotbar 1-6 abilities), continuously issue an execute command.
+
+![https://i.imgur.com/7h8c7eE.gif](https://i.imgur.com/7h8c7eE.gif)
+
+- Instant Abilites: Instant cast (e.g Varian Parry)
+- Area Target/skillshort Abilities: Target to mouse location (e.g Varian Lion Fang)
+- Unit Targeting Abilities: Target to the closest unit to the mouse location within 5 radius (e.g Varian Charge)
+
+*Tip: Combine with [`togglecdr`](LibUtilities.md#-command-togglecdr) for some crazy effects.*
+
+Most of the time, for abilities that have cancel like Zeratul's Void Prison (`ZeratulVoidPrison`), You normally cannot cast multiple times using UI or hotkey R, due to it rebind to `VoidPrisonCancel`. This command however can bypass this limit as it issue the order directly without sending the cancel ability command order, so you can mass cast VP at ease.
+
+You can enable up to 10 abilities at once, the parameter doc below cannot list that many. However adding too much may skip some cast due to the new order cancelling the previous not-yet-issued ones. You may want to experiment a bit.
+
+>Note: It is a simple auto order issuing and will replace the current order, so some abilities auto cast may cause you hard to move your unit. You can use [builder mode (`backspace`)](LibBuilderMode.md) to move the units easier.
+
+>Note: It will respect all requirements and limits of the abilities, such as cast time (CastIntroTime) and require talents to unlock. For even crazier effect, you can use [`modifycatalogvalue`](LibPlayers.md#-command-modifycatalogvalue) to remove the cast time and [`selectalltalent`](LibPlayers.md#-command-selectalltalent) or [`addtalent`](LibPlayers.md#-command-addtalent) to add talents, such as having 2 ult or triple varian banners.
+
+### ⚙️ Parameters:
+{: .no_toc }
+    [Ability1]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Ability 1 to be auto casted
+    	Default:	-
+    [Ability2]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Ability 2 to be auto casted
+    	Default:	-
+    [Ability3]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Ability 3 to be auto casted
+    	Default:	-
+    [Ability4]
+    	Required:	false
+    	Type:		string
+    	Usage:		The Ability 4 to be auto casted
+    	Default:	-
+
+### 💡 Examples:
+{: .no_toc }
+    > tac VarianBannerOfDalaran VarianBannerOfIronforge VarianBannerOfStormwind
+    	(Varian - Auto cast all banners (after using "selectalltalents" command ))
+    > toggleautocast HanzoScatterArrow HanzoSonicArrow HanzoDragonsArrow
+    	(Hanzo - Auto cast all basic abilities)
+    > toggleautocast ZeratulCleave ZeratulBlinkStorm ZeratulSingularitySpike
+    	(Zeratul - Auto cast all basic abilities)
+
+### 🖼 UI Availability:
+{: .no_toc }
+- ❌ **Not Implemented**
 
 ---
 
