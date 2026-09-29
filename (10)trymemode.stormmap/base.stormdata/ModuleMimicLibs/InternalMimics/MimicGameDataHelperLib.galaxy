@@ -9685,51 +9685,6 @@ void MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Demon Hunter - Manticore Proc
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Func (bool testConds, bool runActions) {
-    // Variable Declarations
-    unit lv_target;
-    unit lv_caster;
-    int lv_casterPlayer;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_target = EventPlayerEffectUsedUnit(c_effectUnitTarget);
-    lv_caster = EventPlayerEffectUsedUnit(c_effectUnitCaster);
-    lv_casterPlayer = UnitGetOwner(lv_caster);
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((MimicGameDataHelperLib_gv_heroDemonHunterManticoreTarget[lv_casterPlayer] == lv_target)) {
-        if ((MimicGameDataHelperLib_gv_heroDemonHunterManticoreIncrementer[lv_casterPlayer] == 2)) {
-            UnitCreateEffectUnitWithSource(lv_caster, "DemonHunterHeroWeaponManticoreTalentProcDamage", lv_target, c_gameCatalogAbil, "attack");
-            UnitCreateEffectUnitWithSource(lv_caster, "ManticoreRemoveProcStacks", lv_target, c_gameCatalogAbil, "attack");
-            MimicGameDataHelperLib_gv_heroDemonHunterManticoreIncrementer[lv_casterPlayer] = 0;
-        }
-        else {
-            MimicGameDataHelperLib_gv_heroDemonHunterManticoreIncrementer[lv_casterPlayer] += 1;
-        }
-    }
-    else {
-        UnitCreateEffectUnitWithSource(lv_caster, "ManticoreRemoveProcStacks", MimicGameDataHelperLib_gv_heroDemonHunterManticoreTarget[lv_casterPlayer], c_gameCatalogAbil, "attack");
-        MimicGameDataHelperLib_gv_heroDemonHunterManticoreIncrementer[lv_casterPlayer] = 1;
-        MimicGameDataHelperLib_gv_heroDemonHunterManticoreTarget[lv_casterPlayer] = lv_target;
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Init () {
-    MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc = TriggerCreate("MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc, c_playerAny, "DemonHunterHeroWeaponManticoreTalentDummyModifyUnit");
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Dryad - Leaping Strike - Set Target Variable
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeSetTargetVariable_Func (bool testConds, bool runActions) {
@@ -24114,34 +24069,6 @@ void MimicGameDataHelperLib_gt_HeroTychusUpdateOrdersOnIssueOrderAbility_Init ()
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Hero - Tychus - Overkill Targeted Retarget v.H16
-//--------------------------------------------------------------------------------------------------
-bool MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!((UnitIsAlive(EventPlayerEffectUsedUnit(c_effectUnitTarget)) == true))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    UnitCreateEffectUnitWithSource(EventPlayerEffectUsedUnit(c_effectUnitCaster), "OverkillTargetedRetargetInitialPersistent", EventPlayerEffectUsedUnit(c_effectUnitTarget), c_gameCatalogAbil, "TychusOverkillTargeted");
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16_Init () {
-    MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16 = TriggerCreate("MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16_Func");
-    TriggerEnable(MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16, false);
-    TriggerAddEventPlayerEffectUsed(MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16, c_playerAny, "OverkillTargetedRetargetDestroyPersistentSet");
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Hero - Tychus - Overkill Rolling Reload
 //--------------------------------------------------------------------------------------------------
 bool MimicGameDataHelperLib_gt_HeroTychusOverkillRollingReload_Func (bool testConds, bool runActions) {
@@ -26824,7 +26751,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroDiabloResetEternalSoulstoneRessurection_Init();
     MimicGameDataHelperLib_gt_HeroDiabloBlackSoulstoneStackTalentPicked_Init();
     MimicGameDataHelperLib_gt_HeroDemonHunterVaultDamageBuff_Init();
-    MimicGameDataHelperLib_gt_HeroDemonHunterManticoreProc_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeSetTargetVariable_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeFindLandingLocation_Init();
     MimicGameDataHelperLib_gt_HeroDryadLeapingStrikeCreateAttackPersistent_Init();
@@ -27113,7 +27039,6 @@ void MimicGameDataHelperLib_InitTriggers () {
     MimicGameDataHelperLib_gt_HeroTychusThatsTheStuffHealPreviewCatalog_Init();
     MimicGameDataHelperLib_gt_HeroTychusThatsTheStuffOff_Init();
     MimicGameDataHelperLib_gt_HeroTychusUpdateOrdersOnIssueOrderAbility_Init();
-    MimicGameDataHelperLib_gt_HeroTychusOverkillTargetedRetargetvH16_Init();
     MimicGameDataHelperLib_gt_HeroTychusOverkillRollingReload_Init();
     MimicGameDataHelperLib_gt_HeroTyraelSanctificationFacing_Init();
     MimicGameDataHelperLib_gt_HeroTyraelSanctificationTimerStart_Init();

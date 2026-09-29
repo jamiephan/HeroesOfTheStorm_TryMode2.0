@@ -4460,13 +4460,9 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNCrusaderSkinOWC20" parent="UN_t" />
-    <CUnit id="UNCrusaderSkinOWC20NoHelmet" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20DeathRagdoll" parent="UN_t" />
-    <CUnit id="UNCrusaderSkinOWC20NoHelmetDeathRagdoll" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20PortraitAddition" parent="UN_t" />
-    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitAddition" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20Portrait" parent="UN_t" />
-    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortrait" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20BlessedShieldImpact" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20BlessedShieldMissile" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20ondemnWarning" parent="UN_t" />
@@ -4510,22 +4506,6 @@
     <CUnit id="UNCrusaderSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var2data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar1" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var5data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar2" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -4855,13 +4835,9 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNDemonHunterSkinOWC20" parent="UN_t" />
-    <CUnit id="UNDemonHunterSkinOWC20NoMask" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20DeathRagdoll" parent="UN_t" />
-    <CUnit id="UNDemonHunterSkinOWC20NoMaskDeathRagdoll" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20PortraitAddition" parent="UN_t" />
-    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitAddition" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20Portrait" parent="UN_t" />
-    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortrait" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
@@ -4880,22 +4856,6 @@
     <CUnit id="UNDemonHunterSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var2data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar1" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var5data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar2" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -9734,13 +9694,9 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNHeroRaynorSkinOWC20" parent="UN_t" />
-    <CUnit id="UNHeroRaynorSkinOWC20NoMask" parent="UN_t" />
     <CUnit id="UNRaynorSkinOWC20Portrait" parent="UN_t" />
-    <CUnit id="UNRaynorSkinOWC20NoMaskPortrait" parent="UN_t" />
     <CUnit id="UNRaynorSkinOWC20PortraitAddition" parent="UN_t" />
-    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitAddition" parent="UN_t" />
     <CUnit id="UNHeroRaynorSkinOWC20DeathRagdoll" parent="UN_t" />
-    <CUnit id="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
@@ -9759,22 +9715,6 @@
     <CUnit id="UNRaynorSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var2data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitVar1" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var4data.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var5data.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitVar2" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -13622,14 +13562,6 @@
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
-    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/lootbox/banners/bannerdfblizzcon2020basedata.xml}-->
-    <!-- ///////////////////////////////////-->
-    <CUnit id="UNBannerDFBlizzcon2020" parent="UN_t" />
-    <!-- ///////////////////////////////////-->
-    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/lootbox/banners/bannerdfblizzcon2020basedata.xml}-->
-    <!-- ///////////////////////////////////-->
-
-    <!-- ///////////////////////////////////-->
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/lootbox/banners/bannerdfcommunity65basebasedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNBannerDFCommunity65Base" parent="UN_t" />
@@ -15116,6 +15048,14 @@
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountdirewolfthreetailsdata/mount_ride_direwolfthreetailsdata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMountDirewolfThreeTails" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountdirewolfthreetailsdata/mount_ride_direwolfthreetailsdata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountdogarmy19data/mount_ridebeast_dogarmy19basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNMountDogArmy19" parent="UN_t" />
@@ -15536,6 +15476,14 @@
     <CUnit id="UNMountOwlSeekerAltered20" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountowlseekeraltered20data/mount_ride_owlseekeraltered20basedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountphoenixdata/mount_ride_phoenixbasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMountPhoenix" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/mounts/mountphoenixdata/mount_ride_phoenixbasedata.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -28795,6 +28743,35 @@
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistobasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNHeroMephistoMoophisto" parent="UN_t" />
+    <CUnit id="UNHeroMephistoMoophistoDeathRagdoll" parent="UN_t" />
+    <CUnit id="UNMephistoMoophistoPortraitCommon" parent="UN_t" />
+    <CUnit id="UNMephistoMoophistoPortrait" parent="UN_t" />
+    <CUnit id="UNMephistoMoophistoPortraitAddition" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoDuranceOfHateDemonFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoShadeOfMephistoModel" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoConsumeSoulsCastFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoBaseFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistountBaseFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoWeaponShardOfHateBeam" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoWeaponBeam" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoWeaponAttackHandFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoShardOfHateImpactFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoWeaponDamageImpact" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoLightningNovaCastFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoLightningNovaGroundFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoLightningNovaImpactFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoSkullMissileAttackMissile" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoDuranceOfHateCastFX" parent="UN_t" />
+    <CUnit id="UNMephistoSkinMoophistoSkullMissileImpactFX" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistobasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
     <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistostarwraithdata/mephistostarwraithbasedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNHeroMephistoSkinStarWraith" parent="UN_t" />
@@ -31314,6 +31291,204 @@
     <CUnit id="UNWhitemaneSkinSpooky18Var2Portrait" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/whitemane.stormmod/base.stormdata/gamedata/whitemaneskindata/whitemanespooky18data/whitemanespooky18var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/modeldata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNStorm_UI_AOECone_Fantasy" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/modeldata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathbasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathPortraitCommon" parent="UN_t" />
+    <CUnit id="UNXalatathPortrait" parent="UN_t" />
+    <CUnit id="UNXalatathPortraitAdditionCommon" parent="UN_t" />
+    <CUnit id="UNXalatathPortraitAddition" parent="UN_t" />
+    <CUnit id="UNHeroXalatathCommon" parent="UN_t" />
+    <CUnit id="UNHeroXalatath" parent="UN_t" />
+    <CUnit id="UNHeroXalatathDeathRagdoll" parent="UN_t" />
+    <CUnit id="UNXalatathHearthstonePortal" parent="UN_t" />
+    <CUnit id="UNXalatathDarkBarrierBuff" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <CUnit id="UNXalatathWeaponFXCast" parent="UN_t" />
+    <CUnit id="UNXalatathWeaponMissile" parent="UN_t" />
+    <CUnit id="UNXalatathWeaponTargetingModel" parent="UN_t" />
+    <CUnit id="UNXalatathAttackImpact" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualRangeFX" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitual" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualDeath" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualInitialPulse" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualPulse" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualTimeout" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualPlacement" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkBeam" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkeBeam" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainBeam" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainBeamInitial" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainBeamLow" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainBounceCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainDamageImpact" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualLinkChainImpactLow" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualImpact" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualImpactSplat" parent="UN_t" />
+    <CUnit id="UNXalatathUnstableCoreFireUnit" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyOuterRangeSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyOuterRangeSplatTC" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyInnerRangeSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyChannelTargetPointSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyInnerRangeSplatTC" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyGroundImpact" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyCast" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyMissile" parent="UN_t" />
+    <CUnit id="UNXalatathVoidVolleyImpact" parent="UN_t" />
+    <CUnit id="UNXalatathFracturedRealityTrailUnit" parent="UN_t" />
+    <CUnit id="UNXalatathFracturedRealityDamageImpact" parent="UN_t" />
+    <CUnit id="UNXalatathFracturedRealityGroundModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepWalk" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepCastFX" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepSilenceOfTheLambFX" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepImpactFX" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepInModelPlayer" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepOutModelPlayer" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepInModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidStepOutModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidSummonerPortal" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkMarkWarning" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkLaunch" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkMissile" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkImpactFX" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkMarkFXAllPlayers" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkMarkFXXalatathOnly" parent="UN_t" />
+    <CUnit id="UNXalatathShadowMarkMissileImpact" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergenceWarningModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergenceCaster" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergencePortalBirth" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergencePortalUnit" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergencePortalDeath" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergencePortalPlacement" parent="UN_t" />
+    <CUnit id="UNXalatathVoidConvergencePortalCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinion" parent="UN_t" />
+    <CUnit id="UNXalatathRiftDefenderMinion" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinionDeath" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinionSpawning" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinionBirthModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinionAttackImpactTarget" parent="UN_t" />
+    <CUnit id="UNXalatathVoidMinionAttack" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionCursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileImpact" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileImpactSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier1" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier2" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier3" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier4" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionTriggerRangeRing" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionImpactSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionImpact" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathbasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathPortraitVar1" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathPortraitVar2" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathPortraitVar3" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathPortraitVar4" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamebasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNHeroXalatathVoidflame" parent="UN_t" />
+    <CUnit id="UNHeroXalatathVoidflameDeathRagdoll" parent="UN_t" />
+    <CUnit id="UNXalatathVoidflamePortraitCommon" parent="UN_t" />
+    <CUnit id="UNXalatathVoidflamePortrait" parent="UN_t" />
+    <CUnit id="UNXalatathVoidflamePortraitAddition" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb_VoidFlame" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamebasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathVoidflameVar1Portrait" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathVoidflameVar2Portrait" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathVoidflameVar3Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathVoidflameVar4Portrait" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathvoidflamedata/xalatathvoidflamevar4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathOrbitalEruptionOrbModel" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier1" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier2" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier3" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionMissileTier4" parent="UN_t" />
+    <CUnit id="UNXalatathInvisibleOverrideModel" parent="UN_t" />
+    <CUnit id="UNXalatathOrbitalEruptionCenterDummyModel" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -41648,26 +41823,14 @@
     <CActorUnit id="UNCrusaderSkinOWC20" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20">
         <Model value="CrusaderSkinOWC20" />
     </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmet" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmet">
-        <Model value="CrusaderSkinOWC20NoHelmet" />
-    </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20DeathRagdoll">
         <Model value="CrusaderSkinOWC20DeathRagdoll" />
-    </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetDeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetDeathRagdoll">
-        <Model value="CrusaderSkinOWC20NoHelmetDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20PortraitAddition">
         <Model value="CrusaderSkinOWC20PortraitAddition" />
     </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitAddition" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitAddition">
-        <Model value="CrusaderSkinOWC20NoHelmetPortraitAddition" />
-    </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20Portrait">
         <Model value="CrusaderSkinOWC20Portrait" />
-    </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortrait" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortrait">
-        <Model value="CrusaderSkinOWC20NoHelmetPortrait" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20BlessedShieldImpact" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20BlessedShieldImpact">
         <Model value="CrusaderSkinOWC20BlessedShieldImpact" />
@@ -41749,12 +41912,6 @@
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20PortraitVar2">
         <Model value="CrusaderSkinOWC20PortraitVar2" />
-    </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar1" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitVar1">
-        <Model value="CrusaderSkinOWC20NoHelmetPortraitVar1" />
-    </CActorUnit>
-    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar2" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitVar2">
-        <Model value="CrusaderSkinOWC20NoHelmetPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinSpellDeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinSpellDeathRagdoll">
         <Model value="CrusaderSkinSpellDeathRagdoll" />
@@ -42308,38 +42465,20 @@
     <CActorUnit id="UNDemonHunterSkinOWC20" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20">
         <Model value="DemonHunterSkinOWC20" />
     </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMask" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMask">
-        <Model value="DemonHunterSkinOWC20NoMask" />
-    </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20DeathRagdoll">
         <Model value="DemonHunterSkinOWC20DeathRagdoll" />
-    </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskDeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskDeathRagdoll">
-        <Model value="DemonHunterSkinOWC20NoMaskDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitAddition">
         <Model value="DemonHunterSkinOWC20PortraitAddition" />
     </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitAddition" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitAddition">
-        <Model value="DemonHunterSkinOWC20NoMaskPortraitAddition" />
-    </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20Portrait">
         <Model value="DemonHunterSkinOWC20Portrait" />
-    </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortrait" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortrait">
-        <Model value="DemonHunterSkinOWC20NoMaskPortrait" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitVar1" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitVar1">
         <Model value="DemonHunterSkinOWC20PortraitVar1" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitVar2">
         <Model value="DemonHunterSkinOWC20PortraitVar2" />
-    </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar1" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitVar1">
-        <Model value="DemonHunterSkinOWC20NoMaskPortraitVar1" />
-    </CActorUnit>
-    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar2" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitVar2">
-        <Model value="DemonHunterSkinOWC20NoMaskPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinUltimateDeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinUltimateDeathRagdoll">
         <Model value="DemonHunterSkinUltimateDeathRagdoll" />
@@ -50918,38 +51057,20 @@
     <CActorUnit id="UNHeroRaynorSkinOWC20" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20">
         <Model value="HeroRaynorSkinOWC20" />
     </CActorUnit>
-    <CActorUnit id="UNHeroRaynorSkinOWC20NoMask" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20NoMask">
-        <Model value="HeroRaynorSkinOWC20NoMask" />
-    </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20Portrait">
         <Model value="RaynorSkinOWC20Portrait" />
-    </CActorUnit>
-    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortrait" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortrait">
-        <Model value="RaynorSkinOWC20NoMaskPortrait" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitAddition">
         <Model value="RaynorSkinOWC20PortraitAddition" />
     </CActorUnit>
-    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitAddition" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitAddition">
-        <Model value="RaynorSkinOWC20NoMaskPortraitAddition" />
-    </CActorUnit>
     <CActorUnit id="UNHeroRaynorSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20DeathRagdoll">
         <Model value="HeroRaynorSkinOWC20DeathRagdoll" />
-    </CActorUnit>
-    <CActorUnit id="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll">
-        <Model value="HeroRaynorSkinOWC20NoMaskDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitVar1" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitVar1">
         <Model value="RaynorSkinOWC20PortraitVar1" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitVar2">
         <Model value="RaynorSkinOWC20PortraitVar2" />
-    </CActorUnit>
-    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitVar1" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitVar1">
-        <Model value="RaynorSkinOWC20NoMaskPortraitVar1" />
-    </CActorUnit>
-    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitVar2" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitVar2">
-        <Model value="RaynorSkinOWC20NoMaskPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinPatriotPortrait" parent="GenericUnitStandard" unitName="UNRaynorSkinPatriotPortrait">
         <Model value="RaynorSkinPatriotPortrait" />
@@ -57338,9 +57459,6 @@
     <CActorUnit id="UNBannerDFBlizzcon2018" parent="GenericUnitStandard" unitName="UNBannerDFBlizzcon2018">
         <Model value="BannerDFBlizzcon2018" />
     </CActorUnit>
-    <CActorUnit id="UNBannerDFBlizzcon2020" parent="GenericUnitStandard" unitName="UNBannerDFBlizzcon2020">
-        <Model value="BannerDFBlizzcon2020" />
-    </CActorUnit>
     <CActorUnit id="UNBannerDFCommunity65Base" parent="GenericUnitStandard" unitName="UNBannerDFCommunity65Base">
         <Model value="BannerDFCommunity65Base" />
     </CActorUnit>
@@ -58565,6 +58683,9 @@
     <CActorUnit id="UNMountDirewolf_Rank15_01_Var5" parent="GenericUnitStandard" unitName="UNMountDirewolf_Rank15_01_Var5">
         <Model value="MountDirewolf_Rank15_01_Var5" />
     </CActorUnit>
+    <CActorUnit id="UNMountDirewolfThreeTails" parent="GenericUnitStandard" unitName="UNMountDirewolfThreeTails">
+        <Model value="MountDirewolfThreeTails" />
+    </CActorUnit>
     <CActorUnit id="UNMountDogArmy19" parent="GenericUnitStandard" unitName="UNMountDogArmy19">
         <Model value="MountDogArmy19" />
     </CActorUnit>
@@ -58741,6 +58862,9 @@
     </CActorUnit>
     <CActorUnit id="UNMountOwlSeekerAltered20" parent="GenericUnitStandard" unitName="UNMountOwlSeekerAltered20">
         <Model value="MountOwlSeekerAltered20" />
+    </CActorUnit>
+    <CActorUnit id="UNMountPhoenix" parent="GenericUnitStandard" unitName="UNMountPhoenix">
+        <Model value="MountPhoenix" />
     </CActorUnit>
     <CActorUnit id="UNMountPigFel" parent="GenericUnitStandard" unitName="UNMountPigFel">
         <Model value="MountPigFel" />
@@ -85259,6 +85383,72 @@
     <CActorUnit id="UNMephistoVar4Portrait" parent="GenericUnitStandard" unitName="UNMephistoVar4Portrait">
         <Model value="MephistoVar4Portrait" />
     </CActorUnit>
+    <CActorUnit id="UNHeroMephistoMoophisto" parent="GenericUnitStandard" unitName="UNHeroMephistoMoophisto">
+        <Model value="HeroMephistoMoophisto" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroMephistoMoophistoDeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroMephistoMoophistoDeathRagdoll">
+        <Model value="HeroMephistoMoophistoDeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitCommon" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitCommon">
+        <Model value="MephistoMoophistoPortraitCommon" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortrait" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortrait">
+        <Model value="MephistoMoophistoPortrait" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitAddition" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitAddition">
+        <Model value="MephistoMoophistoPortraitAddition" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoDuranceOfHateDemonFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoDuranceOfHateDemonFX">
+        <Model value="MephistoSkinMoophistoDuranceOfHateDemonFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoShadeOfMephistoModel" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoShadeOfMephistoModel">
+        <Model value="MephistoSkinMoophistoShadeOfMephistoModel" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze">
+        <Model value="MephistoSkinMoophistoShadeOfMephistoShadeGlaze" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoConsumeSoulsCastFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoConsumeSoulsCastFX">
+        <Model value="MephistoSkinMoophistoConsumeSoulsCastFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoBaseFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoBaseFX">
+        <Model value="MephistoSkinMoophistoBaseFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistountBaseFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistountBaseFX">
+        <Model value="MephistoSkinMoophistountBaseFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoWeaponShardOfHateBeam" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoWeaponShardOfHateBeam">
+        <Model value="MephistoSkinMoophistoWeaponShardOfHateBeam" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoWeaponBeam" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoWeaponBeam">
+        <Model value="MephistoSkinMoophistoWeaponBeam" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoWeaponAttackHandFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoWeaponAttackHandFX">
+        <Model value="MephistoSkinMoophistoWeaponAttackHandFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoShardOfHateImpactFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoShardOfHateImpactFX">
+        <Model value="MephistoSkinMoophistoShardOfHateImpactFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoWeaponDamageImpact" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoWeaponDamageImpact">
+        <Model value="MephistoSkinMoophistoWeaponDamageImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoLightningNovaCastFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoLightningNovaCastFX">
+        <Model value="MephistoSkinMoophistoLightningNovaCastFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoLightningNovaGroundFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoLightningNovaGroundFX">
+        <Model value="MephistoSkinMoophistoLightningNovaGroundFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoLightningNovaImpactFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoLightningNovaImpactFX">
+        <Model value="MephistoSkinMoophistoLightningNovaImpactFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoSkullMissileAttackMissile" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoSkullMissileAttackMissile">
+        <Model value="MephistoSkinMoophistoSkullMissileAttackMissile" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoDuranceOfHateCastFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoDuranceOfHateCastFX">
+        <Model value="MephistoSkinMoophistoDuranceOfHateCastFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoSkinMoophistoSkullMissileImpactFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoSkullMissileImpactFX">
+        <Model value="MephistoSkinMoophistoSkullMissileImpactFX" />
+    </CActorUnit>
     <CActorUnit id="UNHeroMephistoSkinStarWraith" parent="GenericUnitStandard" unitName="UNHeroMephistoSkinStarWraith">
         <Model value="HeroMephistoSkinStarWraith" />
     </CActorUnit>
@@ -89233,6 +89423,348 @@
     </CActorUnit>
     <CActorUnit id="UNWhitemaneSkinSpooky18Var2Portrait" parent="GenericUnitStandard" unitName="UNWhitemaneSkinSpooky18Var2Portrait">
         <Model value="WhitemaneSkinSpooky18Var2Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNStorm_UI_AOECone_Fantasy" parent="GenericUnitStandard" unitName="UNStorm_UI_AOECone_Fantasy">
+        <Model value="Storm_UI_AOECone_Fantasy" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitCommon" parent="GenericUnitStandard" unitName="UNXalatathPortraitCommon">
+        <Model value="XalatathPortraitCommon" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortrait" parent="GenericUnitStandard" unitName="UNXalatathPortrait">
+        <Model value="XalatathPortrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitAdditionCommon" parent="GenericUnitStandard" unitName="UNXalatathPortraitAdditionCommon">
+        <Model value="XalatathPortraitAdditionCommon" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitAddition" parent="GenericUnitStandard" unitName="UNXalatathPortraitAddition">
+        <Model value="XalatathPortraitAddition" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroXalatathCommon" parent="GenericUnitStandard" unitName="UNHeroXalatathCommon">
+        <Model value="HeroXalatathCommon" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroXalatath" parent="GenericUnitStandard" unitName="UNHeroXalatath">
+        <Model value="HeroXalatath" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroXalatathDeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroXalatathDeathRagdoll">
+        <Model value="HeroXalatathDeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathHearthstonePortal" parent="GenericUnitStandard" unitName="UNXalatathHearthstonePortal">
+        <Model value="XalatathHearthstonePortal" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkBarrierBuff" parent="GenericUnitStandard" unitName="UNXalatathDarkBarrierBuff">
+        <Model value="XalatathDarkBarrierBuff" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
+        <Model value="XalatathShoulderOrb" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathWeaponFXCast" parent="GenericUnitStandard" unitName="UNXalatathWeaponFXCast">
+        <Model value="XalatathWeaponFXCast" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathWeaponMissile" parent="GenericUnitStandard" unitName="UNXalatathWeaponMissile">
+        <Model value="XalatathWeaponMissile" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathWeaponTargetingModel" parent="GenericUnitStandard" unitName="UNXalatathWeaponTargetingModel">
+        <Model value="XalatathWeaponTargetingModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathAttackImpact" parent="GenericUnitStandard" unitName="UNXalatathAttackImpact">
+        <Model value="XalatathAttackImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualRangeFX" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualRangeFX">
+        <Model value="XalatathDarkHeartRitualRangeFX" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitual" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitual">
+        <Model value="XalatathDarkHeartRitual" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualCursorSplat">
+        <Model value="XalatathDarkHeartRitualCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualDeath" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualDeath">
+        <Model value="XalatathDarkHeartRitualDeath" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualInitialPulse" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualInitialPulse">
+        <Model value="XalatathDarkHeartRitualInitialPulse" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualPulse" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualPulse">
+        <Model value="XalatathDarkHeartRitualPulse" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualTimeout" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualTimeout">
+        <Model value="XalatathDarkHeartRitualTimeout" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualPlacement" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualPlacement">
+        <Model value="XalatathDarkHeartRitualPlacement" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkBeam" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkBeam">
+        <Model value="XalatathDarkHeartRitualLinkBeam" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkeBeam" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkeBeam">
+        <Model value="XalatathDarkHeartRitualLinkeBeam" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainBeam" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainBeam">
+        <Model value="XalatathDarkHeartRitualLinkChainBeam" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainBeamInitial" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainBeamInitial">
+        <Model value="XalatathDarkHeartRitualLinkChainBeamInitial" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainBeamLow" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainBeamLow">
+        <Model value="XalatathDarkHeartRitualLinkChainBeamLow" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainBounceCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainBounceCursorSplat">
+        <Model value="XalatathDarkHeartRitualLinkChainBounceCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainDamageImpact" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainDamageImpact">
+        <Model value="XalatathDarkHeartRitualLinkChainDamageImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualLinkChainImpactLow" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualLinkChainImpactLow">
+        <Model value="XalatathDarkHeartRitualLinkChainImpactLow" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualImpact" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualImpact">
+        <Model value="XalatathDarkHeartRitualImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualImpactSplat" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualImpactSplat">
+        <Model value="XalatathDarkHeartRitualImpactSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathUnstableCoreFireUnit" parent="GenericUnitStandard" unitName="UNXalatathUnstableCoreFireUnit">
+        <Model value="XalatathUnstableCoreFireUnit" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyCursorSplat">
+        <Model value="XalatathVoidVolleyCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyOuterRangeSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyOuterRangeSplat">
+        <Model value="XalatathVoidVolleyOuterRangeSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyOuterRangeSplatTC" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyOuterRangeSplatTC">
+        <Model value="XalatathVoidVolleyOuterRangeSplatTC" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyInnerRangeSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyInnerRangeSplat">
+        <Model value="XalatathVoidVolleyInnerRangeSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyChannelTargetPointSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyChannelTargetPointSplat">
+        <Model value="XalatathVoidVolleyChannelTargetPointSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyInnerRangeSplatTC" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyInnerRangeSplatTC">
+        <Model value="XalatathVoidVolleyInnerRangeSplatTC" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyGroundImpact" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyGroundImpact">
+        <Model value="XalatathVoidVolleyGroundImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyCast" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyCast">
+        <Model value="XalatathVoidVolleyCast" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyMissile" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyMissile">
+        <Model value="XalatathVoidVolleyMissile" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidVolleyImpact" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyImpact">
+        <Model value="XalatathVoidVolleyImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathFracturedRealityTrailUnit" parent="GenericUnitStandard" unitName="UNXalatathFracturedRealityTrailUnit">
+        <Model value="XalatathFracturedRealityTrailUnit" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathFracturedRealityDamageImpact" parent="GenericUnitStandard" unitName="UNXalatathFracturedRealityDamageImpact">
+        <Model value="XalatathFracturedRealityDamageImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathFracturedRealityGroundModel" parent="GenericUnitStandard" unitName="UNXalatathFracturedRealityGroundModel">
+        <Model value="XalatathFracturedRealityGroundModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepWalk" parent="GenericUnitStandard" unitName="UNXalatathVoidStepWalk">
+        <Model value="XalatathVoidStepWalk" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepCastFX" parent="GenericUnitStandard" unitName="UNXalatathVoidStepCastFX">
+        <Model value="XalatathVoidStepCastFX" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepSilenceOfTheLambFX" parent="GenericUnitStandard" unitName="UNXalatathVoidStepSilenceOfTheLambFX">
+        <Model value="XalatathVoidStepSilenceOfTheLambFX" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepImpactFX" parent="GenericUnitStandard" unitName="UNXalatathVoidStepImpactFX">
+        <Model value="XalatathVoidStepImpactFX" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidStepCursorSplat">
+        <Model value="XalatathVoidStepCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepInModelPlayer" parent="GenericUnitStandard" unitName="UNXalatathVoidStepInModelPlayer">
+        <Model value="XalatathVoidStepInModelPlayer" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepOutModelPlayer" parent="GenericUnitStandard" unitName="UNXalatathVoidStepOutModelPlayer">
+        <Model value="XalatathVoidStepOutModelPlayer" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepInModel" parent="GenericUnitStandard" unitName="UNXalatathVoidStepInModel">
+        <Model value="XalatathVoidStepInModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidStepOutModel" parent="GenericUnitStandard" unitName="UNXalatathVoidStepOutModel">
+        <Model value="XalatathVoidStepOutModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidSummonerPortal" parent="GenericUnitStandard" unitName="UNXalatathVoidSummonerPortal">
+        <Model value="XalatathVoidSummonerPortal" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkMarkWarning" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkMarkWarning">
+        <Model value="XalatathShadowMarkMarkWarning" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkCursorSplat">
+        <Model value="XalatathShadowMarkCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkLaunch" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkLaunch">
+        <Model value="XalatathShadowMarkLaunch" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkMissile" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkMissile">
+        <Model value="XalatathShadowMarkMissile" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkImpactFX" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkImpactFX">
+        <Model value="XalatathShadowMarkImpactFX" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkMarkFXAllPlayers" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkMarkFXAllPlayers">
+        <Model value="XalatathShadowMarkMarkFXAllPlayers" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkMarkFXXalatathOnly" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkMarkFXXalatathOnly">
+        <Model value="XalatathShadowMarkMarkFXXalatathOnly" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShadowMarkMissileImpact" parent="GenericUnitStandard" unitName="UNXalatathShadowMarkMissileImpact">
+        <Model value="XalatathShadowMarkMissileImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergenceWarningModel" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergenceWarningModel">
+        <Model value="XalatathVoidConvergenceWarningModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergenceCaster" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergenceCaster">
+        <Model value="XalatathVoidConvergenceCaster" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergencePortalBirth" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergencePortalBirth">
+        <Model value="XalatathVoidConvergencePortalBirth" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergencePortalUnit" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergencePortalUnit">
+        <Model value="XalatathVoidConvergencePortalUnit" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergencePortalDeath" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergencePortalDeath">
+        <Model value="XalatathVoidConvergencePortalDeath" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergencePortalPlacement" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergencePortalPlacement">
+        <Model value="XalatathVoidConvergencePortalPlacement" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidConvergencePortalCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidConvergencePortalCursorSplat">
+        <Model value="XalatathVoidConvergencePortalCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinion" parent="GenericUnitStandard" unitName="UNXalatathVoidMinion">
+        <Model value="XalatathVoidMinion" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathRiftDefenderMinion" parent="GenericUnitStandard" unitName="UNXalatathRiftDefenderMinion">
+        <Model value="XalatathRiftDefenderMinion" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinionDeath" parent="GenericUnitStandard" unitName="UNXalatathVoidMinionDeath">
+        <Model value="XalatathVoidMinionDeath" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinionSpawning" parent="GenericUnitStandard" unitName="UNXalatathVoidMinionSpawning">
+        <Model value="XalatathVoidMinionSpawning" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinionBirthModel" parent="GenericUnitStandard" unitName="UNXalatathVoidMinionBirthModel">
+        <Model value="XalatathVoidMinionBirthModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinionAttackImpactTarget" parent="GenericUnitStandard" unitName="UNXalatathVoidMinionAttackImpactTarget">
+        <Model value="XalatathVoidMinionAttackImpactTarget" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidMinionAttack" parent="GenericUnitStandard" unitName="UNXalatathVoidMinionAttack">
+        <Model value="XalatathVoidMinionAttack" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionCursorSplat">
+        <Model value="XalatathVoidEruptionCursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileImpact" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileImpact">
+        <Model value="XalatathVoidEruptionMissileImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileImpactSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileImpactSplat">
+        <Model value="XalatathVoidEruptionMissileImpactSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier1" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier1">
+        <Model value="XalatathVoidEruptionMissileTier1" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier2" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier2">
+        <Model value="XalatathVoidEruptionMissileTier2" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier3" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier3">
+        <Model value="XalatathVoidEruptionMissileTier3" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier4" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier4">
+        <Model value="XalatathVoidEruptionMissileTier4" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionTriggerRangeRing" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionTriggerRangeRing">
+        <Model value="XalatathVoidEruptionTriggerRangeRing" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionImpactSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionImpactSplat">
+        <Model value="XalatathVoidEruptionImpactSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionImpact" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionImpact">
+        <Model value="XalatathVoidEruptionImpact" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitVar1" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar1">
+        <Model value="XalatathPortraitVar1" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
+        <Model value="XalatathShoulderOrb" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitVar2" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar2">
+        <Model value="XalatathPortraitVar2" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
+        <Model value="XalatathShoulderOrb" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitVar3" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar3">
+        <Model value="XalatathPortraitVar3" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathPortraitVar4" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar4">
+        <Model value="XalatathPortraitVar4" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroXalatathVoidflame" parent="GenericUnitStandard" unitName="UNHeroXalatathVoidflame">
+        <Model value="HeroXalatathVoidflame" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroXalatathVoidflameDeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroXalatathVoidflameDeathRagdoll">
+        <Model value="HeroXalatathVoidflameDeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflamePortraitCommon" parent="GenericUnitStandard" unitName="UNXalatathVoidflamePortraitCommon">
+        <Model value="XalatathVoidflamePortraitCommon" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflamePortrait" parent="GenericUnitStandard" unitName="UNXalatathVoidflamePortrait">
+        <Model value="XalatathVoidflamePortrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflamePortraitAddition" parent="GenericUnitStandard" unitName="UNXalatathVoidflamePortraitAddition">
+        <Model value="XalatathVoidflamePortraitAddition" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb_VoidFlame" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb_VoidFlame">
+        <Model value="XalatathShoulderOrb_VoidFlame" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflameVar1Portrait" parent="GenericUnitStandard" unitName="UNXalatathVoidflameVar1Portrait">
+        <Model value="XalatathVoidflameVar1Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
+        <Model value="XalatathShoulderOrb" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflameVar2Portrait" parent="GenericUnitStandard" unitName="UNXalatathVoidflameVar2Portrait">
+        <Model value="XalatathVoidflameVar2Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
+        <Model value="XalatathShoulderOrb" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflameVar3Portrait" parent="GenericUnitStandard" unitName="UNXalatathVoidflameVar3Portrait">
+        <Model value="XalatathVoidflameVar3Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidflameVar4Portrait" parent="GenericUnitStandard" unitName="UNXalatathVoidflameVar4Portrait">
+        <Model value="XalatathVoidflameVar4Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathOrbitalEruptionOrbModel" parent="GenericUnitStandard" unitName="UNXalatathOrbitalEruptionOrbModel">
+        <Model value="XalatathOrbitalEruptionOrbModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier1" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier1">
+        <Model value="XalatathVoidEruptionMissileTier1" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier2" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier2">
+        <Model value="XalatathVoidEruptionMissileTier2" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier3" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier3">
+        <Model value="XalatathVoidEruptionMissileTier3" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionMissileTier4" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionMissileTier4">
+        <Model value="XalatathVoidEruptionMissileTier4" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathInvisibleOverrideModel" parent="GenericUnitStandard" unitName="UNXalatathInvisibleOverrideModel">
+        <Model value="XalatathInvisibleOverrideModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathOrbitalEruptionCenterDummyModel" parent="GenericUnitStandard" unitName="UNXalatathOrbitalEruptionCenterDummyModel">
+        <Model value="XalatathOrbitalEruptionCenterDummyModel" />
     </CActorUnit>
     <CActorUnit id="UNHeroYrelCommon" parent="GenericUnitStandard" unitName="UNHeroYrelCommon">
         <Model value="HeroYrelCommon" />

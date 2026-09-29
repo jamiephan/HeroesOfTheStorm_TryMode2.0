@@ -5676,6 +5676,61 @@
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
+    <!-- Start Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathdata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MXalatathAttack">
+        <Buttons Face="attack" Type="AbilCmd" AbilCmd="XalatathAttack,Execute" Behavior="XalatathAttack" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathSmartTargetingRightClick">
+        <Buttons Face="XalatathSmartTargetingRightClick" Type="AbilCmd" AbilCmd="XalatathSmartTargetingRightClick,Execute" Behavior="XalatathSmartTargetingRightClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathTargetingAttackClick">
+        <Buttons Face="XalatathSmartTargeting" Type="AbilCmd" AbilCmd="XalatathTargetingAttackClick,Execute" Behavior="XalatathTargetingAttackClick" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidVolley">
+        <!-- useValidator="XalatathVoidVolleyCanCastValidator" Detected. Please check the game data for the requirement of <CValidator* id="XalatathVoidVolleyCanCastValidator" /> class -->
+        <Buttons Face="XalatathVoidVolley" Type="AbilCmd" AbilCmd="XalatathVoidVolley,Execute" Behavior="XalatathVoidVolley" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidStep">
+        <Buttons Face="XalatathVoidStep" Type="AbilCmd" AbilCmd="XalatathVoidStep,Execute" Behavior="XalatathVoidStep" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathDarkHeartRitual">
+        <Buttons Face="XalatathDarkHeartRitual" Type="AbilCmd" AbilCmd="XalatathDarkHeartRitual,Execute" Behavior="XalatathDarkHeartRitual" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathShadowMark">
+        <Buttons Face="XalatathShadowMark" Type="AbilCmd" AbilCmd="XalatathShadowMark,Execute" Behavior="XalatathShadowMark" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidConvergence">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: Ultimate1Unlocked ↓ -->
+        <Buttons Face="XalatathVoidConvergence" Type="AbilCmd" AbilCmd="XalatathVoidConvergence,Execute" Behavior="XalatathVoidConvergence" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidStepCancel">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: XalatathVoidStepActive ↓ -->
+        <Buttons Face="XalatathVoidStepCancel" Type="AbilCmd" AbilCmd="XalatathVoidStepCancel,Execute" Behavior="XalatathVoidStepCancel" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MDarkHeartMove">
+        <Buttons Face="DarkHeartMove" Type="AbilCmd" AbilCmd="DarkHeartMove,Execute" Behavior="DarkHeartMove" />
+    </CBehaviorAbility>
+    <!-- ///////////////////////////////////-->
+    <!-- End Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathdata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MXalatathVoidEruption">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked ↓ -->
+        <Buttons Face="XalatathVoidEruption" Type="AbilCmd" AbilCmd="XalatathVoidEruption,Execute" Behavior="XalatathVoidEruption" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidEruptionCancel">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: XalatathVoidEruptionHasChargingBehavior ↓ -->
+        <Buttons Face="XalatathVoidEruptionCancel" Type="AbilCmd" AbilCmd="XalatathVoidEruptionCancel,Execute" Behavior="XalatathVoidEruptionCancel" />
+    </CBehaviorAbility>
+    <!-- ///////////////////////////////////-->
+    <!-- End Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
     <!-- Start Abilities in {mods/heromods/yrel.stormmod/base.stormdata/gamedata/yreldata.xml}-->
     <!-- ///////////////////////////////////-->
     <CBehaviorAbility id="MYrelVindication">

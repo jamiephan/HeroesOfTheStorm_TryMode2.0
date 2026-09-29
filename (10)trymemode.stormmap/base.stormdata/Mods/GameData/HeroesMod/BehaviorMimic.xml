@@ -48814,17 +48814,6 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
-    <CBehaviorAbility id="MBAmazonHeroWeaponChargedStrikesActive">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAmazonHeroWeaponChargedStrikesActive_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAmazonHeroWeaponChargedStrikesActive_AbilBehavior,Off" />
-    </CBehaviorAbility>
-    <CAbilBehavior id="MBAmazonHeroWeaponChargedStrikesActive_AbilBehavior">
-        <Flags index="Toggle" value="1" />
-        <Flags index="Transient" value="1" />
-        <BehaviorArray value="AmazonHeroWeaponChargedStrikesActive" />
-        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
-        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
-    </CAbilBehavior>
     <CBehaviorAbility id="MBAmazonPlateoftheWhaleRegenBehavior">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBAmazonPlateoftheWhaleRegenBehavior_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBAmazonPlateoftheWhaleRegenBehavior_AbilBehavior,Off" />
@@ -68853,6 +68842,1127 @@
     </CAbilBehavior>
     <!-- ///////////////////////////////////-->
     <!-- End Behaviors in {mods/heromods/whitemane.stormmod/base.stormdata/gamedata/whitemanedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathdata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBXalatathPummelingStepCasterBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathPummelingStepCasterBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathPummelingStepCasterBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathPummelingStepCasterBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathPummelingStepCasterBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepCanceledMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepCanceledMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepCanceledMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepCanceledMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepCanceledMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepChargeWeaponBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepChargeWeaponBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepChargeWeaponBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepChargeWeaponBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepChargeWeaponBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepMissileCharge">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileCharge_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileCharge_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepMissileCharge_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepMissileCharge" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepDaze">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepDaze_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepDaze_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepDaze_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepDaze" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathAutoAcquireOrderGuard">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathAutoAcquireOrderGuard_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathAutoAcquireOrderGuard_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathAutoAcquireOrderGuard_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathAutoAcquireOrderGuard" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathCloakOfShadowsSpellArmorAndMoveSpeed">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathCloakOfShadowsSpellArmorAndMoveSpeed_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathCloakOfShadowsSpellArmorAndMoveSpeed_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathCloakOfShadowsSpellArmorAndMoveSpeed_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathCloakOfShadowsSpellArmorAndMoveSpeed" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepCasterBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepCasterBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepCasterBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepCasterBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepCasterBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepHoldParentBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepHoldParentBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepHoldParentBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepHoldParentBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepHoldParentBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepLeg2HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepLeg2HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepLeg2HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepLeg2HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepLeg2HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepLeg3HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepLeg3HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepLeg3HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepLeg3HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepLeg3HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepEndHoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepEndHoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepEndHoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepEndHoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepEndHoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepSilenceOfTheLambHoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepSilenceOfTheLambHoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepSilenceOfTheLambHoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepSilenceOfTheLambHoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepSilenceOfTheLambHoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopDelayHoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopDelayHoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopDelayHoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopDelayHoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopDelayHoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopLeg1HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg1HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg1HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopLeg1HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopLeg1HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopLeg2HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg2HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg2HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopLeg2HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopLeg2HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopLeg3HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg3HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg3HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopLeg3HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopLeg3HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopLeg4HoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg4HoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopLeg4HoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopLeg4HoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopLeg4HoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathParadoxLoopEndHoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopEndHoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathParadoxLoopEndHoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathParadoxLoopEndHoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathParadoxLoopEndHoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidSummonerCastHoldBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidSummonerCastHoldBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidSummonerCastHoldBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidSummonerCastHoldBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidSummonerCastHoldBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepTalentProgressCaster">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepTalentProgressCaster_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepTalentProgressCaster_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepTalentProgressCaster_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepTalentProgressCaster" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathSilenceOftheLambSilenceEnemyBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathSilenceOftheLambSilenceEnemyBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathSilenceOftheLambSilenceEnemyBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathSilenceOftheLambSilenceEnemyBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathSilenceOftheLambSilenceEnemyBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidMinionInitialAbilitySuppression">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionInitialAbilitySuppression_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionInitialAbilitySuppression_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidMinionInitialAbilitySuppression_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidMinionInitialAbilitySuppression" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidMinionSpawnSuppression">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionSpawnSuppression_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionSpawnSuppression_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidMinionSpawnSuppression_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidMinionSpawnSuppression" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergenceTooltipData">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceTooltipData_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceTooltipData_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergenceTooltipData_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergenceTooltipData" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergencePortalLimitBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalLimitBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalLimitBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergencePortalLimitBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergencePortalLimitBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathRiftInvasionPortalNoHealthDecay">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathRiftInvasionPortalNoHealthDecay" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergenceSpawnMinionBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceSpawnMinionBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceSpawnMinionBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergenceSpawnMinionBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergenceSpawnMinionBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergenceRevealerBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceRevealerBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceRevealerBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergenceRevealerBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergenceRevealerBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergencePortalTimedLifeEffect">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeEffect_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeEffect_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergencePortalTimedLifeEffect_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergencePortalTimedLifeEffect" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergencePortalTimedLifeForeverEffect">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergencePortalTimedLifeForeverEffect" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidConvergencePortalSlow">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalSlow_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalSlow_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidConvergencePortalSlow_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidConvergencePortalSlow" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidMinionTimedLife">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionTimedLife_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionTimedLife_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidMinionTimedLife_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidMinionTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidMinionMarkedTargetSuppressionBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionMarkedTargetSuppressionBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionMarkedTargetSuppressionBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidMinionMarkedTargetSuppressionBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidMinionMarkedTargetSuppressionBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidMinionChasingMarkedTarget">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionChasingMarkedTarget_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidMinionChasingMarkedTarget_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidMinionChasingMarkedTarget_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidMinionChasingMarkedTarget" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathFracturedRealityTrailTimedLife">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathFracturedRealityTrailTimedLife_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathFracturedRealityTrailTimedLife_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathFracturedRealityTrailTimedLife_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathFracturedRealityTrailTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathFracturedReality">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathFracturedReality_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathFracturedReality_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathFracturedReality_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathFracturedReality" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathFracturedRealityTrailMissileBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathFracturedRealityTrailMissileBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathFracturedRealityTrailMissileBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathFracturedRealityTrailMissileBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathFracturedRealityTrailMissileBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathCrushingCascadeSlowBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathCrushingCascadeSlowBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathCrushingCascadeSlowBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathCrushingCascadeSlowBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathCrushingCascadeSlowBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidAcolyteMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidAcolyteMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidAcolyteMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidAcolyteMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidAcolyteMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidAcolyteMissileMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidAcolyteMissileMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidAcolyteMissileMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidAcolyteMissileMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidAcolyteMissileMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidVolleyChargePrimedBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyChargePrimedBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyChargePrimedBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidVolleyChargePrimedBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidVolleyChargePrimedBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidVolleyChargeDurationController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyChargeDurationController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyChargeDurationController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidVolleyChargeDurationController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidVolleyChargeDurationController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartsProtectionSilenceSearchDebuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSilenceSearchDebuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSilenceSearchDebuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartsProtectionSilenceSearchDebuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartsProtectionSilenceSearchDebuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartsProtectionSearchBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSearchBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSearchBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartsProtectionSearchBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartsProtectionSearchBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartsProtectionSilenceSilenceEnemy">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSilenceSilenceEnemy_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartsProtectionSilenceSilenceEnemy_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartsProtectionSilenceSilenceEnemy_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartsProtectionSilenceSilenceEnemy" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualSpellArmor">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualSpellArmor_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualSpellArmor_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualSpellArmor_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualSpellArmor" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualDamageLinkBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualDamageLinkBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualDamageLinkBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualDamageLinkBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualDamageLinkBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualPulseArtHook">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualPulseArtHook_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualPulseArtHook_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualPulseArtHook_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualPulseArtHook" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartTargetLinkedSlow">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartTargetLinkedSlow_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartTargetLinkedSlow_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartTargetLinkedSlow_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartTargetLinkedSlow" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualTimedLife">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualTimedLife_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualTimedLife_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualTimedLife_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathUnstableCoreFireTimedLife">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathUnstableCoreFireTimedLife_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathUnstableCoreFireTimedLife_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathUnstableCoreFireTimedLife_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathUnstableCoreFireTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathUnstableCoreDOTDamage">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathUnstableCoreDOTDamage_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathUnstableCoreDOTDamage_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathUnstableCoreDOTDamage_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathUnstableCoreDOTDamage" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartDetonateMissileSuicideDelay">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartDetonateMissileSuicideDelay_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartDetonateMissileSuicideDelay_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartDetonateMissileSuicideDelay_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartDetonateMissileSuicideDelay" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualImpactSelfReveal">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualImpactSelfReveal_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualImpactSelfReveal_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualImpactSelfReveal_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualImpactSelfReveal" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkHeartRitualChaseController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualChaseController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkHeartRitualChaseController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkHeartRitualChaseController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkHeartRitualChaseController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkBarrier">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkBarrier_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkBarrier_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkBarrier_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkBarrier" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathDarkBarrierVisualFXCarry">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathDarkBarrierVisualFXCarry_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathDarkBarrierVisualFXCarry_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathDarkBarrierVisualFXCarry_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathDarkBarrierVisualFXCarry" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathShadowMarkCasterBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkCasterBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkCasterBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathShadowMarkCasterBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathShadowMarkCasterBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathToxicMarkArmorDebuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathToxicMarkArmorDebuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathToxicMarkArmorDebuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathToxicMarkArmorDebuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathToxicMarkArmorDebuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathShadowMarkDummyUnitTimedLife">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkDummyUnitTimedLife_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkDummyUnitTimedLife_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathShadowMarkDummyUnitTimedLife_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathShadowMarkDummyUnitTimedLife" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathFrozenMarkBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathFrozenMarkBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathFrozenMarkBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathFrozenMarkBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathFrozenMarkBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathShadowMarkDebuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkDebuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkDebuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathShadowMarkDebuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathShadowMarkDebuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathShadowMarkReveal">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkReveal_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathShadowMarkReveal_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathShadowMarkReveal_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathShadowMarkReveal" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidStepMissileWeaponBonusCharge">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileWeaponBonusCharge_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileWeaponBonusCharge_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidStepMissileWeaponBonusCharge_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidStepMissileWeaponBonusCharge" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathMarkedResilienceShield">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathMarkedResilienceShield_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathMarkedResilienceShield_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathMarkedResilienceShield_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathMarkedResilienceShield" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathMarkedResilienceShieldDecayDelay">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathMarkedResilienceShieldDecayDelay_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathMarkedResilienceShieldDecayDelay_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathMarkedResilienceShieldDecayDelay_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathMarkedResilienceShieldDecayDelay" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathWeaponCasterTargetFinderDisabler">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathWeaponCasterTargetFinderDisabler_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathWeaponCasterTargetFinderDisabler_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathWeaponCasterTargetFinderDisabler_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathWeaponCasterTargetFinderDisabler" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathWeaponTargeting">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathWeaponTargeting_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathWeaponTargeting_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathWeaponTargeting_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathWeaponTargeting" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathWeaponRangeController">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathWeaponRangeController_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathWeaponRangeController_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathWeaponRangeController_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathWeaponRangeController" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponCasterTargetFinderDisablerMounted">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponCasterTargetFinderDisablerMounted_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponCasterTargetFinderDisablerMounted_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponCasterTargetFinderDisablerMounted_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponCasterTargetFinderDisablerMounted" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponCasterTargetFinderDisabler">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponCasterTargetFinderDisabler_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponCasterTargetFinderDisabler_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponCasterTargetFinderDisabler_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponCasterTargetFinderDisabler" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponDisablerHoldFire">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponDisablerHoldFire_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponDisablerHoldFire_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponDisablerHoldFire_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponDisablerHoldFire" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponShootingCasterBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponShootingCasterBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponShootingCasterBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponShootingCasterBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponShootingCasterBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponShootingTargetBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponShootingTargetBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponShootingTargetBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponShootingTargetBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponShootingTargetBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHeroWeaponTargeting">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponTargeting_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHeroWeaponTargeting_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHeroWeaponTargeting_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHeroWeaponTargeting" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathHoldFireDisabler">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathHoldFireDisabler_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathHoldFireDisabler_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathHoldFireDisabler_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathHoldFireDisabler" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <!-- ///////////////////////////////////-->
+    <!-- End Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathdata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbTimedLifeBaseBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeBaseBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeBaseBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbTimedLifeBaseBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbTimedLifeBaseBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbTimedLifeTier1BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier1BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier1BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbTimedLifeTier1BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbTimedLifeTier1BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbTimedLifeTier2BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier2BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier2BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbTimedLifeTier2BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbTimedLifeTier2BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbTimedLifeTier3BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier3BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier3BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbTimedLifeTier3BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbTimedLifeTier3BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbTimedLifeTier4BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier4BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbTimedLifeTier4BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbTimedLifeTier4BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbTimedLifeTier4BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionEarlyReleasePendingBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionEarlyReleasePendingBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionEarlyReleasePendingBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionEarlyReleasePendingBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionEarlyReleasePendingBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionFlightDamageCooldownBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionFlightDamageCooldownBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionFlightDamageCooldownBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionFlightDamageCooldownBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionFlightDamageCooldownBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionNonHeroesBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionNonHeroesBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionNonHeroesBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionNonHeroesBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionNonHeroesBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionBlindDebuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionBlindDebuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionBlindDebuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionBlindDebuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionBlindDebuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionMissileSuicideDelay">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMissileSuicideDelay_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMissileSuicideDelay_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionMissileSuicideDelay_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionMissileSuicideDelay" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionMoveLock">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMoveLock_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMoveLock_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionMoveLock_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionMoveLock" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionTargeting">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionTargeting_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionTargeting_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionTargeting_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionTargeting" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionCharging">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionCharging_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionCharging_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionCharging_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionCharging" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionMinimumChargeLock">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMinimumChargeLock_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionMinimumChargeLock_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionMinimumChargeLock_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionMinimumChargeLock" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionAutoFiredBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionAutoFiredBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionAutoFiredBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionAutoFiredBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionAutoFiredBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbDamageControllerBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbDamageControllerBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbDamageControllerBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbDamageControllerBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbDamageControllerBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbFlightDamageBaseBehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageBaseBehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageBaseBehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbFlightDamageBaseBehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbFlightDamageBaseBehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbFlightDamageTier1BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier1BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier1BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbFlightDamageTier1BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbFlightDamageTier1BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbFlightDamageTier2BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier2BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier2BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbFlightDamageTier2BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbFlightDamageTier2BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbFlightDamageTier3BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier3BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier3BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbFlightDamageTier3BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbFlightDamageTier3BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidEruptionOrbFlightDamageTier4BehaviorBuff">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier4BehaviorBuff_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidEruptionOrbFlightDamageTier4BehaviorBuff_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidEruptionOrbFlightDamageTier4BehaviorBuff_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidEruptionOrbFlightDamageTier4BehaviorBuff" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <!-- ///////////////////////////////////-->
+    <!-- End Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoidvolley2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MBXalatathVoidVolley2CasterBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidVolley2CasterBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidVolley2CasterBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidVolley2CasterBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidVolley2CasterBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidVolleyCommittedBehavior">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyCommittedBehavior_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidVolleyCommittedBehavior_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidVolleyCommittedBehavior_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidVolleyCommittedBehavior" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
+    <!-- ///////////////////////////////////-->
+    <!-- End Behaviors in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoidvolley2data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
