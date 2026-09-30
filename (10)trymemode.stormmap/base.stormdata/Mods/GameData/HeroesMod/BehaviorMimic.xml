@@ -69133,17 +69133,6 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
-    <CBehaviorAbility id="MBXalatathRiftInvasionPortalNoHealthDecay">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior,Off" />
-    </CBehaviorAbility>
-    <CAbilBehavior id="MBXalatathRiftInvasionPortalNoHealthDecay_AbilBehavior">
-        <Flags index="Toggle" value="1" />
-        <Flags index="Transient" value="1" />
-        <BehaviorArray value="XalatathRiftInvasionPortalNoHealthDecay" />
-        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
-        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
-    </CAbilBehavior>
     <CBehaviorAbility id="MBXalatathVoidConvergenceSpawnMinionBehavior">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceSpawnMinionBehavior_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergenceSpawnMinionBehavior_AbilBehavior,Off" />
@@ -69174,17 +69163,6 @@
         <Flags index="Toggle" value="1" />
         <Flags index="Transient" value="1" />
         <BehaviorArray value="XalatathVoidConvergencePortalTimedLifeEffect" />
-        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
-        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
-    </CAbilBehavior>
-    <CBehaviorAbility id="MBXalatathVoidConvergencePortalTimedLifeForeverEffect">
-        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior,On" />
-        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior,Off" />
-    </CBehaviorAbility>
-    <CAbilBehavior id="MBXalatathVoidConvergencePortalTimedLifeForeverEffect_AbilBehavior">
-        <Flags index="Toggle" value="1" />
-        <Flags index="Transient" value="1" />
-        <BehaviorArray value="XalatathVoidConvergencePortalTimedLifeForeverEffect" />
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>

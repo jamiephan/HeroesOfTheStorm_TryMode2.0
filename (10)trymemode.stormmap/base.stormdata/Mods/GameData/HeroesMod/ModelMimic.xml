@@ -31318,7 +31318,8 @@
     <CUnit id="UNXalatathWeaponMissile" parent="UN_t" />
     <CUnit id="UNXalatathWeaponTargetingModel" parent="UN_t" />
     <CUnit id="UNXalatathAttackImpact" parent="UN_t" />
-    <CUnit id="UNXalatathDarkHeartRitualRangeFX" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualRangeFXSplatAlly" parent="UN_t" />
+    <CUnit id="UNXalatathDarkHeartRitualRangeFXSplatEnemy" parent="UN_t" />
     <CUnit id="UNXalatathDarkHeartRitual" parent="UN_t" />
     <CUnit id="UNXalatathDarkHeartRitualCursorSplat" parent="UN_t" />
     <CUnit id="UNXalatathDarkHeartRitualDeath" parent="UN_t" />
@@ -89469,8 +89470,11 @@
     <CActorUnit id="UNXalatathAttackImpact" parent="GenericUnitStandard" unitName="UNXalatathAttackImpact">
         <Model value="XalatathAttackImpact" />
     </CActorUnit>
-    <CActorUnit id="UNXalatathDarkHeartRitualRangeFX" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualRangeFX">
-        <Model value="XalatathDarkHeartRitualRangeFX" />
+    <CActorUnit id="UNXalatathDarkHeartRitualRangeFXSplatAlly" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualRangeFXSplatAlly">
+        <Model value="XalatathDarkHeartRitualRangeFXSplatAlly" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathDarkHeartRitualRangeFXSplatEnemy" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitualRangeFXSplatEnemy">
+        <Model value="XalatathDarkHeartRitualRangeFXSplatEnemy" />
     </CActorUnit>
     <CActorUnit id="UNXalatathDarkHeartRitual" parent="GenericUnitStandard" unitName="UNXalatathDarkHeartRitual">
         <Model value="XalatathDarkHeartRitual" />
