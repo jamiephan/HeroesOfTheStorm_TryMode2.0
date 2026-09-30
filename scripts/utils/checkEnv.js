@@ -38,24 +38,26 @@ export const checkEnv = () => {
 
   dotenv.config({ quiet: true });
 
-  // Check for Heroes of the Storm Install valid directory
-  ["", "/.build.info", "/HeroesData/", "/Support/", "/Versions/"].forEach(
-    (path) => {
-      if (
-        !fs.existsSync(
-          `${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}${path}`,
-        )
-      ) {
-        LOGGER.error(
-          `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
-        );
-        throw errorGenerator(
-          "HEROES_OF_THE_STORM_INSTALL_LOCATION",
-          `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
-        );
-      }
-    },
-  );
+  if (process.env.TOOLS_USE_CASC_ONLINE_MODE?.toLowerCase() !== "true") {
+    // Check for Heroes of the Storm Install valid directory
+    ["", "/.build.info", "/HeroesData/", "/Support/", "/Versions/"].forEach(
+      (path) => {
+        if (
+          !fs.existsSync(
+            `${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION}${path}`,
+          )
+        ) {
+          LOGGER.error(
+            `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+          );
+          throw errorGenerator(
+            "HEROES_OF_THE_STORM_INSTALL_LOCATION",
+            `Not a valid Heroes of the Storm Directory (${process.env.HEROES_OF_THE_STORM_INSTALL_LOCATION})`,
+          );
+        }
+      },
+    );
+  }
 
   LOGGER.info("Environment variables are valid.");
 

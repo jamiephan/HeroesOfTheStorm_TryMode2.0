@@ -1,0 +1,52 @@
+name: generate-mimics
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  GenerateMimics:
+    name: Generate mimics
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate and commit mimics
+        run: npm run ci:genmimics
+
+      - name: Check for generated changes
+        id: generated
+        shell: pwsh
+        run: |
+          $base = (git rev-parse $env:GITHUB_SHA).Trim()
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          $head = (git rev-parse HEAD).Trim()
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          if ($head -eq $base) {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value "changed=false"
+            Write-Output "No generated commit; ending without a push."
+          } else {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value "changed=true"
+          }
+
+      - name: Push generated commit
+        if: steps.generated.outputs.changed == 'true'
+        shell: pwsh
+        run: git push origin "HEAD:$env:GITHUB_REF_NAME"

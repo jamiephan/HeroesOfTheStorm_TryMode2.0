@@ -19,7 +19,8 @@
         "extract:s2ma": "node ./scripts/entry.js --script=extracts2ma --mode=script",
         "util:symlink": "node ./scripts/entry.js --script=symlink --mode=script",
         "util:clearcasccache": "node ./scripts/entry.js --script=clearcasccache --mode=script",
-        "ci:patchmaps": "node ./scripts/ci/patchMaps.mjs"
+        "ci:patchmaps": "node ./scripts/ci/patchMaps.mjs",
+        "ci:genmimics": "node ./scripts/ci/genMimics.mjs"
     },
     "type": "module",
     "repository": {
