@@ -6,30 +6,91 @@ on:
     paths-ignore:
       - 'docs/**'
       - 'README.md'
+  workflow_run:
+    workflows: [generate-mimics]
+    types:
+      - completed
+    branches:
+      - master
+
+permissions:
+  contents: write
+
 jobs:
   Release:
     name: Creating a Release on Github
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.sha }}
+
+      - name: Check release commit
+        id: release_metadata
+        shell: pwsh
+        env:
+          RELEASE_EVENT: ${{ github.event_name }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          $head = (git rev-parse HEAD).Trim()
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          $commitSubject = (git show -s --format=%s $head).Trim()
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          $commitMessage = (git show -s --format=%B $head) -join "`n"
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          $commitTimestamp = (git show -s --format=%cI $head).Trim()
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+
+          $shouldRelease = $true
+          if ($env:RELEASE_EVENT -eq "workflow_run") {
+            $shouldRelease = $head -ne $env:WORKFLOW_RUN_HEAD_SHA -and $commitSubject.StartsWith("ci: Updated mimics to ", [StringComparison]::Ordinal)
+          }
+
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "should_release=$($shouldRelease.ToString().ToLowerInvariant())"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "commit_sha=$head"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "commit_timestamp=$commitTimestamp"
+
+          $delimiter = "COMMIT_MESSAGE_$([guid]::NewGuid().ToString('N'))"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "commit_message<<$delimiter"
+          if ($commitMessage) {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value $commitMessage
+          }
+          Add-Content -Path $env:GITHUB_OUTPUT -Value $delimiter
+
       - name: Setup Node.js
+        if: steps.release_metadata.outputs.should_release == 'true'
         uses: actions/setup-node@v6
       - name: Install Dependencies
+        if: steps.release_metadata.outputs.should_release == 'true'
         run: npm install
       - name: Build and Patch Maps
+        if: steps.release_metadata.outputs.should_release == 'true'
         run: npm run ci:patchmaps
         env:
           OUTPUT_DIR: C:/maps
       - name: Create Github Release
         uses: softprops/action-gh-release@v3
+        if: steps.release_metadata.outputs.should_release == 'true'
         with:
-          tag_name: release-${{ github.event.head_commit.id }}
-          name: ${{ github.event.head_commit.message }}
+          tag_name: release-${{ steps.release_metadata.outputs.commit_sha }}
+          name: ${{ steps.release_metadata.outputs.commit_message }}
           body: |
-            Commit Message: `${{ github.event.head_commit.message }}`
+            Commit Message: `${{ steps.release_metadata.outputs.commit_message }}`
 
-            Built time: `${{ github.event.head_commit.timestamp }}`
+            Built time: `${{ steps.release_metadata.outputs.commit_timestamp }}`
 
             Maps with the name `.AI` indicates the map will be filled with AI players.
 
