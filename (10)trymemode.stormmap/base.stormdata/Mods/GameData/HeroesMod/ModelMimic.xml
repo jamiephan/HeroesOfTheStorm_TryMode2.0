@@ -4460,9 +4460,13 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNCrusaderSkinOWC20" parent="UN_t" />
+    <CUnit id="UNCrusaderSkinOWC20NoHelmet" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20DeathRagdoll" parent="UN_t" />
+    <CUnit id="UNCrusaderSkinOWC20NoHelmetDeathRagdoll" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20PortraitAddition" parent="UN_t" />
+    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitAddition" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20Portrait" parent="UN_t" />
+    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortrait" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20BlessedShieldImpact" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20BlessedShieldMissile" parent="UN_t" />
     <CUnit id="UNCrusaderSkinOWC20ondemnWarning" parent="UN_t" />
@@ -4506,6 +4510,22 @@
     <CUnit id="UNCrusaderSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar1" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var5data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar2" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/crusaderdata/crusaderskindata/crusaderowc20data/crusaderowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -4835,9 +4855,13 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNDemonHunterSkinOWC20" parent="UN_t" />
+    <CUnit id="UNDemonHunterSkinOWC20NoMask" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20DeathRagdoll" parent="UN_t" />
+    <CUnit id="UNDemonHunterSkinOWC20NoMaskDeathRagdoll" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20PortraitAddition" parent="UN_t" />
+    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitAddition" parent="UN_t" />
     <CUnit id="UNDemonHunterSkinOWC20Portrait" parent="UN_t" />
+    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortrait" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
@@ -4856,6 +4880,22 @@
     <CUnit id="UNDemonHunterSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar1" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var5data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar2" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/demonhunterdata/demonhunterskindata/demonhunterowc20data/demonhunterowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -9694,9 +9734,13 @@
     <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNHeroRaynorSkinOWC20" parent="UN_t" />
+    <CUnit id="UNHeroRaynorSkinOWC20NoMask" parent="UN_t" />
     <CUnit id="UNRaynorSkinOWC20Portrait" parent="UN_t" />
+    <CUnit id="UNRaynorSkinOWC20NoMaskPortrait" parent="UN_t" />
     <CUnit id="UNRaynorSkinOWC20PortraitAddition" parent="UN_t" />
+    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitAddition" parent="UN_t" />
     <CUnit id="UNHeroRaynorSkinOWC20DeathRagdoll" parent="UN_t" />
+    <CUnit id="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20basedata.xml}-->
     <!-- ///////////////////////////////////-->
@@ -9715,6 +9759,22 @@
     <CUnit id="UNRaynorSkinOWC20PortraitVar2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitVar1" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var4data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var5data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNRaynorSkinOWC20NoMaskPortraitVar2" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heroesdata.stormmod/base.stormdata/gamedata/heroes/raynordata/raynorskindata/raynorowc20data/raynorowc20var5data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -31401,7 +31461,7 @@
     <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar1data.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNXalatathPortraitVar1" parent="UN_t" />
-    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb_Var1" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar1data.xml}-->
     <!-- ///////////////////////////////////-->
@@ -31410,7 +31470,7 @@
     <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar2data.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNXalatathPortraitVar2" parent="UN_t" />
-    <CUnit id="UNXalatathShoulderOrb" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb_Var2" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar2data.xml}-->
     <!-- ///////////////////////////////////-->
@@ -31419,6 +31479,7 @@
     <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar3data.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNXalatathPortraitVar3" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb_Var3" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar3data.xml}-->
     <!-- ///////////////////////////////////-->
@@ -31427,6 +31488,7 @@
     <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar4data.xml}-->
     <!-- ///////////////////////////////////-->
     <CUnit id="UNXalatathPortraitVar4" parent="UN_t" />
+    <CUnit id="UNXalatathShoulderOrb_Var4" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathskindata/xalatathbasedata/xalatathvar4data.xml}-->
     <!-- ///////////////////////////////////-->
@@ -41824,14 +41886,26 @@
     <CActorUnit id="UNCrusaderSkinOWC20" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20">
         <Model value="CrusaderSkinOWC20" />
     </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmet" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmet">
+        <Model value="CrusaderSkinOWC20NoHelmet" />
+    </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20DeathRagdoll">
         <Model value="CrusaderSkinOWC20DeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetDeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetDeathRagdoll">
+        <Model value="CrusaderSkinOWC20NoHelmetDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20PortraitAddition">
         <Model value="CrusaderSkinOWC20PortraitAddition" />
     </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitAddition" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitAddition">
+        <Model value="CrusaderSkinOWC20NoHelmetPortraitAddition" />
+    </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20Portrait">
         <Model value="CrusaderSkinOWC20Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortrait" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortrait">
+        <Model value="CrusaderSkinOWC20NoHelmetPortrait" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20BlessedShieldImpact" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20BlessedShieldImpact">
         <Model value="CrusaderSkinOWC20BlessedShieldImpact" />
@@ -41913,6 +41987,12 @@
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20PortraitVar2">
         <Model value="CrusaderSkinOWC20PortraitVar2" />
+    </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar1" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitVar1">
+        <Model value="CrusaderSkinOWC20NoHelmetPortraitVar1" />
+    </CActorUnit>
+    <CActorUnit id="UNCrusaderSkinOWC20NoHelmetPortraitVar2" parent="GenericUnitStandard" unitName="UNCrusaderSkinOWC20NoHelmetPortraitVar2">
+        <Model value="CrusaderSkinOWC20NoHelmetPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNCrusaderSkinSpellDeathRagdoll" parent="GenericUnitStandard" unitName="UNCrusaderSkinSpellDeathRagdoll">
         <Model value="CrusaderSkinSpellDeathRagdoll" />
@@ -42466,20 +42546,38 @@
     <CActorUnit id="UNDemonHunterSkinOWC20" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20">
         <Model value="DemonHunterSkinOWC20" />
     </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMask" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMask">
+        <Model value="DemonHunterSkinOWC20NoMask" />
+    </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20DeathRagdoll">
         <Model value="DemonHunterSkinOWC20DeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskDeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskDeathRagdoll">
+        <Model value="DemonHunterSkinOWC20NoMaskDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitAddition">
         <Model value="DemonHunterSkinOWC20PortraitAddition" />
     </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitAddition" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitAddition">
+        <Model value="DemonHunterSkinOWC20NoMaskPortraitAddition" />
+    </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20Portrait">
         <Model value="DemonHunterSkinOWC20Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortrait" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortrait">
+        <Model value="DemonHunterSkinOWC20NoMaskPortrait" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitVar1" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitVar1">
         <Model value="DemonHunterSkinOWC20PortraitVar1" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20PortraitVar2">
         <Model value="DemonHunterSkinOWC20PortraitVar2" />
+    </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar1" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitVar1">
+        <Model value="DemonHunterSkinOWC20NoMaskPortraitVar1" />
+    </CActorUnit>
+    <CActorUnit id="UNDemonHunterSkinOWC20NoMaskPortraitVar2" parent="GenericUnitStandard" unitName="UNDemonHunterSkinOWC20NoMaskPortraitVar2">
+        <Model value="DemonHunterSkinOWC20NoMaskPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNDemonHunterSkinUltimateDeathRagdoll" parent="GenericUnitStandard" unitName="UNDemonHunterSkinUltimateDeathRagdoll">
         <Model value="DemonHunterSkinUltimateDeathRagdoll" />
@@ -51058,20 +51156,38 @@
     <CActorUnit id="UNHeroRaynorSkinOWC20" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20">
         <Model value="HeroRaynorSkinOWC20" />
     </CActorUnit>
+    <CActorUnit id="UNHeroRaynorSkinOWC20NoMask" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20NoMask">
+        <Model value="HeroRaynorSkinOWC20NoMask" />
+    </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20Portrait" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20Portrait">
         <Model value="RaynorSkinOWC20Portrait" />
+    </CActorUnit>
+    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortrait" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortrait">
+        <Model value="RaynorSkinOWC20NoMaskPortrait" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitAddition" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitAddition">
         <Model value="RaynorSkinOWC20PortraitAddition" />
     </CActorUnit>
+    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitAddition" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitAddition">
+        <Model value="RaynorSkinOWC20NoMaskPortraitAddition" />
+    </CActorUnit>
     <CActorUnit id="UNHeroRaynorSkinOWC20DeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20DeathRagdoll">
         <Model value="HeroRaynorSkinOWC20DeathRagdoll" />
+    </CActorUnit>
+    <CActorUnit id="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll" parent="GenericUnitStandard" unitName="UNHeroRaynorSkinOWC20NoMaskDeathRagdoll">
+        <Model value="HeroRaynorSkinOWC20NoMaskDeathRagdoll" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitVar1" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitVar1">
         <Model value="RaynorSkinOWC20PortraitVar1" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinOWC20PortraitVar2" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20PortraitVar2">
         <Model value="RaynorSkinOWC20PortraitVar2" />
+    </CActorUnit>
+    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitVar1" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitVar1">
+        <Model value="RaynorSkinOWC20NoMaskPortraitVar1" />
+    </CActorUnit>
+    <CActorUnit id="UNRaynorSkinOWC20NoMaskPortraitVar2" parent="GenericUnitStandard" unitName="UNRaynorSkinOWC20NoMaskPortraitVar2">
+        <Model value="RaynorSkinOWC20NoMaskPortraitVar2" />
     </CActorUnit>
     <CActorUnit id="UNRaynorSkinPatriotPortrait" parent="GenericUnitStandard" unitName="UNRaynorSkinPatriotPortrait">
         <Model value="RaynorSkinPatriotPortrait" />
@@ -89698,20 +89814,26 @@
     <CActorUnit id="UNXalatathPortraitVar1" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar1">
         <Model value="XalatathPortraitVar1" />
     </CActorUnit>
-    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
-        <Model value="XalatathShoulderOrb" />
+    <CActorUnit id="UNXalatathShoulderOrb_Var1" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb_Var1">
+        <Model value="XalatathShoulderOrb_Var1" />
     </CActorUnit>
     <CActorUnit id="UNXalatathPortraitVar2" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar2">
         <Model value="XalatathPortraitVar2" />
     </CActorUnit>
-    <CActorUnit id="UNXalatathShoulderOrb" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb">
-        <Model value="XalatathShoulderOrb" />
+    <CActorUnit id="UNXalatathShoulderOrb_Var2" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb_Var2">
+        <Model value="XalatathShoulderOrb_Var2" />
     </CActorUnit>
     <CActorUnit id="UNXalatathPortraitVar3" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar3">
         <Model value="XalatathPortraitVar3" />
     </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb_Var3" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb_Var3">
+        <Model value="XalatathShoulderOrb_Var3" />
+    </CActorUnit>
     <CActorUnit id="UNXalatathPortraitVar4" parent="GenericUnitStandard" unitName="UNXalatathPortraitVar4">
         <Model value="XalatathPortraitVar4" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathShoulderOrb_Var4" parent="GenericUnitStandard" unitName="UNXalatathShoulderOrb_Var4">
+        <Model value="XalatathShoulderOrb_Var4" />
     </CActorUnit>
     <CActorUnit id="UNHeroXalatathVoidflame" parent="GenericUnitStandard" unitName="UNHeroXalatathVoidflame">
         <Model value="HeroXalatathVoidflame" />
