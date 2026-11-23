@@ -28419,6 +28419,7 @@
     <CUnit id="UNMedivhPolyBombSpreadWarningRed" parent="UN_t" />
     <CUnit id="UNMedivhPolyBombSpreadWarningBlue" parent="UN_t" />
     <CUnit id="UNMedivhPolyBombGlyphOfPolyBombCursorSplat" parent="UN_t" />
+    <CUnit id="UNMedivhForceOfWillCircleOfProtectionSplat" parent="UN_t" />
     <CUnit id="UNMedivhArcaneRiftMissile" parent="UN_t" />
     <CUnit id="UNMedivhArcaneRiftCast" parent="UN_t" />
     <CUnit id="UNMedivhArcaneRiftImpact" parent="UN_t" />
@@ -28813,6 +28814,7 @@
     <CUnit id="UNMephistoSkinMoophistoDuranceOfHateDemonFX" parent="UN_t" />
     <CUnit id="UNMephistoSkinMoophistoShadeOfMephistoModel" parent="UN_t" />
     <CUnit id="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze" parent="UN_t" />
+    <CUnit id="UNStorm_FX_Mephisto_Moophisto_CrownFX" parent="UN_t" />
     <CUnit id="UNMephistoSkinMoophistoConsumeSoulsCastFX" parent="UN_t" />
     <CUnit id="UNMephistoSkinMoophistoBaseFX" parent="UN_t" />
     <CUnit id="UNMephistoSkinMoophistountBaseFX" parent="UN_t" />
@@ -28829,6 +28831,38 @@
     <CUnit id="UNMephistoSkinMoophistoSkullMissileImpactFX" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistobasedata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMephistoMoophistoPortraitVar1" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar1data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMephistoMoophistoPortraitVar2" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar2data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMephistoMoophistoPortraitVar3" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar3data.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar4data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNMephistoMoophistoPortraitVar4" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/mephisto.stormmod/base.stormdata/gamedata/mephistoskindata/mephistomoophistodata/mephistomoophistovar4data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -31398,6 +31432,7 @@
     <CUnit id="UNXalatathDarkHeartRitualImpact" parent="UN_t" />
     <CUnit id="UNXalatathDarkHeartRitualImpactSplat" parent="UN_t" />
     <CUnit id="UNXalatathUnstableCoreFireUnit" parent="UN_t" />
+    <CUnit id="UNXalatathUnstableCoreGroundModel" parent="UN_t" />
     <CUnit id="UNXalatathVoidVolleyCursorSplat" parent="UN_t" />
     <CUnit id="UNXalatathVoidVolleyOuterRangeSplat" parent="UN_t" />
     <CUnit id="UNXalatathVoidVolleyOuterRangeSplatTC" parent="UN_t" />
@@ -31552,6 +31587,15 @@
     <CUnit id="UNXalatathOrbitalEruptionCenterDummyModel" parent="UN_t" />
     <!-- ///////////////////////////////////-->
     <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptionv2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CUnit id="UNXalatathVoidEruptionV2CursorSplat" parent="UN_t" />
+    <CUnit id="UNXalatathVoidEruptionV2MissileTier1" parent="UN_t" />
+    <!-- ///////////////////////////////////-->
+    <!-- End Models in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptionv2data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->
@@ -84930,6 +84974,9 @@
     <CActorUnit id="UNMedivhPolyBombGlyphOfPolyBombCursorSplat" parent="GenericUnitStandard" unitName="UNMedivhPolyBombGlyphOfPolyBombCursorSplat">
         <Model value="MedivhPolyBombGlyphOfPolyBombCursorSplat" />
     </CActorUnit>
+    <CActorUnit id="UNMedivhForceOfWillCircleOfProtectionSplat" parent="GenericUnitStandard" unitName="UNMedivhForceOfWillCircleOfProtectionSplat">
+        <Model value="MedivhForceOfWillCircleOfProtectionSplat" />
+    </CActorUnit>
     <CActorUnit id="UNMedivhArcaneRiftMissile" parent="GenericUnitStandard" unitName="UNMedivhArcaneRiftMissile">
         <Model value="MedivhArcaneRiftMissile" />
     </CActorUnit>
@@ -85524,6 +85571,9 @@
     <CActorUnit id="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoShadeOfMephistoShadeGlaze">
         <Model value="MephistoSkinMoophistoShadeOfMephistoShadeGlaze" />
     </CActorUnit>
+    <CActorUnit id="UNStorm_FX_Mephisto_Moophisto_CrownFX" parent="GenericUnitStandard" unitName="UNStorm_FX_Mephisto_Moophisto_CrownFX">
+        <Model value="Storm_FX_Mephisto_Moophisto_CrownFX" />
+    </CActorUnit>
     <CActorUnit id="UNMephistoSkinMoophistoConsumeSoulsCastFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoConsumeSoulsCastFX">
         <Model value="MephistoSkinMoophistoConsumeSoulsCastFX" />
     </CActorUnit>
@@ -85565,6 +85615,18 @@
     </CActorUnit>
     <CActorUnit id="UNMephistoSkinMoophistoSkullMissileImpactFX" parent="GenericUnitStandard" unitName="UNMephistoSkinMoophistoSkullMissileImpactFX">
         <Model value="MephistoSkinMoophistoSkullMissileImpactFX" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitVar1" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitVar1">
+        <Model value="MephistoMoophistoPortraitVar1" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitVar2" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitVar2">
+        <Model value="MephistoMoophistoPortraitVar2" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitVar3" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitVar3">
+        <Model value="MephistoMoophistoPortraitVar3" />
+    </CActorUnit>
+    <CActorUnit id="UNMephistoMoophistoPortraitVar4" parent="GenericUnitStandard" unitName="UNMephistoMoophistoPortraitVar4">
+        <Model value="MephistoMoophistoPortraitVar4" />
     </CActorUnit>
     <CActorUnit id="UNHeroMephistoSkinStarWraith" parent="GenericUnitStandard" unitName="UNHeroMephistoSkinStarWraith">
         <Model value="HeroMephistoSkinStarWraith" />
@@ -89646,6 +89708,9 @@
     <CActorUnit id="UNXalatathUnstableCoreFireUnit" parent="GenericUnitStandard" unitName="UNXalatathUnstableCoreFireUnit">
         <Model value="XalatathUnstableCoreFireUnit" />
     </CActorUnit>
+    <CActorUnit id="UNXalatathUnstableCoreGroundModel" parent="GenericUnitStandard" unitName="UNXalatathUnstableCoreGroundModel">
+        <Model value="XalatathUnstableCoreGroundModel" />
+    </CActorUnit>
     <CActorUnit id="UNXalatathVoidVolleyCursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidVolleyCursorSplat">
         <Model value="XalatathVoidVolleyCursorSplat" />
     </CActorUnit>
@@ -89891,6 +89956,12 @@
     </CActorUnit>
     <CActorUnit id="UNXalatathOrbitalEruptionCenterDummyModel" parent="GenericUnitStandard" unitName="UNXalatathOrbitalEruptionCenterDummyModel">
         <Model value="XalatathOrbitalEruptionCenterDummyModel" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionV2CursorSplat" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionV2CursorSplat">
+        <Model value="XalatathVoidEruptionV2CursorSplat" />
+    </CActorUnit>
+    <CActorUnit id="UNXalatathVoidEruptionV2MissileTier1" parent="GenericUnitStandard" unitName="UNXalatathVoidEruptionV2MissileTier1">
+        <Model value="XalatathVoidEruptionV2MissileTier1" />
     </CActorUnit>
     <CActorUnit id="UNHeroYrelCommon" parent="GenericUnitStandard" unitName="UNHeroYrelCommon">
         <Model value="HeroYrelCommon" />

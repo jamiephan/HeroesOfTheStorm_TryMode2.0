@@ -4025,10 +4025,6 @@
     <CBehaviorAbility id="MChoSurgingFistCast">
         <Buttons Face="ChoSurgingFist" Type="AbilCmd" AbilCmd="ChoSurgingFistCast,Execute" Behavior="ChoSurgingFistCast" />
     </CBehaviorAbility>
-    <CBehaviorAbility id="MChoSurgingFistTrigger">
-        <!-- ↓ Requirement Behavior Detected. Please add the behavior: ChoSurgingFistFakeCastBehaviorActive ↓ -->
-        <Buttons Face="ChoSurgingFistTriggerButton" Type="AbilCmd" AbilCmd="ChoSurgingFistTrigger,Execute" Behavior="ChoSurgingFistTrigger" />
-    </CBehaviorAbility>
     <CBehaviorAbility id="MChoConsumingBlaze">
         <Buttons Face="ChoConsumingBlaze" Type="AbilCmd" AbilCmd="ChoConsumingBlaze,Execute" Behavior="ChoConsumingBlaze" />
     </CBehaviorAbility>
@@ -4062,6 +4058,10 @@
     <CBehaviorAbility id="MGallTwistingNetherActivated">
         <!-- ↓ Requirement Behavior Detected. Please add the behavior: GallTwistingNetherChannelingActive ↓ -->
         <Buttons Face="GallTwistingNetherActivated" Type="AbilCmd" AbilCmd="GallTwistingNetherActivated,Execute" Behavior="GallTwistingNetherActivated" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MChoSurgingFistTrigger">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: ChoSurgingFistFakeCastBehaviorActive ↓ -->
+        <Buttons Face="ChoSurgingFistTriggerButton" Type="AbilCmd" AbilCmd="ChoSurgingFistTrigger,Execute" Behavior="ChoSurgingFistTrigger" />
     </CBehaviorAbility>
     <CBehaviorAbility id="MChoSurgingFistExecute">
         <Buttons Face="ChoSurgingFistExecute" Type="AbilCmd" AbilCmd="ChoSurgingFistExecute,Execute" Behavior="ChoSurgingFistExecute" />
@@ -5728,6 +5728,21 @@
     </CBehaviorAbility>
     <!-- ///////////////////////////////////-->
     <!-- End Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptiondata.xml}-->
+    <!-- ///////////////////////////////////-->
+
+    <!-- ///////////////////////////////////-->
+    <!-- Start Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptionv2data.xml}-->
+    <!-- ///////////////////////////////////-->
+    <CBehaviorAbility id="MXalatathVoidEruptionV2">
+        <!-- ↓ Requirement Behavior Detected. Please add the behavior: Ultimate2Unlocked ↓ -->
+        <Buttons Face="XalatathVoidEruption" Type="AbilCmd" AbilCmd="XalatathVoidEruptionV2,Execute" Behavior="XalatathVoidEruptionV2" />
+    </CBehaviorAbility>
+    <CBehaviorAbility id="MXalatathVoidEruptionV2Cancel">
+        <!-- showValidator="XalatathHasVoidEruptionV2CasterBehavior" Detected. Please check the game data for the requirement of <CValidator* id="XalatathHasVoidEruptionV2CasterBehavior" /> class -->
+        <Buttons Face="XalatathVoidEruptionCancel" Type="AbilCmd" AbilCmd="XalatathVoidEruptionV2Cancel,Execute" Behavior="XalatathVoidEruptionV2Cancel" />
+    </CBehaviorAbility>
+    <!-- ///////////////////////////////////-->
+    <!-- End Abilities in {mods/heromods/xalatath.stormmod/base.stormdata/gamedata/xalatathvoideruptionv2data.xml}-->
     <!-- ///////////////////////////////////-->
 
     <!-- ///////////////////////////////////-->

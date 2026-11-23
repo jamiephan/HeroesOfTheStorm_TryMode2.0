@@ -7406,7 +7406,7 @@ void MimicUILib_gf_PartyFrameAllyPing (int lp_pingingPlayer, unit lp_targetUnit,
     }
 
     lv_pingTargetGroup = PlayerGroupMath(libGame_gf_PlayersOnTeamHeroes(libGame_gf_TeamNumberOfPlayer(lp_pingingPlayer), false), PlayerGroupMuting(libNtve_ge_MuteType_Pings, lp_pingingPlayer, true), libNtve_ge_PlayerGroupOperation_Subtract);
-    if (((UnitIsAlive(lv_targetUnit) == true) && (UnitHasBehaviorWithCategoryFlag(lv_targetUnit, c_behaviorCategorySlow) == false))) {
+    if (((UnitIsAlive(lv_targetUnit) == true) && (UnitHasBehaviorWithCategoryFlag(lv_targetUnit, c_behaviorCategorySpecialDeathState) == false))) {
         if ((UnitGetType(lv_targetUnit) == "HeroGall")) {
             lv_targetUnit = libGDHL_gv_chogallPairs[libGame_gf_TeamNumberOfPlayer(lp_targetPlayerID)].lv_choUnit;
         }
