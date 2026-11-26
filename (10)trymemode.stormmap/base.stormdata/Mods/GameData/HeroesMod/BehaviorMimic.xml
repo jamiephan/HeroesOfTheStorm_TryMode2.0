@@ -69496,6 +69496,17 @@
         <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
         <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
     </CAbilBehavior>
+    <CBehaviorAbility id="MBXalatathVoidAdeptMarkedHeroHitMarker">
+        <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidAdeptMarkedHeroHitMarker_AbilBehavior,On" />
+        <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidAdeptMarkedHeroHitMarker_AbilBehavior,Off" />
+    </CBehaviorAbility>
+    <CAbilBehavior id="MBXalatathVoidAdeptMarkedHeroHitMarker_AbilBehavior">
+        <Flags index="Toggle" value="1" />
+        <Flags index="Transient" value="1" />
+        <BehaviorArray value="XalatathVoidAdeptMarkedHeroHitMarker" />
+        <CmdButtonArray index="On" DefaultButtonFace="MB_btn_on" />
+        <CmdButtonArray index="Off" DefaultButtonFace="MB_btn_off" />
+    </CAbilBehavior>
     <CBehaviorAbility id="MBXalatathVoidStepMissileWeaponBonusCharge">
         <Buttons Face="MB_btn_on" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileWeaponBonusCharge_AbilBehavior,On" />
         <Buttons Face="MB_btn_off" Type="AbilCmd" AbilCmd="MBXalatathVoidStepMissileWeaponBonusCharge_AbilBehavior,Off" />
